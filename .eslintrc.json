@@ -31,6 +31,15 @@
               "tsx": "never"
           }
       ],
+      "jsx-a11y/label-has-associated-control": "off",
+      "jsx-a11y/label-has-for": "off",
+      "react/function-component-definition": [
+        2,
+        {
+          "namedComponents": "arrow-function",
+          "unnamedComponents": "arrow-function"
+        }
+      ],
       "react/jsx-filename-extension": ["warn", {"extensions": [".tsx"]}],
       "no-shadow": "off",
       "react/react-in-jsx-scope": "off",
