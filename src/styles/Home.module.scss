@@ -1,18 +1,18 @@
 @font-face {
 	font-family: "FuturaBold";
-	src: url("/public/fonts/FuturaBold.woff") format("woff");
+	src: url("../../public/fonts/FuturaBold.woff") format("woff");
 	font-weight: 700;
 	font-style: bold;
 }
 @font-face {
 	font-family: "FuturaLight";
-	src: url("/public/fonts/FuturaLight.woff") format("woff");
+	src: url("../../public/fonts/FuturaLight.woff") format("woff");
 	font-weight: 400;
 	font-style: normal;
 }
 @font-face {
 	font-family: "FuturaMedium";
-	src: url("/public/fonts/FuturaMedium.woff") format("woff");
+	src: url("../../public/fonts/FuturaMedium.woff") format("woff");
 	font-weight: 500;
 	font-style: normal;
 }
@@ -59,7 +59,7 @@
     display: block;
     width: 16px;
     height: 16px;
-    content: url("/public/images/ic_chevron_down.svg");
+    content: url("../../public/images/ic_chevron_down.svg");
     position: absolute;
     right: 0;
     top: 0;
@@ -183,7 +183,7 @@
 	display: block;
 	width: 20px;
 	height: 20px;
-	content: url("/public/images/ic_chk_selected.svg");
+	content: url("../../public/images/ic_chk_selected.svg");
   }
   .checkmark:after {
 	content: "";
@@ -239,124 +239,124 @@ button.light {
     }
 }
 .iclogo {
-	content: url("/public/images/ic_logo.png");
+	content: url("../../public/images/ic_logo.png");
 }
 .iclogowhite {
-	content: url("/public/images/ic_logo_white.png");
+	content: url("../../public/images/ic_logo_white.png");
 }
 .ictw {
-	content: url("/public/images/ic_tw.svg");
+	content: url("../../public/images/ic_tw.svg");
 }
 .icfb {
-	content: url("/public/images/ic_fb.svg");
+	content: url("../../public/images/ic_fb.svg");
 }
 .icyt {
-	content: url("/public/images/ic_yt.svg");
+	content: url("../../public/images/ic_yt.svg");
 }
 .icig {
-	content: url("/public/images/ic_ig.svg");
+	content: url("../../public/images/ic_ig.svg");
 }
 .icli {
-	content: url("/public/images/ic_li.svg");
+	content: url("../../public/images/ic_li.svg");
 }
 .ictww {
-	content: url("/public/images/ic_tw_w.png");
+	content: url("../../public/images/ic_tw_w.png");
 }
 .icfbw {
-	content: url("/public/images/ic_fb_w.png");
+	content: url("../../public/images/ic_fb_w.png");
 }
 .icytw {
-	content: url("/public/images/ic_yt_w.png");
+	content: url("../../public/images/ic_yt_w.png");
 }
 .icigw {
-	content: url("/public/images/ic_ig_w.png");
+	content: url("../../public/images/ic_ig_w.png");
 }
 .icliw {
-	content: url("/public/images/ic_li_w.png");
+	content: url("../../public/images/ic_li_w.png");
 }
 .icsearch {
-	content: url("/public/images/ic_search.svg");
+	content: url("../../public/images/ic_search.svg");
 }
 .icarrowright {
-	content: url("/public/images/ic_chevron_right.svg");
+	content: url("../../public/images/ic_chevron_right.svg");
 }
 .icstoregrocery {
-	content: url("/public/images/ic_store_grocery.svg");
+	content: url("../../public/images/ic_store_grocery.svg");
 }
 .icmappin {
-	content: url("/public/images/ic_map_pin.svg");
+	content: url("../../public/images/ic_map_pin.svg");
 }
 .iccrosshair {
-	content: url("/public/images/ic_crosshair.svg");
+	content: url("../../public/images/ic_crosshair.svg");
 }
 .icmkdish {
-	content: url("/public/images/ic_dish.svg");
+	content: url("../../public/images/ic_dish.svg");
 }
 .icmkshop {
-	content: url("/public/images/ic_shop.svg");
+	content: url("../../public/images/ic_shop.svg");
 }
 .icphone {
-	content: url("/public/images/ic_phone.svg");
+	content: url("../../public/images/ic_phone.svg");
 }
 .icmkred {
-	content: url("/public/images/ic_mk_red.svg");
+	content: url("../../public/images/ic_mk_red.svg");
 }
 .icmkblue {
-	content: url("/public/images/ic_mk_blue.svg");
+	content: url("../../public/images/ic_mk_blue.svg");
 }
 .icmkgreen {
-	content: url("/public/images/ic_mk_green.svg");
+	content: url("../../public/images/ic_mk_green.svg");
 }
 .icaddcoment {
-	content: url("/public/images/ic_addcomment.svg");
+	content: url("../../public/images/ic_addcomment.svg");
 }
 .iczplus {
-	content: url("/public/images/ic_zplus.svg");
+	content: url("../../public/images/ic_zplus.svg");
 }
 .iczminus {
-	content: url("/public/images/ic_zminus.svg");
+	content: url("../../public/images/ic_zminus.svg");
 }
 .icarrowleft {
-	content: url("/public/images/ic_arrow_left.svg");
+	content: url("../../public/images/ic_arrow_left.svg");
 }
 .icformnonactive {
-	content: url("/public/images/ic_form_nonactive.svg");
+	content: url("../../public/images/ic_form_nonactive.svg");
 }
 .icformactive {
-	content: url("/public/images/ic_form_active.svg");
+	content: url("../../public/images/ic_form_active.svg");
 }
 .icclose {
-	content: url("/public/images/ic_close.svg");
+	content: url("../../public/images/ic_close.svg");
 }
 .iccalendar {
-	content: url("/public/images/ic_calendar.svg");
+	content: url("../../public/images/ic_calendar.svg");
 }
 .icfilter {
-	content: url("/public/images/ic_filter.svg");
+	content: url("../../public/images/ic_filter.svg");
 }
 .icarrowrightpag {
-	content: url("/public/images/ic_arrow_right.svg");
+	content: url("../../public/images/ic_arrow_right.svg");
 }
 .icarrowleftpag {
-	content: url("/public/images/ic_arrow_left_pag.svg");
+	content: url("../../public/images/ic_arrow_left_pag.svg");
 }
 .icdown {
-	content: url("/public/images/ic_download_cloud.svg");
+	content: url("../../public/images/ic_download_cloud.svg");
 }
 .icdownactive{
-	content: url("/public/images/ic_download_cloud_white.svg");
+	content: url("../../public/images/ic_download_cloud_white.svg");
 }
 .icplus {
-	content: url("/public/images/ic_plus_black.svg");
+	content: url("../../public/images/ic_plus_black.svg");
 }
 .icplusactive {
-	content: url("/public/images/ic_plus_white.svg");
+	content: url("../../public/images/ic_plus_white.svg");
 }
 .icsetting {
-	content: url("/public/images/ic_setting.svg");
+	content: url("../../public/images/ic_setting.svg");
 }
 .icbell {
-	content: url("/public/images/ic_bell.svg");
+	content: url("../../public/images/ic_bell.svg");
 }
 .container {
 	position: relative;
@@ -375,7 +375,7 @@ button.light {
 	.bgnoise {
 		display: block;
 		width: 100%;
-		background: url("/public/images/img_noise.png") no-repeat center center fixed; 
+		background: url("../../public/images/img_noise.png") no-repeat center center fixed; 
 		-webkit-background-size: cover;
 		-moz-background-size: cover;
 		-o-background-size: cover;
@@ -501,7 +501,7 @@ button.light {
       	    display: block;
       	    width: 16px;
       	    height: 16px;
-      	    content: url("/public/images/ic_search.svg");
+      	    content: url("../../public/images/ic_search.svg");
       	}
     }
     .search button:hover {
@@ -1733,7 +1733,7 @@ button.light {
 								height: 16px;
 								width: 16px;
 								border-radius: 50%;
-								content: url("/public/images/ic_form_nonactive.svg");
+								content: url("../../public/images/ic_form_nonactive.svg");
 							}
 						}
 						.chkwrap input:checked ~ .checkmark {
@@ -1741,7 +1741,7 @@ button.light {
 							display: block;
 							width: 16px;
 							height: 16px;
-							content: url("/public/images/ic_form_active.svg");
+							content: url("../../public/images/ic_form_active.svg");
 						}
 					}
 				}
@@ -1996,24 +1996,24 @@ button.light {
 						button.light.btndown {
 							&:hover {
 								.icdown {
-									content: url("/public/images/ic_download_cloud_white.svg");
+									content: url("../../public/images/ic_download_cloud_white.svg");
 								}
 							}
 							&.active {
 								.icdown {
-									content: url("/public/images/ic_download_cloud_white.svg");
+									content: url("../../public/images/ic_download_cloud_white.svg");
 								}
 							}
 						}
 						button.light.btnplus {
 							&:hover {
 								.icplus {
-									content: url("/public/images/ic_plus_white.svg");
+									content: url("../../public/images/ic_plus_white.svg");
 								}
 							}
 							&.active {
 								.icplus {
-									content: url("/public/images/ic_plus_white.svg");
+									content: url("../../public/images/ic_plus_white.svg");
 								}
 								
 							}
@@ -2831,7 +2831,7 @@ button.light {
 	z-index: 1;
 	height: 100vh;
 	width: 100vw;
-	background: url("/public/images/img_landing.png") no-repeat center center fixed; 
+	background: url("../../public/images/img_landing.png") no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
