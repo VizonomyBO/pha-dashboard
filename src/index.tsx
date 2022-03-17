@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import { Dashboard } from './pages/dashboard';
+import { Form2 } from './pages/form2';
 import { Form1 } from './pages/form1';
 
 ReactDOM.render(
@@ -21,6 +22,10 @@ ReactDOM.render(
         <Route
           path="/form1"
           element={<Form1 />}
+        />
+        <Route
+          path="/form2"
+          element={<Form2 />}
         />
       </Routes>
     </BrowserRouter>
