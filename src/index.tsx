@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import { Dashboard } from './pages/dashboard';
+import { Landing } from './pages/landing';
 import { Home } from './pages/home';
 import { Form1 } from './pages/form1';
 import { Form2 } from './pages/form2';
@@ -20,6 +21,10 @@ ReactDOM.render(
       <Routes>
         <Route
           path="/"
+          element={<Landing />}
+        />
+        <Route
+          path="/dashboard"
           element={<Dashboard />}
         />
         <Route
