@@ -1,3 +1,4 @@
+import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 
 export const Home = () => {
@@ -9,31 +10,9 @@ export const Home = () => {
       <div className="barblue home" />
       <div className="pagecontainer">
         <Navbar />
-        <div className="searchoptionsarea">
-          <div className="accesspoint colored">
-            <h1>FOOD ACCESS POINTS NEAR YOU</h1>
-            <p>
-              Search over +200 curated restaurants, farms,
-              markets and other fresh source of local, sustainable food.
-            </p>
-          </div>
-          <div className="searcharea colored">
-            <div className="alook">
-              <div className="accesstype">
-                Select Access Type
-              </div>
-              <div className="citysearch">
-                <i className="icsearch" />
-                <input type="text" name="" id="" placeholder="City or Zip Code" />
-                <button className="light" type="button">
-                  Search
-
-                </button>
-
-              </div>
-            </div>
-          </div>
-        </div>
+        <Header
+          type="home"
+        />
         <div className="location">
           <div className="locfound">
             <div className="description">

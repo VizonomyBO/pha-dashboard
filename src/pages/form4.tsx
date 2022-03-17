@@ -1,3 +1,4 @@
+import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 
 export const Form4 = () => {
@@ -9,15 +10,7 @@ export const Form4 = () => {
       <div className="barblue form2" />
       <div className="pagecontainer">
         <Navbar />
-        <div className="searchoptionsarea form2">
-          <div className="accesspoint colored">
-            <h1>FOOD ACCESS POINTS NEAR YOU</h1>
-            <p>
-              Looking for a nearby grocery store, SNAP retailer, or food-coop?
-              Search our access points using the map below.
-            </p>
-          </div>
-        </div>
+        <Header />
         <div className="modaluserfeedbck">
           <div className="formpage">
             <div className="header">
