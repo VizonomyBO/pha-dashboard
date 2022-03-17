@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import { Dashboard } from './pages/dashboard';
+import { Form1 } from './pages/form1';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -16,6 +17,10 @@ ReactDOM.render(
         <Route
           path="/"
           element={<Dashboard />}
+        />
+        <Route
+          path="/form1"
+          element={<Form1 />}
         />
       </Routes>
     </BrowserRouter>
