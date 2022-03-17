@@ -40,6 +40,7 @@
           "unnamedComponents": "arrow-function"
         }
       ],
+      "react/require-default-props": "off",
       "react/jsx-filename-extension": ["warn", {"extensions": [".tsx"]}],
       "no-shadow": "off",
       "react/react-in-jsx-scope": "off",
