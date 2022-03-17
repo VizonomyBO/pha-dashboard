@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import './index.scss';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { Dashboard } from './pages/dashboard';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,7 +15,7 @@ ReactDOM.render(
       <Routes>
         <Route
           path="/"
-          element={<App />}
+          element={<Dashboard />}
         />
       </Routes>
     </BrowserRouter>
