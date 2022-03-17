@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import { Dashboard } from './pages/dashboard';
+import { Landing } from './pages/landing';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -15,6 +16,10 @@ ReactDOM.render(
       <Routes>
         <Route
           path="/"
+          element={<Landing />}
+        />
+        <Route
+          path="/dashboard"
           element={<Dashboard />}
         />
       </Routes>
