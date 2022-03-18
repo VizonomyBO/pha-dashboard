@@ -1,11 +1,11 @@
 import classNames from 'classnames';
-import { FormHeaderInterface } from '../@types';
+import { FormHeaderInterface, FormTabType } from '../@types';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
 
-export const FormHeader = ({ active, setActive }: FormHeaderInterface) => {
-  const businessClass = classNames('option', { active: active === BUSINESS_DETAILS });
-  const otherClass = classNames('option', { active: active === OTHER_QUESTIONS });
-  const contactClass = classNames('option', { active: active === CONTACT_DETAILS });
+export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => {
+  const businessClass = classNames('option', { active: activeTab === BUSINESS_DETAILS });
+  const otherClass = classNames('option', { active: activeTab === OTHER_QUESTIONS });
+  const contactClass = classNames('option', { active: activeTab === CONTACT_DETAILS });
   return (
     <div className="header">
       <div className="backlink">
@@ -21,7 +21,7 @@ export const FormHeader = ({ active, setActive }: FormHeaderInterface) => {
         className="optiondetail"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           console.log(event.target.value);
-          setActive(event.target.value);
+          setActiveTab(event.target.value as FormTabType);
         }}
       >
         <div className={businessClass}>

@@ -12,14 +12,15 @@ import {
   CONTACT_DETAILS,
   OTHER_QUESTIONS
 } from '../constants';
+import { FormTabType } from '../@types';
 
 export const Form = () => {
-  const [active, setActive] = useState(BUSINESS_DETAILS as string);
+  const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
   const [formClass, setFormClass] = useState('form1');
 
   useEffect(() => {
-    setFormClass(CLASSES_BY_FORM[active]);
-  }, [active]);
+    setFormClass(CLASSES_BY_FORM[activeTab]);
+  }, [activeTab]);
 
   return (
     <div className="container">
@@ -31,18 +32,18 @@ export const Form = () => {
         <Header />
         <div className={`formarea ${formClass}`}>
           <FormHeader
-            active={active}
-            setActive={setActive}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
           />
           <div className="group">
             <div className="left">
-              {active === BUSINESS_DETAILS && (
+              {activeTab === BUSINESS_DETAILS && (
                 <LeftForm1 />
               )}
-              {active === OTHER_QUESTIONS && (
+              {activeTab === OTHER_QUESTIONS && (
                 <LeftForm2 />
               )}
-              {active === CONTACT_DETAILS && (
+              {activeTab === CONTACT_DETAILS && (
                 <LeftForm3 />
               )}
             </div>
