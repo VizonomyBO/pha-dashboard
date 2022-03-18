@@ -1,9 +1,6 @@
+import { FormHeaderInterface } from '../@types';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
 
-interface FormHeaderInterface {
-  active : string,
-  setActive: (value: string) => void,
-}
 export const FormHeader = ({ active, setActive }: FormHeaderInterface) => (
   <div className="header">
     <div className="backlink">

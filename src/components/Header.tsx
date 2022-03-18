@@ -1,6 +1,5 @@
-interface HeaderInterface {
-  type?: string
-}
+import { HeaderInterface } from '../@types';
+
 export const Header = ({ type }: HeaderInterface) => (
   <div className="searchoptionsarea form1">
     <div className="accesspoint colored">
