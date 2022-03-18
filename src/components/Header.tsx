@@ -10,7 +10,7 @@ export const Header = ({ type }: HeaderInterface) => (
         Search our access points using the map below.
       </p>
     </div>
-    {type === 'home' ? (
+    {type === 'home' && (
       <div className="searcharea colored">
         <div className="alook">
           <div className="accesstype">
@@ -27,6 +27,6 @@ export const Header = ({ type }: HeaderInterface) => (
           </div>
         </div>
       </div>
-    ) : null}
+    ) }
   </div>
 );
