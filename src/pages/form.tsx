@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { LeftForm1 } from '../components/LeftForm1';
 import { LeftForm2 } from '../components/LeftForm2';
@@ -17,6 +18,8 @@ import { FormTabType } from '../@types';
 export const Form = () => {
   const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
   const [formClass, setFormClass] = useState('form1');
+  const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
+  const formAreaClass = classNames('formarea', { [formClass]: true });
 
   useEffect(() => {
     setFormClass(CLASSES_BY_FORM[activeTab]);
@@ -26,11 +29,11 @@ export const Form = () => {
     <div className="container">
       <div className="bgwhite" />
       <figure className="bgnoise home" />
-      <div className={`barblue ${formClass}`} />
+      <div className={barBlueClass} />
       <div className="pagecontainer">
         <Navbar />
         <Header />
-        <div className={`formarea ${formClass}`}>
+        <div className={formAreaClass}>
           <FormHeader
             activeTab={activeTab}
             setActiveTab={setActiveTab}
