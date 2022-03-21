@@ -17,7 +17,7 @@ import { FormTabType } from '../@types';
 
 export const Form = () => {
   const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
-  const [formClass, setFormClass] = useState('form1');
+  const [formClass, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const formAreaClass = classNames('formarea', { [formClass]: true });
 
