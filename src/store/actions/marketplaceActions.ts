@@ -1,10 +1,10 @@
 import { Dispatch } from 'redux';
-import { classBusinessDetails } from '../../classes/form';
+import { initialMarketplace } from '../reducers/marketplaceReducers';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (businessDetails: classBusinessDetails) => {
+export const setBusinessDetails = (businessDetails: typeof initialMarketplace.businessDetails) => {
   console.log(businessDetails);
-  return (dispatch : any) => {
+  return (dispatch : Dispatch) => {
     dispatch({
       type: TYPES.SET_BUSINESS_DETAILS,
       payload: businessDetails

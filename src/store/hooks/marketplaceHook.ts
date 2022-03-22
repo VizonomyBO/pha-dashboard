@@ -1,14 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { classBusinessDetails } from '../../classes/form';
 import { resetMarketplace, setBusinessDetails } from '../actions';
-import { Marketplace } from '../reducers/marketplaceReducers';
+import { initialMarketplace } from '../reducers/marketplaceReducers';
 
-export const useMarketplaceState = () => useSelector((rootState: {marketplace: Marketplace}) => rootState.marketplace);
-
+export const useMarketplaceState = () => useSelector(
+  (rootState: {marketplace: typeof initialMarketplace}) => rootState.marketplace
+);
 export const useMarketplaceDispatch = () => {
   const dispatch = useDispatch();
   return {
-    setBusinessDetails: (businessDetails: classBusinessDetails) => {
+    setBusinessDetails: (businessDetails: typeof initialMarketplace.businessDetails) => {
       dispatch(setBusinessDetails(businessDetails));
     },
     resetMarketplace: () => {

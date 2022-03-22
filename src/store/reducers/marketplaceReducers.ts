@@ -1,28 +1,20 @@
 import { AnyAction } from 'redux';
 import * as TYPES from '../types';
 
-export class Marketplace {
-  businessDetails: any;
-
-  socialMedia: any;
-
-  files: any;
-
-  constructor() {
-    this.businessDetails = {
-      name: '',
-      cordinate: [],
-    };
-    this.socialMedia = {
-      facebook: '',
-    };
-    this.files = {
-      media: [],
-    };
+export interface Marketplace {
+  businessDetails:{
+    name: '',
+    cordinate: [],
+  },
+  socialMedia : {
+    facebook: '',
+  },
+  files : {
+    media: [],
   }
 }
 
-const initialMarketplace = {
+export const initialMarketplace = {
   businessDetails: {
     name: '',
     cordinate: [],

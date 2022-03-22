@@ -23,6 +23,8 @@ export default function configureStore(preloadedState?: any) {
       ...preloadedState,
     });
   }
-  if (typeof window === 'undefined') return store;
+  if (typeof window === 'undefined') {
+    return store;
+  }
   return store;
 }
