@@ -3,7 +3,7 @@ import { initialMarketplace } from '../reducers/marketplaceReducers';
 import * as TYPES from '../types';
 
 export const setBusinessDetails = (businessDetails: typeof initialMarketplace.businessDetails) => {
-  console.log(businessDetails);
+  console.debug(businessDetails);
   return (dispatch : Dispatch) => {
     dispatch({
       type: TYPES.SET_BUSINESS_DETAILS,
@@ -13,7 +13,7 @@ export const setBusinessDetails = (businessDetails: typeof initialMarketplace.bu
 };
 
 export const resetMarketplace = () => {
-  console.log();
+  console.debug();
   return (dispatch : Dispatch) => {
     dispatch({
       type: TYPES.RESET_MARKETPLACE,
