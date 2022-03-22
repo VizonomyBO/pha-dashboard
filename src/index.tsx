@@ -5,6 +5,8 @@ import {
   Route
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import store from './store';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
 import { Dashboard } from './pages/dashboard';
@@ -14,32 +16,34 @@ import { Form } from './pages/form';
 import { Form4 } from './pages/form4';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path="/"
-          element={<Landing />}
-        />
-        <Route
-          path="/dashboard"
-          element={<Dashboard />}
-        />
-        <Route
-          path="/form"
-          element={<Form />}
-        />
-        <Route
-          path="/form4"
-          element={<Form4 />}
-        />
-        <Route
-          path="/home"
-          element={<Home />}
-        />
-      </Routes>
-    </BrowserRouter>
-  </React.StrictMode>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <BrowserRouter>
+        <Routes>
+          <Route
+            path="/"
+            element={<Landing />}
+          />
+          <Route
+            path="/dashboard"
+            element={<Dashboard />}
+          />
+          <Route
+            path="/form"
+            element={<Form />}
+          />
+          <Route
+            path="/form4"
+            element={<Form4 />}
+          />
+          <Route
+            path="/home"
+            element={<Home />}
+          />
+        </Routes>
+      </BrowserRouter>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
