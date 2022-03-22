@@ -1,9 +1,11 @@
-import { applyMiddleware, createStore } from 'redux';
+import {
+  applyMiddleware, createStore, EmptyObject, PreloadedState
+} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import appReducers from './reducers';
 
-export function initStore(initialStore? :any) {
+export function initStore(initialStore? : object) {
   const store = createStore(
     appReducers,
     initialStore,
@@ -16,7 +18,7 @@ export function initStore(initialStore? :any) {
   return store;
 }
 
-export default function configureStore(preloadedState?: any) {
+export default function configureStore(preloadedState?: PreloadedState<EmptyObject>) {
   let store = initStore(preloadedState);
   if (preloadedState) {
     store = initStore({

@@ -1,9 +1,8 @@
 import { Dispatch } from 'redux';
-import { initialMarketplace } from '../reducers/marketplaceReducers';
+import { MarketplaceType } from '../../@types/marketplace';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (businessDetails: typeof initialMarketplace.businessDetails) => {
-  console.debug(businessDetails);
+export const setBusinessDetails = (businessDetails: MarketplaceType) => {
   return (dispatch : Dispatch) => {
     dispatch({
       type: TYPES.SET_BUSINESS_DETAILS,
@@ -12,11 +11,10 @@ export const setBusinessDetails = (businessDetails: typeof initialMarketplace.bu
   };
 };
 
-export const resetMarketplace = () => {
-  console.debug();
+export const resetBusiness = () => {
   return (dispatch : Dispatch) => {
     dispatch({
-      type: TYPES.RESET_MARKETPLACE,
+      type: TYPES.RESET_MARKETPLACE_BISINESS,
     });
   };
 };

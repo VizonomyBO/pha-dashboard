@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import marketplaceReducer from './marketplaceReducers';
 
-const reducers = {
+export const reducers = {
   marketplace: marketplaceReducer,
 };
 

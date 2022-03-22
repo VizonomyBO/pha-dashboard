@@ -9,3 +9,16 @@ export const CLASSES_BY_FORM = {
 } as {
   [key: string]: string;
 };
+
+export const INITIAL_MARKETPLACE = {
+  businessDetails: {
+    name: '',
+    cordinate: null,
+  },
+  socialMedia: {
+    facebook: '',
+  },
+  files: {
+    media: null,
+  }
+};

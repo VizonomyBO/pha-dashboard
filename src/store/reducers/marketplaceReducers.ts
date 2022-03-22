@@ -1,43 +1,22 @@
 import { AnyAction } from 'redux';
+import { Marketplace } from '../../@types/marketplace';
+import { INITIAL_MARKETPLACE } from '../../constants';
 import * as TYPES from '../types';
 
-export interface Marketplace {
-  businessDetails:{
-    name: '',
-    cordinate: [],
-  },
-  socialMedia : {
-    facebook: '',
-  },
-  files : {
-    media: [],
-  }
-}
-
-export const initialMarketplace = {
-  businessDetails: {
-    name: '',
-    cordinate: [],
-  },
-  socialMedia: {
-    facebook: '',
-  },
-  files: {
-    media: [],
-  }
-};
-
-const marketplaceReducer = (state: Marketplace, action: AnyAction) => {
+const marketplaceReducer = (state: Marketplace = INITIAL_MARKETPLACE, action: AnyAction) => {
   switch (action?.type) {
     case TYPES.SET_BUSINESS_DETAILS:
       return {
-        ...initialMarketplace,
+        ...state,
         businessDetails: action.payload,
       };
-    case TYPES.RESET_MARKETPLACE:
-      return initialMarketplace;
+    case TYPES.RESET_MARKETPLACE_BISINESS:
+      return {
+        ...state,
+        businessDetails: state.businessDetails,
+      };
     default:
-      return initialMarketplace;
+      return state;
   }
 };
 
