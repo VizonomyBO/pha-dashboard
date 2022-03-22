@@ -1,6 +1,8 @@
+import { Dispatch } from 'redux';
+import { classBusinessDetails } from '../../classes/form';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (businessDetails: any) => {
+export const setBusinessDetails = (businessDetails: classBusinessDetails) => {
   console.log(businessDetails);
   return (dispatch : any) => {
     dispatch({
@@ -11,7 +13,8 @@ export const setBusinessDetails = (businessDetails: any) => {
 };
 
 export const resetMarketplace = () => {
-  return (dispatch : any) => {
+  console.log();
+  return (dispatch : Dispatch) => {
     dispatch({
       type: TYPES.RESET_MARKETPLACE,
     });
