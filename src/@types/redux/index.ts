@@ -18,8 +18,8 @@ export interface SocialMediaInterface {
 export interface FilesInterface {
   media: null | MediaInterface,
 }
-export interface Marketplace {
-  businessDetails:BusinessDetailsInterface,
+export interface MarketplaceInterface {
+  businessDetails: BusinessDetailsInterface,
   socialMedia : SocialMediaInterface,
   files : FilesInterface,
 }

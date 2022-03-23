@@ -1,9 +1,9 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { BusinessDetailsInterface, Marketplace } from '../../@types/redux';
+import { BusinessDetailsInterface, MarketplaceInterface } from '../../@types/redux';
 import { resetBusiness, setBusinessDetails } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
-  (rootState: {marketplace: Marketplace}) => rootState.marketplace
+  (rootState: {marketplace: MarketplaceInterface}) => rootState.marketplace
 );
 export const useMarketplaceDispatch = () => {
   const dispatch = useDispatch();
