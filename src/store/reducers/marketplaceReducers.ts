@@ -1,19 +1,6 @@
 import { AnyAction } from 'redux';
+import { INITIAL_MARKETPLACE } from '../defaultStore';
 import * as TYPES from '../types';
-
-export const INITIAL_MARKETPLACE = {
-  businessDetails: {
-    name: '',
-    coordinate: null,
-  },
-  socialMedia: {
-    facebook: '',
-  },
-  files: {
-    media: null,
-  }
-};
-
 
 const marketplaceReducer = (state = INITIAL_MARKETPLACE, action: AnyAction) => {
   switch (action?.type) {
