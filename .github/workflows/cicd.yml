@@ -7,7 +7,7 @@ on:
   push:
     branches: [ workflow ]
   pull_request:
-    branches: [ master ]
+    branches: [ workflow ]
 
 env:
   PROJECT_ID: ${{ secrets.GCR_PROJECT }}
