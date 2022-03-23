@@ -1,4 +1,6 @@
-export const Header = ({ type }: any) => (
+import { HeaderInterface } from '../@types';
+
+export const Header = ({ type }: HeaderInterface) => (
   <div className="searchoptionsarea form1">
     <div className="accesspoint colored">
       <h1>FOOD ACCESS POINTS NEAR YOU</h1>
@@ -7,7 +9,7 @@ export const Header = ({ type }: any) => (
         Search our access points using the map below.
       </p>
     </div>
-    {type === 'home' ? (
+    {type === 'home' && (
       <div className="searcharea colored">
         <div className="alook">
           <div className="accesstype">
@@ -24,6 +26,6 @@ export const Header = ({ type }: any) => (
           </div>
         </div>
       </div>
-    ) : null}
+    ) }
   </div>
 );
