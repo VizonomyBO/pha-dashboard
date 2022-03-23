@@ -1,9 +1,28 @@
+import { useEffect } from 'react';
+// import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
+
 export const LeftForm1 = () => {
   console.log('LeftForm1');
+  // const { resetMarketplace } = useMarketplaceDispatch();
+  // useEffect(() => {
+  //   resetMarketplace();
+  // }, []);
+  useEffect(() => {
+    //   resetMarketplace();
+    console.log('LeftForm1');
+  }, []);
   return (
     <>
       <div className="sectiontitle">
         Business Listing
+      </div>
+      <div className="item">
+        <div className="title">
+          <label>Business Name</label>
+        </div>
+        <div className="ainput">
+          <input className="light" type="text" />
+        </div>
       </div>
       <div className="item">
         <div className="title">
@@ -208,7 +227,11 @@ export const LeftForm1 = () => {
           <input className="light" type="text" />
         </div>
       </div>
-
+      <div className="aaction">
+        <button className="light" type="button">
+          Proceed
+        </button>
+      </div>
     </>
   );
 };
