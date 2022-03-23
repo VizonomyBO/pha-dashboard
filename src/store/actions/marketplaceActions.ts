@@ -1,8 +1,8 @@
 import { Dispatch } from 'redux';
-import { MarketplaceType } from '../../@types/redux';
+import { BusinessDetailsInterface } from '../../@types/redux';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (businessDetails: MarketplaceType) => {
+export const setBusinessDetails = (businessDetails: BusinessDetailsInterface) => {
   return (dispatch : Dispatch) => {
     dispatch({
       type: TYPES.SET_BUSINESS_DETAILS,

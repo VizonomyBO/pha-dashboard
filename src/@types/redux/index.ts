@@ -23,5 +23,3 @@ export interface Marketplace {
   socialMedia : SocialMediaInterface,
   files : FilesInterface,
 }
-
-export type MarketplaceType = BusinessDetailsInterface | SocialMediaInterface | FilesInterface;
