@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { MarketplaceType } from '../../@types/marketplace';
+import { MarketplaceType } from '../../@types/redux';
 import { resetBusiness, setBusinessDetails } from '../actions';
 
 export const useMarketplaceState = () => useSelector(

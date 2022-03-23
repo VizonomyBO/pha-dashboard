@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { MarketplaceType } from '../../@types/marketplace';
+import { MarketplaceType } from '../../@types/redux';
 import * as TYPES from '../types';
 
 export const setBusinessDetails = (businessDetails: MarketplaceType) => {
@@ -14,7 +14,7 @@ export const setBusinessDetails = (businessDetails: MarketplaceType) => {
 export const resetBusiness = () => {
   return (dispatch : Dispatch) => {
     dispatch({
-      type: TYPES.RESET_MARKETPLACE_BISINESS,
+      type: TYPES.RESET_MARKETPLACE_BUSINESS,
     });
   };
 };

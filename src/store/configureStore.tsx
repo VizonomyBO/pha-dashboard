@@ -5,7 +5,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import appReducers from './reducers';
 
-export function initStore(initialStore? : object) {
+export function initStore(initialStore? : PreloadedState<EmptyObject>) {
   const store = createStore(
     appReducers,
     initialStore,
