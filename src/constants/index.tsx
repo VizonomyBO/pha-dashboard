@@ -11,3 +11,10 @@ export const CLASSES_BY_FORM = {
 } as {
   [key: string]: string;
 };
+export const DEFAULT_VIEW_STATE = {
+  latitude: 39.02,
+  longitude: -96,
+  zoom: 3.1,
+  bearing: 0,
+  pitch: 0,
+};
