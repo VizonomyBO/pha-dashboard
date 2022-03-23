@@ -5,10 +5,11 @@ name: PHA
 
 on:
   push:
-    branches: [ workflow ]
+    branches:
+      - 'workflow'
   pull_request:
-    branches: [ workflow ]
-    types: [opened, reopened]
+    branches:
+      - 'workflow'
 
 env:
   PROJECT_ID: ${{ secrets.GCR_PROJECT }}
