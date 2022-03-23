@@ -5,7 +5,7 @@ name: PHA
 
 on:
   push:
-    branches: [ master ]
+    branches: [ workflow ]
   pull_request:
     branches: [ master ]
 
