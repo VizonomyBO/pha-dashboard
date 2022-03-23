@@ -1,5 +1,3 @@
-import { INITIAL_MARKETPLACE } from '../../constants';
-
 export interface CoordinateInterface {
   latitude: string,
   longitude: string
@@ -10,19 +8,20 @@ export interface MediaInterface {
   size: string,
   link: string,
 }
-
+export interface BusinessDetailsInterface {
+  name: string,
+  coordinate: CoordinateInterface | null,
+}
+export interface SocialMediaInterface {
+  facebook: string,
+}
+export interface FilesInterface {
+  media: null | MediaInterface,
+}
 export interface Marketplace {
-  businessDetails:{
-    name: string,
-    coordinate: CoordinateInterface | null,
-  },
-  socialMedia : {
-    facebook: string,
-  },
-  files : {
-    media: object | null | MediaInterface,
-  }
+  businessDetails:BusinessDetailsInterface,
+  socialMedia : SocialMediaInterface,
+  files : FilesInterface,
 }
 
-export type MarketplaceType = typeof INITIAL_MARKETPLACE.businessDetails | typeof INITIAL_MARKETPLACE.socialMedia |
- typeof INITIAL_MARKETPLACE.files | typeof INITIAL_MARKETPLACE;
+export type MarketplaceType = BusinessDetailsInterface | SocialMediaInterface | FilesInterface;
