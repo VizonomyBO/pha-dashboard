@@ -13,7 +13,7 @@ export const CLASSES_BY_FORM = {
 export const INITIAL_MARKETPLACE = {
   businessDetails: {
     name: '',
-    cordinate: null,
+    coordinate: null,
   },
   socialMedia: {
     facebook: '',

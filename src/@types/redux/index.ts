@@ -1,5 +1,9 @@
 import { INITIAL_MARKETPLACE } from '../../constants';
 
+export interface CoordinateInterface {
+  latitude: string,
+  longitude: string
+}
 export interface MediaInterface {
   name: string,
   tipe: string,
@@ -10,7 +14,7 @@ export interface MediaInterface {
 export interface Marketplace {
   businessDetails:{
     name: string,
-    cordinate: Array<string> | null | Array<number>,
+    coordinate: CoordinateInterface | null,
   },
   socialMedia : {
     facebook: string,
