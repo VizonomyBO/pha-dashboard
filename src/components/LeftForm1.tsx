@@ -6,7 +6,10 @@ export const LeftForm1 = () => {
   // const { resetMarketplace } = useMarketplaceDispatch();
   // useEffect(() => {
   //   resetMarketplace();
-  // }, []);
+  // // }, []);
+  // function handleButtonClick(e: any) {
+  //   console.log('click left button', e);
+  // }
   useEffect(() => {
     //   resetMarketplace();
     console.log('LeftForm1');
@@ -58,12 +61,18 @@ export const LeftForm1 = () => {
       </div>
       <div className="twoc">
         <div className="item">
-          <div className="title">
+          {/* <div className="title">
             <label>State</label>
           </div>
           <div className="ainput2">
             <input className="light" type="text" />
-          </div>
+          </div> */}
+          {/* <div class="dropdown">
+            <span>Mouse over me</span>
+            <div class="dropdown-content">
+              <p>Hello World!</p>
+            </div>
+          </div> */}
         </div>
         <div className="item">
           <div className="title">
