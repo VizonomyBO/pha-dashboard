@@ -9,7 +9,8 @@ export const Home = () => {
       <figure className="bgnoise home" />
       <div className="barblue home" />
       <div className="pagecontainer">
-        <Navbar />
+        <Nav
+        bar />
         <Header
           type="home"
         />
