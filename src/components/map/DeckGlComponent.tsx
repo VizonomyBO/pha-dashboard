@@ -11,6 +11,7 @@ import { NoDataProvided } from '../NoDataProvided';
 
 export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
   const initialViewState = DEFAULT_VIEW_STATE;
+  const controllerStatus = true;
   return (
     <div>
       {MAPBOX_KEY === NO_DATA ? (
@@ -20,8 +21,9 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
       )
         : (
           <DeckGL
-            viewState={{ ...initialViewState }}
+            initialViewState={{ ...initialViewState }}
             layers={layers}
+            controller={controllerStatus}
           >
             <Map
               id="mainMap"
