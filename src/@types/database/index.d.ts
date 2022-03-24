@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export interface PhaRetailer {
   retailer_id: number,
   latitude: number,
