@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 
 export const LeftForm2 = () => {
   console.log('LeftForm2');
-
   const [description, setDescription] = useState('');
   const [fresh, setFresh] = useState(false);
   const [frozen, setFrozen] = useState(false);
@@ -15,13 +14,22 @@ export const LeftForm2 = () => {
   const [localNoProduce, setLocalNoProduce] = useState(false);
   const [itemsStore, setItemsStore] = useState('');
   const [itemsSeasonally, setItemsSeasonally] = useState('');
+  const [disable1, setDisable1] = useState(true);
+  const [disable2, setDisable2] = useState(true);
+  const [disable3, setDisable3] = useState(true);
 
   function loadDescription(event: any) {
     setDescription(event.target.value);
   }
 
-  function loadAvailabilityFre() {
-    setFresh(!fresh);
+  function loadAvailabilityFre(event: any) {
+    if (event.target.checked) {
+      setFresh(true);
+      setDisable1(false);
+    } else {
+      setFresh(false);
+      setDisable1(true);
+    }
   }
 
   function loadAvailabilityFro() {
@@ -33,21 +41,25 @@ export const LeftForm2 = () => {
   }
 
   function loadAcceptable() {
+    setDisable2(false);
     setAcceptable(true);
     setUnAcceptable(false);
   }
 
   function loadUnAcceptable() {
+    setDisable2(false);
     setAcceptable(false);
     setUnAcceptable(true);
   }
 
   function loadVisibility() {
+    setDisable3(false);
     setVisibility(true);
     setNoVisibility(false);
   }
 
   function loadNoVisibility() {
+    setDisable3(false);
     setVisibility(false);
     setNoVisibility(true);
   }
@@ -70,7 +82,7 @@ export const LeftForm2 = () => {
   }
 
   useEffect(() => {
-    console.log(description, acceptable, visibility, localProduce, localStorage, itemsStore, itemsSeasonally);
+    console.log(fresh, description, acceptable, visibility, localProduce, localStorage, itemsStore, itemsSeasonally);
   }, []);
 
   return (
@@ -125,106 +137,129 @@ export const LeftForm2 = () => {
           </label>
         </div>
       </div>
-      <div className="sectiontitle">
-        Quality
-      </div>
-      <div className="item">
-        <div className="title grouped">
-          <span className="number">2.</span>
-          <span className="description">
-            How would you describe the quality of the fresh fruits and
-            vegetables you stock at this location? Acceptable (peak
-            condition, top quality, good color, fresh, firm, and clean)
+      {
+        !disable1 ? (
+          <div>
+            <div className="sectiontitle">
+              Quality
+            </div>
+            <div className="item">
+              <div className="title grouped">
+                <span className="number">2.</span>
+                <span className="description">
+                  How would you describe the quality of the fresh fruits and
+                  vegetables you stock at this location? Acceptable (peak
+                  condition, top quality, good color, fresh, firm, and clean)
+                </span>
+              </div>
+              <div className="ainput chk">
+                <label className="chkwrap">
+                  Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
+                  <input
+                    type="checkbox"
+                    checked={acceptable}
+                    onChange={loadAcceptable}
+                  />
+                  <span className="checkmark" />
+                </label>
+                <label className="chkwrap">
+                  Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
+                  patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
+                  <input
+                    type="checkbox"
+                    checked={unacceptable}
+                    onChange={loadUnAcceptable}
+                  />
+                  <span className="checkmark" />
+                </label>
+              </div>
+            </div>
+          </div>
+        ) : (
+          null
+        )
+      }
+      {
+        disable2 ? (
+          null
+        ) : (
+          <div>
+            <div className="sectiontitle">
+              Visibility
+            </div>
+            <div className="item">
+              <div className="title grouped">
+                <span className="number">3.</span>
+                <span className="description">
+                  Are the fresh fruits and vegetables visible from the front of the
+                  store or before entering ?
 
-          </span>
-        </div>
-        <div className="ainput chk">
-          <label className="chkwrap">
-            Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
-            <input
-              type="checkbox"
-              checked={acceptable}
-              onChange={loadAcceptable}
-            />
-            <span className="checkmark" />
-          </label>
-          <label className="chkwrap">
-            Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
-            patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
-            <input
-              type="checkbox"
-              checked={unacceptable}
-              onChange={loadUnAcceptable}
-            />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
-      <div className="sectiontitle">
-        Visibility
-      </div>
-      <div className="item">
-        <div className="title grouped">
-          <span className="number">3.</span>
-          <span className="description">
-            Are the fresh fruits and vegetables visible from the front of the
-            store or before entering ?
-
-          </span>
-        </div>
-        <div className="ainput chk">
-          <label className="chkwrap">
-            Yes
-            <input
-              type="checkbox"
-              checked={visibility}
-              onChange={loadVisibility}
-            />
-            <span className="checkmark" />
-          </label>
-          <label className="chkwrap">
-            No
-            <input
-              type="checkbox"
-              checked={novisibility}
-              onChange={loadNoVisibility}
-            />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
-      <div className="sectiontitle">
-        Local
-      </div>
-      <div className="item">
-        <div className="title grouped">
-          <span className="number">4.</span>
-          <span className="description">
-            Do you stock locally grown produce (grown within 250 miles
-            radius)?
-          </span>
-        </div>
-        <div className="ainput chk">
-          <label className="chkwrap">
-            Yes
-            <input
-              type="checkbox"
-              checked={localProduce}
-              onChange={loadLocalProduce}
-            />
-            <span className="checkmark" />
-          </label>
-          <label className="chkwrap">
-            No
-            <input
-              type="checkbox"
-              checked={localNoProduce}
-              onChange={loadLocalNoProduce}
-            />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
+                </span>
+              </div>
+              <div className="ainput chk">
+                <label className="chkwrap">
+                  Yes
+                  <input
+                    type="checkbox"
+                    checked={visibility}
+                    onChange={loadVisibility}
+                  />
+                  <span className="checkmark" />
+                </label>
+                <label className="chkwrap">
+                  No
+                  <input
+                    type="checkbox"
+                    checked={novisibility}
+                    onChange={loadNoVisibility}
+                  />
+                  <span className="checkmark" />
+                </label>
+              </div>
+            </div>
+          </div>
+        )
+      }
+      {
+        disable3 ? (
+          null
+        ) : (
+          <div>
+            <div className="sectiontitle">
+              Local
+            </div>
+            <div className="item">
+              <div className="title grouped">
+                <span className="number">4.</span>
+                <span className="description">
+                  Do you stock locally grown produce (grown within 250 miles
+                  radius)?
+                </span>
+              </div>
+              <div className="ainput chk">
+                <label className="chkwrap">
+                  Yes
+                  <input
+                    type="checkbox"
+                    checked={localProduce}
+                    onChange={loadLocalProduce}
+                  />
+                  <span className="checkmark" />
+                </label>
+                <label className="chkwrap">
+                  No
+                  <input
+                    type="checkbox"
+                    checked={localNoProduce}
+                    onChange={loadLocalNoProduce}
+                  />
+                  <span className="checkmark" />
+                </label>
+              </div>
+            </div>
+          </div>
+        )
+      }
       <div className="sectiontitle">
         Optional Information
       </div>
