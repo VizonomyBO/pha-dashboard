@@ -1,67 +1,77 @@
-import React, { useState } from "react"; 
+import React, { useEffect, useState } from 'react';
 
 export const LeftForm2 = () => {
   console.log('LeftForm2');
 
-  const [description, setDescription] = useState("")
-  const [fresh, setFresh] = useState(false)
-  const [frozen, setFrozen] = useState(false)
-  const [canned, setCannet] = useState(false)
-  const [acceptable, setAcceptable] = useState(false)
-  const [visibility, setVisibility] = useState(false)
-  const [localProduce, setLocalProduce] = useState(false)
-  const [itemsStore, setItemsStore] = useState("")
-  const [itemsSeasonally, setItemsSeasonally] = useState("")
-  
-  function loadDescription(event:any){
-    setDescription(event.target.value)
+  const [description, setDescription] = useState('');
+  const [fresh, setFresh] = useState(false);
+  const [frozen, setFrozen] = useState(false);
+  const [canned, setCannet] = useState(false);
+  const [acceptable, setAcceptable] = useState(false);
+  const [unacceptable, setUnAcceptable] = useState(false);
+  const [visibility, setVisibility] = useState(false);
+  const [novisibility, setNoVisibility] = useState(false);
+  const [localProduce, setLocalProduce] = useState(false);
+  const [localNoProduce, setLocalNoProduce] = useState(false);
+  const [itemsStore, setItemsStore] = useState('');
+  const [itemsSeasonally, setItemsSeasonally] = useState('');
+
+  function loadDescription(event: any) {
+    setDescription(event.target.value);
   }
 
-  function loadAvailabilityFre(event:any){
-    setFresh(!fresh)
+  function loadAvailabilityFre() {
+    setFresh(!fresh);
   }
 
-  function loadAvailabilityFro(event:any){
-    setFrozen(!frozen)
+  function loadAvailabilityFro() {
+    setFrozen(!frozen);
   }
 
-  function loadAvailabilityCa(event:any){
-    setCannet(!canned)
+  function loadAvailabilityCa() {
+    setCannet(!canned);
   }
 
-  function loadAcceptable(event:any){
-    setAcceptable(event.target.checked)
+  function loadAcceptable() {
+    setAcceptable(true);
+    setUnAcceptable(false);
   }
 
-  function loadNoAcceptable(event:any){
-    if(event.target.checked)
-      setAcceptable(!event.target.checked)
+  function loadUnAcceptable() {
+    setAcceptable(false);
+    setUnAcceptable(true);
   }
 
-  function loadVisibility(event: any){
-    setVisibility(event.target.checked)
+  function loadVisibility() {
+    setVisibility(true);
+    setNoVisibility(false);
   }
 
-  function loadNoVisibility(event: any){
-    if(event.target.checked)
-      setVisibility(!event.target.checked)
+  function loadNoVisibility() {
+    setVisibility(false);
+    setNoVisibility(true);
   }
 
-  function loadLocalProduce(event:any){
-    setLocalProduce(event.target.checked)
+  function loadLocalProduce() {
+    setLocalProduce(true);
+    setLocalNoProduce(false);
   }
-  function loadLocalNoProduce(event:any){
-    if(event.target.checked)
-    setLocalProduce(!event.target.checked)
-  }
-
-  function loadItemsStore (event:any){
-    setItemsStore(event.target.value)
+  function loadLocalNoProduce() {
+    setLocalProduce(false);
+    setLocalNoProduce(true);
   }
 
-  function loadItemsSeasonally (event:any){
-    setItemsSeasonally(event.target.value)
+  function loadItemsStore(event: any) {
+    setItemsStore(event.target.value);
   }
+
+  function loadItemsSeasonally(event: any) {
+    setItemsSeasonally(event.target.value);
+  }
+
+  useEffect(() => {
+    console.log(description, acceptable, visibility, localProduce, localStorage, itemsStore, itemsSeasonally);
+  }, []);
 
   return (
     <>
@@ -76,7 +86,14 @@ export const LeftForm2 = () => {
           </label>
         </div>
         <div className="ainput htxtarea">
-          <textarea name="yth" id="yth" cols={30} rows={10} placeholder="Your text here..." onChange={loadDescription} />
+          <textarea
+            name="yth"
+            id="yth"
+            cols={30}
+            rows={10}
+            placeholder="Your text here..."
+            onChange={loadDescription}
+          />
         </div>
       </div>
       <div className="sectiontitle">
@@ -124,13 +141,21 @@ export const LeftForm2 = () => {
         <div className="ainput chk">
           <label className="chkwrap">
             Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
-            <input type="checkbox" onChange={loadAcceptable}  />
+            <input
+              type="checkbox"
+              checked={acceptable}
+              onChange={loadAcceptable}
+            />
             <span className="checkmark" />
           </label>
           <label className="chkwrap">
             Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
             patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
-            <input type="checkbox" onChange={loadNoAcceptable} />
+            <input
+              type="checkbox"
+              checked={unacceptable}
+              onChange={loadUnAcceptable}
+            />
             <span className="checkmark" />
           </label>
         </div>
@@ -150,12 +175,20 @@ export const LeftForm2 = () => {
         <div className="ainput chk">
           <label className="chkwrap">
             Yes
-            <input type="checkbox" onChange={loadVisibility} />
+            <input
+              type="checkbox"
+              checked={visibility}
+              onChange={loadVisibility}
+            />
             <span className="checkmark" />
           </label>
           <label className="chkwrap">
             No
-            <input type="checkbox" onChange={loadNoVisibility} />
+            <input
+              type="checkbox"
+              checked={novisibility}
+              onChange={loadNoVisibility}
+            />
             <span className="checkmark" />
           </label>
         </div>
@@ -169,18 +202,25 @@ export const LeftForm2 = () => {
           <span className="description">
             Do you stock locally grown produce (grown within 250 miles
             radius)?
-
           </span>
         </div>
         <div className="ainput chk">
           <label className="chkwrap">
             Yes
-            <input type="checkbox" onChange={loadLocalProduce}  />
+            <input
+              type="checkbox"
+              checked={localProduce}
+              onChange={loadLocalProduce}
+            />
             <span className="checkmark" />
           </label>
           <label className="chkwrap">
             No
-            <input type="checkbox" onChange={loadLocalNoProduce} />
+            <input
+              type="checkbox"
+              checked={localNoProduce}
+              onChange={loadLocalNoProduce}
+            />
             <span className="checkmark" />
           </label>
         </div>
@@ -196,7 +236,14 @@ export const LeftForm2 = () => {
           </label>
         </div>
         <div className="ainput htxtarea">
-          <textarea name="yth" id="yth2" cols={30} rows={10} placeholder="Your text here..." onChange={loadItemsStore} />
+          <textarea
+            name="yth"
+            id="yth2"
+            cols={30}
+            rows={10}
+            placeholder="Your text here..."
+            onChange={loadItemsStore}
+          />
         </div>
       </div>
       <div className="item">
@@ -204,7 +251,14 @@ export const LeftForm2 = () => {
           <label>Please list fresh produce items that are only available seasonally.</label>
         </div>
         <div className="ainput htxtarea">
-          <textarea name="yth" id="yth3" cols={30} rows={10} placeholder="Your text here..." onChange={loadItemsSeasonally} />
+          <textarea
+            name="yth"
+            id="yth3"
+            cols={30}
+            rows={10}
+            placeholder="Your text here..."
+            onChange={loadItemsSeasonally}
+          />
         </div>
       </div>
       <div className="sectiontitle">
