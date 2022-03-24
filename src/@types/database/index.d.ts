@@ -5,6 +5,7 @@ export interface PhaRetailer {
   longitude: number,
   name: string,
   address_1: string,
+  random: string,
   address_2: string,
   phone: string,
   city: string,
