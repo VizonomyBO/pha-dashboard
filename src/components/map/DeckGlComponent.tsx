@@ -1,6 +1,6 @@
 import DeckGL from '@deck.gl/react';
 import { Layer } from 'deck.gl';
-import Map from 'react-map-gl';
+import Map, { Marker } from 'react-map-gl';
 import {
   MAPBOX_KEY,
   BASEMAP,
@@ -8,6 +8,7 @@ import {
   DEFAULT_VIEW_STATE
 } from '../../constants/index';
 import { NoDataProvided } from '../NoDataProvided';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
   const initialViewState = DEFAULT_VIEW_STATE;
@@ -30,7 +31,14 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
               reuseMaps
               mapStyle={BASEMAP}
               mapboxAccessToken={MAPBOX_KEY}
-            />
+            >
+              <Marker
+                key='abcdes'
+                latitude={41}
+                longitude={-104}
+              >
+              </Marker>
+            </Map>
           </DeckGL>
         )}
     </div>

@@ -1,5 +1,6 @@
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
+import { Map } from '../components/map/Map';
 
 export const Home = () => {
   console.log('Home');
@@ -139,7 +140,9 @@ export const Home = () => {
             </div>
           </div>
           <div className="amap">
-            <div className="modal">
+            <Map />
+
+            {/* <div className="modal">
               <figure className="picture">
                 <img src="/public/images/img_market_001.png" alt="" />
               </figure>
@@ -171,7 +174,7 @@ export const Home = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="bmodal">
               <figure className="picture">
                 <img src="/public/images/img_market_s_001.png" alt="" />
