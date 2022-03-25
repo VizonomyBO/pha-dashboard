@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 
 export const LeftForm2 = () => {
-  console.log('LeftForm2');
-  const [description, setDescription] = useState('');
+  const [descriptionF, setDescription] = useState('');
   const [fresh, setFresh] = useState(false);
   const [frozen, setFrozen] = useState(false);
   const [canned, setCannet] = useState(false);
@@ -12,11 +12,17 @@ export const LeftForm2 = () => {
   const [novisibility, setNoVisibility] = useState(false);
   const [localProduce, setLocalProduce] = useState(false);
   const [localNoProduce, setLocalNoProduce] = useState(false);
-  const [itemsStore, setItemsStore] = useState('');
-  const [itemsSeasonally, setItemsSeasonally] = useState('');
   const [disable1, setDisable1] = useState(true);
   const [disable2, setDisable2] = useState(true);
   const [disable3, setDisable3] = useState(true);
+
+  const [qualityF, setQuality] = useState('');
+  const [visibilityState, setVisibilityState] = useState('');
+  const [localF, setLocal] = useState('');
+  const [produceAvailStore, setProduceAvailAStore] = useState('');
+  const [produceAvailSeasonally, setProduceAvailSeasonally] = useState('');
+
+  const { setOtherQuestions } = useMarketplaceDispatch();
 
   function loadDescription(event: any) {
     setDescription(event.target.value);
@@ -44,46 +50,70 @@ export const LeftForm2 = () => {
     setDisable2(false);
     setAcceptable(true);
     setUnAcceptable(false);
+    setQuality('acceptable');
   }
 
   function loadUnAcceptable() {
     setDisable2(false);
     setAcceptable(false);
     setUnAcceptable(true);
+    setQuality('unacceptable');
   }
 
   function loadVisibility() {
     setDisable3(false);
     setVisibility(true);
     setNoVisibility(false);
+    setVisibilityState('visibility');
   }
 
   function loadNoVisibility() {
     setDisable3(false);
     setVisibility(false);
     setNoVisibility(true);
+    setVisibilityState('no visibility');
   }
 
   function loadLocalProduce() {
     setLocalProduce(true);
     setLocalNoProduce(false);
+    setLocal('local grow');
   }
   function loadLocalNoProduce() {
     setLocalProduce(false);
     setLocalNoProduce(true);
+    setLocal('no local grow');
   }
 
   function loadItemsStore(event: any) {
-    setItemsStore(event.target.value);
+    setProduceAvailAStore(event.target.value);
   }
 
   function loadItemsSeasonally(event: any) {
-    setItemsSeasonally(event.target.value);
+    setProduceAvailSeasonally(event.target.value);
   }
 
-  useEffect(() => {
-    console.log(fresh, description, acceptable, visibility, localProduce, localStorage, itemsStore, itemsSeasonally);
-  }, []);
+  function onchangeForm() {
+    let st = '';
+    if (fresh) {
+      st = 'fresh, ';
+    }
+    if (frozen) {
+      st += 'frozen, ';
+    }
+    if (canned) {
+      st += 'canned';
+    }
+    setOtherQuestions({
+      description: descriptionF,
+      availability: st,
+      quality: qualityF,
+      visibility: visibilityState,
+      local: localF,
+      produce_avail_store: produceAvailStore,
+      produce_avail_seasonally: produceAvailSeasonally
+    });
+  }
 
   return (
     <>
@@ -138,7 +168,9 @@ export const LeftForm2 = () => {
         </div>
       </div>
       {
-        !disable1 ? (
+        disable1 ? (
+          null
+        ) : (
           <div>
             <div className="sectiontitle">
               Quality
@@ -175,8 +207,6 @@ export const LeftForm2 = () => {
               </div>
             </div>
           </div>
-        ) : (
-          null
         )
       }
       {
@@ -193,7 +223,6 @@ export const LeftForm2 = () => {
                 <span className="description">
                   Are the fresh fruits and vegetables visible from the front of the
                   store or before entering ?
-
                 </span>
               </div>
               <div className="ainput chk">
@@ -234,6 +263,7 @@ export const LeftForm2 = () => {
                 <span className="description">
                   Do you stock locally grown produce (grown within 250 miles
                   radius)?
+
                 </span>
               </div>
               <div className="ainput chk">
@@ -310,6 +340,11 @@ export const LeftForm2 = () => {
             <div>Browse on your device.</div>
           </div>
         </div>
+      </div>
+      <div className="aaction">
+        <button className="light" type="button" onClick={() => onchangeForm()}>
+          Proceed
+        </button>
       </div>
     </>
   );
