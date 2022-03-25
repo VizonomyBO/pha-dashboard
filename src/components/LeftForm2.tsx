@@ -24,12 +24,12 @@ export const LeftForm2 = () => {
 
   const { setOtherQuestions } = useMarketplaceDispatch();
 
-  function loadDescription(event: any) {
-    setDescription(event.target.value);
+  function loadDescription() {
+    setDescription((document.getElementById('yth') as HTMLInputElement).value);
   }
 
-  function loadAvailabilityFre(event: any) {
-    if (event.target.checked) {
+  function loadAvailabilityFre() {
+    if ((document.getElementById('fresh') as HTMLInputElement).checked) {
       setFresh(true);
       setDisable1(false);
     } else {
@@ -85,12 +85,12 @@ export const LeftForm2 = () => {
     setLocal('no local grow');
   }
 
-  function loadItemsStore(event: any) {
-    setProduceAvailAStore(event.target.value);
+  function loadItemsStore() {
+    setProduceAvailAStore((document.getElementById('yth2') as HTMLInputElement).value);
   }
 
-  function loadItemsSeasonally(event: any) {
-    setProduceAvailSeasonally(event.target.value);
+  function loadItemsSeasonally() {
+    setProduceAvailSeasonally((document.getElementById('yth3') as HTMLInputElement).value);
   }
 
   function onchangeForm() {
@@ -152,7 +152,7 @@ export const LeftForm2 = () => {
         <div className="ainput chk">
           <label className="chkwrap">
             Fresh
-            <input type="checkbox" onChange={loadAvailabilityFre} />
+            <input type="checkbox" id="fresh" onChange={loadAvailabilityFre} />
             <span className="checkmark" />
           </label>
           <label className="chkwrap">
