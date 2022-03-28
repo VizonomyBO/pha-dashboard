@@ -9,3 +9,8 @@ export interface FormHeaderInterface {
   activeTab: FormTabType,
   setActiveTab: (value: FormTabType) => void,
 }
+
+export interface DropdowInterface {
+  initialState: string,
+  type: string,
+}

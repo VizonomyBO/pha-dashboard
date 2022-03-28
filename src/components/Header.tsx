@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { HeaderInterface } from '../@types';
 
 export const Header = ({ type }: HeaderInterface) => (
@@ -25,11 +24,6 @@ export const Header = ({ type }: HeaderInterface) => (
             </button>
 
           </div>
-          <Link to="/form">
-            <button className="light" type="button">
-              Test Form
-            </button>
-          </Link>
         </div>
       </div>
     ) }
