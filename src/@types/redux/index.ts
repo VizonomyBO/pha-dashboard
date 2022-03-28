@@ -14,7 +14,7 @@ export interface BusinessDetailsInterface {
 }
 export interface OtherQuestionsInterface {
   description: string,
-  availability: string,
+  availability: string[],
   quality: string,
   visibility: string,
   local: string,

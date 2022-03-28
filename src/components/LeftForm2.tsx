@@ -12,9 +12,7 @@ export const LeftForm2 = () => {
   const [novisibility, setNoVisibility] = useState(false);
   const [localProduce, setLocalProduce] = useState(false);
   const [localNoProduce, setLocalNoProduce] = useState(false);
-  const [disable1, setDisable1] = useState(true);
-  const [disableFormVisibility, setDisableFormVisibility] = useState(true);
-  const [disableFormLocal, setDisableFormLocal] = useState(true);
+  const [disableForm, setDisableForm] = useState(true);
 
   const [qualityState, setQualityState] = useState('');
   const [visibilityState, setVisibilityState] = useState('');
@@ -24,100 +22,24 @@ export const LeftForm2 = () => {
 
   const { setOtherQuestions } = useMarketplaceDispatch();
 
-  const loadAvailabilityFre = () => {
-    if ((document.getElementById('fresh') as HTMLInputElement).checked) {
-      setFresh(true);
-      setDisable1(false);
-    } else {
-      setFresh(false);
-      setDisable1(true);
-    }
-  };
-
-  function loadAvailabilityFro() {
-    setFrozen(!frozen);
-  }
-
-  function loadAvailabilityCa() {
-    setCannet(!canned);
-  }
-
-  const loadAcceptable = () => {
-    if ((document.getElementById('acceptable') as HTMLInputElement).checked) {
-      setAcceptable(true);
-      setUnAcceptable(false);
-      setDisableFormVisibility(false);
-      setQualityState('acceptable');
-    } else {
-      setAcceptable(false);
-      if (!(document.getElementById('unacceptable') as HTMLInputElement).checked
-        && !(document.getElementById('acceptable') as HTMLInputElement).checked) {
-        setDisableFormVisibility(true);
-      }
-    }
-  };
-
-  const loadUnAcceptable = () => {
-    if ((document.getElementById('unacceptable') as HTMLInputElement).checked) {
-      setAcceptable(false);
-      setDisableFormVisibility(false);
-      setUnAcceptable(true);
-      setQualityState('unacceptable');
-    } else {
-      setUnAcceptable(false);
-      if (!(document.getElementById('unacceptable') as HTMLInputElement).checked
-        && !(document.getElementById('acceptable') as HTMLInputElement).checked) {
-        setDisableFormVisibility(true);
-      }
-    }
-  };
-
-  const loadVisibility = () => {
-    if ((document.getElementById('visibility') as HTMLInputElement).checked) {
-      setDisableFormLocal(false);
-      setVisibility(true);
-      setNoVisibility(false);
-    } else {
-      setNoVisibility(true);
-      if (!(document.getElementById('novisibility') as HTMLInputElement).checked
-        && !(document.getElementById('visibility') as HTMLInputElement).checked) {
-        setDisableFormLocal(true);
-      }
-    }
-    setVisibilityState('visibility');
-  };
-
-  function loadNoVisibility() {
-    setVisibility(false);
-    setNoVisibility(true);
-    setVisibilityState('no visibility');
-  }
-
-  function loadLocalProduce() {
-    setLocalProduce(true);
-    setLocalNoProduce(false);
-    setLocalState('local grow');
-  }
-  function loadLocalNoProduce() {
-    setLocalProduce(false);
-    setLocalNoProduce(true);
-    setLocalState('no local grow');
-  }
-
   const onchangeForm = () => {
-    let st = '';
+    const tempData = [''];
+    let i = 0;
     if (fresh) {
-      st = 'fresh, ';
+      tempData[i] = 'fresh, ';
+      i += 1;
     }
     if (frozen) {
-      st += 'frozen, ';
+      tempData[i] = 'frozen, ';
+      i += 1;
     }
     if (canned) {
-      st += 'canned';
+      tempData[i] = 'canned';
+      i += 1;
     }
     setOtherQuestions({
       description: descriptionForm,
-      availability: st,
+      availability: tempData,
       quality: qualityState,
       visibility: visibilityState,
       local: localState,
@@ -145,7 +67,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={() => setDescription((document.getElementById('yth') as HTMLInputElement).value)}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </div>
       </div>
@@ -163,25 +85,42 @@ export const LeftForm2 = () => {
         <div className="ainput chk">
           <label className="chkwrap">
             Fresh
-            <input type="checkbox" id="fresh" onChange={loadAvailabilityFre} />
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                if (e.target.checked) {
+                  setFresh(true);
+                  setDisableForm(false);
+                } else {
+                  setFresh(false);
+                  setDisableForm(true);
+                }
+              }}
+            />
             <span className="checkmark" />
           </label>
           <label className="chkwrap">
             Frozen
-            <input type="checkbox" onChange={loadAvailabilityFro} />
+            <input
+              type="checkbox"
+              onChange={(e) => {
+                setFrozen(e.target.checked);
+              }}
+            />
             <span className="checkmark" />
           </label>
           <label className="chkwrap">
             Canned
-            <input type="checkbox" onChange={loadAvailabilityCa} />
+            <input
+              type="checkbox"
+              onChange={(e) => setCannet(e.target.checked)}
+            />
             <span className="checkmark" />
           </label>
         </div>
       </div>
       {
-        disable1 ? (
-          null
-        ) : (
+        !disableForm && (
           <div>
             <div className="sectiontitle">
               Quality
@@ -200,9 +139,14 @@ export const LeftForm2 = () => {
                   Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
                   <input
                     type="checkbox"
-                    id="acceptable"
                     checked={acceptable}
-                    onChange={loadAcceptable}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setAcceptable(true);
+                        setUnAcceptable(false);
+                        setQualityState('acceptable');
+                      } else setAcceptable(false);
+                    }}
                   />
                   <span className="checkmark" />
                 </label>
@@ -211,22 +155,19 @@ export const LeftForm2 = () => {
                   patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
                   <input
                     type="checkbox"
-                    id="unacceptable"
                     checked={unacceptable}
-                    onChange={loadUnAcceptable}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setAcceptable(false);
+                        setUnAcceptable(true);
+                        setQualityState('unacceptable');
+                      } else setUnAcceptable(false);
+                    }}
                   />
                   <span className="checkmark" />
                 </label>
               </div>
             </div>
-          </div>
-        )
-      }
-      {
-        disableFormVisibility ? (
-          null
-        ) : (
-          <div>
             <div className="sectiontitle">
               Visibility
             </div>
@@ -243,9 +184,14 @@ export const LeftForm2 = () => {
                   Yes
                   <input
                     type="checkbox"
-                    id="visibility"
                     checked={visibility}
-                    onChange={loadVisibility}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setVisibility(true);
+                        setNoVisibility(false);
+                        setVisibilityState('visibility');
+                      } else setVisibility(false);
+                    }}
                   />
                   <span className="checkmark" />
                 </label>
@@ -253,22 +199,19 @@ export const LeftForm2 = () => {
                   No
                   <input
                     type="checkbox"
-                    id="novisibility"
                     checked={novisibility}
-                    onChange={loadNoVisibility}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setVisibility(false);
+                        setNoVisibility(true);
+                        setVisibilityState('no visibility');
+                      } else setNoVisibility(false);
+                    }}
                   />
                   <span className="checkmark" />
                 </label>
               </div>
             </div>
-          </div>
-        )
-      }
-      {
-        disableFormLocal ? (
-          null
-        ) : (
-          <div>
             <div className="sectiontitle">
               Local
             </div>
@@ -287,7 +230,13 @@ export const LeftForm2 = () => {
                   <input
                     type="checkbox"
                     checked={localProduce}
-                    onChange={loadLocalProduce}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setLocalProduce(true);
+                        setLocalNoProduce(false);
+                        setLocalState('local grow');
+                      } else setLocalProduce(false);
+                    }}
                   />
                   <span className="checkmark" />
                 </label>
@@ -296,7 +245,13 @@ export const LeftForm2 = () => {
                   <input
                     type="checkbox"
                     checked={localNoProduce}
-                    onChange={loadLocalNoProduce}
+                    onChange={(e) => {
+                      if (e.target.checked) {
+                        setLocalProduce(false);
+                        setLocalNoProduce(true);
+                        setLocalState('no local grow');
+                      } else setLocalNoProduce(false);
+                    }}
                   />
                   <span className="checkmark" />
                 </label>
@@ -322,7 +277,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={() => setProduceAvailAStore((document.getElementById('yth2') as HTMLInputElement).value)}
+            onChange={(e) => setProduceAvailAStore(e.target.value)}
           />
         </div>
       </div>
@@ -337,7 +292,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={() => setProduceAvailSeasonally((document.getElementById('yth3') as HTMLInputElement).value)}
+            onChange={(e) => setProduceAvailSeasonally(e.target.value)}
           />
         </div>
       </div>
