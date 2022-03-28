@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 
 export const LeftForm2 = () => {
-  const [descriptionF, setDescription] = useState('');
+  const [descriptionForm, setDescription] = useState('');
   const [fresh, setFresh] = useState(false);
   const [frozen, setFrozen] = useState(false);
   const [canned, setCannet] = useState(false);
@@ -13,22 +13,18 @@ export const LeftForm2 = () => {
   const [localProduce, setLocalProduce] = useState(false);
   const [localNoProduce, setLocalNoProduce] = useState(false);
   const [disable1, setDisable1] = useState(true);
-  const [disable2, setDisable2] = useState(true);
-  const [disable3, setDisable3] = useState(true);
+  const [disableFormVisibility, setDisableFormVisibility] = useState(true);
+  const [disableFormLocal, setDisableFormLocal] = useState(true);
 
-  const [qualityF, setQuality] = useState('');
+  const [qualityState, setQualityState] = useState('');
   const [visibilityState, setVisibilityState] = useState('');
-  const [localF, setLocal] = useState('');
+  const [localState, setLocalState] = useState('');
   const [produceAvailStore, setProduceAvailAStore] = useState('');
   const [produceAvailSeasonally, setProduceAvailSeasonally] = useState('');
 
   const { setOtherQuestions } = useMarketplaceDispatch();
 
-  function loadDescription() {
-    setDescription((document.getElementById('yth') as HTMLInputElement).value);
-  }
-
-  function loadAvailabilityFre() {
+  const loadAvailabilityFre = () => {
     if ((document.getElementById('fresh') as HTMLInputElement).checked) {
       setFresh(true);
       setDisable1(false);
@@ -36,7 +32,7 @@ export const LeftForm2 = () => {
       setFresh(false);
       setDisable1(true);
     }
-  }
+  };
 
   function loadAvailabilityFro() {
     setFrozen(!frozen);
@@ -46,29 +42,52 @@ export const LeftForm2 = () => {
     setCannet(!canned);
   }
 
-  function loadAcceptable() {
-    setDisable2(false);
-    setAcceptable(true);
-    setUnAcceptable(false);
-    setQuality('acceptable');
-  }
+  const loadAcceptable = () => {
+    if ((document.getElementById('acceptable') as HTMLInputElement).checked) {
+      setAcceptable(true);
+      setUnAcceptable(false);
+      setDisableFormVisibility(false);
+      setQualityState('acceptable');
+    } else {
+      setAcceptable(false);
+      if (!(document.getElementById('unacceptable') as HTMLInputElement).checked
+        && !(document.getElementById('acceptable') as HTMLInputElement).checked) {
+        setDisableFormVisibility(true);
+      }
+    }
+  };
 
-  function loadUnAcceptable() {
-    setDisable2(false);
-    setAcceptable(false);
-    setUnAcceptable(true);
-    setQuality('unacceptable');
-  }
+  const loadUnAcceptable = () => {
+    if ((document.getElementById('unacceptable') as HTMLInputElement).checked) {
+      setAcceptable(false);
+      setDisableFormVisibility(false);
+      setUnAcceptable(true);
+      setQualityState('unacceptable');
+    } else {
+      setUnAcceptable(false);
+      if (!(document.getElementById('unacceptable') as HTMLInputElement).checked
+        && !(document.getElementById('acceptable') as HTMLInputElement).checked) {
+        setDisableFormVisibility(true);
+      }
+    }
+  };
 
-  function loadVisibility() {
-    setDisable3(false);
-    setVisibility(true);
-    setNoVisibility(false);
+  const loadVisibility = () => {
+    if ((document.getElementById('visibility') as HTMLInputElement).checked) {
+      setDisableFormLocal(false);
+      setVisibility(true);
+      setNoVisibility(false);
+    } else {
+      setNoVisibility(true);
+      if (!(document.getElementById('novisibility') as HTMLInputElement).checked
+        && !(document.getElementById('visibility') as HTMLInputElement).checked) {
+        setDisableFormLocal(true);
+      }
+    }
     setVisibilityState('visibility');
-  }
+  };
 
   function loadNoVisibility() {
-    setDisable3(false);
     setVisibility(false);
     setNoVisibility(true);
     setVisibilityState('no visibility');
@@ -77,23 +96,15 @@ export const LeftForm2 = () => {
   function loadLocalProduce() {
     setLocalProduce(true);
     setLocalNoProduce(false);
-    setLocal('local grow');
+    setLocalState('local grow');
   }
   function loadLocalNoProduce() {
     setLocalProduce(false);
     setLocalNoProduce(true);
-    setLocal('no local grow');
+    setLocalState('no local grow');
   }
 
-  function loadItemsStore() {
-    setProduceAvailAStore((document.getElementById('yth2') as HTMLInputElement).value);
-  }
-
-  function loadItemsSeasonally() {
-    setProduceAvailSeasonally((document.getElementById('yth3') as HTMLInputElement).value);
-  }
-
-  function onchangeForm() {
+  const onchangeForm = () => {
     let st = '';
     if (fresh) {
       st = 'fresh, ';
@@ -105,15 +116,15 @@ export const LeftForm2 = () => {
       st += 'canned';
     }
     setOtherQuestions({
-      description: descriptionF,
+      description: descriptionForm,
       availability: st,
-      quality: qualityF,
+      quality: qualityState,
       visibility: visibilityState,
-      local: localF,
+      local: localState,
       produce_avail_store: produceAvailStore,
       produce_avail_seasonally: produceAvailSeasonally
     });
-  }
+  };
 
   return (
     <>
@@ -134,7 +145,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={loadDescription}
+            onChange={() => setDescription((document.getElementById('yth') as HTMLInputElement).value)}
           />
         </div>
       </div>
@@ -189,6 +200,7 @@ export const LeftForm2 = () => {
                   Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
                   <input
                     type="checkbox"
+                    id="acceptable"
                     checked={acceptable}
                     onChange={loadAcceptable}
                   />
@@ -199,6 +211,7 @@ export const LeftForm2 = () => {
                   patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
                   <input
                     type="checkbox"
+                    id="unacceptable"
                     checked={unacceptable}
                     onChange={loadUnAcceptable}
                   />
@@ -210,7 +223,7 @@ export const LeftForm2 = () => {
         )
       }
       {
-        disable2 ? (
+        disableFormVisibility ? (
           null
         ) : (
           <div>
@@ -230,6 +243,7 @@ export const LeftForm2 = () => {
                   Yes
                   <input
                     type="checkbox"
+                    id="visibility"
                     checked={visibility}
                     onChange={loadVisibility}
                   />
@@ -239,6 +253,7 @@ export const LeftForm2 = () => {
                   No
                   <input
                     type="checkbox"
+                    id="novisibility"
                     checked={novisibility}
                     onChange={loadNoVisibility}
                   />
@@ -250,7 +265,7 @@ export const LeftForm2 = () => {
         )
       }
       {
-        disable3 ? (
+        disableFormLocal ? (
           null
         ) : (
           <div>
@@ -307,7 +322,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={loadItemsStore}
+            onChange={() => setProduceAvailAStore((document.getElementById('yth2') as HTMLInputElement).value)}
           />
         </div>
       </div>
@@ -322,7 +337,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={loadItemsSeasonally}
+            onChange={() => setProduceAvailSeasonally((document.getElementById('yth3') as HTMLInputElement).value)}
           />
         </div>
       </div>
