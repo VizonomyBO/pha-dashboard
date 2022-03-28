@@ -189,7 +189,7 @@ export const LeftForm2 = () => {
                       if (e.target.checked) {
                         setVisibility(true);
                         setNoVisibility(false);
-                        setVisibilityState('visibility');
+                        setVisibilityState('yes');
                       } else setVisibility(false);
                     }}
                   />
@@ -204,7 +204,7 @@ export const LeftForm2 = () => {
                       if (e.target.checked) {
                         setVisibility(false);
                         setNoVisibility(true);
-                        setVisibilityState('no visibility');
+                        setVisibilityState('no');
                       } else setNoVisibility(false);
                     }}
                   />
@@ -234,7 +234,7 @@ export const LeftForm2 = () => {
                       if (e.target.checked) {
                         setLocalProduce(true);
                         setLocalNoProduce(false);
-                        setLocalState('local grow');
+                        setLocalState('yes');
                       } else setLocalProduce(false);
                     }}
                   />
@@ -249,7 +249,7 @@ export const LeftForm2 = () => {
                       if (e.target.checked) {
                         setLocalProduce(false);
                         setLocalNoProduce(true);
-                        setLocalState('no local grow');
+                        setLocalState('no');
                       } else setLocalNoProduce(false);
                     }}
                   />

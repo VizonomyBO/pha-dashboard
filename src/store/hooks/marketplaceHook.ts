@@ -1,6 +1,12 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { BusinessDetailsInterface, MarketplaceInterface, OtherQuestionsInterface } from '../../@types/redux';
-import { resetBusiness, setBusinessDetails, setOtherQuestons } from '../actions';
+import {
+  BusinessDetailsInterface, ContactDetailsInterface,
+  MarketplaceInterface, OtherQuestionsInterface
+} from '../../@types/redux';
+import {
+  setContactDetails,
+  resetBusiness, setBusinessDetails, setOtherQuestons
+} from '../actions';
 
 export const useMarketplaceState = () => useSelector(
   (rootState: { marketplace: MarketplaceInterface }) => rootState.marketplace
@@ -16,6 +22,9 @@ export const useMarketplaceDispatch = () => {
     },
     setOtherQuestions: (otherQuestions: OtherQuestionsInterface) => {
       dispatch(setOtherQuestons(otherQuestions));
-    }
+    },
+    setContactDetails: (contactDetails: ContactDetailsInterface) => {
+      dispatch(setContactDetails(contactDetails));
+    },
   };
 };

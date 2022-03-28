@@ -14,6 +14,16 @@ const marketplaceReducer = (action: AnyAction, state = INITIAL_MARKETPLACE) => {
         ...state,
         businessDetails: INITIAL_MARKETPLACE.businessDetails,
       };
+    case TYPES.SET_OTHER_QUESTIONS:
+      return {
+        ...state,
+        otherQuestions: INITIAL_MARKETPLACE.otherQuestions,
+      };
+    case TYPES.SET_CONTACT_DETAILS:
+      return {
+        ...state,
+        contactDetails: INITIAL_MARKETPLACE.contactDetails,
+      };
     default:
       return state;
   }

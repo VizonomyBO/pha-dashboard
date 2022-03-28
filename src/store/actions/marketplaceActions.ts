@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { BusinessDetailsInterface, OtherQuestionsInterface } from '../../@types/redux';
+import { BusinessDetailsInterface, ContactDetailsInterface, OtherQuestionsInterface } from '../../@types/redux';
 import * as TYPES from '../types';
 
 export const setBusinessDetails = (businessDetails: BusinessDetailsInterface) => (dispatch: Dispatch) => {
@@ -13,6 +13,13 @@ export const setOtherQuestons = (otherQuestions: OtherQuestionsInterface) => (di
   dispatch({
     type: TYPES.SET_OTHER_QUESTIONS,
     payload: otherQuestions
+  });
+};
+
+export const setContactDetails = (contactDetails: ContactDetailsInterface) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_CONTACT_DETAILS,
+    payload: contactDetails
   });
 };
 
