@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import { NAME_DROPDOWN, TYPE_DROPDOWN } from '../constants';
 import { DropdownSelect } from './DropdownSelect';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
@@ -18,6 +18,15 @@ export const LeftForm1 = () => {
     setWebsite
   } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
+  const [formComplete, setFormComplete] = useState(false);
+  useEffect(() => {
+    if (businessDetails.name !== '' && businessDetails.address_1 !== '' && businessDetails.phone !== ''
+    && businessDetails.city !== '' && businessDetails.state && businessDetails.zipcode) {
+      setFormComplete(true);
+    } else {
+      setFormComplete(false);
+    }
+  }, [businessDetails]);
   return (
     <>
       <div className="sectiontitle">
@@ -387,11 +396,9 @@ export const LeftForm1 = () => {
         </div>
       </div>
       <div className="aaction">
-        <Link to="/form2">
-          <button className="light" type="button">
-            Proceed
-          </button>
-        </Link>
+        <button className="light" type="button" disabled={!formComplete}>
+          Proceed
+        </button>
       </div>
     </>
   );
