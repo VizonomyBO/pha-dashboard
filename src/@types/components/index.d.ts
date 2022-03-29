@@ -12,5 +12,5 @@ export interface FormHeaderInterface {
 
 export interface DropdowInterface {
   initialState: string,
-  type: string,
+  setValue: (name: string) => void
 }

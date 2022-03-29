@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DEFAULT_DROPDOWN_OPTION, TYPE_DROPDOWN } from '../constants';
+import { DEFAULT_DROPDOWN_OPTION } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { isEmpty } from '../utils/isEmpty';
@@ -16,7 +16,22 @@ export const LeftForm1 = () => {
     setFacebook,
     setInstagram,
     setTwitter,
-    setWebsite
+    setWebsite,
+    setState,
+    setSunOpen,
+    setSunClose,
+    setMonOpen,
+    setMonClose,
+    setTuesOpen,
+    setTuesClose,
+    setWedOpen,
+    setWedClose,
+    setThursOpen,
+    setThursClose,
+    setFriOpen,
+    setFriClose,
+    setSatOpen,
+    setSatClose
   } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
   const [formComplete, setFormComplete] = useState(false);
@@ -102,7 +117,7 @@ export const LeftForm1 = () => {
           </div>
           <DropdownBusiness
             initialState={DEFAULT_DROPDOWN_OPTION.STATES}
-            type={TYPE_DROPDOWN.STATE}
+            setValue={setState}
           />
         </div>
         <div className="item">
@@ -132,7 +147,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DROPDOWN.SUN_OPEN}
+              setValue={setSunOpen}
             />
           </div>
         </div>
@@ -140,7 +155,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DROPDOWN.SUN_CLOSE}
+              setValue={setSunClose}
             />
           </div>
         </div>
@@ -155,7 +170,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DROPDOWN.MON_OPEN}
+              setValue={setMonOpen}
             />
           </div>
         </div>
@@ -163,7 +178,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DROPDOWN.MON_CLOSE}
+              setValue={setMonClose}
             />
           </div>
         </div>
@@ -178,7 +193,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DROPDOWN.TUE_OPEN}
+              setValue={setTuesOpen}
             />
           </div>
         </div>
@@ -186,7 +201,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DROPDOWN.TUE_CLOSE}
+              setValue={setTuesClose}
             />
           </div>
         </div>
@@ -201,7 +216,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DROPDOWN.WED_OPEN}
+              setValue={setWedOpen}
             />
           </div>
         </div>
@@ -209,7 +224,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DROPDOWN.WED_CLOSE}
+              setValue={setWedClose}
             />
           </div>
         </div>
@@ -224,7 +239,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DROPDOWN.THU_OPEN}
+              setValue={setThursOpen}
             />
           </div>
         </div>
@@ -232,7 +247,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DROPDOWN.THU_CLOSE}
+              setValue={setThursClose}
             />
           </div>
         </div>
@@ -247,7 +262,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DROPDOWN.FRI_OPEN}
+              setValue={setFriOpen}
             />
           </div>
         </div>
@@ -255,7 +270,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DROPDOWN.FRI_CLOSE}
+              setValue={setFriClose}
             />
           </div>
         </div>
@@ -270,7 +285,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DROPDOWN.SAT_OPEN}
+              setValue={setSatOpen}
             />
           </div>
         </div>
@@ -278,7 +293,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DROPDOWN.SAT_CLOSE}
+              setValue={setSatClose}
             />
           </div>
         </div>
