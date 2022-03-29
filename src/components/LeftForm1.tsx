@@ -1,23 +1,11 @@
 import { useEffect, useState } from 'react';
-import { DEFAULT_DROPDOWN_OPTION, TYPE_DRODOWN_BUSINESS } from '../constants';
+import { DEFAULT_DROPDOWN_OPTION, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { isEmpty } from '../utils/isEmpty';
 
 export const LeftForm1 = () => {
-  const {
-    setName,
-    setAddress1,
-    setAddress2,
-    setCity,
-    setPhone,
-    setZipcode,
-    setEmail,
-    setFacebook,
-    setInstagram,
-    setTwitter,
-    setWebsite
-  } = useMarketplaceDispatch();
+  const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
   const [formComplete, setFormComplete] = useState(false);
   useEffect(() => {
@@ -38,7 +26,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.NAME, e.target.value)
+            }
             value={businessDetails.name}
           />
         </div>
@@ -51,7 +41,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress1(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, e.target.value)
+            }
             value={businessDetails.address_1}
           />
         </div>
@@ -64,7 +56,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setAddress2(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ADDRESS_2, e.target.value)
+            }
             value={businessDetails.address_2}
           />
         </div>
@@ -77,7 +71,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setPhone(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.PHONE, e.target.value)
+            }
             value={businessDetails.phone}
           />
         </div>
@@ -90,7 +86,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setCity(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.CITY, e.target.value)
+            }
             value={businessDetails.city}
           />
         </div>
@@ -102,7 +100,7 @@ export const LeftForm1 = () => {
           </div>
           <DropdownBusiness
             initialState={DEFAULT_DROPDOWN_OPTION.STATES}
-            type={TYPE_DRODOWN_BUSINESS.STATE}
+            type={TYPE_BUSINESS.STATE}
           />
         </div>
         <div className="item">
@@ -113,7 +111,9 @@ export const LeftForm1 = () => {
             <input
               className="light"
               type="text"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setZipcode(e.target.value)}
+              onChange={
+                (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ZIPCODE, e.target.value)
+              }
               value={businessDetails.zipcode}
             />
           </div>
@@ -132,7 +132,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DRODOWN_BUSINESS.SUN_OPEN}
+              type={TYPE_BUSINESS.SUN_OPEN}
             />
           </div>
         </div>
@@ -140,7 +140,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DRODOWN_BUSINESS.SUN_CLOSE}
+              type={TYPE_BUSINESS.SUN_CLOSE}
             />
           </div>
         </div>
@@ -155,7 +155,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DRODOWN_BUSINESS.MON_OPEN}
+              type={TYPE_BUSINESS.MON_OPEN}
             />
           </div>
         </div>
@@ -163,7 +163,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DRODOWN_BUSINESS.MON_CLOSE}
+              type={TYPE_BUSINESS.MON_CLOSE}
             />
           </div>
         </div>
@@ -178,7 +178,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DRODOWN_BUSINESS.TUES_OPEN}
+              type={TYPE_BUSINESS.TUES_OPEN}
             />
           </div>
         </div>
@@ -186,7 +186,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DRODOWN_BUSINESS.TUES_CLOSE}
+              type={TYPE_BUSINESS.TUES_CLOSE}
             />
           </div>
         </div>
@@ -201,7 +201,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DRODOWN_BUSINESS.WED_OPEN}
+              type={TYPE_BUSINESS.WED_OPEN}
             />
           </div>
         </div>
@@ -209,7 +209,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DRODOWN_BUSINESS.WED_CLOSE}
+              type={TYPE_BUSINESS.WED_CLOSE}
             />
           </div>
         </div>
@@ -224,7 +224,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DRODOWN_BUSINESS.THURS_OPEN}
+              type={TYPE_BUSINESS.THURS_OPEN}
             />
           </div>
         </div>
@@ -232,7 +232,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DRODOWN_BUSINESS.THURS_CLOSE}
+              type={TYPE_BUSINESS.THURS_CLOSE}
             />
           </div>
         </div>
@@ -247,7 +247,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DRODOWN_BUSINESS.FRI_OPEN}
+              type={TYPE_BUSINESS.FRI_OPEN}
             />
           </div>
         </div>
@@ -255,7 +255,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DRODOWN_BUSINESS.FRI_CLOSE}
+              type={TYPE_BUSINESS.FRI_CLOSE}
             />
           </div>
         </div>
@@ -270,7 +270,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.OPEN}
-              type={TYPE_DRODOWN_BUSINESS.SAT_OPEN}
+              type={TYPE_BUSINESS.SAT_OPEN}
             />
           </div>
         </div>
@@ -278,7 +278,7 @@ export const LeftForm1 = () => {
           <div className="ainput2">
             <DropdownBusiness
               initialState={DEFAULT_DROPDOWN_OPTION.CLOSE}
-              type={TYPE_DRODOWN_BUSINESS.SAT_CLOSE}
+              type={TYPE_BUSINESS.SAT_CLOSE}
             />
           </div>
         </div>
@@ -294,7 +294,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setWebsite(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.WEBSITE, e.target.value)
+            }
             value={businessDetails.website}
           />
         </div>
@@ -307,7 +309,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFacebook(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.FACEBOOK, e.target.value)
+            }
             value={businessDetails.facebook}
           />
         </div>
@@ -320,7 +324,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTwitter(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.TWITTER, e.target.value)
+            }
             value={businessDetails.twitter}
           />
         </div>
@@ -333,7 +339,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.EMAIL, e.target.value)
+            }
             value={businessDetails.email}
           />
         </div>
@@ -346,7 +354,9 @@ export const LeftForm1 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInstagram(e.target.value)}
+            onChange={
+              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.INSTAGRAM, e.target.value)
+            }
             value={businessDetails.instagram}
           />
         </div>

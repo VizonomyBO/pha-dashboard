@@ -25,6 +25,7 @@ export const INITIAL_MARKETPLACE = {
     facebook: '',
     twitter: '',
     email: '',
+    instagram: '',
   },
   files: {
     media: null,

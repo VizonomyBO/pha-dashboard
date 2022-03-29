@@ -3,13 +3,13 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
-import { DEFAULT_DROPDOWN_OPTION, STATES, TYPE_DRODOWN_BUSINESS } from '../constants';
+import { DEFAULT_DROPDOWN_OPTION, STATES } from '../constants';
 import { DropdowInterface } from '../@types';
 import { HOURS } from '../constants/hours';
 import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 
 export const DropdownBusiness = ({ initialState, type } : DropdowInterface) => {
-  const { setState, setSchedule } = useMarketplaceDispatch();
+  const { setBusinessDetails } = useMarketplaceDispatch();
   const [option, setOption] = useState('States');
   const [options, setOptions] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -22,11 +22,7 @@ export const DropdownBusiness = ({ initialState, type } : DropdowInterface) => {
   };
   const handleMenuItemClick = (index: number) => {
     setOption(options[index]);
-    if (type === TYPE_DRODOWN_BUSINESS.STATE) {
-      setState(options[index]);
-    } else {
-      setSchedule(type, options[index]);
-    }
+    setBusinessDetails(type, options[index]);
     handleClose();
   };
   useEffect(() => {

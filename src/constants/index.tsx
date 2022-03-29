@@ -78,8 +78,14 @@ export const DEFAULT_DROPDOWN_OPTION = {
   CLOSE: 'Close'
 };
 
-export const TYPE_DRODOWN_BUSINESS = {
+export const TYPE_BUSINESS = {
+  NAME: 'name',
+  ADDRESS_1: 'address_1',
+  ADDRESS_2: 'address_2',
+  PHONE: 'phone',
+  CITY: 'city',
   STATE: 'state',
+  ZIPCODE: 'zipcode',
   SUN_OPEN: 'sun_open',
   SUN_CLOSE: 'sun_close',
   MON_OPEN: 'mon_open',
@@ -94,4 +100,9 @@ export const TYPE_DRODOWN_BUSINESS = {
   FRI_CLOSE: 'fri_close',
   SAT_OPEN: 'sat_open',
   SAT_CLOSE: 'sat_close',
+  WEBSITE: 'website',
+  FACEBOOK: 'facebook',
+  TWITTER: 'twitter',
+  EMAIL: 'email',
+  INSTAGRAM: 'instagram',
 };
