@@ -5,14 +5,14 @@ import MenuItem from '@mui/material/MenuItem';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import {
   HOURS,
-  NAME_DROPDOWN,
+  DEFAULT_DROPDOWN_OPTION,
   STATES,
   TYPE_DROPDOWN
 } from '../constants';
 import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 import { DropdowInterface } from '../@types';
 
-export const DropdownSelect = ({ initialState, type } : DropdowInterface) => {
+export const DropdownBusiness = ({ initialState, type } : DropdowInterface) => {
   const [option, setOption] = useState('States');
   const [options, setOptions] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -43,38 +43,69 @@ export const DropdownSelect = ({ initialState, type } : DropdowInterface) => {
   const handleMenuItemClick = (index: number) => {
     setOption(options[index]);
     switch (type) {
-      case TYPE_DROPDOWN.STATE: setState(options[index]); break;
-      case TYPE_DROPDOWN.SUN_OPEN: setSunOpen(options[index]); break;
-      case TYPE_DROPDOWN.SUN_CLOSE: setSunClose(options[index]); break;
-      case TYPE_DROPDOWN.MON_OPEN: setMonOpen(options[index]); break;
-      case TYPE_DROPDOWN.MON_CLOSE: setMonClose(options[index]); break;
-      case TYPE_DROPDOWN.TUE_OPEN: setTuesOpen(options[index]); break;
-      case TYPE_DROPDOWN.TUE_CLOSE: setTuesClose(options[index]); break;
-      case TYPE_DROPDOWN.WED_OPEN: setWedOpen(options[index]); break;
-      case TYPE_DROPDOWN.WED_CLOSE: setWedClose(options[index]); break;
-      case TYPE_DROPDOWN.THU_OPEN: setThursOpen(options[index]); break;
-      case TYPE_DROPDOWN.THU_CLOSE: setThursClose(options[index]); break;
-      case TYPE_DROPDOWN.FRI_OPEN: setFriOpen(options[index]); break;
-      case TYPE_DROPDOWN.FRI_CLOSE: setFriClose(options[index]); break;
-      case TYPE_DROPDOWN.SAT_OPEN: setSatOpen(options[index]); break;
-      case TYPE_DROPDOWN.SAT_CLOSE: setSatClose(options[index]); break;
-      default: setState(options[index]);
+      case TYPE_DROPDOWN.STATE:
+        setState(options[index]);
+        break;
+      case TYPE_DROPDOWN.SUN_OPEN:
+        setSunOpen(options[index]);
+        break;
+      case TYPE_DROPDOWN.SUN_CLOSE:
+        setSunClose(options[index]);
+        break;
+      case TYPE_DROPDOWN.MON_OPEN:
+        setMonOpen(options[index]);
+        break;
+      case TYPE_DROPDOWN.MON_CLOSE:
+        setMonClose(options[index]);
+        break;
+      case TYPE_DROPDOWN.TUE_OPEN:
+        setTuesOpen(options[index]);
+        break;
+      case TYPE_DROPDOWN.TUE_CLOSE:
+        setTuesClose(options[index]);
+        break;
+      case TYPE_DROPDOWN.WED_OPEN:
+        setWedOpen(options[index]);
+        break;
+      case TYPE_DROPDOWN.WED_CLOSE:
+        setWedClose(options[index]);
+        break;
+      case TYPE_DROPDOWN.THU_OPEN:
+        setThursOpen(options[index]);
+        break;
+      case TYPE_DROPDOWN.THU_CLOSE:
+        setThursClose(options[index]);
+        break;
+      case TYPE_DROPDOWN.FRI_OPEN:
+        setFriOpen(options[index]);
+        break;
+      case TYPE_DROPDOWN.FRI_CLOSE:
+        setFriClose(options[index]);
+        break;
+      case TYPE_DROPDOWN.SAT_OPEN:
+        setSatOpen(options[index]);
+        break;
+      case TYPE_DROPDOWN.SAT_CLOSE:
+        setSatClose(options[index]);
+        break;
+      default:
+        setState(options[index]);
     }
     handleClose();
   };
   useEffect(() => {
     setOption(initialState);
-    if (initialState === NAME_DROPDOWN.STATES) {
+    if (initialState === DEFAULT_DROPDOWN_OPTION.STATES) {
       setOptions(STATES);
     }
-    if (initialState === NAME_DROPDOWN.CLOSE || initialState === NAME_DROPDOWN.OPEN) {
+    if (initialState === DEFAULT_DROPDOWN_OPTION.CLOSE || initialState === DEFAULT_DROPDOWN_OPTION.OPEN) {
       setOptions(HOURS);
     }
   }, [initialState]);
   return (
     <div className="ainput2">
       <Button
-        id="demo-customized-button"
+        id="dropdown-business"
         variant="contained"
         disableElevation
         onClick={handleClick}
@@ -83,10 +114,7 @@ export const DropdownSelect = ({ initialState, type } : DropdowInterface) => {
         <label>{option}</label>
       </Button>
       <Menu
-        id="demo-customized-menu"
-        MenuListProps={{
-          'aria-labelledby': 'demo-customized-button',
-        }}
+        id="dropdown-business"
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}

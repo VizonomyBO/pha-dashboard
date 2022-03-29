@@ -99,7 +99,7 @@ export const STATES = [
   'Wyoming'
 ];
 
-export const NAME_DROPDOWN = {
+export const DEFAULT_DROPDOWN_OPTION = {
   STATES: 'States',
   OPEN: 'Open',
   CLOSE: 'Close'
