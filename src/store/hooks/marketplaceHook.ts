@@ -8,26 +8,13 @@ import {
   setCity,
   setEmail,
   setFacebook,
-  setFriClose,
-  setFriOpen,
   setInstagram,
-  setMonClose,
-  setMonOpen,
   setName,
   setPhone,
-  setSatClose,
-  setSatOpen,
+  setSchedule,
   setState,
-  setSunClose,
-  setSunOpen,
-  setThursClose,
-  setThursOpen,
-  setTuesClose,
-  setTuesOpen,
   setTwitter,
   setWebsite,
-  setWedClose,
-  setWedOpen,
   setZipcode
 } from '../actions';
 
@@ -64,47 +51,8 @@ export const useMarketplaceDispatch = () => {
     setZipcode: (name: string) => {
       dispatch(setZipcode(name));
     },
-    setSunOpen: (name: string) => {
-      dispatch(setSunOpen(name));
-    },
-    setSunClose: (name: string) => {
-      dispatch(setSunClose(name));
-    },
-    setMonOpen: (name: string) => {
-      dispatch(setMonOpen(name));
-    },
-    setMonClose: (name: string) => {
-      dispatch(setMonClose(name));
-    },
-    setTuesOpen: (name: string) => {
-      dispatch(setTuesOpen(name));
-    },
-    setTuesClose: (name: string) => {
-      dispatch(setTuesClose(name));
-    },
-    setWedOpen: (name: string) => {
-      dispatch(setWedOpen(name));
-    },
-    setWedClose: (name: string) => {
-      dispatch(setWedClose(name));
-    },
-    setThursOpen: (name: string) => {
-      dispatch(setThursOpen(name));
-    },
-    setThursClose: (name: string) => {
-      dispatch(setThursClose(name));
-    },
-    setFriOpen: (name: string) => {
-      dispatch(setFriOpen(name));
-    },
-    setFriClose: (name: string) => {
-      dispatch(setFriClose(name));
-    },
-    setSatOpen: (name: string) => {
-      dispatch(setSatOpen(name));
-    },
-    setSatClose: (name: string) => {
-      dispatch(setSatClose(name));
+    setSchedule: (day: string, hours: string) => {
+      dispatch(setSchedule(day, hours));
     },
     setWebsite: (name: string) => {
       dispatch(setWebsite(name));

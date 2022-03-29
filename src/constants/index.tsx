@@ -77,3 +77,21 @@ export const DEFAULT_DROPDOWN_OPTION = {
   OPEN: 'Open',
   CLOSE: 'Close'
 };
+
+export const TYPE_DRODOWN_BUSINESS = {
+  STATE: 'state',
+  SUN_OPEN: 'sun_open',
+  SUN_CLOSE: 'sun_close',
+  MON_OPEN: 'mon_open',
+  MON_CLOSE: 'mon_close',
+  TUES_OPEN: 'tues_open',
+  TUES_CLOSE: 'tues_close',
+  WED_OPEN: 'wed_open',
+  WED_CLOSE: 'wed_close',
+  THURS_OPEN: 'thurs_open',
+  THURS_CLOSE: 'thurs_close',
+  FRI_OPEN: 'fri_open',
+  FRI_CLOSE: 'fri_close',
+  SAT_OPEN: 'sat_open',
+  SAT_CLOSE: 'sat_close',
+};

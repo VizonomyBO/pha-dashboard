@@ -71,116 +71,12 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
           zipcode: action.payload
         }
       };
-    case TYPES.SET_SUN_OPEN:
+    case TYPES.SET_SCHEDULE:
       return {
         ...state,
         businessDetails: {
           ...state.businessDetails,
-          sun_open: action.payload
-        }
-      };
-    case TYPES.SET_SUN_CLOSE:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          sun_close: action.payload
-        }
-      };
-    case TYPES.SET_MON_OPEN:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          mon_open: action.payload
-        }
-      };
-    case TYPES.SET_MON_CLOSE:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          mon_close: action.payload
-        }
-      };
-    case TYPES.SET_TUES_OPEN:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          tues_open: action.payload
-        }
-      };
-    case TYPES.SET_TUES_CLOSE:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          tues_close: action.payload
-        }
-      };
-    case TYPES.SET_WED_OPEN:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          wed_open: action.payload
-        }
-      };
-    case TYPES.SET_WED_CLOSE:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          wed_close: action.payload
-        }
-      };
-    case TYPES.SET_THURS_OPEN:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          thurs_open: action.payload
-        }
-      };
-    case TYPES.SET_THURS_CLOSE:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          thurs_close: action.payload
-        }
-      };
-    case TYPES.SET_FRI_OPEN:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          fri_open: action.payload
-        }
-      };
-    case TYPES.SET_FRI_CLOSE:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          fri_close: action.payload
-        }
-      };
-    case TYPES.SET_SAT_OPEN:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          sat_open: action.payload
-        }
-      };
-    case TYPES.SET_SAT_CLOSE:
-      return {
-        ...state,
-        businessDetails: {
-          ...state.businessDetails,
-          sat_close: action.payload
+          [action.payload]: action.value
         }
       };
     case TYPES.SET_WEBSITE:
