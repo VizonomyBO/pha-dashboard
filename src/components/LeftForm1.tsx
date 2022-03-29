@@ -131,9 +131,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.OPEN}
@@ -142,9 +139,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.CLOSE}
@@ -160,9 +154,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.OPEN}
@@ -171,9 +162,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.CLOSE}
@@ -189,9 +177,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.OPEN}
@@ -200,9 +185,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.CLOSE}
@@ -218,9 +200,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.OPEN}
@@ -229,9 +208,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.CLOSE}
@@ -247,9 +223,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.OPEN}
@@ -258,9 +231,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.CLOSE}
@@ -276,9 +246,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.OPEN}
@@ -287,9 +254,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.CLOSE}
@@ -305,9 +269,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.OPEN}
@@ -316,9 +277,6 @@ export const LeftForm1 = () => {
           </div>
         </div>
         <div className="item">
-          <div className="title">
-            <label />
-          </div>
           <div className="ainput2">
             <DropdownSelect
               initialState={NAME_DROPDOWN.CLOSE}
@@ -339,7 +297,7 @@ export const LeftForm1 = () => {
             className="light"
             type="text"
             onChange={(e) => setWebsite(e.target.value)}
-            value={businessDetails.address_1}
+            value={businessDetails.website}
           />
         </div>
       </div>

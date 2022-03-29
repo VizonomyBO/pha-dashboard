@@ -14,7 +14,7 @@ import { DropdowInterface } from '../@types';
 
 export const DropdownSelect = ({ initialState, type } : DropdowInterface) => {
   const [option, setOption] = useState('States');
-  const [options, setOptions] = useState<never[] | string[]>([]);
+  const [options, setOptions] = useState<string[]>([]);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const {
     setState,
@@ -42,50 +42,23 @@ export const DropdownSelect = ({ initialState, type } : DropdowInterface) => {
   };
   const handleMenuItemClick = (index: number) => {
     setOption(options[index]);
-    if (type === TYPE_DROPDOWN.STATE) {
-      setState(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.SUN_OPEN) {
-      setSunOpen(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.SUN_CLOSE) {
-      setSunClose(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.MON_OPEN) {
-      setMonOpen(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.MON_CLOSE) {
-      setMonClose(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.TUE_OPEN) {
-      setTuesOpen(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.TUE_CLOSE) {
-      setTuesClose(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.WED_OPEN) {
-      setWedOpen(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.WED_CLOSE) {
-      setWedClose(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.THU_OPEN) {
-      setThursOpen(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.THU_CLOSE) {
-      setThursClose(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.FRI_OPEN) {
-      setFriOpen(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.FRI_CLOSE) {
-      setFriClose(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.SAT_OPEN) {
-      setSatOpen(options[index]);
-    }
-    if (type === TYPE_DROPDOWN.SAT_CLOSE) {
-      setSatClose(options[index]);
+    switch (type) {
+      case TYPE_DROPDOWN.STATE: setState(options[index]); break;
+      case TYPE_DROPDOWN.SUN_OPEN: setSunOpen(options[index]); break;
+      case TYPE_DROPDOWN.SUN_CLOSE: setSunClose(options[index]); break;
+      case TYPE_DROPDOWN.MON_OPEN: setMonOpen(options[index]); break;
+      case TYPE_DROPDOWN.MON_CLOSE: setMonClose(options[index]); break;
+      case TYPE_DROPDOWN.TUE_OPEN: setTuesOpen(options[index]); break;
+      case TYPE_DROPDOWN.TUE_CLOSE: setTuesClose(options[index]); break;
+      case TYPE_DROPDOWN.WED_OPEN: setWedOpen(options[index]); break;
+      case TYPE_DROPDOWN.WED_CLOSE: setWedClose(options[index]); break;
+      case TYPE_DROPDOWN.THU_OPEN: setThursOpen(options[index]); break;
+      case TYPE_DROPDOWN.THU_CLOSE: setThursClose(options[index]); break;
+      case TYPE_DROPDOWN.FRI_OPEN: setFriOpen(options[index]); break;
+      case TYPE_DROPDOWN.FRI_CLOSE: setFriClose(options[index]); break;
+      case TYPE_DROPDOWN.SAT_OPEN: setSatOpen(options[index]); break;
+      case TYPE_DROPDOWN.SAT_CLOSE: setSatClose(options[index]); break;
+      default: setState(options[index]);
     }
     handleClose();
   };
@@ -102,9 +75,6 @@ export const DropdownSelect = ({ initialState, type } : DropdowInterface) => {
     <div className="ainput2">
       <Button
         id="demo-customized-button"
-        aria-controls={open ? 'demo-customized-menu' : undefined}
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
         variant="contained"
         disableElevation
         onClick={handleClick}

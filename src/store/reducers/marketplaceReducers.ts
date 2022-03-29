@@ -215,6 +215,14 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
           instagram: action.payload
         }
       };
+    case TYPES.SET_EMAIL:
+      return {
+        ...state,
+        businessDetails: {
+          ...state.businessDetails,
+          email: action.payload
+        }
+      };
     default:
       return INITIAL_MARKETPLACE;
   }
