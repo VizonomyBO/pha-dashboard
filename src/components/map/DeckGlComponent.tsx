@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { DeckGL } from 'deck.gl';
+import { DeckGL, Layer, PickInfo } from 'deck.gl';
 import Map from 'react-map-gl';
 import { MapView } from '@deck.gl/core';
 import {
@@ -20,22 +20,25 @@ const data = [
   { coordinates: [-105.45, 50.78], message: 'Hover over me', type: 'green' }
 ];
 
-/* export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => { */
-export const DeckGLComponent = () => {
+export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
   const initialViewState = DEFAULT_VIEW_STATE;
   const controller = true;
-  const [hoverInfo, setHoverInfo] = useState({});
+  const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
 
   const hideTooltip = () => {
-    setHoverInfo({});
+    setHoverInfo(undefined);
   };
 
-  const expandTooltip = (info) => {
-    setHoverInfo(info.object ? info : {});
+  const expandTooltip = (info: PickInfo<Layer<unknown>[]>) => {
+    console.log(info);
+    if (info.object) {
+      setHoverInfo(info);
+    }
   };
-
-  const layer = IconLayerData(data);
-
+  let layer;
+  if (layers) {
+    layer = IconLayerData(data);
+  }
   return (
     <div>
       {MAPBOX_KEY === NO_DATA ? (
@@ -50,7 +53,7 @@ export const DeckGLComponent = () => {
             controller={controller}
             layers={layer}
             onViewStateChange={hideTooltip}
-            onClick={expandTooltip}
+            onClick={() => expandTooltip}
           /*  getCursor={(info: any) => 'pointer'} */
           /* onViewStateChange={handleViewStateChange} */
           /* onViewportChange={(viewport) => setViewport(viewport)} */

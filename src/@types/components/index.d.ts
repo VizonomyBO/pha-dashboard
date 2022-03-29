@@ -9,3 +9,9 @@ export interface FormHeaderInterface {
   activeTab: FormTabType,
   setActiveTab: (value: FormTabType) => void,
 }
+
+export interface dataMapGl {
+  coordinates: number[],
+  message?: string,
+  type?: string
+}

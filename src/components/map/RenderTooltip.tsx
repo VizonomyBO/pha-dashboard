@@ -1,7 +1,9 @@
-export default function renderTooltip(info) {
-  const { object, x, y } = info;
+import { Layer, PickInfo } from 'deck.gl';
+
+export default function renderTooltip(info: PickInfo<Layer<unknown>[]> | undefined) {
   let toolTip = null;
-  if (object) {
+  if (info?.object) {
+    const { x, y } = info;
     toolTip = (
       <div className="bmodal" style={{ left: x, top: y }}>
         <figure className="picture">

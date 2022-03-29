@@ -1,10 +1,12 @@
+import { Layer } from 'deck.gl';
 import { IconLayer } from '@deck.gl/layers';
 import PinRed from './ic-pin-red.svg';
 import PinBlue from './ic-pin-blue.svg';
 import PinGreen from './ic-pin-green.svg';
+import { dataMapGl } from '../../@types';
 
-export default function IconLayerData(data) {
-  const layer = data.map((item, i) => {
+export default function IconLayerData(data: Array<dataMapGl>): Layer<unknown>[] {
+  const layer = data.map((item: dataMapGl, i: number) => {
     let icon = PinRed;
     if (item.type === 'blue') icon = PinBlue;
     if (item.type === 'green') icon = PinGreen;
@@ -18,9 +20,9 @@ export default function IconLayerData(data) {
         height: 60,
         width: 60,
         getCursor: () => 'pointer',
-        zIndex: 1 + 1
+        zIndex: 2
       }),
-      getPosition: (d) => d.coordinates,
+      getPosition: (d: any) => d.coordinates,
       getSize: () => 5,
       sizeScale: 10,
       pickable: true,
