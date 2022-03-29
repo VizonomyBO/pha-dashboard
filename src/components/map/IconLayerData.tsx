@@ -9,7 +9,7 @@ export default function IconLayerData(data) {
     if (item.type === 'blue') icon = PinBlue;
     if (item.type === 'green') icon = PinGreen;
     return new IconLayer({
-      id: 'IconLayer' + i,
+      id: `IconLayer%${i}`,
       data: [item],
       getIcon: () => ({
         id: 'marker',
