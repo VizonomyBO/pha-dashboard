@@ -7,7 +7,6 @@ export const Home = () => {
   console.log('Home');
 
   const onClickPlus = () => {
-    console.log('abc');
     /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
   };
 

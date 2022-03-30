@@ -5,11 +5,17 @@ import PinBlue from './ic-pin-blue.svg';
 import PinGreen from './ic-pin-green.svg';
 import { dataMapGl } from '../../@types';
 
+const COLORS = { GREEN: 'green', BLUE: 'blue' };
+
 export default function IconLayerData(data: Array<dataMapGl>): Layer<unknown>[] {
   const layer = data.map((item: dataMapGl, i: number) => {
     let icon = PinRed;
-    if (item.type === 'blue') icon = PinBlue;
-    if (item.type === 'green') icon = PinGreen;
+    if (item.type === COLORS.BLUE) {
+      icon = PinBlue;
+    }
+    if (item.type === COLORS.GREEN) {
+      icon = PinGreen;
+    }
     return new IconLayer({
       id: `IconLayer%${i}`,
       data: [item],

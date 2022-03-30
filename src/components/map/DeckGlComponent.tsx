@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { DeckGL, Layer, PickInfo } from 'deck.gl';
 import Map from 'react-map-gl';
-import { MapView } from '@deck.gl/core';
 import {
   MAPBOX_KEY,
   BASEMAP,
@@ -11,8 +10,6 @@ import {
 import { NoDataProvided } from '../NoDataProvided';
 import RenderTooltip from './RenderTooltip';
 import IconLayerData from './IconLayerData';
-
-const MAP_VIEW = new MapView({ repeat: true });
 
 const data = [
   { coordinates: [-100.45, 40.78], message: 'Hover over me', type: 'red' },
@@ -48,7 +45,6 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
       )
         : (
           <DeckGL
-            views={[MAP_VIEW]}
             initialViewState={{ ...initialViewState }}
             controller={controller}
             layers={layer}
