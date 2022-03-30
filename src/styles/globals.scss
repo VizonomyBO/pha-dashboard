@@ -24,3 +24,26 @@ img, picture, video, canvas, svg {
 input, button, textarea, select {
     font: inherit;
 }
+
+.fileInput {
+	display: none;
+}
+.fileText {
+	text-decoration: underline;
+}
+.fileText:hover {
+	text-decoration: underline;
+    color: #00BDE3;
+}
+.fileSpam {
+    background-color: #F7F9FA;
+    margin-right: 10px;
+    white-space: nowrap;
+    color: #00BDE3;
+    font-size: 15px;
+}
+.fileContent {
+    margin: 15px;
+    display: flex;
+    flex-direction: column;
+}

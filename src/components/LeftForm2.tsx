@@ -1,3 +1,5 @@
+import { Attachment } from './Attachment';
+
 export const LeftForm2 = () => {
   console.log('LeftForm2');
   return (
@@ -151,13 +153,17 @@ export const LeftForm2 = () => {
         <div className="title">
           <label>Do you have any high quality photos of this business to share?</label>
         </div>
-        <div className="ainput upload">
-          <div className="uploadarea">
-            <div>Drag and drop files here</div>
-            <div>or</div>
-            <div>Browse on your device.</div>
-          </div>
+        <Attachment
+          type="bussines"
+        />
+      </div>
+      <div className="item">
+        <div className="title">
+          <label>Connect with the Community! Please upload a picture of the store owner or manager. </label>
         </div>
+        <Attachment
+          type="owner"
+        />
       </div>
     </>
   );

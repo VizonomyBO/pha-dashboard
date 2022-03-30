@@ -28,6 +28,7 @@ export const INITIAL_MARKETPLACE = {
     instagram: '',
   },
   files: {
-    media: null,
+    bussines: [],
+    owner: []
   }
 };
