@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
-import { AttachmentInterface, FileInterface, MultimediFileInterface } from '../@types';
+import { FileInterface, MultimediFileInterface } from '../@types';
 import { useMarketplaceDispatch } from '../store/hooks';
 
-export const Attachment = ({ type }: AttachmentInterface) => {
+export const Attachment = ({ type }: {type: string}) => {
   const labelRef = useRef<HTMLDivElement>(null);
   const { setBusinessFile } = useMarketplaceDispatch();
   const [multimedia, setMultimedia] = useState<MultimediFileInterface[]>([]);

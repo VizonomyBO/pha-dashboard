@@ -37,7 +37,3 @@ export interface MultimediFileInterface {
     webkitRelativePath: string
   }
 }
-
-export interface AttachmentInterface {
-  type: string
-}

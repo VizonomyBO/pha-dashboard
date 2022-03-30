@@ -154,7 +154,7 @@ export const LeftForm2 = () => {
           <label>Do you have any high quality photos of this business to share?</label>
         </div>
         <Attachment
-          type="bussines"
+          type="business"
         />
       </div>
       <div className="item">
