@@ -1,51 +1,23 @@
 import React, { useState } from 'react';
-import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 
 export const LeftForm2 = () => {
-  const [descriptionForm, setDescription] = useState('');
-  const [fresh, setFresh] = useState(false);
-  const [frozen, setFrozen] = useState(false);
-  const [canned, setCannet] = useState(false);
   const [acceptable, setAcceptable] = useState(false);
   const [unacceptable, setUnAcceptable] = useState(false);
-  const [visibility, setVisibility] = useState(false);
+  const [visibilityCheck, setVisibilityCheck] = useState(false);
   const [novisibility, setNoVisibility] = useState(false);
   const [localProduce, setLocalProduce] = useState(false);
   const [localNoProduce, setLocalNoProduce] = useState(false);
-  const [disableForm, setDisableForm] = useState(true);
 
-  const [qualityState, setQualityState] = useState('');
-  const [visibilityState, setVisibilityState] = useState('');
-  const [localState, setLocalState] = useState('');
-  const [produceAvailStore, setProduceAvailAStore] = useState('');
-  const [produceAvailSeasonally, setProduceAvailSeasonally] = useState('');
-
-  const { setOtherQuestions } = useMarketplaceDispatch();
+  const {
+    setOtherQuestions, setAvailability, setQuality,
+    setVisibility, setLocal, setProduceAvailStore,
+    setProduceAvailSeasonally
+  } = useMarketplaceDispatch();
+  const { otherQuestions } = useMarketplaceState();
 
   const onchangeForm = () => {
-    const tempData = [''];
-    let i = 0;
-    if (fresh) {
-      tempData[i] = 'fresh, ';
-      i += 1;
-    }
-    if (frozen) {
-      tempData[i] = 'frozen, ';
-      i += 1;
-    }
-    if (canned) {
-      tempData[i] = 'canned';
-      i += 1;
-    }
-    setOtherQuestions({
-      description: descriptionForm,
-      availability: tempData,
-      quality: qualityState,
-      visibility: visibilityState,
-      local: localState,
-      produce_avail_store: produceAvailStore,
-      produce_avail_seasonally: produceAvailSeasonally
-    });
+    console.log('');
   };
 
   return (
@@ -67,7 +39,10 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={(e) => setDescription(e.target.value)}
+            onChange={(e: React.FormEvent<HTMLTextAreaElement>): void => {
+              setOtherQuestions('description', e.currentTarget.value);
+            }}
+            value={otherQuestions.description}
           />
         </div>
       </div>
@@ -87,13 +62,13 @@ export const LeftForm2 = () => {
             Fresh
             <input
               type="checkbox"
-              onChange={(e) => {
-                if (e.target.checked) {
-                  setFresh(true);
-                  setDisableForm(false);
+              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                if (e.currentTarget.checked) {
+                  setAvailability([...otherQuestions.availability, 'Fresh']);
                 } else {
-                  setFresh(false);
-                  setDisableForm(true);
+                  setAvailability(
+                    otherQuestions.availability.filter((data: string) => data !== 'Fresh')
+                  );
                 }
               }}
             />
@@ -103,8 +78,14 @@ export const LeftForm2 = () => {
             Frozen
             <input
               type="checkbox"
-              onChange={(e) => {
-                setFrozen(e.target.checked);
+              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                if (e.currentTarget.checked) {
+                  setAvailability([...otherQuestions.availability, 'Frozen']);
+                } else {
+                  setAvailability(
+                    otherQuestions.availability.filter((data: string) => data !== 'Frozen')
+                  );
+                }
               }}
             />
             <span className="checkmark" />
@@ -113,14 +94,22 @@ export const LeftForm2 = () => {
             Canned
             <input
               type="checkbox"
-              onChange={(e) => setCannet(e.target.checked)}
+              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                if (e.currentTarget.checked) {
+                  setAvailability([...otherQuestions.availability, 'Canned']);
+                } else {
+                  setAvailability(
+                    otherQuestions.availability.filter((data: string) => data !== 'Canned')
+                  );
+                }
+              }}
             />
             <span className="checkmark" />
           </label>
         </div>
       </div>
       {
-        !disableForm && (
+        otherQuestions.availability.find((element: string) => element === 'Fresh') && (
           <div>
             <div className="sectiontitle">
               Quality
@@ -140,12 +129,11 @@ export const LeftForm2 = () => {
                   <input
                     type="checkbox"
                     checked={acceptable}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setAcceptable(true);
-                        setUnAcceptable(false);
-                        setQualityState('acceptable');
-                      } else setAcceptable(false);
+                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                      setAcceptable(e.currentTarget.checked);
+                      setUnAcceptable(!e.currentTarget.checked);
+                      if (e.currentTarget.checked) setQuality('Acceptable');
+                      else setQuality('Unacceptable');
                     }}
                   />
                   <span className="checkmark" />
@@ -156,13 +144,13 @@ export const LeftForm2 = () => {
                   <input
                     type="checkbox"
                     checked={unacceptable}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setAcceptable(false);
-                        setUnAcceptable(true);
-                        setQualityState('unacceptable');
-                      } else setUnAcceptable(false);
+                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                      setAcceptable(!e.currentTarget.checked);
+                      setUnAcceptable(e.currentTarget.checked);
+                      if (e.currentTarget.checked) setQuality('Unacceptable');
+                      else setQuality('Acceptable');
                     }}
+                    value={otherQuestions.quality}
                   />
                   <span className="checkmark" />
                 </label>
@@ -184,13 +172,12 @@ export const LeftForm2 = () => {
                   Yes
                   <input
                     type="checkbox"
-                    checked={visibility}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setVisibility(true);
-                        setNoVisibility(false);
-                        setVisibilityState('yes');
-                      } else setVisibility(false);
+                    checked={visibilityCheck}
+                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                      setVisibilityCheck(e.currentTarget.checked);
+                      setNoVisibility(!e.currentTarget.checked);
+                      if (e.currentTarget.checked) setVisibility('Yes');
+                      else setVisibility('No');
                     }}
                   />
                   <span className="checkmark" />
@@ -200,12 +187,11 @@ export const LeftForm2 = () => {
                   <input
                     type="checkbox"
                     checked={novisibility}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setVisibility(false);
-                        setNoVisibility(true);
-                        setVisibilityState('no');
-                      } else setNoVisibility(false);
+                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                      setVisibilityCheck(!e.currentTarget.checked);
+                      setNoVisibility(e.currentTarget.checked);
+                      if (e.currentTarget.checked) setVisibility('No');
+                      else setVisibility('Yes');
                     }}
                   />
                   <span className="checkmark" />
@@ -230,12 +216,11 @@ export const LeftForm2 = () => {
                   <input
                     type="checkbox"
                     checked={localProduce}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setLocalProduce(true);
-                        setLocalNoProduce(false);
-                        setLocalState('yes');
-                      } else setLocalProduce(false);
+                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                      setLocalProduce(e.currentTarget.checked);
+                      setLocalNoProduce(!e.currentTarget.checked);
+                      if (e.currentTarget.checked) setLocal('yes');
+                      else setLocal('No');
                     }}
                   />
                   <span className="checkmark" />
@@ -245,12 +230,11 @@ export const LeftForm2 = () => {
                   <input
                     type="checkbox"
                     checked={localNoProduce}
-                    onChange={(e) => {
-                      if (e.target.checked) {
-                        setLocalProduce(false);
-                        setLocalNoProduce(true);
-                        setLocalState('no');
-                      } else setLocalNoProduce(false);
+                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                      setLocalProduce(!e.currentTarget.checked);
+                      setLocalNoProduce(e.currentTarget.checked);
+                      if (e.currentTarget.checked) setLocal('No');
+                      else setLocal('Yes');
                     }}
                   />
                   <span className="checkmark" />
@@ -277,7 +261,9 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={(e) => setProduceAvailAStore(e.target.value)}
+            onChange={(e: React.FormEvent<HTMLTextAreaElement>): void => {
+              setProduceAvailStore('produce_avail_store', e.currentTarget.value);
+            }}
           />
         </div>
       </div>
@@ -292,7 +278,9 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={(e) => setProduceAvailSeasonally(e.target.value)}
+            onChange={(e: React.FormEvent<HTMLTextAreaElement>): void => {
+              setProduceAvailSeasonally('produce_avail_seasonally', e.currentTarget.value);
+            }}
           />
         </div>
       </div>

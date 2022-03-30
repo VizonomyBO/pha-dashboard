@@ -11,7 +11,7 @@ export const INITIAL_MARKETPLACE = {
   },
   otherQuestions: {
     description: '',
-    availability: [''],
+    availability: [],
     quality: '',
     visibility: '',
     local: '',

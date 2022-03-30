@@ -1,20 +1,17 @@
-import { useState } from 'react';
 import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 
 export const LeftForm3 = () => {
-  console.log('LeftForm3');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [owner, setOwner] = useState('');
-  const [patron, setPatron] = useState('');
-  const { setContactDetails } = useMarketplaceDispatch();
+  const {
+    setContactName, setContactEmail, setContactOwner, setContactPatron
+  } = useMarketplaceDispatch();
+
   const onchangeForm = () => {
-    setContactDetails({
-      contact_name: name,
-      contact_email: email,
-      contact_owner: owner,
-      contact_patron: patron
-    });
+    // setContactDetails({
+    //   contact_name: name,
+    //   contact_email: email,
+    //   contact_owner: owner,
+    //   contact_patron: patron
+    // });
   };
   return (
     <>
@@ -26,7 +23,9 @@ export const LeftForm3 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+              setContactName('contact_name', e.currentTarget.value);
+            }}
           />
         </div>
       </div>
@@ -38,7 +37,9 @@ export const LeftForm3 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+              setContactEmail('contact_email', e.currentTarget.value);
+            }}
           />
         </div>
       </div>
@@ -49,9 +50,9 @@ export const LeftForm3 = () => {
             I am the owner/manager of the business.
             <input
               type="checkbox"
-              onChange={(e) => {
-                if (e.target.checked) setOwner('yes');
-                else setOwner('No');
+              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                if (e.currentTarget.checked) setContactOwner('yes');
+                else setContactOwner('No');
               }}
             />
             <span className="checkmark" />
@@ -60,9 +61,9 @@ export const LeftForm3 = () => {
             I am patron of this business.
             <input
               type="checkbox"
-              onChange={(e) => {
-                if (e.target.checked) setPatron('yes');
-                else setPatron('No');
+              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
+                if (e.currentTarget.checked) setContactPatron('yes');
+                else setContactPatron('No');
               }}
             />
             <span className="checkmark" />

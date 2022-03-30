@@ -37,4 +37,6 @@ export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
   socialMedia: SocialMediaInterface,
   files: FilesInterface,
+  otherQuestions: OtherQuestionsInterface,
+  contactDetails: ContactDetailsInterface,
 }
