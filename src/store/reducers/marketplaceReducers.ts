@@ -1,13 +1,17 @@
 import { AnyAction } from 'redux';
+import { MarketplaceInterface } from '../../@types/redux';
 import { INITIAL_MARKETPLACE } from '../defaultStore';
 import * as TYPES from '../types';
 
-const marketplaceReducer = (action: AnyAction, state = INITIAL_MARKETPLACE) => {
+const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
   switch (action?.type) {
     case TYPES.SET_BUSINESS_DETAILS:
       return {
         ...state,
-        businessDetails: action.payload,
+        businessDetails: {
+          ...state.businessDetails,
+          [action.payload]: action.value
+        }
       };
     case TYPES.RESET_MARKETPLACE_BUSINESS:
       return {
@@ -15,7 +19,7 @@ const marketplaceReducer = (action: AnyAction, state = INITIAL_MARKETPLACE) => {
         businessDetails: INITIAL_MARKETPLACE.businessDetails,
       };
     default:
-      return state;
+      return INITIAL_MARKETPLACE;
   }
 };
 
