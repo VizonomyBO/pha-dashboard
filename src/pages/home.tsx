@@ -5,8 +5,6 @@ import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
 
 export const Home = () => {
-  console.log('Home');
-
   const onClickPlus = () => {
     /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
   };
