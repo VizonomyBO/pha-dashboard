@@ -18,7 +18,7 @@ export const resetBusiness = () => (dispatch : Dispatch) => {
 
 export const setBusinessFile = (type: string, valueType: MultimediaInterface[]) => (dispatch : Dispatch) => {
   dispatch({
-    type: TYPES.SET_BUSINESS_FILES,
+    type: TYPES.BUSINESS_FILES,
     payload: type,
     value: valueType
   });

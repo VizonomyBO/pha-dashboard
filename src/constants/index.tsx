@@ -105,4 +105,6 @@ export const TYPE_BUSINESS = {
   TWITTER: 'twitter',
   EMAIL: 'email',
   INSTAGRAM: 'instagram',
+  BUSINESS: 'business',
+  OWNER: 'owner'
 };

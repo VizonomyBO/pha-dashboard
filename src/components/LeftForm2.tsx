@@ -1,3 +1,4 @@
+import { TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 
 export const LeftForm2 = () => {
@@ -154,7 +155,7 @@ export const LeftForm2 = () => {
           <label>Do you have any high quality photos of this business to share?</label>
         </div>
         <Attachment
-          type="business"
+          type={TYPE_BUSINESS.BUSINESS}
         />
       </div>
       <div className="item">
@@ -162,7 +163,7 @@ export const LeftForm2 = () => {
           <label>Connect with the Community! Please upload a picture of the store owner or manager. </label>
         </div>
         <Attachment
-          type="owner"
+          type={TYPE_BUSINESS.OWNER}
         />
       </div>
     </>

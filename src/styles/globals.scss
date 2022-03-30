@@ -28,13 +28,16 @@ input, button, textarea, select {
 .fileInput {
 	display: none;
 }
+
 .fileText {
 	text-decoration: underline;
 }
+
 .fileText:hover {
 	text-decoration: underline;
     color: #00BDE3;
 }
+
 .fileSpam {
     background-color: #F7F9FA;
     margin-right: 10px;
@@ -42,6 +45,7 @@ input, button, textarea, select {
     color: #00BDE3;
     font-size: 15px;
 }
+
 .fileContent {
     margin: 15px;
     display: contents;
