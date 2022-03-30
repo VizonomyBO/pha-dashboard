@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { DeckGL, Layer, PickInfo } from 'deck.gl';
 import Map from 'react-map-gl';
 import {
@@ -21,7 +21,7 @@ export const DeckGLComponent = () => {
   const initialViewState = DEFAULT_VIEW_STATE;
   const controller = true;
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
-  const [layer, setLayer] = useState<Layer<unknown>[]>([]);
+  const layer = IconLayerData(data);
 
   const hideTooltip = () => {
     setHoverInfo(undefined);
@@ -32,12 +32,6 @@ export const DeckGLComponent = () => {
       setHoverInfo((info as PickInfo<Layer<unknown>[]>));
     }
   };
-
-  useEffect(() => {
-    if (layer) {
-      setLayer(IconLayerData(data));
-    }
-  }, [layer]);
 
   return (
     <div>
