@@ -17,7 +17,7 @@ const data = [
   { coordinates: [-105.45, 50.78], message: 'Hover over me', type: 'green' }
 ];
 
-export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
+export const DeckGLComponent = () => {
   const initialViewState = DEFAULT_VIEW_STATE;
   const controller = true;
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
@@ -34,7 +34,7 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
   };
 
   useEffect(() => {
-    if (layers) {
+    if (layer) {
       setLayer(IconLayerData(data));
     }
   }, [layer]);

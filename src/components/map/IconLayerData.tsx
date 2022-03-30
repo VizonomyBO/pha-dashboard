@@ -8,7 +8,7 @@ import { dataMapGl } from '../../@types';
 const COLORS = { GREEN: 'green', BLUE: 'blue' };
 
 export default function IconLayerData(data: Array<dataMapGl>): Layer<unknown>[] {
-  const layer = data.map((item: dataMapGl, i: number) => {
+  const layer: Layer<unknown>[] = data.map((item: dataMapGl, i: number) => {
     let icon = PinRed;
     if (item.type === COLORS.BLUE) {
       icon = PinBlue;

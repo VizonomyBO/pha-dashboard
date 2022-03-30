@@ -5,7 +5,7 @@ export const Map = () => {
   console.log('MAP init');
   return (
     <div className="map-container">
-      <DeckGLComponent layers={[]} />
+      <DeckGLComponent />
     </div>
   );
 };
