@@ -15,3 +15,8 @@ export interface dataMapGl {
   message?: string,
   type?: string
 }
+
+export interface DropdowInterface {
+  initialState: string,
+  type: string
+}

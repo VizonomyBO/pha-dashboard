@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
@@ -28,7 +29,9 @@ export const Home = () => {
                 Don’t see a food pantry or retailer? We can help!
                 Submit a request form, and we’ll add the location.
               </div>
-              <div className="desc3">Add A Listing</div>
+              <Link to="/form">
+                <div className="desc3">Add A Listing</div>
+              </Link>
             </div>
             <div className="space"><span className="line" /></div>
             <div className="listloc">

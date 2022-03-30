@@ -1,11 +1,11 @@
 import { Dispatch } from 'redux';
-import { BusinessDetailsInterface } from '../../@types/redux';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (businessDetails: BusinessDetailsInterface) => (dispatch : Dispatch) => {
+export const setBusinessDetails = (type: string, valueType: string) => (dispatch : Dispatch) => {
   dispatch({
     type: TYPES.SET_BUSINESS_DETAILS,
-    payload: businessDetails
+    payload: type,
+    value: valueType
   });
 };
 

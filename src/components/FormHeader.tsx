@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 import { FormHeaderInterface, FormTabType } from '../@types';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
 
@@ -9,11 +10,13 @@ export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => 
   return (
     <div className="header">
       <div className="backlink">
-        <button className="light" type="button">
-          <span className="icarrowleft">
-            <span className="txt">Back to Locations</span>
-          </span>
-        </button>
+        <Link to="/home">
+          <button className="light" type="button">
+            <span className="icarrowleft">
+              <span className="txt">Back to Locations</span>
+            </span>
+          </button>
+        </Link>
       </div>
       <h2 className="sectitle">Marketplace Request Form</h2>
       <p className="secdescription">Have a location listed by completing the form below</p>

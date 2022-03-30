@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DeckGL, Layer, PickInfo } from 'deck.gl';
 import Map from 'react-map-gl';
 import {
@@ -21,21 +21,24 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
   const initialViewState = DEFAULT_VIEW_STATE;
   const controller = true;
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
+  const [layer, setLayer] = useState<Layer<unknown>[]>([]);
 
   const hideTooltip = () => {
     setHoverInfo(undefined);
   };
 
   const expandTooltip = (info: unknown) => {
-    console.log(info);
     if ((info as PickInfo<Layer<unknown>[]>).object) {
       setHoverInfo((info as PickInfo<Layer<unknown>[]>));
     }
   };
-  let layer;
-  if (layers) {
-    layer = IconLayerData(data);
-  }
+
+  useEffect(() => {
+    if (layers) {
+      setLayer(IconLayerData(data));
+    }
+  }, [layer]);
+
   return (
     <div>
       {MAPBOX_KEY === NO_DATA ? (
@@ -50,9 +53,6 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
             layers={layer}
             onViewStateChange={hideTooltip}
             onClick={(info: unknown) => expandTooltip(info)}
-          /*  getCursor={(info: any) => 'pointer'} */
-          /* onViewStateChange={handleViewStateChange} */
-          /* onViewportChange={(viewport) => setViewport(viewport)} */
           >
             <Map
               id="mainMap"
@@ -61,11 +61,6 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
               mapboxAccessToken={MAPBOX_KEY}
             >
               {RenderTooltip(hoverInfo)}
-              {/* <div style={{ margin: 10, left: 0, zIndex: 9999 }}>
-                <NavigationControl position="bottom-right"
-                showCompass={false} showZoom={true} visualizePitch={true}
-                style={{ position: 'relative', right: 30, top: -20 }} />
-              </div> */}
             </Map>
           </DeckGL>
         )}
