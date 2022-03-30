@@ -1,4 +1,4 @@
-import { Layer } from 'deck.gl';
+import { Layer, Position } from 'deck.gl';
 import { IconLayer } from '@deck.gl/layers';
 import PinRed from './ic-pin-red.svg';
 import PinBlue from './ic-pin-blue.svg';
@@ -22,7 +22,7 @@ export default function IconLayerData(data: Array<dataMapGl>): Layer<unknown>[] 
         getCursor: () => 'pointer',
         zIndex: 2
       }),
-      getPosition: (d: any) => d.coordinates,
+      getPosition: (d: unknown) => ((d as dataMapGl).coordinates as Position), // TODO fix any
       getSize: () => 5,
       sizeScale: 10,
       pickable: true,

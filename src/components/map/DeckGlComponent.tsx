@@ -29,10 +29,10 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
     setHoverInfo(undefined);
   };
 
-  const expandTooltip = (info: PickInfo<Layer<unknown>[]>) => {
+  const expandTooltip = (info: unknown) => {
     console.log(info);
-    if (info.object) {
-      setHoverInfo(info);
+    if ((info as PickInfo<Layer<unknown>[]>).object) {
+      setHoverInfo((info as PickInfo<Layer<unknown>[]>));
     }
   };
   let layer;
@@ -53,7 +53,7 @@ export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
             controller={controller}
             layers={layer}
             onViewStateChange={hideTooltip}
-            onClick={() => expandTooltip}
+            onClick={(info: unknown) => expandTooltip(info)}
           /*  getCursor={(info: any) => 'pointer'} */
           /* onViewStateChange={handleViewStateChange} */
           /* onViewportChange={(viewport) => setViewport(viewport)} */
