@@ -58,7 +58,12 @@ export interface FilesInterface {
   media: null | MediaInterface,
 }
 export interface selectCategoryInterface {
-  selectCategoryOptions: string[]
+  supermarket: string,
+  corner_store: string,
+  dollar_stores: string,
+  food_pantry: string,
+  distribution: string,
+  food_co_op: string,
 }
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,

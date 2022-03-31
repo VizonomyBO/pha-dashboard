@@ -48,6 +48,11 @@ export const INITIAL_MARKETPLACE = {
     contact_patron: ''
   },
   selectCategory: {
-    selectCategoryOptions: []
-  }
+    supermarket: '',
+    corner_store: '',
+    dollar_stores: '',
+    food_pantry: '',
+    distribution: '',
+    food_co_op: '',
+  },
 };

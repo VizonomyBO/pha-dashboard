@@ -1,5 +1,5 @@
 export const CategoryPanel = () => {
-  console.log('CategoryPanel');
+  console.log('');
   return (
     <>
       <div className="sectiontitle">
