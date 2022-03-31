@@ -21,8 +21,8 @@ export const DropdownCategories = () => {
         displayEmpty
         value={categoriesSelected}
         onChange={handleChange}
-        renderValue={(selected) => {
-          if (selected.length === 0) {
+        renderValue={(selected:Array<string>) => {
+          if (!selected.length) {
             return <em>Select Category</em>;
           }
           if (selected.length > 1) {
