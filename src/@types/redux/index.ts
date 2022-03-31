@@ -36,6 +36,21 @@ export interface BusinessDetailsInterface {
   email: string,
   instagram: string,
 }
+export interface OtherQuestionsInterface {
+  description: string,
+  availability: string[],
+  quality: string,
+  visibility: string,
+  local: string,
+  produce_avail_store: string,
+  produce_avail_seasonally: string
+}
+export interface ContactDetailsInterface {
+  contact_name?: string,
+  contact_email?: string,
+  contact_owner?: string,
+  contact_patron?: string
+}
 export interface SocialMediaInterface {
   facebook: string,
 }
@@ -44,6 +59,8 @@ export interface FilesInterface {
 }
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
-  socialMedia : SocialMediaInterface,
-  files : FilesInterface,
+  socialMedia: SocialMediaInterface,
+  files: FilesInterface,
+  otherQuestions: OtherQuestionsInterface,
+  contactDetails: ContactDetailsInterface,
 }
