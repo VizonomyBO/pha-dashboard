@@ -115,12 +115,52 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
           contact_patron: action.payload
         }
       };
-    case TYPES.SET_SELECT_CATEGORY_OPTIONS:
+    case TYPES.SET_SELECT_CATEGORY_SUPERMARKET:
       return {
         ...state,
         selectCategory: {
           ...state.selectCategory,
-          selectCategoryOptions: action.payload
+          supermarket: action.payload
+        }
+      };
+    case TYPES.SET_SELECT_CATEGORY_CORNER:
+      return {
+        ...state,
+        selectCategory: {
+          ...state.selectCategory,
+          corner_store: action.payload
+        }
+      };
+    case TYPES.SET_SELECT_CATEGORY_DOLLAR:
+      return {
+        ...state,
+        selectCategory: {
+          ...state.selectCategory,
+          dollar_stores: action.payload
+        }
+      };
+    case TYPES.SET_SELECT_CATEGORY_FOOD_PANTRY:
+      return {
+        ...state,
+        selectCategory: {
+          ...state.selectCategory,
+          food_pantry: action.payload
+        }
+      };
+    case TYPES.SET_SELECT_CATEGORY_DISTRIBUTION:
+      return {
+        ...state,
+        selectCategory: {
+          ...state.selectCategory,
+          distribution: action.payload
+        }
+      };
+    case TYPES.SET_SELECT_CATEGORY_FOOD_CO_OP:
+      return {
+        ...state,
+        selectCategory: {
+          ...state.selectCategory,
+          food_co_op: action.payload
         }
       };
     default:

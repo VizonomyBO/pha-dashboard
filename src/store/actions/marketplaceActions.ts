@@ -88,10 +88,45 @@ export const setContactPatron = (contactPatron: string) => (dispatch: Dispatch) 
   });
 };
 
-export const setSelectCategoryOptions = (selectCategoryOptions: string[]) => (dispatch: Dispatch) => {
+export const setSelectCategorySupermarket = (selectCategorySupermarket: string) => (dispatch: Dispatch) => {
   dispatch({
-    type: TYPES.SET_SELECT_CATEGORY_OPTIONS,
-    payload: selectCategoryOptions
+    type: TYPES.SET_SELECT_CATEGORY_SUPERMARKET,
+    payload: selectCategorySupermarket
+  });
+};
+
+export const setSelectCategoryCorner = (selectCategoryCorner: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_CORNER,
+    payload: selectCategoryCorner
+  });
+};
+
+export const setSelectCategoryDollar = (selectCategoryDollar: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_DOLLAR,
+    payload: selectCategoryDollar
+  });
+};
+
+export const setSelectCategoryFoodPantry = (selectCategoryFoodPantry: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_FOOD_PANTRY,
+    payload: selectCategoryFoodPantry
+  });
+};
+
+export const setSelectCategoryDistribution = (selectCategoryDistribution: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_DISTRIBUTION,
+    payload: selectCategoryDistribution
+  });
+};
+
+export const setSelectCategoryFoodCoOp = (selectCategoryFoodCoOp: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_FOOD_CO_OP,
+    payload: selectCategoryFoodCoOp
   });
 };
 
