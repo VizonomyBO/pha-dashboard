@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
 import { ModalRequestForm } from './ModalRequestForm';
@@ -6,6 +7,7 @@ import { ModalRequestForm } from './ModalRequestForm';
 export const LeftForm3 = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [clickProceed, setClickProceed] = useState(false);
+  const navigate = useNavigate();
   const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
@@ -41,6 +43,9 @@ export const LeftForm3 = () => {
 
   useEffect(() => {
     if (clickProceed) {
+      setTimeout(() => {
+        navigate('/home');
+      }, 3000);
       setVisibleModal(true);
     }
   }, [clickProceed]);
