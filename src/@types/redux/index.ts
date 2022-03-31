@@ -38,7 +38,7 @@ export interface BusinessDetailsInterface {
 }
 export interface OtherQuestionsInterface {
   description: string,
-  availability: string[],
+  availabilityOptions: string[],
   quality: string,
   visibility: string,
   local: string,

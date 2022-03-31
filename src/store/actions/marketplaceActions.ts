@@ -16,10 +16,10 @@ export const setOtherQuestons = (detail: string) => (dispatch: Dispatch) => {
   });
 };
 
-export const setAvailability = (availability: string[]) => (dispatch: Dispatch) => {
+export const setAvailabilityOptions = (availabilityOptions: string[]) => (dispatch: Dispatch) => {
   dispatch({
-    type: TYPES.SET_AVAILABILITY,
-    payload: availability
+    type: TYPES.SET_AVAILABILITY_OPTIONS,
+    payload: availabilityOptions
   });
 };
 
