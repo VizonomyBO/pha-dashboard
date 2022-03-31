@@ -5,7 +5,7 @@ import {
   setContactName, setBusinessDetails, setBusinessFile,
   setOtherQuestons, setAvailabilityOptions, setQuality, setVisibility,
   setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner,
-  setContactEmail, setSelectCategoryOptions
+  setContactEmail, setSelectCategoryOptions, setSnapAccepted, setWicAccepted
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -55,6 +55,12 @@ export const useMarketplaceDispatch = () => {
     },
     setSelectCategoryOptions: (selectCategory: string[]) => {
       dispatch(setSelectCategoryOptions(selectCategory));
+    },
+    setWicAccepted: (wicAccepted: string) => {
+      dispatch(setWicAccepted(wicAccepted));
+    },
+    setSnapAccepted: (wicAccepted: string) => {
+      dispatch(setSnapAccepted(wicAccepted));
     },
   };
 };

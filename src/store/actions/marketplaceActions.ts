@@ -95,6 +95,20 @@ export const setSelectCategoryOptions = (selectCategoryOptions: string[]) => (di
   });
 };
 
+export const setWicAccepted = (wicAccepted: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_WIC_ACCEPTED,
+    payload: wicAccepted
+  });
+};
+
+export const setSnapAccepted = (snapAccepted: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_SNAP_ACCEPTED,
+    payload: snapAccepted
+  });
+};
+
 export const resetBusiness = () => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.RESET_MARKETPLACE_BUSINESS,

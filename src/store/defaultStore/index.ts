@@ -49,5 +49,9 @@ export const INITIAL_MARKETPLACE = {
   },
   selectCategory: {
     selectCategoryOptions: []
-  }
+  },
+  selectAccessibility: {
+    wic_accepted: '',
+    snap_accepted: '',
+  },
 };

@@ -123,6 +123,22 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
           selectCategoryOptions: action.payload
         }
       };
+    case TYPES.SET_SELECT_WIC_ACCEPTED:
+      return {
+        ...state,
+        selectAccessibility: {
+          ...state.selectAccessibility,
+          wic_accepted: action.payload
+        }
+      };
+    case TYPES.SET_SELECT_SNAP_ACCEPTED:
+      return {
+        ...state,
+        selectAccessibility: {
+          ...state.selectAccessibility,
+          snap_accepted: action.payload
+        }
+      };
     default:
       return INITIAL_MARKETPLACE;
   }

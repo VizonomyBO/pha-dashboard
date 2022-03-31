@@ -60,6 +60,10 @@ export interface FilesInterface {
 export interface selectCategoryInterface {
   selectCategoryOptions: string[]
 }
+export interface selectAccessibilityInterface {
+  wic_accepted: string,
+  snap_accepted: string,
+}
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
   socialMedia: SocialMediaInterface,
@@ -67,4 +71,5 @@ export interface MarketplaceInterface {
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
   selectCategory: selectCategoryInterface,
+  selectAccessibility: selectAccessibilityInterface
 }
