@@ -111,7 +111,7 @@ export const setSelectCategoryDollar = (selectCategoryDollar: string) => (dispat
 
 export const setSelectCategoryFoodPantry = (selectCategoryFoodPantry: string) => (dispatch: Dispatch) => {
   dispatch({
-    type: TYPES.SET_SELECT_CATEGORY_SUPERMARKET,
+    type: TYPES.SET_SELECT_CATEGORY_FOOD_PANTRY,
     payload: selectCategoryFoodPantry
   });
 };

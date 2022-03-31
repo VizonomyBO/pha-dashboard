@@ -136,7 +136,7 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
         ...state,
         selectCategory: {
           ...state.selectCategory,
-          dollar_store: action.payload
+          dollar_stores: action.payload
         }
       };
     case TYPES.SET_SELECT_CATEGORY_FOOD_PANTRY:
