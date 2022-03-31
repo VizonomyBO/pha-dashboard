@@ -20,3 +20,26 @@ export interface DropdowInterface {
   initialState: string,
   type: string
 }
+
+export interface FileInterface {
+  lastModified: number
+  lastModifiedDate: date
+  name: string
+  size: number
+  type: string
+  webkitRelativePath: string
+}
+export interface MultimediaInterface {
+  file?: FileInterface | FileList
+}
+
+export interface MultimediFileInterface {
+  file?: {
+    lastModified: number
+    lastModifiedDate: date
+    name: string
+    size: number
+    type: string
+    webkitRelativePath: string
+  }
+}

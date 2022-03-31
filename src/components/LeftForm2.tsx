@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { TYPE_BUSINESS } from '../constants';
+import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
 
@@ -284,13 +286,17 @@ export const LeftForm2 = () => {
         <div className="title">
           <label>Do you have any high quality photos of this business to share?</label>
         </div>
-        <div className="ainput upload">
-          <div className="uploadarea">
-            <div>Drag and drop files here</div>
-            <div>or</div>
-            <div>Browse on your device.</div>
-          </div>
+        <Attachment
+          type={TYPE_BUSINESS.BUSINESS}
+        />
+      </div>
+      <div className="item">
+        <div className="title">
+          <label>Connect with the Community! Please upload a picture of the store owner or manager. </label>
         </div>
+        <Attachment
+          type={TYPE_BUSINESS.OWNER}
+        />
       </div>
       <div className="aaction">
         <button className="light" type="button">
