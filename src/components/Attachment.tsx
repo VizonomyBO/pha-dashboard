@@ -8,6 +8,9 @@ export const Attachment = ({ type }: {type: string}) => {
     multimedia,
     removeFile
   } = useAttachmentBusiness({ type });
+
+  const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
+
   return (
     <div>
       <div className="ainput upload">
@@ -33,10 +36,7 @@ export const Attachment = ({ type }: {type: string}) => {
         {
           multimedia.map((element: MultimediFileInterface, index: number) => (
             <span
-              key={
-                `${element.file?.name ? element.file.name : ' '}fileSpam
-                ${(element.file?.lastModified ? element.file.lastModified : 123).toString}${type}`
-              }
+              key={generateKey(element, index)}
               className="fileSpam"
             >
               { element.file?.name ? element.file.name : ''}
