@@ -3,7 +3,7 @@ import { MultimediaInterface } from '../../@types';
 import { MarketplaceInterface } from '../../@types/redux';
 import {
   setContactName, setBusinessDetails, setBusinessFile,
-  setOtherQuestons, setAvailability, setQuality, setVisibility,
+  setOtherQuestons, setAvailabilityOptions, setQuality, setVisibility,
   setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner, setContactEmail
 } from '../actions';
 
@@ -22,8 +22,8 @@ export const useMarketplaceDispatch = () => {
     setOtherQuestions: (value: string) => {
       dispatch(setOtherQuestons(value));
     },
-    setAvailability: (availability: string[]) => {
-      dispatch(setAvailability(availability));
+    setAvailabilityOptions: (availabilityOptions: string[]) => {
+      dispatch(setAvailabilityOptions(availabilityOptions));
     },
     setQuality: (quality: string) => {
       dispatch(setQuality(quality));

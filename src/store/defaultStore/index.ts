@@ -34,7 +34,7 @@ export const INITIAL_MARKETPLACE = {
   },
   otherQuestions: {
     description: '',
-    availability: [],
+    availabilityOptions: [],
     quality: '',
     visibility: '',
     local: '',

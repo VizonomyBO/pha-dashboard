@@ -7,7 +7,7 @@ import { formConstants } from '../constants/form';
 export const LeftForm2 = () => {
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
   const {
-    setOtherQuestions, setAvailability, setQuality,
+    setOtherQuestions, setAvailabilityOptions, setQuality,
     setVisibility, setLocal, setProduceAvailStore,
     setProduceAvailSeasonally
   } = useMarketplaceDispatch();
@@ -17,34 +17,26 @@ export const LeftForm2 = () => {
     setOtherQuestions(e.currentTarget.value);
   };
 
-  const setAvailibityFresh = (e: React.FormEvent<HTMLInputElement>): void => {
-    if (e.currentTarget.checked) {
-      setAvailability([...otherQuestions.availability, formConstants.AVAILABILITY.FRESH]);
+  const setAvailabilityOptionsCheck = (constant: string, checked: boolean) => {
+    if (checked) {
+      setAvailabilityOptions([...otherQuestions.availabilityOptions, constant]);
     } else {
-      setAvailability(
-        otherQuestions.availability.filter((data: string) => data !== formConstants.AVAILABILITY.FRESH)
+      setAvailabilityOptions(
+        otherQuestions.availabilityOptions.filter((data: string) => data !== constant)
       );
     }
+  };
+
+  const setAvailibityFresh = (e: React.FormEvent<HTMLInputElement>): void => {
+    setAvailabilityOptionsCheck(formConstants.AVAILABILITY.FRESH, e.currentTarget.checked);
   };
 
   const setAvailabilityFrozen = (e: React.FormEvent<HTMLInputElement>): void => {
-    if (e.currentTarget.checked) {
-      setAvailability([...otherQuestions.availability, formConstants.AVAILABILITY.FROZEN]);
-    } else {
-      setAvailability(
-        otherQuestions.availability.filter((data: string) => data !== formConstants.AVAILABILITY.FROZEN)
-      );
-    }
+    setAvailabilityOptionsCheck(formConstants.AVAILABILITY.FROZEN, e.currentTarget.checked);
   };
 
   const setAvailabilityCanned = (e: React.FormEvent<HTMLInputElement>): void => {
-    if (e.currentTarget.checked) {
-      setAvailability([...otherQuestions.availability, formConstants.AVAILABILITY.CANNED]);
-    } else {
-      setAvailability(
-        otherQuestions.availability.filter((data: string) => data !== formConstants.AVAILABILITY.CANNED)
-      );
-    }
+    setAvailabilityOptionsCheck(formConstants.AVAILABILITY.CANNED, e.currentTarget.checked);
   };
 
   const setQualityFunction = (e: React.FormEvent<HTMLInputElement>): void => {
@@ -68,9 +60,9 @@ export const LeftForm2 = () => {
   };
 
   useEffect(() => {
-    setShowIsFreshOption(otherQuestions.availability.includes(formConstants.AVAILABILITY.FRESH));
-    console.log(otherQuestions.availability);
-  }, [otherQuestions.availability]);
+    setShowIsFreshOption(otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FRESH));
+  }, [otherQuestions.availabilityOptions]);
+
   return (
     <>
       <div className="sectiontitle">

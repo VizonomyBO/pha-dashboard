@@ -34,12 +34,12 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
           description: action.value,
         }
       };
-    case TYPES.SET_AVAILABILITY:
+    case TYPES.SET_AVAILABILITY_OPTIONS:
       return {
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          availability: action.payload
+          availabilityOptions: action.payload
         }
       };
     case TYPES.SET_QUALITY:
