@@ -1,3 +1,5 @@
+import { DropdownCategories } from '../components/DropdownCategories';
+
 export const Landing = () => {
   console.log('Landing');
   return (
@@ -42,14 +44,7 @@ export const Landing = () => {
               <span className="iccrosshair" />
             </div>
             <div className="space" />
-            <div className="citysearch">
-              <i className="icsearch" />
-              <span className="txtd">What</span>
-              <input type="text" name="" id="" placeholder="Select Category" />
-              <button className="light" type="button">
-                Search
-              </button>
-            </div>
+            <DropdownCategories />
           </div>
         </div>
       </div>
