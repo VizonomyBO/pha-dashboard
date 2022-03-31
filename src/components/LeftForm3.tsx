@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
+import { ModalRequestForm } from './ModalRequestForm';
 
 export const LeftForm3 = () => {
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [clickProceed, setClickProceed] = useState(false);
   const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
@@ -35,6 +38,12 @@ export const LeftForm3 = () => {
     setContactOwner(formConstants.CONTACT_OWNER.NO);
     setContactPatron(formConstants.CONTACT_PATRON.NO);
   }, [setContactOwner, setContactPatron]);
+
+  useEffect(() => {
+    if (clickProceed) {
+      setVisibleModal(true);
+    }
+  }, [clickProceed]);
 
   return (
     <>
@@ -84,10 +93,15 @@ export const LeftForm3 = () => {
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button">
+        <button className="light" type="button" onClick={() => setClickProceed(true)}>
           Proceed
         </button>
       </div>
+      <ModalRequestForm
+        type={visibleModal}
+        visible={visibleModal}
+        setVisible={setVisibleModal}
+      />
     </>
   );
 };

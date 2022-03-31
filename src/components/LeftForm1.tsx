@@ -1,18 +1,30 @@
 import { useEffect, useState } from 'react';
-import { DEFAULT_DROPDOWN_OPTION, TYPE_BUSINESS } from '../constants';
+import { DEFAULT_DROPDOWN_OPTION, OTHER_QUESTIONS, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { isEmpty } from '../utils/isEmpty';
+import { ModalRequestForm } from './ModalRequestForm';
+import { FormTabType } from '../@types';
 
-export const LeftForm1 = () => {
+export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.SetStateAction<FormTabType>>}) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
-  const [formComplete, setFormComplete] = useState(false);
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [clickProceed, setClickProceed] = useState(false);
   useEffect(() => {
-    setFormComplete(isEmpty(businessDetails.name) && isEmpty(businessDetails.phone)
+    if (isEmpty(businessDetails.name) && isEmpty(businessDetails.phone)
     && isEmpty(businessDetails.address_1) && isEmpty(businessDetails.city) && isEmpty(businessDetails.state)
-    && isEmpty(businessDetails.zipcode));
-  }, [businessDetails]);
+    && isEmpty(businessDetails.zipcode) && clickProceed) {
+      setActiveTab(OTHER_QUESTIONS);
+      setClickProceed(false);
+    }
+    if ((!isEmpty(businessDetails.name) || !isEmpty(businessDetails.phone)
+    || !isEmpty(businessDetails.address_1) || !isEmpty(businessDetails.city) || !isEmpty(businessDetails.state)
+    || !isEmpty(businessDetails.zipcode)) && clickProceed) {
+      setVisibleModal(true);
+      setClickProceed(false);
+    }
+  }, [clickProceed]);
   return (
     <>
       <div className="sectiontitle">
@@ -362,10 +374,15 @@ export const LeftForm1 = () => {
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" disabled={!formComplete}>
+        <button className="light" type="button" onClick={() => setClickProceed(true)}>
           Proceed
         </button>
       </div>
+      <ModalRequestForm
+        type={!visibleModal}
+        visible={visibleModal}
+        setVisible={setVisibleModal}
+      />
     </>
   );
 };

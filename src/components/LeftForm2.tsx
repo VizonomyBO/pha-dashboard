@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { TYPE_BUSINESS } from '../constants';
+import { CONTACT_DETAILS, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
+import { isEmpty } from '../utils/isEmpty';
+import { FormTabType } from '../@types';
+import { ModalRequestForm } from './ModalRequestForm';
 
-export const LeftForm2 = () => {
+export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.SetStateAction<FormTabType>>}) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [clickProceed, setClickProceed] = useState(false);
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
   const {
     setOtherQuestions, setAvailabilityOptions, setQuality,
@@ -62,6 +67,26 @@ export const LeftForm2 = () => {
   useEffect(() => {
     setShowIsFreshOption(otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FRESH));
   }, [otherQuestions.availabilityOptions]);
+
+  useEffect(() => {
+    if (isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
+      && isEmpty(otherQuestions.quality) && isEmpty(otherQuestions.visibility) && isEmpty(otherQuestions.local)
+      && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh') && clickProceed) {
+      setActiveTab(CONTACT_DETAILS);
+      setClickProceed(false);
+    }
+    if ((!isEmpty(otherQuestions.description) || otherQuestions.availabilityOptions === []
+      || !isEmpty(otherQuestions.quality) || !isEmpty(otherQuestions.visibility) || !isEmpty(otherQuestions.local))
+      && clickProceed) {
+      setVisibleModal(true);
+      setClickProceed(false);
+    }
+    if (isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
+    && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh') !== undefined && clickProceed) {
+      setActiveTab(CONTACT_DETAILS);
+      setClickProceed(false);
+    }
+  }, [clickProceed]);
 
   return (
     <>
@@ -291,10 +316,15 @@ export const LeftForm2 = () => {
         />
       </div>
       <div className="aaction">
-        <button className="light" type="button">
+        <button className="light" type="button" onClick={() => setClickProceed(true)}>
           Proceed
         </button>
       </div>
+      <ModalRequestForm
+        type={!visibleModal}
+        visible={visibleModal}
+        setVisible={setVisibleModal}
+      />
     </>
   );
 };

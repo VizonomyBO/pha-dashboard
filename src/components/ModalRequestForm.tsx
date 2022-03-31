@@ -10,7 +10,7 @@ export const ModalRequestForm = (
     <div>
       {visible && (
         <div className="modaluserfeedbck">
-          {type && (
+          {type ? (
             <div className="modalsubmission">
               <div className="icoarea">
                 <div className="iccheckcircle" />
@@ -20,16 +20,16 @@ export const ModalRequestForm = (
                 Our team will review your information and may reach out for additional clarification. Thank you!
               </p>
             </div>
-          )}
-          {!type && (
-            <div className="modalsubmission">
-              <div className="icoarea">
-                <div className="icxcircle" />
+          )
+            : (
+              <div className="modalsubmission">
+                <div className="icoarea">
+                  <div className="icxcircle" />
+                </div>
+                <p className="desc1">Sorry!</p>
+                <p className="desc2">Please complete all required fields.</p>
               </div>
-              <p className="desc1">Sorry!</p>
-              <p className="desc2">Please complete all required fields.</p>
-            </div>
-          )}
+            )}
         </div>
       )}
     </div>
