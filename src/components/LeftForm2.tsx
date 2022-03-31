@@ -1,14 +1,9 @@
-import React, { useState } from 'react';
-import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
+import React, { useEffect, useState } from 'react';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
+import { formConstants } from '../constants/form';
 
 export const LeftForm2 = () => {
-  const [acceptable, setAcceptable] = useState(false);
-  const [unacceptable, setUnAcceptable] = useState(false);
-  const [visibilityCheck, setVisibilityCheck] = useState(false);
-  const [novisibility, setNoVisibility] = useState(false);
-  const [localProduce, setLocalProduce] = useState(false);
-  const [localNoProduce, setLocalNoProduce] = useState(false);
-
+  const [showIsFreshOption, setShowIsFreshOption] = useState(false);
   const {
     setOtherQuestions, setAvailability, setQuality,
     setVisibility, setLocal, setProduceAvailStore,
@@ -16,10 +11,64 @@ export const LeftForm2 = () => {
   } = useMarketplaceDispatch();
   const { otherQuestions } = useMarketplaceState();
 
-  const onchangeForm = () => {
-    console.log('');
+  const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
+    setOtherQuestions(e.currentTarget.value);
   };
 
+  const setAvailibityFresh = (e: React.FormEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.checked) {
+      setAvailability([...otherQuestions.availability, formConstants.AVAILABILITY.FRESH]);
+    } else {
+      setAvailability(
+        otherQuestions.availability.filter((data: string) => data !== formConstants.AVAILABILITY.FRESH)
+      );
+    }
+  };
+
+  const setAvailabilityFrozen = (e: React.FormEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.checked) {
+      setAvailability([...otherQuestions.availability, formConstants.AVAILABILITY.FROZEN]);
+    } else {
+      setAvailability(
+        otherQuestions.availability.filter((data: string) => data !== formConstants.AVAILABILITY.FROZEN)
+      );
+    }
+  };
+
+  const setAvailabilityCanned = (e: React.FormEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.checked) {
+      setAvailability([...otherQuestions.availability, formConstants.AVAILABILITY.CANNED]);
+    } else {
+      setAvailability(
+        otherQuestions.availability.filter((data: string) => data !== formConstants.AVAILABILITY.CANNED)
+      );
+    }
+  };
+
+  const setQualityFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    setQuality(e.currentTarget.value);
+  };
+
+  const setVisibilityFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    setVisibility(e.currentTarget.value);
+  };
+
+  const setLocalFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    setLocal(e.currentTarget.value);
+  };
+
+  const setProduceAvailStoreFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
+    setProduceAvailStore(e.currentTarget.value);
+  };
+
+  const setProduceAvailSeasonallyFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
+    setProduceAvailSeasonally(e.currentTarget.value);
+  };
+
+  useEffect(() => {
+    setShowIsFreshOption(otherQuestions.availability.includes(formConstants.AVAILABILITY.FRESH));
+    console.log(otherQuestions.availability);
+  }, [otherQuestions.availability]);
   return (
     <>
       <div className="sectiontitle">
@@ -39,10 +88,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={(e: React.FormEvent<HTMLTextAreaElement>): void => {
-              setOtherQuestions('description', e.currentTarget.value);
-            }}
-            value={otherQuestions.description}
+            onChange={setDescriptionFunction}
           />
         </div>
       </div>
@@ -62,15 +108,7 @@ export const LeftForm2 = () => {
             Fresh
             <input
               type="checkbox"
-              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                if (e.currentTarget.checked) {
-                  setAvailability([...otherQuestions.availability, 'Fresh']);
-                } else {
-                  setAvailability(
-                    otherQuestions.availability.filter((data: string) => data !== 'Fresh')
-                  );
-                }
-              }}
+              onChange={setAvailibityFresh}
             />
             <span className="checkmark" />
           </label>
@@ -78,15 +116,7 @@ export const LeftForm2 = () => {
             Frozen
             <input
               type="checkbox"
-              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                if (e.currentTarget.checked) {
-                  setAvailability([...otherQuestions.availability, 'Frozen']);
-                } else {
-                  setAvailability(
-                    otherQuestions.availability.filter((data: string) => data !== 'Frozen')
-                  );
-                }
-              }}
+              onChange={setAvailabilityFrozen}
             />
             <span className="checkmark" />
           </label>
@@ -94,156 +124,123 @@ export const LeftForm2 = () => {
             Canned
             <input
               type="checkbox"
-              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                if (e.currentTarget.checked) {
-                  setAvailability([...otherQuestions.availability, 'Canned']);
-                } else {
-                  setAvailability(
-                    otherQuestions.availability.filter((data: string) => data !== 'Canned')
-                  );
-                }
-              }}
+              onChange={setAvailabilityCanned}
             />
             <span className="checkmark" />
           </label>
         </div>
       </div>
-      {
-        otherQuestions.availability.find((element: string) => element === 'Fresh') && (
-          <div>
-            <div className="sectiontitle">
-              Quality
-            </div>
-            <div className="item">
-              <div className="title grouped">
-                <span className="number">2.</span>
-                <span className="description">
-                  How would you describe the quality of the fresh fruits and
-                  vegetables you stock at this location? Acceptable (peak
-                  condition, top quality, good color, fresh, firm, and clean)
-                </span>
-              </div>
-              <div className="ainput chk">
-                <label className="chkwrap">
-                  Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
-                  <input
-                    type="checkbox"
-                    checked={acceptable}
-                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                      setAcceptable(e.currentTarget.checked);
-                      setUnAcceptable(!e.currentTarget.checked);
-                      if (e.currentTarget.checked) setQuality('Acceptable');
-                      else setQuality('Unacceptable');
-                    }}
-                  />
-                  <span className="checkmark" />
-                </label>
-                <label className="chkwrap">
-                  Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
-                  patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
-                  <input
-                    type="checkbox"
-                    checked={unacceptable}
-                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                      setAcceptable(!e.currentTarget.checked);
-                      setUnAcceptable(e.currentTarget.checked);
-                      if (e.currentTarget.checked) setQuality('Unacceptable');
-                      else setQuality('Acceptable');
-                    }}
-                    value={otherQuestions.quality}
-                  />
-                  <span className="checkmark" />
-                </label>
-              </div>
-            </div>
-            <div className="sectiontitle">
-              Visibility
-            </div>
-            <div className="item">
-              <div className="title grouped">
-                <span className="number">3.</span>
-                <span className="description">
-                  Are the fresh fruits and vegetables visible from the front of the
-                  store or before entering ?
-                </span>
-              </div>
-              <div className="ainput chk">
-                <label className="chkwrap">
-                  Yes
-                  <input
-                    type="checkbox"
-                    checked={visibilityCheck}
-                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                      setVisibilityCheck(e.currentTarget.checked);
-                      setNoVisibility(!e.currentTarget.checked);
-                      if (e.currentTarget.checked) setVisibility('Yes');
-                      else setVisibility('No');
-                    }}
-                  />
-                  <span className="checkmark" />
-                </label>
-                <label className="chkwrap">
-                  No
-                  <input
-                    type="checkbox"
-                    checked={novisibility}
-                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                      setVisibilityCheck(!e.currentTarget.checked);
-                      setNoVisibility(e.currentTarget.checked);
-                      if (e.currentTarget.checked) setVisibility('No');
-                      else setVisibility('Yes');
-                    }}
-                  />
-                  <span className="checkmark" />
-                </label>
-              </div>
-            </div>
-            <div className="sectiontitle">
-              Local
-            </div>
-            <div className="item">
-              <div className="title grouped">
-                <span className="number">4.</span>
-                <span className="description">
-                  Do you stock locally grown produce (grown within 250 miles
-                  radius)?
+      {showIsFreshOption && (
+        <>
+          <div className="sectiontitle">
+            Quality
+          </div>
+          <div className="item">
+            <div className="title grouped">
+              <span className="number">2.</span>
+              <span className="description">
+                How would you describe the quality of the fresh fruits and
+                vegetables you stock at this location? Acceptable (peak
+                condition, top quality, good color, fresh, firm, and clean)
 
-                </span>
-              </div>
-              <div className="ainput chk">
-                <label className="chkwrap">
-                  Yes
-                  <input
-                    type="checkbox"
-                    checked={localProduce}
-                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                      setLocalProduce(e.currentTarget.checked);
-                      setLocalNoProduce(!e.currentTarget.checked);
-                      if (e.currentTarget.checked) setLocal('yes');
-                      else setLocal('No');
-                    }}
-                  />
-                  <span className="checkmark" />
-                </label>
-                <label className="chkwrap">
-                  No
-                  <input
-                    type="checkbox"
-                    checked={localNoProduce}
-                    onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                      setLocalProduce(!e.currentTarget.checked);
-                      setLocalNoProduce(e.currentTarget.checked);
-                      if (e.currentTarget.checked) setLocal('No');
-                      else setLocal('Yes');
-                    }}
-                  />
-                  <span className="checkmark" />
-                </label>
-              </div>
+              </span>
+            </div>
+            <div className="ainput chk">
+              <label className="chkwrap">
+                Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
+                <input
+                  type="radio"
+                  value={formConstants.QUALITY.ACCEPTABLE}
+                  checked={otherQuestions.quality === formConstants.QUALITY.ACCEPTABLE}
+                  onChange={setQualityFunction}
+                />
+                <span className="checkmark" />
+              </label>
+              <label className="chkwrap">
+                Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
+                patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
+                <input
+                  type="radio"
+                  value={formConstants.QUALITY.UNACCEPTABLE}
+                  checked={otherQuestions.quality === formConstants.QUALITY.UNACCEPTABLE}
+                  onChange={setQualityFunction}
+                />
+                <span className="checkmark" />
+              </label>
             </div>
           </div>
-        )
-      }
+          <div className="sectiontitle">
+            Visibility
+          </div>
+          <div className="item">
+            <div className="title grouped">
+              <span className="number">3.</span>
+              <span className="description">
+                Are the fresh fruits and vegetables visible from the front of the
+                store or before entering ?
+
+              </span>
+            </div>
+            <div className="ainput chk">
+              <label className="chkwrap">
+                Yes
+                <input
+                  type="radio"
+                  value={formConstants.VISIBILITY.YES}
+                  checked={otherQuestions.visibility === formConstants.VISIBILITY.YES}
+                  onChange={setVisibilityFunction}
+                />
+                <span className="checkmark" />
+              </label>
+              <label className="chkwrap">
+                No
+                <input
+                  type="radio"
+                  value={formConstants.VISIBILITY.NO}
+                  checked={otherQuestions.visibility === formConstants.VISIBILITY.NO}
+                  onChange={setVisibilityFunction}
+                />
+                <span className="checkmark" />
+              </label>
+            </div>
+          </div>
+          <div className="sectiontitle">
+            Local
+          </div>
+          <div className="item">
+            <div className="title grouped">
+              <span className="number">4.</span>
+              <span className="description">
+                Do you stock locally grown produce (grown within 250 miles
+                radius)?
+
+              </span>
+            </div>
+            <div className="ainput chk">
+              <label className="chkwrap">
+                Yes
+                <input
+                  type="radio"
+                  value={formConstants.LOCAL.YES}
+                  checked={otherQuestions.local === formConstants.LOCAL.YES}
+                  onChange={setLocalFunction}
+                />
+                <span className="checkmark" />
+              </label>
+              <label className="chkwrap">
+                No
+                <input
+                  type="radio"
+                  value={formConstants.LOCAL.NO}
+                  checked={otherQuestions.local === formConstants.LOCAL.NO}
+                  onChange={setLocalFunction}
+                />
+                <span className="checkmark" />
+              </label>
+            </div>
+          </div>
+        </>
+      )}
       <div className="sectiontitle">
         Optional Information
       </div>
@@ -261,9 +258,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={(e: React.FormEvent<HTMLTextAreaElement>): void => {
-              setProduceAvailStore('produce_avail_store', e.currentTarget.value);
-            }}
+            onChange={setProduceAvailStoreFunction}
           />
         </div>
       </div>
@@ -278,9 +273,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
-            onChange={(e: React.FormEvent<HTMLTextAreaElement>): void => {
-              setProduceAvailSeasonally('produce_avail_seasonally', e.currentTarget.value);
-            }}
+            onChange={setProduceAvailSeasonallyFunction}
           />
         </div>
       </div>
@@ -300,7 +293,7 @@ export const LeftForm2 = () => {
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => onchangeForm()}>
+        <button className="light" type="button">
           Proceed
         </button>
       </div>

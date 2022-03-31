@@ -1,12 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  BusinessDetailsInterface,
   MarketplaceInterface
 } from '../../@types/redux';
 import {
-  setContactName, resetBusiness, setBusinessDetails,
+  setContactName, setBusinessDetails,
   setOtherQuestons, setAvailability, setQuality, setVisibility,
-  setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner
+  setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner, setContactEmail
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -15,14 +14,11 @@ export const useMarketplaceState = () => useSelector(
 export const useMarketplaceDispatch = () => {
   const dispatch = useDispatch();
   return {
-    setBusinessDetails: (businessDetails: BusinessDetailsInterface) => {
-      dispatch(setBusinessDetails(businessDetails));
+    setBusinessDetails: (type: string, value: string) => {
+      dispatch(setBusinessDetails(type, value));
     },
-    resetBusiness: () => {
-      dispatch(resetBusiness());
-    },
-    setOtherQuestions: (otherQuestions: string, value: string) => {
-      dispatch(setOtherQuestons(otherQuestions, value));
+    setOtherQuestions: (value: string) => {
+      dispatch(setOtherQuestons(value));
     },
     setAvailability: (availability: string[]) => {
       dispatch(setAvailability(availability));
@@ -36,17 +32,17 @@ export const useMarketplaceDispatch = () => {
     setLocal: (local: string) => {
       dispatch(setLocal(local));
     },
-    setProduceAvailStore: (produceAvailStore: string, value: string) => {
-      dispatch(setProduceAvailStore(produceAvailStore, value));
+    setProduceAvailStore: (value: string) => {
+      dispatch(setProduceAvailStore(value));
     },
-    setProduceAvailSeasonally: (produceAvailSeasonally: string, value: string) => {
-      dispatch(setProduceAvailSeasonally(produceAvailSeasonally, value));
+    setProduceAvailSeasonally: (value: string) => {
+      dispatch(setProduceAvailSeasonally(value));
     },
-    setContactName: (contactName: string, value: string) => {
-      dispatch(setContactName(contactName, value));
+    setContactName: (value: string) => {
+      dispatch(setContactName(value));
     },
-    setContactEmail: (contactEmail: string, value: string) => {
-      dispatch(setContactName(contactEmail, value));
+    setContactEmail: (value: string) => {
+      dispatch(setContactEmail(value));
     },
     setContactOwner: (contactOwner: string) => {
       dispatch(setContactOwner(contactOwner));

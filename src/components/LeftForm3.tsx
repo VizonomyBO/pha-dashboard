@@ -1,18 +1,41 @@
+import React, { useEffect } from 'react';
 import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
+import { formConstants } from '../constants/form';
 
 export const LeftForm3 = () => {
   const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
 
-  const onchangeForm = () => {
-    // setContactDetails({
-    //   contact_name: name,
-    //   contact_email: email,
-    //   contact_owner: owner,
-    //   contact_patron: patron
-    // });
+  const setName = (e: React.FormEvent<HTMLInputElement>): void => {
+    setContactName(e.currentTarget.value);
   };
+
+  const setEmail = (e: React.FormEvent<HTMLInputElement>): void => {
+    setContactEmail(e.currentTarget.value);
+  };
+
+  const setContactOwnerFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.checked) {
+      setContactOwner(formConstants.CONTACT_OWNER.YES);
+    } else {
+      setContactOwner(formConstants.CONTACT_OWNER.NO);
+    }
+  };
+
+  const setContactPatronFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    if (e.currentTarget.checked) {
+      setContactPatron(formConstants.CONTACT_PATRON.YES);
+    } else {
+      setContactPatron(formConstants.CONTACT_PATRON.NO);
+    }
+  };
+
+  useEffect(() => {
+    setContactOwner(formConstants.CONTACT_OWNER.NO);
+    setContactPatron(formConstants.CONTACT_PATRON.NO);
+  }, []);
+
   return (
     <>
       <div className="item">
@@ -23,9 +46,7 @@ export const LeftForm3 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-              setContactName('contact_name', e.currentTarget.value);
-            }}
+            onChange={setName}
           />
         </div>
       </div>
@@ -37,9 +58,7 @@ export const LeftForm3 = () => {
           <input
             className="light"
             type="text"
-            onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-              setContactEmail('contact_email', e.currentTarget.value);
-            }}
+            onChange={setEmail}
           />
         </div>
       </div>
@@ -50,10 +69,7 @@ export const LeftForm3 = () => {
             I am the owner/manager of the business.
             <input
               type="checkbox"
-              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                if (e.currentTarget.checked) setContactOwner('yes');
-                else setContactOwner('No');
-              }}
+              onChange={setContactOwnerFunction}
             />
             <span className="checkmark" />
           </label>
@@ -61,17 +77,14 @@ export const LeftForm3 = () => {
             I am patron of this business.
             <input
               type="checkbox"
-              onChange={(e: React.FormEvent<HTMLInputElement>): void => {
-                if (e.currentTarget.checked) setContactPatron('yes');
-                else setContactPatron('No');
-              }}
+              onChange={setContactPatronFunction}
             />
             <span className="checkmark" />
           </label>
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => onchangeForm()}>
+        <button className="light" type="button">
           Proceed
         </button>
       </div>

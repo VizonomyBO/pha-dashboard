@@ -8,7 +8,10 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
     case TYPES.SET_BUSINESS_DETAILS:
       return {
         ...state,
-        businessDetails: action.payload,
+        businessDetails: {
+          ...state.businessDetails,
+          [action.payload]: action.value
+        }
       };
     case TYPES.RESET_MARKETPLACE_BUSINESS:
       return {
@@ -20,7 +23,7 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          [action.typeOtherQuestions]: action.value,
+          description: action.value,
         }
       };
     case TYPES.SET_AVAILABILITY:
@@ -60,7 +63,7 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          [action.typeProduceAvailStore]: action.value,
+          produceAvailStore: action.value,
         }
       };
     case TYPES.SET_PRODUCE_AVAIL_SEASONALLY:
@@ -68,7 +71,7 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          [action.typeProduceAvailSeasonally]: action.value,
+          produceAvailSeasonally: action.value,
         }
       };
     case TYPES.SET_CONTACT_NAME:
@@ -76,8 +79,7 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
         ...state,
         contactDetails: {
           ...state.contactDetails,
-          [action.typeContactName]: action.value,
-
+          contact_name: action.value,
         }
       };
     case TYPES.SET_CONTACT_EMAIL:
@@ -85,7 +87,7 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
         ...state,
         contactDetails: {
           ...state.contactDetails,
-          [action.typeContactEmail]: action.value,
+          contact_email: action.value,
 
         }
       };
