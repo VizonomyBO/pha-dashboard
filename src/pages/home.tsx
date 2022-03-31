@@ -1,9 +1,14 @@
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
+import { Map } from '../components/map/Map';
 
 export const Home = () => {
-  console.log('Home');
+  const onClickPlus = () => {
+    /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
+  };
+
   return (
     <div className="container">
       <div className="bgwhite" />
@@ -142,7 +147,9 @@ export const Home = () => {
             </div>
           </div>
           <div className="amap">
-            <div className="modal">
+            <Map />
+
+            {/* <div className="modal">
               <figure className="picture">
                 <img src="/public/images/img_market_001.png" alt="" />
               </figure>
@@ -174,8 +181,8 @@ export const Home = () => {
                   </button>
                 </div>
               </div>
-            </div>
-            <div className="bmodal">
+            </div> */}
+            {/* <div className="bmodal">
               <figure className="picture">
                 <img src="/public/images/img_market_s_001.png" alt="" />
               </figure>
@@ -200,12 +207,11 @@ export const Home = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </div> */}
             <div className="controlzoom">
               <div className="zplus">
-                <button className="light" type="button">
+                <button className="light" type="button" id="zoomIn" aria-label="Zoom in" onClick={onClickPlus}>
                   <span className="iczplus" />
-
                 </button>
               </div>
               <div className="space">

@@ -10,6 +10,12 @@ export interface FormHeaderInterface {
   setActiveTab: (value: FormTabType) => void,
 }
 
+export interface dataMapGl {
+  coordinates: number[],
+  message?: string,
+  type?: string
+}
+
 export interface DropdowInterface {
   initialState: string,
   type: string
