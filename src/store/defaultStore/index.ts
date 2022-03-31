@@ -46,5 +46,8 @@ export const INITIAL_MARKETPLACE = {
     contact_email: '',
     contact_owner: '',
     contact_patron: ''
+  },
+  selectCategory: {
+    selectCategoryOptions: []
   }
 };

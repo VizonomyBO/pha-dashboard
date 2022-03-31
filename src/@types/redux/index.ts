@@ -57,10 +57,14 @@ export interface SocialMediaInterface {
 export interface FilesInterface {
   media: null | MediaInterface,
 }
+export interface selectCategoryInterface {
+  selectCategoryOptions: string[]
+}
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
   socialMedia: SocialMediaInterface,
   files: FilesInterface,
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
+  selectCategory: selectCategoryInterface,
 }

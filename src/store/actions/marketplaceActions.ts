@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { MultimediaInterface } from '../../@types';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (type: string, value: string) => (dispatch : Dispatch) => {
+export const setBusinessDetails = (type: string, value: string) => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.SET_BUSINESS_DETAILS,
     payload: type,
@@ -88,13 +88,20 @@ export const setContactPatron = (contactPatron: string) => (dispatch: Dispatch) 
   });
 };
 
+export const setSelectCategoryOptions = (selectCategoryOptions: string[]) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_OPTIONS,
+    payload: selectCategoryOptions
+  });
+};
+
 export const resetBusiness = () => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.RESET_MARKETPLACE_BUSINESS,
   });
 };
 
-export const setBusinessFile = (type: string, value: MultimediaInterface[]) => (dispatch : Dispatch) => {
+export const setBusinessFile = (type: string, value: MultimediaInterface[]) => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.BUSINESS_FILES,
     payload: type,
