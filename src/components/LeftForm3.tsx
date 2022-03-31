@@ -34,7 +34,7 @@ export const LeftForm3 = () => {
   useEffect(() => {
     setContactOwner(formConstants.CONTACT_OWNER.NO);
     setContactPatron(formConstants.CONTACT_PATRON.NO);
-  }, []);
+  }, [setContactOwner, setContactPatron]);
 
   return (
     <>
