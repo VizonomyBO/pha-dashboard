@@ -11,11 +11,15 @@ export const LeftForm2 = () => {
   } = useMarketplaceDispatch();
   const { otherQuestions } = useMarketplaceState();
 
+  const setAvailabilityOptionsCheck = (constant: string, checked: boolean) => {
+    console.log(constant, checked);
+  };
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     setOtherQuestions(e.currentTarget.value);
   };
 
   const setAvailibityFresh = (e: React.FormEvent<HTMLInputElement>): void => {
+    setAvailabilityOptionsCheck(formConstants.AVAILABILITY.FRESH, e.currentTarget.checked);
     if (e.currentTarget.checked) {
       setAvailability([...otherQuestions.availability, formConstants.AVAILABILITY.FRESH]);
     } else {
