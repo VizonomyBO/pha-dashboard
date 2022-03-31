@@ -5,7 +5,9 @@ import {
   setContactName, setBusinessDetails, setBusinessFile,
   setOtherQuestons, setAvailabilityOptions, setQuality, setVisibility,
   setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner,
-  setContactEmail, setSelectCategoryOptions, setSnapAccepted, setWicAccepted
+  setSnapAccepted, setWicAccepted, setContactEmail, setSelectCategoryCorner,
+  setSelectCategoryDistribution, setSelectCategoryDollar,
+  setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -53,8 +55,23 @@ export const useMarketplaceDispatch = () => {
     setContactPatron: (contactPatron: string) => {
       dispatch(setContactPatron(contactPatron));
     },
-    setSelectCategoryOptions: (selectCategory: string[]) => {
-      dispatch(setSelectCategoryOptions(selectCategory));
+    setSelectCategorySupermarket: (selectCategory: string) => {
+      dispatch(setSelectCategorySupermarket(selectCategory));
+    },
+    setSelectCategoryCorner: (selectCategory: string) => {
+      dispatch(setSelectCategoryCorner(selectCategory));
+    },
+    setSelectCategoryDollar: (selectCategory: string) => {
+      dispatch(setSelectCategoryDollar(selectCategory));
+    },
+    setSelectCategoryFoodPantry: (selectCategory: string) => {
+      dispatch(setSelectCategoryFoodPantry(selectCategory));
+    },
+    setSelectCategoryDistribution: (selectCategory: string) => {
+      dispatch(setSelectCategoryDistribution(selectCategory));
+    },
+    setSelectCategoryFoodCoOp: (selectCategory: string) => {
+      dispatch(setSelectCategoryFoodCoOp(selectCategory));
     },
     setWicAccepted: (wicAccepted: string) => {
       dispatch(setWicAccepted(wicAccepted));
