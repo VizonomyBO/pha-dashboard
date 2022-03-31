@@ -23,7 +23,6 @@ export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => 
       <div
         className="optiondetail"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          console.log(event.target.value);
           setActiveTab(event.target.value as FormTabType);
         }}
       >

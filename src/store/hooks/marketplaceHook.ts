@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
+import { MultimediaInterface } from '../../@types';
+import { MarketplaceInterface } from '../../@types/redux';
 import {
-  MarketplaceInterface
-} from '../../@types/redux';
-import {
-  setContactName, setBusinessDetails,
+  setContactName, setBusinessDetails, setBusinessFile,
   setOtherQuestons, setAvailabilityOptions, setQuality, setVisibility,
   setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner, setContactEmail
 } from '../actions';
@@ -16,6 +15,9 @@ export const useMarketplaceDispatch = () => {
   return {
     setBusinessDetails: (type: string, value: string) => {
       dispatch(setBusinessDetails(type, value));
+    },
+    setBusinessFile: (type:string, value: MultimediaInterface[]) => {
+      dispatch(setBusinessFile(type, value));
     },
     setOtherQuestions: (value: string) => {
       dispatch(setOtherQuestons(value));

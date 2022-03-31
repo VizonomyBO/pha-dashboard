@@ -18,6 +18,14 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
         ...state,
         businessDetails: INITIAL_MARKETPLACE.businessDetails,
       };
+    case TYPES.BUSINESS_FILES:
+      return {
+        ...state,
+        files: {
+          ...state.files,
+          [action.payload]: action.value
+        }
+      };
     case TYPES.SET_OTHER_QUESTIONS:
       return {
         ...state,
