@@ -115,6 +115,14 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
           contact_patron: action.payload
         }
       };
+    case TYPES.SET_SELECT_CATEGORY_OPTIONS:
+      return {
+        ...state,
+        selectCategory: {
+          ...state.selectCategory,
+          selectCategoryOptions: action.payload
+        }
+      };
     default:
       return INITIAL_MARKETPLACE;
   }

@@ -4,7 +4,8 @@ import { MarketplaceInterface } from '../../@types/redux';
 import {
   setContactName, setBusinessDetails, setBusinessFile,
   setOtherQuestons, setAvailabilityOptions, setQuality, setVisibility,
-  setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner, setContactEmail
+  setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner,
+  setContactEmail, setSelectCategoryOptions
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -16,7 +17,7 @@ export const useMarketplaceDispatch = () => {
     setBusinessDetails: (type: string, value: string) => {
       dispatch(setBusinessDetails(type, value));
     },
-    setBusinessFile: (type:string, value: MultimediaInterface[]) => {
+    setBusinessFile: (type: string, value: MultimediaInterface[]) => {
       dispatch(setBusinessFile(type, value));
     },
     setOtherQuestions: (value: string) => {
@@ -51,6 +52,9 @@ export const useMarketplaceDispatch = () => {
     },
     setContactPatron: (contactPatron: string) => {
       dispatch(setContactPatron(contactPatron));
+    },
+    setSelectCategoryOptions: (selectCategory: string[]) => {
+      dispatch(setSelectCategoryOptions(selectCategory));
     },
   };
 };
