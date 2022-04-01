@@ -64,3 +64,7 @@ export interface MarketplaceInterface {
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
 }
+
+export interface CategoriesInterface {
+  categoriesSelected: string[]
+}

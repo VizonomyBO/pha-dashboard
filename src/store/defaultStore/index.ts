@@ -48,3 +48,7 @@ export const INITIAL_MARKETPLACE = {
     contact_patron: ''
   }
 };
+
+export const INITIAL_CATEGORIES = {
+  categoriesSelected: []
+};
