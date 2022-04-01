@@ -5,14 +5,21 @@ import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
 import { getDhaRetailer } from '../services/phaDashboardService';
+import { DataPhaDasboardMap } from '../@types';
 
 export const Home = () => {
-  const [dataRequest, setDataRequest] = useState([]);
+  const [dataRequest, setDataRequest] = useState<Array<DataPhaDasboardMap>>([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getDhaRetailer();
-      setDataRequest(data.data.rows);
+      const dataRows: Array<DataPhaDasboardMap> = [];
+      data.data.data.rows.forEach((element: DataPhaDasboardMap) => {
+        if (element.geom) {
+          dataRows.push(element);
+        }
+      });
+      setDataRequest(dataRows);
     };
 
     fetchData()

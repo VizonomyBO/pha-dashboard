@@ -1,5 +1,5 @@
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../constants';
-geom
+
 export interface HeaderInterface {
   type?: string
 }
