@@ -1,4 +1,4 @@
-export const URL = process.env.REACT_URL || 'http://localhost:9000';
+export const URL = process.env.REACT_APP_URL || 'http://localhost:9000';
 export const URL_API = `${URL}/api`;
 const CARTODB = 'cartodb';
 
