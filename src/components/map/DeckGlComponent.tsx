@@ -16,7 +16,7 @@ export const DeckGLComponent = ({ dataForMarker }: { dataForMarker: DataPhaDasbo
   const initialViewState = DEFAULT_VIEW_STATE;
   const controller = true;
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
-  const layer = IconLayerData(dataForMarker);
+  const layer = dataForMarker ? IconLayerData(dataForMarker) : [];
 
   const hideTooltip = () => {
     setHoverInfo(undefined);

@@ -12,9 +12,10 @@ export const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getDhaRetailer();
+      const resp = await getDhaRetailer();
+      const data = await resp.json();
       const dataRows: Array<DataPhaDasboardMap> = [];
-      data.data.data.rows.forEach((element: DataPhaDasboardMap) => {
+      data.data.rows.forEach((element: DataPhaDasboardMap) => {
         if (element.geom) {
           dataRows.push(element);
         }
@@ -55,7 +56,7 @@ export const Home = () => {
             <div className="space"><span className="line" /></div>
             <div className="listloc">
               <div className="listingarea">
-                {ListMarkerComponent(dataRequest)}
+                {dataRequest ? ListMarkerComponent(dataRequest) : null}
               </div>
             </div>
           </div>
