@@ -1,5 +1,5 @@
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../constants';
-
+geom
 export interface HeaderInterface {
   type?: string
 }
@@ -10,10 +10,20 @@ export interface FormHeaderInterface {
   setActiveTab: (value: FormTabType) => void,
 }
 
-export interface dataMapGl {
-  coordinates: number[],
-  message?: string,
-  type?: string
+export interface DataPhaDasboardMap {
+  retailer_id: string,
+  imagelinks?: string,
+  name: string,
+  address_1: string,
+  address_2: string,
+  phone: string,
+  city: string,
+  state: string,
+  zipcode: string,
+  geom: {
+    type: string,
+    coordinates: number[]
+  }
 }
 
 export interface DropdowInterface {

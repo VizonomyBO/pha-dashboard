@@ -3,17 +3,17 @@ import { IconLayer } from '@deck.gl/layers';
 import PinRed from './ic-pin-red.svg';
 import PinBlue from './ic-pin-blue.svg';
 import PinGreen from './ic-pin-green.svg';
-import { dataMapGl } from '../../@types';
+import { DataPhaDasboardMap } from '../../@types';
 
 const COLORS = { GREEN: 'green', BLUE: 'blue' };
 
-export default function IconLayerData(data: Array<dataMapGl>): Layer<unknown>[] {
-  const layer: Layer<unknown>[] = data.map((item: dataMapGl, i: number) => {
+export default function IconLayerData(data: Array<DataPhaDasboardMap>): Layer<unknown>[] {
+  const layer: Layer<unknown>[] = data.map((item: DataPhaDasboardMap, i: number) => {
     let icon = PinRed;
-    if (item.type === COLORS.BLUE) {
+    if (item.geom.type === COLORS.BLUE) {
       icon = PinBlue;
     }
-    if (item.type === COLORS.GREEN) {
+    if (item.geom.type === COLORS.GREEN) {
       icon = PinGreen;
     }
     return new IconLayer({
@@ -28,7 +28,7 @@ export default function IconLayerData(data: Array<dataMapGl>): Layer<unknown>[] 
         getCursor: () => 'pointer',
         zIndex: 2
       }),
-      getPosition: (d: unknown) => ((d as dataMapGl).coordinates as Position), // TODO fix any
+      getPosition: (d: unknown) => ((d as DataPhaDasboardMap).geom.coordinates as Position), // TODO fix any
       getSize: () => 5,
       sizeScale: 10,
       pickable: true,

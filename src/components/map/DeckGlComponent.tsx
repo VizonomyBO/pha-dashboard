@@ -10,18 +10,13 @@ import {
 import { NoDataProvided } from '../NoDataProvided';
 import RenderTooltip from './RenderTooltip';
 import IconLayerData from './IconLayerData';
+import { DataPhaDasboardMap } from '../../@types';
 
-const data = [
-  { coordinates: [-100.45, 40.78], message: 'Hover over me', type: 'red' },
-  { coordinates: [-95.45, 45.78], message: 'Hover over me', type: 'blue' },
-  { coordinates: [-105.45, 50.78], message: 'Hover over me', type: 'green' }
-];
-
-export const DeckGLComponent = () => {
+export const DeckGLComponent = ({ dataForMarker }: { dataForMarker: DataPhaDasboardMap[] }) => {
   const initialViewState = DEFAULT_VIEW_STATE;
   const controller = true;
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
-  const layer = IconLayerData(data);
+  const layer = IconLayerData(dataForMarker);
 
   const hideTooltip = () => {
     setHoverInfo(undefined);
