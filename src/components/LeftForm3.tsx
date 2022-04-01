@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
 import { ModalRequestForm } from './ModalRequestForm';
+import { isNO } from '../utils/isEmpty';
 
 export const LeftForm3 = () => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [clickProceed, setClickProceed] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
   const navigate = useNavigate();
   const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
+
+  const { selectCategory, selectAccessibility } = useMarketplaceState();
 
   const setName = (e: React.FormEvent<HTMLInputElement>): void => {
     setContactName(e.currentTarget.value);
@@ -37,16 +41,30 @@ export const LeftForm3 = () => {
   };
 
   useEffect(() => {
-    setContactOwner(formConstants.CONTACT_OWNER.NO);
-    setContactPatron(formConstants.CONTACT_PATRON.NO);
-  }, [setContactOwner, setContactPatron]);
-
-  useEffect(() => {
-    if (clickProceed) {
+    if (clickProceed
+      && (isNO(selectCategory.supermarket)
+      || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
+      || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
+      || isNO(selectCategory.food_co_op))
+      && (isNO(selectAccessibility.wic_accepted)
+      || isNO(selectAccessibility.snap_accepted))) {
+      setTypeModal(true);
+      setVisibleModal(true);
       setTimeout(() => {
         navigate('/home');
-      }, 3000);
+      }, 1000);
+      setClickProceed(false);
+    }
+    if (clickProceed
+      && ((!isNO(selectCategory.supermarket)
+      && !isNO(selectCategory.corner_store) && !isNO(selectCategory.dollar_stores)
+      && !isNO(selectCategory.food_pantry) && !isNO(selectCategory.distribution)
+      && !isNO(selectCategory.food_co_op))
+      || (!isNO(selectAccessibility.wic_accepted)
+      && !isNO(selectAccessibility.snap_accepted)))) {
+      setTypeModal(false);
       setVisibleModal(true);
+      setClickProceed(false);
     }
   }, [clickProceed]);
 
@@ -103,7 +121,7 @@ export const LeftForm3 = () => {
         </button>
       </div>
       <ModalRequestForm
-        type={visibleModal}
+        type={typeModal}
         visible={visibleModal}
         setVisible={setVisibleModal}
       />

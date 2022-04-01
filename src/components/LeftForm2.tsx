@@ -3,20 +3,21 @@ import { CONTACT_DETAILS, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
-import { isEmpty } from '../utils/isEmpty';
+import { isEmpty, isNO } from '../utils/isEmpty';
 import { FormTabType } from '../@types';
 import { ModalRequestForm } from './ModalRequestForm';
 
 export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.SetStateAction<FormTabType>>}) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [clickProceed, setClickProceed] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
   const {
     setOtherQuestions, setAvailabilityOptions, setQuality,
     setVisibility, setLocal, setProduceAvailStore,
     setProduceAvailSeasonally
   } = useMarketplaceDispatch();
-  const { otherQuestions } = useMarketplaceState();
+  const { otherQuestions, selectCategory, selectAccessibility } = useMarketplaceState();
 
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     setOtherQuestions(e.currentTarget.value);
@@ -69,21 +70,42 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
   }, [otherQuestions.availabilityOptions]);
 
   useEffect(() => {
-    if (isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
-      && isEmpty(otherQuestions.quality) && isEmpty(otherQuestions.visibility) && isEmpty(otherQuestions.local)
-      && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh') && clickProceed) {
+    if ((isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
+    && isEmpty(otherQuestions.quality) && isEmpty(otherQuestions.visibility) && isEmpty(otherQuestions.local)
+    && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh'))
+    && (isNO(selectCategory.supermarket)
+    || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
+    || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
+    || isNO(selectCategory.food_co_op))
+    && (isNO(selectAccessibility.wic_accepted)
+    || isNO(selectAccessibility.snap_accepted)) && clickProceed) {
+      setTypeModal(true);
       setActiveTab(CONTACT_DETAILS);
       setClickProceed(false);
     }
-    if ((!isEmpty(otherQuestions.description) || otherQuestions.availabilityOptions === []
+    if ((isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
+      && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh') !== undefined)
+      && (isEmpty(selectCategory.supermarket)
+      && (isNO(selectCategory.supermarket)
+      || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
+      || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
+      || isNO(selectCategory.food_co_op))
+      && (isNO(selectAccessibility.wic_accepted)
+      || isNO(selectAccessibility.snap_accepted))) && clickProceed) {
+      setTypeModal(true);
+      setActiveTab(CONTACT_DETAILS);
+      setClickProceed(false);
+    }
+    if (((!isEmpty(otherQuestions.description) || otherQuestions.availabilityOptions === []
       || !isEmpty(otherQuestions.quality) || !isEmpty(otherQuestions.visibility) || !isEmpty(otherQuestions.local))
-      && clickProceed) {
+      || ((!isNO(selectCategory.supermarket)
+      && !isNO(selectCategory.corner_store) && !isNO(selectCategory.dollar_stores)
+      && !isNO(selectCategory.food_pantry) && !isNO(selectCategory.distribution)
+      && !isNO(selectCategory.food_co_op))
+      || (!isNO(selectAccessibility.wic_accepted)
+      && !isNO(selectAccessibility.snap_accepted)))) && clickProceed) {
+      setTypeModal(false);
       setVisibleModal(true);
-      setClickProceed(false);
-    }
-    if (isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
-    && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh') !== undefined && clickProceed) {
-      setActiveTab(CONTACT_DETAILS);
       setClickProceed(false);
     }
   }, [clickProceed]);
@@ -321,7 +343,7 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
         </button>
       </div>
       <ModalRequestForm
-        type={!visibleModal}
+        type={typeModal}
         visible={visibleModal}
         setVisible={setVisibleModal}
       />

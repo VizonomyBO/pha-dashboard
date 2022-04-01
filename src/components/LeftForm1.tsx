@@ -2,26 +2,41 @@ import { useEffect, useState } from 'react';
 import { DEFAULT_DROPDOWN_OPTION, OTHER_QUESTIONS, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
-import { isEmpty } from '../utils/isEmpty';
+import { isEmpty, isNO } from '../utils/isEmpty';
 import { ModalRequestForm } from './ModalRequestForm';
 import { FormTabType } from '../@types';
 
 export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.SetStateAction<FormTabType>>}) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
-  const { businessDetails } = useMarketplaceState();
+  const { businessDetails, selectCategory, selectAccessibility } = useMarketplaceState();
   const [visibleModal, setVisibleModal] = useState(false);
   const [clickProceed, setClickProceed] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
   useEffect(() => {
-    if (isEmpty(businessDetails.name) && isEmpty(businessDetails.phone)
+    if ((isEmpty(businessDetails.name) && isEmpty(businessDetails.phone)
     && isEmpty(businessDetails.address_1) && isEmpty(businessDetails.city) && isEmpty(businessDetails.state)
-    && isEmpty(businessDetails.zipcode) && clickProceed) {
+    && isEmpty(businessDetails.zipcode))
+    && (isNO(selectCategory.supermarket)
+    || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
+    || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
+    || isNO(selectCategory.food_co_op))
+    && (isNO(selectAccessibility.wic_accepted)
+    || isNO(selectAccessibility.snap_accepted)) && clickProceed) {
+      setTypeModal(true);
       setActiveTab(OTHER_QUESTIONS);
       setClickProceed(false);
     }
-    if ((!isEmpty(businessDetails.name) || !isEmpty(businessDetails.phone)
+    if (((!isEmpty(businessDetails.name) || !isEmpty(businessDetails.phone)
     || !isEmpty(businessDetails.address_1) || !isEmpty(businessDetails.city) || !isEmpty(businessDetails.state)
-    || !isEmpty(businessDetails.zipcode)) && clickProceed) {
+    || !isEmpty(businessDetails.zipcode))
+    || ((!isNO(selectCategory.supermarket)
+    && !isNO(selectCategory.corner_store) && !isNO(selectCategory.dollar_stores)
+    && !isNO(selectCategory.food_pantry) && !isNO(selectCategory.distribution)
+    && !isNO(selectCategory.food_co_op))
+    || (!isNO(selectAccessibility.wic_accepted)
+    && !isNO(selectAccessibility.snap_accepted)))) && clickProceed) {
       setVisibleModal(true);
+      setTypeModal(false);
       setClickProceed(false);
     }
   }, [clickProceed]);
@@ -379,7 +394,7 @@ export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
         </button>
       </div>
       <ModalRequestForm
-        type={!visibleModal}
+        type={typeModal}
         visible={visibleModal}
         setVisible={setVisibleModal}
       />
