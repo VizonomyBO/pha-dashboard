@@ -3,7 +3,7 @@ import Checkbox from '@mui/material/Checkbox';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
-import { categories } from '../constants/categories';
+import { CATEGORIES } from '../constants/categories';
 
 export const DropdownCategories = () => {
   const {
@@ -31,7 +31,7 @@ export const DropdownCategories = () => {
           return selected[0];
         }}
       >
-        {categories.map((name) => (
+        {CATEGORIES.map((name: string) => (
           <MenuItem key={name} value={name}>
             <Checkbox checked={categoriesSelected.indexOf(name) > -1} />
             <ListItemText primary={name} />

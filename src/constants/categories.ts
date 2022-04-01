@@ -1,4 +1,4 @@
-export const categories = [
+export const CATEGORIES: string[] = [
   'Corner/convenience store',
   'Distribution location',
   'Dollar stores',
