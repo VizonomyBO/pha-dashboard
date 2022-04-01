@@ -9,7 +9,6 @@ import { ModalRequestForm } from './ModalRequestForm';
 
 export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.SetStateAction<FormTabType>>}) => {
   const [visibleModal, setVisibleModal] = useState(false);
-  const [clickProceed, setClickProceed] = useState(false);
   const [typeModal, setTypeModal] = useState(false);
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
   const {
@@ -69,7 +68,7 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
     setShowIsFreshOption(otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FRESH));
   }, [otherQuestions.availabilityOptions]);
 
-  useEffect(() => {
+  const clickProceed = () => {
     if ((isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
     && isEmpty(otherQuestions.quality) && isEmpty(otherQuestions.visibility) && isEmpty(otherQuestions.local)
     && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh'))
@@ -78,10 +77,9 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
     || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
     || isNO(selectCategory.food_co_op))
     && (isNO(selectAccessibility.wic_accepted)
-    || isNO(selectAccessibility.snap_accepted)) && clickProceed) {
+    || isNO(selectAccessibility.snap_accepted))) {
       setTypeModal(true);
       setActiveTab(CONTACT_DETAILS);
-      setClickProceed(false);
     }
     if ((isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
       && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh') !== undefined)
@@ -91,10 +89,9 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
       || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
       || isNO(selectCategory.food_co_op))
       && (isNO(selectAccessibility.wic_accepted)
-      || isNO(selectAccessibility.snap_accepted))) && clickProceed) {
+      || isNO(selectAccessibility.snap_accepted)))) {
       setTypeModal(true);
       setActiveTab(CONTACT_DETAILS);
-      setClickProceed(false);
     }
     if (((!isEmpty(otherQuestions.description) || otherQuestions.availabilityOptions === []
       || !isEmpty(otherQuestions.quality) || !isEmpty(otherQuestions.visibility) || !isEmpty(otherQuestions.local))
@@ -103,12 +100,11 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
       && !isNO(selectCategory.food_pantry) && !isNO(selectCategory.distribution)
       && !isNO(selectCategory.food_co_op))
       || (!isNO(selectAccessibility.wic_accepted)
-      && !isNO(selectAccessibility.snap_accepted)))) && clickProceed) {
+      && !isNO(selectAccessibility.snap_accepted))))) {
       setTypeModal(false);
       setVisibleModal(true);
-      setClickProceed(false);
     }
-  }, [clickProceed]);
+  };
 
   return (
     <>
@@ -338,7 +334,7 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
         />
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => setClickProceed(true)}>
+        <button className="light" type="button" onClick={() => clickProceed()}>
           Proceed
         </button>
       </div>

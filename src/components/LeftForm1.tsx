@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { DEFAULT_DROPDOWN_OPTION, OTHER_QUESTIONS, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
@@ -10,9 +10,8 @@ export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails, selectCategory, selectAccessibility } = useMarketplaceState();
   const [visibleModal, setVisibleModal] = useState(false);
-  const [clickProceed, setClickProceed] = useState(false);
   const [typeModal, setTypeModal] = useState(false);
-  useEffect(() => {
+  const clickProceed = () => {
     if ((isEmpty(businessDetails.name) && isEmpty(businessDetails.phone)
     && isEmpty(businessDetails.address_1) && isEmpty(businessDetails.city) && isEmpty(businessDetails.state)
     && isEmpty(businessDetails.zipcode))
@@ -24,22 +23,11 @@ export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
     || isNO(selectAccessibility.snap_accepted)) && clickProceed) {
       setTypeModal(true);
       setActiveTab(OTHER_QUESTIONS);
-      setClickProceed(false);
-    }
-    if (((!isEmpty(businessDetails.name) || !isEmpty(businessDetails.phone)
-    || !isEmpty(businessDetails.address_1) || !isEmpty(businessDetails.city) || !isEmpty(businessDetails.state)
-    || !isEmpty(businessDetails.zipcode))
-    || ((!isNO(selectCategory.supermarket)
-    && !isNO(selectCategory.corner_store) && !isNO(selectCategory.dollar_stores)
-    && !isNO(selectCategory.food_pantry) && !isNO(selectCategory.distribution)
-    && !isNO(selectCategory.food_co_op))
-    || (!isNO(selectAccessibility.wic_accepted)
-    && !isNO(selectAccessibility.snap_accepted)))) && clickProceed) {
+    } else {
       setVisibleModal(true);
       setTypeModal(false);
-      setClickProceed(false);
     }
-  }, [clickProceed]);
+  };
   return (
     <>
       <div className="sectiontitle">
@@ -389,7 +377,7 @@ export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => setClickProceed(true)}>
+        <button className="light" type="button" onClick={() => clickProceed()}>
           Proceed
         </button>
       </div>

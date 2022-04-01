@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
@@ -7,7 +7,6 @@ import { isNO } from '../utils/isEmpty';
 
 export const LeftForm3 = () => {
   const [visibleModal, setVisibleModal] = useState(false);
-  const [clickProceed, setClickProceed] = useState(false);
   const [typeModal, setTypeModal] = useState(false);
   const navigate = useNavigate();
   const {
@@ -40,9 +39,8 @@ export const LeftForm3 = () => {
     }
   };
 
-  useEffect(() => {
-    if (clickProceed
-      && (isNO(selectCategory.supermarket)
+  const clickProceed = () => {
+    if ((isNO(selectCategory.supermarket)
       || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
       || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
       || isNO(selectCategory.food_co_op))
@@ -53,20 +51,11 @@ export const LeftForm3 = () => {
       setTimeout(() => {
         navigate('/home');
       }, 1000);
-      setClickProceed(false);
-    }
-    if (clickProceed
-      && ((!isNO(selectCategory.supermarket)
-      && !isNO(selectCategory.corner_store) && !isNO(selectCategory.dollar_stores)
-      && !isNO(selectCategory.food_pantry) && !isNO(selectCategory.distribution)
-      && !isNO(selectCategory.food_co_op))
-      || (!isNO(selectAccessibility.wic_accepted)
-      && !isNO(selectAccessibility.snap_accepted)))) {
+    } else {
       setTypeModal(false);
       setVisibleModal(true);
-      setClickProceed(false);
     }
-  }, [clickProceed]);
+  };
 
   return (
     <>
@@ -116,7 +105,7 @@ export const LeftForm3 = () => {
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => setClickProceed(true)}>
+        <button className="light" type="button" onClick={() => clickProceed()}>
           Proceed
         </button>
       </div>
