@@ -55,4 +55,8 @@ export const INITIAL_MARKETPLACE = {
     distribution: '',
     food_co_op: '',
   },
+  selectAccessibility: {
+    wic_accepted: '',
+    snap_accepted: '',
+  },
 };

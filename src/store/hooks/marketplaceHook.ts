@@ -5,7 +5,8 @@ import {
   setContactName, setBusinessDetails, setBusinessFile,
   setOtherQuestons, setAvailabilityOptions, setQuality, setVisibility,
   setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner,
-  setContactEmail, setSelectCategoryCorner, setSelectCategoryDistribution, setSelectCategoryDollar,
+  setSnapAccepted, setWicAccepted, setContactEmail, setSelectCategoryCorner,
+  setSelectCategoryDistribution, setSelectCategoryDollar,
   setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket
 } from '../actions';
 
@@ -71,6 +72,12 @@ export const useMarketplaceDispatch = () => {
     },
     setSelectCategoryFoodCoOp: (selectCategory: string) => {
       dispatch(setSelectCategoryFoodCoOp(selectCategory));
+    },
+    setWicAccepted: (wicAccepted: string) => {
+      dispatch(setWicAccepted(wicAccepted));
+    },
+    setSnapAccepted: (wicAccepted: string) => {
+      dispatch(setSnapAccepted(wicAccepted));
     },
   };
 };

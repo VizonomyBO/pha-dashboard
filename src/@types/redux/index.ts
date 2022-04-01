@@ -65,6 +65,10 @@ export interface selectCategoryInterface {
   distribution: string,
   food_co_op: string,
 }
+export interface selectAccessibilityInterface {
+  wic_accepted: string,
+  snap_accepted: string,
+}
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
   socialMedia: SocialMediaInterface,
@@ -72,4 +76,5 @@ export interface MarketplaceInterface {
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
   selectCategory: selectCategoryInterface,
+  selectAccessibility: selectAccessibilityInterface
 }

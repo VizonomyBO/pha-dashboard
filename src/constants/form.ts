@@ -25,6 +25,16 @@ export const formConstants = {
     NO: 'No'
   },
 };
+export const formAccessibility = {
+  WIC_ACCEPTED: {
+    YES: 'Yes',
+    NO: 'No'
+  },
+  SNAP_ACCEPTED: {
+    YES: 'Yes',
+    NO: 'No'
+  }
+};
 export const formSelectCategory = {
   SUPERMARKET: {
     YES: 'Yes',
