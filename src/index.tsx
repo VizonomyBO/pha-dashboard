@@ -16,6 +16,8 @@ import { Form } from './pages/form';
 import { Form4 } from './pages/form4';
 import { MainMap } from './pages/mainMap';
 
+import { Nsform1 } from './pages/nsform1';
+
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>
@@ -44,6 +46,10 @@ ReactDOM.render(
           <Route
             path="/map"
             element={<MainMap />}
+          />
+          <Route
+            path="/nsform1"
+            element={<Nsform1 />}
           />
         </Routes>
       </BrowserRouter>
