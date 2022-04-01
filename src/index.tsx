@@ -15,6 +15,7 @@ import { Home } from './pages/home';
 import { Form } from './pages/form';
 import { Form4 } from './pages/form4';
 import { MainMap } from './pages/mainMap';
+import { Profile } from './pages/profile';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -44,6 +45,10 @@ ReactDOM.render(
           <Route
             path="/map"
             element={<MainMap />}
+          />
+          <Route
+            path="/profile/:id"
+            element={<Profile />}
           />
         </Routes>
       </BrowserRouter>

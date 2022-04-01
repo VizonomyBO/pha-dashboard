@@ -1,11 +1,12 @@
+import { VISIBLE_TIME } from '../constants';
+
 export const ModalRequestForm = (
   { type, visible, setVisible }
   : {type: boolean, visible: boolean, setVisible: React.Dispatch<React.SetStateAction<boolean>> }
 ) => {
-  console.log('AccessibilityPanel', type, visible);
   setTimeout(() => {
     setVisible(false);
-  }, 2000);
+  }, VISIBLE_TIME);
   return (
     <div>
       {visible && (

@@ -46,5 +46,17 @@ export const INITIAL_MARKETPLACE = {
     contact_email: '',
     contact_owner: '',
     contact_patron: ''
-  }
+  },
+  selectCategory: {
+    supermarket: '',
+    corner_store: '',
+    dollar_stores: '',
+    food_pantry: '',
+    distribution: '',
+    food_co_op: '',
+  },
+  selectAccessibility: {
+    wic_accepted: '',
+    snap_accepted: '',
+  },
 };

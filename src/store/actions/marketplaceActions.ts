@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { MultimediaInterface } from '../../@types';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (type: string, value: string) => (dispatch : Dispatch) => {
+export const setBusinessDetails = (type: string, value: string) => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.SET_BUSINESS_DETAILS,
     payload: type,
@@ -88,13 +88,69 @@ export const setContactPatron = (contactPatron: string) => (dispatch: Dispatch) 
   });
 };
 
+export const setSelectCategorySupermarket = (selectCategorySupermarket: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_SUPERMARKET,
+    payload: selectCategorySupermarket
+  });
+};
+
+export const setSelectCategoryCorner = (selectCategoryCorner: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_CORNER,
+    payload: selectCategoryCorner
+  });
+};
+
+export const setSelectCategoryDollar = (selectCategoryDollar: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_DOLLAR,
+    payload: selectCategoryDollar
+  });
+};
+
+export const setSelectCategoryFoodPantry = (selectCategoryFoodPantry: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_FOOD_PANTRY,
+    payload: selectCategoryFoodPantry
+  });
+};
+
+export const setSelectCategoryDistribution = (selectCategoryDistribution: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_DISTRIBUTION,
+    payload: selectCategoryDistribution
+  });
+};
+
+export const setSelectCategoryFoodCoOp = (selectCategoryFoodCoOp: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_CATEGORY_FOOD_CO_OP,
+    payload: selectCategoryFoodCoOp
+  });
+};
+
+export const setWicAccepted = (wicAccepted: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_WIC_ACCEPTED,
+    payload: wicAccepted
+  });
+};
+
+export const setSnapAccepted = (snapAccepted: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_SNAP_ACCEPTED,
+    payload: snapAccepted
+  });
+};
+
 export const resetBusiness = () => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.RESET_MARKETPLACE_BUSINESS,
   });
 };
 
-export const setBusinessFile = (type: string, value: MultimediaInterface[]) => (dispatch : Dispatch) => {
+export const setBusinessFile = (type: string, value: MultimediaInterface[]) => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.BUSINESS_FILES,
     payload: type,

@@ -57,10 +57,24 @@ export interface SocialMediaInterface {
 export interface FilesInterface {
   media: null | MediaInterface,
 }
+export interface selectCategoryInterface {
+  supermarket: string,
+  corner_store: string,
+  dollar_stores: string,
+  food_pantry: string,
+  distribution: string,
+  food_co_op: string,
+}
+export interface selectAccessibilityInterface {
+  wic_accepted: string,
+  snap_accepted: string,
+}
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
   socialMedia: SocialMediaInterface,
   files: FilesInterface,
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
+  selectCategory: selectCategoryInterface,
+  selectAccessibility: selectAccessibilityInterface
 }
