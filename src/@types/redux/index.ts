@@ -78,3 +78,8 @@ export interface MarketplaceInterface {
   selectCategory: selectCategoryInterface,
   selectAccessibility: selectAccessibilityInterface
 }
+
+export interface SessionInterface {
+  sessionState: boolean,
+  error: boolean
+}
