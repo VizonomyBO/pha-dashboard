@@ -18,6 +18,7 @@ import { MainMap } from './pages/mainMap';
 import { Nsform1 } from './pages/nsform1';
 import { Nsform4 } from './pages/nsform4';
 import { Nshome } from './pages/nshome';
+import { Profile } from './pages/profile';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -59,6 +60,10 @@ ReactDOM.render(
           <Route
             path="/nshome"
             element={<Nshome />}
+          />
+          <Route
+            path="/profile/:id"
+            element={<Profile />}
           />
         </Routes>
       </BrowserRouter>
