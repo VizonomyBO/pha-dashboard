@@ -60,3 +60,8 @@ export const INITIAL_MARKETPLACE = {
     snap_accepted: '',
   },
 };
+
+export const INITIAL_SESSION = {
+  sessionState: false,
+  error: false
+};
