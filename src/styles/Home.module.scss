@@ -2065,10 +2065,15 @@ sup {
 						color: #7A7E80;
 						padding-bottom: 8px;
 					}
-					.ainput {
+					.ainput, .ainput2 {
 						display: block;
 						height: 51px;
 						width: 100%;	
+						input.light {
+							border: 2px solid #E3E5E5;
+							background-color: #fff;
+							padding: 16px 24px;
+						}
 					}
 					.ainput.htxtarea {
 						height: 215px;
@@ -4508,3 +4513,46 @@ header {
 }
 /* end profile */
 }
+
+/* set dropdowns style */
+.container {
+	.pagecontainer {
+		.formarea {
+			.group {
+
+			}
+		}
+	}
+	.css-zddlty-MuiButtonBase-root-MuiButton-root {
+		background-color: #fff;
+    	color: #161A23;
+    	border: 2px solid #E3E5E5;
+    	border-radius: 56px;
+    	padding: 12px 24px;
+		min-width: 160px;
+		display: flex;
+		justify-content: space-between;
+		font-family: 'FuturaMedium',sans-serif;
+		font-size: 16px;
+		&:hover {
+			background-color: #EBFBFF;
+		}
+	}
+}
+#dropdown-business {
+	.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+		min-width: 192px;
+		ul.css-6hp17o-MuiList-root-MuiMenu-list {
+			.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+				font-family: 'FuturaMedium',sans-serif;
+				font-size: 14px;
+				color: #7A7E80;
+			}
+			.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover {
+				background-color: #EBFBFF;
+			}
+		}
+	}
+}
+
+/* end set dropdowns style */

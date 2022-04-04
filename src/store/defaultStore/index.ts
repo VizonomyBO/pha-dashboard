@@ -44,19 +44,24 @@ export const INITIAL_MARKETPLACE = {
   contactDetails: {
     contact_name: '',
     contact_email: '',
-    contact_owner: '',
-    contact_patron: ''
+    contact_owner: 'No',
+    contact_patron: 'No'
   },
   selectCategory: {
-    supermarket: '',
-    corner_store: '',
-    dollar_stores: '',
-    food_pantry: '',
-    distribution: '',
-    food_co_op: '',
+    supermarket: 'No',
+    corner_store: 'No',
+    dollar_stores: 'No',
+    food_pantry: 'No',
+    distribution: 'No',
+    food_co_op: 'No',
   },
   selectAccessibility: {
-    wic_accepted: '',
-    snap_accepted: '',
+    wic_accepted: 'No',
+    snap_accepted: 'No',
   },
+};
+
+export const INITIAL_SESSION = {
+  sessionState: false,
+  error: false
 };
