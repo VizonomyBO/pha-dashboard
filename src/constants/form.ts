@@ -24,6 +24,10 @@ export const formConstants = {
     YES: 'Yes',
     NO: 'No'
   },
+  MEETS_NEED: {
+    YES: 'Yes',
+    NO: 'No'
+  }
 };
 export const formAccessibility = {
   WIC_ACCEPTED: {

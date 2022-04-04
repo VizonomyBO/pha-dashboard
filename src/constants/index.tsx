@@ -8,6 +8,7 @@ export const VISIBLE_TIME = 2000;
 export const PAGE_REDIRECT_TIME = 1000;
 export const MARKED_ELEMENT = 'Yes';
 export const MARKED_FRESH = 'Fresh';
+export const INDIVIDUAL_FORM = 'individualForm';
 export const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_KEY || NO_DATA;
 export const BASEMAP = 'mapbox://styles/vizonomy/cl0zk8u1o002w15pvqr3t0e1b';
 export const CLASSES_BY_FORM = {
@@ -146,4 +147,22 @@ export const PERCENTAGE_KEYS = {
   VISIBLE: 'visible',
   LOCAL: 'local',
   MEETS_NEED: 'meets_need',
+};
+
+export const TYPE_INDIVIDUAL_FORM = {
+  individual_id: 'individual_id',
+  retailer_id: 'retailer_id',
+  availability: 'availability',
+  quality: 'quality',
+  visibility: 'visibility',
+  local: 'local',
+  meets_need: 'meets_need',
+  produce_avail_store: 'produce_avail_store',
+  contact_name: 'contact_name',
+  contact_email: 'contact_email',
+  contact_phone: 'contact_phone',
+  contact_zipcode: 'contact_zipcode',
+  submission_date: 'submission_date',
+  submission_status: 'submission_status',
+  multimedia: 'multimedia'
 };

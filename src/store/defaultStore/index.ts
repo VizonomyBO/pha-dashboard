@@ -65,3 +65,20 @@ export const INITIAL_SESSION = {
   sessionState: false,
   error: false
 };
+
+export const INITIAL_INDIVIDUAL_FORM = {
+  individual_id: '',
+  retailer_id: '',
+  availability: '',
+  quality: '',
+  visibility: '',
+  local: '',
+  meets_need: '',
+  produce_avail_store: '',
+  contact_name: '',
+  contact_email: '',
+  contact_phone: '',
+  contact_zipcode: '',
+  submission_date: new Date(),
+  submission_status: '',
+};
