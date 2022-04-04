@@ -1,3 +1,5 @@
+import { BadgeType } from '../@types';
+
 export const NO_DATA = 'no-data';
 export const BUSINESS_DETAILS = 'businessDetails';
 export const OTHER_QUESTIONS = 'otherQuestions';
@@ -114,20 +116,35 @@ export const TYPE_BUSINESS = {
   OWNER: 'owner'
 };
 
-export const TYPE_INDIVIDUAL_FORM = {
-  individual_id: 'individual_id',
-  retailer_id: 'retailer_id',
-  availability: 'availability',
-  quality: 'quality',
-  visibility: 'visibility',
-  local: 'local',
-  meets_need: 'meetsNeed',
-  produce_avail_store: 'produceAvailStore',
-  contact_name: 'contactName',
-  contact_email: 'contactEmail',
-  contact_phone: 'contactPhone',
-  contact_zipcode: 'contactZipcode',
-  submission_date: 'submissionDate',
-  submission_status: 'submissionStatus',
-  multimedia: 'multimedia'
+export const BADGES: {
+  [key: string]: BadgeType
+} = {
+  fresh: {
+    text: 'Fresh Produce',
+    image: '/images/local-large.png',
+  },
+  acceptable: {
+    text: 'Quality',
+    image: '/images/quality-large.png',
+  },
+  visible: {
+    text: 'Local',
+    image: '/images/local-large.png',
+  },
+  local: {
+    text: 'Visibility',
+    image: '/images/visibility-large.png',
+  },
+  meets_need: {
+    text: 'Superstar',
+    image: '/images/superstar-large.png',
+  }
+};
+
+export const PERCENTAGE_KEYS = {
+  FRESH: 'fresh',
+  ACCEPTABLE: 'acceptable',
+  VISIBLE: 'visible',
+  LOCAL: 'local',
+  MEETS_NEED: 'meets_need',
 };
