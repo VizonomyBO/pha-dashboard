@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FileInterface, MultimediFileInterface } from '../../../@types';
-import { TYPE_INDIVIDUAL_FORM } from '../../../constants';
+import { INDIVIDUAL_FORM, TYPE_INDIVIDUAL_FORM } from '../../../constants';
 import { useIndividualFormDispatch } from '../individualFormHook';
 import { useMarketplaceDispatch } from '../marketplaceHook';
 
@@ -26,7 +26,7 @@ export const useAttachmentBusiness = ({ type }: {type: string}) => {
       );
     }
     setMultimedia([...multimedia, ...newObjects]);
-    if (type === 'individualForm') {
+    if (type === INDIVIDUAL_FORM) {
       setIndividualForm(TYPE_INDIVIDUAL_FORM.multimedia, [...multimedia, ...newObjects]);
     } else {
       setBusinessFile(type, [...multimedia, ...newObjects]);
@@ -34,7 +34,7 @@ export const useAttachmentBusiness = ({ type }: {type: string}) => {
   };
   const removeFile = (index: number) => {
     setMultimedia(multimedia.filter((_, i) => i !== index));
-    if (type === 'individualForm') {
+    if (type === INDIVIDUAL_FORM) {
       setIndividualForm(type, multimedia.filter((_, i) => i !== index));
     } else {
       setBusinessFile(type, multimedia.filter((_, i) => i !== index));
