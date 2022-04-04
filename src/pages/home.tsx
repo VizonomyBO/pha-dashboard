@@ -1,12 +1,9 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
-import { FeedbackForm } from '../components/FeedbackForm';
 
 export const Home = () => {
-  const [visible, setVisible] = useState(false);
   const onClickPlus = () => {
     /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
   };
@@ -32,7 +29,6 @@ export const Home = () => {
               <Link to="/form">
                 <div className="desc3">Add A Listing</div>
               </Link>
-              <button type="button" onClick={() => setVisible(true)}>Aver</button>
             </div>
             <div className="space"><span className="line" /></div>
             <div className="listloc">
@@ -337,7 +333,6 @@ export const Home = () => {
           </div>
         </div>
       </div>
-      {visible && <FeedbackForm setVisible={setVisible} retailerId="123" />}
     </div>
   );
 };
