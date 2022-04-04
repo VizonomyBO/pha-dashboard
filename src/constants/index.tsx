@@ -112,3 +112,21 @@ export const TYPE_BUSINESS = {
   BUSINESS: 'business',
   OWNER: 'owner'
 };
+
+export const TYPE_INDIVIDUAL_FORM = {
+  individual_id: 'individual_id',
+  retailer_id: 'retailer_id',
+  availability: 'availability',
+  quality: 'quality',
+  visibility: 'visibility',
+  local: 'local',
+  meets_need: 'meetsNeed',
+  produce_avail_store: 'produceAvailStore',
+  contact_name: 'contactName',
+  contact_email: 'contactEmail',
+  contact_phone: 'contactPhone',
+  contact_zipcode: 'contactZipcode',
+  submission_date: 'submissionDate',
+  submission_status: 'submissionStatus',
+  multimedia: 'multimedia'
+};

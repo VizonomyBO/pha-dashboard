@@ -1,11 +1,33 @@
-export const FeedbackForm = () => {
-  console.log('FeedbackForm');
+import { TYPE_INDIVIDUAL_FORM } from '../constants';
+import { formConstants } from '../constants/form';
+import { useIndividualFormDispatch, useIndividualFormState } from '../store/hooks/individualFormHook';
+import { Attachment } from './Attachment';
+
+export const FeedbackForm = (
+  { setVisible, retailerId }
+  : {setVisible: React.Dispatch<React.SetStateAction<boolean>>, retailerId: string }
+) => {
+  const { setIndividualForm } = useIndividualFormDispatch();
+  const {
+    availability,
+    quality,
+    visibility,
+    local,
+    meetsNeed
+  } = useIndividualFormState();
+  const setMultipleOptionsCheck = (type: string, checked: boolean, value: string, dataForm: string[]) => {
+    if (checked) {
+      setIndividualForm(type, [...dataForm, value]);
+    } else {
+      setIndividualForm(type, dataForm.filter((data: string) => data !== value));
+    }
+  };
   return (
     <div className="modaluserfeedbck">
-      <div className="formpage close">
+      <div className="formpage">
         <div className="header">
           <div className="backlink">
-            <button className="light" type="button">
+            <button className="light" type="button" onClick={() => setVisible(false)}>
               <span className="icclose" />
               <span className="txt">
                 Close
@@ -32,17 +54,53 @@ export const FeedbackForm = () => {
                 <div className="ainput chk">
                   <label className="chkwrap">
                     Fresh (only continue if checks this)
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onChange={
+                        (e: React.FormEvent<HTMLInputElement>) => {
+                          setMultipleOptionsCheck(
+                            TYPE_INDIVIDUAL_FORM.availability,
+                            e.currentTarget.checked,
+                            formConstants.AVAILABILITY.FRESH,
+                            availability
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                   <label className="chkwrap">
                     Frozen
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onChange={
+                        (e: React.FormEvent<HTMLInputElement>) => {
+                          setMultipleOptionsCheck(
+                            TYPE_INDIVIDUAL_FORM.availability,
+                            e.currentTarget.checked,
+                            formConstants.AVAILABILITY.FROZEN,
+                            availability
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                   <label className="chkwrap">
                     Canned
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onChange={
+                        (e: React.FormEvent<HTMLInputElement>) => {
+                          setMultipleOptionsCheck(
+                            TYPE_INDIVIDUAL_FORM.availability,
+                            e.currentTarget.checked,
+                            formConstants.AVAILABILITY.CANNED,
+                            availability
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                 </div>
@@ -61,13 +119,37 @@ export const FeedbackForm = () => {
                 <div className="ainput chk">
                   <label className="chkwrap">
                     Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={quality}
+                      checked={quality === formConstants.QUALITY.ACCEPTABLE}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.quality,
+                            formConstants.QUALITY.ACCEPTABLE
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                   <label className="chkwrap">
                     Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular patc
                     hes or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={quality}
+                      checked={quality === formConstants.QUALITY.UNACCEPTABLE}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.quality,
+                            formConstants.QUALITY.UNACCEPTABLE
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                 </div>
@@ -86,12 +168,36 @@ export const FeedbackForm = () => {
                 <div className="ainput chk">
                   <label className="chkwrap">
                     Yes
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={visibility}
+                      checked={visibility === formConstants.VISIBILITY.YES}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.visibility,
+                            formConstants.VISIBILITY.YES
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                   <label className="chkwrap">
                     No
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={visibility}
+                      checked={visibility === formConstants.VISIBILITY.NO}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.visibility,
+                            formConstants.VISIBILITY.NO
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                 </div>
@@ -110,12 +216,36 @@ export const FeedbackForm = () => {
                 <div className="ainput chk">
                   <label className="chkwrap">
                     Yes
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={local}
+                      checked={local === formConstants.LOCAL.YES}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.local,
+                            formConstants.LOCAL.YES
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                   <label className="chkwrap">
                     No
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={local}
+                      checked={local === formConstants.LOCAL.NO}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.local,
+                            formConstants.LOCAL.NO
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                 </div>
@@ -134,12 +264,36 @@ export const FeedbackForm = () => {
                 <div className="ainput chk">
                   <label className="chkwrap">
                     Yes
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={meetsNeed}
+                      checked={meetsNeed === formConstants.MEETS_NEED.YES}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.meets_need,
+                            formConstants.MEETS_NEED.YES
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                   <label className="chkwrap">
                     No
-                    <input type="checkbox" />
+                    <input
+                      type="radio"
+                      value={meetsNeed}
+                      checked={meetsNeed === formConstants.MEETS_NEED.NO}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.meets_need,
+                            formConstants.MEETS_NEED.NO
+                          );
+                        }
+                      }
+                    />
                     <span className="checkmark" />
                   </label>
                 </div>
@@ -155,6 +309,14 @@ export const FeedbackForm = () => {
                     name="yth"
                     id="yth2"
                     placeholder="Your text here..."
+                    onChange={
+                      (e: React.FormEvent<HTMLTextAreaElement>) => {
+                        setIndividualForm(
+                          TYPE_INDIVIDUAL_FORM.meets_need,
+                          e.currentTarget.value
+                        );
+                      }
+                    }
                   />
                 </div>
               </div>
@@ -167,13 +329,7 @@ export const FeedbackForm = () => {
                     (Please upload a photo where produce is stocked at this retailer)
                   </label>
                 </div>
-                <div className="ainput upload">
-                  <div className="uploadarea">
-                    <div>Drag and drop files here</div>
-                    <div>or</div>
-                    <div>Browse on your device.</div>
-                  </div>
-                </div>
+                <Attachment type="individualForm" />
               </div>
               <div className="sectiontitle">
                 Contact
@@ -183,7 +339,15 @@ export const FeedbackForm = () => {
                   <label>Email</label>
                 </div>
                 <div className="ainput">
-                  <input className="light" type="text" />
+                  <input
+                    className="light"
+                    type="text"
+                    onChange={
+                      (e: React.ChangeEvent<HTMLInputElement>) => (
+                        setIndividualForm(TYPE_INDIVIDUAL_FORM.contact_email, e.target.value)
+                      )
+                    }
+                  />
                 </div>
               </div>
               <div className="item">
@@ -191,7 +355,15 @@ export const FeedbackForm = () => {
                   <label>Phone Number</label>
                 </div>
                 <div className="ainput">
-                  <input className="light" type="text" />
+                  <input
+                    className="light"
+                    type="text"
+                    onChange={
+                      (e: React.ChangeEvent<HTMLInputElement>) => (
+                        setIndividualForm(TYPE_INDIVIDUAL_FORM.contact_phone, e.target.value)
+                      )
+                    }
+                  />
                 </div>
               </div>
               <div className="item">
@@ -199,7 +371,15 @@ export const FeedbackForm = () => {
                   <label>Zip Code</label>
                 </div>
                 <div className="ainput">
-                  <input className="light" type="text" />
+                  <input
+                    className="light"
+                    type="text"
+                    onChange={
+                      (e: React.ChangeEvent<HTMLInputElement>) => (
+                        setIndividualForm(TYPE_INDIVIDUAL_FORM.contact_zipcode, e.target.value)
+                      )
+                    }
+                  />
                 </div>
               </div>
               <div className="item">
@@ -215,7 +395,16 @@ export const FeedbackForm = () => {
             </div>
           </div>
           <div className="aaction">
-            <button className="light" type="button">Submit</button>
+            <button
+              className="light"
+              type="button"
+              onClick={() => {
+                setIndividualForm(TYPE_INDIVIDUAL_FORM.retailer_id, retailerId);
+                setVisible(false);
+              }}
+            >
+              Submit
+            </button>
           </div>
         </div>
       </div>
