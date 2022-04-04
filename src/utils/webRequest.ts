@@ -13,4 +13,9 @@ export const webRequest = {
     method: 'GET',
     headers,
   }),
+  post: (url: string, body: any, headers?: Headers) => fetch(url, {
+    method: 'POST',
+    body: JSON.stringify(body),
+    headers,
+  })
 };

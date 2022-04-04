@@ -16,6 +16,7 @@ import { Form } from './pages/form';
 import { Form4 } from './pages/form4';
 import { MainMap } from './pages/mainMap';
 import { Profile } from './pages/profile';
+import { Login } from './components/Login';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -25,6 +26,10 @@ ReactDOM.render(
           <Route
             path="/"
             element={<Landing />}
+          />
+          <Route
+            path="/login"
+            element={<Login />}
           />
           <Route
             path="/dashboard"
