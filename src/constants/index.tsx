@@ -139,3 +139,11 @@ export const BADGES: {
     image: '/images/superstar-large.png',
   }
 };
+
+export const PERCENTAGE_KEYS = {
+  FRESH: 'fresh',
+  ACCEPTABLE: 'acceptable',
+  VISIBLE: 'visible',
+  LOCAL: 'local',
+  MEETS_NEED: 'meets_need',
+};

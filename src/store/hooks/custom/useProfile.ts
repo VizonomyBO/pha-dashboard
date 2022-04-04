@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { BadgePercentages } from '../../../@types';
 import { PhaRetailer } from '../../../@types/database';
+import { PERCENTAGE_KEYS } from '../../../constants';
 import { ENDPOINTS } from '../../../constants/url';
 import { webRequest } from '../../../utils/webRequest';
 
-const hasBadge = (percentage = 0) => percentage > 0.5;
+const MINIMUN_REQUIRED_FOR_BADGE = 0.51;
+const hasBadge = (percentage = 0) => percentage >= MINIMUN_REQUIRED_FOR_BADGE;
 
 export const useProfile = () => {
   const { id } = useParams();
   const [profile, setProfile] = useState<PhaRetailer | null>(null);
   const [percentages, setPercentages] = useState<BadgePercentages>({});
-  const [badges, setBadges] = useState<string []>([]);
+  const [badges, setBadges] = useState<string[]>([]);
 
   useEffect(() => {
     webRequest.get(ENDPOINTS.PROFILE(id)).then((res) => res.json())
@@ -23,19 +25,19 @@ export const useProfile = () => {
   useEffect(() => {
     const temporalBadges = [];
     if (hasBadge(percentages.fresh_percentage)) {
-      temporalBadges.push('fresh');
+      temporalBadges.push(PERCENTAGE_KEYS.FRESH);
     }
     if (hasBadge(percentages.acceptable_percentage)) {
-      temporalBadges.push('acceptable');
+      temporalBadges.push(PERCENTAGE_KEYS.ACCEPTABLE);
     }
     if (hasBadge(percentages.visible_percentage)) {
-      temporalBadges.push('visible');
+      temporalBadges.push(PERCENTAGE_KEYS.VISIBLE);
     }
     if (hasBadge(percentages.local_percentage)) {
-      temporalBadges.push('local');
+      temporalBadges.push(PERCENTAGE_KEYS.LOCAL);
     }
     if (hasBadge(percentages.meets_need_percentage)) {
-      temporalBadges.push('meets_need');
+      temporalBadges.push(PERCENTAGE_KEYS.MEETS_NEED);
     }
     setBadges(temporalBadges);
   }, [percentages]);
