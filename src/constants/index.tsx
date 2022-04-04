@@ -1,3 +1,5 @@
+import { BadgeType } from '../@types';
+
 export const NO_DATA = 'no-data';
 export const BUSINESS_DETAILS = 'businessDetails';
 export const OTHER_QUESTIONS = 'otherQuestions';
@@ -112,6 +114,39 @@ export const TYPE_BUSINESS = {
   INSTAGRAM: 'instagram',
   BUSINESS: 'business',
   OWNER: 'owner'
+};
+
+export const BADGES: {
+  [key: string]: BadgeType
+} = {
+  fresh: {
+    text: 'Fresh Produce',
+    image: '/images/local-large.png',
+  },
+  acceptable: {
+    text: 'Quality',
+    image: '/images/quality-large.png',
+  },
+  visible: {
+    text: 'Local',
+    image: '/images/local-large.png',
+  },
+  local: {
+    text: 'Visibility',
+    image: '/images/visibility-large.png',
+  },
+  meets_need: {
+    text: 'Superstar',
+    image: '/images/superstar-large.png',
+  }
+};
+
+export const PERCENTAGE_KEYS = {
+  FRESH: 'fresh',
+  ACCEPTABLE: 'acceptable',
+  VISIBLE: 'visible',
+  LOCAL: 'local',
+  MEETS_NEED: 'meets_need',
 };
 
 export const TYPE_INDIVIDUAL_FORM = {
