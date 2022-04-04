@@ -2,27 +2,27 @@ import { useState } from 'react';
 import { DEFAULT_DROPDOWN_OPTION, OTHER_QUESTIONS, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
-import { isEmpty, isNO } from '../utils/isEmpty';
+import {
+  businessDetailsValidation,
+  selectAccessibilityValidation,
+  selectCategoryValidation
+} from '../utils/validation';
 import { ModalRequestForm } from './ModalRequestForm';
-import { FormTabType } from '../@types';
+import { FormTabTypeInterface } from '../@types';
 
-export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.SetStateAction<FormTabType>>}) => {
+export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails, selectCategory, selectAccessibility } = useMarketplaceState();
   const [visibleModal, setVisibleModal] = useState(false);
   const [typeModal, setTypeModal] = useState(false);
   const clickProceed = () => {
-    if ((isEmpty(businessDetails.name) && isEmpty(businessDetails.phone)
-    && isEmpty(businessDetails.address_1) && isEmpty(businessDetails.city) && isEmpty(businessDetails.state)
-    && isEmpty(businessDetails.zipcode))
-    && (isNO(selectCategory.supermarket)
-    || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
-    || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
-    || isNO(selectCategory.food_co_op))
-    && (isNO(selectAccessibility.wic_accepted)
-    || isNO(selectAccessibility.snap_accepted)) && clickProceed) {
+    if (businessDetailsValidation(businessDetails)
+    && selectCategoryValidation(selectCategory)
+    && selectAccessibilityValidation(selectAccessibility)) {
       setTypeModal(true);
-      setActiveTab(OTHER_QUESTIONS);
+      if (setActiveTab) {
+        setActiveTab(OTHER_QUESTIONS);
+      }
     } else {
       setVisibleModal(true);
       setTypeModal(false);
@@ -377,7 +377,7 @@ export const LeftForm1 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => clickProceed()}>
+        <button className="light" type="button" onClick={clickProceed}>
           Proceed
         </button>
       </div>

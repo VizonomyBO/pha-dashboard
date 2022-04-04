@@ -3,7 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
 import { ModalRequestForm } from './ModalRequestForm';
-import { isNO } from '../utils/isEmpty';
+import { selectAccessibilityValidation, selectCategoryValidation } from '../utils/validation';
+import { PAGE_REDIRECT_TIME } from '../constants';
 
 export const LeftForm3 = () => {
   const [visibleModal, setVisibleModal] = useState(false);
@@ -40,17 +41,13 @@ export const LeftForm3 = () => {
   };
 
   const clickProceed = () => {
-    if ((isNO(selectCategory.supermarket)
-      || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
-      || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
-      || isNO(selectCategory.food_co_op))
-      && (isNO(selectAccessibility.wic_accepted)
-      || isNO(selectAccessibility.snap_accepted))) {
+    if (selectCategoryValidation(selectCategory)
+      && selectAccessibilityValidation(selectAccessibility)) {
       setTypeModal(true);
       setVisibleModal(true);
       setTimeout(() => {
         navigate('/home');
-      }, 1000);
+      }, PAGE_REDIRECT_TIME);
     } else {
       setTypeModal(false);
       setVisibleModal(true);
@@ -105,7 +102,7 @@ export const LeftForm3 = () => {
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => clickProceed()}>
+        <button className="light" type="button" onClick={clickProceed}>
           Proceed
         </button>
       </div>

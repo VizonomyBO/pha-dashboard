@@ -3,11 +3,19 @@ import { CONTACT_DETAILS, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
-import { isEmpty, isNO } from '../utils/isEmpty';
-import { FormTabType } from '../@types';
+import {
+  otherQuestionsEmty,
+  otherQuestionsValidation,
+  otherQuestionsValidationFresh,
+  selectAccessibilityEmty,
+  selectAccessibilityValidation,
+  selectCategoryEmty,
+  selectCategoryValidation
+} from '../utils/validation';
+import { FormTabTypeInterface } from '../@types';
 import { ModalRequestForm } from './ModalRequestForm';
 
-export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.SetStateAction<FormTabType>>}) => {
+export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
   const [visibleModal, setVisibleModal] = useState(false);
   const [typeModal, setTypeModal] = useState(false);
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
@@ -69,38 +77,25 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
   }, [otherQuestions.availabilityOptions]);
 
   const clickProceed = () => {
-    if ((isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
-    && isEmpty(otherQuestions.quality) && isEmpty(otherQuestions.visibility) && isEmpty(otherQuestions.local)
-    && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh'))
-    && (isNO(selectCategory.supermarket)
-    || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
-    || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
-    || isNO(selectCategory.food_co_op))
-    && (isNO(selectAccessibility.wic_accepted)
-    || isNO(selectAccessibility.snap_accepted))) {
+    if (otherQuestionsValidationFresh(otherQuestions)
+    && selectCategoryValidation(selectCategory)
+    && selectAccessibilityValidation(selectAccessibility)) {
       setTypeModal(true);
-      setActiveTab(CONTACT_DETAILS);
+      if (setActiveTab) {
+        setActiveTab(CONTACT_DETAILS);
+      }
     }
-    if ((isEmpty(otherQuestions.description) && otherQuestions.availabilityOptions !== []
-      && otherQuestions.availabilityOptions.filter((data: string) => data === 'Fresh') !== undefined)
-      && (isEmpty(selectCategory.supermarket)
-      && (isNO(selectCategory.supermarket)
-      || isNO(selectCategory.corner_store) || isNO(selectCategory.dollar_stores)
-      || isNO(selectCategory.food_pantry) || isNO(selectCategory.distribution)
-      || isNO(selectCategory.food_co_op))
-      && (isNO(selectAccessibility.wic_accepted)
-      || isNO(selectAccessibility.snap_accepted)))) {
+    if (otherQuestionsValidation(otherQuestions)
+      && selectCategoryValidation(selectCategory)
+      && selectAccessibilityValidation(selectAccessibility)) {
       setTypeModal(true);
-      setActiveTab(CONTACT_DETAILS);
+      if (setActiveTab) {
+        setActiveTab(CONTACT_DETAILS);
+      }
     }
-    if (((!isEmpty(otherQuestions.description) || otherQuestions.availabilityOptions === []
-      || !isEmpty(otherQuestions.quality) || !isEmpty(otherQuestions.visibility) || !isEmpty(otherQuestions.local))
-      || ((!isNO(selectCategory.supermarket)
-      && !isNO(selectCategory.corner_store) && !isNO(selectCategory.dollar_stores)
-      && !isNO(selectCategory.food_pantry) && !isNO(selectCategory.distribution)
-      && !isNO(selectCategory.food_co_op))
-      || (!isNO(selectAccessibility.wic_accepted)
-      && !isNO(selectAccessibility.snap_accepted))))) {
+    if (otherQuestionsEmty(otherQuestions)
+      || selectCategoryEmty(selectCategory)
+      || selectAccessibilityEmty(selectAccessibility)) {
       setTypeModal(false);
       setVisibleModal(true);
     }
@@ -334,7 +329,7 @@ export const LeftForm2 = ({ setActiveTab }: {setActiveTab: React.Dispatch<React.
         />
       </div>
       <div className="aaction">
-        <button className="light" type="button" onClick={() => clickProceed()}>
+        <button className="light" type="button" onClick={clickProceed}>
           Proceed
         </button>
       </div>

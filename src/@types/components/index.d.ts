@@ -43,3 +43,7 @@ export interface MultimediFileInterface {
     webkitRelativePath: string
   }
 }
+
+export interface FormTabTypeInterface {
+  setActiveTab?: React.Dispatch<React.SetStateAction<FormTabType>>
+}
