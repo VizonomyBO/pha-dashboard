@@ -1,4 +1,5 @@
 import { DropdownCategories } from '../components/DropdownCategories';
+import { DropdownGeocoder } from '../components/DropdownGeocoder';
 
 export const Landing = () => {
   console.log('Landing');
@@ -37,12 +38,7 @@ export const Landing = () => {
         </div>
         <div className="ldgsearchstore">
           <div className="alook">
-            <div className="swhere">
-              <span className="icmappin" />
-              <span className="txtd">Where</span>
-              <input type="text" name="" id="" placeholder="City or Zip Code" />
-              <span className="iccrosshair" />
-            </div>
+            <DropdownGeocoder />
             <div className="space" />
             <DropdownCategories />
           </div>

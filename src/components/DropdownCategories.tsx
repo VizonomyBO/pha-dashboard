@@ -6,23 +6,19 @@ import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategori
 import { CATEGORIES } from '../constants/categories';
 
 export const DropdownCategories = () => {
-  const {
-    categoriesSelected,
-    handleChange
-  } = useDropdownCategories();
+  const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
+
   return (
     <div className="citysearch">
       <i className="icsearch" />
       <span className="txtd">What</span>
       <Select
-        labelId="demo-multiple-checkbox-label"
-        id="demo-multiple-checkbox"
         multiple
         displayEmpty
         value={categoriesSelected}
         onChange={handleChange}
-        renderValue={(selected:Array<string>) => {
-          if (!selected.length) {
+        renderValue={(selected: string[]) => {
+          if (selected.length === 0) {
             return <em>Select Category</em>;
           }
           if (selected.length > 1) {
@@ -38,7 +34,7 @@ export const DropdownCategories = () => {
           </MenuItem>
         ))}
       </Select>
-      <button className="light" type="button">
+      <button className="light" type="button" onClick={() => goToMapView()}>
         Search
       </button>
     </div>
