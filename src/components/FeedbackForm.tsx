@@ -15,7 +15,7 @@ export const FeedbackForm = (
     local,
     meets_need
   } = useIndividualFormState();
-  const setAvailabityOptionsCheck = (type: string, checked: boolean, value: string) => {
+  const setAvailabilityOptionsCheck = (type: string, checked: boolean, value: string) => {
     if (checked) {
       setIndividualForm(type, availability === '' ? value : `${availability}, ${value}`);
     } else {
@@ -59,7 +59,7 @@ export const FeedbackForm = (
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
-                          setAvailabityOptionsCheck(
+                          setAvailabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
                             formConstants.AVAILABILITY.FRESH
@@ -75,7 +75,7 @@ export const FeedbackForm = (
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
-                          setAvailabityOptionsCheck(
+                          setAvailabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
                             formConstants.AVAILABILITY.FROZEN
@@ -91,7 +91,7 @@ export const FeedbackForm = (
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
-                          setAvailabityOptionsCheck(
+                          setAvailabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
                             formConstants.AVAILABILITY.CANNED
