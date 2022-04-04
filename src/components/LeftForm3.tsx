@@ -1,11 +1,20 @@
-import React, { useEffect } from 'react';
-import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
+import { ModalRequestForm } from './ModalRequestForm';
+import { selectAccessibilityValidation, selectCategoryValidation } from '../utils/validation';
+import { PAGE_REDIRECT_TIME } from '../constants';
 
 export const LeftForm3 = () => {
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
+  const navigate = useNavigate();
   const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
+
+  const { selectCategory, selectAccessibility } = useMarketplaceState();
 
   const setName = (e: React.FormEvent<HTMLInputElement>): void => {
     setContactName(e.currentTarget.value);
@@ -31,10 +40,19 @@ export const LeftForm3 = () => {
     }
   };
 
-  useEffect(() => {
-    setContactOwner(formConstants.CONTACT_OWNER.NO);
-    setContactPatron(formConstants.CONTACT_PATRON.NO);
-  }, [setContactOwner, setContactPatron]);
+  const clickProceed = () => {
+    if (selectCategoryValidation(selectCategory)
+      && selectAccessibilityValidation(selectAccessibility)) {
+      setTypeModal(true);
+      setVisibleModal(true);
+      setTimeout(() => {
+        navigate('/home');
+      }, PAGE_REDIRECT_TIME);
+    } else {
+      setTypeModal(false);
+      setVisibleModal(true);
+    }
+  };
 
   return (
     <>
@@ -84,10 +102,15 @@ export const LeftForm3 = () => {
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button">
+        <button className="light" type="button" onClick={clickProceed}>
           Proceed
         </button>
       </div>
+      <ModalRequestForm
+        type={typeModal}
+        visible={visibleModal}
+        setVisible={setVisibleModal}
+      />
     </>
   );
 };

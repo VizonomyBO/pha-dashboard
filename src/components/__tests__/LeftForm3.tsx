@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { MemoryRouter } from 'react-router-dom';
 import configureStore from 'redux-mock-store';
 import { LeftForm3 } from '../LeftForm3';
 
@@ -15,7 +16,9 @@ describe('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(
       <Provider store={store}>
-        <LeftForm3 />
+        <MemoryRouter>
+          <LeftForm3 />
+        </MemoryRouter>
       </Provider>,
       div
     );

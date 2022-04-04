@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { formSelectCategory } from '../constants/form';
 import { useMarketplaceDispatch } from '../store/hooks';
 
@@ -55,18 +54,6 @@ export const CategoryPanel = () => {
       setSelectCategoryFoodCoOp(formSelectCategory.FOOD_CO_OP.NO);
     }
   };
-
-  useEffect(() => {
-    setSelectCategorySupermarket(formSelectCategory.SUPERMARKET.NO);
-    setSelectCategoryCorner(formSelectCategory.CORNER_STORE.NO);
-    setSelectCategoryDollar(formSelectCategory.DOLLAR_STORES.NO);
-    setSelectCategoryFoodPantry(formSelectCategory.FOOD_PANTRY.NO);
-    setSelectCategoryDistribution(formSelectCategory.DISTRIBUTION.NO);
-    setSelectCategoryFoodCoOp(formSelectCategory.FOOD_CO_OP.NO);
-  }, [
-    setSelectCategorySupermarket, setSelectCategoryCorner, setSelectCategoryDollar,
-    setSelectCategoryFoodPantry, setSelectCategoryDistribution, setSelectCategoryFoodCoOp
-  ]);
 
   return (
     <>
