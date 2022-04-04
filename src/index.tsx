@@ -15,6 +15,10 @@ import { Home } from './pages/home';
 import { Form } from './pages/form';
 import { Form4 } from './pages/form4';
 import { MainMap } from './pages/mainMap';
+import { Nsform1 } from './pages/nsform1';
+import { Nsform4 } from './pages/nsform4';
+import { Nshome } from './pages/nshome';
+import { Profile } from './pages/profile';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -44,6 +48,22 @@ ReactDOM.render(
           <Route
             path="/map"
             element={<MainMap />}
+          />
+          <Route
+            path="/nsform1"
+            element={<Nsform1 />}
+          />
+          <Route
+            path="/nsform4"
+            element={<Nsform4 />}
+          />
+          <Route
+            path="/nshome"
+            element={<Nshome />}
+          />
+          <Route
+            path="/profile/:id"
+            element={<Profile />}
           />
         </Routes>
       </BrowserRouter>

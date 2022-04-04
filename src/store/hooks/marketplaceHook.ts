@@ -4,7 +4,10 @@ import { MarketplaceInterface } from '../../@types/redux';
 import {
   setContactName, setBusinessDetails, setBusinessFile,
   setOtherQuestons, setAvailabilityOptions, setQuality, setVisibility,
-  setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner, setContactEmail
+  setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner,
+  setSnapAccepted, setWicAccepted, setContactEmail, setSelectCategoryCorner,
+  setSelectCategoryDistribution, setSelectCategoryDollar,
+  setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -16,7 +19,7 @@ export const useMarketplaceDispatch = () => {
     setBusinessDetails: (type: string, value: string) => {
       dispatch(setBusinessDetails(type, value));
     },
-    setBusinessFile: (type:string, value: MultimediaInterface[]) => {
+    setBusinessFile: (type: string, value: MultimediaInterface[]) => {
       dispatch(setBusinessFile(type, value));
     },
     setOtherQuestions: (value: string) => {
@@ -51,6 +54,30 @@ export const useMarketplaceDispatch = () => {
     },
     setContactPatron: (contactPatron: string) => {
       dispatch(setContactPatron(contactPatron));
+    },
+    setSelectCategorySupermarket: (selectCategory: string) => {
+      dispatch(setSelectCategorySupermarket(selectCategory));
+    },
+    setSelectCategoryCorner: (selectCategory: string) => {
+      dispatch(setSelectCategoryCorner(selectCategory));
+    },
+    setSelectCategoryDollar: (selectCategory: string) => {
+      dispatch(setSelectCategoryDollar(selectCategory));
+    },
+    setSelectCategoryFoodPantry: (selectCategory: string) => {
+      dispatch(setSelectCategoryFoodPantry(selectCategory));
+    },
+    setSelectCategoryDistribution: (selectCategory: string) => {
+      dispatch(setSelectCategoryDistribution(selectCategory));
+    },
+    setSelectCategoryFoodCoOp: (selectCategory: string) => {
+      dispatch(setSelectCategoryFoodCoOp(selectCategory));
+    },
+    setWicAccepted: (wicAccepted: string) => {
+      dispatch(setWicAccepted(wicAccepted));
+    },
+    setSnapAccepted: (wicAccepted: string) => {
+      dispatch(setSnapAccepted(wicAccepted));
     },
   };
 };

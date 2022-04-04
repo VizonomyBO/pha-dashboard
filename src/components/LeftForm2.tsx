@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from 'react';
-import { TYPE_BUSINESS } from '../constants';
+import { CONTACT_DETAILS, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
+import {
+  otherQuestionsEmty,
+  otherQuestionsValidation,
+  otherQuestionsValidationFresh,
+  selectAccessibilityEmty,
+  selectAccessibilityValidation,
+  selectCategoryEmty,
+  selectCategoryValidation
+} from '../utils/validation';
+import { FormTabTypeInterface } from '../@types';
+import { ModalRequestForm } from './ModalRequestForm';
 
-export const LeftForm2 = () => {
+export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
   const {
     setOtherQuestions, setAvailabilityOptions, setQuality,
     setVisibility, setLocal, setProduceAvailStore,
     setProduceAvailSeasonally
   } = useMarketplaceDispatch();
-  const { otherQuestions } = useMarketplaceState();
+  const { otherQuestions, selectCategory, selectAccessibility } = useMarketplaceState();
 
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     setOtherQuestions(e.currentTarget.value);
@@ -62,6 +75,31 @@ export const LeftForm2 = () => {
   useEffect(() => {
     setShowIsFreshOption(otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FRESH));
   }, [otherQuestions.availabilityOptions]);
+
+  const clickProceed = () => {
+    if (otherQuestionsValidationFresh(otherQuestions)
+    && selectCategoryValidation(selectCategory)
+    && selectAccessibilityValidation(selectAccessibility)) {
+      setTypeModal(true);
+      if (setActiveTab) {
+        setActiveTab(CONTACT_DETAILS);
+      }
+    }
+    if (otherQuestionsValidation(otherQuestions)
+      && selectCategoryValidation(selectCategory)
+      && selectAccessibilityValidation(selectAccessibility)) {
+      setTypeModal(true);
+      if (setActiveTab) {
+        setActiveTab(CONTACT_DETAILS);
+      }
+    }
+    if (otherQuestionsEmty(otherQuestions)
+      || selectCategoryEmty(selectCategory)
+      || selectAccessibilityEmty(selectAccessibility)) {
+      setTypeModal(false);
+      setVisibleModal(true);
+    }
+  };
 
   return (
     <>
@@ -291,10 +329,15 @@ export const LeftForm2 = () => {
         />
       </div>
       <div className="aaction">
-        <button className="light" type="button">
+        <button className="light" type="button" onClick={clickProceed}>
           Proceed
         </button>
       </div>
+      <ModalRequestForm
+        type={typeModal}
+        visible={visibleModal}
+        setVisible={setVisibleModal}
+      />
     </>
   );
 };

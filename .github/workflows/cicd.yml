@@ -41,14 +41,12 @@ jobs:
     - name: Run lint
       run: yarn lint
 
+    - name: Run test
+      run: yarn test
+
     - name: Build
       run: yarn build
       
-    - name: Archive Production Artifact
-      uses: actions/upload-artifact@main
-      with:
-        name: build
-        path: build
 
   deploy-gcr:
     name: Deploy to GCR
@@ -58,13 +56,18 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
 
-    - name: Download Artifact
-      uses: actions/download-artifact@main
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
       with:
-        name: build
-        path: build
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      run: yarn install
+
+    - name: Build
+      run: yarn build
 
     - name: Setup GCloud Auth
       id: auth

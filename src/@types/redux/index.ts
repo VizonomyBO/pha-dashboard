@@ -57,12 +57,49 @@ export interface SocialMediaInterface {
 export interface FilesInterface {
   media: null | MediaInterface,
 }
+export interface selectCategoryInterface {
+  supermarket: string,
+  corner_store: string,
+  dollar_stores: string,
+  food_pantry: string,
+  distribution: string,
+  food_co_op: string,
+}
+export interface selectAccessibilityInterface {
+  wic_accepted: string,
+  snap_accepted: string,
+}
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
   socialMedia: SocialMediaInterface,
   files: FilesInterface,
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
+  selectCategory: selectCategoryInterface,
+  selectAccessibility: selectAccessibilityInterface
+}
+
+export interface SessionInterface {
+  sessionState: boolean,
+  error: boolean
+}
+
+export interface IndividualFormInterface {
+  individual_id?: string,
+  retailer_id: string,
+  availability: string[],
+  quality?: string,
+  visibility?: string,
+  local?: string,
+  meetsNeed?: string,
+  produceAvailStore?: string,
+  contactName?: string,
+  contactEmail?: string,
+  contactPhone?: string,
+  contactZipcode?: string,
+  submissionDate?: Date,
+  submissionStatus?: string,
+  multimedia?: MediaInterface[]
 }
 
 export interface CategoriesInterface {

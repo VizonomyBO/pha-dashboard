@@ -64,7 +64,9 @@
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "import/no-extraneous-dependencies": "off",
       "@typescript-eslint/no-unused-vars": "error",
-      "linebreak-style": 0
+      "linebreak-style": 0,
+      "@typescript-eslint/camelcase": "off",
+      "camelcase": "off"
   },
   "settings": {
       "import/resolver": {
