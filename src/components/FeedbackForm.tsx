@@ -13,13 +13,14 @@ export const FeedbackForm = (
     quality,
     visibility,
     local,
-    meetsNeed
+    meets_need
   } = useIndividualFormState();
-  const setMultipleOptionsCheck = (type: string, checked: boolean, value: string, dataForm: string[]) => {
+  const setaAilabilityOptionsCheck = (type: string, checked: boolean, value: string) => {
     if (checked) {
-      setIndividualForm(type, [...dataForm, value]);
+      setIndividualForm(type, availability === '' ? value : `${availability}, ${value}`);
     } else {
-      setIndividualForm(type, dataForm.filter((data: string) => data !== value));
+      const availabilityCopy = availability ? availability.replace(`${value},`, '') : availability;
+      setIndividualForm(type, availabilityCopy ? availabilityCopy.replace(`, ${value}`, '') : '');
     }
   };
   return (
@@ -58,11 +59,10 @@ export const FeedbackForm = (
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
-                          setMultipleOptionsCheck(
+                          setaAilabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
-                            formConstants.AVAILABILITY.FRESH,
-                            availability
+                            formConstants.AVAILABILITY.FRESH
                           );
                         }
                       }
@@ -75,11 +75,10 @@ export const FeedbackForm = (
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
-                          setMultipleOptionsCheck(
+                          setaAilabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
-                            formConstants.AVAILABILITY.FROZEN,
-                            availability
+                            formConstants.AVAILABILITY.FROZEN
                           );
                         }
                       }
@@ -92,11 +91,10 @@ export const FeedbackForm = (
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
-                          setMultipleOptionsCheck(
+                          setaAilabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
-                            formConstants.AVAILABILITY.CANNED,
-                            availability
+                            formConstants.AVAILABILITY.CANNED
                           );
                         }
                       }
@@ -266,8 +264,8 @@ export const FeedbackForm = (
                     Yes
                     <input
                       type="radio"
-                      value={meetsNeed}
-                      checked={meetsNeed === formConstants.MEETS_NEED.YES}
+                      value={meets_need}
+                      checked={meets_need === formConstants.MEETS_NEED.YES}
                       onChange={
                         () => {
                           setIndividualForm(
@@ -283,8 +281,8 @@ export const FeedbackForm = (
                     No
                     <input
                       type="radio"
-                      value={meetsNeed}
-                      checked={meetsNeed === formConstants.MEETS_NEED.NO}
+                      value={meets_need}
+                      checked={meets_need === formConstants.MEETS_NEED.NO}
                       onChange={
                         () => {
                           setIndividualForm(
