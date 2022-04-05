@@ -105,6 +105,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
     <>
       <div className="sectiontitle">
         Description
+        <sup>*</sup>
       </div>
       <div className="item">
         <div className="title">
@@ -126,6 +127,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
       </div>
       <div className="sectiontitle">
         Availability
+        <sup>*</sup>
       </div>
       <div className="item">
         <div className="title grouped">
@@ -166,6 +168,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
         <>
           <div className="sectiontitle">
             Quality
+            <sup>*</sup>
           </div>
           <div className="item">
             <div className="title grouped">
@@ -203,6 +206,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
           </div>
           <div className="sectiontitle">
             Visibility
+            <sup>*</sup>
           </div>
           <div className="item">
             <div className="title grouped">
@@ -238,6 +242,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
           </div>
           <div className="sectiontitle">
             Local
+            <sup>*</sup>
           </div>
           <div className="item">
             <div className="title grouped">

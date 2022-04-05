@@ -113,7 +113,9 @@ export const TYPE_BUSINESS = {
   EMAIL: 'email',
   INSTAGRAM: 'instagram',
   BUSINESS: 'business',
-  OWNER: 'owner'
+  OWNER: 'owner',
+  LATITUDE: 'latitude',
+  LONGITUDE: 'longitude',
 };
 
 export const BADGES: {

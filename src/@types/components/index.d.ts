@@ -32,10 +32,8 @@ export interface DataPhaDasboardMap {
   city: string,
   state: string,
   zipcode: string,
-  geom: {
-    type: string,
-    coordinates: number[]
-  }
+  latitude: number,
+  longitude: number,
 }
 
 export interface DropdowInterface {

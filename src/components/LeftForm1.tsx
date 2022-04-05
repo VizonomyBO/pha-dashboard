@@ -9,6 +9,7 @@ import {
 } from '../utils/validation';
 import { ModalRequestForm } from './ModalRequestForm';
 import { FormTabTypeInterface } from '../@types';
+import { DropdownAddress } from './map/DropdownAddress';
 
 export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
@@ -35,7 +36,10 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
       </div>
       <div className="item">
         <div className="title">
-          <label>Business Name</label>
+          <label>
+            Business Name
+            <sup>*</sup>
+          </label>
         </div>
         <div className="ainput">
           <input
@@ -50,18 +54,14 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
       </div>
       <div className="item">
         <div className="title">
-          <label>Address Line 1</label>
+          <label>
+            Address Line 1
+            <sup>*</sup>
+          </label>
         </div>
-        <div className="ainput">
-          <input
-            className="light"
-            type="text"
-            onChange={
-              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, e.target.value)
-            }
-            value={businessDetails.address_1}
-          />
-        </div>
+        <DropdownAddress
+          type={TYPE_BUSINESS.ADDRESS_1}
+        />
       </div>
       <div className="item">
         <div className="title">
@@ -80,7 +80,10 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
       </div>
       <div className="item">
         <div className="title">
-          <label>Phone Number</label>
+          <label>
+            Phone Number
+            <sup>*</sup>
+          </label>
         </div>
         <div className="ainput">
           <input
@@ -95,7 +98,10 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
       </div>
       <div className="item">
         <div className="title">
-          <label>City</label>
+          <label>
+            City
+            <sup>*</sup>
+          </label>
         </div>
         <div className="ainput">
           <input
@@ -111,7 +117,10 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
       <div className="twoc">
         <div className="item">
           <div className="title">
-            <label>State</label>
+            <label>
+              State
+              <sup>*</sup>
+            </label>
           </div>
           <DropdownBusiness
             initialState={DEFAULT_DROPDOWN_OPTION.STATES}
@@ -120,7 +129,10 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
         </div>
         <div className="item">
           <div className="title">
-            <label>Zip / Postal Code</label>
+            <label>
+              Zip / Postal Code
+              <sup>*</sup>
+            </label>
           </div>
           <div className="ainput2">
             <input
