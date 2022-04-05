@@ -1,4 +1,4 @@
-import IconLayerData from '../IconLayerData';
+import { IconLayerData } from '../IconLayerData';
 
 describe('Testing IconLayerData function', () => {
   test('IconLayerData should be defined', () => {

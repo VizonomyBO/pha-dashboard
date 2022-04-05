@@ -1,4 +1,4 @@
-import { Layer, Position } from 'deck.gl';
+import { Position } from 'deck.gl';
 import { IconLayer } from '@deck.gl/layers';
 import PinRed from './ic-pin-red.svg';
 import PinBlue from './ic-pin-blue.svg';
@@ -7,8 +7,8 @@ import { DataPhaDasboardMap } from '../../@types';
 
 const COLORS = { GREEN: 'green', BLUE: 'blue' };
 
-export default function IconLayerData(data: Array<DataPhaDasboardMap>): Layer<unknown>[] {
-  return data.map((item: DataPhaDasboardMap) => {
+export const IconLayerData = (data: Array<DataPhaDasboardMap>) => (
+  data.map((item: DataPhaDasboardMap) => {
     let icon = PinRed;
     if (item.geom.type === COLORS.BLUE) {
       icon = PinBlue;
@@ -35,5 +35,5 @@ export default function IconLayerData(data: Array<DataPhaDasboardMap>): Layer<un
       style: 'cursor:pointer;',
       getCursor: () => 'pointer',
     });
-  });
-}
+  })
+);

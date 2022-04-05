@@ -6,7 +6,7 @@ import {
 } from '../../constants/index';
 import { NoDataProvided } from '../NoDataProvided';
 import RenderTooltip from './RenderTooltip';
-import IconLayerData from './IconLayerData';
+import { IconLayerData } from './IconLayerData';
 import { DataPhaDasboardMap } from '../../@types';
 
 export const DeckGLComponent = ({ dataForMarker }: { dataForMarker: DataPhaDasboardMap[] }) => {
