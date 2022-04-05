@@ -28,7 +28,7 @@ export const DropdownAddress = ({ type }:{type: string}) => {
         }
       });
     }
-  }, []);
+  }, [setBusinessDetails, type]);
   return (
     <div className="ainput">
       <div className="geocoderAdderss" ref={geocoderDivRef} id="geocoderAddress" />
