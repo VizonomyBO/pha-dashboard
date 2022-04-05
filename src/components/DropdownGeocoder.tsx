@@ -1,10 +1,11 @@
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { MAPBOX_KEY } from '../constants';
 
 export const DropdownGeocoder = () => {
   console.log('geocoder');
+  const geocoderDivRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const geocoder = new MapboxGeocoder({
       accessToken: MAPBOX_KEY,
@@ -13,7 +14,7 @@ export const DropdownGeocoder = () => {
     });
     console.log('Geocoder', geocoder);
     if (geocoder) {
-      geocoder.addTo('#geocoder');
+      geocoder.addTo(geocoderDivRef.current as HTMLElement);
       const results = document.getElementById('result');
       geocoder.on('result', (e) => {
         console.log('E', e);
@@ -33,7 +34,7 @@ export const DropdownGeocoder = () => {
       <span className="icmappin" />
       <span className="txtd">Where</span>
       {/* <input ref={inputEl} type="text" name="searcherLanding" id="geocoder" placeholder="City or Zip Code" /> */}
-      <div id="geocoder" />
+      <div ref={geocoderDivRef} id="geocoder" />
       <span className="iccrosshair" />
     </div>
   );
