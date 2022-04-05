@@ -31,6 +31,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
     
+    - name: Test if exists 
+      run: |
+        ls
+        cat .env
     - name: Create env file
       run: |
         echo $ENV_FILE | base64 --decode > .env
