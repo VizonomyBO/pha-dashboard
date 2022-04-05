@@ -34,7 +34,7 @@ jobs:
     - name: Test if exists 
       run: |
         ls
-        cat .env
+        cat $ENV_FILE
     - name: Create env file
       run: |
         echo $ENV_FILE | base64 --decode > .env
