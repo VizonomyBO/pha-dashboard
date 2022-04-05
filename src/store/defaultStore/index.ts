@@ -84,5 +84,8 @@ export const INITIAL_INDIVIDUAL_FORM = {
 };
 
 export const INITIAL_CATEGORIES = {
-  categoriesSelected: []
+  categoriesSelected: [],
+  center: [],
+  accesibility: [],
+  dataSources: []
 };

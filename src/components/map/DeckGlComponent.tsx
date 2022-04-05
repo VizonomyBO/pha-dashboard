@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { DeckGL, Layer, PickInfo } from 'deck.gl';
 import Map from 'react-map-gl';
 import {
@@ -30,19 +30,11 @@ const data = [
 ];
 
 export const DeckGLComponent = () => {
+  const mapref = useRef(null);
   const initialViewState = DEFAULT_VIEW_STATE;
   const controller = true;
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const layer = IconLayerData(data);
-  // const clickEventsInToolTip = () => {
-  //   const buttonDetail = document.getElementById('viewDetailsButton');
-  //   console.log('Button DEtail', buttonDetail);
-  //   if (buttonDetail != null) {
-  //     buttonDetail.addEventListener('click', () => {
-  //       console.log('CLICK');
-  //     });
-  //   }
-  // };
   const hideTooltip = () => {
     setHoverInfo(undefined);
   };
@@ -50,9 +42,6 @@ export const DeckGLComponent = () => {
   const expandTooltip = (info: unknown) => {
     if ((info as PickInfo<Layer<unknown>[]>).object) {
       setHoverInfo(info as PickInfo<Layer<unknown>[]>);
-      // clickEventsInToolTip();
-    } else {
-      // setHoverInfo(undefined);
     }
   };
 
@@ -68,7 +57,7 @@ export const DeckGLComponent = () => {
           onViewStateChange={hideTooltip}
           onClick={(info: unknown) => expandTooltip(info)}
         >
-          <Map id="mainMap" reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
+          <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
           {RenderTooltip(hoverInfo)}
         </DeckGL>
       )}

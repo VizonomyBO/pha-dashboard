@@ -1,9 +1,8 @@
-import React from 'react';
+import { Link } from 'react-router-dom';
 
 export const ToolTip = (data: { x: number; y: number; retailerId: string | undefined }) => {
   const { x, y, retailerId } = data;
   const openIndividualForm = () => {
-    // not yet created
     console.log('open form');
   };
   return (
@@ -25,11 +24,11 @@ export const ToolTip = (data: { x: number; y: number; retailerId: string | undef
           <span className="icphone" />
           <span className="number">(704) 969-9650</span>
         </div>
-        <a href={`profile/${retailerId}`}>
+        <Link to={`profile/${retailerId}`}>
           <button className="light" type="button">
             View Details
           </button>
-        </a>
+        </Link>
         <div className="pinaddcomment">
           <button className="light" type="button" onClick={() => openIndividualForm()}>
             <span className="icaddcoment" />
