@@ -1,8 +1,9 @@
 import { Position } from 'deck.gl';
 import { IconLayer } from '@deck.gl/layers';
-import PinRed from './ic-pin-red.svg';
-import PinBlue from './ic-pin-blue.svg';
-import PinGreen from './ic-pin-green.svg';
+import PinRed from './ic-pin-red.png';
+import PinBlue from './ic-pin-blue.png';
+import PinGreen from './ic-pin-green.png';
+
 import { DataPhaDasboardMap } from '../../@types';
 
 const COLORS = { GREEN: 'green', BLUE: 'blue' };
@@ -22,15 +23,15 @@ export const IconLayerData = (data: Array<DataPhaDasboardMap>) => (
       getIcon: () => ({
         id: 'marker',
         url: icon,
-        anchorY: 60,
-        height: 60,
-        width: 60,
+        anchorY: 15,
+        height: 30,
+        width: 22,
         getCursor: () => 'pointer',
         zIndex: 2
       }),
-      getPosition: (d: unknown) => ((d as DataPhaDasboardMap).geom.coordinates as Position), // TODO fix any
-      getSize: () => 5,
-      sizeScale: 10,
+      getPosition: (d: unknown) => ((d as DataPhaDasboardMap).geom.coordinates as Position),
+      getSize: () => 6,
+      sizeScale: 7,
       pickable: true,
       style: 'cursor:pointer;',
       getCursor: () => 'pointer',
