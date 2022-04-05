@@ -78,3 +78,30 @@ export interface MarketplaceInterface {
   selectCategory: selectCategoryInterface,
   selectAccessibility: selectAccessibilityInterface
 }
+
+export interface SessionInterface {
+  sessionState: boolean,
+  error: boolean
+}
+
+export interface IndividualFormInterface {
+  individual_id?: string,
+  retailer_id: string,
+  availability: string[],
+  quality?: string,
+  visibility?: string,
+  local?: string,
+  meetsNeed?: string,
+  produceAvailStore?: string,
+  contactName?: string,
+  contactEmail?: string,
+  contactPhone?: string,
+  contactZipcode?: string,
+  submissionDate?: Date,
+  submissionStatus?: string,
+  multimedia?: MediaInterface[]
+}
+
+export interface CategoriesInterface {
+  categoriesSelected: string[]
+}

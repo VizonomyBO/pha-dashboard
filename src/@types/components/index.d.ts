@@ -1,5 +1,17 @@
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../constants';
 
+export interface BadgeType {
+  text: string,
+  image: string
+}
+
+export interface BadgePercentages {
+  fresh_percentage?: number,
+  acceptable_percentage?: number,
+  visible_percentage?: number,
+  local_percentage?: number,
+  meets_need_percentage?: number,
+}
 export interface HeaderInterface {
   type?: string
 }
@@ -52,4 +64,8 @@ export interface MultimediFileInterface {
     type: string
     webkitRelativePath: string
   }
+}
+
+export interface FormTabTypeInterface {
+  setActiveTab?: React.Dispatch<React.SetStateAction<FormTabType>>
 }
