@@ -1,9 +1,29 @@
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
+import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
+import { DataPhaDasboardMap } from '../@types';
+import { webRequest } from '../utils/webRequest';
+import { ENDPOINTS } from '../constants/url';
 
 export const Home = () => {
+  const [dataRequest, setDataRequest] = useState<Array<DataPhaDasboardMap>>([]);
+
+  useEffect(() => {
+    webRequest.get(ENDPOINTS.MAP()).then((res) => res.json())
+      .then((res) => {
+        const dataRows: Array<DataPhaDasboardMap> = [];
+        res.data.rows.forEach((element: DataPhaDasboardMap) => {
+          if (element.geom) {
+            dataRows.push(element);
+          }
+        });
+        setDataRequest(dataRows);
+      }).catch((err) => console.error(err));
+  }, []);
+
   const onClickPlus = () => {
     /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
   };
@@ -33,180 +53,12 @@ export const Home = () => {
             <div className="space"><span className="line" /></div>
             <div className="listloc">
               <div className="listingarea">
-                <div className="item">
-                  <div className="statemk">
-                    <div className="cardmk">
-                      <div className="icmkred dimensions" />
-                      <div className="desc red">Food Co-op</div>
-                    </div>
-                  </div>
-                  <div className="descres">
-                    <div className="namemark">JABBO’S COMPACT MARKET</div>
-                    <div className="address">923 Ohio Ave, Clarksdale, MS 38614</div>
-                    <div className="distance">
-                      <div className="miles">1.2 Miles</div>
-                      <div className="kind">WIC-Accepted</div>
-                    </div>
-                  </div>
-                  <div className="arrow">
-                    <button className="light" type="button">
-                      <div className="icarrowright" />
-                    </button>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="statemk">
-                    <div className="cardmk">
-                      <div className="icmkgreen dimensions" />
-                      <div className="desc green">Food Co-op</div>
-                    </div>
-                  </div>
-                  <div className="descres">
-                    <div className="namemark">JABBO’S COMPACT MARKET</div>
-                    <div className="address">923 Ohio Ave, Clarksdale, MS 38614</div>
-                    <div className="distance">
-                      <div className="miles">1.2 Miles</div>
-                      <div className="kind">WIC-Accepted</div>
-                    </div>
-                  </div>
-                  <div className="arrow">
-                    <button className="light" type="button">
-                      <div className="icarrowright" />
-
-                    </button>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="statemk">
-                    <div className="cardmk">
-                      <div className="icmkgreen dimensions" />
-                      <div className="desc green">Food Co-op</div>
-                    </div>
-                  </div>
-                  <div className="descres">
-                    <div className="namemark">JABBO’S COMPACT MARKET</div>
-                    <div className="address">923 Ohio Ave, Clarksdale, MS 38614</div>
-                    <div className="distance">
-                      <div className="miles">1.2 Miles</div>
-                      <div className="kind">WIC-Accepted</div>
-                    </div>
-                  </div>
-                  <div className="arrow">
-                    <button className="light" type="button">
-                      <div className="icarrowright" />
-
-                    </button>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="statemk">
-                    <div className="cardmk">
-                      <div className="icmkblue dimensions" />
-                      <div className="desc blue">Food Co-op</div>
-                    </div>
-                  </div>
-                  <div className="descres">
-                    <div className="namemark">JABBO’S COMPACT MARKET</div>
-                    <div className="address">923 Ohio Ave, Clarksdale, MS 38614</div>
-                    <div className="distance">
-                      <div className="miles">1.2 Miles</div>
-                      <div className="kind">WIC-Accepted</div>
-                    </div>
-                  </div>
-                  <div className="arrow">
-                    <button className="light" type="button">
-                      <div className="icarrowright" />
-
-                    </button>
-                  </div>
-                </div>
-                <div className="item">
-                  <div className="statemk">
-                    <div className="cardmk">
-                      <div className="icmkred dimensions" />
-                      <div className="desc red">Food Co-op</div>
-                    </div>
-                  </div>
-                  <div className="descres">
-                    <div className="namemark">JABBO COMPACT MARKET</div>
-                    <div className="address">923 Ohio Ave, Clarksdale, MS 38614</div>
-                    <div className="distance">
-                      <div className="miles">1.2 Miles</div>
-                      <div className="kind">WIC-Accepted</div>
-                    </div>
-                  </div>
-                  <div className="arrow">
-                    <button className="light" type="button">
-                      <div className="icarrowright" />
-
-                    </button>
-                  </div>
-                </div>
+                {dataRequest && ListMarkerComponent(dataRequest)}
               </div>
             </div>
           </div>
           <div className="amap">
-            <Map />
-
-            {/* <div className="modal">
-              <figure className="picture">
-                <img src="/public/images/img_market_001.png" alt="" />
-              </figure>
-              <div className="detailcard">
-                <div className="store">JABBO’S COMPACT MARKET</div>
-                <div className="services">
-                  <span className="kind icmkdish" />
-                  <span className="kind icmkshop" />
-                  <span className="kind icmkdish" />
-                  <span className="kind icmkshop" />
-                  <span className="kind icmkshop" />
-                </div>
-                <div className="address">923 Ohio Ave, Clarksdale, MS 38614</div>
-                <div className="phone">
-                  <span className="icphone" />
-                  <span className="number">(704) 969-9650</span>
-                </div>
-                <button className="light" type="button">
-                  View Details
-
-                </button>
-
-                <div className="pinaddcomment">
-                  <button className="light" type="button">
-                    <span className="icaddc
-                            oment"
-                    />
-
-                  </button>
-                </div>
-              </div>
-            </div> */}
-            {/* <div className="bmodal">
-              <figure className="picture">
-                <img src="/public/images/img_market_s_001.png" alt="" />
-              </figure>
-              <div className="detailcard">
-                <div className="store">JABBO’S COMPACT MARKET</div>
-                <div className="attribute">
-                  <span className="aitem">Fresh</span>
-                  <span className="aitem">Quality</span>
-                  <span className="aitem">Visible</span>
-                </div>
-                <div className="address">923 Ohio Ave, Clarksdale, MS</div>
-                <div className="phone">
-                  <span className="icphone" />
-                  <span className="number">(704) 969-9650</span>
-                </div>
-                <div className="pinaddcomment">
-                  <button className="light" type="button">
-                    <span className="icaddc
-                            oment"
-                    />
-
-                  </button>
-                </div>
-              </div>
-            </div> */}
+            <Map dataMarker={dataRequest} />
             <div className="controlzoom">
               <div className="zplus">
                 <button className="light" type="button" id="zoomIn" aria-label="Zoom in" onClick={onClickPlus}>
