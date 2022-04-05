@@ -10,7 +10,6 @@ export const MARKED_ELEMENT = 'Yes';
 export const MARKED_FRESH = 'Fresh';
 export const INDIVIDUAL_FORM = 'individualForm';
 export const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_KEY || NO_DATA;
-export const SERVER = 'https://pha-express-app-m4mq3dqaka-uc.a.run.app' || NO_DATA;
 export const BASEMAP = 'mapbox://styles/vizonomy/cl0zk8u1o002w15pvqr3t0e1b';
 export const CLASSES_BY_FORM = {
   [BUSINESS_DETAILS]: 'form1',

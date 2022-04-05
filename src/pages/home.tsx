@@ -4,27 +4,24 @@ import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
-import { getDhaRetailer } from '../services/phaDashboardService';
 import { DataPhaDasboardMap } from '../@types';
+import { webRequest } from '../utils/webRequest';
+import { ENDPOINTS } from '../constants/url';
 
 export const Home = () => {
   const [dataRequest, setDataRequest] = useState<Array<DataPhaDasboardMap>>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const resp = await getDhaRetailer();
-      const data = await resp.json();
-      const dataRows: Array<DataPhaDasboardMap> = [];
-      data.data.rows.forEach((element: DataPhaDasboardMap) => {
-        if (element.geom) {
-          dataRows.push(element);
-        }
-      });
-      setDataRequest(dataRows);
-    };
-
-    fetchData()
-      .catch(console.error);
+    webRequest.get(ENDPOINTS.MAP()).then((res) => res.json())
+      .then((res) => {
+        const dataRows: Array<DataPhaDasboardMap> = [];
+        res.data.rows.forEach((element: DataPhaDasboardMap) => {
+          if (element.geom) {
+            dataRows.push(element);
+          }
+        });
+        setDataRequest(dataRows);
+      }).catch((err) => console.error(err));
   }, []);
 
   const onClickPlus = () => {
@@ -56,7 +53,7 @@ export const Home = () => {
             <div className="space"><span className="line" /></div>
             <div className="listloc">
               <div className="listingarea">
-                {dataRequest ? ListMarkerComponent(dataRequest) : null}
+                {dataRequest && ListMarkerComponent(dataRequest)}
               </div>
             </div>
           </div>
