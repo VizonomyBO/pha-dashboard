@@ -31,7 +31,7 @@ export const Profile = () => {
             <div className="left">
               <div className="userphoto">
                 <div className="picture">
-                  <img src={profile?.owner_photo || '/images/img_photo_1.png'} alt="" height={166} width={166} />
+                  <img src={profile?.owner_photo || '/images/owner_photo.png'} alt="" height={166} width={166} />
                 </div>
               </div>
               <div className="bname">
