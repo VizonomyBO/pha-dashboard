@@ -101,3 +101,7 @@ export interface IndividualFormInterface {
   submissionStatus?: string,
   multimedia?: MediaInterface[]
 }
+
+export interface CategoriesInterface {
+  categoriesSelected: string[]
+}

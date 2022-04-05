@@ -82,3 +82,10 @@ export const INITIAL_INDIVIDUAL_FORM = {
   submission_date: new Date(),
   submission_status: '',
 };
+
+export const INITIAL_CATEGORIES = {
+  categoriesSelected: [],
+  center: [],
+  accesibility: [],
+  dataSources: []
+};
