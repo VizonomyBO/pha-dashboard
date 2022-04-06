@@ -8,26 +8,21 @@ export const DropdownGeocoder = () => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState();
+  const [inputTextHtm, setInputTextHtml] = useState('');
   const [geocoder, setGeocoder] = useState<GeocoderService>();
   useEffect(() => {
     setGeocoder(new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement));
   }, []);
   useEffect(() => {
-    console.log(inputText, 'DOTTY..2', geocoder);
     if (inputText.shouldSearch) {
-      console.log('DOTTY..8');
       geocoder?.setGeocoderInputText(inputText);
+    } else {
+      if (inputText.text) {
+        geocoder?.setGeocoderQuery(inputText.text);
+      }
+      setGeocoderOptions([]);
     }
-    // else {
-    //   if (inputText.text) {
-    //     geocoder.setGeocoderQuery(inputText.text);
-    //   }
-    //   setGeocoderOptions([]);
-    // }
   }, [inputText]);
-  useEffect(() => {
-    console.log(options, 'DOTTY..1');
-  }, [options]);
   return (
     <>
       <div className="swhere">
@@ -38,14 +33,13 @@ export const DropdownGeocoder = () => {
           ref={geocoderDivRef}
           className="txtd"
           type="text"
-          value={inputText.text}
+          value={inputTextHtm}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            const { value } = e.target;
-            console.log(e.target.value, 'DOTTY..4', value);
             setInputText({
               text: e.target.value,
               shouldSearch: true
             });
+            setInputTextHtml(e.target.value);
           }}
           placeholder="City or Zip Code"
         />
@@ -58,35 +52,42 @@ export const DropdownGeocoder = () => {
           maxWidth: 313
         }}
       >
-        <table>
-          <tr key="tr">
+        {inputText.shouldSearch && (
+          <ul className="tableGeocoder">
             {
-              inputText.shouldSearch && options.map((opt: any, index: number) => {
-                console.log(opt, index);
+              inputText.shouldSearch && options.map((opt: any) => {
+                let region = '';
+                if (opt.context) {
+                  opt.context.forEach((element: any) => {
+                    if (element.id.includes('region')) {
+                      region = element.short_code.replace('US-', '');
+                    }
+                  });
+                }
                 return (
-                  <td key={`${opt.place_name}index`}>
+                  <li key={`${opt.place_name}index`} className="trGeocoder">
                     <button
+                      className="buttonGoecoder"
                       type="button"
                       onClick={() => {
                         setInputText({
                           text: opt.place_name,
                           shouldSearch: false
                         });
+                        setInputTextHtml(region === '' ? opt.text : `${opt.text}, ${region}`);
                         setGeocoderOptions([]);
                       }}
                     >
                       <label>
-                        <span>
-                          <span>{opt.place_name}</span>
-                        </span>
+                        <span className="spanGeocoder">{region === '' ? opt.text : `${opt.text}, ${region}`}</span>
                       </label>
                     </button>
-                  </td>
+                  </li>
                 );
               })
             }
-          </tr>
-        </table>
+          </ul>
+        )}
       </div>
     </>
   );

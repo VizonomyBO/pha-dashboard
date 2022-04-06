@@ -19,7 +19,6 @@ export class GeocoderService {
     });
     this.geocoder.addTo(elem);
     this.geocoder.on('results', (response) => {
-      console.log('response', response);
       setGeocoderOptions(response.features);
     });
     this.geocoder.on('error', (error) => {
@@ -28,7 +27,6 @@ export class GeocoderService {
   }
 
   setGeocoderInputText(inputText: InputTextInterface) {
-    console.log(inputText, 'Dotty..7');
     if (this.geocoder != null && inputText.text != null) {
       this.geocoder.setInput(inputText.text);
     }

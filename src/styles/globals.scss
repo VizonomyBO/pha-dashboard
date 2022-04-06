@@ -85,3 +85,33 @@ input, button, textarea, select {
 .css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
     margin-top: 15px;
 }
+
+.tableGeocoder {
+    margin-left: 10px;
+    width: 216px;
+    background-color: white;
+    margin-top: 50px;
+    position: fixed;
+    border-radius: 20px;
+    padding-bottom: 10px;
+    list-style: none;
+    padding: 10px;
+}
+
+.buttonGoecoder {
+    background: transparent;
+    border-color: transparent;
+    width: 100%;
+    text-align: inherit;
+}
+.spanGeocoder {
+    font-family: "FuturaMedium", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #7A7E80;
+    padding-left: 4px;
+}
+
+.trGeocoder:hover {
+    background-color: #EBFBFF;
+}
