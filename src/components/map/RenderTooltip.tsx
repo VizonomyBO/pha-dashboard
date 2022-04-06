@@ -1,11 +1,11 @@
-import { Layer, PickInfo } from 'deck.gl';
+import { PickInfo } from 'deck.gl';
+import { DataPhaDasboardMap } from '../../@types';
 import { ToolTip } from './ToolTip';
 
-export default function renderTooltip(info: PickInfo<Layer<unknown>[]> | undefined) {
+export default function renderTooltip(info: PickInfo<DataPhaDasboardMap>) {
   let toolTip = null;
   if (info?.object) {
-    const { x, y } = info;
-    toolTip = ToolTip({ x, y, retailerId: '' });
+    toolTip = ToolTip(info);
   }
   return toolTip;
 }
