@@ -57,3 +57,11 @@ input, button, textarea, select {
     color: red;
     font-family: "FuturaBold", sans-serif;
 }
+
+.mapboxgl-ctrl-geocoder--icon-search {
+    display: none !important;
+}
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder .suggestions {
+    background-color: transparent;
+    box-shadow: 0 0 10px 2px transparent !important;
+}
