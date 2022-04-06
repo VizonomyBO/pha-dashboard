@@ -61,7 +61,12 @@ input, button, textarea, select {
 .mapboxgl-ctrl-geocoder--icon-search {
     display: none !important;
 }
+
 .mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder .suggestions {
     background-color: transparent;
     box-shadow: 0 0 10px 2px transparent !important;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-color: transparent !important;
 }
