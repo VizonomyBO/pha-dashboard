@@ -17,7 +17,7 @@ export const IconLayerData = (data: Array<DataPhaDasboardMap>) => (
     if (item.geom.type === COLORS.GREEN) {
       icon = PinGreen;
     }
-    return new IconLayer({
+    return new IconLayer<DataPhaDasboardMap>({
       id: `IconLayer%${item.retailer_id}`,
       data: [item],
       getIcon: () => ({
@@ -29,12 +29,10 @@ export const IconLayerData = (data: Array<DataPhaDasboardMap>) => (
         getCursor: () => 'pointer',
         zIndex: 2
       }),
-      getPosition: (d: unknown) => ((d as DataPhaDasboardMap).geom.coordinates as Position),
+      getPosition: (d: DataPhaDasboardMap) => (d.geom.coordinates as Position),
       getSize: () => 6,
       sizeScale: 7,
-      pickable: true,
-      style: 'cursor:pointer;',
-      getCursor: () => 'pointer',
+      pickable: true
     });
   })
 );
