@@ -26,6 +26,8 @@ export const INITIAL_MARKETPLACE = {
     twitter: '',
     email: '',
     instagram: '',
+    latitude: 0,
+    longitude: 0,
   },
   files: {
     bussines: [],
@@ -44,24 +46,48 @@ export const INITIAL_MARKETPLACE = {
   contactDetails: {
     contact_name: '',
     contact_email: '',
-    contact_owner: '',
-    contact_patron: ''
+    contact_owner: 'No',
+    contact_patron: 'No'
   },
   selectCategory: {
-    supermarket: '',
-    corner_store: '',
-    dollar_stores: '',
-    food_pantry: '',
-    distribution: '',
-    food_co_op: '',
+    supermarket: 'No',
+    corner_store: 'No',
+    dollar_stores: 'No',
+    food_pantry: 'No',
+    distribution: 'No',
+    food_co_op: 'No',
   },
   selectAccessibility: {
-    wic_accepted: '',
-    snap_accepted: '',
+    wic_accepted: 'No',
+    snap_accepted: 'No',
   },
 };
 
 export const INITIAL_SESSION = {
   sessionState: false,
   error: false
+};
+
+export const INITIAL_INDIVIDUAL_FORM = {
+  individual_id: '',
+  retailer_id: '',
+  availability: '',
+  quality: '',
+  visibility: '',
+  local: '',
+  meets_need: '',
+  produce_avail_store: '',
+  contact_name: '',
+  contact_email: '',
+  contact_phone: '',
+  contact_zipcode: '',
+  submission_date: new Date(),
+  submission_status: '',
+};
+
+export const INITIAL_CATEGORIES = {
+  categoriesSelected: [],
+  center: [],
+  accesibility: [],
+  dataSources: []
 };

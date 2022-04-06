@@ -5,7 +5,7 @@ export default function renderTooltip(info: PickInfo<Layer<unknown>[]> | undefin
   let toolTip = null;
   if (info?.object) {
     const { x, y } = info;
-    toolTip = ToolTip({ x, y });
+    toolTip = ToolTip({ x, y, retailerId: '' });
   }
   return toolTip;
 }

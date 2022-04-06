@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useMarketplaceDispatch } from '../store/hooks';
 import { formAccessibility } from '../constants/form';
 
@@ -20,14 +19,11 @@ export const AccessibilityPanel = () => {
       setSnapAccepted(formAccessibility.SNAP_ACCEPTED.NO);
     }
   };
-  useEffect(() => {
-    setWicAccepted(formAccessibility.WIC_ACCEPTED.NO);
-    setSnapAccepted(formAccessibility.SNAP_ACCEPTED.NO);
-  }, [setWicAccepted, setSnapAccepted]);
   return (
     <>
       <div className="sectiontitle second">
         Select Accessibility
+        <sup>*</sup>
       </div>
       <div className="panel">
         <div className="body">
@@ -55,6 +51,10 @@ export const AccessibilityPanel = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="sectiontitle second">
+          <sup>*</sup>
+          <span className="colorred">Required</span>
         </div>
       </div>
     </>

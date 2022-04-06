@@ -1,18 +1,34 @@
-import { useEffect, useState } from 'react';
-import { DEFAULT_DROPDOWN_OPTION, TYPE_BUSINESS } from '../constants';
+import { useState } from 'react';
+import { DEFAULT_DROPDOWN_OPTION, OTHER_QUESTIONS, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
-import { isEmpty } from '../utils/isEmpty';
+import {
+  businessDetailsValidation,
+  selectAccessibilityValidation,
+  selectCategoryValidation
+} from '../utils/validation';
+import { ModalRequestForm } from './ModalRequestForm';
+import { FormTabTypeInterface } from '../@types';
+import { DropdownAddress } from './map/DropdownAddress';
 
-export const LeftForm1 = () => {
+export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
-  const { businessDetails } = useMarketplaceState();
-  const [formComplete, setFormComplete] = useState(false);
-  useEffect(() => {
-    setFormComplete(isEmpty(businessDetails.name) && isEmpty(businessDetails.phone)
-    && isEmpty(businessDetails.address_1) && isEmpty(businessDetails.city) && isEmpty(businessDetails.state)
-    && isEmpty(businessDetails.zipcode));
-  }, [businessDetails]);
+  const { businessDetails, selectCategory, selectAccessibility } = useMarketplaceState();
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
+  const clickProceed = () => {
+    if (businessDetailsValidation(businessDetails)
+    && selectCategoryValidation(selectCategory)
+    && selectAccessibilityValidation(selectAccessibility)) {
+      setTypeModal(true);
+      if (setActiveTab) {
+        setActiveTab(OTHER_QUESTIONS);
+      }
+    } else {
+      setVisibleModal(true);
+      setTypeModal(false);
+    }
+  };
   return (
     <>
       <div className="sectiontitle">
@@ -20,7 +36,10 @@ export const LeftForm1 = () => {
       </div>
       <div className="item">
         <div className="title">
-          <label>Business Name</label>
+          <label>
+            Business Name
+            <sup>*</sup>
+          </label>
         </div>
         <div className="ainput">
           <input
@@ -35,16 +54,14 @@ export const LeftForm1 = () => {
       </div>
       <div className="item">
         <div className="title">
-          <label>Address Line 1</label>
+          <label>
+            Address Line 1
+            <sup>*</sup>
+          </label>
         </div>
-        <div className="ainput">
-          <input
-            className="light"
-            type="text"
-            onChange={
-              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, e.target.value)
-            }
-            value={businessDetails.address_1}
+        <div className="dropdownAddress">
+          <DropdownAddress
+            type={TYPE_BUSINESS.ADDRESS_1}
           />
         </div>
       </div>
@@ -65,7 +82,10 @@ export const LeftForm1 = () => {
       </div>
       <div className="item">
         <div className="title">
-          <label>Phone Number</label>
+          <label>
+            Phone Number
+            <sup>*</sup>
+          </label>
         </div>
         <div className="ainput">
           <input
@@ -80,7 +100,10 @@ export const LeftForm1 = () => {
       </div>
       <div className="item">
         <div className="title">
-          <label>City</label>
+          <label>
+            City
+            <sup>*</sup>
+          </label>
         </div>
         <div className="ainput">
           <input
@@ -96,7 +119,10 @@ export const LeftForm1 = () => {
       <div className="twoc">
         <div className="item">
           <div className="title">
-            <label>State</label>
+            <label>
+              State
+              <sup>*</sup>
+            </label>
           </div>
           <DropdownBusiness
             initialState={DEFAULT_DROPDOWN_OPTION.STATES}
@@ -105,7 +131,10 @@ export const LeftForm1 = () => {
         </div>
         <div className="item">
           <div className="title">
-            <label>Zip / Postal Code</label>
+            <label>
+              Zip / Postal Code
+              <sup>*</sup>
+            </label>
           </div>
           <div className="ainput2">
             <input
@@ -362,10 +391,15 @@ export const LeftForm1 = () => {
         </div>
       </div>
       <div className="aaction">
-        <button className="light" type="button" disabled={!formComplete}>
+        <button className="light" type="button" onClick={clickProceed}>
           Proceed
         </button>
       </div>
+      <ModalRequestForm
+        type={typeModal}
+        visible={visibleModal}
+        setVisible={setVisibleModal}
+      />
     </>
   );
 };

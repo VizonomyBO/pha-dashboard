@@ -1,11 +1,9 @@
-import { DeckGLComponent } from './DeckGlComponent';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { DeckGLComponent } from './DeckGlComponent';
+import { DataPhaDasboardMap } from '../../@types';
 
-export const Map = () => {
-  console.log('MAP init');
-  return (
-    <div className="map-container">
-      <DeckGLComponent />
-    </div>
-  );
-};
+export const Map = ({ dataMarker }: { dataMarker: DataPhaDasboardMap[] }) => (
+  <div className="map-container">
+    <DeckGLComponent dataForMarker={dataMarker} />
+  </div>
+);

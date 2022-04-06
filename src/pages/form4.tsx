@@ -21,20 +21,21 @@ export const Form4 = () => {
                 </button>
               </div>
               <h2 className="sectitle">User Feedback Form</h2>
-              <p className="secdescription">Have a location listed by completing the form below</p>
+              <p className="secdescription">
+                Have a location listed by completing the form below
+              </p>
             </div>
             <div className="body">
               <div className="group">
                 <div className="aleft">
-                  <div className="sectiontitle">
-                    Availability
-                  </div>
+                  <div className="sectiontitle">Availability</div>
                   <div className="item">
                     <div className="title grouped">
                       <span className="number">1.</span>
                       <span className="description">
-                        What type of fruits and vegetables are stocked at this location?
-                        Please select categories with three or more items regularly stocked?
+                        What type of fruits and vegetables are stocked at
+                        this location? Please select categories with three
+                        or more items regularly stocked?
                       </span>
                     </div>
                     <div className="ainput chk">
@@ -55,44 +56,39 @@ export const Form4 = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="sectiontitle">
-                    Quality
-                  </div>
+                  <div className="sectiontitle">Quality</div>
                   <div className="item">
                     <div className="title grouped">
                       <span className="number">2.</span>
                       <span className="description">
-                        How would you describe the quality of the fresh fruits and
-                        vegetables at this location?
-                        {' '}
-
+                        How would you describe the quality of the fresh
+                        fruits and vegetables at this location?
                       </span>
                     </div>
                     <div className="ainput chk">
                       <label className="chkwrap">
-                        Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
+                        Acceptable (peak condition, top quality, good color,
+                        fresh, firm, and clean)
                         <input type="checkbox" />
                         <span className="checkmark" />
                       </label>
                       <label className="chkwrap">
                         Unacceptable (bruised, old looking, mushy, dry,
-                        overripe, dark sunken spots in Irregular patches or cracked or broken surfaces,
-                        signs of shriveling, mold or excessive softening)
+                        overripe, dark sunken spots in Irregular patches or
+                        cracked or broken surfaces, signs of shriveling,
+                        mold or excessive softening)
                         <input type="checkbox" />
                         <span className="checkmark" />
                       </label>
                     </div>
                   </div>
-                  <div className="sectiontitle">
-                    Visibility
-                  </div>
+                  <div className="sectiontitle">Visibility</div>
                   <div className="item">
                     <div className="title grouped">
                       <span className="number">3.</span>
                       <span className="description">
-                        Are the fresh fruits and vegetables visible from the front of the
-                        store or before entering ?
-
+                        Are the fresh fruits and vegetables visible from the
+                        front of the store or before entering ?
                       </span>
                     </div>
                     <div className="ainput chk">
@@ -108,16 +104,13 @@ export const Form4 = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="sectiontitle">
-                    Local
-                  </div>
+                  <div className="sectiontitle">Local</div>
                   <div className="item">
                     <div className="title grouped">
                       <span className="number">4.</span>
                       <span className="description">
-                        Were any of the fruits and vegetables labeled as “locally
-                        grown”?
-
+                        Were any of the fruits and vegetables labeled as
+                        “locally grown”?
                       </span>
                     </div>
                     <div className="ainput chk">
@@ -133,16 +126,13 @@ export const Form4 = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="sectiontitle">
-                    Meets Need
-                  </div>
+                  <div className="sectiontitle">Meets Need</div>
                   <div className="item">
                     <div className="title grouped">
                       <span className="number">5.</span>
                       <span className="description">
-                        Did the retailer or market have all of the fruits and vegetables
-                        you were looking for?
-
+                        Did the retailer or market have all of the fruits
+                        and vegetables you were looking for?
                       </span>
                     </div>
                     <div className="ainput chk">
@@ -161,19 +151,27 @@ export const Form4 = () => {
                   <div className="item">
                     <div className="title">
                       <label>
-                        If no, please list what fruits and vegetables you would like this retailer to stock?
+                        If no, please list what fruits and vegetables you
+                        would like this retailer to stock?
                       </label>
                     </div>
                     <div className="ainput htxtarea">
-                      <textarea name="yth" id="yth2" cols={30} rows={10} placeholder="Your text here..." />
+                      <textarea
+                        name="yth"
+                        id="yth2"
+                        cols={30}
+                        rows={10}
+                        placeholder="Your text here..."
+                      />
                     </div>
                   </div>
-                  <div className="sectiontitle">
-                    Photo Upload
-                  </div>
+                  <div className="sectiontitle">Photo Upload</div>
                   <div className="item">
                     <div className="title">
-                      <label>(Please upload a photo where produce is stocked at this retailer)</label>
+                      <label>
+                        (Please upload a photo where produce is stocked at
+                        this retailer)
+                      </label>
                     </div>
                     <div className="ainput upload">
                       <div className="uploadarea">
@@ -183,9 +181,7 @@ export const Form4 = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="sectiontitle">
-                    Contact
-                  </div>
+                  <div className="sectiontitle">Contact</div>
                   <div className="item">
                     <div className="title">
                       <label>Email</label>
@@ -213,8 +209,9 @@ export const Form4 = () => {
                   <div className="item">
                     <div className="ainput chk">
                       <label className="chkwrap">
-                        Stay connected to your local retailers and your community!
-                        I agree to allow PHA and its affiliates to use my contact information for communication
+                        Stay connected to your local retailers and your
+                        community! I agree to allow PHA and its affiliates
+                        to use my contact information for communication
                         purposes.
                         <input type="checkbox" />
                         <span className="checkmark" />

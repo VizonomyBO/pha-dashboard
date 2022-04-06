@@ -16,7 +16,7 @@ export const useMarketplaceState = () => useSelector(
 export const useMarketplaceDispatch = () => {
   const dispatch = useDispatch();
   return {
-    setBusinessDetails: (type: string, value: string) => {
+    setBusinessDetails: (type: string, value: string | number) => {
       dispatch(setBusinessDetails(type, value));
     },
     setBusinessFile: (type: string, value: MultimediaInterface[]) => {

@@ -1,10 +1,12 @@
 import { Header } from '../components/Header';
+import { Badge } from '../components/map/Badge';
 import { Navbar } from '../components/Navbar';
+import { BADGES } from '../constants';
 import { useProfile } from '../store/hooks/custom/useProfile';
 import { formatPhone, showSchedule, showText } from '../utils/textFormatter';
 
 export const Profile = () => {
-  const { profile } = useProfile();
+  const { profile, badges } = useProfile();
   return (
     <div className="container">
       <div className="bgwhite" />
@@ -29,7 +31,7 @@ export const Profile = () => {
             <div className="left">
               <div className="userphoto">
                 <div className="picture">
-                  <img src={profile?.owner_photo || '/images/img_photo_1.png'} alt="" height={166} width={166} />
+                  <img src={profile?.owner_photo || '/images/owner_photo.png'} alt="" height={166} width={166} />
                 </div>
               </div>
               <div className="bname">
@@ -103,22 +105,9 @@ export const Profile = () => {
               <div className="txtst" />
               <div className="txtbt" />
               <div className="quality">
-                <div className="block">
-                  <div className="icclock" />
-                  <div className="ict"><span className="txtst">Fresh Food</span></div>
-                </div>
-                <div className="block">
-                  <div className="icclock" />
-                  <div className="ict"><span className="txtst">Produce Availability</span></div>
-                </div>
-                <div className="block">
-                  <div className="icclock" />
-                  <div className="ict"><span className="txtst">Fresh Food</span></div>
-                </div>
-                <div className="block">
-                  <div className="icclock" />
-                  <div className="ict"><span className="txtst">Produce Availability</span></div>
-                </div>
+                {
+                  badges.map((badge) => (<Badge key={badge} {...BADGES[badge]} />))
+                }
               </div>
               <div className="maparea">
                 <div className="opkindmap">
