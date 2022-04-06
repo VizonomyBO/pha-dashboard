@@ -32,7 +32,7 @@ export class GeocoderService {
     }
   }
 
-  setGeocoderQuery(query:any) {
+  setGeocoderQuery(query: string) {
     if (this.geocoder != null) {
       this.geocoder.query(query);
     }

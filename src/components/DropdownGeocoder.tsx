@@ -31,7 +31,6 @@ export const DropdownGeocoder = () => {
       <div className="swhere">
         <span className="icmappin" />
         <span className="txtd">Where</span>
-        {/* <div ref={geocoderDivRef} id="geocoder" /> */}
         <input
           ref={geocoderDivRef}
           className="txtd"
