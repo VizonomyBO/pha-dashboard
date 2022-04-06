@@ -20,6 +20,7 @@ import { Nsform1 } from './pages/nsform1';
 import { Nsform4 } from './pages/nsform4';
 import { Nshome } from './pages/nshome';
 import { Profile } from './pages/profile';
+import { Login } from './components/Login';
 
 import { theme } from './theme';
 
@@ -32,6 +33,10 @@ ReactDOM.render(
             <Route
               path="/"
               element={<Landing />}
+            />
+            <Route
+              path="/login"
+              element={<Login />}
             />
             <Route
               path="/dashboard"
