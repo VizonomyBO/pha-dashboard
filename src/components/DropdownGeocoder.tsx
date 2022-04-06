@@ -1,4 +1,5 @@
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { useEffect, useRef, useState } from 'react';
 import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 import { GeocoderService } from '../services/geocoderService';
@@ -12,6 +13,7 @@ export const DropdownGeocoder = () => {
   const [geocoder, setGeocoder] = useState<GeocoderService>();
   useEffect(() => {
     setGeocoder(new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     if (inputText.shouldSearch) {
@@ -22,6 +24,7 @@ export const DropdownGeocoder = () => {
       }
       setGeocoderOptions([]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputText]);
   return (
     <>
@@ -55,9 +58,10 @@ export const DropdownGeocoder = () => {
         {inputText.shouldSearch && (
           <ul className="tableGeocoder">
             {
-              inputText.shouldSearch && options.map((opt: any) => {
+              inputText.shouldSearch && options.map((opt: Result) => {
                 let region = '';
                 if (opt.context) {
+                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
                   opt.context.forEach((element: any) => {
                     if (element.id.includes('region')) {
                       region = element.short_code.replace('US-', '');
