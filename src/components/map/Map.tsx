@@ -12,7 +12,6 @@ export const Map = () => {
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const [deckState, setDeckState] = useState({ ...deckDefaults, renderToolTip: RenderTooltip });
   const [layers, setLayers] = useState([]);
-
   // const { getCartoToken, cartoToken } = useDeckgl();
   const hideTooltip = () => {
     setHoverInfo(undefined);
@@ -65,9 +64,6 @@ export const Map = () => {
       onClickFunction: expandTooltip
     });
   }, [layers]);
-  // const newprops = {
-  //   layers: layers
-  // };
   return (
     <div className="map-container">
       <DeckGLComponent {...deckState}>{RenderTooltip(hoverInfo)}</DeckGLComponent>
