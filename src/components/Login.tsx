@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
 import { ENDPOINTS } from '../constants/url';
 import { webRequest } from '../utils/webRequest';
+import {
+  ITEM_IMAGE,
+  STYLE_ERROR,
+  INTERVAL_CAUROSEL,
+  MESSAGE_EMAIL_PASSWORD,
+  MESSAGE_ERROR
+} from '../constants/login';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
@@ -10,23 +17,6 @@ export const Login = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
   const TOKEN_KEY = 'token';
-  const items = [{
-    id: 'img01',
-    imagen: '/images/loginImages/admin-image-1.jpeg',
-    description: 'Eat healthy with our curated selection of food and vegetables'
-  }, {
-    id: 'img02',
-    imagen: '/images/loginImages/admin-image-2.jpeg',
-    description: 'Eat healthy with our curated selection of food and vegetables!'
-  }, {
-    id: 'img03',
-    imagen: '/images/loginImages/admin-image-3.jpeg',
-    description: 'Eat healthy with our curated selection of food and vegetables'
-  }];
-  const styleError = {
-    color: 'red',
-    fontSize: '14px'
-  };
 
   const setUsernameFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     setUsername(e.currentTarget.value);
@@ -36,9 +26,14 @@ export const Login = () => {
     setPassword(e.currentTarget.value);
   };
 
+  const setTimeOutFunction = () => {
+    setTimeout(() => {
+      setErrorMessage('');
+    }, 3000);
+  };
+
   const loginFunction = () => {
-    const headers = new Headers();
-    headers.append('Content-Type', 'application/json');
+    const headers = webRequest.generateJSONHeader();
     webRequest.post(ENDPOINTS.LOGIN(), {
       username, password
     }, headers).then((r) => r.json())
@@ -47,20 +42,22 @@ export const Login = () => {
           localStorage.setItem(TOKEN_KEY, d.data.idToken);
           navigate('/dashboard');
         } else {
-          setErrorMessage('Could not connect, check your email and password.');
-          setTimeout(() => {
-            setErrorMessage('');
-          }, 3000);
+          setErrorMessage(MESSAGE_EMAIL_PASSWORD);
+          setTimeOutFunction();
         }
-      }).catch((err) => console.error(err));
+      }).catch((err) => {
+        console.error(err);
+        setErrorMessage(MESSAGE_ERROR);
+        setTimeOutFunction();
+      });
   };
 
   return (
     <div className="container">
-      <Carousel className="bglogin" interval={4000} autoPlay>
+      <Carousel className="bglogin" interval={INTERVAL_CAUROSEL} autoPlay>
         {
-          items.map((item) => (
-            <div>
+          ITEM_IMAGE.map((item) => (
+            <div key={item.id}>
               <img src={item.imagen} alt="" />
               <div className="blockdesc">
                 <p>
@@ -100,7 +97,7 @@ export const Login = () => {
             />
           </div>
           {errorMessage && (
-            <p style={styleError}>
+            <p style={STYLE_ERROR}>
               {errorMessage}
             </p>
           )}
