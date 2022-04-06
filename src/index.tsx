@@ -6,6 +6,7 @@ import {
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from '@mui/material';
 import store from './store';
 import './index.scss';
 import reportWebVitals from './reportWebVitals';
@@ -19,56 +20,65 @@ import { Nsform1 } from './pages/nsform1';
 import { Nsform4 } from './pages/nsform4';
 import { Nshome } from './pages/nshome';
 import { Profile } from './pages/profile';
+import { Login } from './components/Login';
+
+import { theme } from './theme';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            path="/"
-            element={<Landing />}
-          />
-          <Route
-            path="/dashboard"
-            element={<Dashboard />}
-          />
-          <Route
-            path="/form"
-            element={<Form />}
-          />
-          <Route
-            path="/form4"
-            element={<Form4 />}
-          />
-          <Route
-            path="/home"
-            element={<Home />}
-          />
-          <Route
-            path="/map"
-            element={<MainMap />}
-          />
-          <Route
-            path="/nsform1"
-            element={<Nsform1 />}
-          />
-          <Route
-            path="/nsform4"
-            element={<Nsform4 />}
-          />
-          <Route
-            path="/nshome"
-            element={<Nshome />}
-          />
-          <Route
-            path="/profile/:id"
-            element={<Profile />}
-          />
-        </Routes>
-      </BrowserRouter>
-    </React.StrictMode>
-  </Provider>,
+  <ThemeProvider theme={theme}>
+    <Provider store={store}>
+      <React.StrictMode>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              path="/"
+              element={<Landing />}
+            />
+            <Route
+              path="/login"
+              element={<Login />}
+            />
+            <Route
+              path="/dashboard"
+              element={<Dashboard />}
+            />
+            <Route
+              path="/form"
+              element={<Form />}
+            />
+            <Route
+              path="/form4"
+              element={<Form4 />}
+            />
+            <Route
+              path="/home"
+              element={<Home />}
+            />
+            <Route
+              path="/map"
+              element={<MainMap />}
+            />
+            <Route
+              path="/nsform1"
+              element={<Nsform1 />}
+            />
+            <Route
+              path="/nsform4"
+              element={<Nsform4 />}
+            />
+            <Route
+              path="/nshome"
+              element={<Nshome />}
+            />
+            <Route
+              path="/profile/:id"
+              element={<Profile />}
+            />
+          </Routes>
+        </BrowserRouter>
+      </React.StrictMode>
+    </Provider>
+  </ThemeProvider>,
   document.getElementById('root')
 );
 
