@@ -1,14 +1,12 @@
-import { useState, useRef, useEffect } from 'react';
-import { DeckGL, Layer, PickInfo } from 'deck.gl';
+import { useRef } from 'react';
+import { DeckGL } from 'deck.gl';
 import Map from 'react-map-gl';
-import { CartoLayer, MAP_TYPES, setDefaultCredentials } from '@deck.gl/carto';
-import PinRed from './ic-pin-red.svg';
+// import { CartoLayer, MAP_TYPES, setDefaultCredentials } from '@deck.gl/carto';
+// import PinRed from './ic-pin-red.svg';
 // import { WebMercatorViewport } from '@deck.gl/core';
-import {
-  MAPBOX_KEY, BASEMAP, NO_DATA, DEFAULT_VIEW_STATE
-} from '../../constants/index';
+import { MAPBOX_KEY, BASEMAP, NO_DATA } from '../../constants/index';
 import { NoDataProvided } from '../NoDataProvided';
-import RenderTooltip from './RenderTooltip';
+// import RenderTooltip from './RenderTooltip';
 import { DeckInterface } from '../../@types';
 
 export const DeckGLComponent = ({
@@ -17,7 +15,7 @@ export const DeckGLComponent = ({
   layers,
   onViewStateChange,
   onClickFunction
-} : DeckInterface) => {
+}: DeckInterface) => {
   const mapref = useRef(null);
   return (
     <div>
@@ -25,7 +23,7 @@ export const DeckGLComponent = ({
         <NoDataProvided variables={['MAPBOX_KEY']} />
       ) : (
         <DeckGL
-          initialViewState={{ ...initialStateView }}
+          initialViewState={initialStateView}
           controller={controller}
           layers={layers}
           onViewStateChange={onViewStateChange}
