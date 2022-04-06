@@ -59,9 +59,11 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             <sup>*</sup>
           </label>
         </div>
-        <DropdownAddress
-          type={TYPE_BUSINESS.ADDRESS_1}
-        />
+        <div className="dropdownAddress">
+          <DropdownAddress
+            type={TYPE_BUSINESS.ADDRESS_1}
+          />
+        </div>
       </div>
       <div className="item">
         <div className="title">
