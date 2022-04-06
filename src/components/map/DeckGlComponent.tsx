@@ -1,21 +1,18 @@
 import { useRef } from 'react';
 import { DeckGL } from 'deck.gl';
 import Map from 'react-map-gl';
-// import { CartoLayer, MAP_TYPES, setDefaultCredentials } from '@deck.gl/carto';
-// import PinRed from './ic-pin-red.svg';
-// import { WebMercatorViewport } from '@deck.gl/core';
 import { MAPBOX_KEY, BASEMAP, NO_DATA } from '../../constants/index';
 import { NoDataProvided } from '../NoDataProvided';
-// import RenderTooltip from './RenderTooltip';
 import { DeckInterface } from '../../@types';
 
-export const DeckGLComponent = ({
+export const DeckGLComponent: React.FC<DeckInterface> = ({
   initialStateView,
   controller,
   layers,
   onViewStateChange,
-  onClickFunction
-}: DeckInterface) => {
+  onClickFunction,
+  children
+}) => {
   const mapref = useRef(null);
   return (
     <div>
@@ -30,7 +27,7 @@ export const DeckGLComponent = ({
           onClick={onClickFunction}
         >
           <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
-          {/* {RenderTooltip(hoverInfo)} */}
+          { children }
         </DeckGL>
       )}
     </div>

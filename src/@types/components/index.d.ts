@@ -1,4 +1,4 @@
-import { SetStateAction } from 'react';
+import { Component, SetStateAction } from 'react';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../constants';
 import { Layer } from 'deck.gl';
 export interface BadgeType {
