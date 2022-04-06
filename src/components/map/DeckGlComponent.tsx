@@ -11,7 +11,13 @@ import { NoDataProvided } from '../NoDataProvided';
 import RenderTooltip from './RenderTooltip';
 import { DeckInterface } from '../../@types';
 
-export const DeckGLComponent = ({initialStateView, controller, layers, onViewStateChange,onClickFunction}:DeckInterface) => {
+export const DeckGLComponent = ({
+  initialStateView,
+  controller,
+  layers,
+  onViewStateChange,
+  onClickFunction
+} : DeckInterface) => {
   const mapref = useRef(null);
   return (
     <div>
@@ -26,7 +32,7 @@ export const DeckGLComponent = ({initialStateView, controller, layers, onViewSta
           onClick={onClickFunction}
         >
           <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
-          {RenderTooltip(hoverInfo)}
+          {/* {RenderTooltip(hoverInfo)} */}
         </DeckGL>
       )}
     </div>

@@ -83,8 +83,18 @@ export interface ViewStateInterface {
 }
 export interface DeckInterface {
   initialStateView: ViewStateInterface,
-  onViewStateChange: Function, 
+  onViewStateChange: (args: {
+    viewState: any;
+    interactionState: {
+      inTransition?: boolean;
+      isDragging?: boolean;
+      isPanning?: boolean;
+      isRotating?: boolean;
+      isZooming?: boolean;
+    };
+    oldViewState: any;
+  }) => any,
   controller: boolean,
   layers: Layer[],
-  onClickFunction: Function
+  onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any;
 }
