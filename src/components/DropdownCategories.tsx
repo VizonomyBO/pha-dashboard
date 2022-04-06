@@ -4,6 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
 import { CATEGORIES } from '../constants/categories';
+import { FilterType } from '../@types';
 
 export const DropdownCategories = () => {
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
@@ -24,13 +25,13 @@ export const DropdownCategories = () => {
           if (selected.length > 1) {
             return 'Multiple retailer types…';
           }
-          return selected[0];
+          return CATEGORIES.find((elem: FilterType) => elem.attrib === selected[0])?.name;
         }}
       >
-        {CATEGORIES.map((name: string) => (
-          <MenuItem key={name} value={name}>
-            <Checkbox checked={categoriesSelected.indexOf(name) > -1} />
-            <ListItemText primary={name} />
+        {CATEGORIES.map((category: FilterType) => (
+          <MenuItem key={category.name} value={category.attrib}>
+            <Checkbox checked={categoriesSelected.indexOf(category.attrib) > -1} />
+            <ListItemText primary={category.name} />
           </MenuItem>
         ))}
       </Select>

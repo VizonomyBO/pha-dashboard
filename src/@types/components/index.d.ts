@@ -1,5 +1,6 @@
+import { SetStateAction } from 'react';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../constants';
-
+import { Layer } from 'deck.gl';
 export interface BadgeType {
   text: string,
   image: string
@@ -13,7 +14,8 @@ export interface BadgePercentages {
   meets_need_percentage?: number,
 }
 export interface HeaderInterface {
-  type?: string
+  type?: string,
+  setOpenModal?: SetStateAction<S>
 }
 
 export type FormTabType = typeof BUSINESS_DETAILS | typeof OTHER_QUESTIONS | typeof CONTACT_DETAILS;
@@ -70,4 +72,19 @@ export interface MultimediFileInterface {
 
 export interface FormTabTypeInterface {
   setActiveTab?: React.Dispatch<React.SetStateAction<FormTabType>>
+}
+
+export interface ViewStateInterface {
+  latitude: number,
+  longitude: number,
+  zoom: number,
+  bearing: number,
+  pitch: number,
+}
+export interface DeckInterface {
+  initialStateView: ViewStateInterface,
+  onViewStateChange: Function, 
+  controller: boolean,
+  layers: Layer[],
+  onClickFunction: Function
 }

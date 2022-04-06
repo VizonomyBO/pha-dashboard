@@ -1,7 +1,11 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { CategoriesInterface } from '../../@types/redux';
 import {
-  setCategoriesSelected
+  setCategoriesSelected,
+  setAccesibilitiesSelected,
+  setBadgesSelected,
+  setCenterGeocoder,
+  setDataSourcesSelected
 } from '../actions';
 
 export const useCategoriesState = () => useSelector(
@@ -12,6 +16,18 @@ export const useCategoriesDispatch = () => {
   return {
     setCategoriesSelected: (categoriesSelected: string[]) => {
       dispatch(setCategoriesSelected(categoriesSelected));
+    },
+    setAccesibilitiesSelected: (accesibilities: string[]) => {
+      dispatch(setAccesibilitiesSelected(accesibilities));
+    },
+    setCenterGeocoder: (center: string[]) => {
+      dispatch(setCenterGeocoder(center));
+    },
+    setDataSourcesSelected: (dataSources: string[]) => {
+      dispatch(setDataSourcesSelected(dataSources));
+    },
+    setBadgesSelected: (badges: string[]) => {
+      dispatch(setBadgesSelected(badges));
     }
   };
 };

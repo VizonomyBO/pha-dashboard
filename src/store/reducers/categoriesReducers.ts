@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { INITIAL_CATEGORIES } from '../defaultStore';
+import { INITIIAL_FILTERS } from '../defaultStore';
 import * as TYPES from '../types';
 
 const categoriesReducer = (state: string[], action: AnyAction) => {
@@ -9,8 +9,28 @@ const categoriesReducer = (state: string[], action: AnyAction) => {
         ...state,
         categoriesSelected: action.categoriesSelected
       };
+    case TYPES.SET_ACCESSIBILITY:
+      return {
+        ...state,
+        accesibilities: action.accesibilities
+      };
+    case TYPES.SET_CENTER:
+      return {
+        ...state,
+        center: action.center
+      };
+    case TYPES.SET_DATA_SOURCES:
+      return {
+        ...state,
+        dataSources: action.dataSources
+      };
+    case TYPES.SET_BADGES:
+      return {
+        ...state,
+        badges: action.badges
+      };
     default:
-      return INITIAL_CATEGORIES;
+      return INITIIAL_FILTERS;
   }
 };
 

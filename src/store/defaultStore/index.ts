@@ -85,9 +85,10 @@ export const INITIAL_INDIVIDUAL_FORM = {
   submission_status: '',
 };
 
-export const INITIAL_CATEGORIES = {
+export const INITIIAL_FILTERS = {
   categoriesSelected: [],
   center: [],
-  accesibility: [],
-  dataSources: []
+  accesibilities: [],
+  dataSources: [],
+  badges: []
 };

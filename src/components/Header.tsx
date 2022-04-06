@@ -1,6 +1,6 @@
 import { HeaderInterface } from '../@types';
 
-export const Header = ({ type }: HeaderInterface) => (
+export const Header = ({ type, setOpenModal }: HeaderInterface) => (
   <div className="searchoptionsarea form1">
     <div className="accesspoint colored">
       <h1>GOOD FOOD MAP</h1>
@@ -12,15 +12,14 @@ export const Header = ({ type }: HeaderInterface) => (
     {type === 'home' && (
       <div className="searcharea colored">
         <div className="alook">
-          <div className="accesstype">
+          <button className="accesstype" onClick={() => setOpenModal(true)} type="button">
             Select Access Type
-          </div>
+          </button>
           <div className="citysearch">
             <i className="icsearch" />
             <input type="text" name="" id="" placeholder="City or Zip Code" />
             <button className="light" type="button">
               Search
-
             </button>
 
           </div>

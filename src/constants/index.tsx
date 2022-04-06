@@ -168,3 +168,9 @@ export const TYPE_INDIVIDUAL_FORM = {
   submission_status: 'submission_status',
   multimedia: 'multimedia'
 };
+
+export const TABLES_CARTO = {
+  submitted_by_users: 'retailers_pha',
+  open_street_map: 'retailers_osm',
+  USDA_food_markets: 'retailers_usda'
+};
