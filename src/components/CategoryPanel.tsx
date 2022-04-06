@@ -59,6 +59,7 @@ export const CategoryPanel = () => {
     <>
       <div className="sectiontitle">
         Select Category
+        <sup>*</sup>
       </div>
       <div className="panel">
         <div className="body">

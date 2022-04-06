@@ -2,7 +2,7 @@ import { Dispatch } from 'redux';
 import { MultimediaInterface } from '../../@types';
 import * as TYPES from '../types';
 
-export const setBusinessDetails = (type: string, value: string) => (dispatch: Dispatch) => {
+export const setBusinessDetails = (type: string, value: string | number) => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.SET_BUSINESS_DETAILS,
     payload: type,

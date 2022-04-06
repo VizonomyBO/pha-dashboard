@@ -26,6 +26,8 @@ export const INITIAL_MARKETPLACE = {
     twitter: '',
     email: '',
     instagram: '',
+    latitude: 0,
+    longitude: 0,
   },
   files: {
     bussines: [],

@@ -35,6 +35,8 @@ export interface BusinessDetailsInterface {
   twitter: string,
   email: string,
   instagram: string,
+  latitude: number,
+  longitude: number,
 }
 export interface OtherQuestionsInterface {
   description: string,
