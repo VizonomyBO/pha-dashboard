@@ -94,7 +94,7 @@ export const INITIAL_CATEGORIES = {
 
 export const INITIAL_GEOCODER_STATE = {
   inputText: {
-    text: null,
+    text: '',
     shouldSearch: false
   },
   options: []

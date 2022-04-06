@@ -9,7 +9,7 @@ export class GeocoderService {
 
   setGeocoderOptions;
 
-  constructor(id: string, setGeocoderOptions: (options: []) => void) {
+  constructor(id: string, setGeocoderOptions: (options: []) => void, elem: HTMLElement) {
     this.setGeocoderOptions = setGeocoderOptions;
     this.t = 4000;
     this.geocoder = new MapboxGeocoder({
@@ -17,7 +17,9 @@ export class GeocoderService {
       countries: 'US',
       marker: false,
     });
+    this.geocoder.addTo(elem);
     this.geocoder.on('results', (response) => {
+      console.log('response', response);
       setGeocoderOptions(response.features);
     });
     this.geocoder.on('error', (error) => {

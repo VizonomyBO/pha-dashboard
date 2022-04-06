@@ -1,15 +1,16 @@
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 import { GeocoderService } from '../services/geocoderService';
 
 const name = 'geocoder';
 export const DropdownGeocoder = () => {
+  const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState();
   const [geocoder, setGeocoder] = useState<GeocoderService>();
   useEffect(() => {
-    setGeocoder(new GeocoderService(name, setGeocoderOptions));
+    setGeocoder(new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement));
   }, []);
   useEffect(() => {
     console.log(inputText, 'DOTTY..2', geocoder);
@@ -34,6 +35,7 @@ export const DropdownGeocoder = () => {
         <span className="txtd">Where</span>
         {/* <div ref={geocoderDivRef} id="geocoder" /> */}
         <input
+          ref={geocoderDivRef}
           className="txtd"
           type="text"
           value={inputText.text}
