@@ -51,3 +51,37 @@ input, button, textarea, select {
     display: contents;
     flex-direction: column;
 }
+
+.textAdd {
+    padding-left: 20px;
+    color: red;
+    font-family: "FuturaBold", sans-serif;
+}
+
+.mapboxgl-ctrl-geocoder--icon-search {
+    display: none !important;
+}
+
+.mapboxgl-ctrl-geocoder, .mapboxgl-ctrl-geocoder .suggestions {
+    background-color: transparent !important;
+    box-shadow: 0 0 10px 2px transparent !important;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+    border-color: transparent !important;
+}
+
+.dropdownAddress {
+    border: 2px solid #E3E5E5;
+    border-radius: 25px;
+}
+
+.mapboxgl-ctrl-geocoder .suggestions {
+    font-size: 13px;
+    background-color: white !important;
+    margin-top: 17px !important;
+}
+
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+    margin-top: 15px;
+}

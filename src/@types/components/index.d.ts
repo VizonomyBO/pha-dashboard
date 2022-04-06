@@ -32,6 +32,8 @@ export interface DataPhaDasboardMap {
   city: string,
   state: string,
   zipcode: string,
+  latitude?: number,
+  longitude?: number,
   geom: {
     type: string,
     coordinates: number[]

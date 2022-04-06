@@ -11,10 +11,12 @@ export const LeftForm3 = () => {
   const [typeModal, setTypeModal] = useState(false);
   const navigate = useNavigate();
   const {
+    selectAccessibility,
+    selectCategory
+  } = useMarketplaceState();
+  const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
-
-  const { selectCategory, selectAccessibility } = useMarketplaceState();
 
   const setName = (e: React.FormEvent<HTMLInputElement>): void => {
     setContactName(e.currentTarget.value);

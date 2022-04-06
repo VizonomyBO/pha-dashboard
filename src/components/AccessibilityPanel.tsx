@@ -23,6 +23,7 @@ export const AccessibilityPanel = () => {
     <>
       <div className="sectiontitle second">
         Select Accessibility
+        <sup>*</sup>
       </div>
       <div className="panel">
         <div className="body">
@@ -50,6 +51,10 @@ export const AccessibilityPanel = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="sectiontitle second">
+          <sup>*</sup>
+          <span className="colorred">Required</span>
         </div>
       </div>
     </>

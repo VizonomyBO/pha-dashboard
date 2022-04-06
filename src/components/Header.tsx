@@ -3,7 +3,7 @@ import { HeaderInterface } from '../@types';
 export const Header = ({ type }: HeaderInterface) => (
   <div className="searchoptionsarea form1">
     <div className="accesspoint colored">
-      <h1>FOOD ACCESS POINTS NEAR YOU</h1>
+      <h1>GOOD FOOD MAP</h1>
       <p>
         Looking for a nearby grocery store, SNAP retailer, or food-coop?
         Search our access points using the map below.
