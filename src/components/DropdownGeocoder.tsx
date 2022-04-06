@@ -61,12 +61,11 @@ export const DropdownGeocoder = () => {
               inputText.shouldSearch && options.map((opt: Result) => {
                 let region = '';
                 if (opt.context) {
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  opt.context.forEach((element: any) => {
-                    if (element.id.includes('region')) {
-                      region = element.short_code.replace('US-', '');
+                  for (let i = 0; opt.context && i < opt.context.length; i += 1) {
+                    if (opt.context[i].id.includes('region')) {
+                      region = opt.context[i].short_code.replace('US-', '');
                     }
-                  });
+                  }
                 }
                 return (
                   <li key={`${opt.place_name}index`} className="trGeocoder">
