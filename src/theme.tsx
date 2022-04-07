@@ -33,6 +33,13 @@ export const theme = createTheme({
           }
         }
       }
+    },
+    MuiTypography: {
+      styleOverrides: {
+        root: {
+          fontFamily: '"FuturaMedium", sans-serif !important'
+        }
+      }
     }
   }
 });
