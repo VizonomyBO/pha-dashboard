@@ -11,13 +11,12 @@ export const Dashboard = () => {
   const token = localStorage.getItem(TOKEN_KEY);
   const { table } = useDashboard();
 
+  if (!token) {
+    navigate('/login');
+  }
   console.log('dashboard');
   useEffect(() => {
-    if (!token) {
-      navigate('/login');
-    } else {
-      console.log(table);
-    }
+    console.log(table);
   }, [token, table]);
   return (
     <div className="container">
