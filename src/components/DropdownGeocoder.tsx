@@ -14,8 +14,7 @@ export const DropdownGeocoder = () => {
   const [geocoder, setGeocoder] = useState<GeocoderService>();
   useEffect(() => {
     setGeocoder(new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [setGeocoderOptions]);
   useEffect(() => {
     if (inputText.shouldSearch) {
       geocoder?.setGeocoderInputText(inputText);
