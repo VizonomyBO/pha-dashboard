@@ -9,11 +9,10 @@ import { ViewStateChangeFn } from '../../@types';
 import { ICON_MAPPING } from '../../constants';
 import PinRed from './ic-pin-red.svg';
 
+const Carto = carto as any;
 export const Map = () => {
-  console.log('Map');
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const [deckState, setDeckState] = useState({ ...deckDefaults, renderToolTip: RenderTooltip });
-  console.log(deckState);
   const [layers, setLayers] = useState([]);
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
@@ -21,6 +20,7 @@ export const Map = () => {
     console.log('Temporary log to see how to use it', currentViewstate);
     setCurrentViewState(viewState);
   }, [currentViewstate]);
+
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
       setHoverInfo(info);
@@ -30,17 +30,15 @@ export const Map = () => {
   }, []);
 
   useEffect(() => {
-    carto.setDefaultCredentials({
+    Carto.setDefaultCredentials({
       apiBaseUrl: 'https://gcp-us-east1.api.carto.com',
       accessToken:
         // eslint-disable-next-line
         'eyJhbGciOiJIUzI1NiJ9.eyJhIjoiYWNfajl3eHQwbnoiLCJqdGkiOiI3ZjVkZTJhYiJ9.deIgT389U_YFodUSADFt5g6EccLWIJAbw1Ta0CraYxQ'
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const cartLayer = new (carto as any).CartoLayer({
+    const cartLayer = new Carto.CartoLayer({
       connection: 'carto_dw',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      type: (carto as any).MAP_TYPES.QUERY,
+      type: Carto.MAP_TYPES.QUERY,
       data: 'select * from carto-dw-ac-j9wxt0nz.shared.pha_retailer_2',
       pointType: 'icon',
       pickable: true,
@@ -52,7 +50,6 @@ export const Map = () => {
     });
     setLayers(cartLayer);
   }, []);
-
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {
@@ -63,13 +60,10 @@ export const Map = () => {
       };
       return newDeckState;
     });
-  }, [expandTooltip, hideTooltip, layers]);
-
+  }, [layers, hideTooltip, expandTooltip]);
   return (
     <div className="map-container">
-      <DeckGLComponent {...deckDefaults}>
-        {RenderTooltip(hoverInfo)}
-      </DeckGLComponent>
+      <DeckGLComponent {...deckState}>{RenderTooltip(hoverInfo)}</DeckGLComponent>
     </div>
   );
 };
