@@ -86,6 +86,7 @@ input, button, textarea, select {
     margin-top: 15px;
     background-color: white !important;
     border-radius: 25px !important;
+    width: 264px;
 }
 
 .table-geocoder {
@@ -165,15 +166,23 @@ input, button, textarea, select {
     padding-left: 4px;
 }
 
-.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked, .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.MuiCheckbox-indeterminate {
     color: #00BDE3 !important;
     border: #7A7E80 !important;
 }
 
-.css-10hburv-MuiTypography-root {
+.MuiTypography-root {
     font-family: "FuturaMedium", sans-serif !important;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .labelBusiness {
     text-transform: capitalize;
+}
+
+.css-yb0lig {
+    font-family: FuturaMedium,sans-serif !important;
 }
