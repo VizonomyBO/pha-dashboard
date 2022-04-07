@@ -7,6 +7,10 @@ describe('renders without crashing', () => {
   const initialStoreState = {
     marketplace: {
       businessDetails: {}
+    },
+    geocoder: {
+      inputText: '',
+      options: []
     }
   };
   const mockStore = configureStore();
