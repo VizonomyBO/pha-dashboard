@@ -36,7 +36,7 @@ export const DashboardNavbar = () => (
             <div className="profile">
               <button className="light" type="button">
                 <figure className="picture">
-                  <img src="/public/images/img_user.png" alt="" />
+                  <img src="/images/img_user.png" alt="" />
                 </figure>
               </button>
               <div className="logout">
