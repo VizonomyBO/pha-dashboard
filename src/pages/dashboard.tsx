@@ -1,15 +1,24 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
 import { DashboardTable } from '../components/dashboard/DashboardTable';
 import { useDashboard } from '../store/hooks/custom/useDashboard';
 
 export const Dashboard = () => {
-  console.log('dashboard');
+  const navigate = useNavigate();
+  const TOKEN_KEY = 'token';
+  const token = localStorage.getItem(TOKEN_KEY);
   const { table } = useDashboard();
+
+  console.log('dashboard');
   useEffect(() => {
-    console.log(table);
-  }, [table]);
+    if (!token) {
+      navigate('/login');
+    } else {
+      console.log(table);
+    }
+  }, [token, table]);
   return (
     <div className="container">
       {/* <div className="bgwhite" /> */}
