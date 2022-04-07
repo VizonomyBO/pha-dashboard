@@ -91,3 +91,11 @@ export const INITIAL_CATEGORIES = {
   accesibility: [],
   dataSources: []
 };
+
+export const INITIAL_GEOCODER_STATE = {
+  inputText: {
+    text: '',
+    shouldSearch: false
+  },
+  options: []
+};

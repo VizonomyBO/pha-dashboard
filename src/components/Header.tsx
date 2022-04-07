@@ -1,3 +1,4 @@
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HeaderInterface } from '../@types';
 
 export const Header = ({ type }: HeaderInterface) => (
@@ -14,6 +15,7 @@ export const Header = ({ type }: HeaderInterface) => (
         <div className="alook">
           <div className="accesstype">
             Select Access Type
+            <KeyboardArrowDownIcon style={{ marginLeft: '40px' }} />
           </div>
           <div className="citysearch">
             <i className="icsearch" />
