@@ -48,7 +48,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.NAME, e.target.value)
             }
-            value={businessDetails.name}
+            value={businessDetails && businessDetails.name}
           />
         </div>
       </div>
@@ -76,7 +76,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ADDRESS_2, e.target.value)
             }
-            value={businessDetails.address_2}
+            value={businessDetails && businessDetails.address_2}
           />
         </div>
       </div>
@@ -94,7 +94,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.PHONE, e.target.value)
             }
-            value={businessDetails.phone}
+            value={businessDetails && businessDetails.phone}
           />
         </div>
       </div>
@@ -112,7 +112,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.CITY, e.target.value)
             }
-            value={businessDetails.city}
+            value={businessDetails && businessDetails.city}
           />
         </div>
       </div>
@@ -143,7 +143,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
               onChange={
                 (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ZIPCODE, e.target.value)
               }
-              value={businessDetails.zipcode}
+              value={businessDetails && businessDetails.zipcode}
             />
           </div>
         </div>
@@ -326,7 +326,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.WEBSITE, e.target.value)
             }
-            value={businessDetails.website}
+            value={businessDetails && businessDetails.website}
           />
         </div>
       </div>
@@ -341,7 +341,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.FACEBOOK, e.target.value)
             }
-            value={businessDetails.facebook}
+            value={businessDetails && businessDetails.facebook}
           />
         </div>
       </div>
@@ -356,7 +356,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.TWITTER, e.target.value)
             }
-            value={businessDetails.twitter}
+            value={businessDetails && businessDetails.twitter}
           />
         </div>
       </div>
@@ -371,7 +371,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.EMAIL, e.target.value)
             }
-            value={businessDetails.email}
+            value={businessDetails && businessDetails.email}
           />
         </div>
       </div>
@@ -386,7 +386,7 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.INSTAGRAM, e.target.value)
             }
-            value={businessDetails.instagram}
+            value={businessDetails && businessDetails.instagram}
           />
         </div>
       </div>

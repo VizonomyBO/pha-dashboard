@@ -57,6 +57,8 @@ export interface SocialMediaInterface {
   facebook: string,
 }
 export interface FilesInterface {
+  bussines: unknown[],
+  owner: unknown[],
   media: null | MediaInterface,
 }
 export interface selectCategoryInterface {
