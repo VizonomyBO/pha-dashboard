@@ -14,13 +14,13 @@ import {
   STYLE_ACTIVATOR_BUTTON_ACTIVATE,
   STYLE_INDICATOR_CONTAINER
 } from '../constants/login';
+import { loginValidation } from '../utils/loginValidation';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
-  const TOKEN_KEY = 'token';
 
   const setUsernameFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     setUsername(e.currentTarget.value);
@@ -43,7 +43,7 @@ export const Login = () => {
     }, headers).then((r) => r.json())
       .then((d) => {
         if (d.data) {
-          localStorage.setItem(TOKEN_KEY, d.data.idToken);
+          loginValidation.setToken(d.data.idToken);
           navigate('/dashboard');
         } else {
           setErrorMessage(MESSAGE_EMAIL_PASSWORD);

@@ -4,17 +4,17 @@ import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
 import { DashboardTable } from '../components/dashboard/DashboardTable';
 import { useDashboard } from '../store/hooks/custom/useDashboard';
+import { loginValidation } from '../utils/loginValidation';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-  const TOKEN_KEY = 'token';
-  const token = localStorage.getItem(TOKEN_KEY);
+  const token = loginValidation.getToken();
   const { table } = useDashboard();
 
   if (!token) {
     navigate('/login');
   }
-  console.log('dashboard');
+
   useEffect(() => {
     console.log(table);
   }, [token, table]);
