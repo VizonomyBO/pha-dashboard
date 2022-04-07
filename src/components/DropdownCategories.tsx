@@ -17,16 +17,19 @@ export const DropdownCategories = () => {
         className="dropdown-categories-select"
         multiple
         displayEmpty
-        value={categoriesSelected}
+        value={categoriesSelected || []}
         onChange={handleChange}
-        renderValue={(selected: string[]) => {
-          if (selected.length === 0) {
-            return <em>Select Category</em>;
+        renderValue={(selected: string[] | undefined) => {
+          if (selected) {
+            if (selected.length === 0) {
+              return <em>Select Category</em>;
+            }
+            if (selected.length > 1) {
+              return 'Multiple retailer types…';
+            }
+            return CATEGORIES.find((elem: FilterType) => elem.attrib === selected[0])?.name;
           }
-          if (selected.length > 1) {
-            return 'Multiple retailer types…';
-          }
-          return CATEGORIES.find((elem: FilterType) => elem.attrib === selected[0])?.name;
+          return <em>Select Category</em>;
         }}
       >
         {CATEGORIES.map((category: FilterType) => (

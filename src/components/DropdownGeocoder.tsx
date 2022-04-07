@@ -18,10 +18,10 @@ export const DropdownGeocoder = () => {
   ));
   useEffect(() => {
     geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
-    if (inputText.shouldSearch) {
+    if (inputText && inputText.shouldSearch) {
       geocoder.current.setGeocoderInputText(inputText);
     } else {
-      if (inputText.text) {
+      if (inputText && inputText.text) {
         geocoder.current.setGeocoderQuery(inputText.text);
       }
       setGeocoderOptions([]);
@@ -50,7 +50,7 @@ export const DropdownGeocoder = () => {
         <span className="iccrosshair" />
       </div>
       <div className="geocoder-block">
-        {options.length > 0 && inputText.shouldSearch && (
+        {options && options.length > 0 && inputText.shouldSearch && (
           <ul className="table-geocoder">
             {
               inputText.shouldSearch && options.map((opt: Result) => {
