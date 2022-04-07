@@ -5,6 +5,14 @@ export interface BadgeType {
   image: string
 }
 
+type Status = 'Rejected' | 'Pending' | 'Approved' | '';
+export interface QueryParams {
+  page: number,
+  limit: number,
+  search: string,
+  status: Status,
+  dateRange: string
+}
 export interface BadgePercentages {
   fresh_percentage?: number,
   acceptable_percentage?: number,
