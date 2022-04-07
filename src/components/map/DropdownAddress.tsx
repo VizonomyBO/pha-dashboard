@@ -11,23 +11,22 @@ export const DropdownAddress = ({ type } : {type:string}) => {
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState();
   const [inputTextHtml, setInputTextHtml] = useState('');
-  const [geocoder, setGeocoder] = useState<GeocoderService>();
   const { setBusinessDetails } = useMarketplaceDispatch();
-  useEffect(() => {
-    setGeocoder(new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const geocoder = useRef<GeocoderService>(new GeocoderService(
+    name,
+    setGeocoderOptions,
+    geocoderDivRef.current as HTMLElement
+  ));
   useEffect(() => {
     if (inputText.shouldSearch) {
-      geocoder?.setGeocoderInputText(inputText);
+      geocoder.current.setGeocoderInputText(inputText);
     } else {
       if (inputText.text) {
-        geocoder?.setGeocoderQuery(inputText.text);
+        geocoder.current.setGeocoderQuery(inputText.text);
       }
       setGeocoderOptions([]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputText]);
+  }, [geocoder, inputText, setGeocoderOptions]);
   const inputTextFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     setInputText({
       text: e.currentTarget.value,

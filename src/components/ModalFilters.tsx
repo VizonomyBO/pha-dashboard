@@ -1,7 +1,7 @@
 import { ChangeEvent } from 'react';
 import { ModalFilterData, FilterType } from '../@types';
-import { useFilter } from '../store/hooks/custom/useFilters';
 import { CATEGORIES, ACCESIBILITIES, DATASOURCES } from '../constants/categories';
+import { useFilter } from '../store/hooks/custom/useFilters';
 
 export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
   const {
