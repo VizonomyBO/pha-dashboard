@@ -13,6 +13,7 @@ export const DropdownCategories = () => {
       <i className="icsearch" />
       <span className="txtd">What</span>
       <Select
+        className="dropdown-categories-select"
         multiple
         displayEmpty
         value={categoriesSelected}
@@ -28,9 +29,9 @@ export const DropdownCategories = () => {
         }}
       >
         {CATEGORIES.map((name: string) => (
-          <MenuItem key={name} value={name}>
-            <Checkbox checked={categoriesSelected.indexOf(name) > -1} />
-            <ListItemText primary={name} />
+          <MenuItem key={name} value={name} className="dropdown-categories">
+            <ListItemText primary={name} className="item-categories" />
+            <Checkbox className="checkbox-categories" checked={categoriesSelected.indexOf(name) > -1} />
           </MenuItem>
         ))}
       </Select>

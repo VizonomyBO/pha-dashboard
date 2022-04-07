@@ -67,7 +67,7 @@ input, button, textarea, select {
     box-shadow: 0 0 10px 2px transparent !important;
 }
 
-.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+.MuiOutlinedInput-notchedOutline {
     border-color: transparent !important;
 }
 
@@ -82,11 +82,13 @@ input, button, textarea, select {
     margin-top: 17px !important;
 }
 
-.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+.MuiPaper-root {
     margin-top: 15px;
+    background-color: white !important;
+    border-radius: 25px !important;
 }
 
-.tableGeocoder {
+.table-geocoder {
     margin-left: 10px;
     width: 216px;
     background-color: white;
@@ -98,13 +100,13 @@ input, button, textarea, select {
     padding: 10px;
 }
 
-.buttonGoecoder {
+.button-goecoder {
     background: transparent;
     border-color: transparent;
     width: 100%;
     text-align: inherit;
 }
-.spanGeocoder {
+.span-geocoder {
     font-family: "FuturaMedium", sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -112,6 +114,66 @@ input, button, textarea, select {
     padding-left: 4px;
 }
 
-.trGeocoder:hover {
+.tr-geocoder:hover {
     background-color: #EBFBFF;
+}
+
+.input-address {
+    padding: 10px;
+    width: 100%;
+    height: 105%;
+    background-color: transparent;
+    border: transparent !important;
+    padding-left: 20px;
+    font-family: "FuturaMedium", sans-serif;
+    outline: none;
+}
+
+.geocoder-block {
+    display: 'block';
+    position: absolute;
+    max-width: 313;
+}
+
+.ul-address {
+    margin-left: 10px;
+    border: 2px solid #E3E5E5;
+    width: 400px;
+    background-color: white;
+    margin-top: 12px;
+    position: absolute;
+    border-radius: 20px;
+    list-style: none;
+    padding: 10px;
+}
+
+.dropdown-categories-select {
+    background-color: transparent !important;
+    border-color: transparent !important;
+    font-family: "FuturaMedium" !important;
+    width: 170px;;
+}
+
+.dropdown-categories {
+    background-color: white !important;
+}
+
+.item-categories {
+    font-family: "FuturaMedium", sans-serif !important;
+    font-size: 14px;
+    font-weight: 500;
+    padding-left: 4px;
+}
+
+.css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root {
+    color: #00BDE3 !important;
+    border: #7A7E80 !important;
+}
+
+.css-10hburv-MuiTypography-root {
+    font-family: "FuturaMedium", sans-serif !important;
+}
+
+.labelBusiness {
+    text-transform: capitalize;
 }

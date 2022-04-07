@@ -9,8 +9,12 @@ const categoriesReducer = (state: string[], action: AnyAction) => {
         ...state,
         categoriesSelected: action.categoriesSelected
       };
-    default:
+    case TYPES.INIT:
       return INITIAL_CATEGORIES;
+    default:
+      return {
+        ...state
+      };
   }
 };
 

@@ -179,8 +179,12 @@ const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
           snap_accepted: action.payload
         }
       };
-    default:
+    case TYPES.INIT:
       return INITIAL_MARKETPLACE;
+    default:
+      return {
+        ...state
+      };
   }
 };
 

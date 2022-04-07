@@ -75,7 +75,7 @@ export interface PhaIndividual {
 }
 
 export interface InputTextInterface {
-  text: string | null,
+  text: string,
   shouldSearch: boolean
 }
 export interface GeocoderInterface {

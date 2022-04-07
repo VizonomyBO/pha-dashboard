@@ -24,7 +24,7 @@ export const DropdownBusiness = ({ initialState, type } : DropdowInterface) => {
         onClick={handleClick}
         endIcon={<KeyboardArrowDownIcon />}
       >
-        <label>{option}</label>
+        <label className="labelBusiness">{option}</label>
       </Button>
       <Menu
         id="dropdown-business"

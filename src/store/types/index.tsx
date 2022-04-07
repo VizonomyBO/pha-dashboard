@@ -1,3 +1,4 @@
+export const INIT = '@@INIT';
 export * from './marketplaceTypes';
 export * from './categoriesTypes';
 export * from './sessionTypes';

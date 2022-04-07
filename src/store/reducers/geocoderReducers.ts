@@ -15,8 +15,12 @@ const geocoderReducer = (state: GeocoderInterface, action: AnyAction) => {
         ...state,
         options: action.payload
       };
-    default:
+    case TYPES.INIT:
       return INITIAL_GEOCODER_STATE;
+    default:
+      return {
+        ...state
+      };
   }
 };
 
