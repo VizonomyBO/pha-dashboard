@@ -5,7 +5,8 @@ import {
   setAccesibilitiesSelected,
   setBadgesSelected,
   setCenterGeocoder,
-  setDataSourcesSelected
+  setDataSourcesSelected,
+  resetValues
 } from '../actions';
 
 export const useCategoriesState = () => useSelector(
@@ -28,6 +29,9 @@ export const useCategoriesDispatch = () => {
     },
     setBadgesSelected: (badges: string[]) => {
       dispatch(setBadgesSelected(badges));
+    },
+    resetValues: () => {
+      dispatch(resetValues());
     }
   };
 };

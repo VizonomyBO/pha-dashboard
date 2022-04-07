@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
 import { PropertiesLayer } from '../../@types';
 
-export const ToolTip = (data: { x: number; y: number; newObj: PropertiesLayer }) => {
-  const { x, y, newObj } = data;
+export const ToolTip = (data: { x: number; y: number; objectTypified: PropertiesLayer }) => {
+  const { x, y, objectTypified } = data;
   const openIndividualForm = () => {
     console.log('open form');
   };
   return (
     <div className="modal" style={{ left: x, top: y - 460 }}>
       <figure className="picture">
-        <img src={`/public/images/${newObj?.properties?.owner_photo}`} alt="" />
+        <img src={`/public/images/${objectTypified?.properties?.owner_photo}`} alt="" />
       </figure>
       <div className="detailcard">
-        <div className="store">{newObj?.properties?.name}</div>
+        <div className="store">{objectTypified?.properties?.name}</div>
         <div className="services">
           <span className="kind icmkdish" />
           <span className="kind icmkshop" />
@@ -20,12 +20,12 @@ export const ToolTip = (data: { x: number; y: number; newObj: PropertiesLayer })
           <span className="kind icmkshop" />
           <span className="kind icmkshop" />
         </div>
-        <div className="address">{newObj?.properties?.address_1}</div>
+        <div className="address">{objectTypified?.properties?.address_1}</div>
         <div className="phone">
           <span className="icphone" />
-          <span className="number">{newObj?.properties?.phone}</span>
+          <span className="number">{objectTypified?.properties?.phone}</span>
         </div>
-        <Link to={`profile/${newObj?.properties?.retailer_id}`}>
+        <Link to={`profile/${objectTypified?.properties?.retailer_id}`}>
           <button className="light" type="button">
             View Details
           </button>

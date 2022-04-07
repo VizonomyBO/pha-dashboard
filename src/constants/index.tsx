@@ -8,6 +8,8 @@ export const VISIBLE_TIME = 2000;
 export const PAGE_REDIRECT_TIME = 1000;
 export const MARKED_ELEMENT = 'Yes';
 export const MARKED_FRESH = 'Fresh';
+export const REGION_GEOCODER = 'US-';
+export const REGION = 'region';
 export const INDIVIDUAL_FORM = 'individualForm';
 export const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_KEY || NO_DATA;
 export const BASEMAP = 'mapbox://styles/vizonomy/cl0zk8u1o002w15pvqr3t0e1b';
@@ -173,4 +175,14 @@ export const TABLES_CARTO = {
   submitted_by_users: 'retailers_pha',
   open_street_map: 'retailers_osm',
   USDA_food_markets: 'retailers_usda'
+};
+
+export const ICON_MAPPING = {
+  marker: {
+    x: 0,
+    y: 0,
+    width: 32,
+    height: 42,
+    mask: false
+  }
 };

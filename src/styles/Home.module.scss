@@ -522,10 +522,10 @@ sup {
 		height: 344px;
 	}
 	.barblue.form1 {
-		height: 1800px;
+		height: 1900px;
 	}
 	.barblue.form2 {
-		height: 2400px;
+		height: 2700px;
 	}
 	.barblue.form3 {
 		height: 700px;
@@ -1265,6 +1265,7 @@ sup {
 				padding: 40px 0 6px 0;
 				color: #fff;
 				text-align: center;
+				letter-spacing: -0.5px
 			}
 			p {
 				width: 454px;
@@ -1309,6 +1310,7 @@ sup {
 						padding-left: 8px;
 						color: #161A23;
 						width: 128px;
+						padding-right: 5px;
 					}
 				}
 				.space {
@@ -1371,7 +1373,7 @@ sup {
 				padding-bottom: 26px;
 				h1 {
 					font-family: "FuturaBold", sans-serif;
-					font-size: 48px;
+					font-size: 58px;
 					line-height: 56px;
 					/* padding: 40px 0 6px 0; */
 					padding: 0 0 6px 0;
@@ -1393,6 +1395,7 @@ sup {
 				padding-bottom: 32px;
 				h1 {
 					color: var(--primary-red);
+					letter-spacing: -0.5px
 				}
 				p {
 					font-family: "FuturaMedium", sans-serif;
@@ -1410,7 +1413,6 @@ sup {
 					flex-direction: row;
 					padding: 0 0;
 					align-items: center;
-		
 					.accesstype {
 						display: flex;
 						width: 237px;
@@ -1418,10 +1420,10 @@ sup {
 						height: 56px;
 						background-color: #fff;
 						color: #7A7E80;
-						justify-content: center;
 						align-items: center;
 						font-family: "FuturaMedium", sans-serif;
-						font-size: 12px;
+						font-size: 16px;
+						padding-left: 30px;
 					}
 					.citysearch {
 						display: flex;
@@ -1433,7 +1435,7 @@ sup {
 						input[type=text] {
 							-webkit-appearance: none;
 							font-family: "FuturaMedium", sans-serif;
-							font-size: 12px;
+							font-size: 16px;
 							border: none;
 							outline: none;
 							width: 228px;
@@ -1536,6 +1538,16 @@ sup {
 						padding-top: 40px;
 						height: 512px;
 						overflow-y: scroll;
+					}
+					.listingarea::-webkit-scrollbar {
+						-webkit-appearance: none;
+					}
+					.listingarea::-webkit-scrollbar-thumb {
+						background-color: #00BDE3;
+						border-radius: 10px;
+						width: 6px;
+						border: 5px solid white;
+						padding-bottom: 50px;
 					}
 					.item {
 						display: flex;
@@ -3566,7 +3578,7 @@ sup {
 }
 .formlogin {
 	position: absolute;
-	top: 48px;
+	top: 150px;
 	left: 112px;
 	display: block;
 	z-index: 2;
@@ -4541,6 +4553,8 @@ header {
 #dropdown-business {
 	.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
 		min-width: 192px;
+		height: 237px;
+    position: absolute;
 		ul.css-6hp17o-MuiList-root-MuiMenu-list {
 			.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
 				font-family: 'FuturaMedium',sans-serif;
@@ -4551,6 +4565,16 @@ header {
 				background-color: #EBFBFF;
 			}
 		}
+	}
+	.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper::-webkit-scrollbar {
+		-webkit-appearance: none;
+	}
+	.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper::-webkit-scrollbar-thumb {
+		background-color: #00BDE3;
+		border-radius: 10px;
+		width: 6px;
+		border: 5px solid white;
+		padding-bottom: 50px;
 	}
 }
 

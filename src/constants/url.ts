@@ -7,6 +7,5 @@ export const ENDPOINTS = {
   PROFILE: (id: string | undefined) => `${URL}/${CARTODB}/profile/${id}`,
   LOGIN: () => `${URL}/auth/login`,
   BADGES: (id: string | undefined) => `${URL}/${CARTODB}/badges/${id}`,
-  MAP: () => `${URL}/${CARTODB}/pha-retailer`,
-  CARTO_TOKEN: `${URL}/${CARTODB}/token`
+  MAP: () => `${URL}/${CARTODB}/pha-retailer`
 };

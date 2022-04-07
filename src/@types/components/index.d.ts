@@ -1,6 +1,7 @@
 import { SetStateAction } from 'react';
 import { Layer } from 'deck.gl';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../constants';
+import { PhaRetailer } from '../database';
 
 export interface BadgeType {
   text: string;
@@ -24,24 +25,14 @@ export interface FormHeaderInterface {
   activeTab: FormTabType;
   setActiveTab: (value: FormTabType) => void;
 }
-
-export interface DataPhaDasboardMap {
-  retailer_id: string;
-  imagelinks?: string;
-  name: string;
-  address_1: string;
-  address_2: string;
-  phone: string;
-  city: string;
-  state: string;
-  zipcode: string;
-  latitude?: number;
-  longitude?: number;
+export type Geomtype = {
   geom: {
     type: string;
     coordinates: number[];
   };
-}
+};
+
+export type DataPhaDasboardMap = PhaRetailer & Geomtype;
 
 export interface DropdowInterface {
   initialState: string;
@@ -82,19 +73,21 @@ export interface ViewStateInterface {
   bearing: number;
   pitch: number;
 }
+export type ViewStateChangeFn = (args: {
+  viewState: any;
+  interactionState: {
+    inTransition?: boolean;
+    isDragging?: boolean;
+    isPanning?: boolean;
+    isRotating?: boolean;
+    isZooming?: boolean;
+  };
+  oldViewState: any;
+}) => any;
+
 export interface DeckInterface {
   initialStateView: ViewStateInterface;
-  onViewStateChange: (args: {
-    viewState: any;
-    interactionState: {
-      inTransition?: boolean;
-      isDragging?: boolean;
-      isPanning?: boolean;
-      isRotating?: boolean;
-      isZooming?: boolean;
-    };
-    oldViewState: any;
-  }) => any;
+  onViewStateChange: ViewStateChangeFn;
   controller: boolean;
   layers: Layer[];
   onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any;

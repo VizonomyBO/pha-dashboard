@@ -30,3 +30,8 @@ export const setBadgesSelected = (badges: string[]) => (
     badges
   }
 );
+export const resetValues = () => (
+  {
+    type: TYPES.RESET_VALUES
+  }
+);

@@ -85,10 +85,18 @@ export const INITIAL_INDIVIDUAL_FORM = {
   submission_status: '',
 };
 
-export const INITIIAL_FILTERS = {
+export const INITIAL_FILTERS = {
   categoriesSelected: [],
   center: [],
   accesibilities: [],
   dataSources: [],
   badges: []
+};
+
+export const INITIAL_GEOCODER_STATE = {
+  inputText: {
+    text: '',
+    shouldSearch: false
+  },
+  options: []
 };

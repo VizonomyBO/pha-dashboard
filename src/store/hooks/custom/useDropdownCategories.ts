@@ -4,7 +4,7 @@ import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 
 export const useDropdownCategories = () => {
   const { categoriesSelected } = useCategoriesState();
-  const { setCategoriesSelected } = useCategoriesDispatch();
+  const { setCategoriesSelected, setCenterGeocoder } = useCategoriesDispatch();
   const navigate = useNavigate();
   const handleChange = (event: SelectChangeEvent<typeof categoriesSelected>) => {
     const {
@@ -19,6 +19,7 @@ export const useDropdownCategories = () => {
   return {
     categoriesSelected,
     handleChange,
-    goToMapView
+    goToMapView,
+    setCenterGeocoder
   };
 };

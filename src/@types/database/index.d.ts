@@ -73,3 +73,12 @@ export interface PhaIndividual {
   submission_date?: Date,
   submission_status?: string,
 }
+
+export interface InputTextInterface {
+  text: string,
+  shouldSearch: boolean
+}
+export interface GeocoderInterface {
+  inputText: inputTextInterface,
+  options: []
+}

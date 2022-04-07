@@ -4,7 +4,17 @@ import configureStore from 'redux-mock-store';
 import { DropdownBusiness } from '../DropdownBusiness';
 
 describe('renders without crashing', () => {
-  const initialStoreState = {};
+  const initialStoreState = {
+    marketplace: {
+      businessDetails: {
+        state: ''
+      }
+    },
+    geocoder: {
+      inputText: '',
+      options: []
+    }
+  };
   const mockStore = configureStore();
   let store;
 

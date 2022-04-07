@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { INITIIAL_FILTERS } from '../defaultStore';
+import { INITIAL_FILTERS } from '../defaultStore';
 import * as TYPES from '../types';
 
 const categoriesReducer = (state: string[], action: AnyAction) => {
@@ -29,8 +29,12 @@ const categoriesReducer = (state: string[], action: AnyAction) => {
         ...state,
         badges: action.badges
       };
+    case TYPES.INIT:
+      return INITIAL_FILTERS;
     default:
-      return INITIIAL_FILTERS;
+      return {
+        ...state
+      };
   }
 };
 

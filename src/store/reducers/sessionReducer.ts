@@ -10,8 +10,12 @@ const sessionReducer = (state: SessionInterface, action: AnyAction) => {
         ...state,
         sessionState: action.payload
       };
-    default:
+    case TYPES.INIT:
       return INITIAL_SESSION;
+    default:
+      return {
+        ...state
+      };
   }
 };
 

@@ -23,7 +23,7 @@
     "@types/react-redux": "^7.1.23",
     "classnames": "^2.3.1",
     "connected-react-router": "^6.9.2",
-    "deck.gl": "^8.7.2",
+    "deck.gl": "^8.7.4",
     "mapbox-gl": "^2.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
