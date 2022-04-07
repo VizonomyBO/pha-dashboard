@@ -41,16 +41,16 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: yarn install
+      run: npm install
 
     - name: Run lint
-      run: yarn lint
+      run: npm lint
 
     - name: Run test
-      run: yarn test
+      run: npm test
 
     - name: Build
-      run: yarn build
+      run: npm build
       
 
   deploy-gcr:
@@ -73,10 +73,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
 
     - name: Install dependencies
-      run: yarn install
+      run: npm install
 
     - name: Build
-      run: yarn build
+      run: npm build
 
     - name: Setup GCloud Auth
       id: auth
