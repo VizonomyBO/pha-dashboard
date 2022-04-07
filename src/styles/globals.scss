@@ -86,6 +86,7 @@ input, button, textarea, select {
     margin-top: 15px;
     background-color: white !important;
     border-radius: 25px !important;
+    width: 264px !important;
 }
 
 .table-geocoder {
@@ -156,13 +157,16 @@ input, button, textarea, select {
 
 .dropdown-categories {
     background-color: white !important;
-    width: auto;
+    width: auto !important;
 }
 
 .item-categories {
-    font-family: "FuturaMedium", sans-serif !important;
+    font-family: "FuturaMedium",sans-serif!important;
     font-size: 14px;
     font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
     padding-left: 4px;
 }
 
@@ -177,4 +181,10 @@ input, button, textarea, select {
 
 .labelBusiness {
     text-transform: capitalize;
+}
+
+.MuiTypography-root .MuiTypography-body1 .MuiListItemText-primary {
+    font-family: "FuturaMedium",sans-serif!important;
+    font-size: 14px;
+    font-weight: 500;
 }
