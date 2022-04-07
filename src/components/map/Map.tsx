@@ -9,6 +9,7 @@ import { ViewStateChangeFn } from '../../@types';
 import { ICON_MAPPING } from '../../constants';
 import PinRed from './ic-pin-red.svg';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Carto = carto as any;
 export const Map = () => {
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
