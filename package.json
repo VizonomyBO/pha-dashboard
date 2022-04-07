@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@danmarshall/deckgl-typings": "^4.9.17",
+    "@deck.gl/carto": "^8.7.4",
     "@emotion/react": "^11.8.2",
     "@emotion/styled": "^11.8.1",
     "@mapbox/mapbox-gl-geocoder": "^5.0.0",

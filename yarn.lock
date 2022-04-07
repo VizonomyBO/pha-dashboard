@@ -1177,6 +1177,25 @@
     moment-timezone "^0.5.33"
     pbf "^3.2.1"
 
+"@deck.gl/carto@^8.7.4":
+  version "8.7.4"
+  resolved "https://registry.yarnpkg.com/@deck.gl/carto/-/carto-8.7.4.tgz#99ae5b95533e6d4c7447ec0254b44a0c21968e2d"
+  integrity sha512-PaZ55emAIG4jyj5W/4MXW7QP9DV13gDEtt5aBrBnP94WC9gAkpBA50j0e31iWtirqf2Hfv41swr0u9xIdoXOYQ==
+  dependencies:
+    "@loaders.gl/gis" "^3.1.5"
+    "@loaders.gl/loader-utils" "^3.1.5"
+    "@loaders.gl/mvt" "^3.1.5"
+    "@loaders.gl/tiles" "^3.1.5"
+    "@luma.gl/constants" "^8.5.10"
+    "@math.gl/web-mercator" "^3.5.7"
+    cartocolor "^4.0.2"
+    d3-array "^2.8.0"
+    d3-color "^2.0.0"
+    d3-format "^2.0.0"
+    d3-scale "^3.2.3"
+    moment-timezone "^0.5.33"
+    pbf "^3.2.1"
+
 "@deck.gl/core@8.7.2":
   version "8.7.2"
   resolved "https://registry.yarnpkg.com/@deck.gl/core/-/core-8.7.2.tgz#26a704641c2ca9791f3ff53f88fe12a49c0618ad"
