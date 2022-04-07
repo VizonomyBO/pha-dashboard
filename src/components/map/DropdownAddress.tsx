@@ -47,7 +47,7 @@ export const DropdownAddress = ({ type } : {type:string}) => {
         />
       </div>
       <div className="geocoder-block">
-        {options.length > 0 && inputText.shouldSearch && (
+        {options && inputText && options.length > 0 && inputText.shouldSearch && (
           <ul className="ul-address">
             {
               inputText.shouldSearch && options.map((opt: Result) => {

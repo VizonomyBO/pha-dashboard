@@ -1,4 +1,9 @@
-export const INITIAL_MARKETPLACE = {
+import { MarketplaceInterface } from '../../@types/redux';
+
+export const INITIAL_MARKETPLACE: MarketplaceInterface = {
+  socialMedia: {
+    facebook: 'fb'
+  },
   businessDetails: {
     name: '',
     address_1: '',
@@ -85,12 +90,11 @@ export const INITIAL_INDIVIDUAL_FORM = {
   submission_status: '',
 };
 
-export const INITIAL_FILTERS = {
+export const INITIAL_CATEGORIES = {
   categoriesSelected: [],
   center: [],
-  accesibilities: [],
-  dataSources: [],
-  badges: []
+  accesibility: [],
+  dataSources: []
 };
 
 export const INITIAL_GEOCODER_STATE = {

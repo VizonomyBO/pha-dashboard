@@ -1,3 +1,5 @@
+import { Result } from '@mapbox/mapbox-gl-geocoder';
+
 /* eslint-disable camelcase */
 export interface PhaRetailer {
   retailer_id?: string,
@@ -80,5 +82,5 @@ export interface InputTextInterface {
 }
 export interface GeocoderInterface {
   inputText: inputTextInterface,
-  options: []
+  options: Result[]
 }
