@@ -3545,29 +3545,32 @@ sup {
 	position: absolute;
 	top: 0;
 	z-index: 1;
-	height: 100vh;
-	width: 100vw;
-	background: url("../../public/images/img_crsl_1.png") no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
-	.blockdesc {
-		position: absolute;
-		top: 500px;
-		left: 550px;
-		font-family: "FuturaBold", sans-serif;
-        font-size: 32px;
-		line-height: 38px;
-		color: #fff;
-		display: flex;
-		flex-direction: row;
-		justify-content: center;
-		align-items: center;
-		p {
-			display: block;
-			margin: 0;
-			width: 450px;
+	.carrosel{
+		top: 0;
+		z-index: 2;
+		height: 100vh;
+		width: 100vw;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+		.blockdesc {
+			position: absolute;
+			top: 490px;
+			left: 576px;
+			font-family: "FuturaBold", sans-serif;
+			font-size: 32px;
+			line-height: 38px;
+			color: #fff;
+			display: flex;
+			flex-direction: row;
+			justify-content: center;
+			align-items: center;
+			p {
+				display: block;
+				margin: 0;
+				width: 450px;
+			}
 		}
 	}
 }
@@ -3581,6 +3584,7 @@ sup {
 	display: block;
 	z-index: 2;
 	width: 416px;
+	height: 588px;
 	padding: 48px;
 	background-color: #fff;
 	border-radius: 26px;

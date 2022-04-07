@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Carousel from 'react-material-ui-carousel';
+import HorizontalRuleIcon from '@mui/material/Icon';
 import { ENDPOINTS } from '../constants/url';
 import { webRequest } from '../utils/webRequest';
 import {
@@ -8,7 +9,10 @@ import {
   STYLE_ERROR,
   INTERVAL_CAUROSEL,
   MESSAGE_EMAIL_PASSWORD,
-  MESSAGE_ERROR
+  MESSAGE_ERROR,
+  STYLE_ACTIVATOR_BUTTON,
+  STYLE_ACTIVATOR_BUTTON_ACTIVATE,
+  STYLE_INDICATOR_CONTAINER
 } from '../constants/login';
 
 export const Login = () => {
@@ -54,20 +58,44 @@ export const Login = () => {
 
   return (
     <div className="container">
-      <Carousel className="bglogin" interval={INTERVAL_CAUROSEL} autoPlay>
-        {
-          ITEM_IMAGE.map((item) => (
-            <div key={item.id}>
-              <img src={item.imagen} alt="" />
-              <div className="blockdesc">
-                <p>
-                  {item.description}
-                </p>
+      <div className="bglogin">
+        <Carousel
+          className="carrosel"
+          autoPlay
+          IndicatorIcon={<HorizontalRuleIcon />}
+          interval={INTERVAL_CAUROSEL}
+          animation="fade"
+          swipe={false}
+          navButtonsAlwaysInvisible
+          cycleNavigation
+          fullHeightHover
+          indicatorIconButtonProps={{
+            style: STYLE_ACTIVATOR_BUTTON
+          }}
+          activeIndicatorIconButtonProps={{
+            style: STYLE_ACTIVATOR_BUTTON_ACTIVATE
+          }}
+          indicatorContainerProps={{
+            style: {
+              position: 'absolute',
+              ...STYLE_INDICATOR_CONTAINER
+            }
+          }}
+        >
+          {
+            ITEM_IMAGE.map((item) => (
+              <div key={item.id}>
+                <img src={item.imagen} alt="" style={{ height: '100vh', width: '100vw' }} />
+                <div className="blockdesc">
+                  <p>
+                    {item.description}
+                  </p>
+                </div>
               </div>
-            </div>
-          ))
-        }
-      </Carousel>
+            ))
+          }
+        </Carousel>
+      </div>
       <div className="formlogin">
         <div className="iclogo">
           a
