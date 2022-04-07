@@ -77,6 +77,7 @@ export const DropdownAddress = ({ type } : {type:string}) => {
                         setBusinessDetails(TYPE_BUSINESS.STATE, region);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[0]);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[1]);
+                        setBusinessDetails(type, regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`);
                       }}
                     >
                       <label>

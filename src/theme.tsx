@@ -40,6 +40,31 @@ export const theme = createTheme({
           fontFamily: '"FuturaMedium", sans-serif !important'
         }
       }
-    }
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          marginTop: '20px',
+          backgroundColor: 'white !important',
+          borderRadius: '25px !important',
+          width: '264px !important',
+          height: '287px',
+          paddingBottom: '10px',
+          paddingRight: '0px !important',
+          '::-webkit-scrollbar': {
+            '-webkit-appearance': 'none',
+            width: '30px',
+          },
+          '::-webkit-scrollbar-thumb': {
+            backgroundColor: '#00BDE3',
+            borderRadius: '50px',
+            width: '6px',
+            border: '10px solid white',
+            paddingBottom: '50px',
+          }
+        }
+      }
+    },
+
   }
 });
