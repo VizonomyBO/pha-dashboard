@@ -1,4 +1,9 @@
-export const INITIAL_MARKETPLACE = {
+import { MarketplaceInterface } from '../../@types/redux';
+
+export const INITIAL_MARKETPLACE: MarketplaceInterface = {
+  socialMedia: {
+    facebook: 'fb'
+  },
   businessDetails: {
     name: '',
     address_1: '',

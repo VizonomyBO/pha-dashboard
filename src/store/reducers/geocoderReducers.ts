@@ -3,7 +3,11 @@ import { GeocoderInterface } from '../../@types/database';
 import { INITIAL_GEOCODER_STATE } from '../defaultStore';
 import * as TYPES from '../types';
 
-const geocoderReducer = (state: GeocoderInterface, action: AnyAction) => {
+const defaultState: GeocoderInterface = {
+  ...INITIAL_GEOCODER_STATE
+};
+
+const geocoderReducer = (state: GeocoderInterface = defaultState, action: AnyAction = { type: 'foo' }) => {
   switch (action.type) {
     case TYPES.SET_INPUT_TEXT:
       return {
