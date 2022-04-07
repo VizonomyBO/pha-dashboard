@@ -17,7 +17,9 @@ export class GeocoderService {
       countries: 'US',
       marker: false,
     });
-    this.geocoder.addTo(elem);
+    if (elem) {
+      this.geocoder.addTo(elem);
+    }
     this.geocoder.on('results', (response) => {
       setGeocoderOptions(response.features);
     });
