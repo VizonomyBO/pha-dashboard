@@ -16,22 +16,31 @@ export const DropdownCategories = () => {
         className="dropdown-categories-select"
         multiple
         displayEmpty
-        value={categoriesSelected}
+        value={categoriesSelected || []}
         onChange={handleChange}
-        renderValue={(selected: string[]) => {
-          if (selected.length === 0) {
-            return <em>Select Category</em>;
+        renderValue={(selected: string[] | undefined) => {
+          if (selected) {
+            if (selected.length === 0) {
+              return <em>Select Category</em>;
+            }
+            if (selected.length > 1) {
+              return 'Multiple retailer types…';
+            }
+            return selected[0];
           }
-          if (selected.length > 1) {
-            return 'Multiple retailer types…';
-          }
-          return selected[0];
+          return undefined;
         }}
       >
         {CATEGORIES.map((name: string) => (
           <MenuItem key={name} value={name} className="dropdown-categories">
             <ListItemText primary={name} className="item-categories" />
-            <Checkbox className="checkbox-categories" checked={categoriesSelected.indexOf(name) > -1} />
+            <Checkbox
+              className="checkbox-categories"
+              checked={
+                categoriesSelected
+                && categoriesSelected.indexOf(name) > -1
+              }
+            />
           </MenuItem>
         ))}
       </Select>
