@@ -37,7 +37,7 @@ export const DashboardHeader = () => (
           Delete
         </button>
       </div>
-      <div className="datefilterarea">
+      {/* <div className="datefilterarea">
         <div className="opfilter">
           <span className="iccalendar" />
           <input className="generic" type="text" name="" id="" placeholder="Jan 6, 2022 - Jan 13, 2022" />
@@ -46,7 +46,7 @@ export const DashboardHeader = () => (
           <span className="icfilter" />
           <span className="title">Filters</span>
         </button>
-      </div>
+      </div> */}
     </div>
   </div>
 );
