@@ -13,7 +13,7 @@ export interface QueryParams {
   page: number,
   limit: number,
   search: string,
-  status: Status,
+  status: string,
   dateRange: string
 }
 export interface BadgePercentages {
@@ -99,4 +99,11 @@ export interface DeckInterface {
   controller: boolean;
   layers: Layer[];
   onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+}
+
+export interface ButtonDashboard {
+  id: string,
+  name: string,
+  class: string,
+  active: boolean
 }

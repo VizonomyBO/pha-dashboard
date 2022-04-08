@@ -2747,10 +2747,11 @@ sup {
 					}
 				}
 				.statusoption {
-					display: flex;
+					display: block;
 					flex-direction: row;
 					justify-content: flex-start;
 					padding-bottom: 32px;
+					height: 32px;
 					button.light {
 						background-color: #fff;
 						color: #7A7E80;

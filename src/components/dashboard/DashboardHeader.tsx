@@ -4,14 +4,35 @@ import {
   useEffect,
   useState
 } from 'react';
-import { QueryParams } from '../../@types';
+import { ButtonDashboard, QueryParams } from '../../@types';
+import { DEFAULT_VALUES_BUTTON } from '../../constants/dashboard';
 
 export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAction<QueryParams>> }) => {
   const [inputValue, setinputValue] = useState('');
+  const [buttonValue, setbuttonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, search: inputValue }));
   }, [inputValue, setParams]);
+
+  useEffect(() => {
+    const option: Array<string> = [];
+    (buttonValue as Array<ButtonDashboard>).forEach((item) => {
+      if (item.active) {
+        option.push(item.name);
+      }
+    });
+    const reducedArray: string = option.reduce((acc, curr) => `${acc}${curr},`, '');
+    setParams((old: QueryParams) => ({ ...old, status: reducedArray.slice(0, -1) }));
+  }, [buttonValue, setParams, setbuttonValue]);
+
+  const onChangeValue = (index: number) => {
+    setTimeout(() => {
+      buttonValue[index].active = !buttonValue[index].active;
+      console.log(buttonValue);
+      setbuttonValue(buttonValue);
+    }, 2);
+  };
 
   return (
     <div className="header">
@@ -32,15 +53,21 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
         <p>View retailer submissions</p>
       </div>
       <div className="statusoption">
-        <button className="light op1 active" type="button">
-          Pending
-        </button>
-        <button className="light op2 active" type="button">
-          Aproved
-        </button>
-        <button className="light op3" type="button">
-          Rejected
-        </button>
+        {
+          buttonValue.map((item, index) => (
+            <button
+              key={item.id}
+              className={`${item.class} ${item.active ? 'active' : null}`}
+              type="button"
+              onClick={() => {
+                setbuttonValue([]);
+                onChangeValue(index);
+              }}
+            >
+              {item.name}
+            </button>
+          ))
+        }
       </div>
       <div className="filterarea">
         <div className="searcharea">
