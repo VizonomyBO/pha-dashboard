@@ -92,6 +92,17 @@ input, button, textarea, select {
     padding-bottom: 10px;
     list-style: none;
     padding: 10px;
+    z-index: 2;
+}
+.table-geocoder-home {
+  margin-left: -135px;
+  width: 216px;
+  background-color: white;
+  border-radius: 20px;
+  list-style: none;
+  padding: 10px;
+  z-index: 2;
+  position: relative;
 }
 
 .button-goecoder {
@@ -127,6 +138,15 @@ input, button, textarea, select {
     display: 'block';
     position: absolute;
     max-width: 313;
+}
+.geocoder-block-home {
+  display: 'block';
+  position: absolute;
+  max-width: 313;
+  top: 404px;
+}
+.swhere-home {
+  max-width: 194px;
 }
 
 .ul-address {

@@ -11,11 +11,7 @@ export const Landing = () => {
         <div className="navbararea" style={{ backgroundColor: 'transparent' }}>
           <div className="navbar">
             <div className="nbleft">
-              <a
-                href="https://www.ahealthieramerica.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="https://www.ahealthieramerica.org/" target="_blank" rel="noopener noreferrer">
                 <div className="iclogowhite" />
               </a>
             </div>
@@ -24,38 +20,22 @@ export const Landing = () => {
                 <Link to="/form" style={{ textDecoration: 'none' }}>
                   <div className="txtaction">Add A Listing</div>
                 </Link>
-                <a
-                  href="https://twitter.com/PHAnews"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://twitter.com/PHAnews" target="_blank" rel="noopener noreferrer">
                   <button className="light" type="button">
                     <span className="ictww" />
                   </button>
                 </a>
-                <a
-                  href="https://www.facebook.com/PHA"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://www.facebook.com/PHA" target="_blank" rel="noopener noreferrer">
                   <button className="light" type="button">
                     <span className="icfbw" />
                   </button>
                 </a>
-                <a
-                  href="https://www.youtube.com/user/aHealthierAmerica"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://www.youtube.com/user/aHealthierAmerica" target="_blank" rel="noopener noreferrer">
                   <button className="light" type="button">
                     <span className="icytw" />
                   </button>
                 </a>
-                <a
-                  href="https://www.instagram.com/PHAnews"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <a href="https://www.instagram.com/PHAnews" target="_blank" rel="noopener noreferrer">
                   <button className="light" type="button">
                     <span className="icigw" />
                   </button>
@@ -79,7 +59,7 @@ export const Landing = () => {
         </div>
         <div className="ldgsearchstore">
           <div className="alook">
-            <DropdownGeocoder />
+            <DropdownGeocoder type="landing" />
             <div className="space" />
             <DropdownCategories />
           </div>
