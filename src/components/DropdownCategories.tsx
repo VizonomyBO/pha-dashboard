@@ -4,6 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
 import { CATEGORIES } from '../constants/categories';
+import { FilterType } from '../@types';
 
 export const DropdownCategories = () => {
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
@@ -16,22 +17,30 @@ export const DropdownCategories = () => {
         className="dropdown-categories-select"
         multiple
         displayEmpty
-        value={categoriesSelected}
+        value={categoriesSelected || []}
         onChange={handleChange}
-        renderValue={(selected: string[]) => {
-          if (selected.length === 0) {
-            return <em>Select Category</em>;
+        renderValue={(selected: string[] | undefined) => {
+          if (selected) {
+            if (selected.length === 0) {
+              return <em>Select Category</em>;
+            }
+            if (selected.length > 1) {
+              return 'Multiple retailer types…';
+            }
+            return selected[0];
           }
-          if (selected.length > 1) {
-            return 'Multiple retailer types…';
-          }
-          return selected[0];
+          return undefined;
         }}
       >
-        {CATEGORIES.map((name: string) => (
-          <MenuItem key={name} value={name} className="dropdown-categories">
-            <ListItemText primary={name} className="item-categories" />
-            <Checkbox className="checkbox-categories" checked={categoriesSelected.indexOf(name) > -1} />
+        {CATEGORIES.map((category: FilterType) => (
+          <MenuItem key={category.name} value={category.attrib} className="dropdown-categories">
+            <Checkbox
+              checked={
+              categoriesSelected && categoriesSelected.indexOf(category.attrib) > -1
+              }
+              className="checkbox-categories"
+            />
+            <ListItemText primary={category.name} className="item-categories" />
           </MenuItem>
         ))}
       </Select>
