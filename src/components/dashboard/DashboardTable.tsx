@@ -35,7 +35,11 @@ export const DashboardTable = ({ table }: { table: (PhaRetailer & PhaIndividual)
               <th className="wcol6 htit6"> </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody
+            style={{
+              display: 'block', overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
+            }}
+          >
             {table.map((item: PhaRetailer) => (
               <tr key={item.retailer_id}>
                 <td className="wcol1 bbtm padleft">

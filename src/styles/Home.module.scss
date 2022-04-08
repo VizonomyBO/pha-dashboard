@@ -3010,6 +3010,8 @@ sup {
 						border-radius: 16px; */
 						border-radius: 16px;
 						thead {
+							width: 100%;
+							display: table;
 							tr {
 								position: relative;
 								&::after {
