@@ -18,9 +18,9 @@ export const DashboardNavbar = () => {
           <div className="navigationadmin">
             <nav className="menu">
               <ol>
-                <li><a href="#0">Individual</a></li>
+                <li><a href="#0">Individual Forms</a></li>
                 <li className="active">
-                  <a href="#0">Dashboard</a>
+                  <a href="#0">Retailer Forms</a>
                 </li>
               </ol>
             </nav>
