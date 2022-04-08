@@ -4,6 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
 import { CATEGORIES } from '../constants/categories';
+import { FilterType } from '../@types';
 
 export const DropdownCategories = () => {
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
@@ -31,16 +32,15 @@ export const DropdownCategories = () => {
           return undefined;
         }}
       >
-        {CATEGORIES.map((name: string) => (
-          <MenuItem key={name} value={name} className="dropdown-categories">
-            <ListItemText primary={name} className="item-categories" />
+        {CATEGORIES.map((category: FilterType) => (
+          <MenuItem key={category.name} value={category.attrib} className="dropdown-categories">
             <Checkbox
-              className="checkbox-categories"
               checked={
-                categoriesSelected
-                && categoriesSelected.indexOf(name) > -1
+              categoriesSelected && categoriesSelected.indexOf(category.attrib) > -1
               }
+              className="checkbox-categories"
             />
+            <ListItemText primary={category.name} className="item-categories" />
           </MenuItem>
         ))}
       </Select>
