@@ -144,7 +144,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
               type="checkbox"
               onChange={setAvailibityFresh}
             />
-            <span className="checkmark" />
+            <span className="checkmark ckeckmark-form" />
           </label>
           <label className="chkwrap">
             Frozen
@@ -152,7 +152,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
               type="checkbox"
               onChange={setAvailabilityFrozen}
             />
-            <span className="checkmark" />
+            <span className="checkmark ckeckmark-form" />
           </label>
           <label className="chkwrap">
             Canned
@@ -160,7 +160,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
               type="checkbox"
               onChange={setAvailabilityCanned}
             />
-            <span className="checkmark" />
+            <span className="checkmark ckeckmark-form" />
           </label>
         </div>
       </div>
@@ -189,7 +189,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
                   checked={otherQuestions.quality === formConstants.QUALITY.ACCEPTABLE}
                   onChange={setQualityFunction}
                 />
-                <span className="checkmark" />
+                <span className="checkmark ckeckmark-form" />
               </label>
               <label className="chkwrap">
                 Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
@@ -200,7 +200,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
                   checked={otherQuestions.quality === formConstants.QUALITY.UNACCEPTABLE}
                   onChange={setQualityFunction}
                 />
-                <span className="checkmark" />
+                <span className="checkmark ckeckmark-form" />
               </label>
             </div>
           </div>
@@ -226,7 +226,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
                   checked={otherQuestions.visibility === formConstants.VISIBILITY.YES}
                   onChange={setVisibilityFunction}
                 />
-                <span className="checkmark" />
+                <span className="checkmark ckeckmark-form" />
               </label>
               <label className="chkwrap">
                 No
@@ -236,7 +236,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
                   checked={otherQuestions.visibility === formConstants.VISIBILITY.NO}
                   onChange={setVisibilityFunction}
                 />
-                <span className="checkmark" />
+                <span className="checkmark ckeckmark-form" />
               </label>
             </div>
           </div>
@@ -262,7 +262,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
                   checked={otherQuestions.local === formConstants.LOCAL.YES}
                   onChange={setLocalFunction}
                 />
-                <span className="checkmark" />
+                <span className="checkmark ckeckmark-form" />
               </label>
               <label className="chkwrap">
                 No
@@ -272,7 +272,7 @@ export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
                   checked={otherQuestions.local === formConstants.LOCAL.NO}
                   onChange={setLocalFunction}
                 />
-                <span className="checkmark" />
+                <span className="checkmark ckeckmark-form" />
               </label>
             </div>
           </div>

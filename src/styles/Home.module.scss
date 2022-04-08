@@ -174,7 +174,6 @@
 	width: 20px;
 	background-color: rgb(255, 255, 255);
 	vertical-align: middle;
-	border: 2px solid #E3E5E5;
   border-radius: 4px;
   }
   .chkwrap:hover input ~ .checkmark {
@@ -2588,6 +2587,7 @@ sup {
 						color: #7A7E80 ;
 						padding-bottom: 72px;
 						width: 543px;
+						line-height: 25px;
 					}
 					.gallery {
 						width: 544px;

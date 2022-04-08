@@ -91,7 +91,7 @@ export const LeftForm3 = () => {
               type="checkbox"
               onChange={setContactOwnerFunction}
             />
-            <span className="checkmark" />
+            <span className="checkmark ckeckmark-form" />
           </label>
           <label className="chkwrap">
             I am patron of this business.
@@ -99,7 +99,7 @@ export const LeftForm3 = () => {
               type="checkbox"
               onChange={setContactPatronFunction}
             />
-            <span className="checkmark" />
+            <span className="checkmark ckeckmark-form" />
           </label>
         </div>
       </div>
