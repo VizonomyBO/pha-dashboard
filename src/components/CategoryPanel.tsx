@@ -77,7 +77,7 @@ export const CategoryPanel = () => {
                     type="checkbox"
                     onChange={setSelectSupermaketFunction}
                   />
-                  <span className="checkmark,ckeckmark-form" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
               <div className="option">
