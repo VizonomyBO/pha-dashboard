@@ -27,7 +27,7 @@ export const DropdownCategories = () => {
             if (selected.length > 1) {
               return 'Multiple retailer types…';
             }
-            return selected[0];
+            return CATEGORIES.find((elem: FilterType) => elem.attrib === selected[0])?.name;
           }
           return undefined;
         }}

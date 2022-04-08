@@ -31,7 +31,7 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
                     <input
                       type="checkbox"
                       onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeCategory(e, category)}
-                      checked={categoriesSelected.indexOf(category.attrib) > -1}
+                      checked={categoriesSelected && categoriesSelected.indexOf(category.attrib) > -1}
                     />
                     <span className="checkmark" />
                   </label>
@@ -51,7 +51,7 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
                     <input
                       type="checkbox"
                       onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeAccesibilities(e, accesibility)}
-                      checked={accesibilities.indexOf(accesibility.attrib) > -1}
+                      checked={accesibilities && accesibilities.indexOf(accesibility.attrib) > -1}
                     />
                     <span className="checkmark" />
                   </label>
@@ -71,7 +71,7 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
                     <input
                       type="checkbox"
                       onChange={(e: ChangeEvent<HTMLInputElement>) => handleChangeDataSources(e, datasource)}
-                      checked={dataSources.indexOf(datasource.attrib) > -1}
+                      checked={dataSources && dataSources.indexOf(datasource.attrib) > -1}
                     />
                     <span className="checkmark" />
                   </label>
