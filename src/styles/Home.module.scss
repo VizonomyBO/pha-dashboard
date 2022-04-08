@@ -172,17 +172,22 @@
 	left: 0;
 	height: 20px;
 	width: 20px;
-	background-color: #eee;
+	background-color: rgb(255, 255, 255);
 	vertical-align: middle;
+	border: 2px solid #E3E5E5;
+  border-radius: 4px;
   }
   .chkwrap:hover input ~ .checkmark {
 	background-color: #ccc;
+	border-color: #ccc;
   }
   .chkwrap input:checked ~ .checkmark {
 	background-color: #00BDE3;
+	border-color: #00BDE3;
 	display: block;
 	width: 20px;
 	height: 20px;
+	border-radius: 4px;
 	content: url("../../public/images/ic_chk_selected.svg");
   }
   .checkmark:after {
