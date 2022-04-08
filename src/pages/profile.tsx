@@ -51,14 +51,12 @@ export const Profile = () => {
               <div className="item">
                 <span className="icodesc iccimail" />
                 <span className="txtst blue">
-                  <span className="txtst blue">
-                    <a
-                      href={profile?.email}
-                      style={{ all: 'unset', cursor: 'pointer' }}
-                    >
-                      email
-                    </a>
-                  </span>
+                  <a
+                    href={profile?.email}
+                    style={{ all: 'unset', cursor: 'pointer' }}
+                  >
+                    Email
+                  </a>
                 </span>
               </div>
               <div className="item">
@@ -68,7 +66,7 @@ export const Profile = () => {
                     href={profile?.facebook}
                     style={{ all: 'unset', cursor: 'pointer' }}
                   >
-                    facebook
+                    Facebook
                   </a>
                 </span>
               </div>
@@ -79,7 +77,7 @@ export const Profile = () => {
                     href={profile?.twitter}
                     style={{ all: 'unset', cursor: 'pointer' }}
                   >
-                    twitter
+                    Twitter
                   </a>
                 </span>
               </div>
@@ -90,7 +88,7 @@ export const Profile = () => {
                     href={profile?.website}
                     style={{ all: 'unset', cursor: 'pointer' }}
                   >
-                    website
+                    Website
                   </a>
                 </span>
               </div>
