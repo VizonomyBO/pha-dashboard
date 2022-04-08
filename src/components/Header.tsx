@@ -1,5 +1,6 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HeaderInterface } from '../@types';
+import { DropdownGeocoder } from './DropdownGeocoder';
 
 export const Header = ({ type, setOpenModal }: HeaderInterface) => (
   <div className="searchoptionsarea form1">
@@ -18,7 +19,7 @@ export const Header = ({ type, setOpenModal }: HeaderInterface) => (
           </button>
           <div className="citysearch">
             <i className="icsearch" />
-            <input type="text" name="" id="" placeholder="City or Zip Code" />
+            <DropdownGeocoder type="home" />
             <button className="light" type="button">
               Search
             </button>

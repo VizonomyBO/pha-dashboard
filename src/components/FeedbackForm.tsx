@@ -67,7 +67,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                   <label className="chkwrap">
                     Frozen
@@ -83,7 +83,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                   <label className="chkwrap">
                     Canned
@@ -99,7 +99,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
               </div>
@@ -130,7 +130,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                   <label className="chkwrap">
                     Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular patc
@@ -148,7 +148,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
               </div>
@@ -179,7 +179,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                   <label className="chkwrap">
                     No
@@ -196,7 +196,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
               </div>
@@ -227,7 +227,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                   <label className="chkwrap">
                     No
@@ -244,7 +244,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
               </div>
@@ -275,7 +275,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                   <label className="chkwrap">
                     No
@@ -292,7 +292,7 @@ export const FeedbackForm = (
                         }
                       }
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
               </div>
@@ -386,7 +386,7 @@ export const FeedbackForm = (
                     Stay connected to your local retailers and your community! I agree to allow P
                     HA and its affiliates to use my contact information for communication purposes.
                     <input type="checkbox" />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
               </div>

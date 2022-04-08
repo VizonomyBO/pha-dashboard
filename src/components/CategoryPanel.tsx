@@ -77,7 +77,7 @@ export const CategoryPanel = () => {
                     type="checkbox"
                     onChange={setSelectSupermaketFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
               <div className="option">
@@ -87,7 +87,7 @@ export const CategoryPanel = () => {
                     type="checkbox"
                     onChange={setSelectCornerFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
               <div className="option">
@@ -97,7 +97,7 @@ export const CategoryPanel = () => {
                     type="checkbox"
                     onChange={setSelectDollarFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
               <div className="option">
@@ -107,7 +107,7 @@ export const CategoryPanel = () => {
                     type="checkbox"
                     onChange={setSelectFoodPantryFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
               <div className="option">
@@ -117,7 +117,7 @@ export const CategoryPanel = () => {
                     type="checkbox"
                     onChange={setSelectDistributionFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
               <div className="option">
@@ -127,7 +127,7 @@ export const CategoryPanel = () => {
                     type="checkbox"
                     onChange={setSelectFoodCoOpFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
             </div>

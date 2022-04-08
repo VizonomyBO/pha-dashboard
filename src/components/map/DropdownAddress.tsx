@@ -6,27 +6,21 @@ import { GeocoderService } from '../../services/geocoderService';
 import { REGION, REGION_GEOCODER, TYPE_BUSINESS } from '../../constants';
 
 const name = 'geocoder';
-export const DropdownAddress = ({ type } : {type:string}) => {
+export const DropdownAddress = ({ type }: { type: string }) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState();
   const [inputTextHtml, setInputTextHtml] = useState('');
   const { setBusinessDetails } = useMarketplaceDispatch();
-  const geocoder = useRef<GeocoderService>(new GeocoderService(
-    name,
-    setGeocoderOptions,
-    geocoderDivRef.current as HTMLElement
-  ));
+  const geocoder = useRef<GeocoderService>(
+    new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement)
+  );
   useEffect(() => {
     geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
-    if (inputText.shouldSearch) {
-      geocoder.current.setGeocoderInputText(inputText);
-    } else {
-      if (inputText.text) {
-        geocoder.current.setGeocoderQuery(inputText.text);
-      }
-      setGeocoderOptions([]);
+    if (inputText.text) {
+      geocoder.current.setGeocoderQuery(inputText.text);
     }
+    setGeocoderOptions([]);
   }, [geocoder, inputText, setGeocoderOptions]);
   const inputTextFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     setInputText({
@@ -50,8 +44,8 @@ export const DropdownAddress = ({ type } : {type:string}) => {
       <div className="geocoder-block">
         {options && inputText && options.length > 0 && inputText.shouldSearch && (
           <ul className="ul-address">
-            {
-              inputText.shouldSearch && options.map((opt: Result) => {
+            {inputText.shouldSearch
+              && options.map((opt: Result) => {
                 let region = '';
                 let regionShortcode = '';
                 if (opt.context) {
@@ -88,8 +82,7 @@ export const DropdownAddress = ({ type } : {type:string}) => {
                     </button>
                   </li>
                 );
-              })
-            }
+              })}
           </ul>
         )}
       </div>

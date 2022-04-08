@@ -91,7 +91,18 @@ input, button, textarea, select {
     border-radius: 20px;
     padding-bottom: 10px;
     list-style: none;
-    padding: 10px;
+    padding: 12px;
+    z-index: 2;
+}
+.table-geocoder-home {
+  margin-left: -135px;
+  width: 216px;
+  background-color: white;
+  border-radius: 20px;
+  list-style: none;
+  padding: 10px;
+  z-index: 2;
+  position: relative;
 }
 
 .button-goecoder {
@@ -99,13 +110,13 @@ input, button, textarea, select {
     border-color: transparent;
     width: 100%;
     text-align: inherit;
+    padding-bottom: 7px;
 }
 .span-geocoder {
     font-family: "FuturaMedium", sans-serif;
     font-size: 14px;
     font-weight: 500;
     color: #7A7E80;
-    padding-left: 4px;
 }
 
 .tr-geocoder {
@@ -131,6 +142,15 @@ input, button, textarea, select {
     display: 'block';
     position: absolute;
     max-width: 313;
+}
+.geocoder-block-home {
+  display: 'block';
+  position: absolute;
+  max-width: 313;
+  top: 404px;
+}
+.swhere-home {
+  max-width: 194px;
 }
 
 .ul-address {
@@ -188,3 +208,6 @@ input, button, textarea, select {
     font-weight: 500;
 }
 
+.ckeckmark-form {
+    border: 2px solid #E3E5E5;
+}

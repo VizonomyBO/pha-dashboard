@@ -50,19 +50,47 @@ export const Profile = () => {
               </div>
               <div className="item">
                 <span className="icodesc iccimail" />
-                <span className="txtst blue">{showText(profile?.email)}</span>
+                <span className="txtst blue">
+                  <a
+                    href={profile?.email}
+                    style={{ all: 'unset', cursor: 'pointer' }}
+                  >
+                    Email
+                  </a>
+                </span>
               </div>
               <div className="item">
                 <span className="icodesc iccifb" />
-                <span className="txtst blue">{showText(profile?.facebook)}</span>
+                <span className="txtst blue">
+                  <a
+                    href={profile?.facebook}
+                    style={{ all: 'unset', cursor: 'pointer' }}
+                  >
+                    Facebook
+                  </a>
+                </span>
               </div>
               <div className="item">
                 <span className="icodesc iccitw" />
-                <span className="txtst blue">{showText(profile?.twitter)}</span>
+                <span className="txtst blue">
+                  <a
+                    href={profile?.twitter}
+                    style={{ all: 'unset', cursor: 'pointer' }}
+                  >
+                    Twitter
+                  </a>
+                </span>
               </div>
               <div className="item">
                 <span className="icodesc icciws" />
-                <span className="txtst blue">{showText(profile?.website)}</span>
+                <span className="txtst blue">
+                  <a
+                    href={profile?.website}
+                    style={{ all: 'unset', cursor: 'pointer' }}
+                  >
+                    Website
+                  </a>
+                </span>
               </div>
               <div className="txtbt spc">Hours</div>
               <div className="item">
