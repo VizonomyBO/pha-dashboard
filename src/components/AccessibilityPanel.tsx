@@ -36,7 +36,7 @@ export const AccessibilityPanel = () => {
                     type="checkbox"
                     onChange={setWicAcceptedFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
               <div className="option">
@@ -46,7 +46,7 @@ export const AccessibilityPanel = () => {
                     type="checkbox"
                     onChange={setSnapAcceptedFunction}
                   />
-                  <span className="checkmark" />
+                  <span className="checkmark ckeckmark-form" />
                 </label>
               </div>
             </div>
