@@ -28,6 +28,7 @@ export const theme = createTheme({
           fontFamily: '"FuturaMedium",sans-serif',
           fontSize: '14px',
           color: '#7A7E80',
+          paddingRight: '0px !important',
           '&hover': {
             backgroundColor: '#EBFBFF'
           }
@@ -53,18 +54,25 @@ export const theme = createTheme({
           paddingRight: '0px !important',
           '::-webkit-scrollbar': {
             '-webkit-appearance': 'none',
-            width: '30px',
+            width: '35px',
           },
           '::-webkit-scrollbar-thumb': {
             backgroundColor: '#00BDE3',
             borderRadius: '50px',
             width: '6px',
-            border: '10px solid white',
+            border: '15px solid white',
             paddingBottom: '50px',
-          }
+          },
         }
       }
     },
-
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          paddingLeft: '0px !important',
+          paddingRight: '0px !important',
+        }
+      }
+    },
   }
 });

@@ -14,8 +14,8 @@ export const Header = ({ type, setOpenModal }: HeaderInterface) => (
         <div className="alook">
           <button className="accesstype" onClick={() => setOpenModal(true)} type="button">
             Select Access Type
+            <KeyboardArrowDownIcon style={{ marginLeft: '40px' }} />
           </button>
-          <KeyboardArrowDownIcon style={{ marginLeft: '40px' }} />
           <div className="citysearch">
             <i className="icsearch" />
             <input type="text" name="" id="" placeholder="City or Zip Code" />
