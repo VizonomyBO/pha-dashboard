@@ -29,7 +29,6 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
   const onChangeValue = (index: number) => {
     setTimeout(() => {
       buttonValue[index].active = !buttonValue[index].active;
-      console.log(buttonValue);
       setbuttonValue(buttonValue);
     }, 2);
   };
