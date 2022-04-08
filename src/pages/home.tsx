@@ -44,9 +44,18 @@ export const Home = () => {
               <div className="desc2">
                 Don’t see a food pantry or retailer? We can help! Submit a request form, and we’ll add the location.
               </div>
-              <Link to="/form" style={{ textDecoration: 'none' }}>
-                <div className="textAdd">Add A Listing</div>
-              </Link>
+              <div className="optaddchk">
+                <Link to="/form" style={{ textDecoration: 'none' }}>
+                  <div className="textAdd">Add A Listing</div>
+                </Link>
+                <div className="option">
+                  <label className="chkwrap">
+                    Filter by map view
+                    <input type="checkbox" />
+                    <span className="checkmark ckeckmark-form" />
+                  </label>
+                </div>
+              </div>
             </div>
             <div className="space">
               <span className="line" />
