@@ -1,12 +1,20 @@
 import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
 import { DashboardTable } from '../components/dashboard/DashboardTable';
 import { useDashboard } from '../store/hooks/custom/useDashboard';
+import { authorizationManager } from '../utils/authorizationManager';
 
 export const Dashboard = () => {
-  console.log('dashboard');
-  const { table } = useDashboard();
+  const navigate = useNavigate();
+  const token = authorizationManager.getToken();
+  const { table, setParams } = useDashboard();
+
+  if (!token) {
+    navigate('/login');
+  }
+
   useEffect(() => {
     console.log(table);
   }, [table]);
@@ -18,7 +26,7 @@ export const Dashboard = () => {
       <div className="pagecontainer">
         <DashboardNavbar />
         <div className="dashboard">
-          <DashboardHeader />
+          <DashboardHeader setParams={setParams} />
           <DashboardTable table={table} />
         </div>
       </div>

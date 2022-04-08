@@ -4,15 +4,15 @@ export const MESSAGE_ERROR = 'Unknown error, please try again later.';
 
 export const ITEM_IMAGE = [{
   id: 'img01',
-  imagen: '/images/loginImages/admin-image-1.jpeg',
+  imagen: '/images/loginImages/admin-image-1.jpg',
   description: 'Eat healthy with our curated selection of food and vegetables'
 }, {
   id: 'img02',
-  imagen: '/images/loginImages/admin-image-2.jpeg',
+  imagen: '/images/loginImages/admin-image-2.jpg',
   description: 'Eat healthy with our curated selection of food and vegetables'
 }, {
   id: 'img03',
-  imagen: '/images/loginImages/admin-image-3.jpeg',
+  imagen: '/images/loginImages/admin-image-3.jpg',
   description: 'Eat healthy with our curated selection of food and vegetables'
 }];
 
