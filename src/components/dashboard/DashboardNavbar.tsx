@@ -22,7 +22,7 @@ export const DashboardNavbar = () => {
                 <li className="active">
                   <a href="#0">Dashboard</a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#0">Projects</a>
                 </li>
                 <li>
@@ -33,16 +33,16 @@ export const DashboardNavbar = () => {
                 </li>
                 <li>
                   <a href="#0">Users</a>
-                </li>
+                </li> */}
               </ol>
             </nav>
             <div className="userarea">
-              <button type="button" className="light">
+              {/* <button type="button" className="light">
                 <span className="icsetting" />
               </button>
               <button className="light" type="button">
                 <span className="icbell" />
-              </button>
+              </button> */}
               <div className="profile">
                 <button className="light" type="button">
                   <figure className="picture">
