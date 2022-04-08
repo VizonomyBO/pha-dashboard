@@ -34,8 +34,13 @@ export const DropdownCategories = () => {
       >
         {CATEGORIES.map((category: FilterType) => (
           <MenuItem key={category.name} value={category.attrib} className="dropdown-categories">
-            <Checkbox checked={categoriesSelected.indexOf(category.attrib) > -1} className="checkbox-categories" />
             <ListItemText primary={category.name} className="item-categories" />
+            <Checkbox
+              checked={
+              categoriesSelected && categoriesSelected.indexOf(category.attrib) > -1
+              }
+              className="checkbox-categories"
+            />
           </MenuItem>
         ))}
       </Select>

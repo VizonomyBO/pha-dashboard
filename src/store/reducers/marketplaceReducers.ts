@@ -3,7 +3,11 @@ import { MarketplaceInterface } from '../../@types/redux';
 import { INITIAL_MARKETPLACE } from '../defaultStore';
 import * as TYPES from '../types';
 
-const marketplaceReducer = (state: MarketplaceInterface, action: AnyAction) => {
+const defaultState: MarketplaceInterface = {
+  ...INITIAL_MARKETPLACE
+};
+
+const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: AnyAction = { type: 'foo' }) => {
   switch (action?.type) {
     case TYPES.SET_BUSINESS_DETAILS:
       return {

@@ -10,19 +10,13 @@ export const useDashboard = () => {
   const [table, setTable] = useState<(PhaRetailer & PhaIndividual)[]>([]);
   useEffect(() => {
     const queryParams = getQueryParms(params);
-    const promises = [];
-    promises.push(webRequest.get(ENDPOINTS.PHA_INDIVIDUAL(queryParams)));
-    promises.push(webRequest.get(ENDPOINTS.PHA_RETAILERS(queryParams)));
-    Promise.all(promises).then((res) => {
-      res.forEach((response) => {
-        response.json().then((row) => {
-          setTable(row.data.rows);
-        });
+    webRequest.get(ENDPOINTS.DASHBOARD(queryParams)).then((response) => response.json())
+      .then((response) => {
+        setTable(response.data.rows);
+      }).catch((error) => {
+        console.error(error);
+        setTable([]);
       });
-    }).catch((err) => {
-      console.error(err);
-      setTable([]);
-    });
   }, [params]);
   return {
     setParams,
