@@ -54,7 +54,7 @@ input, button, textarea, select {
 
 .textAdd {
     padding-left: 20px;
-    color: red;
+    color: #e40000;
     font-family: "FuturaBold", sans-serif;
 }
 
@@ -108,6 +108,10 @@ input, button, textarea, select {
     padding-left: 4px;
 }
 
+.tr-geocoder {
+    // height: 40px;
+}
+
 .tr-geocoder:hover {
     background-color: #EBFBFF;
 }
@@ -146,11 +150,13 @@ input, button, textarea, select {
     border-color: transparent !important;
     font-family: "FuturaMedium" !important;
     width: 170px;;
+    color: #757587 !important;
 }
 
 .dropdown-categories {
     background-color: white !important;
     width: auto !important;
+    padding-bottom: 0px !important;
 }
 
 .item-categories {
@@ -181,3 +187,4 @@ input, button, textarea, select {
     font-size: 14px;
     font-weight: 500;
 }
+

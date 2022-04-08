@@ -27,6 +27,7 @@ export const theme = createTheme({
           width: '192px',
           fontFamily: '"FuturaMedium",sans-serif',
           fontSize: '14px',
+          height: '40px',
           color: '#7A7E80',
           paddingRight: '0px !important',
           '&hover': {
@@ -38,18 +39,22 @@ export const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          fontFamily: '"FuturaMedium", sans-serif !important'
+          fontFamily: '"FuturaMedium", sans-serif !important',
+          textOverflow: 'ellipsis',
+          whiteSpace: 'nowrap',
+          overflow: 'hidden',
+          fontSize: '14px !important',
         }
       }
     },
     MuiPaper: {
       styleOverrides: {
         root: {
-          marginTop: '20px',
+          marginTop: '17px',
           backgroundColor: 'white !important',
           borderRadius: '25px !important',
           width: '264px !important',
-          height: '287px',
+          height: '220px',
           paddingBottom: '10px',
           paddingRight: '0px !important',
           '::-webkit-scrollbar': {
@@ -74,5 +79,14 @@ export const theme = createTheme({
         }
       }
     },
+    MuiInputBase: {
+      styleOverrides: {
+        input: {
+          em: {
+            fontStyle: 'normal !important',
+          }
+        }
+      }
+    }
   }
 });
