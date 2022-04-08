@@ -18,6 +18,7 @@ export const DropdownAddress = ({ type } : {type:string}) => {
     geocoderDivRef.current as HTMLElement
   ));
   useEffect(() => {
+    geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
     if (inputText.shouldSearch) {
       geocoder.current.setGeocoderInputText(inputText);
     } else {
