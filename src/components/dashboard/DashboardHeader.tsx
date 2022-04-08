@@ -9,28 +9,24 @@ import { DEFAULT_VALUES_BUTTON } from '../../constants/dashboard';
 
 export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAction<QueryParams>> }) => {
   const [inputValue, setinputValue] = useState('');
-  const [buttonValue, setbuttonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
+  const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, search: inputValue }));
   }, [inputValue, setParams]);
 
   useEffect(() => {
-    const option: Array<string> = [];
-    (buttonValue as Array<ButtonDashboard>).forEach((item) => {
-      if (item.active) {
-        option.push(item.name);
-      }
-    });
-    const reducedArray: string = option.reduce((acc, curr) => `${acc}${curr},`, '');
-    setParams((old: QueryParams) => ({ ...old, status: reducedArray.slice(0, -1) }));
-  }, [buttonValue, setParams, setbuttonValue]);
+    const options = (buttonValue as Array<ButtonDashboard>).filter((item) => item.active)
+      .map((item) => item.name).join(',');
+    setParams((old: QueryParams) => ({ ...old, status: options }));
+  }, [buttonValue, setParams, setButtonValue]);
 
   const onChangeValue = (index: number) => {
-    setTimeout(() => {
-      buttonValue[index].active = !buttonValue[index].active;
-      setbuttonValue(buttonValue);
-    }, 2);
+    setButtonValue((old) => {
+      const copy = [...old];
+      copy[index].active = !copy[index].active;
+      return copy;
+    });
   };
 
   return (
@@ -59,7 +55,6 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
               className={`${item.class} ${item.active ? 'active' : null}`}
               type="button"
               onClick={() => {
-                setbuttonValue([]);
                 onChangeValue(index);
               }}
             >
