@@ -34,7 +34,7 @@ export const CATEGORIES: FilterType[] = [
     attrib: 'general_store'
   },
   {
-    name: 'Supermarket/big box retailer',
+    name: 'Supermarket/big box',
     attrib: 'supermarket'
   }
 ];
