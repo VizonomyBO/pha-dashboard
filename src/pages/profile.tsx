@@ -4,6 +4,8 @@ import { Navbar } from '../components/Navbar';
 import { BADGES } from '../constants';
 import { useProfile } from '../store/hooks/custom/useProfile';
 import { formatPhone, showSchedule, showText } from '../utils/textFormatter';
+import { deckDefaults } from '../components/map/deckDefaults';
+import { DeckGLComponent } from '../components/map/DeckGlComponent';
 
 export const Profile = () => {
   const { profile, badges } = useProfile();
@@ -133,7 +135,9 @@ export const Profile = () => {
                     </button>
                   </div>
                 </div>
-                <div className="somethingareaexample" />
+                <div className="somethingareaexample">
+                  <DeckGLComponent {...deckDefaults} />
+                </div>
               </div>
               <div className="txtbt">About our location</div>
               <p className="txtst al">

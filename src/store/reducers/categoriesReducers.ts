@@ -20,6 +20,26 @@ const categoriesReducer = (state: CategoryState = defaultState, action: AnyActio
         ...state,
         categoriesSelected: action.categoriesSelected
       };
+    case TYPES.SET_ACCESSIBILITY:
+      return {
+        ...state,
+        accesibilities: action.accesibilities
+      };
+    case TYPES.SET_CENTER:
+      return {
+        ...state,
+        center: action.center
+      };
+    case TYPES.SET_DATA_SOURCES:
+      return {
+        ...state,
+        dataSources: action.dataSources
+      };
+    case TYPES.SET_BADGES:
+      return {
+        ...state,
+        badges: action.badges
+      };
     case TYPES.INIT:
       return INITIAL_CATEGORIES;
     default:

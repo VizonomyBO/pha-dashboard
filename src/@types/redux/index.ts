@@ -107,5 +107,9 @@ export interface IndividualFormInterface {
 }
 
 export interface CategoriesInterface {
-  categoriesSelected: string[]
+  categoriesSelected: string[],
+  center: number[],
+  accesibilities: string[],
+  dataSources: string[],
+  badges: string[]
 }

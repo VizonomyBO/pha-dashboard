@@ -2461,6 +2461,7 @@ sup {
 						margin-bottom: 40px;
 						overflow: scroll;
 						.opkindmap {
+              z-index: 2;
 							position: absolute;
 							display: flex;
 							flex-direction: row;
@@ -2500,6 +2501,7 @@ sup {
 							background-color: green;
 						}
 						.controlzoom {
+              z-index: 2;
 							position: absolute;
 							top: 20px;
 							right: 16px;
