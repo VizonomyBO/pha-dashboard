@@ -9,7 +9,7 @@ import { loginValidation } from '../utils/loginValidation';
 export const Dashboard = () => {
   const navigate = useNavigate();
   const token = loginValidation.getToken();
-  const { table } = useDashboard();
+  const { table, setParams } = useDashboard();
 
   if (!token) {
     navigate('/login');
@@ -17,7 +17,7 @@ export const Dashboard = () => {
 
   useEffect(() => {
     console.log(table);
-  }, [token, table]);
+  }, [table]);
   return (
     <div className="container">
       {/* <div className="bgwhite" /> */}
@@ -26,7 +26,7 @@ export const Dashboard = () => {
       <div className="pagecontainer">
         <DashboardNavbar />
         <div className="dashboard">
-          <DashboardHeader />
+          <DashboardHeader setParams={setParams} />
           <DashboardTable table={table} />
         </div>
       </div>
