@@ -4,14 +4,30 @@ import {
   useEffect,
   useState
 } from 'react';
-import { QueryParams } from '../../@types';
+import { ButtonDashboard, QueryParams } from '../../@types';
+import { DEFAULT_VALUES_BUTTON } from '../../constants/dashboard';
 
 export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAction<QueryParams>> }) => {
   const [inputValue, setinputValue] = useState('');
+  const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, search: inputValue }));
   }, [inputValue, setParams]);
+
+  useEffect(() => {
+    const options = (buttonValue as Array<ButtonDashboard>).filter((item) => item.active)
+      .map((item) => item.name).join(',');
+    setParams((old: QueryParams) => ({ ...old, status: options }));
+  }, [buttonValue, setParams, setButtonValue]);
+
+  const onChangeValue = (index: number) => {
+    setButtonValue((old) => {
+      const copy = [...old];
+      copy[index].active = !copy[index].active;
+      return copy;
+    });
+  };
 
   return (
     <div className="header">
@@ -32,15 +48,20 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
         <p>View retailer submissions</p>
       </div>
       <div className="statusoption">
-        <button className="light op1 active" type="button">
-          Pending
-        </button>
-        <button className="light op2 active" type="button">
-          Aproved
-        </button>
-        <button className="light op3" type="button">
-          Rejected
-        </button>
+        {
+          buttonValue.map((item, index) => (
+            <button
+              key={item.id}
+              className={`${item.class} ${item.active ? 'active' : null}`}
+              type="button"
+              onClick={() => {
+                onChangeValue(index);
+              }}
+            >
+              {item.name}
+            </button>
+          ))
+        }
       </div>
       <div className="filterarea">
         <div className="searcharea">
