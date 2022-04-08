@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
+import { authorizationManager } from '../../utils/authorizationManager';
 
 export const DashboardNavbar = () => {
-  const TOKEN_KEY = 'token';
   const navigate = useNavigate();
   const logout = () => {
-    localStorage.removeItem(TOKEN_KEY);
+    authorizationManager.logout();
     navigate('/home');
   };
 
@@ -22,27 +22,9 @@ export const DashboardNavbar = () => {
                 <li className="active">
                   <a href="#0">Dashboard</a>
                 </li>
-                {/* <li>
-                  <a href="#0">Projects</a>
-                </li>
-                <li>
-                  <a href="#0">Tasks</a>
-                </li>
-                <li>
-                  <a href="#0">Reporting</a>
-                </li>
-                <li>
-                  <a href="#0">Users</a>
-                </li> */}
               </ol>
             </nav>
             <div className="userarea">
-              {/* <button type="button" className="light">
-                <span className="icsetting" />
-              </button>
-              <button className="light" type="button">
-                <span className="icbell" />
-              </button> */}
               <div className="profile">
                 <button className="light" type="button">
                   <figure className="picture">

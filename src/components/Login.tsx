@@ -14,7 +14,7 @@ import {
   STYLE_ACTIVATOR_BUTTON_ACTIVATE,
   STYLE_INDICATOR_CONTAINER
 } from '../constants/login';
-import { loginValidation } from '../utils/loginValidation';
+import { authorizationManager } from '../utils/authorizationManager';
 
 export const Login = () => {
   const [username, setUsername] = useState('');
@@ -43,7 +43,7 @@ export const Login = () => {
     }, headers).then((r) => r.json())
       .then((d) => {
         if (d.data) {
-          loginValidation.setToken(d.data.idToken);
+          authorizationManager.setToken(d.data.idToken);
           navigate('/dashboard');
         } else {
           setErrorMessage(MESSAGE_EMAIL_PASSWORD);

@@ -4,11 +4,11 @@ import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
 import { DashboardTable } from '../components/dashboard/DashboardTable';
 import { useDashboard } from '../store/hooks/custom/useDashboard';
-import { loginValidation } from '../utils/loginValidation';
+import { authorizationManager } from '../utils/authorizationManager';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
-  const token = loginValidation.getToken();
+  const token = authorizationManager.getToken();
   const { table, setParams } = useDashboard();
 
   if (!token) {
