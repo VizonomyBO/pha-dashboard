@@ -1021,6 +1021,15 @@ sup {
 					height: 56px;
 				}
 			}
+			&.landing {
+				padding: 24px 0;
+				.nbleft {
+					.iclogowhite {
+						width: 196px;
+						height: 84px;
+					}
+				}
+			}
 			.nbright {
 				display: flex;
 				flex-direction: column;
@@ -4587,3 +4596,65 @@ header {
 }
 
 /* end set dropdowns style */
+
+@media (max-width: 1920px) {
+	.container {
+		.pagecontainer {
+			.navbar.landing {
+				.nbleft {
+					.iclogowhite {
+						width: 262px;
+						height: 112px;
+					}
+				}
+			}
+			.navbar {
+				.nbleft {
+					.iclogowhite {
+						width: 262px;
+						height: 112px;
+					}
+				}
+				.nbright {
+					.sn {
+						.txtaction {
+							font-size: 18px;
+						}
+						.ictww,  .icfbw,  .icytw,  .icigw,  .icliw {
+							width: 32px;
+							height: 32px;
+						}
+						button.light {
+							margin-left: 32px;
+						}
+						button.light .ictw:hover, button.light .ictww:hover,
+						button.light .icfb:hover, button.light .icfbw:hover,
+						button.light .icyt:hover, button.light .icytw:hover,
+						button.light .icig:hover, button.light .icigw:hover,
+						button.light .icli:hover, button.light .icliw:hover {
+							width: 48px;
+							height: 48px;
+						/* 	content: url("../../public/images/ic_tw_hover.svg"); */
+						}
+					}
+					
+					.ictww:hover,  .icfbw:hover,  .icytw:hover,  .icigw:hover,  .icliw:hover {
+						width: 48px;
+						height: 48px;
+					}
+
+				}
+			}
+			.ldgaccesspoint {
+				h1 {
+					font-size: 64px;
+				}
+				p {
+					width: 605px;
+					font-size: 24px;
+					padding-top: 16px;
+				}
+			}
+		}
+	}
+}

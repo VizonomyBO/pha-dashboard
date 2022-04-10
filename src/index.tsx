@@ -21,6 +21,7 @@ import { Nsform4 } from './pages/nsform4';
 import { Nshome } from './pages/nshome';
 import { Profile } from './pages/profile';
 import { Login } from './components/Login';
+import { Nslanding } from './pages/nslanding';
 
 import { theme } from './theme';
 
@@ -73,6 +74,10 @@ ReactDOM.render(
             <Route
               path="/profile/:id"
               element={<Profile />}
+            />
+            <Route
+              path="/nslanding"
+              element={<Nslanding />}
             />
           </Routes>
         </BrowserRouter>
