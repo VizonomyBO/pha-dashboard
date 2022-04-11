@@ -94,6 +94,7 @@ export const INITIAL_CATEGORIES = {
   categoriesSelected: [],
   center: [],
   accesibilities: [],
+  badges: [],
   dataSources: ['retailers_pha'],
   callFilters: true,
   zoomCenter: true

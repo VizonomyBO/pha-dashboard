@@ -2,7 +2,6 @@ import { ChangeEvent } from 'react';
 import { ModalFilterData, FilterType } from '../@types';
 import { CATEGORIES, ACCESIBILITIES, DATASOURCES } from '../constants/categories';
 import { useFilter } from '../store/hooks/custom/useFilters';
-import { useCategoriesDispatch } from '../store/hooks';
 
 export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
   const {
@@ -11,13 +10,9 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
     dataSources,
     handleChangeCategory,
     handleChangeAccesibilities,
-    handleChangeDataSources
-  } = useFilter();
-  const { setCallFilters } = useCategoriesDispatch();
-  const closeModalAndCallFilters = () => {
-    setOpenModal(false);
-    setCallFilters(true);
-  };
+    handleChangeDataSources,
+    closeModalAndCallFilters
+  } = useFilter({ setOpenModal });
   return (
     <div className="modalretailer">
       <div className="panel">

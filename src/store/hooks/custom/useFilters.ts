@@ -1,12 +1,18 @@
 import { ChangeEvent, useEffect } from 'react';
-import { FilterType } from '../../../@types';
+import { FilterType, ModalFilterData } from '../../../@types';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 
-export const useFilter = () => {
+export const useFilter = ({ setOpenModal }: ModalFilterData) => {
   const { categoriesSelected, accesibilities, dataSources } = useCategoriesState();
   const {
-    setCategoriesSelected, setAccesibilitiesSelected, setDataSourcesSelected
+    setCategoriesSelected, setAccesibilitiesSelected, setDataSourcesSelected, setCallFilters
   } = useCategoriesDispatch();
+
+  const closeModalAndCallFilters = () => {
+    setOpenModal(false);
+    setCallFilters(true);
+  };
+
   const handleChangeCategory = (event: ChangeEvent<HTMLInputElement>, category: FilterType) => {
     if (categoriesSelected && categoriesSelected.indexOf(category.attrib) > -1 && !event.target.checked) {
       setCategoriesSelected(categoriesSelected.filter((_category: string) => _category !== category.attrib));
@@ -32,6 +38,8 @@ export const useFilter = () => {
   };
   useEffect(() => {
     if (categoriesSelected.length || accesibilities.length) {
+      // TODO: Jorge check my question on PR 79
+      // https://github.com/VizonomyBO/pha-dashboard/pull/79#pullrequestreview-938578288
       if (dataSources.indexOf('retailers_pha') === -1) {
         setDataSourcesSelected([...dataSources, 'retailers_pha']);
       }
@@ -41,9 +49,10 @@ export const useFilter = () => {
     categoriesSelected,
     accesibilities,
     dataSources,
+    closeModalAndCallFilters,
     setCategoriesSelected,
     handleChangeCategory,
     handleChangeAccesibilities,
-    handleChangeDataSources
+    handleChangeDataSources,
   };
 };
