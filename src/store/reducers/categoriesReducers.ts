@@ -3,10 +3,10 @@ import { INITIAL_CATEGORIES } from '../defaultStore';
 import * as TYPES from '../types';
 
 interface CategoryState {
-  categoriesSelected: unknown[];
-  center: unknown[];
-  accesibilities: unknown[];
-  dataSources: unknown[];
+  categoriesSelected: string[];
+  center: string[];
+  accesibilities: string[];
+  dataSources: string[];
   callFilters: boolean;
   zoomCenter: boolean
 }
