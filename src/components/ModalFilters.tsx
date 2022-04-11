@@ -25,7 +25,7 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
             </div>
             <div className="group">
               {CATEGORIES.map((category: FilterType) => (
-                <div className="option">
+                <div className="option" key={category.name}>
                   <label className="chkwrap">
                     {category.name}
                     <input
@@ -45,7 +45,7 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
             </div>
             <div className="group">
               {ACCESIBILITIES.map((accesibility: FilterType) => (
-                <div className="option">
+                <div className="option" key={accesibility.name}>
                   <label className="chkwrap">
                     {accesibility.name}
                     <input
@@ -65,7 +65,7 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
             </div>
             <div className="group">
               {DATASOURCES.map((datasource: FilterType) => (
-                <div className="option">
+                <div className="option" key={datasource.name}>
                   <label className="chkwrap">
                     {datasource.name}
                     <input

@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
-import { BADGES } from '../../constants';
-import { Badge } from '../map/Badge';
+import { BADGES } from '../../../constants';
+import { Badge } from '../Badge';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
