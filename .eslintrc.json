@@ -40,6 +40,8 @@
           "unnamedComponents": "arrow-function"
         }
       ],
+      "no-use-before-define": "off",
+      "@typescript-eslint/no-use-before-define": ["error"],
       "react/require-default-props": "off",
       "react/jsx-filename-extension": ["warn", {"extensions": [".tsx"]}],
       "no-shadow": "off",
@@ -47,7 +49,7 @@
       "@typescript-eslint/no-shadow": ["error"],
       "max-len": ["error", { "code": 120 }],
       "react-hooks/rules-of-hooks": "error",
-      "react-hooks/exhaustive-deps": "warn",
+      "react-hooks/exhaustive-deps": "error",
       "import/prefer-default-export": "off",
       "react/prop-types": "off",
       "no-console":"off",
@@ -61,8 +63,10 @@
       }],
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "import/no-extraneous-dependencies": "off",
-      "@typescript-eslint/no-unused-vars": "error"
-      
+      "@typescript-eslint/no-unused-vars": "error",
+      "linebreak-style": 0,
+      "@typescript-eslint/camelcase": "off",
+      "camelcase": "off"
   },
   "settings": {
       "import/resolver": {

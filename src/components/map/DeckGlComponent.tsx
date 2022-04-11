@@ -1,36 +1,35 @@
-import DeckGL from '@deck.gl/react';
-import { Layer } from 'deck.gl';
+import { useRef } from 'react';
+import { DeckGL } from 'deck.gl';
 import Map from 'react-map-gl';
-import {
-  MAPBOX_KEY,
-  BASEMAP,
-  NO_DATA,
-  DEFAULT_VIEW_STATE
-} from '../../constants/index';
+import { MAPBOX_KEY, BASEMAP, NO_DATA } from '../../constants/index';
 import { NoDataProvided } from '../NoDataProvided';
+import { DeckInterface } from '../../@types';
 
-export const DeckGLComponent = ({ layers }: { layers: Layer<unknown>[] }) => {
-  const initialViewState = DEFAULT_VIEW_STATE;
+export const DeckGLComponent: React.FC<DeckInterface> = ({
+  initialStateView,
+  controller,
+  layers,
+  onViewStateChange,
+  onClickFunction,
+  children
+}) => {
+  const mapref = useRef(null);
   return (
     <div>
       {MAPBOX_KEY === NO_DATA ? (
-        <NoDataProvided
-          variables={['MAPBOX_KEY']}
-        />
-      )
-        : (
-          <DeckGL
-            viewState={{ ...initialViewState }}
-            layers={layers}
-          >
-            <Map
-              id="mainMap"
-              reuseMaps
-              mapStyle={BASEMAP}
-              mapboxAccessToken={MAPBOX_KEY}
-            />
-          </DeckGL>
-        )}
+        <NoDataProvided variables={['MAPBOX_KEY']} />
+      ) : (
+        <DeckGL
+          initialViewState={initialStateView}
+          controller={controller}
+          layers={layers}
+          onViewStateChange={onViewStateChange}
+          onClick={onClickFunction}
+        >
+          <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
+          { children }
+        </DeckGL>
+      )}
     </div>
   );
 };

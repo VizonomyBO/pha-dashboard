@@ -1,9 +1,111 @@
-export const LeftForm2 = () => {
-  console.log('LeftForm2');
+import React, { useEffect, useState } from 'react';
+import { CONTACT_DETAILS, TYPE_BUSINESS } from '../constants';
+import { Attachment } from './Attachment';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
+import { formConstants } from '../constants/form';
+import {
+  otherQuestionsEmty,
+  otherQuestionsValidation,
+  otherQuestionsValidationFresh,
+  selectAccessibilityEmty,
+  selectAccessibilityValidation,
+  selectCategoryEmty,
+  selectCategoryValidation
+} from '../utils/validation';
+import { FormTabTypeInterface } from '../@types';
+import { ModalRequestForm } from './ModalRequestForm';
+
+export const LeftForm2 = ({ setActiveTab }: FormTabTypeInterface) => {
+  const [visibleModal, setVisibleModal] = useState(false);
+  const [typeModal, setTypeModal] = useState(false);
+  const [showIsFreshOption, setShowIsFreshOption] = useState(false);
+  const {
+    setOtherQuestions, setAvailabilityOptions, setQuality,
+    setVisibility, setLocal, setProduceAvailStore,
+    setProduceAvailSeasonally
+  } = useMarketplaceDispatch();
+  const { otherQuestions, selectCategory, selectAccessibility } = useMarketplaceState();
+
+  const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
+    setOtherQuestions(e.currentTarget.value);
+  };
+
+  const setAvailabilityOptionsCheck = (constant: string, checked: boolean) => {
+    if (checked) {
+      setAvailabilityOptions([...otherQuestions.availabilityOptions, constant]);
+    } else {
+      setAvailabilityOptions(
+        otherQuestions.availabilityOptions.filter((data: string) => data !== constant)
+      );
+    }
+  };
+
+  const setAvailibityFresh = (e: React.FormEvent<HTMLInputElement>): void => {
+    setAvailabilityOptionsCheck(formConstants.AVAILABILITY.FRESH, e.currentTarget.checked);
+  };
+
+  const setAvailabilityFrozen = (e: React.FormEvent<HTMLInputElement>): void => {
+    setAvailabilityOptionsCheck(formConstants.AVAILABILITY.FROZEN, e.currentTarget.checked);
+  };
+
+  const setAvailabilityCanned = (e: React.FormEvent<HTMLInputElement>): void => {
+    setAvailabilityOptionsCheck(formConstants.AVAILABILITY.CANNED, e.currentTarget.checked);
+  };
+
+  const setQualityFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    setQuality(e.currentTarget.value);
+  };
+
+  const setVisibilityFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    setVisibility(e.currentTarget.value);
+  };
+
+  const setLocalFunction = (e: React.FormEvent<HTMLInputElement>): void => {
+    setLocal(e.currentTarget.value);
+  };
+
+  const setProduceAvailStoreFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
+    setProduceAvailStore(e.currentTarget.value);
+  };
+
+  const setProduceAvailSeasonallyFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
+    setProduceAvailSeasonally(e.currentTarget.value);
+  };
+
+  useEffect(() => {
+    setShowIsFreshOption(otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FRESH));
+  }, [otherQuestions.availabilityOptions]);
+
+  const clickProceed = () => {
+    if (otherQuestionsValidationFresh(otherQuestions)
+    && selectCategoryValidation(selectCategory)
+    && selectAccessibilityValidation(selectAccessibility)) {
+      setTypeModal(true);
+      if (setActiveTab) {
+        setActiveTab(CONTACT_DETAILS);
+      }
+    }
+    if (otherQuestionsValidation(otherQuestions)
+      && selectCategoryValidation(selectCategory)
+      && selectAccessibilityValidation(selectAccessibility)) {
+      setTypeModal(true);
+      if (setActiveTab) {
+        setActiveTab(CONTACT_DETAILS);
+      }
+    }
+    if (otherQuestionsEmty(otherQuestions)
+      || selectCategoryEmty(selectCategory)
+      || selectAccessibilityEmty(selectAccessibility)) {
+      setTypeModal(false);
+      setVisibleModal(true);
+    }
+  };
+
   return (
     <>
       <div className="sectiontitle">
         Description
+        <sup>*</sup>
       </div>
       <div className="item">
         <div className="title">
@@ -13,11 +115,19 @@ export const LeftForm2 = () => {
           </label>
         </div>
         <div className="ainput htxtarea">
-          <textarea name="yth" id="yth" cols={30} rows={10} placeholder="Your text here..." />
+          <textarea
+            name="yth"
+            id="yth"
+            cols={30}
+            rows={10}
+            placeholder="Your text here..."
+            onChange={setDescriptionFunction}
+          />
         </div>
       </div>
       <div className="sectiontitle">
         Availability
+        <sup>*</sup>
       </div>
       <div className="item">
         <div className="title grouped">
@@ -30,98 +140,144 @@ export const LeftForm2 = () => {
         <div className="ainput chk">
           <label className="chkwrap">
             Fresh
-            <input type="checkbox" />
-            <span className="checkmark" />
+            <input
+              type="checkbox"
+              onChange={setAvailibityFresh}
+            />
+            <span className="checkmark ckeckmark-form" />
           </label>
           <label className="chkwrap">
             Frozen
-            <input type="checkbox" />
-            <span className="checkmark" />
+            <input
+              type="checkbox"
+              onChange={setAvailabilityFrozen}
+            />
+            <span className="checkmark ckeckmark-form" />
           </label>
           <label className="chkwrap">
             Canned
-            <input type="checkbox" />
-            <span className="checkmark" />
+            <input
+              type="checkbox"
+              onChange={setAvailabilityCanned}
+            />
+            <span className="checkmark ckeckmark-form" />
           </label>
         </div>
       </div>
-      <div className="sectiontitle">
-        Quality
-      </div>
-      <div className="item">
-        <div className="title grouped">
-          <span className="number">2.</span>
-          <span className="description">
-            How would you describe the quality of the fresh fruits and
-            vegetables you stock at this location? Acceptable (peak
-            condition, top quality, good color, fresh, firm, and clean)
+      {showIsFreshOption && (
+        <>
+          <div className="sectiontitle">
+            Quality
+            <sup>*</sup>
+          </div>
+          <div className="item">
+            <div className="title grouped">
+              <span className="number">2.</span>
+              <span className="description">
+                How would you describe the quality of the fresh fruits and
+                vegetables you stock at this location? Acceptable (peak
+                condition, top quality, good color, fresh, firm, and clean)
 
-          </span>
-        </div>
-        <div className="ainput chk">
-          <label className="chkwrap">
-            Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-          <label className="chkwrap">
-            Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
-            patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
-      <div className="sectiontitle">
-        Visibility
-      </div>
-      <div className="item">
-        <div className="title grouped">
-          <span className="number">3.</span>
-          <span className="description">
-            Are the fresh fruits and vegetables visible from the front of the
-            store or before entering ?
+              </span>
+            </div>
+            <div className="ainput chk">
+              <label className="chkwrap">
+                Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
+                <input
+                  type="radio"
+                  value={formConstants.QUALITY.ACCEPTABLE}
+                  checked={otherQuestions.quality === formConstants.QUALITY.ACCEPTABLE}
+                  onChange={setQualityFunction}
+                />
+                <span className="checkmark ckeckmark-form" />
+              </label>
+              <label className="chkwrap">
+                Unacceptable (bruised, old looking, mushy, dry, overripe, dark sunken spots in Irregular
+                patches or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
+                <input
+                  type="radio"
+                  value={formConstants.QUALITY.UNACCEPTABLE}
+                  checked={otherQuestions.quality === formConstants.QUALITY.UNACCEPTABLE}
+                  onChange={setQualityFunction}
+                />
+                <span className="checkmark ckeckmark-form" />
+              </label>
+            </div>
+          </div>
+          <div className="sectiontitle">
+            Visibility
+            <sup>*</sup>
+          </div>
+          <div className="item">
+            <div className="title grouped">
+              <span className="number">3.</span>
+              <span className="description">
+                Are the fresh fruits and vegetables visible from the front of the
+                store or before entering ?
 
-          </span>
-        </div>
-        <div className="ainput chk">
-          <label className="chkwrap">
-            Yes
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-          <label className="chkwrap">
-            No
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
-      <div className="sectiontitle">
-        Local
-      </div>
-      <div className="item">
-        <div className="title grouped">
-          <span className="number">4.</span>
-          <span className="description">
-            Do you stock locally grown produce (grown within 250 miles
-            radius)?
+              </span>
+            </div>
+            <div className="ainput chk">
+              <label className="chkwrap">
+                Yes
+                <input
+                  type="radio"
+                  value={formConstants.VISIBILITY.YES}
+                  checked={otherQuestions.visibility === formConstants.VISIBILITY.YES}
+                  onChange={setVisibilityFunction}
+                />
+                <span className="checkmark ckeckmark-form" />
+              </label>
+              <label className="chkwrap">
+                No
+                <input
+                  type="radio"
+                  value={formConstants.VISIBILITY.NO}
+                  checked={otherQuestions.visibility === formConstants.VISIBILITY.NO}
+                  onChange={setVisibilityFunction}
+                />
+                <span className="checkmark ckeckmark-form" />
+              </label>
+            </div>
+          </div>
+          <div className="sectiontitle">
+            Local
+            <sup>*</sup>
+          </div>
+          <div className="item">
+            <div className="title grouped">
+              <span className="number">4.</span>
+              <span className="description">
+                Do you stock locally grown produce (grown within 250 miles
+                radius)?
 
-          </span>
-        </div>
-        <div className="ainput chk">
-          <label className="chkwrap">
-            Yes
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-          <label className="chkwrap">
-            No
-            <input type="checkbox" />
-            <span className="checkmark" />
-          </label>
-        </div>
-      </div>
+              </span>
+            </div>
+            <div className="ainput chk">
+              <label className="chkwrap">
+                Yes
+                <input
+                  type="radio"
+                  value={formConstants.LOCAL.YES}
+                  checked={otherQuestions.local === formConstants.LOCAL.YES}
+                  onChange={setLocalFunction}
+                />
+                <span className="checkmark ckeckmark-form" />
+              </label>
+              <label className="chkwrap">
+                No
+                <input
+                  type="radio"
+                  value={formConstants.LOCAL.NO}
+                  checked={otherQuestions.local === formConstants.LOCAL.NO}
+                  onChange={setLocalFunction}
+                />
+                <span className="checkmark ckeckmark-form" />
+              </label>
+            </div>
+          </div>
+        </>
+      )}
       <div className="sectiontitle">
         Optional Information
       </div>
@@ -133,7 +289,14 @@ export const LeftForm2 = () => {
           </label>
         </div>
         <div className="ainput htxtarea">
-          <textarea name="yth" id="yth2" cols={30} rows={10} placeholder="Your text here..." />
+          <textarea
+            name="yth"
+            id="yth2"
+            cols={30}
+            rows={10}
+            placeholder="Your text here..."
+            onChange={setProduceAvailStoreFunction}
+          />
         </div>
       </div>
       <div className="item">
@@ -141,7 +304,14 @@ export const LeftForm2 = () => {
           <label>Please list fresh produce items that are only available seasonally.</label>
         </div>
         <div className="ainput htxtarea">
-          <textarea name="yth" id="yth3" cols={30} rows={10} placeholder="Your text here..." />
+          <textarea
+            name="yth"
+            id="yth3"
+            cols={30}
+            rows={10}
+            placeholder="Your text here..."
+            onChange={setProduceAvailSeasonallyFunction}
+          />
         </div>
       </div>
       <div className="sectiontitle">
@@ -151,14 +321,28 @@ export const LeftForm2 = () => {
         <div className="title">
           <label>Do you have any high quality photos of this business to share?</label>
         </div>
-        <div className="ainput upload">
-          <div className="uploadarea">
-            <div>Drag and drop files here</div>
-            <div>or</div>
-            <div>Browse on your device.</div>
-          </div>
-        </div>
+        <Attachment
+          type={TYPE_BUSINESS.BUSINESS}
+        />
       </div>
+      <div className="item">
+        <div className="title">
+          <label>Connect with the Community! Please upload a picture of the store owner or manager. </label>
+        </div>
+        <Attachment
+          type={TYPE_BUSINESS.OWNER}
+        />
+      </div>
+      <div className="aaction">
+        <button className="light" type="button" onClick={clickProceed}>
+          Proceed
+        </button>
+      </div>
+      <ModalRequestForm
+        type={typeModal}
+        visible={visibleModal}
+        setVisible={setVisibleModal}
+      />
     </>
   );
 };

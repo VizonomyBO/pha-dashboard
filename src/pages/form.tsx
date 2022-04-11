@@ -41,10 +41,14 @@ export const Form = () => {
           <div className="group">
             <div className="left">
               {activeTab === BUSINESS_DETAILS && (
-                <LeftForm1 />
+                <LeftForm1
+                  setActiveTab={setActiveTab}
+                />
               )}
               {activeTab === OTHER_QUESTIONS && (
-                <LeftForm2 />
+                <LeftForm2
+                  setActiveTab={setActiveTab}
+                />
               )}
               {activeTab === CONTACT_DETAILS && (
                 <LeftForm3 />
