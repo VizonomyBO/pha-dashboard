@@ -117,7 +117,7 @@ export const Login = () => {
           </div>
           <div className="item">
             <input
-              type="text"
+              type="password"
               className="fl"
               placeholder="Password"
               value={password}

@@ -3631,6 +3631,24 @@ sup {
 		border-radius: 56px;
 		border: 1px solid #E3E5E5;
 	}
+	input[type=password].fl {
+		font-family: "FuturaMedium", sans-serif;
+        font-size: 16px;
+		line-height: 16px;
+        border: none;
+        float: left;
+        width: 100%;
+		background-color: #F7F9FA;
+		padding: 0;
+		margin: 0;
+		outline: none;
+		color: #161A23;
+		border: none;
+		border-color: transparent;
+		padding: 16px 32px;
+		border-radius: 56px;
+		border: 1px solid #E3E5E5;
+	}
 
 	button.fl {
 	    border-radius: none;
