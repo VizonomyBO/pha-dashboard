@@ -7,7 +7,7 @@ import { QueriesInterface } from '../../../@types/redux';
 import { ICON_MAPPING } from '../../../constants';
 import PinRed from '../../../components/map/ic-pin-red.svg';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Carto = carto as any;
 
 export const useMap = () => {
