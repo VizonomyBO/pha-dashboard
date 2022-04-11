@@ -8,7 +8,7 @@ interface CategoryState {
   accesibilities: string[];
   dataSources: string[];
   callFilters: boolean;
-  zoomCenter: boolean
+  zoomCenter: boolean;
 }
 
 const defaultState: CategoryState = {
