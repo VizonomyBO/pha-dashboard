@@ -19,7 +19,7 @@ export const Nshome = () => {
           </div>
         </div>
       </header>
-      <div className="modalretailer">
+      <div className="modalretailer close">
         <div className="panel">
           <div className="head">
             <label>
