@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { CategoriesInterface } from '../../@types/redux';
 import {
@@ -15,6 +16,9 @@ export const useCategoriesState = () => useSelector(
 );
 export const useCategoriesDispatch = () => {
   const dispatch = useDispatch();
+  const setCallFiltersMemoized = useMemo(() => (callFilters: boolean) => {
+    dispatch(setCallFilters(callFilters));
+  }, [dispatch]);
   return {
     setCategoriesSelected: (categoriesSelected: string[]) => {
       dispatch(setCategoriesSelected(categoriesSelected));
@@ -31,9 +35,7 @@ export const useCategoriesDispatch = () => {
     setBadgesSelected: (badges: string[]) => {
       dispatch(setBadgesSelected(badges));
     },
-    setCallFilters: (callFilters: boolean) => {
-      dispatch(setCallFilters(callFilters));
-    },
+    setCallFilters: setCallFiltersMemoized,
     resetValues: () => {
       dispatch(resetValues());
     }
