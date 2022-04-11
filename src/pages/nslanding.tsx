@@ -57,9 +57,9 @@ export const Nslanding = () => {
       </div>
       <div className="arearesult">
         <div className="tab">
-          <div className="space">
+          {/* <div className="space">
             <div className="line" />
-          </div>
+          </div> */}
           {/* <div className="title">All Retailer</div> */}
         </div>
         <div className="searchresult">
