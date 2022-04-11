@@ -7,12 +7,14 @@ import { QueriesInterface } from '../../../@types/redux';
 import { ICON_MAPPING } from '../../../constants';
 import PinRed from '../../../components/map/ic-pin-red.svg';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Carto = carto as any;
+
 export const useMap = () => {
   const { resetValues, setCallFilters } = useCategoriesDispatch();
   const {
     callFilters, categoriesSelected, accesibilities, dataSources
-  } = useCategoriesState();
+  } = useCategoriesState() || {};
   const [queries, setQueries] = useState<QueriesInterface>();
   const [layers, setLayers] = useState([]);
   const getLayers = useMemo(() => () => {
@@ -52,7 +54,7 @@ export const useMap = () => {
       getLayers();
     }
   }, [callFilters, getLayers]);
-  
+
   useEffect(() => {
     if (queries) {
       Carto.setDefaultCredentials({
