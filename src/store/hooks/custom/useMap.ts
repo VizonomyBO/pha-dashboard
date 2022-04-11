@@ -6,6 +6,8 @@ import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { QueriesInterface } from '../../../@types/redux';
 import { ICON_MAPPING } from '../../../constants';
 import PinRed from '../../../components/map/ic-pin-red.svg';
+import PinBlue from '../../../components/map/ic-pin-blue.svg';
+import PinGreen from '../../../components/map/ic-pin-green.svg';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Carto = carto as any;
@@ -33,7 +35,16 @@ export const useMap = () => {
       .catch((err) => console.error(err));
   }, [categoriesSelected, accesibilities, dataSources, setCallFilters]);
 
-  const getCartoLayer = (connectionName: string, query: string) => {
+  const getPinColor = (originTable: string) => {
+    let defaultPin = PinBlue;
+    if (originTable === 'retailers_pha') {
+      defaultPin = PinRed;
+    } else if (originTable === 'retailers_osm') {
+      defaultPin = PinGreen;
+    }
+    return defaultPin;
+  };
+  const getCartoLayer = useMemo(() => (connectionName: string, query: string, originTable: string) => {
     const cartoLayer = new Carto.CartoLayer({
       connection: connectionName,
       type: Carto.MAP_TYPES.QUERY,
@@ -44,10 +55,10 @@ export const useMap = () => {
       getIconColor: () => [255, 0, 0],
       getIcon: () => 'marker',
       iconMapping: ICON_MAPPING,
-      iconAtlas: PinRed
+      iconAtlas: getPinColor(originTable)
     });
     return cartoLayer;
-  };
+  }, []);
 
   useEffect(() => {
     if (callFilters) {
@@ -62,10 +73,16 @@ export const useMap = () => {
         accessToken: queries.token
       });
       if (queries.queries?.retailers_pha) {
-        setLayers(getCartoLayer(queries.connection_name, queries.queries.retailers_pha));
+        setLayers(getCartoLayer(queries.connection_name, queries.queries.retailers_pha, 'retailers_pha'));
+      }
+      if (queries.queries?.retailers_osm) {
+        setLayers(getCartoLayer(queries.connection_name, queries.queries.retailers_osm, 'retailers_osm'));
+      }
+      if (queries.queries?.retailers_usda) {
+        setLayers(getCartoLayer(queries.connection_name, queries.queries.retailers_usda, 'retailers_usda'));
       }
     }
-  }, [queries]);
+  }, [queries, getCartoLayer]);
   return {
     callFilters,
     resetValues,

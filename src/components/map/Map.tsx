@@ -13,7 +13,7 @@ export const Map = () => {
   const { layers } = useMap();
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
-    console.log('vurr', currentViewstate);
+    console.log('temporary comment until more functions are added and this variable is used', currentViewstate);
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
   }, [currentViewstate]);

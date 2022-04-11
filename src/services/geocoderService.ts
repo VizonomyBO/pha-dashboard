@@ -9,19 +9,29 @@ export class GeocoderService {
 
   setGeocoderOptions;
 
-  constructor(id: string, setGeocoderOptions: (options: []) => void, elem: HTMLElement) {
+  constructor(
+    id: string,
+    setGeocoderOptions: (options: []) => void,
+    elem: HTMLElement,
+    setSelectedValue?: (response: any) => void
+  ) {
     this.setGeocoderOptions = setGeocoderOptions;
     this.t = 4000;
     this.geocoder = new MapboxGeocoder({
       accessToken: MAPBOX_KEY,
       countries: 'US',
-      marker: false,
+      marker: false
     });
     if (elem) {
       this.geocoder.addTo(elem);
     }
     this.geocoder.on('results', (response) => {
       setGeocoderOptions(response.features);
+    });
+    this.geocoder.on('select', (response) => {
+      if (setSelectedValue) {
+        setSelectedValue(response);
+      }
     });
     this.geocoder.on('error', (error) => {
       console.log('error', error);
