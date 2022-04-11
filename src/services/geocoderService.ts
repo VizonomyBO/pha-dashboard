@@ -1,4 +1,5 @@
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import { SetStateAction } from 'react';
 import { InputTextInterface } from '../@types/database';
 import { MAPBOX_KEY } from '../constants';
 
@@ -13,7 +14,7 @@ export class GeocoderService {
     id: string,
     setGeocoderOptions: (options: []) => void,
     elem: HTMLElement,
-    setSelectedValue?: (response: any) => void
+    setSelectedValue?: (response: SetStateAction<undefined>) => void
   ) {
     this.setGeocoderOptions = setGeocoderOptions;
     this.t = 4000;
