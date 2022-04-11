@@ -10,8 +10,9 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
     dataSources,
     handleChangeCategory,
     handleChangeAccesibilities,
-    handleChangeDataSources
-  } = useFilter();
+    handleChangeDataSources,
+    closeModalAndCallFilters
+  } = useFilter({ setOpenModal });
   return (
     <div className="modalretailer">
       <div className="panel">
@@ -81,7 +82,7 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
           </div>
         </div>
         <div className="foot">
-          <button type="button" className="light" onClick={() => setOpenModal(false)}>
+          <button type="button" className="light" onClick={closeModalAndCallFilters}>
             Apply
           </button>
         </div>

@@ -14,4 +14,7 @@ export const ENDPOINTS = {
   MAP: () => `${URL}/${CARTODB}/pha-retailer`,
   POST_PHA_RETAILERS: () => `${URL}/${CARTODB}/pha-individual`,
   PROFILE: (id: string | undefined) => `${URL}/${CARTODB}/profile/${id}`,
+  GET_LAYERS: `${URL}/${CARTODB}/layers`
 };
+
+export const CARTO_API = 'https://gcp-us-east1.api.carto.com';

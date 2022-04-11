@@ -35,3 +35,9 @@ export const resetValues = () => (
     type: TYPES.RESET_VALUES
   }
 );
+export const setCallFilters = (callFilters: boolean) => (
+  {
+    type: TYPES.CALL_FILTERS,
+    callFilters
+  }
+);
