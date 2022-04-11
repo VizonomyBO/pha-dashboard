@@ -642,6 +642,9 @@ sup {
       clear: both;
       display: table;
     }
+	.arearesult {
+		display: none;
+	}
 	.modalretailer {
 		position: fixed;
 		display: block;
@@ -2454,11 +2457,14 @@ sup {
 								display: block;
 								width: 60px;
 								height: 60px;
+								background-color: #e0e4e4;
+								border-radius: 50%;
 							}
 							.ict {
 								display: flex;
 								justify-content: center;
 								align-items: center;
+								padding-top: 8px;
 								.txtst {
 									text-align: center;
 									color: #7A7E80;
@@ -4861,6 +4867,56 @@ header.topmenu {
 		display: block;
 	}
 	.container {
+		height: 100vh;
+		.arearesult.close {
+			display: none;
+		}
+		.arearesult {
+				position: absolute;
+				bottom: 0;
+				display: block;
+				width: 100%;
+				z-index: 5;
+				.tab {
+					height: 32px;
+					border-top-left-radius: 16px;
+					border-top-right-radius: 16px;
+					background-color: #fff;
+					box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+					.space {
+						display: flex;
+						flex-direction: row;
+						justify-content: center;
+						width: 100%;
+						padding-top: 12px;
+						.line {
+							display: block;
+							width: 32px;
+							height: 3px;
+							background-color: #C4C4C4;
+						}
+					}
+					.title {
+						width: 100%;
+						padding: 20px 16px 0 16px;
+						font-family: "FutureMedium", sans-serif;
+						font-size: 20px;
+						color: #161A23;
+					}
+				}
+				.searchresult.close {
+					display: none;
+				}
+				.searchresult {
+					height: 200px;
+					overflow: scroll;
+					padding: 16px;
+					background-color: #fff;
+					ul {
+						background-color: #f9f9f9;
+					}
+				}
+		}
 	/* navigation */
 	.spanel {
 		width: 100%;

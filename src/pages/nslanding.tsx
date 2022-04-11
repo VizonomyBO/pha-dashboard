@@ -53,6 +53,34 @@ export const Nslanding = () => {
             </div>
           </div>
         </div>
+        {/* <div className="arearesult close"> */}
+      </div>
+      <div className="arearesult">
+        <div className="tab">
+          <div className="space">
+            <div className="line" />
+          </div>
+          {/* <div className="title">All Retailer</div> */}
+        </div>
+        <div className="searchresult">
+          <ul>
+            <li>result 1</li>
+            <li>result 2</li>
+            <li>result 3</li>
+            <li>result 4</li>
+            <li>result 5</li>
+            <li>result 6</li>
+            <li>result 7</li>
+            <li>result 8</li>
+            <li>result 9</li>
+            <li>result 10</li>
+            <li>result 11</li>
+            <li>result 12</li>
+            <li>result 13</li>
+            <li>result 14</li>
+            <li>result 15</li>
+          </ul>
+        </div>
       </div>
     </div>
   );
