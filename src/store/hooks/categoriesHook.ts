@@ -6,7 +6,8 @@ import {
   setBadgesSelected,
   setCenterGeocoder,
   setDataSourcesSelected,
-  resetValues
+  resetValues,
+  setCallFilters
 } from '../actions';
 
 export const useCategoriesState = () => useSelector(
@@ -29,6 +30,9 @@ export const useCategoriesDispatch = () => {
     },
     setBadgesSelected: (badges: string[]) => {
       dispatch(setBadgesSelected(badges));
+    },
+    setCallFilters: (callFilters: boolean) => {
+      dispatch(setCallFilters(callFilters));
     },
     resetValues: () => {
       dispatch(resetValues());

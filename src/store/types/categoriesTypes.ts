@@ -5,3 +5,4 @@ export const SET_ACCESSIBILITY = 'SET_ACCESSIBILITY';
 export const SET_DATA_SOURCES = 'SET_DATA_SOURCES';
 export const SET_BADGES = 'SET_BADGES';
 export const RESET_VALUES = 'RESET_VALUES';
+export const CALL_FILTERS = 'CALL_FILTERS';

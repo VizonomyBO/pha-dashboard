@@ -3,10 +3,11 @@ import { INITIAL_CATEGORIES } from '../defaultStore';
 import * as TYPES from '../types';
 
 interface CategoryState {
-  categoriesSelected: unknown[],
-  center: unknown[],
-  accesibility: unknown[],
-  dataSources: unknown[]
+  categoriesSelected: unknown[];
+  center: unknown[];
+  accesibilities: unknown[];
+  dataSources: unknown[];
+  callFilters: boolean;
 }
 
 const defaultState: CategoryState = {
@@ -39,6 +40,11 @@ const categoriesReducer = (state: CategoryState = defaultState, action: AnyActio
       return {
         ...state,
         badges: action.badges
+      };
+    case TYPES.CALL_FILTERS:
+      return {
+        ...state,
+        callFilters: action.callFilters
       };
     case TYPES.INIT:
       return INITIAL_CATEGORIES;
