@@ -1,4 +1,4 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 import { FilterType } from '../../../@types';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 
@@ -30,6 +30,13 @@ export const useFilter = () => {
       setDataSourcesSelected([...dataSources, dataSource.attrib]);
     }
   };
+  useEffect(() => {
+    if (categoriesSelected.length || accesibilities.length) {
+      if (dataSources.indexOf('retailers_pha') === -1) {
+        setDataSourcesSelected([...dataSources, 'retailers_pha']);
+      }
+    }
+  }, [categoriesSelected, accesibilities, dataSources, setDataSourcesSelected]);
   return {
     categoriesSelected,
     accesibilities,

@@ -94,7 +94,7 @@ export const INITIAL_CATEGORIES = {
   categoriesSelected: [],
   center: [],
   accesibilities: [],
-  dataSources: [],
+  dataSources: ['retailers_pha'],
   callFilters: false
 };
 
