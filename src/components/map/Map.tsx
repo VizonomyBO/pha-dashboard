@@ -25,7 +25,6 @@ export const Map = () => {
       setHoverInfo(undefined);
     }
   }, []);
-
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {

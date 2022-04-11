@@ -95,7 +95,7 @@ export const INITIAL_CATEGORIES = {
   center: [],
   accesibilities: [],
   dataSources: ['retailers_pha'],
-  callFilters: false
+  callFilters: true
 };
 
 export const INITIAL_GEOCODER_STATE = {
