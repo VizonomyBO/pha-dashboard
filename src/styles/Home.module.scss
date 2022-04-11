@@ -1876,15 +1876,15 @@ sup {
 					border: 1px solid #E3E5E5;
 					.zplus {
 						display: block;
-						width: 33px;
-						height: 36px;
+						width: 46px;
+						height: 48px;
 						border-top-right-radius: 16px;
 						border-top-left-radius: 16px;
 						button.light {
 							margin: 0;
 							padding: 0;
-							width: 33px;
-							height: 36px;
+							width: 46px;
+						height: 48px;
 							display: flex;
 							flex-direction: column;
 							justify-content: center;
@@ -1914,15 +1914,15 @@ sup {
 					}
 					.zminus {
 						display: block;
-						width: 33px;
-            height: 36px;
+						width: 46px;
+						height: 48px;
 						border-bottom-left-radius: 16px;
 						border-bottom-right-radius: 16px;
 						button.light {
 							margin: 0;
 							padding: 0;
-							width: 33px;
-							height: 36px;
+							width: 46px;
+							height: 48px;
 							display: flex;
 							flex-direction: column;
 							justify-content: center;
@@ -3733,6 +3733,12 @@ header.topmenu {
 /* end set dropdowns style */
 @media (min-width: 1920px) {
 	.container {
+		.bgwhite {}
+		.bgnoise.home {}
+		.barblue.home { height: 650px;}
+		.barblue.form1 {
+			height: 2300px;
+		}
 		.pagecontainer {
 			.navbar.landing {
 				width: 1696px;
@@ -3846,11 +3852,438 @@ header.topmenu {
 					}
 				}
 			}
+			/*home*/
+			.navbararea {
+				height: 96px;
+				.navbar {
+					width: 1622px;
+					.nbleft {
+						.iclogo {
+							width: 167px;
+							height: 75px;
+						}
+					}
+					.nbright {
+						.sn {
+							.ictww,  .icfbw,  .icytw,  .icigw,  .icliw {
+								width: 32px;
+								height: 32px;
+							}
+							button.light {
+								margin-left: 32px;
+							}
+							button.light .ictw:hover,
+							button.light .icfb:hover,
+							button.light .icyt:hover,
+							button.light .icig:hover,
+							button.light .icli:hover {
+								width: 48px;
+								height: 48px;
+							}
+						}
+					}
+				}
+			}
+			.searchoptionsarea {
+				.accesspoint.colored {
+					padding-top: 42px;
+					padding-bottom: 40px;
+					h1 {
+						font-size: 42px;
+						line-height: 120%;
+					}
+					p {
+						font-size: 21px;
+						line-height: 160%;
+						padding-top: 1em;
+						width: 600px;
+					}
+				}
+				.searcharea.colored {
+					padding-bottom: 42px;
+					.alook {
+						.accesstype {
+							width: 316px;
+							font-size: 21px;
+						}
+						.citysearch {
+							width: 512px;
+							.icsearch {
+								width: 21px;
+								height: 21px;
+							}
+							input[type=text] {
+								font-size: 21px;
+								padding-left: 16px;
+								width: 272px;
+							}
+							button.light {
+								font-size: 21px;
+								line-height: 160%;
+								border-radius: 72px;
+								padding: 4px 57px;
+							}
+						}
+					}
+				}
+			}
+			.location {
+				height: 925px;
+				.locfound {
+					padding-top: 32px;
+					width: 555px;
+					.description {
+						height: 165px;
+						.desc1 {
+							font-size: 21px;
+							line-height: 140%;
+							padding-left: 27px;
+							padding-bottom: 18px;
+						}
+						.desc2 {
+							font-size: 18px;
+							line-height: 140%;
+							padding-left: 27px;
+							font-weight: 500;
+							font-family: 'FuturaMedium', sans-serif;
+						}
+						.optaddchk {
+							padding-right: 27px;
+							padding-top: 32px;
+							.desc3 {
+								font-size: 18px;
+								line-height: 160%;
+								padding-left: 27px;
+							}
+							.option {
+								.chkwrap {
+									font-size: 18px;
+									line-height: 160%;
+									.checkmark {
+										background-color: #E3E5E5;
+										width: 27px;
+										height: 27px;
+									}
+								}
+								.chkwrap input:checked ~ .checkmark {
+									background-color: #00BCE4;
+								}
+							}
+						}
+					}
+					.listloc {
+						.listingarea {
+							padding-top: 32px;
+							height: 688px;
+							.item {
+								padding: 20px 0 20px 20px;
+								.statemk {
+									display: flex;
+									flex-direction: column;
+									.cardmk {
+										display: flex;
+										flex-direction: column;
+										justify-content: center;
+										align-items: center;
+										.dimensions {
+											display: block;
+											width: 42px;
+											height: 42px;
+										}
+										.desc {
+											font-family: "FuturaMedium", sans-serif;
+											font-size: 8px;
+										}
+										.desc.red {
+											color: #E40000;
+										}
+										.desc.blue {
+											color: #00BDE3;
+										}
+										.desc.green {
+											color: #77BD43;
+										}
+									}
+								}
+								.descres {
+									width: 400px;
+									padding-left: 16px;
+									.namemark {
+										font-size: 21px;
+									}
+									.address {
+										font-family: 'FuturaMedium',sans-serif;
+										font-size: 18px;
+									}
+									.distance {
+										.miles {
+											font-family: 'FuturaMedium',sans-serif;
+											font-size: 18px;
+										}
+										.kind {
+											font-family: 'FuturaMedium',sans-serif;
+											font-size: 18px;
+										}
+									}
+								}
+								.arrow {
+									button.light {
+										.icarrowright {
+											display: block;
+											width: 32px;
+											height: 32px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				.amap {
+					width: 1067px;
+					height: 925px;
+					.modal {
+						width: 373px;
+						.picture {
+							height: 280px;
+							width: 373px;
+							border-top-left-radius: 16px;
+							border-top-right-radius: 16px;
+							background-color: rgb(238, 233, 231);
+						}
+						.detailcard {
+							padding: 32px 21px;
+							.store {
+								font-size: 21px;
+							}
+							.services {
+								font-size: 21px;
+								padding-bottom: 32px;
+								.kind {
+									width: 43px;
+									height: 43px;
+								}
+							}
+							.address {
+								font-size: 18px;
+							}
+							.phone {
+								.icphone {
+									width: 27px;
+									height: 27px;
+								}
+								.number {
+									font-size: 18px;
+								}
+							}
+							button.light {
+								font-size: 21px;
+							}
+							.pinaddcomment {
+								button.light {
+									.icaddcoment {
+										display: block;
+										width: 53px;
+										height: 53px;
+									}
+								}
+							}
+						}
+					}
+					.bmodal {
+					}
+					.controlzoom {
+						.zplus {
+							width: 61px;
+							height: 64px;
+							button.light {
+								width: 61px;
+								height: 64px;
+								border-top-right-radius: 21px;
+    						border-top-left-radius: 21px;
+								.icplus {
+									width: 32px;
+									height: 32px;
+								}
+							}
+						}
+						.space {
+
+						}
+						.zminus {
+							width: 61px;
+							height: 64px;
+							button.light {
+								width: 61px;
+								height: 64px;
+								border-bottom-left-radius: 21px;
+    						border-bottom-right-radius: 21px;
+								.iczminus {
+									width: 32px;
+									height: 32px;
+								}
+							}
+						}
+					}
+				}
+			}
+			/*end home*/
+			.formarea {
+				padding: 46px 48px;
+				.header {
+					.backlink {
+						padding-bottom: 54px;
+						button.light {
+							.icarrowleft {
+								width: 32px;
+								height: 32px;
+							}
+							.txt {
+								font-size: 18px;
+							}
+						}
+					}
+					.sectitle {
+						font-size: 42px;
+						line-height: 120%;
+						padding-bottom: 8px;
+					}
+					.secdescription {
+						font-size: 21px;
+						line-height: 160%;
+						padding-bottom: 88px;
+					}
+					.optiondetail {
+						padding-bottom: 42px;
+						.option {
+							.chkwrap {
+								font-size: 21px;
+								line-height:21px;
+								.checkmark {
+									width: 21px;
+									height: 21px;
+								}
+							}
+						}
+						.option.active {
+							.chkwrap {
+								color: #161A23;
+								.checkmark {
+									width: 21px;
+									height: 21px;
+								}
+							}
+							&::after {
+								height: 3px;
+								margin-top: 8px;
+							}
+						}
+					}
+				}
+				.group {
+					.sectiontitle {
+						font-size: 26px;
+						line-height: 160%;
+						padding-bottom: 20px;
+					}
+					.item {
+						padding-bottom: 32px;
+						.title {
+							font-size: 21px;
+							padding-bottom: 18px;
+						}
+						.ainput {
+							height: 72px;
+							input[type=text] {
+								padding: 24px 24px;
+								font-size: 21px;
+							}
+						}
+					}
+					.left {
+
+					}
+					.right {
+						.panel .body .card .group {
+							padding: 24px 16px;
+							.option.step {
+								font-size: 21px;
+								line-height: 160%;
+								padding-bottom: 20px;
+							}
+							.option {
+								height: 64px;
+								.chkwrap {
+									font-size: 21px;
+									line-height:21px;
+									padding-left: 40px;
+									.checkmark {
+										width: 26px;
+										height: 26px;
+										background-color: #E3E5E5;
+									}
+								}
+								.chkwrap input:checked ~ .checkmark {
+									background-color: #00BCE4;
+								}
+							}
+						}
+					}
+				}
+				.aaction {
+					button.light {
+						font-size: 21px;
+						padding: 20px 78px;
+					}
+				}
+			}
+		}
+		.modalretailer {
+			.panel {
+				width: 1252px;
+				height: 837px;
+				.head {
+					font-size: 32px;
+				}
+				.body {
+					padding: 48px 42px;
+					.card {
+						.tcatecory {
+							font-size: 21px;
+						}
+						.group {
+							.option {
+								height: 56px;
+								.chkwrap {
+									font-size: 18px;
+									.checkmark {
+										width: 24px;
+										height: 24px;
+										background-color: #E3E5E5;
+									}
+								}
+								.chkwrap input:checked ~ .checkmark {
+									background-color: #00BCE4;
+								}
+							}
+						}
+					}
+				}
+				.foot {
+					button.light {
+						font-size: 21px;
+						padding: 10px 56px;
+					}
+				}
+			}
 		}
 	}
 }
 @media (min-width: 2560px) {
 	.container {
+		.barblue.home {
+			height: 1136px;
+		}
 		.pagecontainer {
 			.navbar.landing {
 				width: 2336px;
@@ -3959,6 +4392,457 @@ header.topmenu {
 							line-height: 160%;
 							padding: 12px 72px;
 						}
+					}
+				}
+			}
+			/*home*/
+			.navbararea {
+				height: 128px;
+				.navbar {
+					width: 2162px;
+					.nbleft {
+						.iclogo {
+							width: 222px;
+							height: 100px;
+						}
+					}
+					.nbright {
+						.sn {
+							.ictw,  .icfb,  .icyt,  .icig,  .icli {
+								width: 42px;
+								height: 42px;
+							}
+							button.light {
+								margin-left: 42px;
+								width: 42px;
+								height: 42px;
+							}
+							button.light .ictw:hover,
+							button.light .icfb:hover,
+							button.light .icyt:hover,
+							button.light .icig:hover,
+							button.light .icli:hover {
+								width: 64px;
+								height: 64px;
+							}
+						}
+					}
+				}
+			}
+			.searchoptionsarea {
+				.accesspoint.colored {
+					padding-top: 64px;
+					padding-bottom: 56px;
+					h1 {
+						font-size: 56px;
+						line-height: 120%;
+					}
+					p {
+						font-size: 28px;
+						line-height: 160%;
+						padding-top: 1em;
+						width: 800px;
+					}
+				}
+				.searcharea.colored {
+					padding-bottom: 64px;
+					.alook {
+						.accesstype {
+							width: 421px;
+							font-size: 28px;
+							height: 100px;
+						}
+						.citysearch {
+							width: 683px;
+							padding: 16px 16px 16px 32px;
+							justify-content: space-between;
+							.icsearch {
+								width: 28px;
+								height: 28px;
+							}
+							input[type=text] {
+								font-size: 28px;
+								padding-left: 16px;
+								width: 360px;
+							}
+							button.light {
+								font-size: 28px;
+								line-height: 160%;
+								border-radius: 72px;
+								padding: 12px 72px;
+							}
+						}
+					}
+				}
+			}
+			.location {
+				height: 1234px;
+				border-top-left-radius: 24px;
+				border-top-right-radius: 24px;
+				.locfound {
+					padding-top: 57px;
+					width: 740px;
+					.description {
+						height: 236px;
+						.desc1 {
+							font-size: 28px;
+							line-height: 140%;
+							padding-left: 32px;
+							padding-bottom: 28px;
+						}
+						.desc2 {
+							font-size: 24px;
+							line-height: 140%;
+							padding-left: 32px;
+							font-weight: 500;
+							font-family: 'FuturaMedium', sans-serif;
+						}
+						.optaddchk {
+							padding-right: 32px;
+							padding-top: 48px;
+							.desc3 {
+								font-size: 24px;
+								line-height: 160%;
+								padding-left: 32px;
+							}
+							.option {
+								.chkwrap {
+									font-size: 24px;
+									line-height: 160%;
+									.checkmark {
+										background-color: #E3E5E5;
+										width: 36px;
+										height: 36px;
+										margin-left: -16px;
+									}
+								}
+								.chkwrap input:checked ~ .checkmark {
+									background-color: #00BCE4;
+								}
+							}
+						}
+					}
+					.listloc {
+						.listingarea {
+							padding-top: 32px;
+							height: 880px;
+							.item {
+								padding: 28px 0 28px 28px;
+								.statemk {
+									display: flex;
+									flex-direction: column;
+									.cardmk {
+										display: flex;
+										flex-direction: column;
+										justify-content: center;
+										align-items: center;
+										.dimensions {
+											display: block;
+											width: 56px;
+											height: 56px;
+										}
+										.desc {
+											font-family: "FuturaMedium", sans-serif;
+											font-size: 14px;
+										}
+										.desc.red {
+											color: #E40000;
+										}
+										.desc.blue {
+											color: #00BDE3;
+										}
+										.desc.green {
+											color: #77BD43;
+										}
+									}
+								}
+								.descres {
+									width: 536px;
+									padding-left: 16px;
+									.namemark {
+										font-size: 28px;
+									}
+									.address {
+										font-family: 'FuturaMedium',sans-serif;
+										font-size: 24px;
+									}
+									.distance {
+										.miles {
+											font-family: 'FuturaMedium',sans-serif;
+											font-size: 24px;
+										}
+										.kind {
+											font-family: 'FuturaMedium',sans-serif;
+											font-size: 24px;
+										}
+									}
+								}
+								.arrow {
+									button.light {
+										.icarrowright {
+											display: block;
+											width: 42px;
+											height: 42px;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+				.amap {
+					width: 1422px;
+					height: 1234px;
+					border-top-right-radius: 24px;
+					.modal {
+						width: 498px;
+						border-top-left-radius: 24px;
+						border-top-right-radius: 24px;
+						.picture {
+							height: 280px;
+							width:498px;
+							border-top-left-radius: 24px;
+							border-top-right-radius: 24px;
+							background-color: rgb(238, 233, 231);
+						}
+						.detailcard {
+							padding: 40px 24px;
+							.store {
+								font-size: 28px;
+							}
+							.services {
+								font-size: 24px;
+								padding-bottom: 32px;
+								.kind {
+									width: 56px;
+									height: 56px;
+								}
+							}
+							.address {
+								font-size: 24px;
+								padding-bottom: 16px;
+							}
+							.phone {
+								.icphone {
+									width: 36px;
+									height: 36px;
+								}
+								.number {
+									font-size: 24px;
+								}
+							}
+							button.light {
+								border-radius: 72px;
+								font-size: 28px;
+							}
+							.pinaddcomment {
+								top: -36px;
+								width: 72px;
+								height: 72px;
+								button.light {
+									.icaddcoment {
+										display: block;
+										width: 72px;
+										height: 72px;
+									}
+								}
+							}
+						}
+					}
+					.bmodal {
+					}
+					.controlzoom {
+						top: 56px;
+						right: 56px;
+						.zplus {
+							width: 82px;
+							height: 86px;
+							button.light {
+								width: 82px;
+								height: 86px;
+								border-top-right-radius: 21px;
+    						border-top-left-radius: 21px;
+								.iczplus {
+									width: 42px;
+									height: 42px;
+								}
+							}
+						}
+						.space {
+							.line {
+								width: 53px;
+							}
+						}
+						.zminus {
+							width: 82px;
+							height: 86px;
+							button.light {
+								width: 82px;
+								height: 86px;
+								border-bottom-left-radius: 21px;
+    						border-bottom-right-radius: 21px;
+								.iczminus {
+									width: 42px;
+									height: 42px;
+								}
+							}
+						}
+					}
+				}
+			}
+			/*end home*/
+			.formarea {
+				padding: 57px 85px;
+				width: 1792px;
+				border-radius: 28px;
+				.header {
+					.backlink {
+						padding-bottom: 54px;
+						button.light {
+							.icarrowleft {
+								width: 42px;
+								height: 42px;
+							}
+							.txt {
+								font-size: 24px;
+							}
+						}
+					}
+					.sectitle {
+						font-size: 56px;
+						line-height: 120%;
+						padding-bottom: 8px;
+					}
+					.secdescription {
+						font-size: 28px;
+						line-height: 160%;
+						padding-bottom: 88px;
+					}
+					.optiondetail {
+						padding-bottom: 42px;
+						.option {
+							.chkwrap {
+								font-size: 28px;
+								line-height:28px;
+								.checkmark {
+									width: 28px;
+									height: 28px;
+								}
+							}
+						}
+						.option.active {
+							.chkwrap {
+								color: #161A23;
+								.checkmark {
+									width: 28px;
+									height: 28px;
+								}
+							}
+							&::after {
+								height: 3px;
+								margin-top: 8px;
+							}
+						}
+					}
+				}
+				.group {
+					.sectiontitle {
+						font-size: 36px;
+						line-height: 160%;
+						padding-bottom: 20px;
+					}
+					.item {
+						padding-bottom: 32px;
+						.title {
+							font-size: 28px;
+							padding-bottom: 18px;
+						}
+						.ainput {
+							height: 72px;
+							input[type=text] {
+								padding: 24px 24px;
+								font-size: 28px;
+							}
+						}
+					}
+					.left {
+
+					}
+					.right {
+						.panel .body .card .group {
+							padding: 36px 28px;
+							.option.step {
+								font-size: 28px;
+								line-height: 160%;
+								padding-bottom: 20px;
+							}
+							.option {
+								height: 64px;
+								.chkwrap {
+									font-size: 24px;
+									line-height:21px;
+									padding-left: 64px;
+									.checkmark {
+										width: 36px;
+										height: 36px;
+										background-color: #E3E5E5;
+									}
+								}
+								.chkwrap input:checked ~ .checkmark {
+									background-color: #00BCE4;
+								}
+							}
+						}
+					}
+				}
+				.aaction {
+					button.light {
+						font-size: 21px;
+						padding: 20px 78px;
+					}
+				}
+			}
+		}
+		.modalretailer {
+			.panel {
+				width: 1669px;
+				height: 1116px;
+				.head {
+					height: 107px;
+					font-size: 42px;
+				}
+				.body {
+					padding: 48px 42px;
+					.card {
+						.tcatecory {
+							font-size: 28px;
+							padding-bottom: 24px;
+						}
+						.group {
+							padding: 24px 42px;
+							.option {
+								height: 72px;
+								.chkwrap {
+									font-size: 24px;
+									padding-left: 56px;
+									line-height: 32px;
+									.checkmark {
+										width: 36px;
+										height: 36px;
+										background-color: #E3E5E5;
+									}
+								}
+								.chkwrap input:checked ~ .checkmark {
+									background-color: #00BCE4;
+								}
+							}
+						}
+					}
+				}
+				.foot {
+					button.light {
+						font-size: 28zpx;
+						padding: 16px 72px;
 					}
 				}
 			}

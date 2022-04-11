@@ -19,7 +19,7 @@ export const Nshome = () => {
           </div>
         </div>
       </header>
-      <div className="modalretailer close">
+      <div className="modalretailer">
         <div className="panel">
           <div className="head">
             <label>
@@ -224,7 +224,7 @@ export const Nshome = () => {
         </div>
         <div className="searchoptionsarea">
           <div className="accesspoint colored">
-            <h1>FOOD ACCESS POINTS NEAR YOU</h1>
+            <h1>GOOD FOOD MAP</h1>
             <p>
               Search over +200 curated restaurants, farms, markets and other fresh
               source of local, sustainable food.
