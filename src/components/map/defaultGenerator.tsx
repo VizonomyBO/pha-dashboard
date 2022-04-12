@@ -3,11 +3,8 @@ import RenderTooltip from './RenderTooltip';
 import { InputTextInterface } from '../../@types/database';
 import { deckDefaults } from './deckDefaults';
 
-export const getDeckInitState = (inputText: InputTextInterface) => {
-  const newDeckDefault = {
-    ...deckDefaults
-  };
-  if (inputText?.bbox && inputText.bbox.length === 4) {
+export const getLatLonViewport = (inputText: InputTextInterface) => {
+  if (inputText?.bbox) {
     const viewportWebMercator = new WebMercatorViewport({
       width: window.innerWidth,
       height: window.innerHeight
@@ -22,6 +19,17 @@ export const getDeckInitState = (inputText: InputTextInterface) => {
         padding: 200
       }
     );
+    return newviewport;
+  }
+  return {};
+};
+
+export const getDeckInitState = (inputText: InputTextInterface) => {
+  const newDeckDefault = {
+    ...deckDefaults
+  };
+  if (inputText?.bbox && inputText.bbox.length === 4) {
+    const newviewport = getLatLonViewport(inputText);
     newDeckDefault.initialStateView = {
       ...newDeckDefault.initialStateView,
       latitude: newviewport.latitude,

@@ -1,6 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
 import * as carto from '@deck.gl/carto';
-import { WebMercatorViewport } from 'deck.gl';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
@@ -11,6 +10,7 @@ import PinRed from '../../../components/map/ic-pin-red.svg';
 import PinBlue from '../../../components/map/ic-pin-blue.svg';
 import PinGreen from '../../../components/map/ic-pin-green.svg';
 import { deckDefaults } from '../../../components/map/deckDefaults';
+import { getLatLonViewport } from '../../../components/map/defaultGenerator';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Carto = carto as any;
 
@@ -84,20 +84,7 @@ export const useMap = () => {
     () => () => {
       if (inputText?.text !== '') {
         if (inputText?.bbox && inputText.bbox.length === 4) {
-          const viewportWebMercator = new WebMercatorViewport({
-            width: window.innerWidth,
-            height: window.innerHeight
-          });
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          const newviewport: any = viewportWebMercator.fitBounds(
-            [
-              [inputText.bbox[0], inputText.bbox[1]],
-              [inputText.bbox[2], inputText.bbox[3]]
-            ],
-            {
-              padding: 200
-            }
-          );
+          const newviewport = getLatLonViewport(inputText);
           setCurrentViewState((oldViewState) => {
             const newViewState = {
               ...oldViewState,
