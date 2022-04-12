@@ -19,10 +19,10 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
   setParams: Dispatch<SetStateAction<QueryParams>>,
   totalElements: number
 }) => {
-  const pageNumberLimit = PAGE_NUMBER_LIMIT;
   const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE);
-  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(MAX_PAGE_NUMBER_LIMIT);
-  const [minPageNumberLimit, setminPageNumberLimit] = useState(MIN_PAGE_NUMBER_LIMIT);
+  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(MAX_PAGE_NUMBER_LIMIT);
+  const [minPageNumberLimit, setMinPageNumberLimit] = useState(MIN_PAGE_NUMBER_LIMIT);
+
   const pages = useMemo(() => {
     const numberOfPages = Math.ceil(totalElements / DEFAULT_ROWS_PER_PAGE);
     const arrayFromZeroToDiv = Array.from(Array(numberOfPages).keys());
@@ -56,21 +56,14 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
     setParams((old: QueryParams) => ({ ...old, page: currentPage }));
   }, [currentPage, setParams]);
 
-  const handleNextbtn = () => {
-    setCurrentPage(currentPage + 1);
-    if (currentPage + 1 > maxPageNumberLimit) {
-      setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
-      setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+  useEffect(() => {
+    if (currentPage > maxPageNumberLimit) {
+      setMaxPageNumberLimit(PAGE_NUMBER_LIMIT + maxPageNumberLimit);
     }
-  };
-
-  const handlePrevbtn = () => {
-    setCurrentPage(currentPage - 1);
-    if ((currentPage - 1) % pageNumberLimit === 0) {
-      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    if (currentPage < minPageNumberLimit) {
+      setMinPageNumberLimit(PAGE_NUMBER_LIMIT + minPageNumberLimit);
     }
-  };
+  }, [currentPage, maxPageNumberLimit, minPageNumberLimit]);
 
   return (
     <tfoot>
@@ -81,7 +74,7 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
               <button
                 className="light"
                 type="button"
-                onClick={(handlePrevbtn)}
+                onClick={() => setCurrentPage(currentPage - 1)}
                 disabled={isFirstPage}
               >
                 <span className="icarrowleftpag" />
@@ -95,7 +88,7 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
               <button
                 className="light"
                 type="button"
-                onClick={handleNextbtn}
+                onClick={() => setCurrentPage(currentPage + 1)}
                 disabled={isLastPage}
               >
                 <span className="title left">Next</span>
