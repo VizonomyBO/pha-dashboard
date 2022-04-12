@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {
   Dispatch,
   SetStateAction,
@@ -6,23 +7,28 @@ import {
   useState
 } from 'react';
 import { QueryParams } from '../../@types';
-import { DEFAULT_PAGE, DEFAULT_ROWS_PER_PAGE } from '../../constants/defaultValues';
+import {
+  DEFAULT_PAGE,
+  DEFAULT_ROWS_PER_PAGE,
+  PAGE_NUMBER_LIMIT,
+  MAX_PAGE_NUMBER_LIMIT,
+  MIN_PAGE_NUMBER_LIMIT
+} from '../../constants/defaultValues';
 
 export const DashboardTableFooter = ({ setParams, totalElements }: {
   setParams: Dispatch<SetStateAction<QueryParams>>,
   totalElements: number
 }) => {
-  const pageNumberLimit = 5;
-  const [currentPage, setcurrentPage] = useState(DEFAULT_PAGE);
-  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
-  const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+  const pageNumberLimit = PAGE_NUMBER_LIMIT;
+  const [currentPage, setCurrentPage] = useState(DEFAULT_PAGE);
+  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(MAX_PAGE_NUMBER_LIMIT);
+  const [minPageNumberLimit, setminPageNumberLimit] = useState(MIN_PAGE_NUMBER_LIMIT);
   const pages = useMemo(() => {
     const numberOfPages = Math.ceil(totalElements / DEFAULT_ROWS_PER_PAGE);
     const arrayFromZeroToDiv = Array.from(Array(numberOfPages).keys());
     const pagination = arrayFromZeroToDiv.map((x) => x + 1);
     return pagination;
   }, [totalElements]);
-
   const isFirstPage = currentPage === pages.at(0);
   const isLastPage = currentPage === pages.at(-1);
 
@@ -35,8 +41,8 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
       return (
         <button
           key={number}
-          onClick={() => setcurrentPage(number)}
-          className={`pagenum ${currentPage === number ? ' active' : null}`}
+          onClick={() => setCurrentPage(number)}
+          className={classNames('pagenum', { active: currentPage === number })}
           type="button"
         >
           {number}
@@ -51,7 +57,7 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
   }, [currentPage, setParams]);
 
   const handleNextbtn = () => {
-    setcurrentPage(currentPage + 1);
+    setCurrentPage(currentPage + 1);
     if (currentPage + 1 > maxPageNumberLimit) {
       setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
       setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
@@ -59,7 +65,7 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
   };
 
   const handlePrevbtn = () => {
-    setcurrentPage(currentPage - 1);
+    setCurrentPage(currentPage - 1);
     if ((currentPage - 1) % pageNumberLimit === 0) {
       setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
       setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
@@ -75,7 +81,7 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
               <button
                 className="light"
                 type="button"
-                onClick={handlePrevbtn}
+                onClick={(handlePrevbtn)}
                 disabled={isFirstPage}
               >
                 <span className="icarrowleftpag" />
