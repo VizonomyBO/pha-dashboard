@@ -12,30 +12,22 @@ import {
   BUSINESS_DETAILS,
   CLASSES_BY_FORM,
   CONTACT_DETAILS,
+  HOME,
   OTHER_QUESTIONS,
   PAGE_REDIRECT_TIME
 } from '../constants';
 import { FormTabType } from '../@types';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { useMarketplaceState, useModalDispatch } from '../store/hooks';
-import {
-  businessDetailsValidation,
-  otherQuestionsEmty,
-  otherQuestionsValidation,
-  otherQuestionsValidationFresh,
-  selectAccessibilityEmty,
-  selectAccessibilityValidation,
-  selectCategoryEmty,
-  selectCategoryValidation
-} from '../utils/validation';
+import { Formvalidation } from '../utils/validation';
 
 export const Form = () => {
   const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
   const [formClass, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const formAreaClass = classNames('formarea', { [formClass]: true });
-  const navigate = useNavigate();
   const { setModal } = useModalDispatch();
+  const navigate = useNavigate();
   const {
     businessDetails,
     selectCategory,
@@ -46,52 +38,35 @@ export const Form = () => {
     setFormClass(CLASSES_BY_FORM[activeTab]);
   }, [activeTab]);
   const clickProceed = () => {
+    let value = BUSINESS_DETAILS;
     switch (activeTab) {
       case BUSINESS_DETAILS:
-        if (businessDetailsValidation(businessDetails)
-        && selectCategoryValidation(selectCategory)
-        && selectAccessibilityValidation(selectAccessibility)) {
-          setModal({ type: true, open: true });
-          if (setActiveTab) {
-            setActiveTab(OTHER_QUESTIONS);
-          }
-        } else {
-          setModal({ type: false, open: true });
-        }
+        value = OTHER_QUESTIONS;
         break;
       case OTHER_QUESTIONS:
-        if (otherQuestionsValidationFresh(otherQuestions)
-        && selectCategoryValidation(selectCategory)
-        && selectAccessibilityValidation(selectAccessibility)) {
-          setModal({ type: true, open: true });
-          setActiveTab(CONTACT_DETAILS as FormTabType);
-        }
-        if (otherQuestionsValidation(otherQuestions)
-          && selectCategoryValidation(selectCategory)
-          && selectAccessibilityValidation(selectAccessibility)) {
-          setModal({ type: true, open: true });
-          setActiveTab(CONTACT_DETAILS as FormTabType);
-        }
-        if (otherQuestionsEmty(otherQuestions)
-          || selectCategoryEmty(selectCategory)
-          || selectAccessibilityEmty(selectAccessibility)) {
-          setModal({ type: false, open: true });
-        }
+        value = CONTACT_DETAILS;
         break;
       case CONTACT_DETAILS:
-        if (selectCategoryValidation(selectCategory)
-          && selectAccessibilityValidation(selectAccessibility)) {
-          setModal({ type: true, open: true });
-          setTimeout(() => {
-            navigate('/home');
-          }, PAGE_REDIRECT_TIME);
-        } else {
-          setModal({ type: false, open: true });
-        }
+        value = HOME;
         break;
       default:
-        setActiveTab(activeTab as FormTabType);
         break;
+    }
+    const estate = Formvalidation(
+      value,
+      activeTab,
+      businessDetails,
+      selectCategory,
+      selectAccessibility,
+      otherQuestions
+    );
+    setModal({ type: estate.type, open: estate.open });
+    if (value === HOME) {
+      setTimeout(() => {
+        navigate('/home');
+      }, PAGE_REDIRECT_TIME);
+    } else {
+      setActiveTab(estate.value as FormTabType);
     }
   };
   return (

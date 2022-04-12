@@ -3,7 +3,7 @@ import { DataPhaDasboardMap } from '../../@types';
 export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) => (
   listMarker.map((element: DataPhaDasboardMap) => {
     const color = element.geom.type === 'Point' ? 'red' : 'green';
-    const picture:Array<string> = element.imagelinks ? element.imagelinks.split(',') : [];
+    const picture:string[] = element.imagelinks ? element.imagelinks.split(',') : [];
     return (
       <div key={`itemMarker${element.retailer_id}`} className="item">
         <div className="item">

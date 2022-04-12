@@ -10,7 +10,6 @@ const defaultState: ModalInderface = {
 const modalReducer = (state: ModalInderface = defaultState, action: AnyAction = { type: 'foo' }) => {
   switch (action.type) {
     case TYPES.SET_MODAL_OPEN:
-      console.log(action);
       return {
         ...state,
         open: action.payload.open,

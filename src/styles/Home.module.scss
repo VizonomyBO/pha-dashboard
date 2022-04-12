@@ -5301,6 +5301,21 @@ header.topmenu {
 						color: #7A7E80;
 						padding-bottom: 5px;
 					}
+					.addlistening {
+						position: absolute;
+						z-index: 4;
+						top: 600px;
+						left: 16px;
+						display: block;
+						font-size: 16px;
+						width: 350px;
+						height: 46px;
+						border-radius: 56px;
+						background-color: #ffffff9c;
+						font-family: "FuturaBold", sans-serif !important;
+						border: 2.5px solid #00bde3;
+						color: #00bde3;
+					}
 					.retailerlist.close {
 						display: none;
 					}

@@ -5,7 +5,7 @@ export const ModalRequestForm = () => {
   const { type, open } = useModalState();
   const { setModal } = useModalDispatch();
   setTimeout(() => {
-    if (open === true) {
+    if (open) {
       setModal({ type: false, open: false });
     }
   }, VISIBLE_TIME);

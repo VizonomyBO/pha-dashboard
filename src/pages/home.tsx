@@ -15,7 +15,7 @@ import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 export const Home = () => {
   const [dataRequest, setDataRequest] = useState<Array<DataPhaDasboardMap>>([]);
   const [openModal, setOpenModal] = useState(false);
-  const [openSecPortal, setOpenSecPortal] = useState(false);
+  const [openAllRetailer, setOpenAllRetailer] = useState(false);
   let xDown:number | null = null;
   let yDown:number | null = null;
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
@@ -30,9 +30,9 @@ export const Home = () => {
     const yUp = evt.touches[0].clientY;
     const yDiff = yDown - yUp;
     if (yDiff > 0) {
-      setOpenSecPortal(true);
+      setOpenAllRetailer(true);
     } else {
-      setOpenSecPortal(false);
+      setOpenAllRetailer(false);
     }
     xDown = null;
     yDown = null;
@@ -122,8 +122,16 @@ export const Home = () => {
               Supermarket/super...
               <KeyboardArrowDownIcon style={{ marginLeft: '8px', marginBottom: '-5px' }} />
             </button>
+            <Link to="/form">
+              <button
+                type="button"
+                className="addlistening"
+              >
+                Add A Listing
+              </button>
+            </Link>
             <div
-              className={openSecPortal ? 'retailerlist-show' : 'retailerlist'}
+              className={openAllRetailer ? 'retailerlist-show' : 'retailerlist'}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
             >
@@ -134,7 +142,7 @@ export const Home = () => {
                 <div className="title">All Retailer</div>
               </div>
               {/* <div class="listpanel close"></div> */}
-              {openSecPortal && (
+              {openAllRetailer && (
                 <div className="listpanel">
                   <div className="listingarea">{dataRequest && ListMarkerComponentMobil(dataRequest)}</div>
                 </div>
