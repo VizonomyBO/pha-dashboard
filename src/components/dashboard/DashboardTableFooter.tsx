@@ -1,36 +1,94 @@
-export const DashboardTableFooter = () => (
-  <tfoot>
-    <tr>
-      <td colSpan={6}>
-        <div className="navfooter">
-          <div className="btnprev">
-            <button className="light" type="button">
-              <span className="icarrowleftpag" />
-              <span className="title">Previous</span>
-            </button>
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState
+} from 'react';
+import { QueryParams } from '../../@types';
+import { DEFAULT_PAGE, DEFAULT_ROWS_PER_PAGE } from '../../constants/defaultValues';
+
+export const DashboardTableFooter = ({ setParams, count }: {
+  setParams: Dispatch<SetStateAction<QueryParams>>,
+  count: number
+}) => {
+  const pageNumberLimit = 5;
+  const [currentPage, setcurrentPage] = useState(DEFAULT_PAGE);
+  const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
+  const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+  const pages = [];
+  for (let i = 1; i <= Math.ceil(count / DEFAULT_ROWS_PER_PAGE); i += 1) {
+    pages.push(i);
+  }
+
+  useEffect(() => {
+    setParams((old: QueryParams) => ({ ...old, page: currentPage }));
+  }, [currentPage, setParams]);
+
+  const renderPageNumbers = pages.map((number) => {
+    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+      return (
+        <button
+          key={number}
+          onClick={() => setcurrentPage(number)}
+          className={currentPage === number ? 'pagenum active' : 'pagenum'}
+          type="button"
+        >
+          {number}
+        </button>
+      );
+    }
+    return null;
+  });
+
+  const handleNextbtn = () => {
+    setcurrentPage(currentPage + 1);
+    if (currentPage + 1 > maxPageNumberLimit) {
+      setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
+      setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
+    }
+  };
+
+  const handlePrevbtn = () => {
+    setcurrentPage(currentPage - 1);
+    if ((currentPage - 1) % pageNumberLimit === 0) {
+      setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
+      setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
+    }
+  };
+
+  return (
+    <tfoot>
+      <tr>
+        <td colSpan={6}>
+          <div className="navfooter">
+            <div className="btnprev">
+              <button className="light" type="button" onClick={handlePrevbtn} disabled={currentPage === pages[0]}>
+                <span className="icarrowleftpag" />
+                <span className="title">Previous</span>
+              </button>
+            </div>
+            <div className="pagination">
+              {renderPageNumbers}
+            </div>
+            <div className="btnnext">
+              <button
+                className="light"
+                type="button"
+                onClick={handleNextbtn}
+                disabled={currentPage === pages[pages.length - 1]}
+              >
+                <span className="title left">Next</span>
+                <span className="icarrowrightpag" />
+              </button>
+            </div>
           </div>
-          <div className="pagination">
-            <a href="." className="pagenum active">1</a>
-            <a href="." className="pagenum ">2</a>
-            <a href="." className="pagenum ">3</a>
-            <a href="." className="pagenum "><span>...</span></a>
-            <a href="." className="pagenum ">8</a>
-            <a href="." className="pagenum ">9</a>
-            <a href="." className="pagenum ">10</a>
-          </div>
-          <div className="btnnext">
-            <button className="light" type="button">
-              <span className="title left">Next</span>
-              <span className="icarrowrightpag" />
-            </button>
-          </div>
-        </div>
-      </td>
-    </tr>
-    <tr>
-      <td colSpan={6}>
-        <div className="bottomtrim" />
-      </td>
-    </tr>
-  </tfoot>
-);
+        </td>
+      </tr>
+      <tr>
+        <td colSpan={6}>
+          <div className="bottomtrim" />
+        </td>
+      </tr>
+    </tfoot>
+  );
+};

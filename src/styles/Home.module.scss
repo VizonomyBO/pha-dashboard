@@ -3079,6 +3079,7 @@ sup {
 											align-items: center;
 											width: 60%;
 											.pagenum {
+												border: none;
 												display: flex;
 												justify-content: center;
 												align-items: center;
@@ -3090,6 +3091,7 @@ sup {
 												line-height: 16px;
 												text-decoration: none;
 												color: #161A23;
+												background-color: white;
 												&.active {
 													background-color: rgba(0, 189, 227, 0.12);
 													color: #00BDE3;

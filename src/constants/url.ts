@@ -8,6 +8,7 @@ const addQueryParams = (params?: string) => (params ? `?${params}` : '');
 export const ENDPOINTS = {
   BADGES: (id: string | undefined) => `${URL}/${CARTODB}/badges/${id}`,
   DASHBOARD: (params?: string) => `${URL}/${CARTODB}/dashboard${addQueryParams(params)}`,
+  DASHBOARD_COUNT: (params?: string) => `${URL}/${CARTODB}/dashboard-count${addQueryParams(params)}`,
   LOGIN: () => `${URL}/auth/login`,
   PHA_RETAILERS: (params?: string) => `${URL}/${CARTODB}/pha-retailer${addQueryParams(params)}`,
   PHA_INDIVIDUAL: (params?: string) => `${URL}/${CARTODB}/pha-individual${addQueryParams(params)}`,
