@@ -3,9 +3,14 @@ import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { useEffect, useRef, useState } from 'react';
 import { useGeocoderDispatch, useGeocoderState, useMarketplaceDispatch } from '../../store/hooks';
 import { GeocoderService } from '../../services/geocoderService';
-import { REGION, REGION_GEOCODER, TYPE_BUSINESS } from '../../constants';
+import {
+  GEOCODER_ADDRESS,
+  REGION,
+  REGION_GEOCODER,
+  TYPE_BUSINESS
+} from '../../constants';
 
-const name = 'geocoder';
+const name = GEOCODER_ADDRESS;
 export const DropdownAddress = ({ type }: { type: string }) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();

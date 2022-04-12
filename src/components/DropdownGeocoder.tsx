@@ -3,9 +3,9 @@ import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { useEffect, useRef, useState } from 'react';
 import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 import { GeocoderService } from '../services/geocoderService';
-import { REGION, REGION_GEOCODER } from '../constants';
+import { GEOCODER, REGION, REGION_GEOCODER } from '../constants';
 
-const name = 'geocoder';
+const name = GEOCODER;
 export const DropdownGeocoder = ({ type }: { type: string }) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
