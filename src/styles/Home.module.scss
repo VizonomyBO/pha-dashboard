@@ -3032,7 +3032,7 @@ sup {
 						border-radius: 16px;
 						thead {
 							width: 100%;
-							/* display: table; */
+							display: table;
 							tr {
 								position: relative;
 								&::after {
