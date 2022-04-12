@@ -95,7 +95,7 @@ export const Formvalidation = (
   selectAccessibility: selectAccessibilityInterface,
   otherQuestions: OtherQuestionsInterface
 ) => {
-  let valueReturn = activeTab;
+  let returnValue = activeTab;
   let typeModal = false;
   let openModal = false;
   switch (activeTab) {
@@ -105,7 +105,7 @@ export const Formvalidation = (
       && selectAccessibilityValidation(selectAccessibility)) {
         typeModal = true;
         openModal = true;
-        valueReturn = value;
+        returnValue = value;
       } else {
         typeModal = false;
         openModal = true;
@@ -117,7 +117,7 @@ export const Formvalidation = (
       && selectAccessibilityValidation(selectAccessibility)) {
         typeModal = true;
         openModal = true;
-        valueReturn = value;
+        returnValue = value;
         break;
       }
       if (otherQuestionsValidation(otherQuestions)
@@ -125,7 +125,7 @@ export const Formvalidation = (
         && selectAccessibilityValidation(selectAccessibility)) {
         typeModal = true;
         openModal = true;
-        valueReturn = value;
+        returnValue = value;
         break;
       }
       if (otherQuestionsEmty(otherQuestions)
@@ -141,7 +141,7 @@ export const Formvalidation = (
         typeModal = true;
         openModal = true;
         if (value !== HOME) {
-          valueReturn = value;
+          returnValue = value;
         }
       } else {
         typeModal = false;
@@ -151,5 +151,5 @@ export const Formvalidation = (
     default:
       break;
   }
-  return ({ type: typeModal, open: openModal, value: valueReturn });
+  return ({ type: typeModal, open: openModal, value: returnValue });
 };

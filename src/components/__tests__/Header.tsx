@@ -4,7 +4,13 @@ import configureStore from 'redux-mock-store';
 import { Header } from '../Header';
 
 describe('renders without crashing', () => {
-  const initialStoreState = {};
+  const initialStoreState = {
+    inputText: {
+      text: '',
+      shouldSearch: false
+    },
+    options: []
+  };
   const mockStore = configureStore();
   let store;
 

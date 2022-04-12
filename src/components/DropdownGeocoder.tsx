@@ -32,6 +32,9 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
     });
     setInputTextHtml(e.currentTarget.value);
   };
+  useEffect(() => {
+    setInputTextHtml(inputText.text);
+  }, [inputText]);
   return (
     <>
       <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
