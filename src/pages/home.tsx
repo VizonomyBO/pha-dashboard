@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
@@ -131,7 +132,7 @@ export const Home = () => {
               </button>
             </Link>
             <div
-              className={openAllRetailer ? 'retailerlist-show' : 'retailerlist'}
+              className={classNames(openAllRetailer ? 'retailerlist-show' : 'retailerlist')}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
             >
