@@ -80,10 +80,10 @@ export const DATASOURCES: FilterType[] = [
   },
   {
     name: 'OpenStreetMap',
-    attrib: ' retailers_osm'
+    attrib: 'retailers_osm'
   },
   {
     name: 'USDA Food Markets',
-    attrib: ' retailers_usda'
+    attrib: 'retailers_usda'
   }
 ];

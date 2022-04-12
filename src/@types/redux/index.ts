@@ -1,6 +1,6 @@
 export interface CoordinateInterface {
   latitude: string,
-  longitude: string
+  longitude: string,
 }
 export interface MediaInterface {
   name: string,
@@ -45,13 +45,13 @@ export interface OtherQuestionsInterface {
   visibility: string,
   local: string,
   produce_avail_store: string,
-  produce_avail_seasonally: string
+  produce_avail_seasonally: string,
 }
 export interface ContactDetailsInterface {
   contact_name?: string,
   contact_email?: string,
   contact_owner?: string,
-  contact_patron?: string
+  contact_patron?: string,
 }
 export interface SocialMediaInterface {
   facebook: string,
@@ -80,12 +80,12 @@ export interface MarketplaceInterface {
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
   selectCategory: selectCategoryInterface,
-  selectAccessibility: selectAccessibilityInterface
+  selectAccessibility: selectAccessibilityInterface,
 }
 
 export interface SessionInterface {
   sessionState: boolean,
-  error: boolean
+  error: boolean,
 }
 
 export interface IndividualFormInterface {
@@ -103,7 +103,7 @@ export interface IndividualFormInterface {
   contactZipcode?: string,
   submissionDate?: Date,
   submissionStatus?: string,
-  multimedia?: MediaInterface[]
+  multimedia?: MediaInterface[],
 }
 
 export interface CategoriesInterface {
@@ -111,5 +111,17 @@ export interface CategoriesInterface {
   center: number[],
   accesibilities: string[],
   dataSources: string[],
-  badges: string[]
+  badges: string[],
+  callFilters: boolean,
+  zoomCenter: boolean,
+}
+
+export interface QueriesInterface {
+  connection_name: string,
+  token: string,
+  queries: {
+    retailers_pha?: string,
+    retailers_osm?: string,
+    retailers_usda?: string,
+  },
 }
