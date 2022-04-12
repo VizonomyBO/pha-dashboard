@@ -2,6 +2,7 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  useMemo,
   useState
 } from 'react';
 import { QueryParams } from '../../@types';
@@ -15,12 +16,15 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
   const [currentPage, setcurrentPage] = useState(DEFAULT_PAGE);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
-  const pages = [];
-  for (let i = 1; i <= Math.ceil(totalElements / DEFAULT_ROWS_PER_PAGE); i += 1) {
-    pages.push(i);
-  }
-  const isFirstPage = currentPage === pages[0];
-  const isLastPage = currentPage === pages[pages.length - 1];
+  const pages = useMemo(() => {
+    const numberOfPages = Math.ceil(totalElements / DEFAULT_ROWS_PER_PAGE);
+    const arrayFromZeroToDiv = Array.from(Array(numberOfPages).keys());
+    const pagination = arrayFromZeroToDiv.map((x) => x + 1);
+    return pagination;
+  }, [totalElements]);
+
+  const isFirstPage = currentPage === pages.at(0);
+  const isLastPage = currentPage === pages.at(-1);
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, page: currentPage }));

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
@@ -15,9 +14,6 @@ export const Dashboard = () => {
     navigate('/login');
   }
 
-  useEffect(() => {
-    console.log(table);
-  }, [table]);
   return (
     <div className="container">
       <figure className="bgnoise home" />
