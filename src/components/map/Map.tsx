@@ -10,13 +10,12 @@ import { useMap } from '../../store/hooks/custom/useMap';
 export const Map = () => {
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const [deckState, setDeckState] = useState({ ...deckDefaults, renderToolTip: RenderTooltip });
-  const { layers } = useMap();
-  const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
+  const { layers, currentViewstate, setCurrentViewState } = useMap();
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     console.info('temporary comment until more functions are added and this variable is used', currentViewstate);
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
-  }, [currentViewstate]);
+  }, [currentViewstate, setCurrentViewState]);
 
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {

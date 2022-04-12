@@ -38,8 +38,6 @@ export const useFilter = ({ setOpenModal }: ModalFilterData) => {
   };
   useEffect(() => {
     if (categoriesSelected.length || accesibilities.length) {
-      // TODO: Jorge check my question on PR 79
-      // https://github.com/VizonomyBO/pha-dashboard/pull/79#pullrequestreview-938578288
       if (dataSources.indexOf('retailers_pha') === -1) {
         setDataSourcesSelected([...dataSources, 'retailers_pha']);
       }
