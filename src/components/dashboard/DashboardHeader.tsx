@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {
   Dispatch,
   SetStateAction,
@@ -49,18 +50,21 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
       </div>
       <div className="statusoption">
         {
-          buttonValue.map((item, index) => (
-            <button
-              key={item.id}
-              className={`${item.class} ${item.active ? 'active' : null}`}
-              type="button"
-              onClick={() => {
-                onChangeValue(index);
-              }}
-            >
-              {item.name}
-            </button>
-          ))
+          buttonValue.map((item, index) => {
+            const buttonClass = classNames(item.class, { active: item.active });
+            return (
+              <button
+                key={item.id}
+                className={buttonClass}
+                type="button"
+                onClick={() => {
+                  onChangeValue(index);
+                }}
+              >
+                {item.name}
+              </button>
+            );
+          })
         }
       </div>
       <div className="filterarea">

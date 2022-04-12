@@ -3034,7 +3034,7 @@ sup {
 						border-radius: 16px;
 						thead {
 							width: 100%;
-							/* display: table; */
+							display: table;
 							tr {
 								position: relative;
 								&::after {
@@ -3090,6 +3090,7 @@ sup {
 											align-items: center;
 											width: 60%;
 											.pagenum {
+												border: none;
 												display: flex;
 												justify-content: center;
 												align-items: center;
@@ -3101,6 +3102,7 @@ sup {
 												line-height: 16px;
 												text-decoration: none;
 												color: #161A23;
+												background-color: white;
 												&.active {
 													background-color: rgba(0, 189, 227, 0.12);
 													color: #00BDE3;
@@ -3656,6 +3658,24 @@ sup {
         border: none;
         float: left;
         width: 100%;
+		background-color: #F7F9FA;
+		padding: 0;
+		margin: 0;
+		outline: none;
+		color: #161A23;
+		border: none;
+		border-color: transparent;
+		padding: 16px 32px;
+		border-radius: 56px;
+		border: 1px solid #E3E5E5;
+	}
+	input[type=password].fl {
+		font-family: "FuturaMedium", sans-serif;
+		font-size: 16px;
+		line-height: 16px;
+		border: none;
+		float: left;
+		width: 100%;
 		background-color: #F7F9FA;
 		padding: 0;
 		margin: 0;
