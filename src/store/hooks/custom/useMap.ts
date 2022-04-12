@@ -82,32 +82,41 @@ export const useMap = () => {
 
   const zoomToCenterGeocoder = useMemo(
     () => () => {
-      if (inputText.bbox) {
-        const viewportWebMercator = new WebMercatorViewport({
-          width: window.innerWidth,
-          height: window.innerHeight
-        });
-        const newviewport = viewportWebMercator.fitBounds(
-          [
-            [inputText.bbox[0], inputText.bbox[1]],
-            [inputText.bbox[2], inputText.bbox[3]]
-          ],
-          {
-            padding: 100
-          }
-        );
-        console.info('newviewport', newviewport);
+      if (inputText.text !== '') {
+        if (inputText.bbox && inputText.bbox.length === 4) {
+          const viewportWebMercator = new WebMercatorViewport({
+            width: window.innerWidth,
+            height: window.innerHeight
+          });
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const newviewport: any = viewportWebMercator.fitBounds(
+            [
+              [inputText.bbox[0], inputText.bbox[1]],
+              [inputText.bbox[2], inputText.bbox[3]]
+            ]
+          );
+          setCurrentViewState((oldViewState) => {
+            const newViewState = {
+              ...oldViewState,
+              latitude: newviewport.latitude,
+              longitude: newviewport.longitude,
+              zoom: newviewport.zoom
+            };
+            return newViewState;
+          });
+        } else if (inputText.center && inputText.center[0] !== 0 && inputText.center[1] !== 0) {
+          setCurrentViewState((oldViewState) => {
+            const newViewState = {
+              ...oldViewState,
+              latitude: inputText.center[1],
+              longitude: inputText.center[0]
+            };
+            return newViewState;
+          });
+        }
       }
-      setCurrentViewState((oldViewState) => {
-        const newViewState = {
-          ...oldViewState,
-          latitud: inputText.center[0],
-          longitud: inputText.center[1]
-        };
-        return newViewState;
-      });
     },
-    [setCurrentViewState, inputText]
+    [inputText]
   );
 
   useEffect(() => {

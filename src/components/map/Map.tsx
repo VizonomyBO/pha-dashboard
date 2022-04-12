@@ -1,6 +1,7 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useState, useEffect, useMemo } from 'react';
 import { Layer, PickInfo } from 'deck.gl';
+import { FlyToInterpolator } from '@deck.gl/core';
 import { deckDefaults } from './deckDefaults';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
@@ -17,6 +18,19 @@ export const Map = () => {
     setCurrentViewState(viewState);
   }, [currentViewstate, setCurrentViewState]);
 
+  useEffect(() => {
+    setDeckState((oldDeckState) => {
+      const newDS = {
+        ...oldDeckState,
+        initialStateView: {
+          ...currentViewstate,
+          transitionInterpolator: new FlyToInterpolator(),
+          transitionDuration: 2000,
+        }
+      };
+      return newDS;
+    });
+  }, [currentViewstate, setDeckState]);
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
       setHoverInfo(info);
