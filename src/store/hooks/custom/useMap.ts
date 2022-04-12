@@ -4,36 +4,53 @@ import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { QueriesInterface } from '../../../@types/redux';
+import { useGeocoderState } from '../geocoderHook';
 import { ICON_MAPPING } from '../../../constants';
 import PinRed from '../../../components/map/ic-pin-red.svg';
 import PinBlue from '../../../components/map/ic-pin-blue.svg';
 import PinGreen from '../../../components/map/ic-pin-green.svg';
-
+import { deckDefaults } from '../../../components/map/deckDefaults';
+import { getLatLonViewport } from '../../../components/map/defaultGenerator';
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const Carto = carto as any;
 
 export const useMap = () => {
   const { resetValues, setCallFilters } = useCategoriesDispatch();
   const {
-    callFilters, categoriesSelected, accesibilities, dataSources
+    callFilters,
+    categoriesSelected,
+    accesibilities,
+    dataSources
   } = useCategoriesState() || {};
+  const { inputText, shouldZoom } = useGeocoderState() || {};
+  const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const [queries, setQueries] = useState<QueriesInterface>();
   const [layers, setLayers] = useState([]);
-  const getLayers = useMemo(() => () => {
-    const headers = webRequest.generateJSONHeader();
-    webRequest
-      .post(ENDPOINTS.GET_LAYERS, {
-        categories: categoriesSelected, accesibility: accesibilities, dataSources, badges: []
-      }, headers)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.data && res.success) {
-          setQueries(res.data);
-        }
-        setCallFilters(false);
-      })
-      .catch((err) => console.error(err));
-  }, [categoriesSelected, accesibilities, dataSources, setCallFilters]);
+  const getLayers = useMemo(
+    () => () => {
+      const headers = webRequest.generateJSONHeader();
+      webRequest
+        .post(
+          ENDPOINTS.GET_LAYERS,
+          {
+            categories: categoriesSelected,
+            accesibility: accesibilities,
+            dataSources,
+            badges: []
+          },
+          headers
+        )
+        .then((res) => res.json())
+        .then((res) => {
+          if (res.data && res.success) {
+            setQueries(res.data);
+          }
+          setCallFilters(false);
+        })
+        .catch((err) => console.error(err));
+    },
+    [categoriesSelected, accesibilities, dataSources, setCallFilters]
+  );
 
   const getPinColor = (originTable: string) => {
     let defaultPin = PinBlue;
@@ -44,21 +61,53 @@ export const useMap = () => {
     }
     return defaultPin;
   };
-  const getCartoLayer = useMemo(() => (connectionName: string, query: string, originTable: string) => {
-    const cartoLayer = new Carto.CartoLayer({
-      connection: connectionName,
-      type: Carto.MAP_TYPES.QUERY,
-      data: query,
-      pointType: 'icon',
-      pickable: true,
-      getIconSize: () => 29,
-      getIconColor: () => [255, 0, 0],
-      getIcon: () => 'marker',
-      iconMapping: ICON_MAPPING,
-      iconAtlas: getPinColor(originTable)
-    });
-    return cartoLayer;
-  }, []);
+  const getCartoLayer = useMemo(
+    () => (connectionName: string, query: string, originTable: string) => {
+      const cartoLayer = new Carto.CartoLayer({
+        connection: connectionName,
+        type: Carto.MAP_TYPES.QUERY,
+        data: query,
+        pointType: 'icon',
+        pickable: true,
+        getIconSize: () => 29,
+        getIconColor: () => [255, 0, 0],
+        getIcon: () => 'marker',
+        iconMapping: ICON_MAPPING,
+        iconAtlas: getPinColor(originTable)
+      });
+      return cartoLayer;
+    },
+    []
+  );
+
+  const zoomToCenterGeocoder = useMemo(
+    () => () => {
+      if (inputText?.text !== '') {
+        if (inputText?.bbox && inputText.bbox.length === 4) {
+          const newviewport = getLatLonViewport(inputText);
+          setCurrentViewState((oldViewState) => {
+            const newViewState = {
+              ...oldViewState,
+              latitude: newviewport.latitude,
+              longitude: newviewport.longitude,
+              zoom: newviewport.zoom
+            };
+            return newViewState;
+          });
+        } else if (inputText?.center && inputText.center[0] !== 0 && inputText.center[1] !== 0) {
+          setCurrentViewState((oldViewState) => {
+            const newViewState = {
+              ...oldViewState,
+              latitude: inputText.center[1],
+              longitude: inputText.center[0]
+            };
+            return newViewState;
+          });
+        }
+      }
+    },
+    [inputText]
+  );
 
   useEffect(() => {
     if (callFilters) {
@@ -66,6 +115,11 @@ export const useMap = () => {
     }
   }, [callFilters, getLayers]);
 
+  useEffect(() => {
+    if (shouldZoom) {
+      zoomToCenterGeocoder();
+    }
+  }, [shouldZoom, zoomToCenterGeocoder]);
   useEffect(() => {
     if (queries) {
       Carto.setDefaultCredentials({
@@ -88,6 +142,8 @@ export const useMap = () => {
     resetValues,
     getLayers,
     queries,
-    layers
+    layers,
+    currentViewstate,
+    setCurrentViewState
   };
 };

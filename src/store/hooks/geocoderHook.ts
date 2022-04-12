@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { GeocoderInterface, InputTextInterface } from '../../@types/database';
-import { setInputText, setGeocoderOptions } from '../actions';
+import { setInputText, setGeocoderOptions, setShouldZoom } from '../actions';
 
 export const useGeocoderState = () => useSelector(
   (rootState: {geocoder: GeocoderInterface}) => rootState.geocoder
@@ -12,10 +12,14 @@ export const useGeocoderDispatch = () => {
   const setGeocoderOptionsMemoized = useMemo(() => (options: []) => {
     dispatch(setGeocoderOptions(options));
   }, [dispatch]);
+  const setShouldZoomMemoized = useMemo(() => (shouldZoom: boolean) => {
+    dispatch(setShouldZoom(shouldZoom));
+  }, [dispatch]);
   return {
     setInputText: (chart: InputTextInterface) => {
       dispatch(setInputText(chart));
     },
-    setGeocoderOptions: setGeocoderOptionsMemoized
+    setGeocoderOptions: setGeocoderOptionsMemoized,
+    setShouldZoom: setShouldZoomMemoized
   };
 };

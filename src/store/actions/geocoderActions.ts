@@ -10,3 +10,8 @@ export const setGeocoderOptions = (options: []) => ({
   type: TYPES.SET_GEOCODER_OPTIONS,
   payload: options
 });
+
+export const setShouldZoom = (shouldZoom: boolean) => ({
+  type: TYPES.SET_SHOULD_ZOOM,
+  shouldZoom
+});

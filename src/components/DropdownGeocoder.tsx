@@ -10,14 +10,10 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState() || {};
-  const [selected, setSelectedValue] = useState();
   const [inputTextHtml, setInputTextHtml] = useState('');
   const geocoder = useRef<GeocoderService>(
-    new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement, setSelectedValue)
+    new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement)
   );
-  useEffect(() => {
-    console.log('this is selected', selected);
-  }, [selected]);
   useEffect(() => {
     geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
     if (inputText && inputText.text) {
@@ -28,7 +24,8 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
   const inputTextFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     setInputText({
       text: e.currentTarget.value,
-      shouldSearch: true
+      shouldSearch: true,
+      center: [0, 0]
     });
     setInputTextHtml(e.currentTarget.value);
   };
@@ -73,7 +70,9 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                       onClick={() => {
                         setInputText({
                           text: opt.place_name,
-                          shouldSearch: false
+                          shouldSearch: false,
+                          center: opt.center,
+                          bbox: opt?.bbox || []
                         });
                         setInputTextHtml(region === '' ? opt.text : `${opt.text}, ${region}`);
                         setGeocoderOptions([]);

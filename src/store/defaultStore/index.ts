@@ -103,7 +103,10 @@ export const INITIAL_CATEGORIES = {
 export const INITIAL_GEOCODER_STATE = {
   inputText: {
     text: '',
-    shouldSearch: false
+    shouldSearch: false,
+    center: [],
+    bbox: []
   },
-  options: []
+  options: [],
+  shouldZoom: false
 };
