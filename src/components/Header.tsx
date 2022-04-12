@@ -6,7 +6,7 @@ import { useGeocoderDispatch } from '../store/hooks';
 export const Header = ({ type, setOpenModal }: HeaderInterface) => {
   const { setShouldZoom } = useGeocoderDispatch();
   return (
-    <div className="searchoptionsarea form1">
+    <div className="searchoptionsarea">
       <div className="accesspoint colored">
         <h1>GOOD FOOD MAP</h1>
         <p>

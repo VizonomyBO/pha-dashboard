@@ -110,3 +110,8 @@ export const INITIAL_GEOCODER_STATE = {
   options: [],
   shouldZoom: false
 };
+
+export const INITIAL_MODAL_STATE = {
+  open: false,
+  type: false
+};

@@ -1,34 +1,11 @@
-import { useState } from 'react';
-import { DEFAULT_DROPDOWN_OPTION, OTHER_QUESTIONS, TYPE_BUSINESS } from '../constants';
+import { DEFAULT_DROPDOWN_OPTION, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
-import {
-  businessDetailsValidation,
-  selectAccessibilityValidation,
-  selectCategoryValidation
-} from '../utils/validation';
-import { ModalRequestForm } from './ModalRequestForm';
-import { FormTabTypeInterface } from '../@types';
 import { DropdownAddress } from './map/DropdownAddress';
 
-export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
+export const LeftForm1 = () => {
   const { setBusinessDetails } = useMarketplaceDispatch();
-  const { businessDetails, selectCategory, selectAccessibility } = useMarketplaceState();
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [typeModal, setTypeModal] = useState(false);
-  const clickProceed = () => {
-    if (businessDetailsValidation(businessDetails)
-    && selectCategoryValidation(selectCategory)
-    && selectAccessibilityValidation(selectAccessibility)) {
-      setTypeModal(true);
-      if (setActiveTab) {
-        setActiveTab(OTHER_QUESTIONS);
-      }
-    } else {
-      setVisibleModal(true);
-      setTypeModal(false);
-    }
-  };
+  const { businessDetails } = useMarketplaceState();
   return (
     <>
       <div className="sectiontitle">
@@ -390,16 +367,6 @@ export const LeftForm1 = ({ setActiveTab }: FormTabTypeInterface) => {
           />
         </div>
       </div>
-      <div className="aaction">
-        <button className="light" type="button" onClick={clickProceed}>
-          Proceed
-        </button>
-      </div>
-      <ModalRequestForm
-        type={typeModal}
-        visible={visibleModal}
-        setVisible={setVisibleModal}
-      />
     </>
   );
 };

@@ -4,7 +4,14 @@ import {
   selectAccessibilityInterface,
   selectCategoryInterface
 } from '../@types/redux';
-import { MARKED_ELEMENT, MARKED_FRESH } from '../constants';
+import {
+  BUSINESS_DETAILS,
+  CONTACT_DETAILS,
+  HOME,
+  MARKED_ELEMENT,
+  MARKED_FRESH,
+  OTHER_QUESTIONS
+} from '../constants';
 
 export const isEmpty = (field: string) => !!field;
 
@@ -78,4 +85,71 @@ export const selectAccessibilityEmty = (selectAccessibility: selectAccessibility
     return true;
   }
   return false;
+};
+
+export const Formvalidation = (
+  value: string,
+  activeTab: string,
+  businessDetails: BusinessDetailsInterface,
+  selectCategory: selectCategoryInterface,
+  selectAccessibility: selectAccessibilityInterface,
+  otherQuestions: OtherQuestionsInterface
+) => {
+  let returnValue = activeTab;
+  let typeModal = false;
+  let openModal = false;
+  switch (activeTab) {
+    case BUSINESS_DETAILS:
+      if (businessDetailsValidation(businessDetails)
+      && selectCategoryValidation(selectCategory)
+      && selectAccessibilityValidation(selectAccessibility)) {
+        typeModal = true;
+        openModal = true;
+        returnValue = value;
+      } else {
+        typeModal = false;
+        openModal = true;
+      }
+      break;
+    case OTHER_QUESTIONS:
+      if (otherQuestionsValidationFresh(otherQuestions)
+      && selectCategoryValidation(selectCategory)
+      && selectAccessibilityValidation(selectAccessibility)) {
+        typeModal = true;
+        openModal = true;
+        returnValue = value;
+        break;
+      }
+      if (otherQuestionsValidation(otherQuestions)
+        && selectCategoryValidation(selectCategory)
+        && selectAccessibilityValidation(selectAccessibility)) {
+        typeModal = true;
+        openModal = true;
+        returnValue = value;
+        break;
+      }
+      if (otherQuestionsEmty(otherQuestions)
+        || selectCategoryEmty(selectCategory)
+        || selectAccessibilityEmty(selectAccessibility)) {
+        typeModal = false;
+        openModal = true;
+      }
+      break;
+    case CONTACT_DETAILS:
+      if (selectCategoryValidation(selectCategory)
+        && selectAccessibilityValidation(selectAccessibility)) {
+        typeModal = true;
+        openModal = true;
+        if (value !== HOME) {
+          returnValue = value;
+        }
+      } else {
+        typeModal = false;
+        openModal = true;
+      }
+      break;
+    default:
+      break;
+  }
+  return ({ type: typeModal, open: openModal, value: returnValue });
 };
