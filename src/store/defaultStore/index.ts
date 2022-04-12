@@ -93,8 +93,11 @@ export const INITIAL_INDIVIDUAL_FORM = {
 export const INITIAL_CATEGORIES = {
   categoriesSelected: [],
   center: [],
-  accesibility: [],
-  dataSources: []
+  accesibilities: [],
+  badges: [],
+  dataSources: ['retailers_pha'],
+  callFilters: true,
+  zoomCenter: true
 };
 
 export const INITIAL_GEOCODER_STATE = {

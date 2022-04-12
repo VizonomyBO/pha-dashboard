@@ -22,6 +22,8 @@ import { Nshome } from './pages/nshome';
 import { Profile } from './pages/profile';
 import { Login } from './components/Login';
 import { Nslanding } from './pages/nslanding';
+import { Nsprofile } from './pages/nsprofile';
+import { Nsdashboard } from './pages/nsdashboard';
 
 import { theme } from './theme';
 
@@ -78,6 +80,14 @@ ReactDOM.render(
             <Route
               path="/nslanding"
               element={<Nslanding />}
+            />
+            <Route
+              path="/nsprofile"
+              element={<Nsprofile />}
+            />
+            <Route
+              path="/nsdashboard"
+              element={<Nsdashboard />}
             />
           </Routes>
         </BrowserRouter>

@@ -543,6 +543,9 @@ sup {
 	.barblue.profile {
 		height: 1100px;
 	}
+	.drawarea {
+		display: none;
+	}
 	/*end backgrounds rows*/
 	.search {
 		display: block;
@@ -645,6 +648,9 @@ sup {
       clear: both;
       display: table;
     }
+	.arearesult {
+		display: none;
+	}
 	.modalretailer {
 		position: fixed;
 		display: block;
@@ -2456,11 +2462,14 @@ sup {
 								display: block;
 								width: 60px;
 								height: 60px;
+								background-color: #e0e4e4;
+								border-radius: 50%;
 							}
 							.ict {
 								display: flex;
 								justify-content: center;
 								align-items: center;
+								padding-top: 8px;
 								.txtst {
 									text-align: center;
 									color: #7A7E80;
@@ -2764,7 +2773,7 @@ sup {
 					flex-direction: row;
 					justify-content: flex-start;
 					padding-bottom: 32px;
-					height: 32px;
+					/* height: 32px; */
 					button.light {
 						background-color: #fff;
 						color: #7A7E80;
@@ -3025,7 +3034,7 @@ sup {
 						border-radius: 16px;
 						thead {
 							width: 100%;
-							display: table;
+							/* display: table; */
 							tr {
 								position: relative;
 								&::after {
@@ -4017,7 +4026,8 @@ header.topmenu {
 										}
 										.desc {
 											font-family: "FuturaMedium", sans-serif;
-											font-size: 8px;
+											font-size: 10px;
+											padding-top: 4px;
 										}
 										.desc.red {
 											color: #E40000;
@@ -4262,6 +4272,27 @@ header.topmenu {
 					}
 				}
 			}
+			/* dashboard */
+			.navbararea {
+
+			}
+			.dashboard {
+				.header {
+					.sec1 {
+
+					}
+					.sec2 {
+
+					}
+					.statusoption {
+
+					}
+					.filterarea {
+
+					}
+				}
+			}
+			/* end dashboard */
 		}
 		.modalretailer {
 			.panel {
@@ -4569,6 +4600,7 @@ header.topmenu {
 										.desc {
 											font-family: "FuturaMedium", sans-serif;
 											font-size: 14px;
+											padding-top: 8px;
 										}
 										.desc.red {
 											color: #E40000;
@@ -4791,7 +4823,6 @@ header.topmenu {
 						}
 					}
 					.left {
-
 					}
 					.right {
 						.panel .body .card .group {
@@ -4885,6 +4916,56 @@ header.topmenu {
 		display: block;
 	}
 	.container {
+		height: 100vh;
+		.arearesult.close {
+			display: none;
+		}
+		.arearesult {
+				position: absolute;
+				bottom: 0;
+				display: block;
+				width: 100%;
+				z-index: 5;
+				.tab {
+					height: 32px;
+					border-top-left-radius: 16px;
+					border-top-right-radius: 16px;
+					background-color: #fff;
+					box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+					.space {
+						display: flex;
+						flex-direction: row;
+						justify-content: center;
+						width: 100%;
+						padding-top: 12px;
+						.line {
+							display: block;
+							width: 32px;
+							height: 3px;
+							background-color: #C4C4C4;
+						}
+					}
+					.title {
+						width: 100%;
+						padding: 20px 16px 0 16px;
+						font-family: "FutureMedium", sans-serif;
+						font-size: 20px;
+						color: #161A23;
+					}
+				}
+				.searchresult.close {
+					display: none;
+				}
+				.searchresult {
+					height: 280px;
+					overflow: scroll;
+					padding: 16px;
+					background-color: #fff;
+					ul {
+						background-color: #f9f9f9;
+					}
+				}
+		}
 	/* navigation */
 	.spanel {
 		width: 100%;
@@ -5686,6 +5767,9 @@ header.topmenu {
 	/* end form4 */
 	/* profile */
 	.container {
+		.drawarea {
+			display: block;
+		}
 		.pagecontainer {
 			.searchoptionsarea.form1 {
 				.accesspoint.colored {
@@ -5697,27 +5781,97 @@ header.topmenu {
 			}
 			.userprofile {
 				width: 100%;
-				padding: 16px;
 				margin-top: 78px;
+				padding: 0;
+				border-radius: 0;
 				.pheader {
+					justify-content: space-between;
+					height: 56px;
+					padding-left: 16px;
+					padding-right: 16px;
+					.backlink {
+						button.light {
+							font-size: 12px;
+							padding: 8px 0;
+							.icarrowleft {
+								width: 16px;
+								height: 16px;
+							}
+							.txt {
+								font-size: 14px;
+								line-height: 140%;
+							}
+						}
+					}
 					button.light {
 						font-size: 12px;
-						padding: 8px 24px;
+						line-height: 160%;
+						padding: 5px 16px;
+						border-radius: 30px;
+					}
+				}
+				.drawarea.close {
+					display: none;
+				}
+				.drawarea {
+					position: relative;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					padding-bottom: 40px;
+					.picture {
+						height: 211px;
+						width: 375px;
+						overflow: hidden;
+						img {
+							max-width: 100%;
+							height: auto;
+						}
+					}
+					.brandarea {
+						position: absolute;
+						bottom: 0;
+						left: 16px;
+						background-color: #2B5315;
+						border-radius: 50%;
+						border: 3px solid #fff;
+						width: 80px;
+						height: 80px;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						.txt {
+							font-family: 'FuturaBold',sans-serif;
+							font-size: 18px;
+							color: #fff;
+						}
 					}
 				}
 				.pbody {
 					flex-direction: column-reverse;
+					padding-left: 16px;
+					padding-right: 16px;
 					.left {
 						padding-top: 24px;
 						width: 100%;
 					}
 					.right {
 						width: 100%;
+						.txtxl {
+							font-size: 24px;
+							line-height: 120%;
+							padding-bottom: 0;
+						}
 						.txtst.al {
 							width: 100%;
 						}
 						.maparea {
 							width: 100%;
+						}
+						.txtbt {
+							font-size: 24px;
+							line-height: 120%;
 						}
 						.quality {
 							.block {
