@@ -141,7 +141,6 @@ export const Home = () => {
                 </div>
                 <div className="title">All Retailer</div>
               </div>
-              {/* <div class="listpanel close"></div> */}
               {openAllRetailer && (
                 <div className="listpanel">
                   <div className="listingarea">{dataRequest && ListMarkerComponentMobil(dataRequest)}</div>
