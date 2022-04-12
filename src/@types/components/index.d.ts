@@ -4,8 +4,8 @@ import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../consta
 import { PhaRetailer } from '../database';
 
 export interface BadgeType {
-  text: string;
-  image: string;
+  text: string,
+  image: string,
 }
 
 type Status = 'Rejected' | 'Pending' | 'Approved' | '';
@@ -17,27 +17,27 @@ export interface QueryParams {
   dateRange: string
 }
 export interface BadgePercentages {
-  fresh_percentage?: number;
-  acceptable_percentage?: number;
-  visible_percentage?: number;
-  local_percentage?: number;
-  meets_need_percentage?: number;
+  fresh_percentage?: number,
+  acceptable_percentage?: number,
+  visible_percentage?: number,
+  local_percentage?: number,
+  meets_need_percentage?: number,
 }
 export interface HeaderInterface {
-  type?: string;
-  setOpenModal?: SetStateAction<S>;
+  type?: string,
+  setOpenModal?: SetStateAction<S>,
 }
 
 export type FormTabType = typeof BUSINESS_DETAILS | typeof OTHER_QUESTIONS | typeof CONTACT_DETAILS;
 export interface FormHeaderInterface {
-  activeTab: FormTabType;
-  setActiveTab: (value: FormTabType) => void;
+  activeTab: FormTabType,
+  setActiveTab: (value: FormTabType) => void,
 }
 export type Geomtype = {
   geom: {
-    type: string;
-    coordinates: number[];
-  };
+    type: string,
+    coordinates: number[],
+  },
 };
 
 export interface imageLinks {
@@ -47,62 +47,63 @@ export interface imageLinks {
 export type DataPhaDasboardMap = PhaRetailer & Geomtype & imageLinks;
 
 export interface DropdowInterface {
-  initialState: string;
-  type: string;
+  initialState: string,
+  type: string,
 }
 
 export interface FileInterface {
-  lastModified: number;
-  lastModifiedDate: date;
-  name: string;
-  size: number;
-  type: string;
-  webkitRelativePath: string;
+  lastModified: number,
+  lastModifiedDate: date,
+  name: string,
+  size: number,
+  type: string,
+  webkitRelativePath: string,
 }
 export interface MultimediaInterface {
-  file?: FileInterface | FileList;
+  file?: FileInterface | FileList,
 }
 
 export interface MultimediFileInterface {
   file?: {
-    lastModified: number;
-    lastModifiedDate: date;
-    name: string;
-    size: number;
-    type: string;
-    webkitRelativePath: string;
-  };
+    lastModified: number,
+    lastModifiedDate: date,
+    name: string,
+    size: number,
+    type: string,
+    webkitRelativePath: string,
+  },
 }
 
 export interface FormTabTypeInterface {
-  setActiveTab?: React.Dispatch<React.SetStateAction<FormTabType>>;
+  setActiveTab?: React.Dispatch<React.SetStateAction<FormTabType>>,
 }
 
 export interface ViewStateInterface {
-  latitude: number;
-  longitude: number;
-  zoom: number;
-  bearing: number;
-  pitch: number;
+  latitude: number,
+  longitude: number,
+  zoom: number,
+  bearing: number,
+  pitch: number,
 }
 export type ViewStateChangeFn = (args: {
-  viewState: any;
+  viewState: any,
   interactionState: {
-    inTransition?: boolean;
-    isDragging?: boolean;
-    isPanning?: boolean;
-    isRotating?: boolean;
-    isZooming?: boolean;
-  };
-  oldViewState: any;
+    inTransition?: boolean,
+    isDragging?: boolean,
+    isPanning?: boolean,
+    isRotating?: boolean,
+    isZooming?: boolean,
+  },
+  oldViewState: any,
 }) => any;
 
 export interface DeckInterface {
-  initialStateView: ViewStateInterface;
-  onViewStateChange: ViewStateChangeFn;
-  controller: boolean;
-  layers: Layer[];
-  onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any;
+  initialStateView: ViewStateInterface,
+  onViewStateChange: ViewStateChangeFn,
+  controller: boolean,
+  layers: Layer[],
+  onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any,
+  onLoadFunction: () => any
 }
 
 export interface ButtonDashboard {

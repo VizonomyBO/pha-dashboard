@@ -78,9 +78,12 @@ export interface PhaIndividual {
 
 export interface InputTextInterface {
   text: string,
-  shouldSearch: boolean
+  shouldSearch: boolean,
+  center: number[],
+  bbox?: number[]
 }
 export interface GeocoderInterface {
   inputText: inputTextInterface,
-  options: Result[]
+  options: Result[],
+  shouldZoom: boolean
 }

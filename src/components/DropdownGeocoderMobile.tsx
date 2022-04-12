@@ -23,7 +23,8 @@ export const DropdownGeocoderMobile = () => {
   const inputTextFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     setInputText({
       text: e.currentTarget.value,
-      shouldSearch: true
+      shouldSearch: true,
+      center: [0, 0]
     });
     setInputTextHtml(e.currentTarget.value);
   };
@@ -65,7 +66,9 @@ export const DropdownGeocoderMobile = () => {
                       onClick={() => {
                         setInputText({
                           text: opt.place_name,
-                          shouldSearch: false
+                          shouldSearch: false,
+                          center: opt.center,
+                          bbox: opt?.bbox || []
                         });
                         setInputTextHtml(region);
                         setGeocoderOptions([]);

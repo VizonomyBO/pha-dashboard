@@ -22,7 +22,7 @@ export const DropdownAddress = ({ type }: { type: string }) => {
   );
   useEffect(() => {
     geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
-    if (inputText.text) {
+    if (inputText?.text) {
       geocoder.current.setGeocoderQuery(inputText.text);
     }
     setGeocoderOptions([]);
@@ -30,7 +30,8 @@ export const DropdownAddress = ({ type }: { type: string }) => {
   const inputTextFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     setInputText({
       text: e.currentTarget.value,
-      shouldSearch: true
+      shouldSearch: true,
+      center: [0, 0]
     });
     setInputTextHtml(e.currentTarget.value);
   };
@@ -69,7 +70,9 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                       onClick={() => {
                         setInputText({
                           text: opt.place_name,
-                          shouldSearch: false
+                          shouldSearch: false,
+                          center: opt.center,
+                          bbox: opt?.bbox || []
                         });
                         setInputTextHtml(regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`);
                         setGeocoderOptions([]);
