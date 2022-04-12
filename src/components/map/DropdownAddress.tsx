@@ -54,14 +54,9 @@ export const DropdownAddress = ({ type }: { type: string }) => {
               && options.map((opt: Result) => {
                 let region = '';
                 let regionShortcode = '';
-                if (opt.context) {
-                  for (let i = 0; opt.context && i < opt.context.length; i += 1) {
-                    if (opt.context[i].id.includes(REGION)) {
-                      regionShortcode = opt.context[i].short_code.replace(REGION_GEOCODER, '');
-                      region = opt.context[i].text;
-                    }
-                  }
-                }
+                region = opt.context.find((c) => c.id.includes(REGION))?.text || '';
+                regionShortcode = opt.context.find((c) => c.id.includes(REGION))?.short_code
+                  ?.replace(REGION_GEOCODER, '') || '';
                 return (
                   <li key={`${opt.place_name}index${type}`} className="tr-geocoder">
                     <button
