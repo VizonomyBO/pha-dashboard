@@ -125,3 +125,8 @@ export interface QueriesInterface {
     retailers_usda?: string,
   },
 }
+
+export interface ModalInderface {
+  open: boolean,
+  type: boolean
+}

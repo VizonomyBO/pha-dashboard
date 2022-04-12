@@ -6,5 +6,6 @@ export const deckDefaults: DeckInterface = {
   onViewStateChange: () => '',
   controller: true,
   layers: [],
-  onClickFunction: () => ''
+  onClickFunction: () => '',
+  onLoadFunction: () => ''
 };

@@ -1,12 +1,11 @@
-import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { useEffect, useRef, useState } from 'react';
 import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 import { GeocoderService } from '../services/geocoderService';
-import { GEOCODER, REGION, REGION_GEOCODER } from '../constants';
+import { GEOCODER_MOBILE, REGION, REGION_GEOCODER } from '../constants';
 
-const name = GEOCODER;
-export const DropdownGeocoder = ({ type }: { type: string }) => {
+const name = GEOCODER_MOBILE;
+export const DropdownGeocoderMobile = () => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState() || {};
@@ -29,32 +28,25 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
     });
     setInputTextHtml(e.currentTarget.value);
   };
-  useEffect(() => {
-    setInputTextHtml(inputText.text);
-  }, [inputText]);
   return (
     <>
-      <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
-        {type !== 'home' && (
-          <>
-            <span className="icmappin" />
-            <span className="txtd">Where</span>
-          </>
-        )}
-
-        <input
-          ref={geocoderDivRef}
-          className="txtd"
-          type="text"
-          value={inputTextHtml}
-          onChange={inputTextFunction}
-          placeholder="City or Zip Code"
-        />
-        {type !== 'home' && <span className="iccrosshair" />}
+      <div className="alook">
+        <div className="citysearch">
+          <i className="icsearch" />
+          <input
+            ref={geocoderDivRef}
+            className="txtd"
+            type="text"
+            value={inputTextHtml}
+            onChange={inputTextFunction}
+            placeholder="City or Zip Code"
+          />
+          <button type="button" className="light">Search</button>
+        </div>
       </div>
-      <div className={type !== 'home' ? 'geocoder-block' : 'geocoder-block-home'}>
+      <div className="geocoder-block">
         {options && options.length > 0 && inputText.shouldSearch && (
-          <ul className={type !== 'home' ? 'table-geocoder' : 'table-geocoder-home'}>
+          <ul className="table-geocoder-mobile">
             {inputText.shouldSearch
               && options.map((opt: Result) => {
                 let region = '';
@@ -65,6 +57,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                     }
                   }
                 }
+                region = region === '' ? opt.text : `${opt.text}, ${region}`;
                 return (
                   <li key={`${opt.place_name}index`} className="tr-geocoder">
                     <button
@@ -77,12 +70,12 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                           center: opt.center,
                           bbox: opt?.bbox || []
                         });
-                        setInputTextHtml(region === '' ? opt.text : `${opt.text}, ${region}`);
+                        setInputTextHtml(region);
                         setGeocoderOptions([]);
                       }}
                     >
                       <label>
-                        <span className="span-geocoder">{region === '' ? opt.text : `${opt.text}, ${region}`}</span>
+                        <span className="span-geocoder">{region}</span>
                       </label>
                     </button>
                   </li>
