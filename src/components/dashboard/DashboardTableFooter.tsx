@@ -36,16 +36,16 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
     setParams((old: QueryParams) => ({ ...old, page: currentPage }));
   }, [currentPage, setParams]);
 
-  const renderPageNumbers = pages.map((number) => {
-    if (number < maxPageNumberLimit + 1 && number > minPageNumberLimit) {
+  const renderPageNumbers = pages.map((page) => {
+    if (page < maxPageNumberLimit + 1 && page > minPageNumberLimit) {
       return (
         <button
-          key={number}
-          onClick={() => setCurrentPage(number)}
-          className={classNames('pagenum', { active: currentPage === number })}
+          key={page}
+          onClick={() => setCurrentPage(page)}
+          className={classNames('pagenum', { active: currentPage === page })}
           type="button"
         >
-          {number}
+          {page}
         </button>
       );
     }
