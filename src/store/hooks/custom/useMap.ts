@@ -129,7 +129,6 @@ export const useMap = () => {
   }, [callFilters, getLayers]);
 
   useEffect(() => {
-    console.log('ShouldZoom', shouldZoom);
     if (shouldZoom) {
       zoomToCenterGeocoder();
     }

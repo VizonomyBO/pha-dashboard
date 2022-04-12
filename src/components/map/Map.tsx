@@ -2,58 +2,24 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import {
   useState,
   useEffect,
-  useMemo
+  useMemo,
+  useCallback
 } from 'react';
-import { Layer, PickInfo, WebMercatorViewport } from 'deck.gl';
+import { Layer, PickInfo } from 'deck.gl';
 import { FlyToInterpolator } from '@deck.gl/core';
-import { deckDefaults } from './deckDefaults';
 import { useGeocoderDispatch, useGeocoderState } from '../../store/hooks';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
 import { ViewStateChangeFn } from '../../@types';
 import { useMap } from '../../store/hooks/custom/useMap';
+import { getDeckInitState } from './defaultGenerator';
 
 export const Map = () => {
   const { setShouldZoom } = useGeocoderDispatch();
-  const { inputText } = useGeocoderState() || {};
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
-  const getDeckInitState = () => {
-    const newDeckDefault = {
-      ...deckDefaults
-    };
-    if (inputText?.bbox && inputText.bbox.length === 4) {
-      const viewportWebMercator = new WebMercatorViewport({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const newviewport: any = viewportWebMercator.fitBounds(
-        [
-          [inputText.bbox[0], inputText.bbox[1]],
-          [inputText.bbox[2], inputText.bbox[3]]
-        ],
-        {
-          padding: 200
-        }
-      );
-      newDeckDefault.initialStateView = {
-        ...newDeckDefault.initialStateView,
-        latitude: newviewport.latitude,
-        longitude: newviewport.longitude,
-        zoom: newviewport.zoom
-      };
-    } else if (inputText?.text !== '' && inputText?.center) {
-      newDeckDefault.initialStateView = {
-        ...newDeckDefault.initialStateView,
-        latitude: inputText.center[1],
-        longitude: inputText.center[0],
-        zoom: 12
-      };
-    }
-    return { ...newDeckDefault, renderToolTip: RenderTooltip };
-  };
+  const { inputText } = useGeocoderState() || {};
   const { layers, currentViewstate, setCurrentViewState } = useMap();
-  const [deckState, setDeckState] = useState(getDeckInitState());
+  const [deckState, setDeckState] = useState(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);
@@ -75,14 +41,14 @@ export const Map = () => {
       });
     }
   }, [currentViewstate, setDeckState, isLoaded, setShouldZoom]);
-  const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
+  const expandTooltip = useCallback(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
       setHoverInfo(info);
     } else {
       setHoverInfo(undefined);
     }
   }, []);
-  const onLoad = useMemo(() => () => {
+  const onLoad = useCallback(() => () => {
     setIsLoaded(true);
   }, []);
   useEffect(() => {
