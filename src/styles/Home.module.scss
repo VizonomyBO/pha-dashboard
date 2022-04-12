@@ -19,96 +19,96 @@
 :root {
     --primary-red: #E40000;
     --primary-blue: #00BDE3;
-}
-
-.menu {
-	margin: 0;
-}
-.menu > ol {
-	list-style: none;
-	margin: 0 0;
-	padding: 0;
-}
-.menu > ol > li {
-	/*background: white;*/
-	margin-bottom: 0;
-	position: relative;
-	transition: .5s;
-}
-
-.menu > ol > li > a {
-	display:block;
-}
-
-.menu > ol > li.hlight > a {
-	display:block;
-	/* background-color:#00BDE3;
-	color: white; */
-}
-.menu > ol > li a {
-	color: #161A23;
-	display: block;
-	padding: 0;
-	position: relative;
-	text-decoration: none;
-	z-index: 1;
-	font-family: "FuturaBold", sans-serif;
-	padding-right: 32px;
-}
-.menu > ol > li a:not(:last-child)::before {
-	display: block;
-	width: 16px;
-	height: 16px;
-	content: url("../../public/images/ic_chevron_down.svg");
-	position: absolute;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	margin: auto;  
-	transition: .5s;
-}
-.menu > ol > li:focus, .menu > ol > li:focus-within, .menu > ol > li:hover {
-	z-index: 100;
-}
-.menu > ol > li:focus:after, .menu > ol > li:focus-within:after, .menu > ol > li:hover:after {
-	/*background: linear-gradient(to left,var(--accent-color),var(--gradient-color));*/
-	/*max-width: 800px;*/
-	max-width: 0;
-}
-.menu > ol > li:focus .submenu, .menu > ol > li:focus-within .submenu {
-	/*max-height: 500px;*/
-	max-height: 0;
-}
-.menu > ol > li:focus a:after, .menu > ol > li:focus-within a::after {
-	transform: rotate(-180deg);
-}
-.menu > ol > li:after {
-	content: "";
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	bottom: 0;
-	transition: .5s;
-	max-width: 0;
-	overflow: hidden;
-}
-.menu > ol .submenu {
-	margin-left: 0;
-	list-style: none;
-	max-height: 0px;
-	overflow: hidden;
-	padding-left: 0;
-	position: relative;
-	transition: .5s;
-	z-index: 1;
-}
-.menu > ol .submenu li {
-	font-size: 1em;
-}
-.menu > ol .submenu li:hover, .menu > ol .submenu li a:focus {
-	background: rgba(0,189,227,0.3);
-}
+	}
+ 
+	.menu {
+		 margin: 0;
+	}
+	.menu > ol {
+		 list-style: none;
+		 margin: 0 0;
+		 padding: 0;
+	}
+	.menu > ol > li {
+		 /*background: white;*/
+		 margin-bottom: 0;
+		 position: relative;
+		 transition: .5s;
+	}
+	
+	.menu > ol > li > a {
+		display:block;
+	}
+	
+	.menu > ol > li.hlight > a {
+		display:block;
+		/* background-color:#00BDE3;
+		color: white; */
+	}
+	.menu > ol > li a {
+		 color: #161A23;
+		 display: block;
+		 padding: 0;
+		 position: relative;
+		 text-decoration: none;
+		 z-index: 1;
+		 font-family: "FuturaBold", sans-serif;
+		 padding-right: 32px;
+	}
+	.menu > ol > li a:not(:last-child)::before {
+		 display: block;
+		 width: 16px;
+		 height: 16px;
+		 content: url("../../public/images/ic_chevron_down.svg");
+		 position: absolute;
+		 right: 0;
+		 top: 0;
+		 bottom: 0;
+		 margin: auto;  
+		 transition: .5s;
+	}
+	 .menu > ol > li:focus, .menu > ol > li:focus-within, .menu > ol > li:hover {
+		 z-index: 100;
+	}
+	 .menu > ol > li:focus:after, .menu > ol > li:focus-within:after, .menu > ol > li:hover:after {
+		 /*background: linear-gradient(to left,var(--accent-color),var(--gradient-color));*/
+		 /*max-width: 800px;*/
+		 max-width: 0;
+	}
+	 .menu > ol > li:focus .submenu, .menu > ol > li:focus-within .submenu {
+		 /*max-height: 500px;*/
+		 max-height: 0;
+	}
+	 .menu > ol > li:focus a:after, .menu > ol > li:focus-within a::after {
+		 transform: rotate(-180deg);
+	}
+	 .menu > ol > li:after {
+		 content: "";
+		 position: absolute;
+		 left: 0;
+		 right: 0;
+		 top: 0;
+		 bottom: 0;
+		 transition: .5s;
+		 max-width: 0;
+		 overflow: hidden;
+	}
+	 .menu > ol .submenu {
+		 margin-left: 0;
+		 list-style: none;
+		 max-height: 0px;
+		 overflow: hidden;
+		 padding-left: 0;
+		 position: relative;
+		 transition: .5s;
+		 z-index: 1;
+	}
+	 .menu > ol .submenu li {
+		 font-size: 1em;
+	}
+	 .menu > ol .submenu li:hover, .menu > ol .submenu li a:focus {
+		 background: rgba(0,189,227,0.3);
+	}
 .menu > ol .submenu li a:after {
 	bottom: 5px;
 	bottom: 0;
@@ -125,18 +125,18 @@
 	/*width: 120px;*/
 }
 .menu > ol > li:not(.options):hover {
-	/* border-bottom: 2px solid #FA6169; */
+   /* border-bottom: 2px solid #FA6169; */
 }
 .menu > ol > li:hover:after, .menu > ol > li:focus:after, .menu > ol > li:focus-within:after {
-		border-radius: 3px;
+	border-radius: 3px;
 }
 .menu > ol > li:hover .submenu, 
 .menu > ol > li:focus .submenu, 
 .menu > ol > li:focus-within .submenu {
-		max-height: 1000px;
-		border-radius: 6px;
-		background: white;
-		margin-top: 5px;
+	max-height: 1000px;
+	border-radius: 6px;
+	background: white;
+	margin-top: 5px;
 }
 .menu > ol > li a:not(:last-child):before {
 	right: 1em;
