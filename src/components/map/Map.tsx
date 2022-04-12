@@ -68,7 +68,7 @@ export const Map = () => {
             ...currentViewstate,
             transitionInterpolator: new FlyToInterpolator(),
             transitionDuration: 2000,
-            ontransitionend: setShouldZoom(false)
+            ontransitionend: () => setShouldZoom(false)
           }
         };
         return newDS;
