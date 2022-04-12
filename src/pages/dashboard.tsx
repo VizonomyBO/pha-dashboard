@@ -9,7 +9,7 @@ import { authorizationManager } from '../utils/authorizationManager';
 export const Dashboard = () => {
   const navigate = useNavigate();
   const token = authorizationManager.getToken();
-  const { table, setParams, count } = useDashboard();
+  const { table, setParams, totalElements } = useDashboard();
 
   if (!token) {
     navigate('/login');
@@ -26,7 +26,7 @@ export const Dashboard = () => {
         <DashboardNavbar />
         <div className="dashboard">
           <DashboardHeader setParams={setParams} />
-          <DashboardTable table={table} setParams={setParams} count={count} />
+          <DashboardTable table={table} setParams={setParams} totalElements={totalElements} />
         </div>
       </div>
     </div>

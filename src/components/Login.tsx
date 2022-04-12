@@ -110,7 +110,7 @@ export const Login = () => {
             <input
               type="text"
               className="fl"
-              placeholder="Email"
+              placeholder="Username"
               value={username}
               onChange={setUsernameFunction}
             />

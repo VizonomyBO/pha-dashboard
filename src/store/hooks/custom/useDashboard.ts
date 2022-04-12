@@ -8,7 +8,7 @@ import { webRequest } from '../../../utils/webRequest';
 export const useDashboard = () => {
   const [params, setParams] = useState(defaultQueryParams);
   const [table, setTable] = useState<(PhaRetailer & PhaIndividual)[]>([]);
-  const [count, setCount] = useState(0);
+  const [totalElements, setTotalElements] = useState(0);
 
   useEffect(() => {
     const queryParams = getQueryParms(params);
@@ -25,15 +25,15 @@ export const useDashboard = () => {
     const queryParams = getQueryParms(params);
     webRequest.get(ENDPOINTS.DASHBOARD_COUNT(queryParams)).then((resp) => resp.json())
       .then((resp) => {
-        setCount(resp.data.count);
+        setTotalElements(resp.data.count);
       }).catch((error) => {
         console.error(error);
-        setCount(0);
+        setTotalElements(0);
       });
   }, [params]);
   return {
     setParams,
     table,
-    count
+    totalElements
   };
 };

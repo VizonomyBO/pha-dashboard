@@ -4,10 +4,10 @@ import { PhaIndividual, PhaRetailer } from '../../@types/database';
 import { showText } from '../../utils/textFormatter';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
-export const DashboardTable = ({ table, setParams, count }: {
+export const DashboardTable = ({ table, setParams, totalElements }: {
   table: (PhaRetailer & PhaIndividual)[],
   setParams: Dispatch<SetStateAction<QueryParams>>,
-  count: number
+  totalElements: number
 }) => (
   <div className="listarea">
     <div className="tabulardatawrap">
@@ -78,7 +78,7 @@ export const DashboardTable = ({ table, setParams, count }: {
             </tr>
           ))}
         </tbody>
-        <DashboardTableFooter setParams={setParams} count={count} />
+        <DashboardTableFooter setParams={setParams} totalElements={totalElements} />
       </table>
     </div>
   </div>

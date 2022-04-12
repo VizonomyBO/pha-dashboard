@@ -7,18 +7,20 @@ import {
 import { QueryParams } from '../../@types';
 import { DEFAULT_PAGE, DEFAULT_ROWS_PER_PAGE } from '../../constants/defaultValues';
 
-export const DashboardTableFooter = ({ setParams, count }: {
+export const DashboardTableFooter = ({ setParams, totalElements }: {
   setParams: Dispatch<SetStateAction<QueryParams>>,
-  count: number
+  totalElements: number
 }) => {
   const pageNumberLimit = 5;
   const [currentPage, setcurrentPage] = useState(DEFAULT_PAGE);
   const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
   const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
   const pages = [];
-  for (let i = 1; i <= Math.ceil(count / DEFAULT_ROWS_PER_PAGE); i += 1) {
+  for (let i = 1; i <= Math.ceil(totalElements / DEFAULT_ROWS_PER_PAGE); i += 1) {
     pages.push(i);
   }
+  const isFirstPage = currentPage === pages[0];
+  const isLastPage = currentPage === pages[pages.length - 1];
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, page: currentPage }));
@@ -30,7 +32,7 @@ export const DashboardTableFooter = ({ setParams, count }: {
         <button
           key={number}
           onClick={() => setcurrentPage(number)}
-          className={currentPage === number ? 'pagenum active' : 'pagenum'}
+          className={`pagenum ${currentPage === number ? ' active' : null}`}
           type="button"
         >
           {number}
@@ -39,6 +41,10 @@ export const DashboardTableFooter = ({ setParams, count }: {
     }
     return null;
   });
+
+  useEffect(() => {
+    setParams((old: QueryParams) => ({ ...old, page: currentPage }));
+  }, [currentPage, setParams]);
 
   const handleNextbtn = () => {
     setcurrentPage(currentPage + 1);
@@ -62,20 +68,25 @@ export const DashboardTableFooter = ({ setParams, count }: {
         <td colSpan={6}>
           <div className="navfooter">
             <div className="btnprev">
-              <button className="light" type="button" onClick={handlePrevbtn} disabled={currentPage === pages[0]}>
+              <button
+                className="light"
+                type="button"
+                onClick={handlePrevbtn}
+                disabled={isFirstPage}
+              >
                 <span className="icarrowleftpag" />
                 <span className="title">Previous</span>
               </button>
             </div>
             <div className="pagination">
-              {renderPageNumbers}
+              {pages && renderPageNumbers}
             </div>
             <div className="btnnext">
               <button
                 className="light"
                 type="button"
                 onClick={handleNextbtn}
-                disabled={currentPage === pages[pages.length - 1]}
+                disabled={isLastPage}
               >
                 <span className="title left">Next</span>
                 <span className="icarrowrightpag" />
