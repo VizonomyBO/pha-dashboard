@@ -110,14 +110,14 @@ export const Login = () => {
             <input
               type="text"
               className="fl"
-              placeholder="Email"
+              placeholder="Username"
               value={username}
               onChange={setUsernameFunction}
             />
           </div>
           <div className="item">
             <input
-              type="text"
+              type="password"
               className="fl"
               placeholder="Password"
               value={password}
