@@ -1,15 +1,17 @@
 import { VISIBLE_TIME } from '../constants';
+import { useModalDispatch, useModalState } from '../store/hooks/modalHook';
 
-export const ModalRequestForm = (
-  { type, visible, setVisible }
-  : {type: boolean, visible: boolean, setVisible: React.Dispatch<React.SetStateAction<boolean>> }
-) => {
+export const ModalRequestForm = () => {
+  const { type, open } = useModalState();
+  const { setModal } = useModalDispatch();
   setTimeout(() => {
-    setVisible(false);
+    if (open === true) {
+      setModal({ type: false, open: false });
+    }
   }, VISIBLE_TIME);
   return (
     <div>
-      {visible && (
+      {open && (
         <div className="modaluserfeedbck">
           {type ? (
             <div className="modalsubmission">

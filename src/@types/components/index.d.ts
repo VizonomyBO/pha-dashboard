@@ -40,7 +40,11 @@ export type Geomtype = {
   };
 };
 
-export type DataPhaDasboardMap = PhaRetailer & Geomtype;
+export interface imageLinks {
+  imagelinks: string;
+}
+
+export type DataPhaDasboardMap = PhaRetailer & Geomtype & imageLinks;
 
 export interface DropdowInterface {
   initialState: string;

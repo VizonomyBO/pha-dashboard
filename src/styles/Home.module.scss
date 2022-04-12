@@ -19,130 +19,130 @@
 :root {
     --primary-red: #E40000;
     --primary-blue: #00BDE3;
- }
- 
- .menu {
-    margin: 0;
- }
- .menu > ol {
-    list-style: none;
-    margin: 0 0;
-    padding: 0;
- }
- .menu > ol > li {
-    /*background: white;*/
-    margin-bottom: 0;
-    position: relative;
-    transition: .5s;
- }
- 
- .menu > ol > li > a {
-   display:block;
- }
- 
- .menu > ol > li.hlight > a {
-   display:block;
-   /* background-color:#00BDE3;
-   color: white; */
- }
- .menu > ol > li a {
-    color: #161A23;
-    display: block;
-    padding: 0;
-    position: relative;
-    text-decoration: none;
-    z-index: 1;
-    font-family: "FuturaBold", sans-serif;
-    padding-right: 32px;
- }
- .menu > ol > li a:not(:last-child)::before {
-    display: block;
-    width: 16px;
-    height: 16px;
-    content: url("../../public/images/ic_chevron_down.svg");
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;  
-    transition: .5s;
- }
-  .menu > ol > li:focus, .menu > ol > li:focus-within, .menu > ol > li:hover {
-    z-index: 100;
- }
-  .menu > ol > li:focus:after, .menu > ol > li:focus-within:after, .menu > ol > li:hover:after {
-    /*background: linear-gradient(to left,var(--accent-color),var(--gradient-color));*/
-    /*max-width: 800px;*/
-    max-width: 0;
- }
-  .menu > ol > li:focus .submenu, .menu > ol > li:focus-within .submenu {
-    /*max-height: 500px;*/
-    max-height: 0;
- }
-  .menu > ol > li:focus a:after, .menu > ol > li:focus-within a::after {
-    transform: rotate(-180deg);
- }
-  .menu > ol > li:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    transition: .5s;
-    max-width: 0;
-    overflow: hidden;
- }
-  .menu > ol .submenu {
-    margin-left: 0;
-    list-style: none;
-    max-height: 0px;
-    overflow: hidden;
-    padding-left: 0;
-    position: relative;
-    transition: .5s;
-    z-index: 1;
- }
-  .menu > ol .submenu li {
-    font-size: 1em;
- }
-  .menu > ol .submenu li:hover, .menu > ol .submenu li a:focus {
-    background: rgba(0,189,227,0.3);
- }
-.menu > ol .submenu li a:after {
-    bottom: 5px;
-    bottom: 0;
-    height: 1px;
- }
-.menu > ol .submenu li a:hover:after, .menu > ol .submenu li a:focus:after {
-    width: 15px;
- }
+}
+
+.menu {
+	margin: 0;
+}
+.menu > ol {
+	list-style: none;
+	margin: 0 0;
+	padding: 0;
+}
 .menu > ol > li {
-   border-left: 0;
-   display: inline-block;
-   margin-left: 0;
-   vertical-align: top;
-   /*width: 120px;*/
+	/*background: white;*/
+	margin-bottom: 0;
+	position: relative;
+	transition: .5s;
+}
+
+.menu > ol > li > a {
+	display:block;
+}
+
+.menu > ol > li.hlight > a {
+	display:block;
+	/* background-color:#00BDE3;
+	color: white; */
+}
+.menu > ol > li a {
+	color: #161A23;
+	display: block;
+	padding: 0;
+	position: relative;
+	text-decoration: none;
+	z-index: 1;
+	font-family: "FuturaBold", sans-serif;
+	padding-right: 32px;
+}
+.menu > ol > li a:not(:last-child)::before {
+	display: block;
+	width: 16px;
+	height: 16px;
+	content: url("../../public/images/ic_chevron_down.svg");
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	margin: auto;  
+	transition: .5s;
+}
+.menu > ol > li:focus, .menu > ol > li:focus-within, .menu > ol > li:hover {
+	z-index: 100;
+}
+.menu > ol > li:focus:after, .menu > ol > li:focus-within:after, .menu > ol > li:hover:after {
+	/*background: linear-gradient(to left,var(--accent-color),var(--gradient-color));*/
+	/*max-width: 800px;*/
+	max-width: 0;
+}
+.menu > ol > li:focus .submenu, .menu > ol > li:focus-within .submenu {
+	/*max-height: 500px;*/
+	max-height: 0;
+}
+.menu > ol > li:focus a:after, .menu > ol > li:focus-within a::after {
+	transform: rotate(-180deg);
+}
+.menu > ol > li:after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	transition: .5s;
+	max-width: 0;
+	overflow: hidden;
+}
+.menu > ol .submenu {
+	margin-left: 0;
+	list-style: none;
+	max-height: 0px;
+	overflow: hidden;
+	padding-left: 0;
+	position: relative;
+	transition: .5s;
+	z-index: 1;
+}
+.menu > ol .submenu li {
+	font-size: 1em;
+}
+.menu > ol .submenu li:hover, .menu > ol .submenu li a:focus {
+	background: rgba(0,189,227,0.3);
+}
+.menu > ol .submenu li a:after {
+	bottom: 5px;
+	bottom: 0;
+	height: 1px;
+}
+.menu > ol .submenu li a:hover:after, .menu > ol .submenu li a:focus:after {
+	width: 15px;
+}
+.menu > ol > li {
+	border-left: 0;
+	display: inline-block;
+	margin-left: 0;
+	vertical-align: top;
+	/*width: 120px;*/
 }
 .menu > ol > li:not(.options):hover {
-   /* border-bottom: 2px solid #FA6169; */
+	/* border-bottom: 2px solid #FA6169; */
 }
 .menu > ol > li:hover:after, .menu > ol > li:focus:after, .menu > ol > li:focus-within:after {
-      border-radius: 3px;
+		border-radius: 3px;
 }
 .menu > ol > li:hover .submenu, 
 .menu > ol > li:focus .submenu, 
 .menu > ol > li:focus-within .submenu {
-      max-height: 1000px;
-      border-radius: 6px;
-      background: white;
-      margin-top: 5px;
+		max-height: 1000px;
+		border-radius: 6px;
+		background: white;
+		margin-top: 5px;
 }
 .menu > ol > li a:not(:last-child):before {
-    right: 1em;
+	right: 1em;
 }
 .menu > ol > li:hover a:before {
-    transform: rotate(-180deg);
+	transform: rotate(-180deg);
 }
 
 /* chk */
@@ -158,14 +158,14 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-  }
+}
   .chkwrap input {
 	position: absolute;
 	opacity: 0;
 	cursor: pointer;
 	height: 0;
 	width: 0;
-  }
+}
   .checkmark {
 	position: absolute;
 	top: 0;
@@ -175,11 +175,11 @@
 	background-color: rgb(255, 255, 255);
 	vertical-align: middle;
   border-radius: 4px;
-  }
+}
   .chkwrap:hover input ~ .checkmark {
 	background-color: #ccc;
 	border-color: #ccc;
-  }
+}
   .chkwrap input:checked ~ .checkmark {
 	background-color: #00BDE3;
 	border-color: #00BDE3;
@@ -188,16 +188,16 @@
 	height: 20px;
 	border-radius: 4px;
 	content: url("../../public/images/ic_chk_selected.svg");
-  }
+}
   .checkmark:after {
 	content: "";
 	position: absolute;
 	display: none;
-  }
+}
   
   .chkwrap input:checked ~ .checkmark:after {
 	display: block;
-  }
+}
   
   .chkwrap .checkmark:after {
 	/* left: 9px;
@@ -210,7 +210,7 @@
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg); */
 	
-  }
+}
 /* end chk */
 /* .activescroll {
     display: block;
@@ -558,7 +558,7 @@ sup {
 		justify-content: flex-end;
 		border-radius: 20px;
 	}
-    .search input[type=text] {
+  .search input[type=text] {
 		font-family: "FuturaLight", sans-serif;
         font-size: 14px;
 		line-height: 14px;
@@ -570,7 +570,7 @@ sup {
 		background-color: #F7F9FA;
 		padding-left: 8px;
 		outline: none;
-    }
+  }
 	input[type=text].light {
 		font-family: "FuturaMedium", sans-serif;
         font-size: 16px;
@@ -615,7 +615,7 @@ sup {
 		border: 1px solid #E3E5E5;
 		resize: none;
 	}
-    .search button {
+  .search button {
       	float: left;
       	color: white;
       	border-left: none;
@@ -639,8 +639,8 @@ sup {
       	    height: 16px;
       	    content: url("../../public/images/ic_search.svg");
       	}
-    }
-    .search button:hover {
+  }
+  .search button:hover {
 						
     }
     .search::after {
@@ -3604,6 +3604,8 @@ sup {
 			display: block;
 			margin: 0;
 			width: 450px;
+		}
+	}
 	.carrosel{
 		top: 0;
 		z-index: 2;
@@ -3728,6 +3730,10 @@ header.topmenu {
 .retailerlist {
 	display: none;
 }
+.retailerlist-show {
+	display: none;
+}
+
 /* end deshabilitados para desktop */
 /* set dropdowns style */
 .container {
@@ -5164,7 +5170,7 @@ header.topmenu {
 		}
 	}
 	/* end navigation */
-		.pagecontainer {
+	.pagecontainer {
 			.navbar {
 				height: 100%;
 				width: 100%;
@@ -5260,20 +5266,64 @@ header.topmenu {
 						right: 16px;
 					}
 					.supermarketfilter {
-						position:absolute;
+						position: absolute;
 						z-index: 4;
 						top: 16px;
 						left: 16px;
 						display: block;
-						width: 171px;
+						font-size: 16px;
+						width: 210px;
 						height: 46px;
 						border-radius: 56px;
 						background-color: #fff;
+						font-family: "FuturaMedium",sans-serif!important;
+						border-color: transparent;
+						color: #7A7E80;
+						padding-bottom: 5px;
 					}
 					.retailerlist.close {
 						display: none;
 					}
 					.retailerlist {
+						display: block;
+						width: 100%;
+						right: 0;
+						top: calc(100vh - 82px);
+						height: 82px;
+						z-index: 4;
+						transition: top .2s ease-in-out!important;
+						position: fixed;
+						.tab {
+							height: 93px;
+							border-top-left-radius: 16px;
+							border-top-right-radius: 16px;
+							background-color: #fff;
+							box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+							.space {
+								display: flex;
+								flex-direction: row;
+								justify-content: center;
+								width: 100%;
+								padding-top: 12px;
+								.line {
+									display: block;
+									width: 32px;
+									height: 3px;
+									background-color: #C4C4C4;
+								}
+							}
+							.title {
+								width: 100%;
+								padding: 20px 16px 0 16px;
+								font-family: "FutureMedium", sans-serif;
+								font-size: 20px;
+								color: #161A23;
+							}
+						}
+					}
+					.retailerlist-show {
+						display: block;
+						z-index: 4;
 						position: absolute;
 						bottom: 0;
 						display: block;
@@ -5316,13 +5366,32 @@ header.topmenu {
 							.item {
 								display: block;
 								padding: 16px 16px 0 16px;
-								
 							}
 							.picturerow {
 								display: grid;
 								grid-template-columns: 1fr 1fr;
 								column-gap: 16px;
 								padding-bottom: 8px;
+								.picture {
+									border-radius: 15px;
+									height: 92px;
+									width: 150px;
+									.img {
+										object-fit: cove;
+										border-radius: 15px;
+										height: 92px;
+										width: 150px;
+									}
+								}
+							}
+							.picture {
+								border-radius: 15px;
+								.img {
+									object-fit: cover;
+									border-radius: 15px;
+									height: 92px;
+									width: 350px;
+								}
 							}
 							.detail {
 								display: flex;
@@ -5901,4 +5970,3 @@ header.topmenu {
 	}
 	/* end profile */
 }
-	}}

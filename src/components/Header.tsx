@@ -3,7 +3,7 @@ import { HeaderInterface } from '../@types';
 import { DropdownGeocoder } from './DropdownGeocoder';
 
 export const Header = ({ type, setOpenModal }: HeaderInterface) => (
-  <div className="searchoptionsarea form1">
+  <div className="searchoptionsarea">
     <div className="accesspoint colored">
       <h1>GOOD FOOD MAP</h1>
       <p>
