@@ -57,6 +57,7 @@ export const DropdownGeocoderMobile = () => {
                     }
                   }
                 }
+                region = region === '' ? opt.text : `${opt.text}, ${region}`;
                 return (
                   <li key={`${opt.place_name}index`} className="tr-geocoder">
                     <button
@@ -67,12 +68,12 @@ export const DropdownGeocoderMobile = () => {
                           text: opt.place_name,
                           shouldSearch: false
                         });
-                        setInputTextHtml(region === '' ? opt.text : `${opt.text}, ${region}`);
+                        setInputTextHtml(region);
                         setGeocoderOptions([]);
                       }}
                     >
                       <label>
-                        <span className="span-geocoder">{region === '' ? opt.text : `${opt.text}, ${region}`}</span>
+                        <span className="span-geocoder">{region}</span>
                       </label>
                     </button>
                   </li>
