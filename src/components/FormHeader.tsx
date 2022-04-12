@@ -1,16 +1,25 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FormHeaderInterface, FormTabType } from '../@types';
-import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
+import {
+  BUSINESS_DETAILS,
+  CONTACT_DETAILS,
+  OTHER_QUESTIONS,
+  ROUTE_DASHBOARD,
+  ROUTE_HOME
+} from '../constants';
 
 export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => {
   const businessClass = classNames('option', { active: activeTab === BUSINESS_DETAILS });
   const otherClass = classNames('option', { active: activeTab === OTHER_QUESTIONS });
   const contactClass = classNames('option', { active: activeTab === CONTACT_DETAILS });
+  const location = useLocation();
+  const routeNavigate: string = location.state ? ROUTE_DASHBOARD : ROUTE_HOME;
+
   return (
     <div className="header">
       <div className="backlink">
-        <Link to="/home">
+        <Link to={routeNavigate}>
           <button className="light" type="button">
             <span className="icarrowleft">
               <span className="txt">Back to Locations</span>

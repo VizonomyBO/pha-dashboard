@@ -5,12 +5,17 @@ import {
   useEffect,
   useState
 } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ButtonDashboard, QueryParams } from '../../@types';
 import { DEFAULT_VALUES_BUTTON } from '../../constants/dashboard';
 
 export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAction<QueryParams>> }) => {
   const [inputValue, setinputValue] = useState('');
   const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
+  const navigate = useNavigate();
+  const navigateForm = () => {
+    navigate('/form', { state: { previous: 'dashboard' } });
+  };
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, search: inputValue }));
@@ -39,7 +44,7 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
             <span className="icdown" />
             <span className="title">Download CSV</span>
           </button>
-          <button className="light btnplus active" type="button">
+          <button className="light btnplus active" type="button" onClick={navigateForm}>
             <span className="icplus" />
             <span className="title">Add Retailer</span>
           </button>
