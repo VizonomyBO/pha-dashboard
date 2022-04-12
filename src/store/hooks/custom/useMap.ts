@@ -12,7 +12,7 @@ import PinBlue from '../../../components/map/ic-pin-blue.svg';
 import PinGreen from '../../../components/map/ic-pin-green.svg';
 import { deckDefaults } from '../../../components/map/deckDefaults';
 import { getLatLonViewport } from '../../../components/map/defaultGenerator';
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const Carto = carto as any;
 
 export const useMap = () => {
