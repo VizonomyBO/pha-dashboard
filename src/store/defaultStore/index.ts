@@ -108,5 +108,5 @@ export const INITIAL_GEOCODER_STATE = {
     bbox: []
   },
   options: [],
-  shouldZoom: true
+  shouldZoom: false
 };

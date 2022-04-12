@@ -11,6 +11,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
   layers,
   onViewStateChange,
   onClickFunction,
+  onLoadFunction,
   children
 }) => {
   const mapref = useRef(null);
@@ -25,6 +26,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
           layers={layers}
           onViewStateChange={onViewStateChange}
           onClick={onClickFunction}
+          onLoad={onLoadFunction}
         >
           <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
           { children }

@@ -12,13 +12,14 @@ export const useGeocoderDispatch = () => {
   const setGeocoderOptionsMemoized = useMemo(() => (options: []) => {
     dispatch(setGeocoderOptions(options));
   }, [dispatch]);
+  const setShouldZoomMemoized = useMemo(() => (shouldZoom: boolean) => {
+    dispatch(setShouldZoom(shouldZoom));
+  }, [dispatch]);
   return {
     setInputText: (chart: InputTextInterface) => {
       dispatch(setInputText(chart));
     },
     setGeocoderOptions: setGeocoderOptionsMemoized,
-    setShouldZoom: (shouldZoom: boolean) => {
-      dispatch(setShouldZoom(shouldZoom));
-    }
+    setShouldZoom: setShouldZoomMemoized
   };
 };

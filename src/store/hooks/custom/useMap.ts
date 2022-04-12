@@ -82,8 +82,8 @@ export const useMap = () => {
 
   const zoomToCenterGeocoder = useMemo(
     () => () => {
-      if (inputText.text !== '') {
-        if (inputText.bbox && inputText.bbox.length === 4) {
+      if (inputText?.text !== '') {
+        if (inputText?.bbox && inputText.bbox.length === 4) {
           const viewportWebMercator = new WebMercatorViewport({
             width: window.innerWidth,
             height: window.innerHeight
@@ -93,7 +93,10 @@ export const useMap = () => {
             [
               [inputText.bbox[0], inputText.bbox[1]],
               [inputText.bbox[2], inputText.bbox[3]]
-            ]
+            ],
+            {
+              padding: 200
+            }
           );
           setCurrentViewState((oldViewState) => {
             const newViewState = {
@@ -104,7 +107,7 @@ export const useMap = () => {
             };
             return newViewState;
           });
-        } else if (inputText.center && inputText.center[0] !== 0 && inputText.center[1] !== 0) {
+        } else if (inputText?.center && inputText.center[0] !== 0 && inputText.center[1] !== 0) {
           setCurrentViewState((oldViewState) => {
             const newViewState = {
               ...oldViewState,
@@ -126,6 +129,7 @@ export const useMap = () => {
   }, [callFilters, getLayers]);
 
   useEffect(() => {
+    console.log('ShouldZoom', shouldZoom);
     if (shouldZoom) {
       zoomToCenterGeocoder();
     }
