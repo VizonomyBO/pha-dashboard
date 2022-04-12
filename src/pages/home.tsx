@@ -17,6 +17,7 @@ export const Home = () => {
   const [dataRequest, setDataRequest] = useState<Array<DataPhaDasboardMap>>([]);
   const [openModal, setOpenModal] = useState(false);
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
+  const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
   let xDown:number | null = null;
   let yDown:number | null = null;
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
@@ -132,7 +133,7 @@ export const Home = () => {
               </button>
             </Link>
             <div
-              className={classNames(openAllRetailer ? 'retailerlist-show' : 'retailerlist')}
+              className={retailerClass}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
             >
