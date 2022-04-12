@@ -120,6 +120,14 @@ export const Nsprofile = () => {
               Help Improve This Listing
             </button>
           </div>
+          <div className="drawarea">
+            <div className="picture">
+              <img src="https://cdn.pixabay.com/photo/2016/08/11/08/04/vegetables-1584999_1280.jpg" alt="fruits" />
+            </div>
+            <div className="brandarea">
+              <div className="txt">Jabbo&apos;s</div>
+            </div>
+          </div>
           <div className="pbody">
             <div className="left">
               <div className="userphoto">

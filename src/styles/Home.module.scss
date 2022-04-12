@@ -540,6 +540,9 @@ sup {
 	.barblue.profile {
 		height: 1100px;
 	}
+	.drawarea {
+		display: none;
+	}
 	/*end backgrounds rows*/
 	.search {
 		display: block;
@@ -2768,7 +2771,7 @@ sup {
 					flex-direction: row;
 					justify-content: flex-start;
 					padding-bottom: 32px;
-					height: 32px;
+					/* height: 32px; */
 					button.light {
 						background-color: #fff;
 						color: #7A7E80;
@@ -3029,7 +3032,7 @@ sup {
 						border-radius: 16px;
 						thead {
 							width: 100%;
-							display: table;
+							/* display: table; */
 							tr {
 								position: relative;
 								&::after {
@@ -4244,6 +4247,27 @@ header.topmenu {
 					}
 				}
 			}
+			/* dashboard */
+			.navbararea {
+
+			}
+			.dashboard {
+				.header {
+					.sec1 {
+
+					}
+					.sec2 {
+
+					}
+					.statusoption {
+
+					}
+					.filterarea {
+
+					}
+				}
+			}
+			/* end dashboard */
 		}
 		.modalretailer {
 			.panel {
@@ -5718,6 +5742,9 @@ header.topmenu {
 	/* end form4 */
 	/* profile */
 	.container {
+		.drawarea {
+			display: block;
+		}
 		.pagecontainer {
 			.searchoptionsarea.form1 {
 				.accesspoint.colored {
@@ -5729,27 +5756,97 @@ header.topmenu {
 			}
 			.userprofile {
 				width: 100%;
-				padding: 16px;
 				margin-top: 78px;
+				padding: 0;
+				border-radius: 0;
 				.pheader {
+					justify-content: space-between;
+					height: 56px;
+					padding-left: 16px;
+					padding-right: 16px;
+					.backlink {
+						button.light {
+							font-size: 12px;
+							padding: 8px 0;
+							.icarrowleft {
+								width: 16px;
+								height: 16px;
+							}
+							.txt {
+								font-size: 14px;
+								line-height: 140%;
+							}
+						}
+					}
 					button.light {
 						font-size: 12px;
-						padding: 8px 24px;
+						line-height: 160%;
+						padding: 5px 16px;
+						border-radius: 30px;
+					}
+				}
+				.drawarea.close {
+					display: none;
+				}
+				.drawarea {
+					position: relative;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					padding-bottom: 40px;
+					.picture {
+						height: 211px;
+						width: 375px;
+						overflow: hidden;
+						img {
+							max-width: 100%;
+							height: auto;
+						}
+					}
+					.brandarea {
+						position: absolute;
+						bottom: 0;
+						left: 16px;
+						background-color: #2B5315;
+						border-radius: 50%;
+						border: 3px solid #fff;
+						width: 80px;
+						height: 80px;
+						display: flex;
+						flex-direction: column;
+						justify-content: center;
+						.txt {
+							font-family: 'FuturaBold',sans-serif;
+							font-size: 18px;
+							color: #fff;
+						}
 					}
 				}
 				.pbody {
 					flex-direction: column-reverse;
+					padding-left: 16px;
+					padding-right: 16px;
 					.left {
 						padding-top: 24px;
 						width: 100%;
 					}
 					.right {
 						width: 100%;
+						.txtxl {
+							font-size: 24px;
+							line-height: 120%;
+							padding-bottom: 0;
+						}
 						.txtst.al {
 							width: 100%;
 						}
 						.maparea {
 							width: 100%;
+						}
+						.txtbt {
+							font-size: 24px;
+							line-height: 120%;
 						}
 						.quality {
 							.block {
