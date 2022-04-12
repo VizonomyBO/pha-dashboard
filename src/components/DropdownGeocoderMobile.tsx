@@ -1,4 +1,3 @@
-import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { useEffect, useRef, useState } from 'react';
 import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
