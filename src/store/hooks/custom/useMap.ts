@@ -3,6 +3,7 @@ import * as carto from '@deck.gl/carto';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
+import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
 import { QueriesInterface } from '../../../@types/redux';
 import { useGeocoderState } from '../geocoderHook';
 import { ICON_MAPPING } from '../../../constants';
@@ -25,7 +26,7 @@ export const useMap = () => {
   const { inputText, shouldZoom } = useGeocoderState() || {};
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const [queries, setQueries] = useState<QueriesInterface>();
-  const [layers, setLayers] = useState([]);
+  const [layers, setLayers] = useState<any>([]);
   const getLayers = useMemo(
     () => () => {
       const headers = webRequest.generateJSONHeader();
@@ -64,6 +65,7 @@ export const useMap = () => {
   const getCartoLayer = useMemo(
     () => (connectionName: string, query: string, originTable: string) => {
       const cartoLayer = new Carto.CartoLayer({
+        id: originTable,
         connection: connectionName,
         type: Carto.MAP_TYPES.QUERY,
         data: query,
@@ -126,15 +128,17 @@ export const useMap = () => {
         apiBaseUrl: CARTO_API,
         accessToken: queries.token
       });
+      const newLayers = [];
       if (queries.queries?.retailers_pha) {
-        setLayers(getCartoLayer(queries.connection_name, queries.queries.retailers_pha, 'retailers_pha'));
+        newLayers.push(getCartoLayer(queries.connection_name, queries.queries.retailers_pha, PHA_RETAILERS));
       }
       if (queries.queries?.retailers_osm) {
-        setLayers(getCartoLayer(queries.connection_name, queries.queries.retailers_osm, 'retailers_osm'));
+        newLayers.push(getCartoLayer(queries.connection_name, queries.queries.retailers_osm, OSM_RETAILERS));
       }
       if (queries.queries?.retailers_usda) {
-        setLayers(getCartoLayer(queries.connection_name, queries.queries.retailers_usda, 'retailers_usda'));
+        newLayers.push(getCartoLayer(queries.connection_name, queries.queries.retailers_usda, USDA_RETAILERS));
       }
+      setLayers(newLayers);
     }
   }, [queries, getCartoLayer]);
   return {

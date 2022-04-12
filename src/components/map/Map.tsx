@@ -52,6 +52,7 @@ export const Map = () => {
     setIsLoaded(true);
   }, []);
   useEffect(() => {
+    console.log('this layers', layers);
     setDeckState((oldDeckState) => {
       const newDeckState = {
         ...oldDeckState,

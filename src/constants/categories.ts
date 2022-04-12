@@ -87,3 +87,7 @@ export const DATASOURCES: FilterType[] = [
     attrib: 'retailers_usda'
   }
 ];
+
+export const PHA_RETAILERS = 'retailers_pha';
+export const OSM_RETAILERS = 'retailers_osm';
+export const USDA_RETAILERS = 'retailers_usda';
