@@ -82,7 +82,9 @@ export const Home = () => {
               <span className="line" />
             </div>
             <div className="listloc">
-              <div className="listingarea">{dataRequest && ListMarkerComponent(dataRequest)}</div>
+              <div className="listingarea" onScroll={scrolledToEnd}>
+                {dataRequest && ListMarkerComponent(dataRequest)}
+              </div>
             </div>
           </div>
           <div className="amap">

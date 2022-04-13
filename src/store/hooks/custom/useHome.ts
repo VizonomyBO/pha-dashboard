@@ -11,20 +11,17 @@ export const useHome = () => {
     accesibilities,
     dataSources
   } = useCategoriesState() || {};
+  const VALUES_PER_PAGE = 10;
+  const INIT_PAGE = 1;
   const [dataRequest, setDataRequest] = useState<DataPhaDasboardMap[]>([]);
-  const scrolledToEnd = (event:any) => {
-    const container = event.target;
-    if (container.offsetHeight + container.scrollTop >= container.scrollHeight) {
-      return true;
-    }
-    return false;
-  };
+  const [currentPage, setCurrentPage] = useState(INIT_PAGE);
+  const [hasNext, setHasNext] = useState<boolean>(false);
   const getMarkers = useMemo(
-    () => () => {
+    () => (_currentPage: number) => {
       const headers = webRequest.generateJSONHeader();
       webRequest
         .post(
-          ENDPOINTS.GET_MARKERS,
+          `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}`,
           {
             categories: categoriesSelected,
             accesibility: accesibilities,
@@ -35,22 +32,44 @@ export const useHome = () => {
         )
         .then((res) => res.json())
         .then((res) => {
-          console.log('resrs', res);
           if (res.data && res.success) {
             const dataRows: DataPhaDasboardMap[] = [];
             res.data.rows.forEach((element: DataPhaDasboardMap) => {
               dataRows.push(element);
             });
-            setDataRequest(dataRows);
+            if (_currentPage > INIT_PAGE) {
+              setDataRequest((oldDR) => {
+                const newDR = [...oldDR, ...dataRows];
+                return newDR;
+              });
+            } else {
+              setDataRequest(dataRows);
+            }
+            console.log(res.data.hasNextPage);
+            setHasNext(res.data.hasNextPage);
           }
         })
         .catch((err) => console.error(err));
     },
     [categoriesSelected, accesibilities, dataSources]
   );
+  const updateCurrentPage = useMemo(() => () => {
+    getMarkers(currentPage + 1);
+    setCurrentPage(currentPage + 1);
+  }, [currentPage, setCurrentPage, getMarkers]);
+  const scrolledToEnd = useMemo(() => (event: any) => {
+    const container = event.target;
+    if (container.offsetHeight + container.scrollTop >= container.scrollHeight) {
+      if (hasNext) {
+        updateCurrentPage();
+      }
+      return true;
+    }
+    return false;
+  }, [hasNext, updateCurrentPage]);
   useEffect(() => {
     if (callFilters) {
-      getMarkers();
+      getMarkers(INIT_PAGE);
     }
   }, [callFilters, getMarkers]);
   return {

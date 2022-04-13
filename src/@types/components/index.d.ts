@@ -103,7 +103,8 @@ export interface DeckInterface {
   controller: boolean,
   layers: Layer[],
   onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any,
-  onLoadFunction: () => any
+  onLoadFunction: () => any,
+  onTransitionEnd: () => any
 }
 
 export interface ButtonDashboard {
