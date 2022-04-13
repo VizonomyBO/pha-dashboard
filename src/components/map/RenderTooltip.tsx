@@ -1,8 +1,7 @@
-import { Layer, PickInfo } from 'deck.gl';
 import { ToolTip } from './ToolTip';
-import { PropertiesLayer } from '../../@types';
+import { PropertiesLayer, RenderToolTipInterface } from '../../@types';
 
-export default function renderTooltip(info: PickInfo<Layer<unknown>[]> | undefined, badges: string[]) {
+export default function renderTooltip({ info, badges }: RenderToolTipInterface) {
   let toolTip = null;
   if (info?.object) {
     const { x, y, object } = info;

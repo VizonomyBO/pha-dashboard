@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { PropertiesLayer } from '../../@types';
+import { TooltipProps } from '../../@types';
 import { BADGES } from '../../constants';
 
-export const ToolTip = (data: { x: number; y: number; objectTypified: PropertiesLayer, badges: string[] }) => {
+export const ToolTip = (data: TooltipProps) => {
   const {
     x, y, objectTypified, badges
   } = data;
