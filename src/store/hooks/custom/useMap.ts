@@ -110,6 +110,7 @@ export const useMap = () => {
     },
     [inputText]
   );
+
   const zoomToCenterMarker = useMemo(() => (point: number[]) => {
     setCurrentViewState((oldViewState) => {
       const newViewState = {
@@ -121,6 +122,7 @@ export const useMap = () => {
       return newViewState;
     });
   }, [setCurrentViewState]);
+
   useEffect(() => {
     if (callFilters) {
       getLayers();
