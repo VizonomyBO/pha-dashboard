@@ -1227,6 +1227,17 @@ sup {
 						button.light {
 							margin-left: 16px;
 						}
+						/* hoverable drdopdown */
+						.dropdown-content {
+							display: none;
+						}
+						.dropdown {
+							display: inline-block;
+						}
+						.dropdown:hover .dropdown-content {
+							display: block;
+						}
+						/* end hoverable drdopdown */
 						.profile {
 							position: relative;
 							.logout {

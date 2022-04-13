@@ -25,13 +25,13 @@ export const DashboardNavbar = () => {
               </ol>
             </nav>
             <div className="userarea">
-              <div className="profile">
+              <div className="profile dropdown">
                 <button className="light" type="button">
                   <figure className="picture">
                     <img src="/images/img_user.png" alt="" />
                   </figure>
                 </button>
-                <div className="logout">
+                <div className="dropdown-content logout">
                   <button className="light" type="button" onClick={() => logout()}>
                     Logout
                   </button>
