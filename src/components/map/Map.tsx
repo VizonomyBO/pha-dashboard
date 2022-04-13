@@ -9,7 +9,12 @@ import { FlyToInterpolator } from '@deck.gl/core';
 import { useGeocoderDispatch, useGeocoderState, useMarkerState } from '../../store/hooks';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
-import { PropertiesLayer, ViewStateChangeFn, ViewStateInterface } from '../../@types';
+import {
+  DeckInterface,
+  PropertiesLayer,
+  ViewStateChangeFn,
+  ViewStateInterface
+} from '../../@types';
 import { useMap } from '../../store/hooks/custom/useMap';
 import { getDeckInitState } from './defaultGenerator';
 import { useBadge } from '../../store/hooks/custom/useBadge';
@@ -30,12 +35,14 @@ export const Map = () => {
   const {
     center, click, elementProperties
   } = useMarkerState() || {};
-  const [deckState, setDeckState] = useState(getDeckInitState(inputText));
+  const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
+
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
   }, [setCurrentViewState]);
+
   const changeDeckState = useMemo(() => (viewState: ViewStateInterface) => {
     setDeckState((oldDeckState) => {
       const newDS = {
@@ -50,14 +57,15 @@ export const Map = () => {
       return newDS;
     });
   }, [setDeckState, setShouldZoom]);
+
   useEffect(() => {
     if (isLoaded) {
       changeDeckState(currentViewstate);
     }
   }, [currentViewstate, isLoaded, changeDeckState]);
+
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
-      console.info('info object', info);
       setHoverInfo(info);
       const objectTypified = info.object as PropertiesLayer;
       setCurrentHovered(objectTypified?.properties?.retailer_id);
@@ -65,9 +73,11 @@ export const Map = () => {
       setHoverInfo(undefined);
     }
   }, []);
+
   const onLoad = useMemo(() => () => {
     setIsLoaded(true);
   }, []);
+
   useEffect(() => {
     if (center[0] && center[1]) {
       zoomToCenterMarker(center);
@@ -93,9 +103,10 @@ export const Map = () => {
       return newDeckState;
     });
   }, [layers, hideTooltip, expandTooltip, onLoad]);
+
   return (
     <div className="map-container">
-      <DeckGLComponent {...deckState}>{RenderTooltip(hoverInfo, badges)}</DeckGLComponent>
+      <DeckGLComponent {...deckState}>{RenderTooltip({ info: hoverInfo, badges })}</DeckGLComponent>
     </div>
   );
 };
