@@ -1,55 +1,61 @@
+import { Result } from '@mapbox/mapbox-gl-geocoder';
+import ClearIcon from '@mui/icons-material/Clear';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DropdownCategories } from '../components/DropdownCategories';
+import { DropdownCategoriesMobile } from '../components/DropdownCategoriesMobile';
 import { DropdownGeocoder } from '../components/DropdownGeocoder';
+import { REGION, REGION_GEOCODER } from '../constants';
+import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 
 export const Landing = () => {
-  console.log('Landing');
+  const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
+  const { inputText, options } = useGeocoderState() || {};
+  const [openCategories, setOpenCategories] = useState(false);
   return (
     <div className="container">
       <div className="bg" />
       <div className="pagecontainer">
-        <div className="navbararea" style={{ backgroundColor: 'transparent' }}>
-          <div className="navbar">
-            <div className="nbleft">
-              <a href="https://www.ahealthieramerica.org/" target="_blank" rel="noopener noreferrer">
-                <div className="iclogowhite" />
+        <div className="navbar landing">
+          <div className="nbleft">
+            <a href="https://www.ahealthieramerica.org/" target="_blank" rel="noopener noreferrer">
+              <div className="iclogowhite" />
+            </a>
+          </div>
+          <div className="nbright">
+            <div className="sn">
+              <Link to="/form" style={{ textDecoration: 'none' }}>
+                <div className="txtaction">Add A Listing</div>
+              </Link>
+              <a href="https://twitter.com/PHAnews" target="_blank" rel="noopener noreferrer">
+                <button className="light" type="button">
+                  <span className="ictww" />
+                </button>
               </a>
-            </div>
-            <div className="nbright">
-              <div className="sn">
-                <Link to="/form" style={{ textDecoration: 'none' }}>
-                  <div className="txtaction">Add A Listing</div>
-                </Link>
-                <a href="https://twitter.com/PHAnews" target="_blank" rel="noopener noreferrer">
-                  <button className="light" type="button">
-                    <span className="ictww" />
-                  </button>
-                </a>
-                <a href="https://www.facebook.com/PHA" target="_blank" rel="noopener noreferrer">
-                  <button className="light" type="button">
-                    <span className="icfbw" />
-                  </button>
-                </a>
-                <a href="https://www.youtube.com/user/aHealthierAmerica" target="_blank" rel="noopener noreferrer">
-                  <button className="light" type="button">
-                    <span className="icytw" />
-                  </button>
-                </a>
-                <a href="https://www.instagram.com/PHAnews" target="_blank" rel="noopener noreferrer">
-                  <button className="light" type="button">
-                    <span className="icigw" />
-                  </button>
-                </a>
-                <a
-                  href="https://www.linkedin.com/company/partnership-for-a-healthier-america/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <button className="light" type="button">
-                    <span className="icliw" />
-                  </button>
-                </a>
-              </div>
+              <a href="https://www.facebook.com/PHA" target="_blank" rel="noopener noreferrer">
+                <button className="light" type="button">
+                  <span className="icfbw" />
+                </button>
+              </a>
+              <a href="https://www.youtube.com/user/aHealthierAmerica" target="_blank" rel="noopener noreferrer">
+                <button className="light" type="button">
+                  <span className="icytw" />
+                </button>
+              </a>
+              <a href="https://www.instagram.com/PHAnews" target="_blank" rel="noopener noreferrer">
+                <button className="light" type="button">
+                  <span className="icigw" />
+                </button>
+              </a>
+              <a
+                href="https://www.linkedin.com/company/partnership-for-a-healthier-america/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <button className="light" type="button">
+                  <span className="icliw" />
+                </button>
+              </a>
             </div>
           </div>
         </div>
@@ -61,10 +67,69 @@ export const Landing = () => {
           <div className="alook">
             <DropdownGeocoder type="landing" />
             <div className="space" />
-            <DropdownCategories />
+            <DropdownCategories
+              setOpenCategories={setOpenCategories}
+            />
           </div>
         </div>
       </div>
+      {options && options.length > 0 && inputText.shouldSearch && (
+        <div className="arearesult">
+          <div className="tab">
+            <div className="space">
+              <div className="line" />
+            </div>
+            <div className="title">
+              Where
+              <ClearIcon
+                style={{ marginLeft: '250px' }}
+                onClick={() => setGeocoderOptions([])}
+              />
+            </div>
+          </div>
+          <div className="searchresult">
+            <ul className="ul-geocoder-mobile">
+              {inputText.shouldSearch
+                && options.map((opt: Result) => {
+                  let region = '';
+                  if (opt.context) {
+                    for (let i = 0; opt.context && i < opt.context.length; i += 1) {
+                      if (opt.context[i].id.includes(REGION)) {
+                        region = opt.context[i].short_code.replace(REGION_GEOCODER, '');
+                      }
+                    }
+                  }
+                  return (
+                    <li key={`${opt.place_name}index`} className="tr-geocoder">
+                      <button
+                        className="button-goecoder"
+                        type="button"
+                        onClick={() => {
+                          setInputText({
+                            text: opt.place_name,
+                            shouldSearch: false,
+                            center: opt.center,
+                            bbox: opt?.bbox || []
+                          });
+                          setGeocoderOptions([]);
+                        }}
+                      >
+                        <label>
+                          <span className="span-geocoder">{region === '' ? opt.text : `${opt.text}, ${region}`}</span>
+                        </label>
+                      </button>
+                    </li>
+                  );
+                })}
+            </ul>
+          </div>
+        </div>
+      )}
+      {openCategories && (
+        <DropdownCategoriesMobile
+          setOpenCategories={setOpenCategories}
+        />
+      )}
     </div>
   );
 };

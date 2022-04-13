@@ -29,7 +29,6 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
                 <div className="ref1">
                   {element.address_1}
                 </div>
-                <div className="ref2">1.2 Miles</div>
               </div>
               <div className="statemk">
                 <div className="cardmk">
