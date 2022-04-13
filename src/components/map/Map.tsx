@@ -9,13 +9,16 @@ import { FlyToInterpolator } from '@deck.gl/core';
 import { useGeocoderDispatch, useGeocoderState } from '../../store/hooks';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
-import { ViewStateChangeFn, ViewStateInterface } from '../../@types';
+import { PropertiesLayer, ViewStateChangeFn, ViewStateInterface } from '../../@types';
 import { useMap } from '../../store/hooks/custom/useMap';
 import { getDeckInitState } from './defaultGenerator';
+import { useBadge } from '../../store/hooks/custom/useBadge';
 
 export const Map = () => {
   const { setShouldZoom } = useGeocoderDispatch();
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
+  const [currentHovered, setCurrentHovered] = useState<string | undefined>(undefined);
+  const { badges } = useBadge(currentHovered);
   const { inputText } = useGeocoderState() || {};
   const { layers, currentViewstate, setCurrentViewState } = useMap();
   const [deckState, setDeckState] = useState(getDeckInitState(inputText));
@@ -45,7 +48,10 @@ export const Map = () => {
   }, [currentViewstate, isLoaded, changeDeckState]);
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
+      console.log(info);
       setHoverInfo(info);
+      const objectTypified = info.object as PropertiesLayer;
+      setCurrentHovered(objectTypified?.properties?.retailer_id);
     } else {
       setHoverInfo(undefined);
     }
@@ -67,7 +73,7 @@ export const Map = () => {
   }, [layers, hideTooltip, expandTooltip, onLoad]);
   return (
     <div className="map-container">
-      <DeckGLComponent {...deckState}>{RenderTooltip(hoverInfo)}</DeckGLComponent>
+      <DeckGLComponent {...deckState}>{RenderTooltip(hoverInfo, badges)}</DeckGLComponent>
     </div>
   );
 };
