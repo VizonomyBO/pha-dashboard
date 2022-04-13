@@ -50,7 +50,6 @@ export const useHome = () => {
             } else {
               setDataRequest(dataRows);
             }
-            console.log(res.data.hasNextPage);
             setHasNext(res.data.hasNextPage);
           }
         })
