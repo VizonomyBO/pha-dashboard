@@ -1773,8 +1773,9 @@ sup {
 					position: absolute;
 					top: 300px;
 					right: 29px;
-					width: 385px;
+					width: 350px;
 					height: 128px;
+					left: 9px;
 					background-color: #fff;
 					border-radius: 16px;
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -5854,7 +5855,7 @@ header.topmenu {
 					height: calc(100vh - 78px);
 					width: 100%;
 					border-radius: 0;
-					.locfound, .modal, .bmodal {
+					.locfound, .modal {
 						display: none;
 					}
 					.controlzoom {
