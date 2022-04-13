@@ -4,9 +4,9 @@ import {
   useEffect,
   useMemo
 } from 'react';
-import { Layer, PickInfo } from 'deck.gl';
+import { Layer, PickInfo, WebMercatorViewport } from 'deck.gl';
 import { FlyToInterpolator } from '@deck.gl/core';
-import { useGeocoderDispatch, useGeocoderState } from '../../store/hooks';
+import { useGeocoderDispatch, useGeocoderState, useMarkerState } from '../../store/hooks';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
 import {
@@ -19,13 +19,22 @@ import { useMap } from '../../store/hooks/custom/useMap';
 import { getDeckInitState } from './defaultGenerator';
 import { useBadge } from '../../store/hooks/custom/useBadge';
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export const Map = () => {
   const { setShouldZoom } = useGeocoderDispatch();
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const [currentHovered, setCurrentHovered] = useState<string | undefined>(undefined);
   const { badges } = useBadge(currentHovered);
   const { inputText } = useGeocoderState() || {};
-  const { layers, currentViewstate, setCurrentViewState } = useMap();
+  const {
+    layers,
+    currentViewstate,
+    setCurrentViewState,
+    zoomToCenterMarker
+  } = useMap();
+  const {
+    center, click, elementProperties
+  } = useMarkerState() || {};
   const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -69,6 +78,19 @@ export const Map = () => {
     setIsLoaded(true);
   }, []);
 
+  useEffect(() => {
+    if (center[0] && center[1]) {
+      zoomToCenterMarker(center);
+    }
+    if (click) {
+      const viewportWebMercator = new WebMercatorViewport({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      const { x, y } = viewportWebMercator.project(center) as any;
+      console.info(x, y);
+    }
+  }, [elementProperties, click, center, zoomToCenterMarker]);
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {

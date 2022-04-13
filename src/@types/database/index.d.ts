@@ -87,3 +87,8 @@ export interface GeocoderInterface {
   options: Result[],
   shouldZoom: boolean
 }
+export interface MarkerCenterInterface {
+  center: number[],
+  click: boolean,
+  elementProperties: PropertiesLayer
+}
