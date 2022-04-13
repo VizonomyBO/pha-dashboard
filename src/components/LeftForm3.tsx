@@ -1,19 +1,8 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
+import React from 'react';
+import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
-import { ModalRequestForm } from './ModalRequestForm';
-import { selectAccessibilityValidation, selectCategoryValidation } from '../utils/validation';
-import { PAGE_REDIRECT_TIME } from '../constants';
 
 export const LeftForm3 = () => {
-  const [visibleModal, setVisibleModal] = useState(false);
-  const [typeModal, setTypeModal] = useState(false);
-  const navigate = useNavigate();
-  const {
-    selectAccessibility,
-    selectCategory
-  } = useMarketplaceState();
   const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
@@ -39,20 +28,6 @@ export const LeftForm3 = () => {
       setContactPatron(formConstants.CONTACT_PATRON.YES);
     } else {
       setContactPatron(formConstants.CONTACT_PATRON.NO);
-    }
-  };
-
-  const clickProceed = () => {
-    if (selectCategoryValidation(selectCategory)
-      && selectAccessibilityValidation(selectAccessibility)) {
-      setTypeModal(true);
-      setVisibleModal(true);
-      setTimeout(() => {
-        navigate('/home');
-      }, PAGE_REDIRECT_TIME);
-    } else {
-      setTypeModal(false);
-      setVisibleModal(true);
     }
   };
 
@@ -103,16 +78,6 @@ export const LeftForm3 = () => {
           </label>
         </div>
       </div>
-      <div className="aaction">
-        <button className="light" type="button" onClick={clickProceed}>
-          Proceed
-        </button>
-      </div>
-      <ModalRequestForm
-        type={typeModal}
-        visible={visibleModal}
-        setVisible={setVisibleModal}
-      />
     </>
   );
 };

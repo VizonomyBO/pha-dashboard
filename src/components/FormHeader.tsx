@@ -1,12 +1,33 @@
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { FormHeaderInterface, FormTabType } from '../@types';
+import { Formvalidation } from '../utils/validation';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
+import { useMarketplaceState, useModalDispatch } from '../store/hooks';
 
 export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => {
+  const {
+    businessDetails,
+    selectCategory,
+    selectAccessibility,
+    otherQuestions
+  } = useMarketplaceState();
+  const { setModal } = useModalDispatch();
   const businessClass = classNames('option', { active: activeTab === BUSINESS_DETAILS });
   const otherClass = classNames('option', { active: activeTab === OTHER_QUESTIONS });
   const contactClass = classNames('option', { active: activeTab === CONTACT_DETAILS });
+  const validationForm = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const estate = Formvalidation(
+      event.target.value,
+      activeTab,
+      businessDetails,
+      selectCategory,
+      selectAccessibility,
+      otherQuestions
+    );
+    setModal({ type: estate.type, open: estate.open });
+    setActiveTab(estate.value as FormTabType);
+  };
   return (
     <div className="header">
       <div className="backlink">
@@ -22,9 +43,7 @@ export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => 
       <p className="secdescription">Have a location listed by completing the form below</p>
       <div
         className="optiondetail"
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-          setActiveTab(event.target.value as FormTabType);
-        }}
+        onChange={validationForm}
       >
         <div className={businessClass}>
           <label className="chkwrap">

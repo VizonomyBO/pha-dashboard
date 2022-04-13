@@ -19,130 +19,130 @@
 :root {
     --primary-red: #E40000;
     --primary-blue: #00BDE3;
- }
+	}
  
- .menu {
-    margin: 0;
- }
- .menu > ol {
-    list-style: none;
-    margin: 0 0;
-    padding: 0;
- }
- .menu > ol > li {
-    /*background: white;*/
-    margin-bottom: 0;
-    position: relative;
-    transition: .5s;
- }
- 
- .menu > ol > li > a {
-   display:block;
- }
- 
- .menu > ol > li.hlight > a {
-   display:block;
-   /* background-color:#00BDE3;
-   color: white; */
- }
- .menu > ol > li a {
-    color: #161A23;
-    display: block;
-    padding: 0;
-    position: relative;
-    text-decoration: none;
-    z-index: 1;
-    font-family: "FuturaBold", sans-serif;
-    padding-right: 32px;
- }
- .menu > ol > li a:not(:last-child)::before {
-    display: block;
-    width: 16px;
-    height: 16px;
-    content: url("../../public/images/ic_chevron_down.svg");
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    margin: auto;  
-    transition: .5s;
- }
-  .menu > ol > li:focus, .menu > ol > li:focus-within, .menu > ol > li:hover {
-    z-index: 100;
- }
-  .menu > ol > li:focus:after, .menu > ol > li:focus-within:after, .menu > ol > li:hover:after {
-    /*background: linear-gradient(to left,var(--accent-color),var(--gradient-color));*/
-    /*max-width: 800px;*/
-    max-width: 0;
- }
-  .menu > ol > li:focus .submenu, .menu > ol > li:focus-within .submenu {
-    /*max-height: 500px;*/
-    max-height: 0;
- }
-  .menu > ol > li:focus a:after, .menu > ol > li:focus-within a::after {
-    transform: rotate(-180deg);
- }
-  .menu > ol > li:after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    transition: .5s;
-    max-width: 0;
-    overflow: hidden;
- }
-  .menu > ol .submenu {
-    margin-left: 0;
-    list-style: none;
-    max-height: 0px;
-    overflow: hidden;
-    padding-left: 0;
-    position: relative;
-    transition: .5s;
-    z-index: 1;
- }
-  .menu > ol .submenu li {
-    font-size: 1em;
- }
-  .menu > ol .submenu li:hover, .menu > ol .submenu li a:focus {
-    background: rgba(0,189,227,0.3);
- }
+	.menu {
+		 margin: 0;
+	}
+	.menu > ol {
+		 list-style: none;
+		 margin: 0 0;
+		 padding: 0;
+	}
+	.menu > ol > li {
+		 /*background: white;*/
+		 margin-bottom: 0;
+		 position: relative;
+		 transition: .5s;
+	}
+	
+	.menu > ol > li > a {
+		display:block;
+	}
+	
+	.menu > ol > li.hlight > a {
+		display:block;
+		/* background-color:#00BDE3;
+		color: white; */
+	}
+	.menu > ol > li a {
+		 color: #161A23;
+		 display: block;
+		 padding: 0;
+		 position: relative;
+		 text-decoration: none;
+		 z-index: 1;
+		 font-family: "FuturaBold", sans-serif;
+		 padding-right: 32px;
+	}
+	.menu > ol > li a:not(:last-child)::before {
+		 display: block;
+		 width: 16px;
+		 height: 16px;
+		 content: url("../../public/images/ic_chevron_down.svg");
+		 position: absolute;
+		 right: 0;
+		 top: 0;
+		 bottom: 0;
+		 margin: auto;  
+		 transition: .5s;
+	}
+	 .menu > ol > li:focus, .menu > ol > li:focus-within, .menu > ol > li:hover {
+		 z-index: 100;
+	}
+	 .menu > ol > li:focus:after, .menu > ol > li:focus-within:after, .menu > ol > li:hover:after {
+		 /*background: linear-gradient(to left,var(--accent-color),var(--gradient-color));*/
+		 /*max-width: 800px;*/
+		 max-width: 0;
+	}
+	 .menu > ol > li:focus .submenu, .menu > ol > li:focus-within .submenu {
+		 /*max-height: 500px;*/
+		 max-height: 0;
+	}
+	 .menu > ol > li:focus a:after, .menu > ol > li:focus-within a::after {
+		 transform: rotate(-180deg);
+	}
+	 .menu > ol > li:after {
+		 content: "";
+		 position: absolute;
+		 left: 0;
+		 right: 0;
+		 top: 0;
+		 bottom: 0;
+		 transition: .5s;
+		 max-width: 0;
+		 overflow: hidden;
+	}
+	 .menu > ol .submenu {
+		 margin-left: 0;
+		 list-style: none;
+		 max-height: 0px;
+		 overflow: hidden;
+		 padding-left: 0;
+		 position: relative;
+		 transition: .5s;
+		 z-index: 1;
+	}
+	 .menu > ol .submenu li {
+		 font-size: 1em;
+	}
+	 .menu > ol .submenu li:hover, .menu > ol .submenu li a:focus {
+		 background: rgba(0,189,227,0.3);
+	}
 .menu > ol .submenu li a:after {
-    bottom: 5px;
-    bottom: 0;
-    height: 1px;
- }
+	bottom: 5px;
+	bottom: 0;
+	height: 1px;
+}
 .menu > ol .submenu li a:hover:after, .menu > ol .submenu li a:focus:after {
-    width: 15px;
- }
+	width: 15px;
+}
 .menu > ol > li {
-   border-left: 0;
-   display: inline-block;
-   margin-left: 0;
-   vertical-align: top;
-   /*width: 120px;*/
+	border-left: 0;
+	display: inline-block;
+	margin-left: 0;
+	vertical-align: top;
+	/*width: 120px;*/
 }
 .menu > ol > li:not(.options):hover {
    /* border-bottom: 2px solid #FA6169; */
 }
 .menu > ol > li:hover:after, .menu > ol > li:focus:after, .menu > ol > li:focus-within:after {
-      border-radius: 3px;
+	border-radius: 3px;
 }
 .menu > ol > li:hover .submenu, 
 .menu > ol > li:focus .submenu, 
 .menu > ol > li:focus-within .submenu {
-      max-height: 1000px;
-      border-radius: 6px;
-      background: white;
-      margin-top: 5px;
+	max-height: 1000px;
+	border-radius: 6px;
+	background: white;
+	margin-top: 5px;
 }
 .menu > ol > li a:not(:last-child):before {
-    right: 1em;
+	right: 1em;
 }
 .menu > ol > li:hover a:before {
-    transform: rotate(-180deg);
+	transform: rotate(-180deg);
 }
 
 /* chk */
@@ -158,14 +158,14 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
-  }
+}
   .chkwrap input {
 	position: absolute;
 	opacity: 0;
 	cursor: pointer;
 	height: 0;
 	width: 0;
-  }
+}
   .checkmark {
 	position: absolute;
 	top: 0;
@@ -175,11 +175,11 @@
 	background-color: rgb(255, 255, 255);
 	vertical-align: middle;
   border-radius: 4px;
-  }
+}
   .chkwrap:hover input ~ .checkmark {
 	background-color: #ccc;
 	border-color: #ccc;
-  }
+}
   .chkwrap input:checked ~ .checkmark {
 	background-color: #00BDE3;
 	border-color: #00BDE3;
@@ -188,16 +188,16 @@
 	height: 20px;
 	border-radius: 4px;
 	content: url("../../public/images/ic_chk_selected.svg");
-  }
+}
   .checkmark:after {
 	content: "";
 	position: absolute;
 	display: none;
-  }
+}
   
   .chkwrap input:checked ~ .checkmark:after {
 	display: block;
-  }
+}
   
   .chkwrap .checkmark:after {
 	/* left: 9px;
@@ -210,7 +210,7 @@
 	-ms-transform: rotate(45deg);
 	transform: rotate(45deg); */
 	
-  }
+}
 /* end chk */
 /* .activescroll {
     display: block;
@@ -380,6 +380,9 @@ button.light {
 .icciws {
 	content: url("../../public/images/ic_ci_ws.svg");
 }
+.icclock {
+	content: url("../../public/images/ic_clock.png");
+}
 .icmnhome {
 	content: url("../../public/images/ic_mn_home.svg");
 }
@@ -526,7 +529,7 @@ sup {
 		height: 344px;
 	}
 	.barblue.form1 {
-		height: 1900px;
+		height: 1800px;
 	}
 	.barblue.form2 {
 		height: 2700px;
@@ -555,7 +558,7 @@ sup {
 		justify-content: flex-end;
 		border-radius: 20px;
 	}
-    .search input[type=text] {
+  .search input[type=text] {
 		font-family: "FuturaLight", sans-serif;
         font-size: 14px;
 		line-height: 14px;
@@ -567,7 +570,7 @@ sup {
 		background-color: #F7F9FA;
 		padding-left: 8px;
 		outline: none;
-    }
+  }
 	input[type=text].light {
 		font-family: "FuturaMedium", sans-serif;
         font-size: 16px;
@@ -612,7 +615,7 @@ sup {
 		border: 1px solid #E3E5E5;
 		resize: none;
 	}
-    .search button {
+  .search button {
       	float: left;
       	color: white;
       	border-left: none;
@@ -636,8 +639,8 @@ sup {
       	    height: 16px;
       	    content: url("../../public/images/ic_search.svg");
       	}
-    }
-    .search button:hover {
+  }
+  .search button:hover {
 						
     }
     .search::after {
@@ -720,7 +723,6 @@ sup {
 								}
 							}
 						}
-						
 					}
 				}
 			}
@@ -3037,7 +3039,7 @@ sup {
 						border-radius: 16px;
 						thead {
 							width: 100%;
-							/* display: table; */
+							display: table;
 							tr {
 								position: relative;
 								&::after {
@@ -3093,6 +3095,7 @@ sup {
 											align-items: center;
 											width: 60%;
 											.pagenum {
+												border: none;
 												display: flex;
 												justify-content: center;
 												align-items: center;
@@ -3104,6 +3107,7 @@ sup {
 												line-height: 16px;
 												text-decoration: none;
 												color: #161A23;
+												background-color: white;
 												&.active {
 													background-color: rgba(0, 189, 227, 0.12);
 													color: #00BDE3;
@@ -3584,6 +3588,31 @@ sup {
 	position: absolute;
 	top: 0;
 	z-index: 1;
+	height: 100vh;
+	width: 100vw;
+	background: url("../../public/images/img_crsl_1.png") no-repeat center center fixed; 
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	.blockdesc {
+		position: absolute;
+		top: 500px;
+		left: 550px;
+		font-family: "FuturaBold", sans-serif;
+        font-size: 32px;
+		line-height: 38px;
+		color: #fff;
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-items: center;
+		p {
+			display: block;
+			margin: 0;
+			width: 450px;
+		}
+	}
 	.carrosel{
 		top: 0;
 		z-index: 2;
@@ -3634,6 +3663,24 @@ sup {
         border: none;
         float: left;
         width: 100%;
+		background-color: #F7F9FA;
+		padding: 0;
+		margin: 0;
+		outline: none;
+		color: #161A23;
+		border: none;
+		border-color: transparent;
+		padding: 16px 32px;
+		border-radius: 56px;
+		border: 1px solid #E3E5E5;
+	}
+	input[type=password].fl {
+		font-family: "FuturaMedium", sans-serif;
+		font-size: 16px;
+		line-height: 16px;
+		border: none;
+		float: left;
+		width: 100%;
 		background-color: #F7F9FA;
 		padding: 0;
 		margin: 0;
@@ -3708,6 +3755,10 @@ header.topmenu {
 .retailerlist {
 	display: none;
 }
+.retailerlist-show {
+	display: none;
+}
+
 /* end deshabilitados para desktop */
 /* set dropdowns style */
 .container {
@@ -5708,7 +5759,7 @@ header.topmenu {
 		}
 	}
 	/* end navigation */
-		.pagecontainer {
+	.pagecontainer {
 			.navbar {
 				height: 100%;
 				width: 100%;
@@ -5804,20 +5855,79 @@ header.topmenu {
 						right: 16px;
 					}
 					.supermarketfilter {
-						position:absolute;
+						position: absolute;
 						z-index: 4;
 						top: 16px;
 						left: 16px;
 						display: block;
-						width: 171px;
+						font-size: 16px;
+						width: 210px;
 						height: 46px;
 						border-radius: 56px;
 						background-color: #fff;
+						font-family: "FuturaMedium",sans-serif!important;
+						border-color: transparent;
+						color: #7A7E80;
+						padding-bottom: 5px;
+					}
+					.addlistening {
+						position: absolute;
+						z-index: 4;
+						top: 600px;
+						left: 16px;
+						display: block;
+						font-size: 16px;
+						width: 350px;
+						height: 46px;
+						border-radius: 56px;
+						background-color: #ffffff9c;
+						font-family: "FuturaBold", sans-serif !important;
+						border: 2.5px solid #00bde3;
+						color: #00bde3;
 					}
 					.retailerlist.close {
 						display: none;
 					}
 					.retailerlist {
+						display: block;
+						width: 100%;
+						right: 0;
+						top: calc(100vh - 82px);
+						height: 82px;
+						z-index: 4;
+						transition: top .2s ease-in-out!important;
+						position: fixed;
+						.tab {
+							height: 93px;
+							border-top-left-radius: 16px;
+							border-top-right-radius: 16px;
+							background-color: #fff;
+							box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+							.space {
+								display: flex;
+								flex-direction: row;
+								justify-content: center;
+								width: 100%;
+								padding-top: 12px;
+								.line {
+									display: block;
+									width: 32px;
+									height: 3px;
+									background-color: #C4C4C4;
+								}
+							}
+							.title {
+								width: 100%;
+								padding: 20px 16px 0 16px;
+								font-family: "FutureMedium", sans-serif;
+								font-size: 20px;
+								color: #161A23;
+							}
+						}
+					}
+					.retailerlist-show {
+						display: block;
+						z-index: 4;
 						position: absolute;
 						bottom: 0;
 						display: block;
@@ -5860,13 +5970,32 @@ header.topmenu {
 							.item {
 								display: block;
 								padding: 16px 16px 0 16px;
-								
 							}
 							.picturerow {
 								display: grid;
 								grid-template-columns: 1fr 1fr;
 								column-gap: 16px;
 								padding-bottom: 8px;
+								.picture {
+									border-radius: 15px;
+									height: 92px;
+									width: 150px;
+									.img {
+										object-fit: cove;
+										border-radius: 15px;
+										height: 92px;
+										width: 150px;
+									}
+								}
+							}
+							.picture {
+								border-radius: 15px;
+								.img {
+									object-fit: cover;
+									border-radius: 15px;
+									height: 92px;
+									width: 350px;
+								}
 							}
 							.detail {
 								display: flex;
@@ -5929,81 +6058,81 @@ header.topmenu {
 	}
 	/* end home map */
 	/* landing */
-		.container {
-			.pagecontainer {
-				.ldgaccesspoint {
-					padding-top: 0px;
-					h1 {
-						display: block;
-						font-size: 36px;
-						line-height: 42px;
-						width: 80%;
-					}
-					p {
-						width: 90%;
-						font-family: 'FuturaMedium',sans-serif;
-						font-size: 18px;
-						line-height: 160%;
-					}
+	.container {
+		.pagecontainer {
+			.ldgaccesspoint {
+				padding-top: 0px;
+				h1 {
+					display: block;
+					font-size: 36px;
+					line-height: 42px;
+					width: 80%;
 				}
-				.ldgsearchstore {
-					width: 100%;
-					border-radius: 0;
-					background-color: transparent;
-					.alook {
-						background-color: #fff;
-						flex-direction: column;
-						padding: 0 16px;
-						border-radius: 20px;
-						margin: 0 16px;
-						padding-top: 8px;
-						.swhere {
-							justify-content: flex-start;
-							width: 100%;
-							padding: 16px 0 16px 0;
-							.txtd {
-								font-size: 14px;
-							}
-							input[type=text] {
-								width: 75%;
-								color: #161A23;
-								font-size: 14px;
-								font-weight: 600;
-							}
+				p {
+					width: 90%;
+					font-family: 'FuturaMedium',sans-serif;
+					font-size: 18px;
+					line-height: 160%;
+				}
+			}
+			.ldgsearchstore {
+				width: 100%;
+				border-radius: 0;
+				background-color: transparent;
+				.alook {
+					background-color: #fff;
+					flex-direction: column;
+					padding: 0 16px;
+					border-radius: 20px;
+					margin: 0 16px;
+					padding-top: 8px;
+					.swhere {
+						justify-content: flex-start;
+						width: 100%;
+						padding: 16px 0 16px 0;
+						.txtd {
+							font-size: 14px;
 						}
-						.space {
-							width: 100%;
-							height: 1px;
+						input[type=text] {
+							width: 75%;
+							color: #161A23;
+							font-size: 14px;
+							font-weight: 600;
 						}
-						.citysearch {
+					}
+					.space {
+						width: 100%;
+						height: 1px;
+					}
+					.citysearch {
+						width: 100%;
+						flex-wrap: wrap;
+						justify-content: flex-start;
+						padding: 0;
+						padding-bottom: 16px;
+						i.icsearch {
+							margin-top: 16px;
+							margin-bottom: 16px;
+						}
+						.txtd {
+							font-size: 14px;
+						}
+						input[type=text] {
+							color: #161A23;
+							font-weight: 600;
+							width: 208px;
+							font-size: 14px;
+						}
+						button.light {
+							margin-top: 8px;
 							width: 100%;
-							flex-wrap: wrap;
-							justify-content: flex-start;
-							padding: 0;
-							padding-bottom: 16px;
-							i.icsearch {
-								margin-top: 16px;
-								margin-bottom: 16px;
-							}
-							.txtd {
-								font-size: 14px;
-							}
-							input[type=text] {
-								color: #161A23;
-								font-weight: 600;
-								width: 208px;
-								font-size: 14px;
-							}
-							button.light {
-								margin-top: 8px;
-								width: 100%;
-								font-size: 16px;
-							}
+							font-size: 16px;
 						}
 					}
 				}
 			}
 		}
+	}
 	/* end landig */
 	/* form1 */
 	.container {

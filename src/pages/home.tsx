@@ -1,4 +1,6 @@
+import classNames from 'classnames';
 import React, { useEffect, useState } from 'react';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
@@ -8,10 +10,35 @@ import { DataPhaDasboardMap } from '../@types';
 import { webRequest } from '../utils/webRequest';
 import { ENDPOINTS } from '../constants/url';
 import { ModalFilters } from '../components/ModalFilters';
+import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
+import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 
 export const Home = () => {
   const [dataRequest, setDataRequest] = useState<Array<DataPhaDasboardMap>>([]);
   const [openModal, setOpenModal] = useState(false);
+  const [openAllRetailer, setOpenAllRetailer] = useState(false);
+  const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
+  let xDown:number | null = null;
+  let yDown:number | null = null;
+  const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
+    xDown = evt.touches[0].clientX;
+    yDown = evt.touches[0].clientY;
+  };
+
+  const handleTouchMove = (evt: React.TouchEvent<HTMLDivElement>) => {
+    if (!xDown || !yDown) {
+      return;
+    }
+    const yUp = evt.touches[0].clientY;
+    const yDiff = yDown - yUp;
+    if (yDiff > 0) {
+      setOpenAllRetailer(true);
+    } else {
+      setOpenAllRetailer(false);
+    }
+    xDown = null;
+    yDown = null;
+  };
   useEffect(() => {
     webRequest.get(ENDPOINTS.MAP()).then((res) => res.json())
       .then((res) => {
@@ -33,7 +60,15 @@ export const Home = () => {
     <div className="container">
       <div className="bgwhite" />
       <figure className="bgnoise home" />
-      <div className="barblue home" />
+      <div className="barblue home" id="barblue" />
+      <header className="topmenu">
+        <div className="spanel">
+          <div className="logoarea">
+            <div className="iclogo" />
+          </div>
+          <DropdownGeocoderMobile />
+        </div>
+      </header>
       <div className="pagecontainer">
         <Navbar />
         <Header type="home" setOpenModal={setOpenModal} />
@@ -80,6 +115,39 @@ export const Home = () => {
                   <span className="iczminus" />
                 </button>
               </div>
+            </div>
+            <button
+              type="button"
+              className="supermarketfilter"
+              onClick={() => (setOpenModal(true))}
+            >
+              Supermarket/super...
+              <KeyboardArrowDownIcon style={{ marginLeft: '8px', marginBottom: '-5px' }} />
+            </button>
+            <Link to="/form">
+              <button
+                type="button"
+                className="addlistening"
+              >
+                Add A Listing
+              </button>
+            </Link>
+            <div
+              className={retailerClass}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+            >
+              <div className="tab">
+                <div className="space">
+                  <div className="line" />
+                </div>
+                <div className="title">All Retailer</div>
+              </div>
+              {openAllRetailer && (
+                <div className="listpanel">
+                  <div className="listingarea">{dataRequest && ListMarkerComponentMobil(dataRequest)}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -5,7 +5,19 @@ import configureStore from 'redux-mock-store';
 import { FormHeader } from '../FormHeader';
 
 describe('renders without crashing', () => {
-  const initialStoreState = {};
+  const initialStoreState = {
+    marketplace: {
+      businessDetails: {},
+      otherQuestions: {},
+      contactDetails: {},
+      selectCategory: {},
+      selectAccessibility: {}
+    },
+    modal: {
+      open: false,
+      type: false
+    }
+  };
   const mockStore = configureStore();
   let store;
 

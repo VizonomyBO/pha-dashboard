@@ -1,29 +1,55 @@
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useState, useEffect, useMemo } from 'react';
+import {
+  useState,
+  useEffect,
+  useMemo,
+  useCallback
+} from 'react';
 import { Layer, PickInfo } from 'deck.gl';
-import { deckDefaults } from './deckDefaults';
+import { FlyToInterpolator } from '@deck.gl/core';
+import { useGeocoderDispatch, useGeocoderState } from '../../store/hooks';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
 import { ViewStateChangeFn } from '../../@types';
 import { useMap } from '../../store/hooks/custom/useMap';
+import { getDeckInitState } from './defaultGenerator';
 
 export const Map = () => {
+  const { setShouldZoom } = useGeocoderDispatch();
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
-  const [deckState, setDeckState] = useState({ ...deckDefaults, renderToolTip: RenderTooltip });
-  const { layers } = useMap();
-  const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
+  const { inputText } = useGeocoderState() || {};
+  const { layers, currentViewstate, setCurrentViewState } = useMap();
+  const [deckState, setDeckState] = useState(getDeckInitState(inputText));
+  const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
-    console.info('temporary comment until more functions are added and this variable is used', currentViewstate);
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
-  }, [currentViewstate]);
-
-  const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
+  }, [setCurrentViewState]);
+  useEffect(() => {
+    if (isLoaded) {
+      setDeckState((oldDeckState) => {
+        const newDS = {
+          ...oldDeckState,
+          initialStateView: {
+            ...currentViewstate,
+            transitionInterpolator: new FlyToInterpolator(),
+            transitionDuration: 2000,
+            ontransitionend: () => setShouldZoom(false)
+          }
+        };
+        return newDS;
+      });
+    }
+  }, [currentViewstate, setDeckState, isLoaded, setShouldZoom]);
+  const expandTooltip = useCallback(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
       setHoverInfo(info);
     } else {
       setHoverInfo(undefined);
     }
+  }, []);
+  const onLoad = useCallback(() => () => {
+    setIsLoaded(true);
   }, []);
   useEffect(() => {
     setDeckState((oldDeckState) => {
@@ -31,11 +57,12 @@ export const Map = () => {
         ...oldDeckState,
         layers,
         onViewStateChange: hideTooltip,
-        onClickFunction: expandTooltip
+        onClickFunction: expandTooltip,
+        onLoadFunction: onLoad
       };
       return newDeckState;
     });
-  }, [layers, hideTooltip, expandTooltip]);
+  }, [layers, hideTooltip, expandTooltip, onLoad]);
   return (
     <div className="map-container">
       <DeckGLComponent {...deckState}>{RenderTooltip(hoverInfo)}</DeckGLComponent>
