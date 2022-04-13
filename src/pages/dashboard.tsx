@@ -24,8 +24,13 @@ export const Dashboard = () => {
         <DashboardNavbar />
         <div className="dashboard">
           <DashboardHeader setParams={setParams} selectedElements={selectedElements} />
-          {/* eslint-disable-next-line */}
-          <DashboardTable table={table} setParams={setParams} totalElements={totalElements} selectedElements={selectedElements} setSelectedElements={setSelectedElements} />
+          <DashboardTable
+            table={table}
+            setParams={setParams}
+            totalElements={totalElements}
+            selectedElements={selectedElements}
+            setSelectedElements={setSelectedElements}
+          />
         </div>
       </div>
     </div>
