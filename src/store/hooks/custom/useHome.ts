@@ -1,4 +1,9 @@
-import { useState, useMemo, useEffect } from 'react';
+import {
+  useState,
+  useMemo,
+  useEffect,
+  UIEvent
+} from 'react';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS } from '../../../constants/url';
 import { useCategoriesState } from '../categoriesHook';
@@ -57,8 +62,8 @@ export const useHome = () => {
     getMarkers(currentPage + 1);
     setCurrentPage(currentPage + 1);
   }, [currentPage, setCurrentPage, getMarkers]);
-  const scrolledToEnd = useMemo(() => (event: any) => {
-    const container = event.target;
+  const scrolledToEnd = useMemo(() => (event: UIEvent<HTMLDivElement>) => {
+    const container = event.target as HTMLDivElement;
     if (container.offsetHeight + container.scrollTop >= container.scrollHeight) {
       if (hasNext) {
         updateCurrentPage();
