@@ -117,5 +117,15 @@ export const INITIAL_MODAL_STATE = {
 };
 
 export const INITIAL_CENTER_MARKER = {
-  center: []
+  center: [],
+  click: false,
+  elementProperties: {
+    properties: {
+      address_1: '',
+      name: '',
+      phone: '',
+      retailer_id: '',
+      owner_photo: ''
+    }
+  }
 };

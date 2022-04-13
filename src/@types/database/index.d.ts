@@ -89,4 +89,6 @@ export interface GeocoderInterface {
 }
 export interface MarkerCenterInterface {
   center: number[],
+  click: boolean,
+  elementProperties: PropertiesLayer
 }

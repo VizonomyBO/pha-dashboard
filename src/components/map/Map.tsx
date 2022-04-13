@@ -4,20 +4,29 @@ import {
   useEffect,
   useMemo
 } from 'react';
-import { Layer, PickInfo } from 'deck.gl';
+import { Layer, PickInfo, WebMercatorViewport } from 'deck.gl';
 import { FlyToInterpolator } from '@deck.gl/core';
-import { useGeocoderDispatch, useGeocoderState } from '../../store/hooks';
+import { useGeocoderDispatch, useGeocoderState, useMarkerState } from '../../store/hooks';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
 import { ViewStateChangeFn, ViewStateInterface } from '../../@types';
 import { useMap } from '../../store/hooks/custom/useMap';
 import { getDeckInitState } from './defaultGenerator';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const Map = () => {
   const { setShouldZoom } = useGeocoderDispatch();
+  const {
+    center, click, elementProperties
+  } = useMarkerState() || {};
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const { inputText } = useGeocoderState() || {};
-  const { layers, currentViewstate, setCurrentViewState } = useMap();
+  const {
+    layers,
+    currentViewstate,
+    setCurrentViewState,
+    zoomToCenterMarker
+  } = useMap();
   const [deckState, setDeckState] = useState(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
@@ -45,6 +54,7 @@ export const Map = () => {
   }, [currentViewstate, isLoaded, changeDeckState]);
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
+      console.log('info object', info);
       setHoverInfo(info);
     } else {
       setHoverInfo(undefined);
@@ -53,6 +63,26 @@ export const Map = () => {
   const onLoad = useMemo(() => () => {
     setIsLoaded(true);
   }, []);
+  useEffect(() => {
+    console.log(elementProperties, click);
+    if (center[0] && center[1]) {
+      zoomToCenterMarker(center);
+    }
+    if (click) {
+      const viewportWebMercator = new WebMercatorViewport({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      const { x, y } = viewportWebMercator.project(center) as any;
+      console.log(x, y);
+      // const hoverProps: PickInfo<Layer<unknown>[]> = {
+      //   x,
+      //   y,
+      //   object: elementProperties
+      // };
+      // setHoverInfo(hoverProps);
+    }
+  }, [elementProperties, click, center, zoomToCenterMarker]);
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {

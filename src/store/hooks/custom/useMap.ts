@@ -1,7 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import * as carto from '@deck.gl/carto';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
-import { useMarkerState } from '../markerHook';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
@@ -25,9 +24,6 @@ export const useMap = () => {
     dataSources
   } = useCategoriesState() || {};
   const { inputText, shouldZoom } = useGeocoderState() || {};
-  const {
-    center
-  } = useMarkerState() || {};
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const [queries, setQueries] = useState<QueriesInterface>();
   const [layers, setLayers] = useState<any>([]);
@@ -114,7 +110,7 @@ export const useMap = () => {
     },
     [inputText]
   );
-  const zoomToCenterMarker = (point: number[]) => {
+  const zoomToCenterMarker = useMemo(() => (point: number[]) => {
     setCurrentViewState((oldViewState) => {
       const newViewState = {
         ...oldViewState,
@@ -124,12 +120,7 @@ export const useMap = () => {
       };
       return newViewState;
     });
-  };
-  useEffect(() => {
-    if (center[0] && center[1]) {
-      zoomToCenterMarker(center);
-    }
-  }, [center]);
+  }, [setCurrentViewState]);
   useEffect(() => {
     if (callFilters) {
       getLayers();
@@ -168,6 +159,7 @@ export const useMap = () => {
     layers,
     currentViewstate,
     setCurrentViewState,
-    shouldZoom
+    shouldZoom,
+    zoomToCenterMarker
   };
 };

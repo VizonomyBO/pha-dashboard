@@ -12,7 +12,9 @@ const markerReducer = (state: MarkerCenterInterface = defaultState, action: AnyA
     case TYPES.SET_CENTER_MARKER:
       return {
         ...state,
-        center: action.center
+        center: action.center,
+        click: action.click,
+        elementProperties: action.elementProperties
       };
     case TYPES.INIT:
       return INITIAL_CENTER_MARKER;
