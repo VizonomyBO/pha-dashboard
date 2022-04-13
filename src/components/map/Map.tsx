@@ -16,9 +16,6 @@ import { getDeckInitState } from './defaultGenerator';
 
 export const Map = () => {
   const { setShouldZoom } = useGeocoderDispatch();
-  const {
-    center, click, elementProperties
-  } = useMarkerState() || {};
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const { inputText } = useGeocoderState() || {};
   const {
@@ -27,6 +24,9 @@ export const Map = () => {
     setCurrentViewState,
     zoomToCenterMarker
   } = useMap();
+  const {
+    center, click, elementProperties
+  } = useMarkerState() || {};
   const [deckState, setDeckState] = useState(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
@@ -54,7 +54,7 @@ export const Map = () => {
   }, [currentViewstate, isLoaded, changeDeckState]);
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
-      console.log('info object', info);
+      console.info('info object', info);
       setHoverInfo(info);
     } else {
       setHoverInfo(undefined);
@@ -64,7 +64,6 @@ export const Map = () => {
     setIsLoaded(true);
   }, []);
   useEffect(() => {
-    console.log(elementProperties, click);
     if (center[0] && center[1]) {
       zoomToCenterMarker(center);
     }
@@ -74,13 +73,7 @@ export const Map = () => {
         height: window.innerHeight
       });
       const { x, y } = viewportWebMercator.project(center) as any;
-      console.log(x, y);
-      // const hoverProps: PickInfo<Layer<unknown>[]> = {
-      //   x,
-      //   y,
-      //   object: elementProperties
-      // };
-      // setHoverInfo(hoverProps);
+      console.info(x, y);
     }
   }, [elementProperties, click, center, zoomToCenterMarker]);
   useEffect(() => {
