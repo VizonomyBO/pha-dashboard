@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import { CSVLink } from 'react-csv';
 import {
   Dispatch,
   SetStateAction,
@@ -8,7 +9,10 @@ import {
 import { ButtonDashboard, QueryParams } from '../../@types';
 import { DEFAULT_VALUES_BUTTON } from '../../constants/dashboard';
 
-export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAction<QueryParams>> }) => {
+export const DashboardHeader = ({ setParams, selectedElements }: {
+  setParams: Dispatch<SetStateAction<QueryParams>>,
+  selectedElements: Array<object>,
+}) => {
   const [inputValue, setinputValue] = useState('');
   const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
 
@@ -35,10 +39,12 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
       <div className="sec1">
         <div className="title">Submissions</div>
         <div className="actions">
-          <button className="light btndown" type="button">
-            <span className="icdown" />
-            <span className="title">Download CSV</span>
-          </button>
+          <CSVLink data={selectedElements} filename="PHA-data" asyncOnClick>
+            <button className="light btndown" type="button">
+              <span className="icdown" />
+              <span className="title">Download CSV</span>
+            </button>
+          </CSVLink>
           <button className="light btnplus active" type="button">
             <span className="icplus" />
             <span className="title">Add Retailer</span>
