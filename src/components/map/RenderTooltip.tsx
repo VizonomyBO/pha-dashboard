@@ -5,7 +5,6 @@ export default function renderTooltip({ info, badges }: RenderToolTipInterface) 
   let toolTip = null;
   if (info?.object) {
     const { x, y, object } = info;
-    console.log('x', x, 'y', y);
     const objectTypified = object as PropertiesLayer;
     toolTip = ToolTip({
       x, y, objectTypified, badges
