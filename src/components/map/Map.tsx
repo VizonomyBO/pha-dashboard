@@ -2,8 +2,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import {
   useState,
   useEffect,
-  useMemo,
-  useCallback
+  useMemo
 } from 'react';
 import { Layer, PickInfo } from 'deck.gl';
 import { FlyToInterpolator } from '@deck.gl/core';
@@ -41,14 +40,14 @@ export const Map = () => {
       });
     }
   }, [currentViewstate, setDeckState, isLoaded, setShouldZoom]);
-  const expandTooltip = useCallback(() => (info: PickInfo<Layer<unknown>[]>) => {
+  const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
       setHoverInfo(info);
     } else {
       setHoverInfo(undefined);
     }
   }, []);
-  const onLoad = useCallback(() => () => {
+  const onLoad = useMemo(() => () => {
     setIsLoaded(true);
   }, []);
   useEffect(() => {
