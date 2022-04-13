@@ -11,7 +11,7 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
           ...elementHovered
         }
       };
-      setCenterMarker(elementHovered?.geom?.coordinates, type !== 'hover', elementProperties);
+      setCenterMarker(elementHovered.geom.coordinates, type !== 'hover', elementProperties);
     }
   };
   return listMarker.map((element: DataPhaDasboardMap) => {
