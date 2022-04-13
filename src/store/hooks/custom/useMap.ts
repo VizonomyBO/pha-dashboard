@@ -148,6 +148,7 @@ export const useMap = () => {
     queries,
     layers,
     currentViewstate,
-    setCurrentViewState
+    setCurrentViewState,
+    shouldZoom
   };
 };

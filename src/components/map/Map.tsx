@@ -9,7 +9,7 @@ import { FlyToInterpolator } from '@deck.gl/core';
 import { useGeocoderDispatch, useGeocoderState } from '../../store/hooks';
 import { DeckGLComponent } from './DeckGlComponent';
 import RenderTooltip from './RenderTooltip';
-import { ViewStateChangeFn } from '../../@types';
+import { ViewStateChangeFn, ViewStateInterface } from '../../@types';
 import { useMap } from '../../store/hooks/custom/useMap';
 import { getDeckInitState } from './defaultGenerator';
 
@@ -24,22 +24,25 @@ export const Map = () => {
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
   }, [setCurrentViewState]);
+  const changeDeckState = useMemo(() => (viewState: ViewStateInterface) => {
+    setDeckState((oldDeckState) => {
+      const newDS = {
+        ...oldDeckState,
+        initialStateView: {
+          ...viewState,
+          transitionInterpolator: new FlyToInterpolator(),
+          transitionDuration: 2000,
+          onTransitionEnd: () => setShouldZoom(false)
+        }
+      };
+      return newDS;
+    });
+  }, [setDeckState, setShouldZoom]);
   useEffect(() => {
     if (isLoaded) {
-      setDeckState((oldDeckState) => {
-        const newDS = {
-          ...oldDeckState,
-          initialStateView: {
-            ...currentViewstate,
-            transitionInterpolator: new FlyToInterpolator(),
-            transitionDuration: 2000,
-            ontransitionend: () => setShouldZoom(false)
-          }
-        };
-        return newDS;
-      });
+      changeDeckState(currentViewstate);
     }
-  }, [currentViewstate, setDeckState, isLoaded, setShouldZoom]);
+  }, [currentViewstate, isLoaded, changeDeckState]);
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
       setHoverInfo(info);
