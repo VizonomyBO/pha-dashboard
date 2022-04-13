@@ -1,8 +1,9 @@
 import { DataPhaDasboardMap } from '../../@types';
+import { PHA_RETAILERS } from '../../constants/categories';
 
 export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => (
   listMarker.map((element: DataPhaDasboardMap) => {
-    const color = element.geom.type === 'Point' ? 'red' : 'green';
+    const color = element.source === PHA_RETAILERS ? 'red' : 'green';
     return (
       <div key={`itemMarker${element.retailer_id}`} className="item">
         <div className="statemk">
