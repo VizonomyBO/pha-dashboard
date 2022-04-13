@@ -92,7 +92,10 @@ export const Nsdashboard = () => {
               <div className="searcharea">
                 <div className="opsearch">
                   <span className="icsearch" />
-                  <input className="generic" type="text" />
+                  <input className="generic" type="text" placeholder="Search for retailer" />
+                  <button type="button" className="light">
+                    <span className="icclose" />
+                  </button>
                 </div>
                 <button type="button" className="light">
                   Delete
