@@ -52,7 +52,7 @@ export const Profile = () => {
                 <span className="icodesc iccimail" />
                 <span className="txtst blue">
                   <a
-                    href={profile?.email}
+                    href={`mailto:${profile?.email}`}
                     style={{ all: 'unset', cursor: 'pointer' }}
                   >
                     Email
@@ -63,6 +63,8 @@ export const Profile = () => {
                 <span className="icodesc iccifb" />
                 <span className="txtst blue">
                   <a
+                    target="_blank"
+                    rel="noreferrer"
                     href={profile?.facebook}
                     style={{ all: 'unset', cursor: 'pointer' }}
                   >
@@ -74,6 +76,8 @@ export const Profile = () => {
                 <span className="icodesc iccitw" />
                 <span className="txtst blue">
                   <a
+                    target="_blank"
+                    rel="noreferrer"
                     href={profile?.twitter}
                     style={{ all: 'unset', cursor: 'pointer' }}
                   >
@@ -85,6 +89,8 @@ export const Profile = () => {
                 <span className="icodesc icciws" />
                 <span className="txtst blue">
                   <a
+                    target="_blank"
+                    rel="noreferrer"
                     href={profile?.website}
                     style={{ all: 'unset', cursor: 'pointer' }}
                   >
