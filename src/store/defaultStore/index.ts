@@ -115,3 +115,7 @@ export const INITIAL_MODAL_STATE = {
   open: false,
   type: false
 };
+
+export const INITIAL_CENTER_MARKER = {
+  center: []
+};
