@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { DataPhaDasboardMap } from '../../@types';
 import { PHA_RETAILERS } from '../../constants/categories';
 import { useMarkerDispatch } from '../../store/hooks/markerHook';
@@ -10,12 +9,6 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
       setCenterMarker(elementHovered?.geom?.coordinates);
     }
   };
-  useEffect(
-    () => () => {
-      setCenterMarker([0, 0]);
-    },
-    [setCenterMarker]
-  );
   return listMarker.map((element: DataPhaDasboardMap) => {
     const color = element.source === PHA_RETAILERS ? 'red' : 'green';
     return (

@@ -87,7 +87,6 @@ export interface GeocoderInterface {
   options: Result[],
   shouldZoom: boolean
 }
-
-export interface MarkerCenterInterface { 
+export interface MarkerCenterInterface {
   center: number[],
 }

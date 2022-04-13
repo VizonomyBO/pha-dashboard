@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { MarkerCenterInterface } from '../../@types/database';
 import { setCenterMarker } from '../actions';
@@ -8,9 +9,10 @@ export const useMarkerState = () => useSelector(
 
 export const useMarkerDispatch = () => {
   const dispatch = useDispatch();
+  const setCenterMarkerMemoized = useMemo(() => (center: number[]) => {
+    dispatch(setCenterMarker(center));
+  }, [dispatch]);
   return {
-    setCenterMarker: (center: number[]) => {
-      dispatch(setCenterMarker(center));
-    }
+    setCenterMarker: setCenterMarkerMemoized
   };
 };
