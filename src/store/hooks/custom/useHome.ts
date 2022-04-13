@@ -2,7 +2,8 @@ import {
   useState,
   useMemo,
   useEffect,
-  UIEvent
+  UIEvent,
+  useCallback
 } from 'react';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS } from '../../../constants/url';
@@ -61,16 +62,19 @@ export const useHome = () => {
     getMarkers(currentPage + 1);
     setCurrentPage(currentPage + 1);
   }, [currentPage, setCurrentPage, getMarkers]);
-  const scrolledToEnd = useMemo(() => (event: UIEvent<HTMLDivElement>) => {
-    const container = event.target as HTMLDivElement;
-    if (container.offsetHeight + container.scrollTop >= container.scrollHeight) {
-      if (hasNext) {
-        updateCurrentPage();
+  const scrolledToEnd = useCallback(
+    (event: UIEvent<HTMLDivElement>) => {
+      const container = event.target as HTMLDivElement;
+      if (container.offsetHeight + container.scrollTop >= container.scrollHeight) {
+        if (hasNext) {
+          updateCurrentPage();
+        }
+        return true;
       }
-      return true;
-    }
-    return false;
-  }, [hasNext, updateCurrentPage]);
+      return false;
+    },
+    [hasNext, updateCurrentPage]
+  );
   useEffect(() => {
     if (callFilters) {
       getMarkers(INIT_PAGE);
