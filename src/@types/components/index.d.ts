@@ -102,9 +102,9 @@ export interface DeckInterface {
   onViewStateChange: ViewStateChangeFn,
   controller: boolean,
   layers: Layer[],
-  onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any,
-  onLoadFunction: () => any,
-  onTransitionEnd: () => any
+  onClickFunction: (...args) => any,
+  onLoadFunction: (...args) => any,
+  onTransitionEnd: (...args) => any
 }
 
 export interface ButtonDashboard {
