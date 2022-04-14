@@ -132,7 +132,7 @@ export const BADGES: {
 } = {
   fresh: {
     text: 'Fresh Produce',
-    image: '/images/local-large.png',
+    image: '/images/availability-large.png',
   },
   acceptable: {
     text: 'Quality',

@@ -5,3 +5,4 @@ export * from './sessionTypes';
 export * from './individualFormTypes';
 export * from './geocoderTypes';
 export * from './modalTypes';
+export * from './markerTypes';
