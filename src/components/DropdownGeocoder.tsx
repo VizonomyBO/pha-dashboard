@@ -1,37 +1,22 @@
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
-import { useEffect, useRef, useState } from 'react';
-import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
-import { GeocoderService } from '../services/geocoderService';
-import { GEOCODER, REGION, REGION_GEOCODER } from '../constants';
+import { GEOCODER } from '../constants';
+import { useGeocoder } from '../store/hooks/custom/useGeocoder';
+import { findRegion } from '../utils/findRegion';
 
 const name = GEOCODER;
 export const DropdownGeocoder = ({ type }: { type: string }) => {
-  const geocoderDivRef = useRef<HTMLInputElement>(null);
-  const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
-  const { inputText, options } = useGeocoderState() || {};
-  const [inputTextHtml, setInputTextHtml] = useState('');
-  const geocoder = useRef<GeocoderService>(
-    new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement)
-  );
-  useEffect(() => {
-    geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
-    if (inputText && inputText.text) {
-      geocoder.current.setGeocoderQuery(inputText.text);
-    }
-    setGeocoderOptions([]);
-  }, [geocoder, inputText, setGeocoderOptions]);
-  const inputTextFunction = (e: React.FormEvent<HTMLInputElement>): void => {
-    setInputText({
-      text: e.currentTarget.value,
-      shouldSearch: true,
-      center: [0, 0]
-    });
-    setInputTextHtml(e.currentTarget.value);
-  };
-  useEffect(() => {
-    setInputTextHtml(inputText.text);
-  }, [inputText]);
+  const {
+    setInputText,
+    setInputTextHtml,
+    geocoderDivRef,
+    inputText,
+    inputTextHtml,
+    options,
+    setGeocoderOptions,
+    onChangeInput
+  } = useGeocoder(name);
+
   return (
     <>
       <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
@@ -47,7 +32,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           className="txtd"
           type="text"
           value={inputTextHtml}
-          onChange={inputTextFunction}
+          onChange={onChangeInput}
           placeholder="City or Zip Code"
         />
         {type !== 'home' && <span className="iccrosshair" />}
@@ -57,14 +42,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           <ul className={type !== 'home' ? 'table-geocoder' : 'table-geocoder-home'}>
             {inputText.shouldSearch
               && options.map((opt: Result) => {
-                let region = '';
-                if (opt.context) {
-                  for (let i = 0; opt.context && i < opt.context.length; i += 1) {
-                    if (opt.context[i].id.includes(REGION)) {
-                      region = opt.context[i].short_code.replace(REGION_GEOCODER, '');
-                    }
-                  }
-                }
+                const { region } = findRegion(opt);
                 return (
                   <li key={`${opt.place_name}index`} className="tr-geocoder">
                     <button
