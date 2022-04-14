@@ -7,6 +7,7 @@ import {
 } from '../../constants';
 import { useGeocoder } from '../../store/hooks/custom/useGeocoder';
 import { findRegion } from '../../utils/findRegion';
+import { getAddressFields } from '../../utils/getAddressFields';
 
 const name = GEOCODER_ADDRESS;
 export const DropdownAddress = ({ type }: { type: string }) => {
@@ -22,7 +23,6 @@ export const DropdownAddress = ({ type }: { type: string }) => {
   } = useGeocoder(name);
 
   const { setBusinessDetails } = useMarketplaceDispatch();
-
   return (
     <>
       <div className="ainput">
@@ -47,6 +47,7 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                       className="button-goecoder"
                       type="button"
                       onClick={() => {
+                        console.log(opt);
                         setInputText({
                           text: opt.place_name,
                           shouldSearch: false,
@@ -55,10 +56,19 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                         });
                         setInputTextHtml(regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`);
                         setGeocoderOptions([]);
-                        setBusinessDetails(TYPE_BUSINESS.STATE, region);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[0]);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[1]);
                         setBusinessDetails(type, regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`);
+                        if (opt.place_type.includes('poi')) {
+                          const { zipcode, city, state } = getAddressFields(opt.place_name);
+                          setBusinessDetails(TYPE_BUSINESS.CITY, city);
+                          setBusinessDetails(TYPE_BUSINESS.STATE, state);
+                          setBusinessDetails(TYPE_BUSINESS.ZIPCODE, zipcode);
+                        } else {
+                          setBusinessDetails(TYPE_BUSINESS.CITY, '');
+                          setBusinessDetails(TYPE_BUSINESS.ZIPCODE, '');
+                          setBusinessDetails(TYPE_BUSINESS.STATE, region);
+                        }
                       }}
                     >
                       <label>
