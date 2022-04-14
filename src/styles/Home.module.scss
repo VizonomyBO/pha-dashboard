@@ -220,7 +220,9 @@
     text-align:justify;
     scroll-behavior: smooth;
 } */
-
+.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
+	display: none;
+}
 button.light {
     border-radius: none;
     font-family: "FuturaLight", sans-serif;
@@ -404,6 +406,7 @@ button.light {
 .icxcircle {
 	content: url("../../public/images/ic_x_circle.svg");
 }
+
 .controlzoom {
 	position: absolute;
 	top: 32px;
@@ -1227,15 +1230,6 @@ sup {
 						button.light {
 							margin-left: 16px;
 						}
-						.dropdown-content {
-							display: none;
-						}
-						.dropdown {
-							display: inline-block;
-						}
-						.dropdown:hover .dropdown-content {
-							display: block;
-						}
 						.profile {
 							position: relative;
 							.logout {
@@ -1350,7 +1344,50 @@ sup {
 					height: 56px;
 					background-color: #E3E5E5;
 				}
+				.citysearch.close {
+					display: none;
+				}
 				.citysearch {
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					padding:8px ;
+					width: 384px;
+					.txtd {
+						font-family: "FuturaMedium", sans-serif;
+						font-size: 14px;
+						font-weight: 500;
+						color: #7A7E80;
+						padding: 0 0 0 4px;
+					}
+					input[type=text] {
+						-webkit-appearance: none;
+						font-family: "FuturaMedium", sans-serif;
+						font-size: 14px;
+						border: none;
+						outline: none;
+						width: 228px;
+						padding-left: 8px;
+						color: #161A23;
+					}
+					button.light {
+						padding: 7px 42px;
+						background-color: #00BDE3;
+						font-family: "FuturaBold", sans-serif;
+						border-radius: 20px;
+						color: #fff;
+						font-size: 16px;
+						line-height: 24px;
+						&:hover {
+							background-color: #0099B8;
+						}
+					}
+				}
+				.smcitysearch.close {
+					display: none;
+				}
+				.smcitysearch {
+					display: flex;
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -2396,16 +2433,16 @@ sup {
 					.bname {
 						width: 100%;
 						display: flex;
-						flex-direction: column;
+						flex-direction: row;
 						justify-content: center;
 						align-items: center;
-						padding-bottom: 32px;
 						.contactname {
-							display: inline-block;
+							display: block;
 							width: 144px;
 							font-family: 'FuturaMedium',sans-serif;
 							font-size: 18px;
 							line-height: 21px;
+							padding-bottom: 32px;
 							text-align: center;
 						}
 					}
@@ -3048,7 +3085,7 @@ sup {
 						border-radius: 16px;
 						thead {
 							width: 100%;
-							display: table;
+							/* display: table; */
 							tr {
 								position: relative;
 								&::after {
@@ -4335,6 +4372,7 @@ header.topmenu {
 								height: 53px;
 								width: 53px;
 								background-color: rgb(233, 231, 231);
+								border-radius: 50%;
 							}
 						}
 						.logout {
@@ -4510,7 +4548,7 @@ header.topmenu {
 							thead {
 								tr {
 									&::after {
-										width: 1120px;
+										/* width: 1120px; */
 										background-color: coral;
 									}
 									th {
@@ -5172,23 +5210,41 @@ header.topmenu {
 					}
 				}
 			}
-
 			/*dashboard*/
+			.navbar {
+				.nbleft {
+					width: 222px;
+				}
+				.nbright {
+					padding-left: 500px;
+					width: calc( 100% - 222px );
+					.navigationadmin {
+						display: flex;
+						justify-content: space-between;
+					}
+				}
+			}
+			.navbar .nbright .navigationadmin .menu > ol > li.active:not(.options) a {
+				font-size: 24px;
+				color: #00BDE3;
+			}
 			.navbar .nbright .navigationadmin {
 				.menu ol li a {
-					font-size: 18px;
+					font-size: 24px;
+					padding: 16px 24px;
+					border-radius: 14px;
 				}
 				.userarea button.light {
 					.icsetting, .icbell {
-						width: 32px;
-						height: 32px;
+						width: 43px;
+						height: 43px;
 					}
 				}
 				.userarea .profile {
 					button.light {
 						.picture {
-							height: 53px;
-							width: 53px;
+							height: 71px;
+							width: 71px;
 							background-color: rgb(233, 231, 231);
 						}
 					}
@@ -5205,12 +5261,14 @@ header.topmenu {
 				}
 		}
 		.dashboard {
-			width: 1621px;
-			height: 1328px;
+			width: 2162px;
+			height: 1771px;
+			margin-top: 72px;
 			.header {
+				padding-bottom: 28px;
 				.sec1 {
 					.title {
-						font-size: 42px;
+						font-size: 56px;
 						line-height: 120%;
 					}
 					.actions {
@@ -5218,89 +5276,105 @@ header.topmenu {
 							display: flex;
 							justify-content: center;
 							align-items: center;
+							padding: 14px 40px;
+							border-radius: 36px;
 							&.btndown {
 								.icdown {
-									width: 21px;
-									height: 21px;
+									width: 28px;
+									height: 28px;
 								}
 							}
 							&.btnplus {
 								.icplus {
-									width: 21px;
-									height: 21px;
+									width: 28px;
+									height: 28px;
 								}
 							}
 							.title {
-								font-size: 21px;
+								font-size: 28px;
 								line-height: 140%;
 							}
 						}
-						
 					}
 				}
 				.sec2 {
 					p {
-						font-size: 21px;
+						font-size: 28px;
 						line-height: 120%;
 					}
 				}
 				.statusoption {
 					button.light {
-						font-size: 18px;
-						padding: 18px 22px;
+						font-size: 24px;
+						line-height: 160%;
+						padding: 15px 22px
+					}
+					button.light.op1 {
+						border-bottom-left-radius: 28px;
+						border-top-left-radius: 28px;
+					}
+					button.light.op3 {
+						border-bottom-right-radius: 28px;
+						border-top-right-radius: 28px;
 					}
 				}
 				.filterarea {
-					border-radius: 22px;
-					padding: 22px;
+					border-radius: 28px;
+					padding: 28px;
 					.searcharea {
 						.opsearch {
-							width: 329px;
-							height: 53px;
+							border-radius: 28px;
+							width: 439px;
+							height: 71px;
+							padding-left: 28px;
+							padding-right: 28px;
 							.icsearch {
-								width: 21px;
-								height: 21px;
+								width: 28px;
+								height: 28px;
 							}
 							input[type=text].generic {
-								font-size: 18px;
+								font-size: 24px;
+								padding-left: 16px;
 							}
 							button.light {
 								.icclose {
-									width: 18px;
-									height: 18px;
+									width: 28px;
+									height: 28px;
 								}
 							}
 						}
 						button.light {
-							font-size: 21px;
-							margin-left: 32px;
+							font-size: 28px;
+							margin-left: 45px;
 						}
 					}
 					.datefilterarea {
 						.opfilter {
-							width: 311px;
-							height: 53px;
-							border-radius: 21px;
+							width: 414px;
+							height: 71px;
+							border-radius: 28px;
 							.iccalendar {
-								width: 21px;
-								height: 21px;
+								width: 28px;
+								height: 28px;
 							}
 							input[type=text].generic {
-								font-size: 18px;
+								font-size: 24px;
+								padding-left: 16px;
 							} 
 						}
 						button.light {
 							margin-left: 32px;
-							padding: 8px 16px;
-							height: 53px;
+							padding: 8px 32px;
+							height: 71px;
 							background-color: #fff;
-							border-radius: 21px;
+							border-radius: 28px;
 							.icfilter {
-								width: 21px;
-								height: 21px;
+								width: 28px;
+								height: 28px;
 							}
 							.title {
-								font-size: 18px;
+								font-size: 24px;
+								padding-left: 16px;
 							}
 						}
 					}
@@ -5309,21 +5383,21 @@ header.topmenu {
 			.listarea {
 				.tabulardatawrap {
 					.txt1 {
-						font-size: 18px;
+						font-size: 24px;
 						line-height: 140%;
 					}
 					.txt2 {
-						font-size: 21px;
+						font-size: 28px;
 						line-height: 140%;
 					}
 					.colorstatus {
-						border-radius: 21px;
+						border-radius: 28px;
 						padding: 4px 12px;
 						width: 142px;
 						.dot {
 							display: block;
-							width: 11px;
-							height: 11px;
+							width: 14px;
+							height: 14px;
 							border-radius: 50%;
 						}
 						.txt2 {
@@ -5332,7 +5406,7 @@ header.topmenu {
 					}
 					.colorstatus.green {
 						background-color: #ECF6ED;
-						width: 150px;
+						width: 200px;
 						.dot {
 							background-color: #529F5A;
 						}
@@ -5341,7 +5415,7 @@ header.topmenu {
 						}
 					}
 					.colorstatus.blue {
-						width: 190px;
+						width: 250px;
 						background-color: #ECEEF6;
 						.dot {
 							background-color: #525D9F;
@@ -5352,7 +5426,7 @@ header.topmenu {
 					}
 					.colorstatus.red {
 						background-color: #F6ECEC;
-						width: 140px;
+						width: 180px;
 						.dot {
 							background-color: #9F5252;
 						}
@@ -5510,6 +5584,9 @@ header.topmenu {
 	}
 }
 @media (max-width: 375px) {
+	.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
+		display: block;
+	}
 	header.topmenu {
 		display: block;
 	}
@@ -6114,6 +6191,10 @@ header.topmenu {
 						height: 1px;
 					}
 					.citysearch {
+						display: none;
+					}
+					.smcitysearch {
+						display: flex;
 						width: 100%;
 						flex-wrap: wrap;
 						justify-content: flex-start;
