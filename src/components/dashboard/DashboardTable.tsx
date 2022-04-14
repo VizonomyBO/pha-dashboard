@@ -37,10 +37,7 @@ export const DashboardTable = ({
   };
 
   const checkAll = () => {
-    let checked = true;
-    table.forEach((item) => {
-      checked = checked && selectedElements.includes(item.retailer_id || '');
-    });
+    const checked = table.every((element) => selectedElements.includes(element.retailer_id || ''));
     return checked;
   };
 
