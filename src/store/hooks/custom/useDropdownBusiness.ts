@@ -37,11 +37,11 @@ export const useDropdownBusiness = ({ initialState, type }: DropdowInterface) =>
     if (initialState === DEFAULT_DROPDOWN_OPTION.STATES && isEmpty(businessDetails.state)) {
       setOption(businessDetails.state);
     }
-    /* TODO ESTA PARTE ES PARA LAS HORAS SEGUN DIA  */
+    /* TODO ESTA PARTE ES PARA LAS HORAS SEGUN DIA */
     if (isEmpty(businessDetails.mon_open) && type === TYPE_BUSINESS.MON_OPEN) {
       setOption(businessDetails.mon_open);
     }
-    /* TODO ESTA PARTE ES PARA LAS HORAS SEGUN DIA 
+    /* TODO ESTA PARTE ES PARA LAS HORAS SEGUN DIA
     Object.entries(TYPE_BUSINESS).forEach((element: Array<string>) => {
       if (element[0].indexOf('OPEN') > -1 || element[0].indexOf('CLOSE') > -1) {
         if (isEmpty(businessDetails[element[1]]) && type === element[1]) {
