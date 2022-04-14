@@ -29,4 +29,4 @@ interface TooltipProps {
   badges: string[],
 }
 
-export interface ZoomInterface {value: number, type: string}
+export type ZoomInterface = {value: number, type: string}
