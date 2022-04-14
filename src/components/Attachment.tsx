@@ -12,6 +12,9 @@ export const Attachment = ({ type }: {type: string}) => {
 
   const { widthScroll } = useScrollState();
   const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
+  const classnameName = () => (
+    widthScroll > 375 ? 'Browser Files' : 'Browse on your device'
+  );
   return (
     <div>
       <div className="ainput upload">
@@ -29,7 +32,7 @@ export const Attachment = ({ type }: {type: string}) => {
           />
           <div>
             <label htmlFor={`${type}uploader`}>
-              <p className="fileText">{widthScroll > 375 ? 'Browser Files' : 'Browse on your device' }</p>
+              <p className="fileText">{classnameName}</p>
             </label>
           </div>
         </div>
