@@ -32,6 +32,14 @@ export const DEFAULT_VIEW_STATE = {
   pitch: 0,
 };
 
+export const DEFAULT_VIEW_STATE_PROFILE = {
+  latitude: 39.02,
+  longitude: -96,
+  zoom: 15,
+  bearing: 0,
+  pitch: 0,
+};
+
 export const POINTS_OF_INTEREST = 'poi';
 
 export const STATES = [
