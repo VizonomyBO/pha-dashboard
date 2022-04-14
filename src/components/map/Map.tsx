@@ -58,7 +58,9 @@ export const Map = () => {
           geometry: elementProperties.geom,
           type: 'Feature'
         },
-        coordinate: elementProperties.properties.geom.coordinates
+        coordinate: elementProperties.properties.geom.coordinates,
+        index: 0,
+        layer: undefined
       };
       setHoverInfo(newInfo);
       setCurrentHovered(elementProperties?.properties?.retailer_id);
@@ -91,7 +93,6 @@ export const Map = () => {
 
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
-      console.log('logogog', info);
       setHoverInfo(info);
       const objectTypified = info.object as PropertiesLayer;
       setCurrentHovered(objectTypified?.properties?.retailer_id);
