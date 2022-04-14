@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { CategoriesInterface } from '../../@types/redux';
+import { BBOXInterface, CategoriesInterface } from '../../@types/redux';
 import {
   setCategoriesSelected,
   setAccesibilitiesSelected,
@@ -8,7 +8,9 @@ import {
   setCenterGeocoder,
   setDataSourcesSelected,
   resetValues,
-  setCallFilters
+  setCallFilters,
+  setMapViewFilter,
+  setBbox
 } from '../actions';
 
 export const useCategoriesState = () => useSelector(
@@ -18,6 +20,12 @@ export const useCategoriesDispatch = () => {
   const dispatch = useDispatch();
   const setCallFiltersMemoized = useMemo(() => (callFilters: boolean) => {
     dispatch(setCallFilters(callFilters));
+  }, [dispatch]);
+  const setMapViewFilterMemoized = useMemo(() => (mapViewFilter: boolean) => {
+    dispatch(setMapViewFilter(mapViewFilter));
+  }, [dispatch]);
+  const setBboxMemoized = useMemo(() => (bbox: BBOXInterface) => {
+    dispatch(setBbox(bbox));
   }, [dispatch]);
   return {
     setCategoriesSelected: (categoriesSelected: string[]) => {
@@ -36,6 +44,8 @@ export const useCategoriesDispatch = () => {
       dispatch(setBadgesSelected(badges));
     },
     setCallFilters: setCallFiltersMemoized,
+    setMapViewFilter: setMapViewFilterMemoized,
+    setBbox: setBboxMemoized,
     resetValues: () => {
       dispatch(resetValues());
     }

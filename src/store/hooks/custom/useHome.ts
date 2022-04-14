@@ -15,7 +15,8 @@ export const useHome = () => {
     callFilters,
     categoriesSelected,
     accesibilities,
-    dataSources
+    dataSources,
+    bbox
   } = useCategoriesState() || {};
   const VALUES_PER_PAGE = 10;
   const INIT_PAGE = 1;
@@ -32,7 +33,8 @@ export const useHome = () => {
             categories: categoriesSelected,
             accesibility: accesibilities,
             dataSources,
-            badges: []
+            badges: [],
+            ...(bbox && { bbox })
           },
           headers
         )
@@ -56,7 +58,7 @@ export const useHome = () => {
         })
         .catch((err) => console.error(err));
     },
-    [categoriesSelected, accesibilities, dataSources]
+    [categoriesSelected, accesibilities, dataSources, bbox]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);

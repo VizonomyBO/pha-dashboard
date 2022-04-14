@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
+import { useCategoriesDispatch } from '../store/hooks';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
 import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
@@ -14,6 +15,7 @@ import { useHome } from '../store/hooks/custom/useHome';
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
+  const { setMapViewFilter } = useCategoriesDispatch();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
   let xDown:number | null = null;
@@ -72,7 +74,10 @@ export const Home = () => {
                 <div className="option">
                   <label className="chkwrap">
                     Filter by map view
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onChange={(e) => setMapViewFilter(e.currentTarget.checked)}
+                    />
                     <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>

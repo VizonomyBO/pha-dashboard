@@ -4,6 +4,7 @@ import {
   useEffect,
   useMemo
 } from 'react';
+import * as carto from '@deck.gl/carto';
 import { Layer, PickInfo, WebMercatorViewport } from 'deck.gl';
 import { FlyToInterpolator } from '@deck.gl/core';
 import { useGeocoderDispatch, useGeocoderState, useMarkerState } from '../../store/hooks';
@@ -20,6 +21,7 @@ import { getDeckInitState } from './defaultGenerator';
 import { useBadge } from '../../store/hooks/custom/useBadge';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+const Carto = carto as any;
 export const Map = () => {
   const { setShouldZoom } = useGeocoderDispatch();
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
@@ -30,19 +32,48 @@ export const Map = () => {
     layers,
     currentViewstate,
     setCurrentViewState,
-    zoomToCenterMarker
+    zoomToCenterMarker,
+    finishRender
   } = useMap();
   const {
     center, click, elementProperties
   } = useMarkerState() || {};
   const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const OFFSET_POPUP = 40;
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
   }, [setCurrentViewState]);
 
+  const openPopup = useMemo(() => () => {
+    if (click && center[0] && center[1]) {
+      const viewportWebMercator = new WebMercatorViewport({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      const newCoord = viewportWebMercator.projectFlat([center[0], center[1]]);
+      const newInfo: PickInfo<Layer<unknown>[]> = {
+        x: newCoord[0],
+        y: newCoord[1] + OFFSET_POPUP,
+        object: {
+          ...elementProperties,
+          geometry: elementProperties.geom,
+          type: 'Feature'
+        },
+        coordinate: elementProperties.properties.geom.coordinates,
+        index: 0,
+        layer: new Carto.CartoLayer({})
+      };
+      setHoverInfo(newInfo);
+      setCurrentHovered(elementProperties?.properties?.retailer_id);
+    }
+  }, [click, center, elementProperties]);
+  const onEndTransition = useMemo(() => () => {
+    console.log('on end transition');
+    setShouldZoom(false);
+    openPopup();
+  }, [setShouldZoom, openPopup]);
   const changeDeckState = useMemo(() => (viewState: ViewStateInterface) => {
     setDeckState((oldDeckState) => {
       const newDS = {
@@ -51,12 +82,12 @@ export const Map = () => {
           ...viewState,
           transitionInterpolator: new FlyToInterpolator(),
           transitionDuration: 2000,
-          onTransitionEnd: () => setShouldZoom(false)
+          onTransitionEnd: onEndTransition
         }
       };
       return newDS;
     });
-  }, [setDeckState, setShouldZoom]);
+  }, [setDeckState, onEndTransition]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -81,16 +112,9 @@ export const Map = () => {
   useEffect(() => {
     if (center[0] && center[1]) {
       zoomToCenterMarker(center);
+      openPopup();
     }
-    if (click) {
-      const viewportWebMercator = new WebMercatorViewport({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-      const { x, y } = viewportWebMercator.project(center) as any;
-      console.info(x, y);
-    }
-  }, [elementProperties, click, center, zoomToCenterMarker]);
+  }, [click, center, zoomToCenterMarker, openPopup]);
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {
@@ -98,11 +122,12 @@ export const Map = () => {
         layers,
         onViewStateChange: hideTooltip,
         onClickFunction: expandTooltip,
-        onLoadFunction: onLoad
+        onLoadFunction: onLoad,
+        onFinishRenderFunction: finishRender
       };
       return newDeckState;
     });
-  }, [layers, hideTooltip, expandTooltip, onLoad]);
+  }, [layers, hideTooltip, expandTooltip, onLoad, finishRender]);
 
   return (
     <div className="map-container">
