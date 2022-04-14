@@ -9,6 +9,7 @@ export const useDashboard = () => {
   const [params, setParams] = useState(defaultQueryParams);
   const [table, setTable] = useState<(PhaRetailer & PhaIndividual)[]>([]);
   const [totalElements, setTotalElements] = useState(0);
+  const [selectedElements, setSelectedElements] = useState<Array<string>>([]);
 
   useEffect(() => {
     const queryParams = getQueryParms(params);
@@ -34,6 +35,8 @@ export const useDashboard = () => {
   return {
     setParams,
     table,
-    totalElements
+    totalElements,
+    selectedElements,
+    setSelectedElements,
   };
 };

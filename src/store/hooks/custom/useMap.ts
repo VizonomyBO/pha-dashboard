@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from 'react';
 import * as carto from '@deck.gl/carto';
+import { WebMercatorViewport } from 'deck.gl';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
@@ -16,12 +17,13 @@ import { getLatLonViewport } from '../../../components/map/defaultGenerator';
 const Carto = carto as any;
 
 export const useMap = () => {
-  const { resetValues, setCallFilters } = useCategoriesDispatch();
+  const { resetValues, setCallFilters, setBbox } = useCategoriesDispatch();
   const {
     callFilters,
     categoriesSelected,
     accesibilities,
-    dataSources
+    dataSources,
+    mapViewFilter
   } = useCategoriesState() || {};
   const { inputText, shouldZoom } = useGeocoderState() || {};
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
@@ -123,6 +125,25 @@ export const useMap = () => {
     });
   }, [setCurrentViewState]);
 
+  const finishRender = useMemo(() => () => {
+    if (mapViewFilter) {
+      const viewport = new WebMercatorViewport(currentViewstate);
+      const nw = viewport.unproject([0, 0]);
+      const se = viewport.unproject([viewport.width, viewport.height]);
+      setBbox({
+        xmin: se[0],
+        xmax: nw[0],
+        ymin: nw[1],
+        ymax: se[1]
+      });
+    }
+  }, [mapViewFilter, currentViewstate, setBbox]);
+
+  useEffect(() => {
+    if (mapViewFilter) {
+      finishRender();
+    }
+  }, [mapViewFilter, finishRender]);
   useEffect(() => {
     if (callFilters) {
       getLayers();
@@ -162,6 +183,7 @@ export const useMap = () => {
     currentViewstate,
     setCurrentViewState,
     shouldZoom,
-    zoomToCenterMarker
+    zoomToCenterMarker,
+    finishRender
   };
 };

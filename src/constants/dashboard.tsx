@@ -14,3 +14,7 @@ export const DEFAULT_VALUES_BUTTON = [{
   class: 'light op3',
   active: false
 }];
+
+export const FILENAME_CSV_RETAILER = 'PHA-retailer';
+export const FILENAME_CSV_INDIVIDUAL = 'PHA-individual';
+export const EXTENSION_CSV = '.csv';

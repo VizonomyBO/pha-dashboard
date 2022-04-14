@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
+import { useCategoriesDispatch } from '../store/hooks';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
 import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
@@ -15,6 +16,7 @@ import { useScroll } from '../store/hooks/custom/useScroll';
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
+  const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   useScroll(ref);
@@ -43,6 +45,13 @@ export const Home = () => {
 
   const onClickPlus = () => {
     /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
+  };
+
+  const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMapViewFilter(e.currentTarget.checked);
+    if (!e.currentTarget.checked) {
+      setCallFilters(!e.currentTarget.checked);
+    }
   };
 
   return (
@@ -75,7 +84,10 @@ export const Home = () => {
                 <div className="option">
                   <label className="chkwrap">
                     Filter by map view
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onChange={changeFilterMapView}
+                    />
                     <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>

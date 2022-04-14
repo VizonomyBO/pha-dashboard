@@ -15,7 +15,9 @@ export const useHome = () => {
     callFilters,
     categoriesSelected,
     accesibilities,
-    dataSources
+    dataSources,
+    bbox,
+    mapViewFilter
   } = useCategoriesState() || {};
   const VALUES_PER_PAGE = 10;
   const INIT_PAGE = 1;
@@ -32,7 +34,8 @@ export const useHome = () => {
             categories: categoriesSelected,
             accesibility: accesibilities,
             dataSources,
-            badges: []
+            badges: [],
+            ...(mapViewFilter && { bbox })
           },
           headers
         )
@@ -56,7 +59,7 @@ export const useHome = () => {
         })
         .catch((err) => console.error(err));
     },
-    [categoriesSelected, accesibilities, dataSources]
+    [categoriesSelected, accesibilities, dataSources, bbox, mapViewFilter]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);
@@ -76,10 +79,11 @@ export const useHome = () => {
     [hasNext, updateCurrentPage]
   );
   useEffect(() => {
-    if (callFilters) {
+    if (callFilters || mapViewFilter) {
       getMarkers(INIT_PAGE);
     }
-  }, [callFilters, getMarkers]);
+  }, [callFilters, mapViewFilter, getMarkers, bbox]);
+
   return {
     getMarkers,
     dataRequest,
