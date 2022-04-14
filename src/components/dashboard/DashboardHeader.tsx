@@ -14,7 +14,7 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
   const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
   const navigate = useNavigate();
   const navigateForm = () => {
-    navigate('/form', { state: { previous: 'dashboard' } });
+    navigate('/form', { state: 'Dashboard' });
   };
 
   useEffect(() => {

@@ -3,8 +3,9 @@ import { TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
+import { PhaRetailer } from '../@types/database';
 
-export const LeftForm2 = () => {
+export const LeftForm2 = ({ dataphaRetailer }: { dataphaRetailer?: PhaRetailer }) => {
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
   const {
     setOtherQuestions, setAvailabilityOptions, setQuality,
@@ -63,6 +64,12 @@ export const LeftForm2 = () => {
     setShowIsFreshOption(otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FRESH));
   }, [otherQuestions.availabilityOptions]);
 
+  useEffect(() => {
+    if (dataphaRetailer) {
+      setOtherQuestions(dataphaRetailer.description);
+    }
+  }, [dataphaRetailer, setOtherQuestions]);
+
   return (
     <>
       <div className="sectiontitle">
@@ -83,6 +90,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
+            value={otherQuestions.description}
             onChange={setDescriptionFunction}
           />
         </div>

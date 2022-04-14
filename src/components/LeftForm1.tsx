@@ -1,11 +1,21 @@
+import { useEffect } from 'react';
 import { DEFAULT_DROPDOWN_OPTION, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { DropdownAddress } from './map/DropdownAddress';
+import { PhaRetailer } from '../@types/database';
 
-export const LeftForm1 = () => {
+export const LeftForm1 = ({ dataphaRetailer }: { dataphaRetailer?: PhaRetailer }) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
+  useEffect(() => {
+    console.log(dataphaRetailer);
+    if (dataphaRetailer) {
+      Object.entries(dataphaRetailer).forEach((element) => {
+        setBusinessDetails(element[0], element[1]);
+      });
+    }
+  }, [dataphaRetailer, setBusinessDetails]);
   return (
     <>
       <div className="sectiontitle">

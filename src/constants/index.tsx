@@ -19,6 +19,7 @@ export const ROUTE_DASHBOARD = '/dashboard';
 export const ROUTE_HOME = '/home';
 export const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_KEY || NO_DATA;
 export const BASEMAP = 'mapbox://styles/vizonomy/cl0zk8u1o002w15pvqr3t0e1b';
+export const DASHBOARD = 'Dashboard';
 export const CLASSES_BY_FORM = {
   [BUSINESS_DETAILS]: 'form1',
   [OTHER_QUESTIONS]: 'form2',

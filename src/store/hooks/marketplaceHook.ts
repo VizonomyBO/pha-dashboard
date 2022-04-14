@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MultimediaInterface } from '../../@types';
 import { MarketplaceInterface } from '../../@types/redux';
@@ -15,16 +16,18 @@ export const useMarketplaceState = () => useSelector(
 );
 export const useMarketplaceDispatch = () => {
   const dispatch = useDispatch();
+  const setBusinessDetailsMemoized = useMemo(() => (type: string, value: string | number) => {
+    dispatch(setBusinessDetails(type, value));
+  }, [dispatch]);
+  const setOtherQuestionsMemoized = useMemo(() => (value: string) => {
+    dispatch(setOtherQuestons(value));
+  }, [dispatch]);
   return {
-    setBusinessDetails: (type: string, value: string | number) => {
-      dispatch(setBusinessDetails(type, value));
-    },
+    setBusinessDetails: setBusinessDetailsMemoized,
     setBusinessFile: (type: string, value: MultimediaInterface[]) => {
       dispatch(setBusinessFile(type, value));
     },
-    setOtherQuestions: (value: string) => {
-      dispatch(setOtherQuestons(value));
-    },
+    setOtherQuestions: setOtherQuestionsMemoized,
     setAvailabilityOptions: (availabilityOptions: string[]) => {
       dispatch(setAvailabilityOptions(availabilityOptions));
     },

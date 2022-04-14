@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { LeftForm1 } from '../components/LeftForm1';
 import { LeftForm2 } from '../components/LeftForm2';
 import { LeftForm3 } from '../components/LeftForm3';
@@ -14,16 +14,20 @@ import {
   CONTACT_DETAILS,
   HOME,
   OTHER_QUESTIONS,
-  PAGE_REDIRECT_TIME
+  PAGE_REDIRECT_TIME,
+  DASHBOARD
 } from '../constants';
 import { FormTabType } from '../@types';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { useMarketplaceState, useModalDispatch } from '../store/hooks';
 import { Formvalidation } from '../utils/validation';
+import { ENDPOINTS } from '../constants/url';
+import { webRequest } from '../utils/webRequest';
 
 export const Form = () => {
   const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
   const [formClass, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
+  const [dataphaRetailer, setDdataphaRetailer] = useState();
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const formAreaClass = classNames('formarea', { [formClass]: true });
   const { setModal } = useModalDispatch();
@@ -34,6 +38,16 @@ export const Form = () => {
     selectAccessibility,
     otherQuestions
   } = useMarketplaceState();
+  const location = useLocation();
+  const id = location.state;
+
+  useEffect(() => {
+    if (id && id !== DASHBOARD) {
+      webRequest.get(ENDPOINTS.PROFILE(String(id))).then((resp) => resp.json())
+        .then((resp) => setDdataphaRetailer(resp.data)).catch((err) => console.error(err));
+    }
+  }, [id]);
+
   useEffect(() => {
     setFormClass(CLASSES_BY_FORM[activeTab]);
   }, [activeTab]);
@@ -85,10 +99,10 @@ export const Form = () => {
           <div className="group">
             <div className="left">
               {activeTab === BUSINESS_DETAILS && (
-                <LeftForm1 />
+                <LeftForm1 dataphaRetailer={dataphaRetailer} />
               )}
               {activeTab === OTHER_QUESTIONS && (
-                <LeftForm2 />
+                <LeftForm2 dataphaRetailer={dataphaRetailer} />
               )}
               {activeTab === CONTACT_DETAILS && (
                 <LeftForm3 />
