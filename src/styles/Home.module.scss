@@ -1812,8 +1812,9 @@ sup {
 					position: absolute;
 					top: 300px;
 					right: 29px;
-					width: 385px;
+					width: 350px;
 					height: 128px;
+					left: 9px;
 					background-color: #fff;
 					border-radius: 16px;
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -5586,6 +5587,9 @@ header.topmenu {
 	.retailerlist {
 		display: block;
 	}
+	.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
+		display: none;
+	}
 	.container {
 		height: 100vh;
 		.arearesult.close {
@@ -5598,7 +5602,7 @@ header.topmenu {
 				width: 100%;
 				z-index: 5;
 				.tab {
-					height: 32px;
+					height: 62px;
 					border-top-left-radius: 16px;
 					border-top-right-radius: 16px;
 					background-color: #fff;
@@ -5628,9 +5632,10 @@ header.topmenu {
 					display: none;
 				}
 				.searchresult {
-					height: 280px;
+					height: auto;
 					overflow: scroll;
 					padding: 16px;
+					list-style: none;
 					background-color: #fff;
 					ul {
 						background-color: #f9f9f9;
@@ -5923,7 +5928,7 @@ header.topmenu {
 					height: calc(100vh - 78px);
 					width: 100%;
 					border-radius: 0;
-					.locfound, .modal, .bmodal {
+					.locfound, .modal {
 						display: none;
 					}
 					.controlzoom {
@@ -6611,18 +6616,19 @@ header.topmenu {
 					.right {
 						width: 100%;
 						.txtxl {
-							font-size: 24px;
+							font-size: 20px;
 							line-height: 120%;
 							padding-bottom: 0;
 						}
 						.txtst.al {
+							font-size: 14px;
 							width: 100%;
 						}
 						.maparea {
 							width: 100%;
 						}
 						.txtbt {
-							font-size: 24px;
+							font-size: 20px;
 							line-height: 120%;
 						}
 						.quality {

@@ -4,7 +4,10 @@ import configureStore from 'redux-mock-store';
 import { Attachment } from '../Attachment';
 
 describe('renders without crashing', () => {
-  const initialStoreState = {};
+  const initialStoreState = {
+    widthScroll: 5,
+    heightScroll: 0
+  };
   const mockStore = configureStore();
   let store;
 

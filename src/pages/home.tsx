@@ -172,6 +172,23 @@ export const Home = () => {
                 </div>
               )}
             </div>
+            <div
+              className={retailerClass}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+            >
+              <div className="tab">
+                <div className="space">
+                  <div className="line" />
+                </div>
+                <div className="title">All Retailer</div>
+              </div>
+              {openAllRetailer && (
+                <div className="listpanel">
+                  <div className="listingarea">{dataRequest && ListMarkerComponentMobil(dataRequest)}</div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         {openModal && <ModalFilters setOpenModal={setOpenModal} />}

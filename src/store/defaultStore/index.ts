@@ -134,3 +134,8 @@ export const INITIAL_CENTER_MARKER = {
     }
   }
 };
+
+export const INITIAL_SCROLL = {
+  widthScroll: 0,
+  heightScroll: 0
+};
