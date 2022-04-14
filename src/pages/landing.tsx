@@ -1,22 +1,19 @@
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import ClearIcon from '@mui/icons-material/Clear';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { DropdownCategories } from '../components/DropdownCategories';
 import { DropdownCategoriesMobile } from '../components/DropdownCategoriesMobile';
 import { DropdownGeocoder } from '../components/DropdownGeocoder';
 import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
-import { useScroll } from '../store/hooks/custom/useScroll';
 import { findRegion } from '../utils/findRegion';
 
 export const Landing = () => {
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState() || {};
   const [openCategories, setOpenCategories] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useScroll(ref);
   return (
-    <div className="container" ref={ref}>
+    <div className="container">
       <div className="bg" />
       <div className="pagecontainer">
         <div className="navbar landing">

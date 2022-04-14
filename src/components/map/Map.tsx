@@ -19,6 +19,7 @@ import {
 import { useMap } from '../../store/hooks/custom/useMap';
 import { getDeckInitState } from './defaultGenerator';
 import { useBadge } from '../../store/hooks/custom/useBadge';
+import { useWindowSize } from '../../store/hooks/custom/useWindowSize';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Carto = carto as any;
@@ -28,6 +29,7 @@ export const Map = () => {
   const [currentHovered, setCurrentHovered] = useState<string | undefined>(undefined);
   const { badges } = useBadge(currentHovered);
   const { inputText } = useGeocoderState() || {};
+  const { ref, width } = useWindowSize();
   const {
     layers,
     currentViewstate,
@@ -130,8 +132,8 @@ export const Map = () => {
   }, [layers, hideTooltip, expandTooltip, onLoad, finishRender]);
 
   return (
-    <div className="map-container">
-      <DeckGLComponent {...deckState}>{RenderTooltip({ info: hoverInfo, badges })}</DeckGLComponent>
+    <div className="map-container" ref={ref}>
+      <DeckGLComponent {...deckState}>{RenderTooltip({ info: hoverInfo, badges, width })}</DeckGLComponent>
     </div>
   );
 };

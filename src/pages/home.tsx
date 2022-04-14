@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -11,15 +11,12 @@ import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
 import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 import { useHome } from '../store/hooks/custom/useHome';
-import { useScroll } from '../store/hooks/custom/useScroll';
 
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
   const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useScroll(ref);
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
   let xDown:number | null = null;
   let yDown:number | null = null;
@@ -55,7 +52,7 @@ export const Home = () => {
   };
 
   return (
-    <div className="container" ref={ref}>
+    <div className="container">
       <div className="bgwhite" />
       <figure className="bgnoise home" />
       <div className="barblue home" id="barblue" />
