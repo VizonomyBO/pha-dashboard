@@ -1,3 +1,4 @@
+import { BBOXInterface } from '../../@types/redux';
 import * as TYPES from '../types';
 
 export const setCategoriesSelected = (categoriesSelected: string[]) => (
@@ -39,5 +40,17 @@ export const setCallFilters = (callFilters: boolean) => (
   {
     type: TYPES.CALL_FILTERS,
     callFilters
+  }
+);
+export const setMapViewFilter = (mapViewFilter: boolean) => (
+  {
+    type: TYPES.SET_MAPVIEWFILTER,
+    mapViewFilter
+  }
+);
+export const setBbox = (bbox: BBOXInterface) => (
+  {
+    type: TYPES.SET_BBOX,
+    bbox
   }
 );

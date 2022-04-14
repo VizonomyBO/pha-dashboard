@@ -12,6 +12,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
   onViewStateChange,
   onClickFunction,
   onLoadFunction,
+  onFinishRenderFunction,
   children
 }) => {
   const mapref = useRef(null);
@@ -27,7 +28,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
           onViewStateChange={onViewStateChange}
           onClick={onClickFunction}
           onLoad={onLoadFunction}
-          onAfterRender={() => console.log('finish render')}
+          onAfterRender={onFinishRenderFunction}
         >
           <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
           { children }

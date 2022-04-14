@@ -32,29 +32,30 @@ export const Map = () => {
     layers,
     currentViewstate,
     setCurrentViewState,
-    zoomToCenterMarker
+    zoomToCenterMarker,
+    finishRender
   } = useMap();
   const {
     center, click, elementProperties
   } = useMarkerState() || {};
   const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
-
+  const OFFSET_POPUP = 40;
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
   }, [setCurrentViewState]);
 
   const openPopup = useMemo(() => () => {
-    if (click) {
+    if (click && center[0] && center[1]) {
       const viewportWebMercator = new WebMercatorViewport({
         width: window.innerWidth,
         height: window.innerHeight
       });
-      const newCoord = viewportWebMercator.projectFlat([center[0], center[1]]) as any;
+      const newCoord = viewportWebMercator.projectFlat([center[0], center[1]]);
       const newInfo: PickInfo<Layer<unknown>[]> = {
         x: newCoord[0],
-        y: newCoord[1] + 40,
+        y: newCoord[1] + OFFSET_POPUP,
         object: {
           ...elementProperties,
           geometry: elementProperties.geom,
@@ -69,6 +70,7 @@ export const Map = () => {
     }
   }, [click, center, elementProperties]);
   const onEndTransition = useMemo(() => () => {
+    console.log('on end transition');
     setShouldZoom(false);
     openPopup();
   }, [setShouldZoom, openPopup]);
@@ -120,11 +122,12 @@ export const Map = () => {
         layers,
         onViewStateChange: hideTooltip,
         onClickFunction: expandTooltip,
-        onLoadFunction: onLoad
+        onLoadFunction: onLoad,
+        onFinishRenderFunction: finishRender
       };
       return newDeckState;
     });
-  }, [layers, hideTooltip, expandTooltip, onLoad]);
+  }, [layers, hideTooltip, expandTooltip, onLoad, finishRender]);
 
   return (
     <div className="map-container">

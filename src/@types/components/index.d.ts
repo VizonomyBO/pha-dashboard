@@ -104,7 +104,8 @@ export interface DeckInterface {
   layers: Layer[],
   onClickFunction: (...args) => any,
   onLoadFunction: (...args) => any,
-  onTransitionEnd: (...args) => any
+  onTransitionEnd: (...args) => any,
+  onFinishRenderFunction: (...args) => any
 }
 
 export interface ButtonDashboard {
