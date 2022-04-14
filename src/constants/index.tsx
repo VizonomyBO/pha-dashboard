@@ -32,6 +32,8 @@ export const DEFAULT_VIEW_STATE = {
   pitch: 0,
 };
 
+export const POINTS_OF_INTEREST = 'poi';
+
 export const STATES = [
   'Alabama',
   'Alaska',
