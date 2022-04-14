@@ -43,6 +43,31 @@ export const Map = () => {
     setCurrentViewState(viewState);
   }, [setCurrentViewState]);
 
+  const openPopup = useMemo(() => () => {
+    if (click) {
+      const viewportWebMercator = new WebMercatorViewport({
+        width: window.innerWidth,
+        height: window.innerHeight
+      });
+      const newCoord = viewportWebMercator.projectFlat([center[0], center[1]]) as any;
+      const newInfo: PickInfo<Layer<unknown>[]> = {
+        x: newCoord[0],
+        y: newCoord[1] + 40,
+        object: {
+          ...elementProperties,
+          geometry: elementProperties.geom,
+          type: 'Feature'
+        },
+        coordinate: elementProperties.properties.geom.coordinates
+      };
+      setHoverInfo(newInfo);
+      setCurrentHovered(elementProperties?.properties?.retailer_id);
+    }
+  }, [click, center, elementProperties]);
+  const onEndTransition = useMemo(() => () => {
+    setShouldZoom(false);
+    openPopup();
+  }, [setShouldZoom, openPopup]);
   const changeDeckState = useMemo(() => (viewState: ViewStateInterface) => {
     setDeckState((oldDeckState) => {
       const newDS = {
@@ -51,12 +76,12 @@ export const Map = () => {
           ...viewState,
           transitionInterpolator: new FlyToInterpolator(),
           transitionDuration: 2000,
-          onTransitionEnd: () => setShouldZoom(false)
+          onTransitionEnd: onEndTransition
         }
       };
       return newDS;
     });
-  }, [setDeckState, setShouldZoom]);
+  }, [setDeckState, onEndTransition]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -66,6 +91,7 @@ export const Map = () => {
 
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {
     if (info.object) {
+      console.log('logogog', info);
       setHoverInfo(info);
       const objectTypified = info.object as PropertiesLayer;
       setCurrentHovered(objectTypified?.properties?.retailer_id);
@@ -81,16 +107,9 @@ export const Map = () => {
   useEffect(() => {
     if (center[0] && center[1]) {
       zoomToCenterMarker(center);
+      openPopup();
     }
-    if (click) {
-      const viewportWebMercator = new WebMercatorViewport({
-        width: window.innerWidth,
-        height: window.innerHeight
-      });
-      const { x, y } = viewportWebMercator.project(center) as any;
-      console.info(x, y);
-    }
-  }, [elementProperties, click, center, zoomToCenterMarker]);
+  }, [click, center, zoomToCenterMarker, openPopup]);
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {
