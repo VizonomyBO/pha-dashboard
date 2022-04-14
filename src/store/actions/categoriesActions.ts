@@ -48,7 +48,7 @@ export const setMapViewFilter = (mapViewFilter: boolean) => (
     mapViewFilter
   }
 );
-export const setBbox = (bbox: BBOXInterface) => (
+export const setBbox = (bbox?: BBOXInterface) => (
   {
     type: TYPES.SET_BBOX,
     bbox

@@ -35,7 +35,7 @@ export const useHome = () => {
             accesibility: accesibilities,
             dataSources,
             badges: [],
-            ...(bbox && { bbox })
+            ...(mapViewFilter && { bbox })
           },
           headers
         )
@@ -59,7 +59,7 @@ export const useHome = () => {
         })
         .catch((err) => console.error(err));
     },
-    [categoriesSelected, accesibilities, dataSources, bbox]
+    [categoriesSelected, accesibilities, dataSources, bbox, mapViewFilter]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);
