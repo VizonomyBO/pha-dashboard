@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { saveAs } from 'file-saver';
 import { ButtonDashboard, QueryParams } from '../../@types';
-import { DEFAULT_VALUES_BUTTON } from '../../constants/dashboard';
+import { DEFAULT_VALUES_BUTTON, EXTENSION_CSV, FILENAME_CSV_RETAILER } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
 
@@ -41,7 +41,9 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
     webRequest.post(ENDPOINTS.PHA_RETAILER_CSV(), {
       retailerIds: selectedElements,
     }, headers).then((res) => {
-      res.blob().then((blob) => saveAs(blob, 'pha-reatailer.csv'));
+      const now = new Date();
+      const filename = `${FILENAME_CSV_RETAILER}-${now.toISOString()}${EXTENSION_CSV}`;
+      res.blob().then((blob) => saveAs(blob, filename));
     }).catch((error) => {
       console.error(error);
     });
