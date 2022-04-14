@@ -1227,6 +1227,15 @@ sup {
 						button.light {
 							margin-left: 16px;
 						}
+						.dropdown-content {
+							display: none;
+						}
+						.dropdown {
+							display: inline-block;
+						}
+						.dropdown:hover .dropdown-content {
+							display: block;
+						}
 						.profile {
 							position: relative;
 							.logout {
