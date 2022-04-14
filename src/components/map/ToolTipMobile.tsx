@@ -9,7 +9,7 @@ export const ToolTipMobile = (data: { x: number; y: number; objectTypified: Prop
   return (
     <div className="bmodal">
       <figure className="picture">
-        <img src={`/public/images/${objectTypified?.properties?.owner_photo}`} alt="" />
+        <img src={objectTypified?.properties?.owner_photo} alt="" />
       </figure>
       <div className="detailcard">
         <div className="store">{objectTypified?.properties?.name}</div>
