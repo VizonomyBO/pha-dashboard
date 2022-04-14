@@ -16,7 +16,8 @@ export const useHome = () => {
     categoriesSelected,
     accesibilities,
     dataSources,
-    bbox
+    bbox,
+    mapViewFilter
   } = useCategoriesState() || {};
   const VALUES_PER_PAGE = 10;
   const INIT_PAGE = 1;
@@ -78,10 +79,11 @@ export const useHome = () => {
     [hasNext, updateCurrentPage]
   );
   useEffect(() => {
-    if (callFilters) {
+    if (callFilters || mapViewFilter) {
       getMarkers(INIT_PAGE);
     }
-  }, [callFilters, getMarkers]);
+  }, [callFilters, mapViewFilter, getMarkers, bbox]);
+
   return {
     getMarkers,
     dataRequest,
