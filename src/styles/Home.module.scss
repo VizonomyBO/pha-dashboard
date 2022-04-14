@@ -5665,6 +5665,18 @@ header.topmenu {
 	}
 }
 @media (max-width: 375px) {
+	.table-geocoder {
+		display: none;
+	}
+	header.topmenu {
+		display: block;
+	}
+	.retailerlist {
+		display: block;
+	}
+	.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
+		display: none;
+	}
 	.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
 		display: block;
 	}
