@@ -24,12 +24,26 @@ export const DashboardTable = ({
   };
 
   const selectAll = (checked: boolean) => {
-    let newSelectedElements: string[] = [];
+    let newSelectedElements: Set<string> = new Set(selectedElements);
     if (checked) {
-      newSelectedElements = table.map((item: PhaRetailer) => item.retailer_id || '');
+      const selectedElementsSet = [...selectedElements, ...table.map((item: PhaRetailer) => item.retailer_id || '')];
+      newSelectedElements = new Set(selectedElementsSet);
+    } else {
+      table.forEach((item) => {
+        newSelectedElements.delete(item.retailer_id || '');
+      });
     }
-    setSelectedElements(newSelectedElements);
+    setSelectedElements(Array.from(newSelectedElements));
   };
+
+  const checkAll = () => {
+    let checked = true;
+    table.forEach((item) => {
+      checked = checked && selectedElements.includes(item.retailer_id || '');
+    });
+    return checked;
+  };
+
   return (
     <div className="listarea">
       <div className="tabulardatawrap">
@@ -52,6 +66,7 @@ export const DashboardTable = ({
                     <input
                       type="checkbox"
                       onChange={(e) => selectAll(e.target.checked)}
+                      checked={checkAll()}
                     />
                     <span className="checkmark" />
                   </label>
