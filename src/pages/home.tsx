@@ -15,7 +15,7 @@ import { useHome } from '../store/hooks/custom/useHome';
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
-  const { setMapViewFilter } = useCategoriesDispatch();
+  const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
   let xDown:number | null = null;
@@ -42,6 +42,13 @@ export const Home = () => {
 
   const onClickPlus = () => {
     /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
+  };
+
+  const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMapViewFilter(e.currentTarget.checked);
+    if (!e.currentTarget.checked) {
+      setCallFilters(!e.currentTarget.checked);
+    }
   };
 
   return (
@@ -76,7 +83,7 @@ export const Home = () => {
                     Filter by map view
                     <input
                       type="checkbox"
-                      onChange={(e) => setMapViewFilter(e.currentTarget.checked)}
+                      onChange={changeFilterMapView}
                     />
                     <span className="checkmark ckeckmark-form" />
                   </label>

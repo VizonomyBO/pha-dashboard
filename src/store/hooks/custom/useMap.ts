@@ -140,6 +140,11 @@ export const useMap = () => {
   }, [mapViewFilter, currentViewstate, setBbox]);
 
   useEffect(() => {
+    if (mapViewFilter) {
+      finishRender();
+    }
+  }, [mapViewFilter, finishRender]);
+  useEffect(() => {
     if (callFilters) {
       getLayers();
     }
