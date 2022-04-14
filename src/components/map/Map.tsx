@@ -23,7 +23,8 @@ import { useBadge } from '../../store/hooks/custom/useBadge';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Carto = carto as any;
 export const Map = () => {
-  const { setShouldZoom } = useGeocoderDispatch();
+  const { setShouldZoom, setControllerZoom } = useGeocoderDispatch();
+  const { shouldZoom, controllerZoom } = useGeocoderState() || {};
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const [currentHovered, setCurrentHovered] = useState<string | undefined>(undefined);
   const { badges } = useBadge(currentHovered);
@@ -33,7 +34,8 @@ export const Map = () => {
     currentViewstate,
     setCurrentViewState,
     zoomToCenterMarker,
-    finishRender
+    finishRender,
+    zoomEffect
   } = useMap();
   const {
     center, click, elementProperties
@@ -70,10 +72,12 @@ export const Map = () => {
     }
   }, [click, center, elementProperties]);
   const onEndTransition = useMemo(() => () => {
-    console.log('on end transition');
+    if (!shouldZoom && controllerZoom.type === '') {
+      openPopup();
+    }
     setShouldZoom(false);
-    openPopup();
-  }, [setShouldZoom, openPopup]);
+    setControllerZoom({ value: 0, type: '' });
+  }, [setShouldZoom, openPopup, shouldZoom, setControllerZoom, controllerZoom]);
   const changeDeckState = useMemo(() => (viewState: ViewStateInterface) => {
     setDeckState((oldDeckState) => {
       const newDS = {
@@ -81,7 +85,7 @@ export const Map = () => {
         initialStateView: {
           ...viewState,
           transitionInterpolator: new FlyToInterpolator(),
-          transitionDuration: 2000,
+          transitionDuration: 400,
           onTransitionEnd: onEndTransition
         }
       };
@@ -129,6 +133,12 @@ export const Map = () => {
     });
   }, [layers, hideTooltip, expandTooltip, onLoad, finishRender]);
 
+  useEffect(() => {
+    const { type } = controllerZoom || {};
+    if (type !== '') {
+      zoomEffect(type);
+    }
+  }, [controllerZoom, zoomEffect]);
   return (
     <div className="map-container">
       <DeckGLComponent {...deckState}>{RenderTooltip({ info: hoverInfo, badges })}</DeckGLComponent>

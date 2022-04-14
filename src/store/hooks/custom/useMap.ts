@@ -139,6 +139,18 @@ export const useMap = () => {
     }
   }, [mapViewFilter, currentViewstate, setBbox]);
 
+  const zoomEffect = useMemo(() => (type: string) => {
+    const adder = type === 'in' ? 0.5 : -0.5;
+    setCurrentViewState((oldViewState) => {
+      const newViewState = {
+        ...oldViewState,
+        zoom: oldViewState.zoom + adder,
+        transitionDuration: 400
+      };
+      return newViewState;
+    });
+  }, [setCurrentViewState]);
+
   useEffect(() => {
     if (mapViewFilter) {
       finishRender();
@@ -184,6 +196,7 @@ export const useMap = () => {
     setCurrentViewState,
     shouldZoom,
     zoomToCenterMarker,
-    finishRender
+    finishRender,
+    zoomEffect
   };
 };
