@@ -1227,6 +1227,15 @@ sup {
 						button.light {
 							margin-left: 16px;
 						}
+						.dropdown-content {
+							display: none;
+						}
+						.dropdown {
+							display: inline-block;
+						}
+						.dropdown:hover .dropdown-content {
+							display: block;
+						}
 						.profile {
 							position: relative;
 							.logout {
@@ -2387,16 +2396,16 @@ sup {
 					.bname {
 						width: 100%;
 						display: flex;
-						flex-direction: row;
+						flex-direction: column;
 						justify-content: center;
 						align-items: center;
+						padding-bottom: 32px;
 						.contactname {
-							display: block;
+							display: inline-block;
 							width: 144px;
 							font-family: 'FuturaMedium',sans-serif;
 							font-size: 18px;
 							line-height: 21px;
-							padding-bottom: 32px;
 							text-align: center;
 						}
 					}
