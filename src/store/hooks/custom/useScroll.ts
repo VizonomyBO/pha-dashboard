@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { useScrollDispatch } from '../scrollHook';
 
 export const useScroll = (ref: any) => {
-  const { setScrollWith, setScrollHeight } = useScrollDispatch();
+  const { setScrollWidth, setScrollHeight } = useScrollDispatch();
   useEffect(() => {
     const { current } = ref;
     const trigger = () => {
-      setScrollWith(current.clientWidth);
+      setScrollWidth(current.clientWidth);
       setScrollHeight(current.clientHeight);
     };
 
@@ -16,6 +16,6 @@ export const useScroll = (ref: any) => {
       }
       trigger();
     }
-  }, [ref, setScrollWith, setScrollHeight]);
+  }, [ref, setScrollWidth, setScrollHeight]);
   return {};
 };

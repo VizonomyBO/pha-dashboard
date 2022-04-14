@@ -9,10 +9,10 @@ const defaultState: ScrollInterface = {
 
 const scrollReducer = (state: ScrollInterface = defaultState, action: AnyAction = { type: 'foo' }) => {
   switch (action.type) {
-    case TYPES.SET_SCROLL_WITH:
+    case TYPES.SET_SCROLL_WIDTH:
       return {
         ...state,
-        withScroll: action.payload
+        widthScroll: action.payload
       };
     case TYPES.SET_SCROLL_HEIGHT:
       return {

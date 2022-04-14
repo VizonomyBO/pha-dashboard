@@ -11,7 +11,9 @@ describe('renders without crashing', () => {
       visibility: '',
       local: '',
       meets_need: '',
-    }
+    },
+    widthScroll: 5,
+    heightScroll: 0
   };
   const mockStore = configureStore();
   let store;

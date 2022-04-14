@@ -132,6 +132,6 @@ export interface ModalInderface {
 }
 
 export interface ScrollInterface {
-  withScroll: number,
+  widthScroll: number,
   heightScroll: number
 }

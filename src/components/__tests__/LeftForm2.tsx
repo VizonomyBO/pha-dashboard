@@ -7,7 +7,9 @@ describe('renders without crashing', () => {
   const initialStoreState = {
     marketplace: {
       otherQuestions: {}
-    }
+    },
+    widthScroll: 5,
+    heightScroll: 0
   };
   const mockStore = configureStore();
   let store;

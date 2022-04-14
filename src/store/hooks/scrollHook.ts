@@ -1,22 +1,25 @@
 import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { ScrollInterface } from '../../@types/redux';
-import { setScrollHeight, setScrollWith } from '../actions';
+import { setScrollHeight, setScrollWidth } from '../actions';
 
 export const useScrollState = () => useSelector(
-  (rootState: {modal: ScrollInterface}) => rootState.modal
+  (rootState: {scroll: ScrollInterface}) => rootState.scroll || {
+    widthScroll: 0,
+    heightScroll: 0
+  }
 );
 
 export const useScrollDispatch = () => {
   const dispatch = useDispatch();
-  const setScrollWithMemoized = useMemo(() => (withScroll: number) => {
-    dispatch(setScrollWith(withScroll));
+  const setScrollWidthMemoized = useMemo(() => (widthScroll: number) => {
+    dispatch(setScrollWidth(widthScroll));
   }, [dispatch]);
   const setScrollHeightMemoized = useMemo(() => (heightScroll: number) => {
     dispatch(setScrollHeight(heightScroll));
   }, [dispatch]);
   return {
-    setScrollWith: setScrollWithMemoized,
+    setScrollWidth: setScrollWidthMemoized,
     setScrollHeight: setScrollHeightMemoized
   };
 };

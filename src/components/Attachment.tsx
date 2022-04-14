@@ -1,6 +1,7 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { useAttachmentBusiness } from '../store/hooks/custom/useAttachmentBusiness';
 import { MultimediFileInterface } from '../@types';
+import { useScrollState } from '../store/hooks/scrollHook';
 
 export const Attachment = ({ type }: {type: string}) => {
   const {
@@ -9,7 +10,7 @@ export const Attachment = ({ type }: {type: string}) => {
     removeFile
   } = useAttachmentBusiness({ type });
 
-  const { innerWidth: width } = window;
+  const { widthScroll } = useScrollState();
   const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
   return (
     <div>
@@ -28,7 +29,7 @@ export const Attachment = ({ type }: {type: string}) => {
           />
           <div>
             <label htmlFor={`${type}uploader`}>
-              <p className="fileText">{width > 375 ? 'Browser Files' : 'Browse on your device' }</p>
+              <p className="fileText">{widthScroll > 375 ? 'Browser Files' : 'Browse on your device' }</p>
             </label>
           </div>
         </div>

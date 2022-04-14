@@ -1,8 +1,8 @@
 import * as TYPES from '../types';
 
-export const setScrollWith = (withScroll: number) => ({
-  type: TYPES.SET_SCROLL_WITH,
-  payload: withScroll
+export const setScrollWidth = (widthScroll: number) => ({
+  type: TYPES.SET_SCROLL_WIDTH,
+  payload: widthScroll
 });
 
 export const setScrollHeight = (heightScroll: number) => ({
