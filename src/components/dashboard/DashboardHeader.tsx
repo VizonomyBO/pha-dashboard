@@ -5,10 +5,16 @@ import {
   useEffect,
   useState
 } from 'react';
+import { saveAs } from 'file-saver';
 import { ButtonDashboard, QueryParams } from '../../@types';
 import { DEFAULT_VALUES_BUTTON } from '../../constants/dashboard';
+import { ENDPOINTS } from '../../constants/url';
+import { webRequest } from '../../utils/webRequest';
 
-export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAction<QueryParams>> }) => {
+export const DashboardHeader = ({ setParams, selectedElements }: {
+  setParams: Dispatch<SetStateAction<QueryParams>>,
+  selectedElements: Array<string>,
+}) => {
   const [inputValue, setinputValue] = useState('');
   const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
 
@@ -30,12 +36,23 @@ export const DashboardHeader = ({ setParams }: { setParams: Dispatch<SetStateAct
     });
   };
 
+  const downloadCSV = () => {
+    const headers = webRequest.generateJSONHeader();
+    webRequest.post(ENDPOINTS.PHA_RETAILER_CSV(), {
+      retailerIds: selectedElements,
+    }, headers).then((res) => {
+      res.blob().then((blob) => saveAs(blob, 'pha-reatailer.csv'));
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+
   return (
     <div className="header">
       <div className="sec1">
         <div className="title">Submissions</div>
         <div className="actions">
-          <button className="light btndown" type="button">
+          <button className="light btndown" type="button" onClick={() => downloadCSV()}>
             <span className="icdown" />
             <span className="title">Download CSV</span>
           </button>
