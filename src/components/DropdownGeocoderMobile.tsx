@@ -1,33 +1,21 @@
 import { Result } from '@mapbox/mapbox-gl-geocoder';
-import { useEffect, useRef, useState } from 'react';
-import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
-import { GeocoderService } from '../services/geocoderService';
-import { GEOCODER_MOBILE, REGION, REGION_GEOCODER } from '../constants';
+import { GEOCODER_MOBILE } from '../constants';
+import { useGeocoder } from '../store/hooks/custom/useGeocoder';
+import { findRegion } from '../utils/findRegion';
 
 const name = GEOCODER_MOBILE;
 export const DropdownGeocoderMobile = () => {
-  const geocoderDivRef = useRef<HTMLInputElement>(null);
-  const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
-  const { inputText, options } = useGeocoderState() || {};
-  const [inputTextHtml, setInputTextHtml] = useState('');
-  const geocoder = useRef<GeocoderService>(
-    new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement)
-  );
-  useEffect(() => {
-    geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
-    if (inputText && inputText.text) {
-      geocoder.current.setGeocoderQuery(inputText.text);
-    }
-    setGeocoderOptions([]);
-  }, [geocoder, inputText, setGeocoderOptions]);
-  const inputTextFunction = (e: React.FormEvent<HTMLInputElement>): void => {
-    setInputText({
-      text: e.currentTarget.value,
-      shouldSearch: true,
-      center: [0, 0]
-    });
-    setInputTextHtml(e.currentTarget.value);
-  };
+  const {
+    setInputText,
+    setInputTextHtml,
+    geocoderDivRef,
+    inputText,
+    inputTextHtml,
+    options,
+    setGeocoderOptions,
+    onChangeInput
+  } = useGeocoder(name);
+
   return (
     <>
       <div className="alook">
@@ -38,7 +26,7 @@ export const DropdownGeocoderMobile = () => {
             className="txtd"
             type="text"
             value={inputTextHtml}
-            onChange={inputTextFunction}
+            onChange={onChangeInput}
             placeholder="City or Zip Code"
           />
           <button type="button" className="light">Search</button>
@@ -49,14 +37,7 @@ export const DropdownGeocoderMobile = () => {
           <ul className="table-geocoder-mobile">
             {inputText.shouldSearch
               && options.map((opt: Result) => {
-                let region = '';
-                if (opt.context) {
-                  for (let i = 0; opt.context && i < opt.context.length; i += 1) {
-                    if (opt.context[i].id.includes(REGION)) {
-                      region = opt.context[i].short_code.replace(REGION_GEOCODER, '');
-                    }
-                  }
-                }
+                let { region } = findRegion(opt);
                 region = region === '' ? opt.text : `${opt.text}, ${region}`;
                 return (
                   <li key={`${opt.place_name}index`} className="tr-geocoder">
