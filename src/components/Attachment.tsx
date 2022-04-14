@@ -8,9 +8,9 @@ export const Attachment = ({ type }: {type: string}) => {
     multimedia,
     removeFile
   } = useAttachmentBusiness({ type });
+
   const { innerWidth: width } = window;
   const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
-
   return (
     <div>
       <div className="ainput upload">

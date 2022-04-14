@@ -1,0 +1,2 @@
+export const SET_SCROLL_WITH = 'SET_SCROLL_WITH';
+export const SET_SCROLL_HEIGHT = 'SET_SCROLL_HEIGHT';

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { LeftForm1 } from '../components/LeftForm1';
 import { LeftForm2 } from '../components/LeftForm2';
@@ -20,6 +20,7 @@ import { FormTabType } from '../@types';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { useMarketplaceState, useModalDispatch } from '../store/hooks';
 import { Formvalidation } from '../utils/validation';
+import { useScroll } from '../store/hooks/custom/useScroll';
 
 export const Form = () => {
   const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
@@ -34,6 +35,8 @@ export const Form = () => {
     selectAccessibility,
     otherQuestions
   } = useMarketplaceState();
+  const ref = useRef<HTMLDivElement>(null);
+  useScroll(ref);
   useEffect(() => {
     setFormClass(CLASSES_BY_FORM[activeTab]);
   }, [activeTab]);
@@ -70,7 +73,7 @@ export const Form = () => {
     }
   };
   return (
-    <div className="container">
+    <div className="container" ref={ref}>
       <div className="bgwhite" />
       <figure className="bgnoise home" />
       <div className={barBlueClass} />

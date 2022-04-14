@@ -6,6 +6,7 @@ import individualFormReducer from './individualFormReducers';
 import geocoderReducer from './geocoderReducers';
 import modalReducer from './modalReducers';
 import markerReducer from './markerReducer';
+import scrollReducer from './scrollReducers';
 
 export const reducers = {
   marketplace: marketplaceReducer,
@@ -14,7 +15,8 @@ export const reducers = {
   individualForm: individualFormReducer,
   geocoder: geocoderReducer,
   modal: modalReducer,
-  markerCenter: markerReducer
+  markerCenter: markerReducer,
+  scroll: scrollReducer
 };
 
 export default combineReducers(reducers);
