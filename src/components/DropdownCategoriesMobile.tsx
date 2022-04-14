@@ -1,25 +1,14 @@
 import ClearIcon from '@mui/icons-material/Clear';
 import { CATEGORIES } from '../constants/categories';
 import { FilterType } from '../@types';
-import { useCategoriesDispatch, useCategoriesState } from '../store/hooks';
+import { useDropdownCategoriesMobile } from '../store/hooks/custom/useDropdownCategoriesMobile';
 
 export const DropdownCategoriesMobile = (
   { setOpenCategories }:{setOpenCategories:React.Dispatch<React.SetStateAction<boolean>>}
 ) => {
-  const { setCenterGeocoder } = useCategoriesDispatch();
-  const { categoriesSelected } = useCategoriesState();
-  const categoriesSelect = (e:React.ChangeEvent<HTMLInputElement>, category:FilterType) => {
-    const categoties: string[] = categoriesSelected;
-    if (e.target.checked) {
-      categoties.push(category.attrib);
-      setCenterGeocoder(categoties);
-    } else {
-      const categoriesDeled = categoties.filter((element: string) => (
-        element !== category.attrib
-      ));
-      setCenterGeocoder(categoriesDeled);
-    }
-  };
+  const {
+    categoriesSelect,
+  } = useDropdownCategoriesMobile();
   return (
     <div className="arearesult">
       <div className="tab">

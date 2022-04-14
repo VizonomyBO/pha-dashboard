@@ -44,7 +44,7 @@ export interface imageLinks {
   imagelinks: string;
 }
 
-export type DataPhaDasboardMap = PhaRetailer & Geomtype & imageLinks;
+export type DataPhaDasboardMap = PhaRetailer & Geomtype & imageLinks & { source: string};
 
 export interface DropdowInterface {
   initialState: string,
@@ -102,8 +102,9 @@ export interface DeckInterface {
   onViewStateChange: ViewStateChangeFn,
   controller: boolean,
   layers: Layer[],
-  onClickFunction: <D>(info: PickInfo<D>, e: MouseEvent) => any,
-  onLoadFunction: () => any
+  onClickFunction: (...args) => any,
+  onLoadFunction: (...args) => any,
+  onTransitionEnd: (...args) => any
 }
 
 export interface ButtonDashboard {

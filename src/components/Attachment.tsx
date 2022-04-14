@@ -8,7 +8,7 @@ export const Attachment = ({ type }: {type: string}) => {
     multimedia,
     removeFile
   } = useAttachmentBusiness({ type });
-  const pageWidth = document.documentElement.scrollWidth;
+  const { innerWidth: width } = window;
   const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
 
   return (
@@ -28,7 +28,7 @@ export const Attachment = ({ type }: {type: string}) => {
           />
           <div>
             <label htmlFor={`${type}uploader`}>
-              <p className="fileText">{pageWidth > 375 ? 'Browser Files' : 'Browse on your device' }</p>
+              <p className="fileText">{width > 375 ? 'Browser Files' : 'Browse on your device' }</p>
             </label>
           </div>
         </div>

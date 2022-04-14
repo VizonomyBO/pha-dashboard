@@ -16,3 +16,15 @@ export interface FilterType {
   name: string;
   attrib: string;
 }
+
+export interface RenderToolTipInterface {
+  info: PickInfo<Layer<unknown>[]> | undefined,
+  badges: string[],
+}
+
+interface TooltipProps {
+  x: number,
+  y: number,
+  objectTypified: PropertiesLayer,
+  badges: string[],
+}

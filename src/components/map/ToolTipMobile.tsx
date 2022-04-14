@@ -4,7 +4,7 @@ import { PropertiesLayer } from '../../@types';
 export const ToolTipMobile = (data: { x: number; y: number; objectTypified: PropertiesLayer }) => {
   const { objectTypified } = data;
   const openIndividualForm = () => {
-    console.log('open form');
+    console.info('open form');
   };
   return (
     <div className="bmodal">

@@ -1,20 +1,18 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
-import { DataPhaDasboardMap } from '../@types';
-import { webRequest } from '../utils/webRequest';
-import { ENDPOINTS } from '../constants/url';
 import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
 import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
+import { useHome } from '../store/hooks/custom/useHome';
 
 export const Home = () => {
-  const [dataRequest, setDataRequest] = useState<Array<DataPhaDasboardMap>>([]);
+  const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
@@ -39,18 +37,6 @@ export const Home = () => {
     xDown = null;
     yDown = null;
   };
-  useEffect(() => {
-    webRequest.get(ENDPOINTS.MAP()).then((res) => res.json())
-      .then((res) => {
-        const dataRows: Array<DataPhaDasboardMap> = [];
-        res.data.rows.forEach((element: DataPhaDasboardMap) => {
-          if (element.geom) {
-            dataRows.push(element);
-          }
-        });
-        setDataRequest(dataRows);
-      }).catch((err) => console.error(err));
-  }, []);
 
   const onClickPlus = () => {
     /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
@@ -96,7 +82,9 @@ export const Home = () => {
               <span className="line" />
             </div>
             <div className="listloc">
-              <div className="listingarea">{dataRequest && ListMarkerComponent(dataRequest)}</div>
+              <div className="listingarea" onScroll={scrolledToEnd}>
+                {dataRequest && ListMarkerComponent(dataRequest)}
+              </div>
             </div>
           </div>
           <div className="amap">
@@ -145,7 +133,12 @@ export const Home = () => {
               </div>
               {openAllRetailer && (
                 <div className="listpanel">
-                  <div className="listingarea">{dataRequest && ListMarkerComponentMobil(dataRequest)}</div>
+                  <div
+                    className="listingarea"
+                    onScroll={scrolledToEnd}
+                  >
+                    {dataRequest && ListMarkerComponentMobil(dataRequest)}
+                  </div>
                 </div>
               )}
             </div>

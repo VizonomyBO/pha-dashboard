@@ -10,7 +10,7 @@ export const DropdownCategories = (
   { setOpenCategories }
   : {setOpenCategories:React.Dispatch<React.SetStateAction<boolean>>}
 ) => {
-  const pageWidth = document.documentElement.scrollWidth;
+  const { innerWidth: width } = window;
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
   return (
     <div className="citysearch ">
@@ -38,7 +38,7 @@ export const DropdownCategories = (
           return <em>Select Category</em>;
         }}
       >
-        {pageWidth > 375 && CATEGORIES.map((category: FilterType) => (
+        {width > 375 && CATEGORIES.map((category: FilterType) => (
           <MenuItem key={category.name} value={category.attrib} className="dropdown-categories">
             <ListItemText primary={category.name} className="item-categories" />
             <Checkbox

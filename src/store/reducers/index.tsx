@@ -5,6 +5,7 @@ import sessionReducer from './sessionReducer';
 import individualFormReducer from './individualFormReducers';
 import geocoderReducer from './geocoderReducers';
 import modalReducer from './modalReducers';
+import markerReducer from './markerReducer';
 
 export const reducers = {
   marketplace: marketplaceReducer,
@@ -13,6 +14,7 @@ export const reducers = {
   individualForm: individualFormReducer,
   geocoder: geocoderReducer,
   modal: modalReducer,
+  markerCenter: markerReducer
 };
 
 export default combineReducers(reducers);
