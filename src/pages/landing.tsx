@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 import { DropdownCategories } from '../components/DropdownCategories';
 import { DropdownCategoriesMobile } from '../components/DropdownCategoriesMobile';
 import { DropdownGeocoder } from '../components/DropdownGeocoder';
-import { REGION, REGION_GEOCODER } from '../constants';
 import { useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 import { useScroll } from '../store/hooks/custom/useScroll';
+import { findRegion } from '../utils/findRegion';
 
 export const Landing = () => {
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
@@ -94,14 +94,7 @@ export const Landing = () => {
             <ul className="ul-geocoder-mobile">
               {inputText.shouldSearch
                 && options.map((opt: Result) => {
-                  let region = '';
-                  if (opt.context) {
-                    for (let i = 0; opt.context && i < opt.context.length; i += 1) {
-                      if (opt.context[i].id.includes(REGION)) {
-                        region = opt.context[i].short_code.replace(REGION_GEOCODER, '');
-                      }
-                    }
-                  }
+                  const { region } = findRegion(opt);
                   return (
                     <li key={`${opt.place_name}index`} className="tr-geocoder">
                       <button
