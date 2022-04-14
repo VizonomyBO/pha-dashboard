@@ -28,3 +28,5 @@ interface TooltipProps {
   objectTypified: PropertiesLayer,
   badges: string[],
 }
+
+export interface ZoomInterface {value: number, type: string}
