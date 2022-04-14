@@ -6,7 +6,7 @@ export const useScroll = (ref: any) => {
   useEffect(() => {
     const { current } = ref;
     const trigger = () => {
-      setScrollWith(current.clientWith);
+      setScrollWith(current.clientWidth);
       setScrollHeight(current.clientHeight);
     };
 
