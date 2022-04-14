@@ -37,9 +37,7 @@ export const Profile = () => {
                 </div>
               </div>
               <div className="bname">
-                <div style={{ display: 'inline-block' }}>
-                  <div className="contactname">{showText(profile?.contact_name)}</div>
-                </div>
+                <div className="contactname">{showText(profile?.contact_name)}</div>
                 <div className="contactname">Owner</div>
               </div>
               <div className="contactinf txtbt">Contact Information</div>
