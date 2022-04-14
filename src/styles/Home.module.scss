@@ -3073,6 +3073,25 @@ sup {
 							color: #9F5252;
 						}
 					}
+					.option .chkwrap {
+						.store {
+							padding-left: 16px;
+						}
+						.checkmark {
+							width: 20px;
+							height: 20px;
+							background-color: #fff;
+							border: 2px solid #E3E5E5;
+						}
+						& input:checked ~ .checkmark {
+								background-color: #00BDE3;
+								border-color: #00BDE3;
+								display: block;
+								width: 20px;
+								height: 20px;
+								border-radius: 2px
+						}
+					}
 					table.tlight {
 						width: 100%;
 						border-collapse: collapse;
@@ -4539,6 +4558,25 @@ header.topmenu {
 								color: #9F5252;
 							}
 						}
+						.option .chkwrap {
+							.store {
+								padding-left: 32px;
+							}
+							.checkmark {
+								width: 21px;
+								height: 21px;
+								background-color: #fff;
+								border: 2px solid #E3E5E5;
+							}
+							& input:checked ~ .checkmark {
+									background-color: #00BDE3;
+									border-color: #00BDE3;
+									display: block;
+									width: 21px;
+									height: 21px;
+									border-radius: 2px
+							}
+						}
 						table.tlight {
 							border-radius: 21px;
 							thead {
@@ -4685,6 +4723,9 @@ header.topmenu {
 }
 @media (min-width: 2560px) {
 	.container {
+		.barblue.db {
+			height: 1800px;
+		}
 		.barblue.home {
 			height: 1136px;
 		}
@@ -5245,13 +5286,14 @@ header.topmenu {
 						}
 					}
 					.logout {
-						bottom: -56px;
+						bottom: -72px;
 						button.light {
 							border-radius: 21px;
 							width: 155px;
 							height: 53px;
 							font-family: 'FuturaMedium',sans-serif                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ;
-							font-size: 18px;
+							font-size: 24px;
+							line-height: 160%;
 						}                                                                                                                                                                                                          
 					}
 				}
@@ -5386,6 +5428,11 @@ header.topmenu {
 						font-size: 28px;
 						line-height: 140%;
 					}
+					.bbtm {
+						border-bottom: 2px solid #E3E5E5;
+						padding-top: 40px;
+						padding-bottom: 40px;
+					}
 					.colorstatus {
 						border-radius: 28px;
 						padding: 4px 12px;
@@ -5430,8 +5477,27 @@ header.topmenu {
 							color: #9F5252;
 						}
 					}
+					.option .chkwrap {
+						.store {
+							padding-left: 42px;
+						}
+						.checkmark {
+							width: 36px;
+							height: 36px;
+							background-color: #fff;
+							border: 4px solid #E3E5E5;
+						}
+						& input:checked ~ .checkmark {
+						    background-color: #00BDE3;
+						    border-color: #00BDE3;
+						    display: block;
+						    width: 36x;
+						    height: 36px;
+						    border-radius: 4px
+						}
+					}
 					table.tlight {
-						border-radius: 21px;
+						border-radius: 28px;
 						thead {
 							tr {
 								&::after {
@@ -5440,7 +5506,7 @@ header.topmenu {
 								}
 								th {
 									font-family: "FuturaMedium",sans-serif;
-									font-size: 21px;
+									font-size: 28px;
 									line-height: 140%;
 									.toptrim {
 										height: 32px;
@@ -5457,8 +5523,8 @@ header.topmenu {
 										display: block;
 										width: 100%;
 										height: 32px;
-										border-bottom-left-radius: 21px;
-										border-bottom-right-radius: 21px;
+										border-bottom-left-radius: 28px;
+										border-bottom-right-radius: 28px;
 									}
 									.navfooter {
 										display: flex;
@@ -5468,7 +5534,16 @@ header.topmenu {
 											display: flex;
 											justify-content: flex-start;
 											width: 20%;
-											padding-left: 24px																																													;
+											padding-left: 24px;
+											border-radius: 36px;
+											button.light {
+												border-radius: 36px;
+												padding: 13px 42px;
+											}
+											.icarrowleftpag {
+												width: 28px;
+												height: 28px;
+											}																																			;
 										}
 										.pagination {
 											display: flex;
@@ -5484,8 +5559,8 @@ header.topmenu {
 												height: 34px;
 												border-radius: 8px;
 												font-family: "FuturaBold",sans-serif;
-												font-size: 16px;
-												line-height: 16px;
+												font-size: 24px;
+												line-height: 24px;
 												text-decoration: none;
 												color: #161A23;
 												margin-right: 8px;
@@ -5504,6 +5579,14 @@ header.topmenu {
 											justify-content: flex-end;
 											width: 20%;
 											padding-right: 24px;
+											button.light {
+												border-radius: 36px;
+												padding: 13px 42px;
+											}
+											.icarrowrightpag {
+												width: 28px;
+												height: 28px;
+											}
 										}
 										button.light {
 											padding: 8px 24px;
@@ -5513,7 +5596,8 @@ header.topmenu {
 											display: flex;
 											justify-content: center;
 											align-items: center;
-											font-size: 21px;
+											font-family: 'FuturaMedium',sans-serif;
+											font-size: 28px;
 											.title {
 												padding-left: 8px;
 											}
