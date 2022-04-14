@@ -220,9 +220,6 @@
     text-align:justify;
     scroll-behavior: smooth;
 } */
-.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
-	display: none;
-}
 button.light {
     border-radius: none;
     font-family: "FuturaLight", sans-serif;
@@ -1383,11 +1380,7 @@ sup {
 						}
 					}
 				}
-				.smcitysearch.close {
-					display: none;
-				}
 				.smcitysearch {
-					display: flex;
 					display: flex;
 					justify-content: center;
 					align-items: center;
@@ -1422,6 +1415,9 @@ sup {
 							background-color: #0099B8;
 						}
 					}
+				}
+				.smcitysearch {
+					display: none;
 				}
 			}
 		}
@@ -5586,6 +5582,9 @@ header.topmenu {
 @media (max-width: 375px) {
 	.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
 		display: block;
+	}
+	.container .pagecontainer .ldgsearchstore .alook .citysearch {
+		display: none;
 	}
 	header.topmenu {
 		display: block;

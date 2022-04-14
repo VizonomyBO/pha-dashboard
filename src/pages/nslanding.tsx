@@ -45,13 +45,12 @@ export const Nslanding = () => {
               <span className="iccrosshair" />
             </div>
             <div className="space" />
-            <div className="citysearch close">
+            <div className="citysearch">
               <i className="icsearch" />
               <span className="txtd">What</span>
               <input type="text" placeholder="Select Category" />
               <button type="button" className="light">Search</button>
             </div>
-            {/* <div className="smcitysearch close"> */}
             <div className="smcitysearch">
               <i className="icsearch" />
               <span className="txtd">What</span>
@@ -60,7 +59,6 @@ export const Nslanding = () => {
             </div>
           </div>
         </div>
-        {/* <div className="arearesult close"> */}
       </div>
       <div className="arearesult close">
         <div className="tab">
