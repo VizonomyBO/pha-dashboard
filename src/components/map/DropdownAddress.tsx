@@ -3,6 +3,7 @@ import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { useMarketplaceDispatch } from '../../store/hooks';
 import {
   GEOCODER_ADDRESS,
+  POINTS_OF_INTEREST,
   TYPE_BUSINESS
 } from '../../constants';
 import { useGeocoder } from '../../store/hooks/custom/useGeocoder';
@@ -41,6 +42,7 @@ export const DropdownAddress = ({ type }: { type: string }) => {
             {inputText.shouldSearch
               && options.map((opt: Result) => {
                 const { region, regionShortcode } = findRegion(opt);
+                const addressText = regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`;
                 return (
                   <li key={`${opt.place_name}index${type}`} className="tr-geocoder">
                     <button
@@ -54,12 +56,12 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                           center: opt.center,
                           bbox: opt?.bbox || []
                         });
-                        setInputTextHtml(regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`);
+                        setInputTextHtml(addressText);
                         setGeocoderOptions([]);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[0]);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[1]);
-                        setBusinessDetails(type, regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`);
-                        if (opt.place_type.includes('poi')) {
+                        setBusinessDetails(type, addressText);
+                        if (opt.place_type.includes(POINTS_OF_INTEREST)) {
                           const { zipcode, city, state } = getAddressFields(opt.place_name);
                           setBusinessDetails(TYPE_BUSINESS.CITY, city);
                           setBusinessDetails(TYPE_BUSINESS.STATE, state);
@@ -73,7 +75,7 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                     >
                       <label>
                         <span className="span-geocoder">
-                          {regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`}
+                          {addressText}
                         </span>
                       </label>
                     </button>
