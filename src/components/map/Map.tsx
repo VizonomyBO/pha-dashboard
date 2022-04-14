@@ -4,6 +4,7 @@ import {
   useEffect,
   useMemo
 } from 'react';
+import * as carto from '@deck.gl/carto';
 import { Layer, PickInfo, WebMercatorViewport } from 'deck.gl';
 import { FlyToInterpolator } from '@deck.gl/core';
 import { useGeocoderDispatch, useGeocoderState, useMarkerState } from '../../store/hooks';
@@ -20,6 +21,7 @@ import { getDeckInitState } from './defaultGenerator';
 import { useBadge } from '../../store/hooks/custom/useBadge';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
+const Carto = carto as any;
 export const Map = () => {
   const { setShouldZoom } = useGeocoderDispatch();
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
@@ -60,7 +62,7 @@ export const Map = () => {
         },
         coordinate: elementProperties.properties.geom.coordinates,
         index: 0,
-        layer: undefined
+        layer: new Carto.CartoLayer({})
       };
       setHoverInfo(newInfo);
       setCurrentHovered(elementProperties?.properties?.retailer_id);

@@ -27,6 +27,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
           onViewStateChange={onViewStateChange}
           onClick={onClickFunction}
           onLoad={onLoadFunction}
+          onAfterRender={() => console.log('finish render')}
         >
           <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
           { children }
