@@ -1,6 +1,8 @@
 import { Dispatch, SetStateAction } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
+import { TYPE_BUSINESS } from '../../constants';
+import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
 import { showText } from '../../utils/textFormatter';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
@@ -13,6 +15,12 @@ export const DashboardTable = ({
   selectedElements: Array<string>,
   setSelectedElements: Dispatch<SetStateAction<Array<string>>>,
 }) => {
+  const { setModal } = useModalDispatch();
+  const {
+    setContactName,
+    setContactEmail,
+    setBusinessDetails,
+  } = useMarketplaceDispatch();
   const handleSelected = (checked: boolean, item: PhaRetailer) => {
     let newSelectedElements: string[];
     if (checked) {
@@ -39,6 +47,18 @@ export const DashboardTable = ({
   const checkAll = () => {
     const checked = table.every((element) => selectedElements.includes(element.retailer_id || ''));
     return checked;
+  };
+
+  const showModal = (item: PhaRetailer) => {
+    setContactName(item.contact_name);
+    setContactEmail(item.contact_email);
+    setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, item.address_1);
+    setBusinessDetails(TYPE_BUSINESS.ADDRESS_2, item.address_2);
+    setBusinessDetails(TYPE_BUSINESS.ZIPCODE, item.zipcode);
+    setBusinessDetails(TYPE_BUSINESS.NAME, item.name);
+    setBusinessDetails(TYPE_BUSINESS.PHONE, item.phone);
+    setBusinessDetails(TYPE_BUSINESS.CITY, item.city);
+    setModal({ open: true, type: true });
   };
 
   return (
@@ -78,7 +98,7 @@ export const DashboardTable = ({
           </thead>
           <tbody
             style={{
-              display: 'block', overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
+              overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
             }}
           >
             {table.map((item: PhaRetailer) => (
@@ -114,7 +134,11 @@ export const DashboardTable = ({
                   </div>
                 </td>
                 <td className="wcol6 bbtm padright">
-                  <button className="light view txt2" type="button">
+                  <button
+                    type="button"
+                    className="light view txt2"
+                    onClick={() => showModal(item)}
+                  >
                     View
                   </button>
                 </td>

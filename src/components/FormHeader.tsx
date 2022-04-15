@@ -5,7 +5,7 @@ import { Formvalidation } from '../utils/validation';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
 import { useMarketplaceState, useModalDispatch } from '../store/hooks';
 
-export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => {
+export const FormHeader = ({ showBackArrow, activeTab, setActiveTab }: FormHeaderInterface) => {
   const {
     businessDetails,
     selectCategory,
@@ -30,6 +30,7 @@ export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => 
   };
   return (
     <div className="header">
+      {showBackArrow && (
       <div className="backlink">
         <Link to="/home">
           <button className="light" type="button">
@@ -39,6 +40,7 @@ export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => 
           </button>
         </Link>
       </div>
+      )}
       <h2 className="sectitle">Marketplace Request Form</h2>
       <p className="secdescription">Have a location listed by completing the form below</p>
       <div
