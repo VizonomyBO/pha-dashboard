@@ -37,7 +37,5 @@ export const STYLE_ACTIVATOR_BUTTON_ACTIVATE = {
 };
 
 export const STYLE_INDICATOR_CONTAINER = {
-  zIndex: 253,
-  top: '604px',
-  left: '-136px'
+  zIndex: 253
 };

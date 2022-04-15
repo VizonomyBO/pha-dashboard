@@ -6769,3 +6769,46 @@ header.topmenu {
 	}
 	/* end profile */
 }
+
+/* fix for login page carousel */
+.container {
+	.bglogin {
+		.carrosel {
+			.css-1m9128y {
+				position: absolute;
+				top: 608px;
+				left: 570px;
+				width: 128px;
+			}
+		}
+	}
+}
+@media (min-width: 1920px) {
+	.container {
+		.bglogin {
+			.carrosel {
+				.css-1m9128y {
+					position: absolute;
+					top: 816px;
+					left: 753px;
+					width: 152px;
+				}
+			}
+		}
+	}
+}
+@media (min-width: 2560px) {
+	.container {
+		.bglogin {
+			.carrosel {
+				.css-1m9128y {
+					position: absolute;
+					top: 1098px;
+					left: 986px;
+					width: 200px;
+				}
+			}
+		}
+	}
+}
+/* end fix for login page carousel */
