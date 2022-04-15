@@ -4,7 +4,22 @@ import configureStore from 'redux-mock-store';
 import { RightForm } from '../RightForm';
 
 describe('renders without crashing', () => {
-  const initialStoreState = {};
+  const initialStoreState = {
+    marketplace: {
+      selectCategory: {
+        supermarket: 'Yes',
+        corner_store: 'Yes',
+        dollar_stores: 'Yes',
+        food_pantry: 'Yes',
+        distribution: 'Yes',
+        food_co_op: 'Yes',
+      },
+      selectAccessibility: {
+        wic_accepted: true,
+        snap_accepted: true
+      }
+    },
+  };
   const mockStore = configureStore();
   let store;
 

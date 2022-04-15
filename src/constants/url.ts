@@ -12,6 +12,7 @@ export const ENDPOINTS = {
   LOGIN: () => `${URL}/auth/login`,
   PHA_RETAILERS: (params?: string) => `${URL}/${CARTODB}/pha-retailer${addQueryParams(params)}`,
   PHA_INDIVIDUAL: (params?: string) => `${URL}/${CARTODB}/pha-individual${addQueryParams(params)}`,
+  PHA_RETAILERS_ID: (id: string | undefined) => `${URL}/${CARTODB}/pha-retailer/${id}`,
   MAP: () => `${URL}/${CARTODB}/pha-retailer`,
   POST_PHA_RETAILERS: () => `${URL}/${CARTODB}/pha-individual`,
   PROFILE: (id: string | undefined) => `${URL}/${CARTODB}/profile/${id}`,

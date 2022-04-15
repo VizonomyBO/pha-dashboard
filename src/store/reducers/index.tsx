@@ -7,6 +7,7 @@ import geocoderReducer from './geocoderReducers';
 import modalReducer from './modalReducers';
 import markerReducer from './markerReducer';
 import scrollReducer from './scrollReducers';
+import tabReducer from './tabReducer';
 
 export const reducers = {
   marketplace: marketplaceReducer,
@@ -16,7 +17,8 @@ export const reducers = {
   geocoder: geocoderReducer,
   modal: modalReducer,
   markerCenter: markerReducer,
-  scroll: scrollReducer
+  scroll: scrollReducer,
+  tab: tabReducer
 };
 
 export default combineReducers(reducers);

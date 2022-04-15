@@ -3,7 +3,7 @@ import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { DropdownAddress } from './map/DropdownAddress';
 
-export const LeftForm1 = () => {
+export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
   return (
@@ -36,11 +36,26 @@ export const LeftForm1 = () => {
             <sup>*</sup>
           </label>
         </div>
-        <div className="dropdownAddress">
-          <DropdownAddress
-            type={TYPE_BUSINESS.ADDRESS_1}
-          />
-        </div>
+        {
+          isEdit ? (
+            <div className="ainput">
+              <input
+                className="light"
+                type="text"
+                onChange={
+                (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, e.target.value)
+              }
+                value={businessDetails && businessDetails.address_1}
+              />
+            </div>
+          ) : (
+            <div className="dropdownAddress">
+              <DropdownAddress
+                type={TYPE_BUSINESS.ADDRESS_1}
+              />
+            </div>
+          )
+        }
       </div>
       <div className="item">
         <div className="title">

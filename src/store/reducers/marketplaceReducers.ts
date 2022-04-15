@@ -119,6 +119,14 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
           contact_patron: action.payload
         }
       };
+    case TYPES.SET_SELECT_CATEGORY:
+      return {
+        ...state,
+        selectCategory: {
+          ...state.selectCategory,
+          [action.payload]: action.value
+        }
+      };
     case TYPES.SET_SELECT_CATEGORY_SUPERMARKET:
       return {
         ...state,

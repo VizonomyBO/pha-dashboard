@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import { FormHeaderInterface, FormTabType } from '../@types';
 import { Formvalidation } from '../utils/validation';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
-import { useMarketplaceState, useModalDispatch } from '../store/hooks';
+import {
+  useMarketplaceState,
+  useModalDispatch,
+  useTabDispatch,
+  useTabState
+} from '../store/hooks';
 
-export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => {
+export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
   const {
     businessDetails,
     selectCategory,
@@ -13,32 +18,60 @@ export const FormHeader = ({ activeTab, setActiveTab }: FormHeaderInterface) => 
     otherQuestions
   } = useMarketplaceState();
   const { setModal } = useModalDispatch();
+  const { activeTab } = useTabState();
+  const { setActiveTab } = useTabDispatch();
   const businessClass = classNames('option', { active: activeTab === BUSINESS_DETAILS });
   const otherClass = classNames('option', { active: activeTab === OTHER_QUESTIONS });
   const contactClass = classNames('option', { active: activeTab === CONTACT_DETAILS });
   const validationForm = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const estate = Formvalidation(
-      event.target.value,
-      activeTab,
-      businessDetails,
-      selectCategory,
-      selectAccessibility,
-      otherQuestions
-    );
-    setModal({ type: estate.type, open: estate.open });
-    setActiveTab(estate.value as FormTabType);
+    if (showBackArrow) {
+      const estate = Formvalidation(
+        event.target.value,
+        activeTab,
+        businessDetails,
+        selectCategory,
+        selectAccessibility,
+        otherQuestions
+      );
+      setModal({ type: estate.type, open: estate.open });
+      setActiveTab(estate.value as FormTabType);
+    } else {
+      setActiveTab(event.target.value as FormTabType);
+    }
   };
   return (
     <div className="header">
-      <div className="backlink">
-        <Link to="/home">
-          <button className="light" type="button">
-            <span className="icarrowleft">
-              <span className="txt">Back to Locations</span>
-            </span>
+      {showBackArrow ? (
+        <div className="backlink">
+          <Link to="/home">
+            <button className="light" type="button">
+              <span className="icarrowleft">
+                <span className="txt">Back to Locations</span>
+              </span>
+            </button>
+          </Link>
+        </div>
+      ) : (
+        <div
+          className="backlink"
+          style={{
+            justifyContent: 'flex-end'
+          }}
+        >
+          <button
+            className="light"
+            type="button"
+            style={{
+              fontSize: '20px'
+            }}
+            onClick={() => {
+              setModal({ type: false, open: false });
+            }}
+          >
+            X
           </button>
-        </Link>
-      </div>
+        </div>
+      )}
       <h2 className="sectitle">Marketplace Request Form</h2>
       <p className="secdescription">Have a location listed by completing the form below</p>
       <div

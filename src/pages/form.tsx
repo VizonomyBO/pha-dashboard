@@ -1,11 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LeftForm1 } from '../components/LeftForm1';
-import { LeftForm2 } from '../components/LeftForm2';
-import { LeftForm3 } from '../components/LeftForm3';
-import { FormHeader } from '../components/FormHeader';
-import { RightForm } from '../components/RightForm';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import {
@@ -20,12 +15,14 @@ import { FormTabType } from '../@types';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { useMarketplaceState, useModalDispatch } from '../store/hooks';
 import { Formvalidation } from '../utils/validation';
+import { FormArea } from '../components/FormArea';
+import { useTabDispatch, useTabState } from '../store/hooks/tabHook';
 
 export const Form = () => {
-  const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
-  const [formClass, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
+  const { activeTab } = useTabState();
+  const { setActiveTab } = useTabDispatch();
+  const [, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
-  const formAreaClass = classNames('formarea', { [formClass]: true });
   const { setModal } = useModalDispatch();
   const navigate = useNavigate();
   const {
@@ -77,33 +74,10 @@ export const Form = () => {
       <div className="pagecontainer">
         <Navbar />
         <Header />
-        <div className={formAreaClass}>
-          <FormHeader
-            activeTab={activeTab}
-            setActiveTab={setActiveTab}
-          />
-          <div className="group">
-            <div className="left">
-              {activeTab === BUSINESS_DETAILS && (
-                <LeftForm1 />
-              )}
-              {activeTab === OTHER_QUESTIONS && (
-                <LeftForm2 />
-              )}
-              {activeTab === CONTACT_DETAILS && (
-                <LeftForm3 />
-              )}
-              <div className="aaction">
-                <button className="light" type="button" onClick={clickProceed}>
-                  Proceed
-                </button>
-              </div>
-            </div>
-            <div className="right">
-              <RightForm />
-            </div>
-          </div>
-        </div>
+        <FormArea
+          isModal={false}
+          clickProceed={clickProceed}
+        />
       </div>
       <ModalRequestForm />
     </div>

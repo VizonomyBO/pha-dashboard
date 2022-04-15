@@ -31,8 +31,7 @@ export interface HeaderInterface {
 
 export type FormTabType = typeof BUSINESS_DETAILS | typeof OTHER_QUESTIONS | typeof CONTACT_DETAILS;
 export interface FormHeaderInterface {
-  activeTab: FormTabType,
-  setActiveTab: (value: FormTabType) => void,
+  showBackArrow: boolean;
 }
 export type Geomtype = {
   geom: {
