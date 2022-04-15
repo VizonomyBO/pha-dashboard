@@ -1819,10 +1819,12 @@ sup {
 				.bmodal {
 					position: absolute;
 					top: 300px;
-					right: 29px;
-					width: 350px;
-					height: 128px;
-					left: 9px;
+					/* right: 29px; */
+					/* width: 350px; */
+					width: 95%;
+					/* height: 128px; */
+					height: 152px;
+					left: 8px;
 					background-color: #fff;
 					border-radius: 16px;
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -1874,8 +1876,10 @@ sup {
 							color: #7A7E80;
 							padding-bottom: 4px;
 						}
-						.description {
-	
+						.services {
+							.kind {
+								margin-right: 4px;
+							}
 						}
 						.phone {
 							display: flex;
@@ -2435,7 +2439,7 @@ sup {
 					.bname {
 						width: 100%;
 						display: flex;
-						flex-direction: row;
+						flex-direction: column;
 						justify-content: center;
 						align-items: center;
 						.contactname {
@@ -2444,8 +2448,14 @@ sup {
 							font-family: 'FuturaMedium',sans-serif;
 							font-size: 18px;
 							line-height: 21px;
-							padding-bottom: 32px;
+							/* padding-bottom: 32px; */
 							text-align: center;
+						}
+						.contactname:first-child {
+							padding-bottom: 8px;
+						}
+						.contactname:nth-child(2) {
+							padding-bottom: 32px;
 						}
 					}
 					
@@ -5723,7 +5733,7 @@ header.topmenu {
 		}
 	}
 }
-@media (max-width: 380px) {
+@media (max-width: 428px) {
 	.table-geocoder {
 		display: none;
 	}
@@ -6271,6 +6281,7 @@ header.topmenu {
 											.desc {
 												font-family: "FuturaMedium", sans-serif;
 												font-size: 8px;
+												padding-top: 2px;
 											}
 											.desc.red {
 												color: #E40000;
