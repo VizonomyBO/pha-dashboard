@@ -159,6 +159,22 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
           food_pantry: action.payload
         }
       };
+    case TYPES.IMAGES_FILES:
+      console.log(action);
+      console.log(JSON.stringify({
+        ...state,
+        files: {
+          ...state.files,
+          [action.payload]: action.value
+        }
+      }, null, 2));
+      return {
+        ...state,
+        files: {
+          ...state.files,
+          [action.payload]: action.value
+        }
+      };
     case TYPES.SET_SELECT_CATEGORY_DISTRIBUTION:
       return {
         ...state,
