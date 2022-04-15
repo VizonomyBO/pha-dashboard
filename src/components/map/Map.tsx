@@ -25,11 +25,10 @@ import { useWindowSize } from '../../store/hooks/custom/useWindowSize';
 const Carto = carto as any;
 export const Map = () => {
   const { setShouldZoom, setControllerZoom } = useGeocoderDispatch();
-  const { shouldZoom, controllerZoom } = useGeocoderState() || {};
+  const { shouldZoom, controllerZoom, inputText } = useGeocoderState() || {};
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const [currentHovered, setCurrentHovered] = useState<string | undefined>(undefined);
   const { badges } = useBadge(currentHovered);
-  const { inputText } = useGeocoderState() || {};
   const { ref, width } = useWindowSize();
   const {
     layers,

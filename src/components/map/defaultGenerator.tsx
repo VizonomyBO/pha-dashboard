@@ -16,7 +16,7 @@ export const getLatLonViewport = (inputText: InputTextInterface) => {
         [inputText.bbox[2], inputText.bbox[3]]
       ],
       {
-        padding: 200
+        padding: window.innerWidth < 1000 ? 0 : 200
       }
     );
     return newviewport;

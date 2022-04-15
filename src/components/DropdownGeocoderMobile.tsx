@@ -2,6 +2,7 @@ import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { GEOCODER_MOBILE } from '../constants';
 import { useGeocoder } from '../store/hooks/custom/useGeocoder';
 import { findRegion } from '../utils/findRegion';
+import { useGeocoderDispatch } from '../store/hooks';
 
 const name = GEOCODER_MOBILE;
 export const DropdownGeocoderMobile = () => {
@@ -15,6 +16,7 @@ export const DropdownGeocoderMobile = () => {
     setGeocoderOptions,
     onChangeInput
   } = useGeocoder(name);
+  const { setShouldZoom } = useGeocoderDispatch();
 
   return (
     <>
@@ -29,7 +31,13 @@ export const DropdownGeocoderMobile = () => {
             onChange={onChangeInput}
             placeholder="City or Zip Code"
           />
-          <button type="button" className="light">Search</button>
+          <button
+            type="button"
+            className="light"
+            onClick={() => setShouldZoom(true)}
+          >
+            Search
+          </button>
         </div>
       </div>
       <div className="geocoder-block">
@@ -51,7 +59,7 @@ export const DropdownGeocoderMobile = () => {
                           center: opt.center,
                           bbox: opt?.bbox || []
                         });
-                        setInputTextHtml(region);
+                        setInputTextHtml(region === '' ? opt.text : `${opt.text}, ${region}`);
                         setGeocoderOptions([]);
                       }}
                     >
