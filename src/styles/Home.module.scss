@@ -529,7 +529,8 @@ sup {
 		height: 344px;
 	}
 	.barblue.form1 {
-		height: 1800px;
+		/* height: 1800px; */
+		height: 2000px;
 	}
 	.barblue.form2 {
 		height: 2700px;
@@ -3900,7 +3901,7 @@ header.topmenu {
 		.bgnoise.home {}
 		.barblue.home { height: 650px;}
 		.barblue.form1 {
-			height: 2300px;
+			height: 2800px;
 		}
 		.barblue.db {
 			height: 800px;
@@ -4296,7 +4297,8 @@ header.topmenu {
 			}
 			/*end home*/
 			.formarea {
-				padding: 46px 48px;
+				padding: 46px 64px;
+				width: 1344px;
 				.header {
 					.backlink {
 						padding-bottom: 54px;
@@ -4387,11 +4389,13 @@ header.topmenu {
 									.checkmark {
 										width: 26px;
 										height: 26px;
-										background-color: #E3E5E5;
+										background-color: #fff;
+										border:2px solid #E3E5E5;
 									}
 								}
 								.chkwrap input:checked ~ .checkmark {
 									background-color: #00BCE4;
+									border:2px solid #00BCE4;
 								}
 							}
 						}
@@ -4798,6 +4802,9 @@ header.topmenu {
 					padding-bottom: 42px;
 				}
 			}
+		}
+		.barblue.form1 {
+			height: 3100px;
 		}
 		/* end login */
 		.barblue.home {
@@ -5304,11 +5311,13 @@ header.topmenu {
 									.checkmark {
 										width: 36px;
 										height: 36px;
-										background-color: #E3E5E5;
+										background-color: #fff;
+										border:3px solid #E3E5E5;
 									}
 								}
 								.chkwrap input:checked ~ .checkmark {
 									background-color: #00BCE4;
+									border:3px solid #00BCE4;
 								}
 							}
 						}
