@@ -7,7 +7,6 @@ import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
 import { QueriesInterface } from '../../../@types/redux';
 import { useGeocoderState } from '../geocoderHook';
-import { ICON_MAPPING } from '../../../constants';
 import PinRed from '../../../components/map/ic-pin-red.svg';
 import PinBlue from '../../../components/map/ic-pin-blue.svg';
 import PinGreen from '../../../components/map/ic-pin-green.svg';
@@ -73,11 +72,17 @@ export const useMap = () => {
         data: query,
         pointType: 'icon',
         pickable: true,
-        getIconSize: () => 29,
-        getIconColor: () => [255, 0, 0],
-        getIcon: () => 'marker',
-        iconMapping: ICON_MAPPING,
-        iconAtlas: getPinColor(originTable)
+        sizeScale: 10,
+        getIconSize: () => 30,
+        getIcon: () => ({
+          id: 'marker',
+          url: getPinColor(originTable),
+          anchorY: 60,
+          height: 70,
+          width: 50,
+          getCursor: () => 'pointer',
+          zIndex: 2
+        })
       });
       return cartoLayer;
     },

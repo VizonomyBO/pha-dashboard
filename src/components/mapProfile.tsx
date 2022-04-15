@@ -4,6 +4,7 @@ import { PhaRetailer } from '../@types/database';
 import { deckDefaults } from './map/deckDefaults';
 import { IconLayerData } from './map/IconLayerData';
 import { BASEMAP, BASEMAP_SATELLITE } from '../constants';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const MapProfile = (profile?: PhaRetailer | null) => {
   const [initDeckDefault, setInitDeckDefault] = useState({
