@@ -28,7 +28,6 @@ export const Form = () => {
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const { setModal } = useModalDispatch();
   const navigate = useNavigate();
-  console.log(navigate);
   const {
     businessDetails,
     selectCategory,
@@ -72,9 +71,7 @@ export const Form = () => {
       // eslint-disable-next-line max-len
       const body = bodyGen(businessDetails)(contactDetails)(otherQuestions)(selectCategory)(selectAccessibility)(files)()();
       const formData = new FormData();
-      console.log('mierda ', body);
       formData.append('json', JSON.stringify(body.json));
-      console.log(body.images, body.ownerimages);
       body.images.forEach((image: Blob) => {
         formData.append('images', image);
       });
@@ -90,8 +87,7 @@ export const Form = () => {
           console.log(res);
           setModal({ type: estate.type, open: estate.open });
           setTimeout(() => {
-            console.log('im rederecting');
-            // navigate('/home');
+            navigate('/home');
           }, PAGE_REDIRECT_TIME);
         }
       });

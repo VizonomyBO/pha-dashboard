@@ -59,9 +59,7 @@ export interface FileInterface {
   type: string,
   webkitRelativePath: string,
 }
-export interface MultimediaInterface {
-  file?: FileInterface | FileList,
-}
+export type MultimediaInterface = Blob;
 
 export interface MultimediFileInterface {
   file?: {

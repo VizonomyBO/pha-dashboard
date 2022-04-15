@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { FileInterface, MultimediFileInterface } from '../../../@types';
 import { INDIVIDUAL_FORM, TYPE_INDIVIDUAL_FORM } from '../../../constants';
 import { useIndividualFormDispatch } from '../individualFormHook';
 import { useMarketplaceDispatch } from '../marketplaceHook';
@@ -10,23 +9,12 @@ export const useAttachmentBusiness = ({ type, subType }: {
 }) => {
   const { setImagesFiles } = useMarketplaceDispatch();
   const { setIndividualForm } = useIndividualFormDispatch();
-  const [multimedia, setMultimedia] = useState<MultimediFileInterface[]>([]);
+  const [multimedia, setMultimedia] = useState<Blob[]>([]);
   const filesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFiles: FileInterface[] | FileList | null = e.target.files;
-    const newObjects: MultimediFileInterface[] = [];
+    const newFiles = e.target.files;
+    const newObjects: Blob[] = [];
     for (let i = 0; newFiles && i < newFiles.length; i += 1) {
-      newObjects.push(
-        {
-          file: {
-            lastModified: newFiles[i].lastModified,
-            lastModifiedDate: newFiles[i].lastModified,
-            name: newFiles[i].name,
-            size: newFiles[i].size,
-            type: newFiles[i].type,
-            webkitRelativePath: newFiles[i].webkitRelativePath
-          }
-        }
-      );
+      newObjects.push(newFiles[i]);
     }
     setMultimedia([...multimedia, ...newObjects]);
     if (type === INDIVIDUAL_FORM) {

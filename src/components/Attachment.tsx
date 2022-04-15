@@ -12,7 +12,7 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
   } = useAttachmentBusiness({ type, subType });
   const { ref, width } = useWindowSize();
   const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
-
+  console.info(multimedia, removeFile, CloseIcon, generateKey);
   return (
     <div ref={ref}>
       <div className="ainput upload">
@@ -37,6 +37,7 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
       </div>
       <div className="fileContent">
         {
+          /*
           multimedia.map((element: MultimediFileInterface, index: number) => (
             <span
               key={generateKey(element, index)}
@@ -48,7 +49,7 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
                 style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
               />
             </span>
-          ))
+          )) */
         }
       </div>
     </div>

@@ -165,7 +165,6 @@ export const setBusinessFile = (type: string, value: MultimediaInterface[]) => (
 };
 
 export const setImagesFiles = (type: string, value: MultimediaInterface[]) => (dispatch: Dispatch) => {
-  console.log('FFFFFFFFFFFFFFFFUUUUUUUUUUUUUUUUUCCCCCCCCCCCCCCKKKKKKKKKK ', type, value);
   dispatch({
     type: TYPES.IMAGES_FILES,
     payload: type,
