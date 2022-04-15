@@ -63,8 +63,10 @@ export interface FilesInterface {
   bussines: unknown[],
   owner: unknown[],
   media: null | MediaInterface,
+  images: Blob[],
+  ownerimages: Blob[]
 }
-export interface selectCategoryInterface {
+export interface SelectCategoryInterface {
   supermarket: string,
   corner_store: string,
   dollar_stores: string,
@@ -72,7 +74,7 @@ export interface selectCategoryInterface {
   distribution: string,
   food_co_op: string,
 }
-export interface selectAccessibilityInterface {
+export interface SelectAccessibilityInterface {
   wic_accepted: string,
   snap_accepted: string,
 }
@@ -82,8 +84,8 @@ export interface MarketplaceInterface {
   files: FilesInterface,
   otherQuestions: OtherQuestionsInterface,
   contactDetails: ContactDetailsInterface,
-  selectCategory: selectCategoryInterface,
-  selectAccessibility: selectAccessibilityInterface,
+  selectCategory: SelectCategoryInterface,
+  selectAccessibility: SelectAccessibilityInterface,
 }
 
 export interface SessionInterface {
