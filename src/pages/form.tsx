@@ -57,8 +57,11 @@ export const Form = () => {
       selectAccessibility,
       otherQuestions
     );
-    setModal({ type: estate.type, open: estate.open });
+    if (!estate.type) {
+      setModal({ type: estate.type, open: true });
+    }
     if (value === HOME) {
+      setModal({ type: estate.type, open: estate.open });
       setTimeout(() => {
         navigate('/home');
       }, PAGE_REDIRECT_TIME);
