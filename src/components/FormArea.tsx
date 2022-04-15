@@ -40,19 +40,59 @@ export const FormArea = ({
       <div className="group">
         <div className="left">
           {activeTab === BUSINESS_DETAILS && (
-          <LeftForm1 isEdit />
+            <LeftForm1 isEdit />
           )}
           {activeTab === OTHER_QUESTIONS && (
-          <LeftForm2 />
+            <LeftForm2 />
           )}
           {activeTab === CONTACT_DETAILS && (
-          <LeftForm3 />
+            <LeftForm3 />
           )}
-          <div className="aaction">
-            <button className="light" type="button" onClick={clickProceed}>
-              Proceed
-            </button>
-          </div>
+          {
+            isModal ? (
+              <div className="aaction">
+                <button className="light" type="button" onClick={clickProceed} style={{ padding: '16px 30px' }}>
+                  Approve
+                </button>
+                <button
+                  className="light"
+                  type="button"
+                  onClick={clickProceed}
+                  style={{
+                    backgroundColor: 'white',
+                    padding: '16px 30px',
+                    color: '#0099B8',
+                    border: '2px solid #E3E5E5',
+                    margin: '4px'
+                  }}
+                >
+                  Decline
+                </button>
+                <button
+                  className="light"
+                  type="button"
+                  onClick={clickProceed}
+                  style={{
+                    backgroundColor: 'white',
+                    padding: '16px 30px',
+                    color: '#E40000',
+                    border: '2px solid #E40000',
+                    margin: '4px'
+                  }}
+                >
+                  Delete
+                </button>
+              </div>
+            )
+              : (
+                <div className="aaction">
+                  <button className="light" type="button" onClick={clickProceed}>
+                    Proceed
+                  </button>
+                </div>
+              )
+
+          }
         </div>
         <div className="right">
           <RightForm />
