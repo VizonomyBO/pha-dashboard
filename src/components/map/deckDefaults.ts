@@ -1,4 +1,4 @@
-import { DEFAULT_VIEW_STATE } from '../../constants/index';
+import { BASEMAP, DEFAULT_VIEW_STATE } from '../../constants/index';
 import { DeckInterface } from '../../@types';
 
 export const deckDefaults: DeckInterface = {
@@ -9,5 +9,6 @@ export const deckDefaults: DeckInterface = {
   onClickFunction: () => '',
   onLoadFunction: () => '',
   onTransitionEnd: () => '',
-  onFinishRenderFunction: () => ''
+  onFinishRenderFunction: () => '',
+  currentBasemap: BASEMAP
 };

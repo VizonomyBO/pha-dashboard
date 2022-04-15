@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { DeckGL } from 'deck.gl';
 import Map from 'react-map-gl';
-import { MAPBOX_KEY, BASEMAP, NO_DATA } from '../../constants/index';
+import { MAPBOX_KEY, NO_DATA } from '../../constants/index';
 import { NoDataProvided } from '../NoDataProvided';
 import { DeckInterface } from '../../@types';
 
@@ -13,6 +13,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
   onClickFunction,
   onLoadFunction,
   onFinishRenderFunction,
+  currentBasemap,
   children
 }) => {
   const mapref = useRef(null);
@@ -30,7 +31,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
           onLoad={onLoadFunction}
           onAfterRender={onFinishRenderFunction}
         >
-          <Map ref={mapref} reuseMaps mapStyle={BASEMAP} mapboxAccessToken={MAPBOX_KEY} />
+          <Map ref={mapref} reuseMaps mapStyle={currentBasemap} mapboxAccessToken={MAPBOX_KEY} />
           { children }
         </DeckGL>
       )}

@@ -105,7 +105,8 @@ export interface DeckInterface {
   onClickFunction: (...args) => any,
   onLoadFunction: (...args) => any,
   onTransitionEnd: (...args) => any,
-  onFinishRenderFunction: (...args) => any
+  onFinishRenderFunction: (...args) => any,
+  currentBasemap: string
 }
 
 export interface ButtonDashboard {

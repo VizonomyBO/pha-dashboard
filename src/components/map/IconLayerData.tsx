@@ -3,17 +3,17 @@ import { IconLayer } from '@deck.gl/layers';
 import PinRed from './ic-pin-red.svg';
 import PinBlue from './ic-pin-blue.svg';
 import PinGreen from './ic-pin-green.svg';
-import { DataPhaDasboardMap } from '../../@types';
+import { PhaRetailer } from '../../@types/database';
 
 const COLORS = { GREEN: 'green', BLUE: 'blue' };
 
-export const IconLayerData = (data: Array<DataPhaDasboardMap>) => (
-  data.map((item: DataPhaDasboardMap) => {
+export const IconLayerData = (data: PhaRetailer[]) => (
+  data.map((item: PhaRetailer) => {
     let icon = PinRed;
-    if (item.geom.type === COLORS.BLUE) {
+    if (item?.geom?.type === COLORS.BLUE) {
       icon = PinBlue;
     }
-    if (item.geom.type === COLORS.GREEN) {
+    if (item?.geom?.type === COLORS.GREEN) {
       icon = PinGreen;
     }
     return new IconLayer({
@@ -28,9 +28,9 @@ export const IconLayerData = (data: Array<DataPhaDasboardMap>) => (
         getCursor: () => 'pointer',
         zIndex: 2
       }),
-      getPosition: (d: unknown) => ((d as DataPhaDasboardMap).geom.coordinates as Position), // TODO fix any
+      getPosition: (d: unknown) => ((d as PhaRetailer)?.geom?.coordinates as Position),
       getSize: () => 5,
-      sizeScale: 10,
+      sizeScale: 5,
       pickable: true,
       style: 'cursor:pointer;',
       getCursor: () => 'pointer',

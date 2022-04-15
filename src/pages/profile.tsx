@@ -4,8 +4,7 @@ import { Navbar } from '../components/Navbar';
 import { BADGES } from '../constants';
 import { useProfile } from '../store/hooks/custom/useProfile';
 import { formatPhone, showSchedule, showText } from '../utils/textFormatter';
-import { deckDefaults } from '../components/map/deckDefaults';
-import { DeckGLComponent } from '../components/map/DeckGlComponent';
+import { MapProfile } from '../components/mapProfile';
 
 export const Profile = () => {
   const { profile, badges } = useProfile();
@@ -160,34 +159,7 @@ export const Profile = () => {
                   badges.map((badge) => (<Badge key={badge} {...BADGES[badge]} />))
                 }
               </div>
-              <div className="maparea">
-                <div className="opkindmap">
-                  <button type="button" className="light active btn1">
-                    Map
-                  </button>
-                  <button type="button" className="light btn2">
-                    Satelite
-                  </button>
-                </div>
-                <div className="controlzoom">
-                  <div className="zplus">
-                    <button type="button" className="light">
-                      <span className="iczplus" />
-                    </button>
-                  </div>
-                  <div className="space">
-                    <div className="line" />
-                  </div>
-                  <div className="zminus">
-                    <button type="button" className="light">
-                      <span className="iczminus" />
-                    </button>
-                  </div>
-                </div>
-                <div className="somethingareaexample">
-                  <DeckGLComponent {...deckDefaults} />
-                </div>
-              </div>
+              <MapProfile {...profile} />
               <div className="txtbt">About our location</div>
               <p className="txtst al">
                 {showText(profile?.description)}

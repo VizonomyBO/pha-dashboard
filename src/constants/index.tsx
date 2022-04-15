@@ -17,6 +17,7 @@ export const REGION = 'region';
 export const INDIVIDUAL_FORM = 'individualForm';
 export const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_KEY || NO_DATA;
 export const BASEMAP = 'mapbox://styles/vizonomy/cl0zk8u1o002w15pvqr3t0e1b';
+export const BASEMAP_SATELLITE = 'mapbox://styles/vizonomy/cl0zka27x000m14qxfq4d8pn6';
 export const CLASSES_BY_FORM = {
   [BUSINESS_DETAILS]: 'form1',
   [OTHER_QUESTIONS]: 'form2',
@@ -28,6 +29,14 @@ export const DEFAULT_VIEW_STATE = {
   latitude: 39.02,
   longitude: -96,
   zoom: 3.1,
+  bearing: 0,
+  pitch: 0,
+};
+
+export const DEFAULT_VIEW_STATE_PROFILE = {
+  latitude: 39.02,
+  longitude: -96,
+  zoom: 15,
   bearing: 0,
   pitch: 0,
 };
