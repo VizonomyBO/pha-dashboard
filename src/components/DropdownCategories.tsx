@@ -5,13 +5,8 @@ import ListItemText from '@mui/material/ListItemText';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
 import { CATEGORIES } from '../constants/categories';
 import { FilterType } from '../@types';
-import { useScrollState } from '../store/hooks/scrollHook';
 
-export const DropdownCategories = (
-  { setOpenCategories }
-  : {setOpenCategories:React.Dispatch<React.SetStateAction<boolean>>}
-) => {
-  const { widthScroll } = useScrollState();
+export const DropdownCategories = () => {
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
   return (
     <div className="citysearch ">
@@ -23,9 +18,6 @@ export const DropdownCategories = (
         displayEmpty
         value={categoriesSelected || []}
         onChange={handleChange}
-        onMouseEnter={() => {
-          setOpenCategories(true);
-        }}
         renderValue={(selected: string[] | undefined) => {
           if (selected) {
             if (selected.length === 0) {
@@ -39,7 +31,7 @@ export const DropdownCategories = (
           return <em>Select Category</em>;
         }}
       >
-        {widthScroll > 375 && CATEGORIES.map((category: FilterType) => (
+        {CATEGORIES.map((category: FilterType) => (
           <MenuItem key={category.name} value={category.attrib} className="dropdown-categories">
             <ListItemText primary={category.name} className="item-categories" />
             <Checkbox

@@ -1386,6 +1386,44 @@ sup {
 						}
 					}
 				}
+				.smcitysearch.close {
+					display: none;
+				}
+				.smcitysearch {
+					justify-content: center;
+					align-items: center;
+					padding:8px ;
+					width: 384px;
+					.txtd {
+						font-family: "FuturaMedium", sans-serif;
+						font-size: 14px;
+						font-weight: 500;
+						color: #7A7E80;
+						padding: 0 0 0 4px;
+					}
+					input[type=text] {
+						-webkit-appearance: none;
+						font-family: "FuturaMedium", sans-serif;
+						font-size: 14px;
+						border: none;
+						outline: none;
+						width: 228px;
+						padding-left: 8px;
+						color: #161A23;
+					}
+					button.light {
+						padding: 7px 42px;
+						background-color: #00BDE3;
+						font-family: "FuturaBold", sans-serif;
+						border-radius: 20px;
+						color: #fff;
+						font-size: 16px;
+						line-height: 24px;
+						&:hover {
+							background-color: #0099B8;
+						}
+					}
+				}
 			}
 		}
 		/* end landing */ 
@@ -3768,7 +3806,19 @@ header.topmenu {
 .retailerlist-show {
 	display: none;
 }
-
+.supermarketfilter {
+	color: transparent;
+	background-color: transparent;
+	border-color: transparent;
+}
+.addlistening {
+	color: transparent;
+	background-color: transparent;
+	border-color: transparent;
+}
+.smcitysearch{
+	display: none ;
+}
 /* end deshabilitados para desktop */
 /* set dropdowns style */
 .container {
@@ -5526,6 +5576,12 @@ header.topmenu {
 	.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
 		display: none;
 	}
+	.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
+		display: block;
+	}
+	.container .pagecontainer .ldgsearchstore .alook .citysearch {
+		display: none;
+	}
 	.container {
 		height: 100vh;
 		.arearesult.close {
@@ -6144,6 +6200,37 @@ header.topmenu {
 							margin-top: 8px;
 							width: 100%;
 							font-size: 16px;
+						}
+					}
+					.smcitysearch 	 {
+						width: 100%;
+						flex-wrap: wrap;
+						justify-content: flex-start;
+						padding-bottom: 16px;
+						padding-left: 0px;
+						padding-top: 15px;
+						i.icsearch {
+						}
+						.txtd {
+							font-size: 14px;
+						}
+						input[type=text] {
+							color: #161A23;
+							font-weight: 600;
+							width: 208px;
+							font-size: 14px;
+						}
+						button.light {
+							margin-top: 8px;
+							width: 100%;
+							font-size: 16px;
+							background-color: #00BDE3 !important;
+						}
+						button.light:hover {
+							margin-top: 8px;
+							width: 100%;
+							font-size: 16px;
+							border-radius: 20px;
 						}
 					}
 				}
