@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Badge } from '../components/map/Badge';
 import { Navbar } from '../components/Navbar';
@@ -33,10 +34,12 @@ export const Profile = () => {
         <div className="userprofile">
           <div className="pheader">
             <div className="backlink">
-              <button type="button" className="light">
-                <span className="icarrowleft" />
-                <span className="txt">Back to Locations</span>
-              </button>
+              <Link to="/home">
+                <button type="button" className="light">
+                  <span className="icarrowleft" />
+                  <span className="txt">Back to Locations</span>
+                </button>
+              </Link>
             </div>
             <button type="button" className="light">
               Help Improve This Listing
