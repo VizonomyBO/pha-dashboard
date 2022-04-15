@@ -3,9 +3,14 @@ import { Link } from 'react-router-dom';
 import { FormHeaderInterface, FormTabType } from '../@types';
 import { Formvalidation } from '../utils/validation';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
-import { useMarketplaceState, useModalDispatch } from '../store/hooks';
+import {
+  useMarketplaceState,
+  useModalDispatch,
+  useTabDispatch,
+  useTabState
+} from '../store/hooks';
 
-export const FormHeader = ({ showBackArrow, activeTab, setActiveTab }: FormHeaderInterface) => {
+export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
   const {
     businessDetails,
     selectCategory,
@@ -13,20 +18,26 @@ export const FormHeader = ({ showBackArrow, activeTab, setActiveTab }: FormHeade
     otherQuestions
   } = useMarketplaceState();
   const { setModal } = useModalDispatch();
+  const { activeTab } = useTabState();
+  const { setActiveTab } = useTabDispatch();
   const businessClass = classNames('option', { active: activeTab === BUSINESS_DETAILS });
   const otherClass = classNames('option', { active: activeTab === OTHER_QUESTIONS });
   const contactClass = classNames('option', { active: activeTab === CONTACT_DETAILS });
   const validationForm = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const estate = Formvalidation(
-      event.target.value,
-      activeTab,
-      businessDetails,
-      selectCategory,
-      selectAccessibility,
-      otherQuestions
-    );
-    setModal({ type: estate.type, open: estate.open });
-    setActiveTab(estate.value as FormTabType);
+    if (showBackArrow) {
+      const estate = Formvalidation(
+        event.target.value,
+        activeTab,
+        businessDetails,
+        selectCategory,
+        selectAccessibility,
+        otherQuestions
+      );
+      setModal({ type: estate.type, open: estate.open });
+      setActiveTab(estate.value as FormTabType);
+    } else {
+      setActiveTab(event.target.value as FormTabType);
+    }
   };
   return (
     <div className="header">

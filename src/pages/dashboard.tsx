@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
 import { DashboardTable } from '../components/dashboard/DashboardTable';
@@ -7,11 +6,8 @@ import { useModalDispatch, useModalState } from '../store/hooks';
 import { useDashboard } from '../store/hooks/custom/useDashboard';
 import { authorizationManager } from '../utils/authorizationManager';
 import { FormArea } from '../components/FormArea';
-import { BUSINESS_DETAILS } from '../constants';
-import { FormTabType } from '../@types';
 
 export const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
   const navigate = useNavigate();
   const { open } = useModalState();
   const { setModal } = useModalDispatch();
@@ -35,8 +31,6 @@ export const Dashboard = () => {
         && (
         <FormArea
           isModal
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
           clickProceed={() => {
             setModal({ open: false, type: false });
           }}

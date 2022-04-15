@@ -11,7 +11,7 @@ const tabReducer = (state: TabStateInterface = {
     case TYPES.SET_ACTIVE_TAB:
       return {
         ...state,
-        sessionState: action.payload
+        activeTab: action.value
       };
     default:
       return {

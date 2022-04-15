@@ -16,9 +16,12 @@ import { ModalRequestForm } from '../components/ModalRequestForm';
 import { useMarketplaceState, useModalDispatch } from '../store/hooks';
 import { Formvalidation } from '../utils/validation';
 import { FormArea } from '../components/FormArea';
+import { useTabDispatch, useTabState } from '../store/hooks/tabHook';
+
 
 export const Form = () => {
-  const [activeTab, setActiveTab] = useState(BUSINESS_DETAILS as FormTabType);
+  const { activeTab } = useTabState();
+  const { setActiveTab } = useTabDispatch();
   const [, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const { setModal } = useModalDispatch();
@@ -74,8 +77,6 @@ export const Form = () => {
         <Header />
         <FormArea
           isModal={false}
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
           clickProceed={clickProceed}
         />
       </div>

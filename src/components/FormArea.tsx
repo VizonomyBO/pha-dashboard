@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { LeftForm1 } from './LeftForm1';
 import { LeftForm2 } from './LeftForm2';
 import { LeftForm3 } from './LeftForm3';
@@ -11,19 +11,16 @@ import {
   CONTACT_DETAILS,
   OTHER_QUESTIONS
 } from '../constants';
-import { FormTabType } from '../@types';
+import { useTabState } from '../store/hooks';
 
 export const FormArea = ({
   isModal,
-  activeTab,
-  setActiveTab,
   clickProceed,
 }: {
   isModal: boolean;
-  activeTab: FormTabType;
-  setActiveTab: Dispatch<SetStateAction<FormTabType>>;
   clickProceed: () => void;
 }) => {
+  const { activeTab } = useTabState();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
   const formAreaClass = classNames('formarea', { [formClass]: true });
 
@@ -34,8 +31,6 @@ export const FormArea = ({
     >
       <FormHeader
         showBackArrow={!isModal}
-        activeTab={activeTab}
-        setActiveTab={setActiveTab}
       />
       <div className="group">
         <div className="left">
