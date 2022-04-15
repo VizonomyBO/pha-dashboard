@@ -49,10 +49,10 @@ export interface PhaRetailer {
   produce_avail_seasonally: string,
   owner_photo?: string,
   owner_name?: string,
-  contact_name: string,
-  contact_email: string,
-  contact_owner: string,
-  contact_patron: string,
+  contact_name: string | undefined,
+  contact_email: string | undefined,
+  contact_owner: string | undefined,
+  contact_patron: string | undefined,
   general_store: string,
   grocery_store: string,
   submission_date: string,
@@ -97,3 +97,6 @@ export interface MarkerCenterInterface {
   click: boolean,
   elementProperties: PropertiesLayer
 }
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type CompletelyIntentionalAny = any;

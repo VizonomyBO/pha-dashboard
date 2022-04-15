@@ -9,6 +9,7 @@ import { FormArea } from '../components/FormArea';
 import { webRequest } from '../utils/webRequest';
 import { ENDPOINTS } from '../constants/url';
 import { ROW_STATUS } from '../constants/dashboard';
+import { CompletelyIntentionalAny } from '../@types/database';
 
 export const Dashboard = () => {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export const Dashboard = () => {
           isModal
           clickApprove={() => {
             const headers = webRequest.generateJSONHeader();
-            const body: any = {
+            const body: CompletelyIntentionalAny = {
               name: businessDetails.name,
               address_1: businessDetails.address_1,
               address_2: businessDetails.address_2,
@@ -95,7 +96,7 @@ export const Dashboard = () => {
               snap_accepted: selectAccessibility.snap_accepted,
               wic_accepted: selectAccessibility.wic_accepted,
             };
-            const newBody: any = {};
+            const newBody: CompletelyIntentionalAny = {};
             Object.keys(body).forEach((k) => {
               newBody[k] = body[k].split("'").join("\\'");
             });
