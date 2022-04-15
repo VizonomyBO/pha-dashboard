@@ -28,7 +28,7 @@ export const DashboardNavbar = () => {
               <div className="profile dropdown">
                 <button className="light" type="button">
                   <figure className="picture">
-                    <img src="/images/img_user.png" alt="" />
+                    <img src="/images/profile.png" alt="" />
                   </figure>
                 </button>
                 <div className="dropdown-content logout">
