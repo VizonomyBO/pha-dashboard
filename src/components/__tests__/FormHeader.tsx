@@ -29,6 +29,7 @@ describe('renders without crashing', () => {
       <Provider store={store}>
         <MemoryRouter>
           <FormHeader
+            showBackArrow
             activeTab="businessDetails"
             setActiveTab={setActiveTabMock}
           />

@@ -33,7 +33,7 @@ export const FormArea = ({
       style={isModal ? { overflow: 'auto' } : {}}
     >
       <FormHeader
-        showBackArrow={isModal}
+        showBackArrow={!isModal}
         activeTab={activeTab}
         setActiveTab={setActiveTab}
       />
