@@ -1,23 +1,24 @@
 import classNames from 'classnames';
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
+import { useCategoriesDispatch, useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
 import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
 import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 import { useHome } from '../store/hooks/custom/useHome';
-import { useScroll } from '../store/hooks/custom/useScroll';
 
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
+  const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
+  const { setControllerZoom } = useGeocoderDispatch();
+  const { controllerZoom } = useGeocoderState();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  useScroll(ref);
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
   let xDown:number | null = null;
   let yDown:number | null = null;
@@ -41,12 +42,23 @@ export const Home = () => {
     yDown = null;
   };
 
-  const onClickPlus = () => {
-    /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
+  const onClickChange = (e: string) => {
+    const adder = e === 'in' ? 0.5 : -0.5;
+    setControllerZoom({
+      value: controllerZoom.value + adder,
+      type: e
+    });
+  };
+
+  const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMapViewFilter(e.currentTarget.checked);
+    if (!e.currentTarget.checked) {
+      setCallFilters(!e.currentTarget.checked);
+    }
   };
 
   return (
-    <div className="container" ref={ref}>
+    <div className="container">
       <div className="bgwhite" />
       <figure className="bgnoise home" />
       <div className="barblue home" id="barblue" />
@@ -75,7 +87,10 @@ export const Home = () => {
                 <div className="option">
                   <label className="chkwrap">
                     Filter by map view
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      onChange={changeFilterMapView}
+                    />
                     <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
@@ -94,7 +109,13 @@ export const Home = () => {
             <Map />
             <div className="controlzoom">
               <div className="zplus">
-                <button className="light" type="button" id="zoomIn" aria-label="Zoom in" onClick={onClickPlus}>
+                <button
+                  className="light"
+                  type="button"
+                  id="zoomIn"
+                  aria-label="Zoom in"
+                  onClick={() => onClickChange('in')}
+                >
                   <span className="iczplus" />
                 </button>
               </div>
@@ -102,7 +123,13 @@ export const Home = () => {
                 <div className="line" />
               </div>
               <div className="zminus">
-                <button className="light" type="button">
+                <button
+                  className="light"
+                  type="button"
+                  id="zoomOut"
+                  aria-label="Zoom out"
+                  onClick={() => onClickChange('out')}
+                >
                   <span className="iczminus" />
                 </button>
               </div>

@@ -51,11 +51,16 @@ export const Nslanding = () => {
               <input type="text" placeholder="Select Category" />
               <button type="button" className="light">Search</button>
             </div>
+            <div className="smcitysearch">
+              <i className="icsearch" />
+              <span className="txtd">What</span>
+              <input type="text" placeholder="Select Category" />
+              <button type="button" className="light">Search</button>
+            </div>
           </div>
         </div>
-        {/* <div className="arearesult close"> */}
       </div>
-      <div className="arearesult">
+      <div className="arearesult close">
         <div className="tab">
           {/* <div className="space">
             <div className="line" />

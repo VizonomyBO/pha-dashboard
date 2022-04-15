@@ -16,22 +16,10 @@ export const Nsdashboard = () => {
                 <nav className="menu">
                   <ol>
                     <li>
-                      <a href="#0">Individual</a>
+                      <a href="#0">Individual Forms</a>
                     </li>
                     <li className="active">
-                      <a href="#0">Dashboard</a>
-                    </li>
-                    <li>
-                      <a href="#0">Projects</a>
-                    </li>
-                    <li>
-                      <a href="#0">Tasks</a>
-                    </li>
-                    <li>
-                      <a href="#0">Reporting</a>
-                    </li>
-                    <li>
-                      <a href="#0">Users</a>
+                      <a href="#0">Retailer Forms</a>
                     </li>
                   </ol>
                 </nav>
@@ -45,7 +33,7 @@ export const Nsdashboard = () => {
                   <div className="profile">
                     <button type="button" className="light">
                       <figure className="picture">
-                        <img src="/public/images/img_user.png" alt="" />
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="" />
                       </figure>
                     </button>
                     <div className="logout">

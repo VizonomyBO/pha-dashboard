@@ -97,7 +97,8 @@ export const INITIAL_CATEGORIES = {
   badges: [],
   dataSources: ['retailers_pha'],
   callFilters: true,
-  zoomCenter: true
+  zoomCenter: true,
+  mapViewFilter: false
 };
 
 export const INITIAL_GEOCODER_STATE = {
@@ -108,7 +109,11 @@ export const INITIAL_GEOCODER_STATE = {
     bbox: []
   },
   options: [],
-  shouldZoom: false
+  shouldZoom: false,
+  controllerZoom: {
+    value: 0,
+    type: ''
+  }
 };
 
 export const INITIAL_MODAL_STATE = {

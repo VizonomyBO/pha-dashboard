@@ -8,7 +8,13 @@ import { authorizationManager } from '../utils/authorizationManager';
 export const Dashboard = () => {
   const navigate = useNavigate();
   const token = authorizationManager.getToken();
-  const { table, setParams, totalElements } = useDashboard();
+  const {
+    table,
+    setParams,
+    totalElements,
+    selectedElements,
+    setSelectedElements
+  } = useDashboard();
 
   if (!token) {
     navigate('/login');
@@ -21,8 +27,14 @@ export const Dashboard = () => {
       <div className="pagecontainer">
         <DashboardNavbar />
         <div className="dashboard">
-          <DashboardHeader setParams={setParams} />
-          <DashboardTable table={table} setParams={setParams} totalElements={totalElements} />
+          <DashboardHeader setParams={setParams} selectedElements={selectedElements} />
+          <DashboardTable
+            table={table}
+            setParams={setParams}
+            totalElements={totalElements}
+            selectedElements={selectedElements}
+            setSelectedElements={setSelectedElements}
+          />
         </div>
       </div>
     </div>

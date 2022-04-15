@@ -106,14 +106,18 @@ export interface IndividualFormInterface {
   multimedia?: MediaInterface[],
 }
 
+export interface BBOXInterface {xmin: number, ymin: number, xmax: number, ymax: number}
+
 export interface CategoriesInterface {
   categoriesSelected: string[],
   center: number[],
   accesibilities: string[],
   dataSources: string[],
   badges: string[],
+  bbox?: BBOXInterface,
   callFilters: boolean,
   zoomCenter: boolean,
+  mapViewFilter: boolean
 }
 
 export interface QueriesInterface {

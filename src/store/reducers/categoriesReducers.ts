@@ -39,6 +39,16 @@ const categoriesReducer = (state: CategoriesInterface = defaultState, action: An
         ...state,
         callFilters: action.callFilters
       };
+    case TYPES.SET_MAPVIEWFILTER:
+      return {
+        ...state,
+        mapViewFilter: action.mapViewFilter
+      };
+    case TYPES.SET_BBOX:
+      return {
+        ...state,
+        bbox: action.bbox
+      };
     case TYPES.INIT:
       return INITIAL_CATEGORIES;
     default:

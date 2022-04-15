@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { SetStateAction } from 'react';
 import { Layer } from 'deck.gl';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../../constants';
@@ -104,7 +105,8 @@ export interface DeckInterface {
   layers: Layer[],
   onClickFunction: (...args) => any,
   onLoadFunction: (...args) => any,
-  onTransitionEnd: (...args) => any
+  onTransitionEnd: (...args) => any,
+  onFinishRenderFunction: (...args) => any
 }
 
 export interface ButtonDashboard {

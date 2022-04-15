@@ -8,5 +8,6 @@ export const deckDefaults: DeckInterface = {
   layers: [],
   onClickFunction: () => '',
   onLoadFunction: () => '',
-  onTransitionEnd: () => ''
+  onTransitionEnd: () => '',
+  onFinishRenderFunction: () => ''
 };

@@ -9,7 +9,7 @@ import { FilterType } from '../@types';
 export const DropdownCategories = () => {
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
   return (
-    <div className="citysearch ">
+    <div className="citysearch">
       <i className="icsearch" />
       <span className="txtd">What</span>
       <Select

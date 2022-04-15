@@ -15,6 +15,8 @@ export const ENDPOINTS = {
   MAP: () => `${URL}/${CARTODB}/pha-retailer`,
   POST_PHA_RETAILERS: () => `${URL}/${CARTODB}/pha-individual`,
   PROFILE: (id: string | undefined) => `${URL}/${CARTODB}/profile/${id}`,
+  PHA_RETAILER_CSV: () => `${URL}/${CARTODB}/pha-retailer/download`,
+  PHA_INDIVIDUAL_CSV: () => `${URL}/${CARTODB}/pha-individual/download`,
   GET_LAYERS: `${URL}/${CARTODB}/layers`,
   GET_MARKERS: `${URL}/${CARTODB}/map-table`
 };
