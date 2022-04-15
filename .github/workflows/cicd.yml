@@ -18,39 +18,39 @@ env:
   ENV_FILE: ${{ secrets.ENV }}
 
 jobs:
-  build:
-    name: Build React App
-    runs-on: ubuntu-latest
+  # build:
+    # name: Build React App
+    # runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+    # strategy:
+    #   matrix:
+    #     node-version: [16.x]
+    #     # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    # steps:
+    # - name: Checkout repository
+    #   uses: actions/checkout@v2
 
-    - name: Create env file
-      run: |
-        echo $ENV_FILE | base64 --decode > .env
+    # - name: Create env file
+    #   run: |
+    #     echo $ENV_FILE | base64 --decode > .env
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2
-      with:
-        node-version: ${{ matrix.node-version }}
+    # - name: Use Node.js ${{ matrix.node-version }}
+    #   uses: actions/setup-node@v2
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
 
-    - name: Install dependencies
-      run: yarn install
+    # - name: Install dependencies
+    #   run: yarn install
 
-    - name: Run lint
-      run: yarn lint
+    # - name: Run lint
+    #   run: yarn lint
 
-    - name: Run test
-      run: yarn test
+    # - name: Run test
+    #   run: yarn test
 
-    - name: Build
-      run: yarn build
+    # - name: Build
+    #   run: yarn build
       
 
   deploy-gcr:
@@ -58,6 +58,10 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
+
+    strategy:
+      matrix:
+        node-version: [16.x]
 
     steps:
     - name: Checkout repository
