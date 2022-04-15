@@ -20,6 +20,7 @@ export const useDropdownCategories = () => {
     categoriesSelected,
     handleChange,
     goToMapView,
-    setCenterGeocoder
+    setCenterGeocoder,
+    setCategoriesSelected
   };
 };

@@ -1,3 +1,5 @@
+import { FormTabType } from '../components';
+
 export interface CoordinateInterface {
   latitude: string,
   longitude: string,
@@ -9,6 +11,7 @@ export interface MediaInterface {
   link: string,
 }
 export interface BusinessDetailsInterface {
+  retailer_id?: string | undefined;
   name: string,
   address_1: string,
   address_2: string,
@@ -133,6 +136,10 @@ export interface QueriesInterface {
 export interface ModalInderface {
   open: boolean,
   type: boolean
+}
+
+export interface TabStateInterface {
+  activeTab: FormTabType;
 }
 
 export interface ScrollInterface {

@@ -28,6 +28,12 @@ export const useGeocoder = (name: string) => {
     setGeocoderOptions([]);
   }, [geocoder, inputText, setGeocoderOptions]);
 
+  useEffect(() => {
+    if (inputText.text) {
+      setInputTextHtml(inputText.text);
+    }
+  }, [inputText]);
+
   return {
     setInputText,
     options,

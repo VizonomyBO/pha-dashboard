@@ -95,6 +95,12 @@ export const setSelectCategorySupermarket = (selectCategorySupermarket: string) 
   });
 };
 
+export const setSelectCategory = (type: string, value: string) => ({
+  type: TYPES.SET_SELECT_CATEGORY,
+  payload: type,
+  value
+});
+
 export const setSelectCategoryCorner = (selectCategoryCorner: string) => (dispatch: Dispatch) => {
   dispatch({
     type: TYPES.SET_SELECT_CATEGORY_CORNER,

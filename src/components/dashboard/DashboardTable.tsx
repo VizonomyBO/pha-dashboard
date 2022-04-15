@@ -1,7 +1,13 @@
+import classNames from 'classnames';
 import { Dispatch, SetStateAction } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
+import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
+import { ROW_STATUS } from '../../constants/dashboard';
+import { ENDPOINTS } from '../../constants/url';
+import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
 import { showText } from '../../utils/textFormatter';
+import { webRequest } from '../../utils/webRequest';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
 export const DashboardTable = ({
@@ -13,6 +19,13 @@ export const DashboardTable = ({
   selectedElements: Array<string>,
   setSelectedElements: Dispatch<SetStateAction<Array<string>>>,
 }) => {
+  const { setModal } = useModalDispatch();
+  const {
+    setBusinessDetails, setSelectCategory, setWicAccepted, setSnapAccepted,
+    setOtherQuestions, setAvailabilityOptions, setQuality,
+    setVisibility, setLocal, setProduceAvailStore, setProduceAvailSeasonally,
+    setContactName, setContactEmail, setContactOwner, setContactPatron
+  } = useMarketplaceDispatch();
   const handleSelected = (checked: boolean, item: PhaRetailer) => {
     let newSelectedElements: string[];
     if (checked) {
@@ -39,6 +52,39 @@ export const DashboardTable = ({
   const checkAll = () => {
     const checked = table.every((element) => selectedElements.includes(element.retailer_id || ''));
     return checked;
+  };
+
+  const showModal = (item: PhaRetailer) => {
+    webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
+      .then((res) => res.json())
+      .then((res) => {
+        const retailer = res.data as Record<string, string>;
+        Object.keys(TYPE_BUSINESS).forEach((key: string) => {
+          const prop = (TYPE_BUSINESS as Record<string, string>)[key];
+          setBusinessDetails(prop, retailer[prop]);
+        });
+        Object.keys(SELECT_CATEGORY).forEach((key: string) => {
+          const prop = (SELECT_CATEGORY as Record<string, string>)[key];
+          setSelectCategory(prop, retailer[prop]);
+        });
+        setWicAccepted(retailer.wic_accepted);
+        setSnapAccepted(retailer.snap_accepted);
+
+        setOtherQuestions(retailer.description);
+        setAvailabilityOptions(retailer.availability.split(','));
+        setQuality(retailer.quality);
+        setVisibility(retailer.visibility);
+        setLocal(retailer.local);
+        setProduceAvailStore(retailer.produce_avail_store);
+        setProduceAvailSeasonally(retailer.produce_avail_seasonally);
+
+        setContactName(retailer.contact_name);
+        setContactEmail(retailer.contact_email);
+        setContactOwner(retailer.contact_owner);
+        setContactPatron(retailer.contact_patron);
+      })
+      .catch((err) => console.error(err));
+    setModal({ open: true, type: true });
   };
 
   return (
@@ -78,7 +124,7 @@ export const DashboardTable = ({
           </thead>
           <tbody
             style={{
-              display: 'block', overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
+              overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
             }}
           >
             {table.map((item: PhaRetailer) => (
@@ -102,7 +148,15 @@ export const DashboardTable = ({
                 <td className="wcol2 bbtm"><span className="txt1">{showText(item.zipcode)}</span></td>
                 <td className="wcol3 bbtm"><span className="txt1">{showText(item.submission_date)}</span></td>
                 <td className="wcol4 bbtm">
-                  <div className="colorstatus blue">
+                  <div
+                    className={
+                      classNames('colorstatus', {
+                        blue: item.submission_status === ROW_STATUS.PENDING,
+                        green: item.submission_status === ROW_STATUS.APPROVED,
+                        red: item.submission_status === ROW_STATUS.REJECTED,
+                      })
+                    }
+                  >
                     <span className="dot" />
                     <span className="txt2">{showText(item.submission_status)}</span>
                   </div>
@@ -114,7 +168,11 @@ export const DashboardTable = ({
                   </div>
                 </td>
                 <td className="wcol6 bbtm padright">
-                  <button className="light view txt2" type="button">
+                  <button
+                    type="button"
+                    className="light view txt2"
+                    onClick={() => showModal(item)}
+                  >
                     View
                   </button>
                 </td>

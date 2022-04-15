@@ -7,3 +7,4 @@ export * from './geocoderTypes';
 export * from './modalTypes';
 export * from './scrollTypes';
 export * from './markerTypes';
+export * from './tabTypes';

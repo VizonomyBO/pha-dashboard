@@ -1,10 +1,16 @@
-import { useMarketplaceDispatch } from '../store/hooks';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formAccessibility } from '../constants/form';
 
 export const AccessibilityPanel = () => {
   const {
     setWicAccepted, setSnapAccepted
   } = useMarketplaceDispatch();
+  const {
+    selectAccessibility: {
+      wic_accepted,
+      snap_accepted
+    }
+  } = useMarketplaceState();
   const setWicAcceptedFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     if (e.currentTarget.checked) {
       setWicAccepted(formAccessibility.WIC_ACCEPTED.YES);
@@ -34,6 +40,8 @@ export const AccessibilityPanel = () => {
                   WIC Accepted
                   <input
                     type="checkbox"
+                    value={wic_accepted}
+                    checked={wic_accepted === formAccessibility.WIC_ACCEPTED.YES}
                     onChange={setWicAcceptedFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
@@ -44,6 +52,8 @@ export const AccessibilityPanel = () => {
                   SNAP Accepted
                   <input
                     type="checkbox"
+                    value={snap_accepted}
+                    checked={snap_accepted === formAccessibility.SNAP_ACCEPTED.YES}
                     onChange={setSnapAcceptedFunction}
                   />
                   <span className="checkmark ckeckmark-form" />

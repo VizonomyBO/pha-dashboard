@@ -70,7 +70,7 @@ export const Nsdashboard = () => {
                 Pending
               </button>
               <button type="button" className="light op2">
-                Aproved
+                Approved
               </button>
               <button type="button" className="light op3">
                 Rejected

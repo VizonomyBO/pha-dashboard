@@ -4,7 +4,14 @@ import configureStore from 'redux-mock-store';
 import { AccessibilityPanel } from '../AccessibilityPanel';
 
 describe('renders without crashing', () => {
-  const initialStoreState = {};
+  const initialStoreState = {
+    marketplace: {
+      selectAccessibility: {
+        wic_accepted: true,
+        snap_accepted: true
+      }
+    }
+  };
   const mockStore = configureStore();
   let store;
 

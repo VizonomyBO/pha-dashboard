@@ -1,45 +1,45 @@
-import ClearIcon from '@mui/icons-material/Clear';
-import { CATEGORIES } from '../constants/categories';
 import { FilterType } from '../@types';
-import { useDropdownCategoriesMobile } from '../store/hooks/custom/useDropdownCategoriesMobile';
+import { CATEGORIES } from '../constants/categories';
+import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
 
 export const DropdownCategoriesMobile = (
-  { setOpenCategories }:{setOpenCategories:React.Dispatch<React.SetStateAction<boolean>>}
+  { setOpenCategories }
+  : {setOpenCategories:React.Dispatch<React.SetStateAction<boolean>>}
 ) => {
-  const {
-    categoriesSelect,
-  } = useDropdownCategoriesMobile();
+  const { categoriesSelected, goToMapView, setCategoriesSelected } = useDropdownCategories();
+  const selected = () => {
+    if (categoriesSelected) {
+      if (categoriesSelected.length === 0) {
+        return <em>Select Category</em>;
+      }
+      if (categoriesSelected.length > 1) {
+        return 'Multiple retailer types…';
+      }
+      return CATEGORIES.find((elem: FilterType) => elem.attrib === categoriesSelected[0])?.name;
+    }
+    return <em>Select Category</em>;
+  };
   return (
-    <div className="arearesult">
-      <div className="tab">
-        <div className="space">
-          <div className="line" />
-        </div>
-        <div className="title">
-          What
-          <ClearIcon
-            style={{ marginLeft: '250px' }}
-            onClick={() => setOpenCategories(false)}
-          />
-        </div>
-      </div>
-      <div className="searchresult" style={{ height: '357px' }}>
-        <ul className="ul-geocoder-mobile">
-          {CATEGORIES.map((category: FilterType) => (
-            <li key={`${category.name}index`} className="tr-categories">
-              <label className="chkwrap-mobile">
-                <span className="span-geocoder">{category.name}</span>
-                <input
-                  type="checkbox"
-                  className="checkbox-mobile"
-                  onChange={(e:React.ChangeEvent<HTMLInputElement>) => categoriesSelect(e, category)}
-                />
-                <span className="checkmark-mobile ckeckmark-form" />
-              </label>
-            </li>
-          ))}
-        </ul>
-      </div>
+    <div className="smcitysearch">
+      <i className="icsearch" />
+      <span className="txtd">What</span>
+      <button
+        type="button"
+        className="btm-catalogories"
+        onClick={() => {
+          setOpenCategories(true);
+          setCategoriesSelected([]);
+        }}
+      >
+        {selected()}
+      </button>
+      <button
+        type="button"
+        className="light"
+        onClick={() => goToMapView()}
+      >
+        Search
+      </button>
     </div>
   );
 };

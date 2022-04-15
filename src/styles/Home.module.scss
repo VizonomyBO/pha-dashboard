@@ -541,6 +541,13 @@ sup {
 	.barblue.db {
 		height: 500px;
 	}
+	.barblue.db.withmodal {
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: -1;
+	}
 	.barblue.profile {
 		height: 1100px;
 	}
@@ -1377,6 +1384,9 @@ sup {
 							background-color: #0099B8;
 						}
 					}
+				}
+				.smcitysearch.close {
+						display: none;
 				}
 				.smcitysearch {
 					display: none;
@@ -3799,7 +3809,19 @@ header.topmenu {
 .retailerlist-show {
 	display: none;
 }
-
+.supermarketfilter {
+	color: transparent;
+	background-color: transparent;
+	border-color: transparent;
+}
+.addlistening {
+	color: transparent;
+	background-color: transparent;
+	border-color: transparent;
+}
+.smcitysearch{
+	display: none ;
+}
 /* end deshabilitados para desktop */
 /* set dropdowns style */
 .container {
@@ -5696,7 +5718,10 @@ header.topmenu {
 		}
 	}
 }
-@media (max-width: 375px) {
+@media (max-width: 380px) {
+	.table-geocoder {
+		display: none;
+	}
 	header.topmenu {
 		display: block;
 	}
@@ -5707,6 +5732,12 @@ header.topmenu {
 		display: block;
 	}
 	.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
+		display: none;
+	}
+	.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
+		display: block;
+	}
+	.container .pagecontainer .ldgsearchstore .alook .citysearch {
 		display: none;
 	}
 	.container {
@@ -6314,8 +6345,6 @@ header.topmenu {
 						padding: 0;
 						padding-bottom: 16px;
 						i.icsearch {
-							margin-top: 16px;
-							margin-bottom: 16px;
 						}
 						.txtd {
 							font-size: 14px;
@@ -6330,6 +6359,37 @@ header.topmenu {
 							margin-top: 8px;
 							width: 100%;
 							font-size: 16px;
+						}
+					}
+					.smcitysearch 	 {
+						width: 100%;
+						flex-wrap: wrap;
+						justify-content: flex-start;
+						padding-bottom: 16px;
+						padding-left: 0px;
+						padding-top: 15px;
+						i.icsearch {
+						}
+						.txtd {
+							font-size: 14px;
+						}
+						input[type=text] {
+							color: #161A23;
+							font-weight: 600;
+							width: 208px;
+							font-size: 14px;
+						}
+						button.light {
+							margin-top: 8px;
+							width: 100%;
+							font-size: 16px;
+							background-color: #00BDE3 !important;
+						}
+						button.light:hover {
+							margin-top: 8px;
+							width: 100%;
+							font-size: 16px;
+							border-radius: 20px;
 						}
 					}
 				}

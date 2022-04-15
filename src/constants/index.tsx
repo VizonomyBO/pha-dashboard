@@ -102,7 +102,17 @@ export const DEFAULT_DROPDOWN_OPTION = {
   CLOSE: 'Close'
 };
 
+export const SELECT_CATEGORY = {
+  SET_SELECT_CATEGORY_SUPERMARKET: 'supermarket',
+  CATEGORY_CORNER: 'corner_store',
+  CATEGORY_DOLLAR: 'dollar_stores',
+  CATEGORY_FOOD_PANTRY: 'food_pantry',
+  CATEGORY_DISTRIBUTION: 'distribution',
+  CATEGORY_FOOD_CO_OP: 'food_co_op',
+};
+
 export const TYPE_BUSINESS = {
+  RETAILER_ID: 'retailer_id',
   NAME: 'name',
   ADDRESS_1: 'address_1',
   ADDRESS_2: 'address_2',
