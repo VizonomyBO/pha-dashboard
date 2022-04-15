@@ -3,13 +3,13 @@ import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { DropdownAddress } from './map/DropdownAddress';
 
-const pickOption = (defaultOption: string) => (option: string) => {
+const selectScheduleDropdownValue = (defaultOption: string) => (option: string) => {
   const response = option && option.length ? option : defaultOption;
   return response;
 };
 
-const openPick = pickOption(DEFAULT_DROPDOWN_OPTION.OPEN);
-const closePick = pickOption(DEFAULT_DROPDOWN_OPTION.CLOSE);
+const openSchedule = selectScheduleDropdownValue(DEFAULT_DROPDOWN_OPTION.OPEN);
+const closeSchedule = selectScheduleDropdownValue(DEFAULT_DROPDOWN_OPTION.CLOSE);
 
 export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
   const { setBusinessDetails } = useMarketplaceDispatch();
@@ -160,7 +160,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={openPick(businessDetails.sun_open)}
+              initialState={openSchedule(businessDetails.sun_open)}
               type={TYPE_BUSINESS.SUN_OPEN}
             />
           </div>
@@ -168,7 +168,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={closePick(businessDetails.sun_close)}
+              initialState={closeSchedule(businessDetails.sun_close)}
               type={TYPE_BUSINESS.SUN_CLOSE}
             />
           </div>
@@ -183,7 +183,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={openPick(businessDetails.mon_open)}
+              initialState={openSchedule(businessDetails.mon_open)}
               type={TYPE_BUSINESS.MON_OPEN}
             />
           </div>
@@ -191,7 +191,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={closePick(businessDetails.mon_close)}
+              initialState={closeSchedule(businessDetails.mon_close)}
               type={TYPE_BUSINESS.MON_CLOSE}
             />
           </div>
@@ -206,7 +206,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={openPick(businessDetails.tues_open)}
+              initialState={openSchedule(businessDetails.tues_open)}
               type={TYPE_BUSINESS.TUES_OPEN}
             />
           </div>
@@ -214,7 +214,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={closePick(businessDetails.tues_close)}
+              initialState={closeSchedule(businessDetails.tues_close)}
               type={TYPE_BUSINESS.TUES_CLOSE}
             />
           </div>
@@ -229,7 +229,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={openPick(businessDetails.wed_open)}
+              initialState={openSchedule(businessDetails.wed_open)}
               type={TYPE_BUSINESS.WED_OPEN}
             />
           </div>
@@ -237,7 +237,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={closePick(businessDetails.wed_close)}
+              initialState={closeSchedule(businessDetails.wed_close)}
               type={TYPE_BUSINESS.WED_CLOSE}
             />
           </div>
@@ -252,7 +252,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={openPick(businessDetails.thurs_open)}
+              initialState={openSchedule(businessDetails.thurs_open)}
               type={TYPE_BUSINESS.THURS_OPEN}
             />
           </div>
@@ -260,7 +260,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={closePick(businessDetails.thurs_close)}
+              initialState={closeSchedule(businessDetails.thurs_close)}
               type={TYPE_BUSINESS.THURS_CLOSE}
             />
           </div>
@@ -275,7 +275,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={openPick(businessDetails.fri_open)}
+              initialState={openSchedule(businessDetails.fri_open)}
               type={TYPE_BUSINESS.FRI_OPEN}
             />
           </div>
@@ -283,7 +283,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={closePick(businessDetails.fri_close)}
+              initialState={closeSchedule(businessDetails.fri_close)}
               type={TYPE_BUSINESS.FRI_CLOSE}
             />
           </div>
@@ -298,7 +298,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={openPick(businessDetails.sat_open)}
+              initialState={openSchedule(businessDetails.sat_open)}
               type={TYPE_BUSINESS.SAT_OPEN}
             />
           </div>
@@ -306,7 +306,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="item">
           <div className="ainput2">
             <DropdownBusiness
-              initialState={closePick(businessDetails.sat_close)}
+              initialState={closeSchedule(businessDetails.sat_close)}
               type={TYPE_BUSINESS.SAT_CLOSE}
             />
           </div>
