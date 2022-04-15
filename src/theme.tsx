@@ -29,7 +29,7 @@ export const theme = createTheme({
           fontSize: '14px',
           height: '40px',
           color: '#7A7E80',
-          paddingRight: '0px !important',
+          paddingRight: '10px !important',
           '&hover': {
             backgroundColor: '#EBFBFF'
           }
@@ -56,16 +56,16 @@ export const theme = createTheme({
           width: '264px !important',
           height: '220px',
           paddingBottom: '10px',
+          border: '15px solid white',
           paddingRight: '0px !important',
           '::-webkit-scrollbar': {
             '-webkit-appearance': 'none',
-            width: '35px',
+            width: '6px',
           },
           '::-webkit-scrollbar-thumb': {
             backgroundColor: '#00BDE3',
             borderRadius: '50px',
             width: '6px',
-            border: '15px solid white',
             paddingBottom: '50px',
           },
         }
@@ -91,7 +91,13 @@ export const theme = createTheme({
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          color: 'rgb(0 0 0 / 39%) !important'
+        },
+      }
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          paddingTop: '0px'
         },
       }
     }

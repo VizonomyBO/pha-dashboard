@@ -2,16 +2,8 @@ import { FilterType } from '../@types';
 
 export const CATEGORIES: FilterType[] = [
   {
-    name: 'Corner/convenience store',
-    attrib: 'corner_store'
-  },
-  {
-    name: 'Distribution location',
-    attrib: 'distribution'
-  },
-  {
-    name: 'Dollar stores',
-    attrib: 'dollar_stores'
+    name: 'Grocery Store',
+    attrib: 'grocery_store'
   },
   {
     name: 'Farmers markets',
@@ -22,20 +14,28 @@ export const CATEGORIES: FilterType[] = [
     attrib: 'food_pantry'
   },
   {
-    name: 'Food co-op',
-    attrib: 'food_co_op'
+    name: 'Supermarket/big box',
+    attrib: 'supermarket'
   },
   {
-    name: 'Grocery Store',
-    attrib: 'grocery_store'
+    name: 'Corner/convenience store',
+    attrib: 'corner_store'
+  },
+  {
+    name: 'Dollar stores',
+    attrib: 'dollar_stores'
   },
   {
     name: 'General Store',
     attrib: 'general_store'
   },
   {
-    name: 'Supermarket/big box',
-    attrib: 'supermarket'
+    name: 'Distribution location',
+    attrib: 'distribution'
+  },
+  {
+    name: 'Food co-op',
+    attrib: 'food_co_op'
   }
 ];
 
