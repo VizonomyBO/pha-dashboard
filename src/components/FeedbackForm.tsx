@@ -410,11 +410,21 @@ export const FeedbackForm = (
               className="light"
               type="button"
               onClick={() => {
-                webRequest.post(ENDPOINTS.PHA_INDIVIDUAL(), {}).then((res) => res.json())
+                webRequest.post(ENDPOINTS.PHA_INDIVIDUAL(), {
+                  availability,
+                  quality,
+                  visibility,
+                  local,
+                  meets_need,
+                  contact_phone,
+                  contact_zipcode,
+                  produce_avail_store
+                }).then((res) => res.json())
                   .then((res) => {
-                    console.log(res);
+                    if (res.success) {
+                      setVisible(false);
+                    }
                   });
-                // setVisible(false);
               }}
             >
               Submit
