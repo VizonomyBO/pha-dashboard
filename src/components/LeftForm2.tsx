@@ -256,7 +256,7 @@ export const LeftForm2 = () => {
         </div>
         <div className="ainput htxtarea">
           <textarea
-            name="yth"
+            name="yth2"
             id="yth2"
             cols={30}
             rows={10}
@@ -272,7 +272,7 @@ export const LeftForm2 = () => {
         </div>
         <div className="ainput htxtarea">
           <textarea
-            name="yth"
+            name="yth3"
             id="yth3"
             cols={30}
             rows={10}

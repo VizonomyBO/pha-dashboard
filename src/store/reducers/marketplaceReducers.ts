@@ -75,7 +75,7 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          produceAvailStore: action.value,
+          produce_avail_store: action.value,
         }
       };
     case TYPES.SET_PRODUCE_AVAIL_SEASONALLY:
@@ -83,7 +83,7 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          produceAvailSeasonally: action.value,
+          produce_avail_seasonally: action.value,
         }
       };
     case TYPES.SET_CONTACT_NAME:
