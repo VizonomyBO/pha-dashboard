@@ -1385,12 +1385,6 @@ sup {
 						}
 					}
 				}
-				.smcitysearch.close {
-						display: none;
-				}
-				.smcitysearch {
-					display: none;
-				}
 				.smcitysearch{
 					display: flex;
 					justify-content: center;
@@ -1426,6 +1420,9 @@ sup {
 							background-color: #0099B8;
 						}
 					}
+				}
+				.smcitysearch {
+					display: none;
 				}
 			}
 		}
@@ -4348,6 +4345,10 @@ header.topmenu {
 									height: 21px;
 								}
 							}
+							.chkwrap input:checked ~ .checkmark {
+								width: 21px;
+								height: 21px;
+							}
 						}
 						.option.active {
 							.chkwrap {
@@ -5270,6 +5271,10 @@ header.topmenu {
 									width: 28px;
 									height: 28px;
 								}
+							}
+							.chkwrap input:checked ~ .checkmark {
+								width: 28px;
+								height: 28px;
 							}
 						}
 						.option.active {
@@ -6335,10 +6340,8 @@ header.topmenu {
 						width: 100%;
 						height: 1px;
 					}
-					.citysearch {
-						display: none;
-					}
 					.smcitysearch {
+						display: flex;
 						width: 100%;
 						flex-wrap: wrap;
 						justify-content: flex-start;
@@ -6361,7 +6364,8 @@ header.topmenu {
 							font-size: 16px;
 						}
 					}
-					.smcitysearch 	 {
+					.smcitysearch {
+						display: flex;
 						width: 100%;
 						flex-wrap: wrap;
 						justify-content: flex-start;
@@ -6391,6 +6395,9 @@ header.topmenu {
 							font-size: 16px;
 							border-radius: 20px;
 						}
+					}
+					.citysearch {
+						display: none;
 					}
 				}
 			}
