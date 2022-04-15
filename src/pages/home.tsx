@@ -11,6 +11,7 @@ import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
 import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 import { useHome } from '../store/hooks/custom/useHome';
+import { FeedbackForm } from '../components/FeedbackForm';
 
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
@@ -19,6 +20,8 @@ export const Home = () => {
   const { setControllerZoom } = useGeocoderDispatch();
   const { controllerZoom } = useGeocoderState();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
+  const [visibleFeedback, setVisibleFeedback] = useState(false);
+  const [currentRetailerId, setCurrentRetailerId] = useState('');
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
   let xDown:number | null = null;
   let yDown:number | null = null;
@@ -56,7 +59,6 @@ export const Home = () => {
       setCallFilters(!e.currentTarget.checked);
     }
   };
-
   return (
     <div className="container">
       <div className="bgwhite" />
@@ -106,7 +108,7 @@ export const Home = () => {
             </div>
           </div>
           <div className="amap">
-            <Map />
+            <Map setVisibleFeedback={setVisibleFeedback} setCurrentRetailerId={setCurrentRetailerId} />
             <div className="controlzoom">
               <div className="zplus">
                 <button
@@ -193,6 +195,7 @@ export const Home = () => {
         </div>
         {openModal && <ModalFilters setOpenModal={setOpenModal} />}
       </div>
+      {visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={currentRetailerId} />}
     </div>
   );
 };
