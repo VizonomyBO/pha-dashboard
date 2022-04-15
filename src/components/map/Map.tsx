@@ -23,7 +23,11 @@ import { useWindowSize } from '../../store/hooks/custom/useWindowSize';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Carto = carto as any;
-export const Map = () => {
+export const Map = (
+  { setVisibleFeedback, setCurrentRetailerId }
+  : { setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
+  setCurrentRetailerId: React.Dispatch<React.SetStateAction<string>>}
+) => {
   const { setShouldZoom, setControllerZoom } = useGeocoderDispatch();
   const { shouldZoom, controllerZoom, inputText } = useGeocoderState() || {};
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
@@ -142,7 +146,17 @@ export const Map = () => {
   }, [controllerZoom, zoomEffect]);
   return (
     <div className="map-container" ref={ref}>
-      <DeckGLComponent {...deckState}>{RenderTooltip({ info: hoverInfo, badges, width })}</DeckGLComponent>
+      <DeckGLComponent {...deckState}>
+        {
+          RenderTooltip({
+            info: hoverInfo,
+            badges,
+            width,
+            setVisibleFeedback,
+            setCurrentRetailerId
+          })
+        }
+      </DeckGLComponent>
     </div>
   );
 };

@@ -4,10 +4,12 @@ import { BADGES } from '../../constants';
 
 export const ToolTip = (data: TooltipProps) => {
   const {
-    x, y, objectTypified, badges
+    x, y, objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
   } = data;
-  const openIndividualForm = () => {
-    console.info('logic to open form must be here');
+  const openIndividualForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    setVisibleFeedback(true);
+    setCurrentRetailerId(objectTypified?.properties?.retailer_id ? objectTypified?.properties?.retailer_id : '');
   };
   return (
     <div className="modal" style={{ left: x, top: y - 460 }}>
@@ -40,7 +42,7 @@ export const ToolTip = (data: TooltipProps) => {
           </button>
         </Link>
         <div className="pinaddcomment">
-          <button className="light" type="button" onClick={() => openIndividualForm()}>
+          <button className="light" type="button" onClick={(e) => openIndividualForm(e)}>
             <span className="icaddcoment" />
           </button>
         </div>

@@ -21,6 +21,8 @@ export interface RenderToolTipInterface {
   info: PickInfo<Layer<unknown>[]> | undefined,
   badges: string[],
   width: number,
+  setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
+  setCurrentRetailerId: React.Dispatch<React.SetStateAction<string>>
 }
 
 interface TooltipProps {
@@ -28,6 +30,8 @@ interface TooltipProps {
   y: number,
   objectTypified: PropertiesLayer,
   badges: string[],
+  setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
+  setCurrentRetailerId: React.Dispatch<React.SetStateAction<string>>
 }
 
 export type ZoomInterface = {value: number, type: string}
