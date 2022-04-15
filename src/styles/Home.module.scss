@@ -1385,12 +1385,6 @@ sup {
 						}
 					}
 				}
-				.smcitysearch.close {
-						display: none;
-				}
-				.smcitysearch {
-					display: none;
-				}
 				.smcitysearch{
 					display: flex;
 					justify-content: center;
@@ -1426,6 +1420,9 @@ sup {
 							background-color: #0099B8;
 						}
 					}
+				}
+				.smcitysearch {
+					display: none;
 				}
 			}
 		}
@@ -4348,6 +4345,10 @@ header.topmenu {
 									height: 21px;
 								}
 							}
+							.chkwrap input:checked ~ .checkmark {
+								width: 21px;
+								height: 21px;
+							}
 						}
 						.option.active {
 							.chkwrap {
@@ -5271,6 +5272,10 @@ header.topmenu {
 									height: 28px;
 								}
 							}
+							.chkwrap input:checked ~ .checkmark {
+								width: 28px;
+								height: 28px;
+							}
 						}
 						.option.active {
 							.chkwrap {
@@ -5732,7 +5737,7 @@ header.topmenu {
 		display: block;
 	}
 	.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
-		display: none;
+		/* display: none; */
 	}
 	.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
 		display: block;
@@ -6335,10 +6340,8 @@ header.topmenu {
 						width: 100%;
 						height: 1px;
 					}
-					.citysearch {
-						display: none;
-					}
 					.smcitysearch {
+						display: flex;
 						width: 100%;
 						flex-wrap: wrap;
 						justify-content: flex-start;
@@ -6361,7 +6364,8 @@ header.topmenu {
 							font-size: 16px;
 						}
 					}
-					.smcitysearch 	 {
+					.smcitysearch {
+						display: flex;
 						width: 100%;
 						flex-wrap: wrap;
 						justify-content: flex-start;
@@ -6380,17 +6384,29 @@ header.topmenu {
 							font-size: 14px;
 						}
 						button.light {
-							margin-top: 8px;
+							margin-top: 16px;
 							width: 100%;
 							font-size: 16px;
 							background-color: #00BDE3 !important;
 						}
 						button.light:hover {
-							margin-top: 8px;
+							margin-top: 16px;
 							width: 100%;
 							font-size: 16px;
 							border-radius: 20px;
 						}
+						button.btm-catalogories {
+							em {
+								font-family: 'FuturaMedium', sans-serif;
+								font-size: 14px;
+								line-height: 14px;
+								font-style: normal;
+								font-weight: 600;
+							}
+						}
+					}
+					.citysearch {
+						display: none;
 					}
 				}
 			}
