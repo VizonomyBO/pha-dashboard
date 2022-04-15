@@ -87,6 +87,13 @@ export const theme = createTheme({
           }
         }
       }
+    },
+    MuiSvgIcon: {
+      styleOverrides: {
+        root: {
+          color: 'rgb(0 0 0 / 39%) !important'
+        },
+      }
     }
   }
 });

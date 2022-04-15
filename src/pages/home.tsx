@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
-import { useCategoriesDispatch } from '../store/hooks';
+import { useCategoriesDispatch, useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
 import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
@@ -16,6 +16,8 @@ export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
   const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
+  const { setControllerZoom } = useGeocoderDispatch();
+  const { controllerZoom } = useGeocoderState();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
   let xDown:number | null = null;
@@ -40,8 +42,12 @@ export const Home = () => {
     yDown = null;
   };
 
-  const onClickPlus = () => {
-    /* this.props.onControlClick!(this.props.map, this.props.zoomDiff!); */
+  const onClickChange = (e: string) => {
+    const adder = e === 'in' ? 0.5 : -0.5;
+    setControllerZoom({
+      value: controllerZoom.value + adder,
+      type: e
+    });
   };
 
   const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,7 +109,13 @@ export const Home = () => {
             <Map />
             <div className="controlzoom">
               <div className="zplus">
-                <button className="light" type="button" id="zoomIn" aria-label="Zoom in" onClick={onClickPlus}>
+                <button
+                  className="light"
+                  type="button"
+                  id="zoomIn"
+                  aria-label="Zoom in"
+                  onClick={() => onClickChange('in')}
+                >
                   <span className="iczplus" />
                 </button>
               </div>
@@ -111,7 +123,13 @@ export const Home = () => {
                 <div className="line" />
               </div>
               <div className="zminus">
-                <button className="light" type="button">
+                <button
+                  className="light"
+                  type="button"
+                  id="zoomOut"
+                  aria-label="Zoom out"
+                  onClick={() => onClickChange('out')}
+                >
                   <span className="iczminus" />
                 </button>
               </div>
@@ -151,6 +169,23 @@ export const Home = () => {
                   >
                     {dataRequest && ListMarkerComponentMobil(dataRequest)}
                   </div>
+                </div>
+              )}
+            </div>
+            <div
+              className={retailerClass}
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+            >
+              <div className="tab">
+                <div className="space">
+                  <div className="line" />
+                </div>
+                <div className="title">All Retailer</div>
+              </div>
+              {openAllRetailer && (
+                <div className="listpanel">
+                  <div className="listingarea">{dataRequest && ListMarkerComponentMobil(dataRequest)}</div>
                 </div>
               )}
             </div>

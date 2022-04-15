@@ -13,6 +13,20 @@ export const Profile = () => {
       <div className="bgwhite" />
       <figure className="bgnoise home" />
       <div className="barblue profile" />
+      <header className="topmenu">
+        <div className="spanel">
+          <div className="logoarea">
+            <a
+              href="https://www.ahealthieramerica.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="iclogo" />
+            </a>
+          </div>
+          <div className="alook" />
+        </div>
+      </header>
       <div className="pagecontainer">
         <Navbar />
         <Header />

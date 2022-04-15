@@ -1,4 +1,4 @@
-import { InputTextInterface } from '../../@types/database';
+import { InputTextInterface, ControllerZoomInterface } from '../../@types/database';
 import * as TYPES from '../types';
 
 export const setInputText = (text:InputTextInterface) => ({
@@ -14,4 +14,9 @@ export const setGeocoderOptions = (options: []) => ({
 export const setShouldZoom = (shouldZoom: boolean) => ({
   type: TYPES.SET_SHOULD_ZOOM,
   shouldZoom
+});
+
+export const setControllerZoom = (controllerZoom: ControllerZoomInterface) => ({
+  type: TYPES.SET_CONTROLLER_ZOOM,
+  controllerZoom
 });

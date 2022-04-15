@@ -5,3 +5,4 @@ export * from './individualFormActions';
 export * from './geocoderActions';
 export * from './modalActions';
 export * from './markerActions';
+export * from './scrollActions';

@@ -86,10 +86,15 @@ export interface InputTextInterface {
   center: number[],
   bbox?: number[]
 }
+export interface ControllerZoomInterface {
+  value: number,
+  type: string
+}
 export interface GeocoderInterface {
   inputText: inputTextInterface,
   options: Result[],
-  shouldZoom: boolean
+  shouldZoom: boolean,
+  controllerZoom: ControllerZoomInterface
 }
 export interface MarkerCenterInterface {
   center: number[],

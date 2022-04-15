@@ -194,3 +194,5 @@ export const ICON_MAPPING = {
     mask: false
   }
 };
+
+export const MOBILE_WIDTH = 375;

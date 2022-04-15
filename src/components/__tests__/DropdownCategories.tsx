@@ -17,7 +17,9 @@ describe('renders without crashing', () => {
     },
     categories: {
       categoriesSelected: []
-    }
+    },
+    widthScroll: 5,
+    heightScroll: 0
   };
   const mockStore = configureStore();
   let store;
@@ -28,7 +30,9 @@ describe('renders without crashing', () => {
     ReactDOM.render(
       <Provider store={store}>
         <MemoryRouter>
-          <DropdownCategories />
+          <DropdownCategories
+            setOpenCategories={jest.fn()}
+          />
         </MemoryRouter>
       </Provider>,
       div

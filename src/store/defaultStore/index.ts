@@ -109,7 +109,11 @@ export const INITIAL_GEOCODER_STATE = {
     bbox: []
   },
   options: [],
-  shouldZoom: false
+  shouldZoom: false,
+  controllerZoom: {
+    value: 0,
+    type: ''
+  }
 };
 
 export const INITIAL_MODAL_STATE = {
@@ -129,4 +133,9 @@ export const INITIAL_CENTER_MARKER = {
       owner_photo: ''
     }
   }
+};
+
+export const INITIAL_SCROLL = {
+  widthScroll: 0,
+  heightScroll: 0
 };

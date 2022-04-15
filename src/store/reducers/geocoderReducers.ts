@@ -24,6 +24,11 @@ const geocoderReducer = (state: GeocoderInterface = defaultState, action: AnyAct
         ...state,
         shouldZoom: action.shouldZoom
       };
+    case TYPES.SET_CONTROLLER_ZOOM:
+      return {
+        ...state,
+        controllerZoom: action.controllerZoom
+      };
     case TYPES.INIT:
       return INITIAL_GEOCODER_STATE;
     default:

@@ -529,7 +529,8 @@ sup {
 		height: 344px;
 	}
 	.barblue.form1 {
-		height: 1800px;
+		/* height: 1800px; */
+		height: 2000px;
 	}
 	.barblue.form2 {
 		height: 2700px;
@@ -1812,8 +1813,9 @@ sup {
 					position: absolute;
 					top: 300px;
 					right: 29px;
-					width: 385px;
+					width: 350px;
 					height: 128px;
+					left: 9px;
 					background-color: #fff;
 					border-radius: 16px;
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -3837,11 +3839,62 @@ header.topmenu {
 /* end set dropdowns style */
 @media (min-width: 1920px) {
 	.container {
+		/* login */
+		.bglogin .carrosel .blockdesc {
+			top: 653px;
+			left: 768px;
+			p {
+				font-size: 42px;
+				line-height: 120%;
+				width: 655px;
+			}
+		}
+		.formlogin {
+			top: 64px;
+			left: 149px;
+			width: 555px;
+			height: 784px;
+			padding: 64px;
+			background-color: #fff;
+			border-radius: 34px;
+			.iclogo {
+				width: 173px;
+				height: 80px;
+			}
+			.welcome {
+				padding-top: 88px;
+				padding-bottom: 64px;
+				font-size: 26px;
+				line-height: 160%;
+				width: 401px;
+			}
+			input[type=text].fl {
+				font-size: 21px;
+				line-height: 21px;
+				height: 75px;
+			}
+			input[type=password].fl {
+				font-size: 21px;
+				line-height: 21px;
+				height: 75px;
+			}
+			button.fl {
+				margin-top: 8px;
+				font-size: 21px;
+				line-height: 160%;
+			}
+			.group {
+				.item {
+					padding-bottom: 32px;
+				}
+			}
+		}
+		/* end login */
 		.bgwhite {}
 		.bgnoise.home {}
 		.barblue.home { height: 650px;}
 		.barblue.form1 {
-			height: 2300px;
+			height: 2800px;
 		}
 		.barblue.db {
 			height: 800px;
@@ -4237,7 +4290,8 @@ header.topmenu {
 			}
 			/*end home*/
 			.formarea {
-				padding: 46px 48px;
+				padding: 46px 64px;
+				width: 1344px;
 				.header {
 					.backlink {
 						padding-bottom: 54px;
@@ -4328,11 +4382,13 @@ header.topmenu {
 									.checkmark {
 										width: 26px;
 										height: 26px;
-										background-color: #E3E5E5;
+										background-color: #fff;
+										border:2px solid #E3E5E5;
 									}
 								}
 								.chkwrap input:checked ~ .checkmark {
 									background-color: #00BCE4;
+									border:2px solid #00BCE4;
 								}
 							}
 						}
@@ -4682,6 +4738,68 @@ header.topmenu {
 }
 @media (min-width: 2560px) {
 	.container {
+		/* login */
+		.bglogin .carrosel .blockdesc {
+			top: 872px;
+			left: 1025px;
+			p {
+				font-size: 56px;
+				line-height: 120%;
+				width: 873px;
+			}
+		}
+		.formlogin {
+			top: 85px;
+			left: 199px;
+			width: 740px;
+			height: 1045px;
+			padding: 85px;
+			background-color: #fff;
+			border-radius: 46px;
+			.iclogo {
+				width: 231px;
+				height: 107px;
+			}
+			.welcome {
+				padding-top: 114px;
+				padding-bottom: 82px;
+				font-size: 36px;
+				line-height: 160%;
+				width: 535px;
+			}
+			input[type=text].fl {
+				font-size: 28px;
+				line-height: 28px;
+				height: 100px;
+				border-radius: 100px;
+				padding-left: 57px;
+				padding-right: 57px;
+			}
+			input[type=password].fl {
+				font-size: 28px;
+				line-height: 28px;
+				height: 100px;
+				border-radius: 100px;
+				padding-left: 57px;
+				padding-right: 57px;
+			}
+			button.fl {
+				margin-top: 16px;
+				font-size: 28px;
+				line-height: 28px;
+				height: 100px;
+				border-radius: 100px;
+			}
+			.group {
+				.item {
+					padding-bottom: 42px;
+				}
+			}
+		}
+		.barblue.form1 {
+			height: 3100px;
+		}
+		/* end login */
 		.barblue.home {
 			height: 1136px;
 		}
@@ -5186,11 +5304,13 @@ header.topmenu {
 									.checkmark {
 										width: 36px;
 										height: 36px;
-										background-color: #E3E5E5;
+										background-color: #fff;
+										border:3px solid #E3E5E5;
 									}
 								}
 								.chkwrap input:checked ~ .checkmark {
 									background-color: #00BCE4;
+									border:3px solid #00BCE4;
 								}
 							}
 						}
@@ -5586,6 +5706,9 @@ header.topmenu {
 	.retailerlist {
 		display: block;
 	}
+	.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
+		display: none;
+	}
 	.container {
 		height: 100vh;
 		.arearesult.close {
@@ -5598,7 +5721,7 @@ header.topmenu {
 				width: 100%;
 				z-index: 5;
 				.tab {
-					height: 32px;
+					height: 62px;
 					border-top-left-radius: 16px;
 					border-top-right-radius: 16px;
 					background-color: #fff;
@@ -5628,9 +5751,10 @@ header.topmenu {
 					display: none;
 				}
 				.searchresult {
-					height: 280px;
+					height: auto;
 					overflow: scroll;
 					padding: 16px;
+					list-style: none;
 					background-color: #fff;
 					ul {
 						background-color: #f9f9f9;
@@ -5923,7 +6047,7 @@ header.topmenu {
 					height: calc(100vh - 78px);
 					width: 100%;
 					border-radius: 0;
-					.locfound, .modal, .bmodal {
+					.locfound, .modal {
 						display: none;
 					}
 					.controlzoom {
@@ -6611,18 +6735,19 @@ header.topmenu {
 					.right {
 						width: 100%;
 						.txtxl {
-							font-size: 24px;
+							font-size: 20px;
 							line-height: 120%;
 							padding-bottom: 0;
 						}
 						.txtst.al {
+							font-size: 14px;
 							width: 100%;
 						}
 						.maparea {
 							width: 100%;
 						}
 						.txtbt {
-							font-size: 24px;
+							font-size: 20px;
 							line-height: 120%;
 						}
 						.quality {
@@ -6653,3 +6778,46 @@ header.topmenu {
 	}
 	/* end profile */
 }
+
+/* fix for login page carousel */
+.container {
+	.bglogin {
+		.carrosel {
+			.css-1m9128y {
+				position: absolute;
+				top: 608px;
+				left: 570px;
+				width: 128px;
+			}
+		}
+	}
+}
+@media (min-width: 1920px) {
+	.container {
+		.bglogin {
+			.carrosel {
+				.css-1m9128y {
+					position: absolute;
+					top: 816px;
+					left: 753px;
+					width: 152px;
+				}
+			}
+		}
+	}
+}
+@media (min-width: 2560px) {
+	.container {
+		.bglogin {
+			.carrosel {
+				.css-1m9128y {
+					position: absolute;
+					top: 1098px;
+					left: 986px;
+					width: 200px;
+				}
+			}
+		}
+	}
+}
+/* end fix for login page carousel */

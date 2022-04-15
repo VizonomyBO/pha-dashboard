@@ -5,12 +5,17 @@ import ListItemText from '@mui/material/ListItemText';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
 import { CATEGORIES } from '../constants/categories';
 import { FilterType } from '../@types';
+import { MOBILE_WIDTH } from '../constants';
+import { useWindowSize } from '../store/hooks/custom/useWindowSize';
 
-export const DropdownCategories = () => {
+export const DropdownCategories = (
+  { setOpenCategories }
+  : {setOpenCategories:React.Dispatch<React.SetStateAction<boolean>>}
+) => {
+  const { ref, width } = useWindowSize();
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
-
   return (
-    <div className="citysearch">
+    <div className="citysearch" ref={ref}>
       <i className="icsearch" />
       <span className="txtd">What</span>
       <Select
@@ -19,6 +24,9 @@ export const DropdownCategories = () => {
         displayEmpty
         value={categoriesSelected || []}
         onChange={handleChange}
+        onMouseEnter={() => {
+          setOpenCategories(true);
+        }}
         renderValue={(selected: string[] | undefined) => {
           if (selected) {
             if (selected.length === 0) {
@@ -32,7 +40,7 @@ export const DropdownCategories = () => {
           return <em>Select Category</em>;
         }}
       >
-        {CATEGORIES.map((category: FilterType) => (
+        {width > MOBILE_WIDTH && CATEGORIES.map((category: FilterType) => (
           <MenuItem key={category.name} value={category.attrib} className="dropdown-categories">
             <ListItemText primary={category.name} className="item-categories" />
             <Checkbox

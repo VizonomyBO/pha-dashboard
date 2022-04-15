@@ -134,3 +134,8 @@ export interface ModalInderface {
   open: boolean,
   type: boolean
 }
+
+export interface ScrollInterface {
+  widthScroll: number,
+  heightScroll: number
+}

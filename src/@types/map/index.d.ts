@@ -20,6 +20,7 @@ export interface FilterType {
 export interface RenderToolTipInterface {
   info: PickInfo<Layer<unknown>[]> | undefined,
   badges: string[],
+  width: number,
 }
 
 interface TooltipProps {
@@ -28,3 +29,5 @@ interface TooltipProps {
   objectTypified: PropertiesLayer,
   badges: string[],
 }
+
+export type ZoomInterface = {value: number, type: string}

@@ -110,17 +110,28 @@ input, button, textarea, select {
     border-color: transparent;
     width: 100%;
     text-align: inherit;
-    padding-bottom: 7px;
+    padding-bottom: 8px;
 }
 .span-geocoder {
     font-family: "FuturaMedium", sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: #7A7E80;
 }
 
 .tr-geocoder {
-    // height: 40px;
+    list-style: none;
+}
+
+.tr-categories {
+    list-style: none;
+    position: sticky;
+    padding-bottom: 15px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 .tr-geocoder:hover {
@@ -226,3 +237,59 @@ input, button, textarea, select {
     z-index: 2;
 }
 
+.ul-geocoder-mobile {
+    background-color: #ffffff !important;
+    padding-left: 0px;
+}
+
+.chkwrap-mobile {
+	display: block;
+	position: relative;
+	padding-left: 35px;
+	margin-bottom: 12px;
+	cursor: pointer;
+	font-size: 22px;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.chkwrap-mobile input {
+	position: absolute;
+	opacity: 0;
+	cursor: pointer;
+	height: 0;
+	width: 0;
+}
+.checkmark-mobile {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 20px;
+	width: 20px;
+    margin-left: 300px;
+	background-color: rgb(255, 255, 255);
+	vertical-align: middle;
+    border-radius: 4px;
+}
+.chkwrap-mobile:hover input ~ .checkmark-mobile {
+	background-color: #7A7E80;
+	border-color: #7A7E80;
+}
+.chkwrap-mobile input:checked ~ .checkmark-mobile {
+	background-color: #00BDE3;
+	border-color: #00BDE3;
+	display: block;
+	width: 20px;
+	height: 20px;
+	border-radius: 4px;
+	content: url("../../public/images/ic_chk_selected.svg");
+}
+.checkmark-mobile:after {
+	content: "";
+	position: absolute;
+	display: none;
+}
+.chkwrap-mobile input:checked ~ .checkmark-mobile:after {
+	display: block;
+}
