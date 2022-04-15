@@ -30,16 +30,36 @@ export const FormHeader = ({ showBackArrow, activeTab, setActiveTab }: FormHeade
   };
   return (
     <div className="header">
-      {showBackArrow && (
-      <div className="backlink">
-        <Link to="/home">
-          <button className="light" type="button">
-            <span className="icarrowleft">
-              <span className="txt">Back to Locations</span>
-            </span>
+      {showBackArrow ? (
+        <div className="backlink">
+          <Link to="/home">
+            <button className="light" type="button">
+              <span className="icarrowleft">
+                <span className="txt">Back to Locations</span>
+              </span>
+            </button>
+          </Link>
+        </div>
+      ) : (
+        <div
+          className="backlink"
+          style={{
+            justifyContent: 'flex-end'
+          }}
+        >
+          <button
+            className="light"
+            type="button"
+            style={{
+              fontSize: '20px'
+            }}
+            onClick={() => {
+              setModal({ type: false, open: false });
+            }}
+          >
+            X
           </button>
-        </Link>
-      </div>
+        </div>
       )}
       <h2 className="sectitle">Marketplace Request Form</h2>
       <p className="secdescription">Have a location listed by completing the form below</p>
