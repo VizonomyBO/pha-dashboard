@@ -43,7 +43,7 @@ export const ToolTipMobile = (data: TooltipProps) => {
       </Link>
       <div className="bmodal-ts">
         <div className="pinaddcomment">
-          <button className="light" type="button" onClick={(e) => openIndividualForm(e)}>
+          <button className="light" type="button" onClick={openIndividualForm}>
             <span className="icaddcoment" />
           </button>
         </div>
