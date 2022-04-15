@@ -23,10 +23,10 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
   const businessClass = classNames('option', { active: activeTab === BUSINESS_DETAILS });
   const otherClass = classNames('option', { active: activeTab === OTHER_QUESTIONS });
   const contactClass = classNames('option', { active: activeTab === CONTACT_DETAILS });
-  const validationForm = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const validationForm = (event: string) => {
     if (showBackArrow) {
       const estate = Formvalidation(
-        event.target.value,
+        event,
         activeTab,
         businessDetails,
         selectCategory,
@@ -35,7 +35,7 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
       );
       setActiveTab(estate.value as FormTabType);
     } else {
-      setActiveTab(event.target.value as FormTabType);
+      setActiveTab(event as FormTabType);
     }
   };
   return (
@@ -75,9 +75,8 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
       <p className="secdescription">Have a location listed by completing the form below</p>
       <div
         className="optiondetail"
-        onChange={validationForm}
       >
-        <div className={businessClass}>
+        <div className={businessClass} onClick={() => validationForm(BUSINESS_DETAILS)} aria-hidden="true">
           <label className="chkwrap">
             Business Details
             <input
@@ -88,7 +87,7 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
             <span className="checkmark" />
           </label>
         </div>
-        <div className={otherClass}>
+        <div className={otherClass} onClick={() => validationForm(OTHER_QUESTIONS)} aria-hidden="true">
           <label className="chkwrap">
             Other Questions
             <input
@@ -99,7 +98,7 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
             <span className="checkmark" />
           </label>
         </div>
-        <div className={contactClass}>
+        <div className={contactClass} onClick={() => validationForm(CONTACT_DETAILS)} aria-hidden="true">
           <label className="chkwrap">
             Contact Details
             <input
