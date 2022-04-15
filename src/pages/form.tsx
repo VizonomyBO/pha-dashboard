@@ -84,7 +84,6 @@ export const Form = () => {
         headers
       ).then((res) => res.json()).then((res) => {
         if (res.success) {
-          console.log(res);
           setModal({ type: estate.type, open: estate.open });
           setTimeout(() => {
             navigate('/home');

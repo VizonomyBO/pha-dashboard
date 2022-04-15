@@ -9,7 +9,6 @@ import {
 } from '../@types/redux';
 
 export const getPhaRetailerBody = () => (businessDetails: BusinessDetailsInterface) => {
-  console.log('variable de mierda que no tiene datos ', businessDetails);
   const bodyBusinessDetails: CompletelyIntentionalAny = {
     name: businessDetails.name,
     address_1: businessDetails.address_1,
@@ -90,7 +89,6 @@ export const getPhaRetailerBody = () => (businessDetails: BusinessDetailsInterfa
               if (status) {
                 body.status = status;
               }
-              console.log(body);
               const newBody: CompletelyIntentionalAny = {
                 json: {}
               };
@@ -103,7 +101,6 @@ export const getPhaRetailerBody = () => (businessDetails: BusinessDetailsInterfa
               });
               newBody.images = body.images || [];
               newBody.ownerimages = body.ownerimages || [];
-              console.log(newBody);
               return newBody;
             };
           };

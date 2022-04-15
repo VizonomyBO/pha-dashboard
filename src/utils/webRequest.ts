@@ -14,7 +14,6 @@ export const webRequest = {
     const formData = new FormData();
     Object.keys(data).forEach((key) => {
       formData.append(key, data[key]);
-      console.log('shit ', JSON.stringify(formData.get(key)));
     });
     return formData;
   },
