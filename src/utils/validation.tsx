@@ -134,6 +134,9 @@ export const Formvalidation = (
         typeModal = false;
         openModal = true;
       }
+      if (activeTab === OTHER_QUESTIONS && value === BUSINESS_DETAILS) {
+        returnValue = value;
+      }
       break;
     case CONTACT_DETAILS:
       if (selectCategoryValidation(selectCategory)
@@ -147,9 +150,13 @@ export const Formvalidation = (
         typeModal = false;
         openModal = true;
       }
+      if (activeTab === CONTACT_DETAILS && (value === BUSINESS_DETAILS || value === OTHER_QUESTIONS)) {
+        returnValue = value;
+      }
       break;
     default:
       break;
   }
+  console.log('activeTab', activeTab, 'returnValue', returnValue, 'value', value);
   return ({ type: typeModal, open: openModal, value: returnValue });
 };

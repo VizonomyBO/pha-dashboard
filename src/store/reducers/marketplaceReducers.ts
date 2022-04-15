@@ -160,14 +160,6 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
         }
       };
     case TYPES.IMAGES_FILES:
-      console.log(action);
-      console.log(JSON.stringify({
-        ...state,
-        files: {
-          ...state.files,
-          [action.payload]: action.value
-        }
-      }, null, 2));
       return {
         ...state,
         files: {

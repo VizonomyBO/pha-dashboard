@@ -36,7 +36,7 @@ export const ToolTip = (data: TooltipProps) => {
           <span className="icphone" />
           <span className="number">{objectTypified?.properties?.phone}</span>
         </div>
-        <Link to={`profile/${objectTypified?.properties?.retailer_id}`}>
+        <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
           <button className="light" type="button">
             View Details
           </button>
