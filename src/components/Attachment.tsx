@@ -36,6 +36,7 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
       </div>
       <div className="fileContent">
         {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           multimedia.map((element: any, index: number) => (
             <span
               key={generateKey(element, index)}
