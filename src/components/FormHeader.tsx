@@ -33,7 +33,6 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
         selectAccessibility,
         otherQuestions
       );
-      setModal({ type: estate.type, open: estate.open });
       setActiveTab(estate.value as FormTabType);
     } else {
       setActiveTab(event.target.value as FormTabType);
