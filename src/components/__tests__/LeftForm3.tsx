@@ -6,7 +6,14 @@ import { LeftForm3 } from '../LeftForm3';
 
 describe('renders without crashing', () => {
   const initialStoreState = {
-    marketplace: {}
+    marketplace: {
+      contactDetails: {
+        contact_name: '',
+        contact_email: '',
+        contact_owner: '',
+        contact_patron: '',
+      }
+    }
   };
   const mockStore = configureStore();
   let store;

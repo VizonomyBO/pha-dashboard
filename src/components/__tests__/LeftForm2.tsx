@@ -6,7 +6,9 @@ import { LeftForm2 } from '../LeftForm2';
 describe('renders without crashing', () => {
   const initialStoreState = {
     marketplace: {
-      otherQuestions: {}
+      otherQuestions: {
+        availabilityOptions: []
+      }
     },
     widthScroll: 5,
     heightScroll: 0

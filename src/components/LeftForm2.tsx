@@ -83,6 +83,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
+            value={otherQuestions.description}
             onChange={setDescriptionFunction}
           />
         </div>
@@ -104,6 +105,7 @@ export const LeftForm2 = () => {
             Fresh
             <input
               type="checkbox"
+              checked={otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FRESH)}
               onChange={setAvailibityFresh}
             />
             <span className="checkmark ckeckmark-form" />
@@ -112,6 +114,7 @@ export const LeftForm2 = () => {
             Frozen
             <input
               type="checkbox"
+              checked={otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.FROZEN)}
               onChange={setAvailabilityFrozen}
             />
             <span className="checkmark ckeckmark-form" />
@@ -120,6 +123,7 @@ export const LeftForm2 = () => {
             Canned
             <input
               type="checkbox"
+              checked={otherQuestions.availabilityOptions.includes(formConstants.AVAILABILITY.CANNED)}
               onChange={setAvailabilityCanned}
             />
             <span className="checkmark ckeckmark-form" />
@@ -256,6 +260,7 @@ export const LeftForm2 = () => {
             id="yth2"
             cols={30}
             rows={10}
+            value={otherQuestions.produce_avail_store}
             placeholder="Your text here..."
             onChange={setProduceAvailStoreFunction}
           />
@@ -272,6 +277,7 @@ export const LeftForm2 = () => {
             cols={30}
             rows={10}
             placeholder="Your text here..."
+            value={otherQuestions.produce_avail_seasonally}
             onChange={setProduceAvailSeasonallyFunction}
           />
         </div>

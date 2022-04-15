@@ -4,7 +4,18 @@ import configureStore from 'redux-mock-store';
 import { CategoryPanel } from '../CategoryPanel';
 
 describe('renders without crashing', () => {
-  const initialStoreState = {};
+  const initialStoreState = {
+    marketplace: {
+      selectCategory: {
+        supermarket: 'Yes',
+        corner_store: 'Yes',
+        dollar_stores: 'Yes',
+        food_pantry: 'Yes',
+        distribution: 'Yes',
+        food_co_op: 'Yes'
+      }
+    }
+  };
   const mockStore = configureStore();
   let store;
 

@@ -7,7 +7,7 @@ import {
   setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner,
   setSnapAccepted, setWicAccepted, setContactEmail, setSelectCategoryCorner,
   setSelectCategoryDistribution, setSelectCategoryDollar,
-  setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket
+  setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket, setSelectCategory
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -54,6 +54,9 @@ export const useMarketplaceDispatch = () => {
     },
     setContactPatron: (contactPatron: string) => {
       dispatch(setContactPatron(contactPatron));
+    },
+    setSelectCategory: (type: string, selectCategory: string) => {
+      dispatch(setSelectCategory(type, selectCategory));
     },
     setSelectCategorySupermarket: (selectCategory: string) => {
       dispatch(setSelectCategorySupermarket(selectCategory));

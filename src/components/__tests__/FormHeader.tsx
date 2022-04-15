@@ -27,14 +27,11 @@ describe('renders without crashing', () => {
   test('renders without crashing', () => {
     store = mockStore(initialStoreState);
     const div = document.createElement('div');
-    const setActiveTabMock = jest.fn();
     ReactDOM.render(
       <Provider store={store}>
         <MemoryRouter>
           <FormHeader
             showBackArrow
-            activeTab="businessDetails"
-            setActiveTab={setActiveTabMock}
           />
         </MemoryRouter>
       </Provider>,

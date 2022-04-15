@@ -1,11 +1,19 @@
 import React from 'react';
-import { useMarketplaceDispatch } from '../store/hooks/marketplaceHook';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { formConstants } from '../constants/form';
 
 export const LeftForm3 = () => {
   const {
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
+  const {
+    contactDetails: {
+      contact_name,
+      contact_email,
+      contact_owner,
+      contact_patron
+    }
+  } = useMarketplaceState();
 
   const setName = (e: React.FormEvent<HTMLInputElement>): void => {
     setContactName(e.currentTarget.value);
@@ -41,6 +49,7 @@ export const LeftForm3 = () => {
           <input
             className="light"
             type="text"
+            value={contact_name}
             onChange={setName}
           />
         </div>
@@ -53,6 +62,7 @@ export const LeftForm3 = () => {
           <input
             className="light"
             type="text"
+            value={contact_email}
             onChange={setEmail}
           />
         </div>
@@ -64,6 +74,7 @@ export const LeftForm3 = () => {
             I am the owner/manager of the business.
             <input
               type="checkbox"
+              value={contact_owner}
               onChange={setContactOwnerFunction}
             />
             <span className="checkmark ckeckmark-form" />
@@ -72,6 +83,7 @@ export const LeftForm3 = () => {
             I am patron of this business.
             <input
               type="checkbox"
+              value={contact_patron}
               onChange={setContactPatronFunction}
             />
             <span className="checkmark ckeckmark-form" />

@@ -1,9 +1,11 @@
 import { Dispatch, SetStateAction } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
-import { TYPE_BUSINESS } from '../../constants';
+import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
+import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
 import { showText } from '../../utils/textFormatter';
+import { webRequest } from '../../utils/webRequest';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
 export const DashboardTable = ({
@@ -17,9 +19,10 @@ export const DashboardTable = ({
 }) => {
   const { setModal } = useModalDispatch();
   const {
-    setContactName,
-    setContactEmail,
-    setBusinessDetails,
+    setBusinessDetails, setSelectCategory, setWicAccepted, setSnapAccepted,
+    setOtherQuestions, setAvailabilityOptions, setQuality,
+    setVisibility, setLocal, setProduceAvailStore, setProduceAvailSeasonally,
+    setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
   const handleSelected = (checked: boolean, item: PhaRetailer) => {
     let newSelectedElements: string[];
@@ -50,14 +53,35 @@ export const DashboardTable = ({
   };
 
   const showModal = (item: PhaRetailer) => {
-    setContactName(item.contact_name);
-    setContactEmail(item.contact_email);
-    setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, item.address_1);
-    setBusinessDetails(TYPE_BUSINESS.ADDRESS_2, item.address_2);
-    setBusinessDetails(TYPE_BUSINESS.ZIPCODE, item.zipcode);
-    setBusinessDetails(TYPE_BUSINESS.NAME, item.name);
-    setBusinessDetails(TYPE_BUSINESS.PHONE, item.phone);
-    setBusinessDetails(TYPE_BUSINESS.CITY, item.city);
+    webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
+      .then((res) => res.json())
+      .then((res) => {
+        const retailer = res.data as Record<string, string>;
+        Object.keys(TYPE_BUSINESS).forEach((key: string) => {
+          const prop = (TYPE_BUSINESS as Record<string, string>)[key];
+          setBusinessDetails(prop, retailer[prop]);
+        });
+        Object.keys(SELECT_CATEGORY).forEach((key: string) => {
+          const prop = (SELECT_CATEGORY as Record<string, string>)[key];
+          setSelectCategory(prop, retailer[prop]);
+        });
+        setWicAccepted(retailer.wic_accepted);
+        setSnapAccepted(retailer.snap_accepted);
+
+        setOtherQuestions(retailer.description);
+        setAvailabilityOptions(retailer.availability.split(','));
+        setQuality(retailer.quality);
+        setVisibility(retailer.visibility);
+        setLocal(retailer.local);
+        setProduceAvailStore(retailer.produce_avail_store);
+        setProduceAvailSeasonally(retailer.produce_avail_seasonally);
+
+        setContactName(retailer.contact_name);
+        setContactEmail(retailer.contact_email);
+        setContactOwner(retailer.contact_owner);
+        setContactPatron(retailer.contact_patron);
+      })
+      .catch((err) => console.error(err));
     setModal({ open: true, type: true });
   };
 

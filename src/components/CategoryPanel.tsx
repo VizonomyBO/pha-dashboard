@@ -1,11 +1,21 @@
 import { formSelectCategory } from '../constants/form';
-import { useMarketplaceDispatch } from '../store/hooks';
+import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 
 export const CategoryPanel = () => {
   const {
     setSelectCategoryCorner, setSelectCategoryDistribution, setSelectCategoryDollar,
     setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket
   } = useMarketplaceDispatch();
+  const {
+    selectCategory: {
+      supermarket,
+      corner_store,
+      dollar_stores,
+      food_pantry,
+      distribution,
+      food_co_op
+    }
+  } = useMarketplaceState();
 
   const setSelectSupermaketFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     if (e.currentTarget.checked) {
@@ -75,6 +85,8 @@ export const CategoryPanel = () => {
                   Supermarket/big box retailer
                   <input
                     type="checkbox"
+                    value={supermarket}
+                    checked={supermarket === formSelectCategory.SUPERMARKET.YES}
                     onChange={setSelectSupermaketFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
@@ -85,6 +97,8 @@ export const CategoryPanel = () => {
                   Corner/convenience store
                   <input
                     type="checkbox"
+                    value={corner_store}
+                    checked={corner_store === formSelectCategory.CORNER_STORE.YES}
                     onChange={setSelectCornerFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
@@ -95,6 +109,8 @@ export const CategoryPanel = () => {
                   Dollar stores
                   <input
                     type="checkbox"
+                    value={dollar_stores}
+                    checked={dollar_stores === formSelectCategory.DOLLAR_STORES.YES}
                     onChange={setSelectDollarFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
@@ -105,6 +121,8 @@ export const CategoryPanel = () => {
                   Food pantry
                   <input
                     type="checkbox"
+                    value={food_pantry}
+                    checked={food_pantry === formSelectCategory.FOOD_PANTRY.YES}
                     onChange={setSelectFoodPantryFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
@@ -115,6 +133,8 @@ export const CategoryPanel = () => {
                   Distribution location
                   <input
                     type="checkbox"
+                    value={distribution}
+                    checked={distribution === formSelectCategory.DISTRIBUTION.YES}
                     onChange={setSelectDistributionFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
@@ -125,6 +145,8 @@ export const CategoryPanel = () => {
                   Food co-op
                   <input
                     type="checkbox"
+                    value={food_co_op}
+                    checked={distribution === formSelectCategory.FOOD_CO_OP.YES}
                     onChange={setSelectFoodCoOpFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
