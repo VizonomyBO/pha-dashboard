@@ -12,9 +12,7 @@ export const Attachment = ({ type }: {type: string}) => {
   } = useAttachmentBusiness({ type });
   const { ref, width } = useWindowSize();
   const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
-  const classnameName = () => (
-    width > MOBILE_WIDTH ? 'Browser Files' : 'Browse on your device'
-  );
+
   return (
     <div ref={ref}>
       <div className="ainput upload">
@@ -32,7 +30,7 @@ export const Attachment = ({ type }: {type: string}) => {
           />
           <div>
             <label htmlFor={`${type}uploader`}>
-              <p className="fileText">{classnameName}</p>
+              <p className="fileText">{width > MOBILE_WIDTH ? 'Browser Files' : 'Browse on your device' }</p>
             </label>
           </div>
         </div>
