@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
 import { TYPE_INDIVIDUAL_FORM } from '../constants';
 import { formConstants } from '../constants/form';
+import { ENDPOINTS } from '../constants/url';
 import { useIndividualFormDispatch, useIndividualFormState } from '../store/hooks/individualFormHook';
+import { webRequest } from '../utils/webRequest';
 import { Attachment } from './Attachment';
 
 export const FeedbackForm = (
@@ -8,12 +11,19 @@ export const FeedbackForm = (
   : {setVisible: React.Dispatch<React.SetStateAction<boolean>>, retailerId: string }
 ) => {
   const { setIndividualForm } = useIndividualFormDispatch();
+  useEffect(() => {
+    setIndividualForm(TYPE_INDIVIDUAL_FORM.retailer_id, retailerId);
+  }, [setIndividualForm, retailerId]);
+
   const {
     availability,
     quality,
     visibility,
     local,
-    meets_need
+    meets_need,
+    contact_phone,
+    contact_zipcode,
+    produce_avail_store
   } = useIndividualFormState();
   const setAvailabilityOptionsCheck = (type: string, checked: boolean, value: string) => {
     if (checked) {
@@ -306,11 +316,12 @@ export const FeedbackForm = (
                   <textarea
                     name="yth"
                     id="yth2"
+                    value={produce_avail_store}
                     placeholder="Your text here..."
                     onChange={
                       (e: React.FormEvent<HTMLTextAreaElement>) => {
                         setIndividualForm(
-                          TYPE_INDIVIDUAL_FORM.meets_need,
+                          TYPE_INDIVIDUAL_FORM.produce_avail_store,
                           e.currentTarget.value
                         );
                       }
@@ -356,6 +367,7 @@ export const FeedbackForm = (
                   <input
                     className="light"
                     type="text"
+                    value={contact_phone}
                     onChange={
                       (e: React.ChangeEvent<HTMLInputElement>) => (
                         setIndividualForm(TYPE_INDIVIDUAL_FORM.contact_phone, e.target.value)
@@ -372,6 +384,7 @@ export const FeedbackForm = (
                   <input
                     className="light"
                     type="text"
+                    value={contact_zipcode}
                     onChange={
                       (e: React.ChangeEvent<HTMLInputElement>) => (
                         setIndividualForm(TYPE_INDIVIDUAL_FORM.contact_zipcode, e.target.value)
@@ -397,8 +410,21 @@ export const FeedbackForm = (
               className="light"
               type="button"
               onClick={() => {
-                setIndividualForm(TYPE_INDIVIDUAL_FORM.retailer_id, retailerId);
-                setVisible(false);
+                webRequest.post(ENDPOINTS.PHA_INDIVIDUAL(), {
+                  availability,
+                  quality,
+                  visibility,
+                  local,
+                  meets_need,
+                  contact_phone,
+                  contact_zipcode,
+                  produce_avail_store
+                }).then((res) => res.json())
+                  .then((res) => {
+                    if (res.success) {
+                      setVisible(false);
+                    }
+                  });
               }}
             >
               Submit
