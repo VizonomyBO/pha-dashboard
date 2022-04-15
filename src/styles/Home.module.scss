@@ -5737,7 +5737,7 @@ header.topmenu {
 		display: block;
 	}
 	.css-10nakn3-MuiModal-root-MuiPopover-root-MuiMenu-root {
-		display: none;
+		/* display: none; */
 	}
 	.container .pagecontainer .ldgsearchstore .alook .smcitysearch {
 		display: block;
@@ -6394,6 +6394,15 @@ header.topmenu {
 							width: 100%;
 							font-size: 16px;
 							border-radius: 20px;
+						}
+						button.btm-catalogories {
+							em {
+								font-family: 'FuturaMedium', sans-serif;
+								font-size: 14px;
+								line-height: 14px;
+								font-style: normal;
+								font-weight: 600;
+							}
 						}
 					}
 					.citysearch {
