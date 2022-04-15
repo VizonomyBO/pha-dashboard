@@ -26,9 +26,9 @@ export const ToolTipMobile = (data: { x: number; y: number; objectTypified: Prop
           <span className="number">{objectTypified?.properties?.phone}</span>
         </div>
         <Link to={`profile/${objectTypified?.properties?.retailer_id}`}>
-          <button className="light" type="button">
+          {/* <button className="light" type="button">
             View Details
-          </button>
+          </button> */}
         </Link>
         <div className="pinaddcomment">
           <button className="light" type="button" onClick={() => openIndividualForm()}>
