@@ -1,7 +1,9 @@
+import classNames from 'classnames';
 import { Dispatch, SetStateAction } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
 import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
+import { ROW_STATUS } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
 import { showText } from '../../utils/textFormatter';
@@ -146,7 +148,15 @@ export const DashboardTable = ({
                 <td className="wcol2 bbtm"><span className="txt1">{showText(item.zipcode)}</span></td>
                 <td className="wcol3 bbtm"><span className="txt1">{showText(item.submission_date)}</span></td>
                 <td className="wcol4 bbtm">
-                  <div className="colorstatus blue">
+                  <div
+                    className={
+                      classNames('colorstatus', {
+                        blue: item.submission_status === ROW_STATUS.PENDING,
+                        green: item.submission_status === ROW_STATUS.APPROVED,
+                        red: item.submission_status === ROW_STATUS.REJECTED,
+                      })
+                    }
+                  >
                     <span className="dot" />
                     <span className="txt2">{showText(item.submission_status)}</span>
                   </div>

@@ -16,9 +16,15 @@ import { useTabState } from '../store/hooks';
 export const FormArea = ({
   isModal,
   clickProceed,
+  clickApprove,
+  clickDecline,
+  clickDelete,
 }: {
   isModal: boolean;
-  clickProceed: () => void;
+  clickProceed?: () => void;
+  clickApprove?: () => void;
+  clickDecline?: () => void;
+  clickDelete?: () => void;
 }) => {
   const { activeTab } = useTabState();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
@@ -46,13 +52,13 @@ export const FormArea = ({
           {
             isModal ? (
               <div className="aaction">
-                <button className="light" type="button" onClick={clickProceed} style={{ padding: '16px 30px' }}>
+                <button className="light" type="button" onClick={clickApprove} style={{ padding: '16px 30px' }}>
                   Approve
                 </button>
                 <button
                   className="light"
                   type="button"
-                  onClick={clickProceed}
+                  onClick={clickDecline}
                   style={{
                     backgroundColor: 'white',
                     padding: '16px 30px',
@@ -66,7 +72,7 @@ export const FormArea = ({
                 <button
                   className="light"
                   type="button"
-                  onClick={clickProceed}
+                  onClick={clickDelete}
                   style={{
                     backgroundColor: 'white',
                     padding: '16px 30px',

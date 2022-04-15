@@ -11,6 +11,7 @@ export interface MediaInterface {
   link: string,
 }
 export interface BusinessDetailsInterface {
+  retailer_id?: string | undefined;
   name: string,
   address_1: string,
   address_2: string,

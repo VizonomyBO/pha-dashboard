@@ -103,6 +103,7 @@ export const SELECT_CATEGORY = {
 };
 
 export const TYPE_BUSINESS = {
+  RETAILER_ID: 'retailer_id',
   NAME: 'name',
   ADDRESS_1: 'address_1',
   ADDRESS_2: 'address_2',

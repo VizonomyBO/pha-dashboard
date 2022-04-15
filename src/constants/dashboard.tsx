@@ -5,7 +5,7 @@ export const DEFAULT_VALUES_BUTTON = [{
   active: false
 }, {
   id: 'btn-02',
-  name: 'Aproved',
+  name: 'Approved',
   class: 'light op2',
   active: false
 }, {
@@ -14,6 +14,12 @@ export const DEFAULT_VALUES_BUTTON = [{
   class: 'light op3',
   active: false
 }];
+
+export enum ROW_STATUS {
+  APPROVED = 'Approved',
+  REJECTED = 'Rejected',
+  PENDING = 'Pending',
+}
 
 export const FILENAME_CSV_RETAILER = 'PHA-retailer';
 export const FILENAME_CSV_INDIVIDUAL = 'PHA-individual';
