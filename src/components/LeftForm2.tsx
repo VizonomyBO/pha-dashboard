@@ -291,6 +291,7 @@ export const LeftForm2 = () => {
         </div>
         <Attachment
           type={TYPE_BUSINESS.BUSINESS}
+          subType="images"
         />
       </div>
       <div className="item">
@@ -299,6 +300,7 @@ export const LeftForm2 = () => {
         </div>
         <Attachment
           type={TYPE_BUSINESS.OWNER}
+          subType="ownerimages"
         />
       </div>
     </>

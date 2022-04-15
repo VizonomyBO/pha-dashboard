@@ -4,12 +4,12 @@ import { MultimediFileInterface } from '../@types';
 import { MOBILE_WIDTH } from '../constants';
 import { useWindowSize } from '../store/hooks/custom/useWindowSize';
 
-export const Attachment = ({ type }: {type: string}) => {
+export const Attachment = ({ type, subType }: {type: string, subType?: string }) => {
   const {
     filesSelected,
     multimedia,
     removeFile
-  } = useAttachmentBusiness({ type });
+  } = useAttachmentBusiness({ type, subType });
   const { ref, width } = useWindowSize();
   const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
 

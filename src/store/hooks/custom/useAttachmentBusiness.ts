@@ -4,8 +4,11 @@ import { INDIVIDUAL_FORM, TYPE_INDIVIDUAL_FORM } from '../../../constants';
 import { useIndividualFormDispatch } from '../individualFormHook';
 import { useMarketplaceDispatch } from '../marketplaceHook';
 
-export const useAttachmentBusiness = ({ type }: {type: string}) => {
-  const { setBusinessFile } = useMarketplaceDispatch();
+export const useAttachmentBusiness = ({ type, subType }: {
+  type: string,
+  subType?: string
+}) => {
+  const { setImagesFiles } = useMarketplaceDispatch();
   const { setIndividualForm } = useIndividualFormDispatch();
   const [multimedia, setMultimedia] = useState<MultimediFileInterface[]>([]);
   const filesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -29,15 +32,16 @@ export const useAttachmentBusiness = ({ type }: {type: string}) => {
     if (type === INDIVIDUAL_FORM) {
       setIndividualForm(TYPE_INDIVIDUAL_FORM.multimedia, [...multimedia, ...newObjects]);
     } else {
-      setBusinessFile(type, [...multimedia, ...newObjects]);
+      setImagesFiles(subType as string, [...multimedia, ...newObjects]);
     }
   };
   const removeFile = (index: number) => {
-    setMultimedia(multimedia.filter((_, i) => i !== index));
+    const filtered = multimedia.filter((_, i) => i !== index);
+    setMultimedia(filtered);
     if (type === INDIVIDUAL_FORM) {
-      setIndividualForm(type, multimedia.filter((_, i) => i !== index));
+      setIndividualForm(type, filtered);
     } else {
-      setBusinessFile(type, multimedia.filter((_, i) => i !== index));
+      setImagesFiles(subType as string, filtered);
     }
   };
   return {
