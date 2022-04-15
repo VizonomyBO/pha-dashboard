@@ -111,7 +111,7 @@ export const DashboardTable = ({
                       onChange={(e) => selectAll(e.target.checked)}
                       checked={checkAll()}
                     />
-                    <span className="checkmark" />
+                    <span className="checkmark ckeckmark-form" />
                   </label>
                 </div>
               </th>
@@ -141,7 +141,7 @@ export const DashboardTable = ({
                         onChange={(e) => handleSelected(e.target.checked, item)}
                         checked={selectedElements.includes(item.retailer_id || '')}
                       />
-                      <span className="checkmark" />
+                      <span className="checkmark  ckeckmark-form" />
                     </label>
                   </div>
                 </td>

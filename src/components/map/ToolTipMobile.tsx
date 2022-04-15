@@ -1,10 +1,15 @@
 import { Link } from 'react-router-dom';
-import { PropertiesLayer } from '../../@types';
+import { TooltipProps } from '../../@types';
+import { BADGES } from '../../constants';
 
-export const ToolTipMobile = (data: { x: number; y: number; objectTypified: PropertiesLayer }) => {
-  const { objectTypified } = data;
-  const openIndividualForm = () => {
-    console.info('open form');
+export const ToolTipMobile = (data: TooltipProps) => {
+  const {
+    objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
+  } = data;
+  const openIndividualForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+    setVisibleFeedback(true);
+    setCurrentRetailerId(objectTypified?.properties?.retailer_id ?? '');
   };
   return (
     <>
@@ -16,11 +21,17 @@ export const ToolTipMobile = (data: { x: number; y: number; objectTypified: Prop
           <div className="detailcard">
             <div className="store">{objectTypified?.properties?.name}</div>
             <div className="services">
-              <span className="kind icmkdish" />
-              <span className="kind icmkshop" />
-              <span className="kind icmkdish" />
-              <span className="kind icmkshop" />
-              <span className="kind icmkshop" />
+              {
+                badges.map((badge) => (
+                  <span
+                    key={badge}
+                    className="kind icmkdish"
+                    style={{
+                      content: `url("${BADGES[badge].image}")`
+                    }}
+                  />
+                ))
+              }
             </div>
             <div className="address">{objectTypified?.properties?.address_1}</div>
             <div className="phone">
@@ -32,7 +43,7 @@ export const ToolTipMobile = (data: { x: number; y: number; objectTypified: Prop
       </Link>
       <div className="bmodal-ts">
         <div className="pinaddcomment">
-          <button className="light" type="button" onClick={() => openIndividualForm()}>
+          <button className="light" type="button" onClick={openIndividualForm}>
             <span className="icaddcoment" />
           </button>
         </div>
