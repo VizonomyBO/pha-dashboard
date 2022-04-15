@@ -9,7 +9,7 @@ export const ToolTipMobile = (data: TooltipProps) => {
   const openIndividualForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     setVisibleFeedback(true);
-    setCurrentRetailerId(objectTypified?.properties?.retailer_id ? objectTypified?.properties?.retailer_id : '');
+    setCurrentRetailerId(objectTypified?.properties?.retailer_id ?? '');
   };
   return (
     <>
