@@ -1,8 +1,8 @@
 import {
   BusinessDetailsInterface,
   OtherQuestionsInterface,
-  selectAccessibilityInterface,
-  selectCategoryInterface
+  SelectAccessibilityInterface,
+  SelectCategoryInterface
 } from '../@types/redux';
 import {
   BUSINESS_DETAILS,
@@ -26,7 +26,7 @@ export const businessDetailsValidation = (businessDetails: BusinessDetailsInterf
   return false;
 };
 
-export const selectCategoryValidation = (selectCategory: selectCategoryInterface) => {
+export const selectCategoryValidation = (selectCategory: SelectCategoryInterface) => {
   if (isLiteralYes(selectCategory.supermarket)
   || isLiteralYes(selectCategory.corner_store) || isLiteralYes(selectCategory.dollar_stores)
   || isLiteralYes(selectCategory.food_pantry) || isLiteralYes(selectCategory.distribution)
@@ -36,7 +36,7 @@ export const selectCategoryValidation = (selectCategory: selectCategoryInterface
   return false;
 };
 
-export const selectAccessibilityValidation = (selectAccessibility: selectAccessibilityInterface) => {
+export const selectAccessibilityValidation = (selectAccessibility: SelectAccessibilityInterface) => {
   if (isLiteralYes(selectAccessibility.wic_accepted)
   || isLiteralYes(selectAccessibility.snap_accepted)) {
     return true;
@@ -69,7 +69,7 @@ export const otherQuestionsEmty = (otherQuestions: OtherQuestionsInterface) => {
   return false;
 };
 
-export const selectCategoryEmty = (selectCategory: selectCategoryInterface) => {
+export const selectCategoryEmty = (selectCategory: SelectCategoryInterface) => {
   if (!isLiteralYes(selectCategory.supermarket)
   && !isLiteralYes(selectCategory.corner_store) && !isLiteralYes(selectCategory.dollar_stores)
   && !isLiteralYes(selectCategory.food_pantry) && !isLiteralYes(selectCategory.distribution)
@@ -79,7 +79,7 @@ export const selectCategoryEmty = (selectCategory: selectCategoryInterface) => {
   return false;
 };
 
-export const selectAccessibilityEmty = (selectAccessibility: selectAccessibilityInterface) => {
+export const selectAccessibilityEmty = (selectAccessibility: SelectAccessibilityInterface) => {
   if (!isLiteralYes(selectAccessibility.wic_accepted)
   && !isLiteralYes(selectAccessibility.snap_accepted)) {
     return true;
@@ -91,8 +91,8 @@ export const Formvalidation = (
   value: string,
   activeTab: string,
   businessDetails: BusinessDetailsInterface,
-  selectCategory: selectCategoryInterface,
-  selectAccessibility: selectAccessibilityInterface,
+  selectCategory: SelectCategoryInterface,
+  selectAccessibility: SelectAccessibilityInterface,
   otherQuestions: OtherQuestionsInterface
 ) => {
   let returnValue = activeTab;
