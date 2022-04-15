@@ -3,6 +3,7 @@ import { useAttachmentBusiness } from '../store/hooks/custom/useAttachmentBusine
 import { MultimediFileInterface } from '../@types';
 import { MOBILE_WIDTH } from '../constants';
 import { useWindowSize } from '../store/hooks/custom/useWindowSize';
+import { CompletelyIntentionalAny } from '../@types/database';
 
 export const Attachment = ({ type, subType }: {type: string, subType?: string }) => {
   const {
@@ -36,8 +37,7 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
       </div>
       <div className="fileContent">
         {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          multimedia.map((element: any, index: number) => (
+          multimedia.map((element: CompletelyIntentionalAny, index: number) => (
             <span
               key={generateKey(element, index)}
               className="fileSpam"
