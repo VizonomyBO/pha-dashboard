@@ -18,7 +18,6 @@ import { Formvalidation } from '../utils/validation';
 import { FormArea } from '../components/FormArea';
 import { useTabDispatch, useTabState } from '../store/hooks/tabHook';
 
-
 export const Form = () => {
   const { activeTab } = useTabState();
   const { setActiveTab } = useTabDispatch();

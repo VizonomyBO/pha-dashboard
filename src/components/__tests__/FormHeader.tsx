@@ -16,6 +16,9 @@ describe('renders without crashing', () => {
     modal: {
       open: false,
       type: false
+    },
+    tab: {
+      activeTab: ''
     }
   };
   const mockStore = configureStore();
