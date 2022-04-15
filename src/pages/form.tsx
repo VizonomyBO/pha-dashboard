@@ -17,6 +17,9 @@ import { useMarketplaceState, useModalDispatch } from '../store/hooks';
 import { Formvalidation } from '../utils/validation';
 import { FormArea } from '../components/FormArea';
 import { useTabDispatch, useTabState } from '../store/hooks/tabHook';
+import { webRequest } from '../utils/webRequest';
+import { ENDPOINTS } from '../constants/url';
+import { getPhaRetailerBody } from '../utils/getPhaRetailerBody';
 
 export const Form = () => {
   const { activeTab } = useTabState();
@@ -29,7 +32,9 @@ export const Form = () => {
     businessDetails,
     selectCategory,
     selectAccessibility,
-    otherQuestions
+    otherQuestions,
+    contactDetails,
+    files
   } = useMarketplaceState();
   useEffect(() => {
     setFormClass(CLASSES_BY_FORM[activeTab]);
@@ -57,11 +62,35 @@ export const Form = () => {
       selectAccessibility,
       otherQuestions
     );
-    setModal({ type: estate.type, open: estate.open });
+    if (!estate.type) {
+      setModal({ type: estate.type, open: true });
+    }
     if (value === HOME) {
-      setTimeout(() => {
-        navigate('/home');
-      }, PAGE_REDIRECT_TIME);
+      const headers = webRequest.generateMultipartHeader();
+      const bodyGen = getPhaRetailerBody();
+      // eslint-disable-next-line max-len
+      const body = bodyGen(businessDetails)(contactDetails)(otherQuestions)(selectCategory)(selectAccessibility)(files)()();
+      const formData = new FormData();
+      formData.append('json', JSON.stringify(body.json));
+      body.images.forEach((image: Blob) => {
+        formData.append('images', image);
+      });
+      body.ownerimages.forEach((image: Blob) => {
+        formData.append('ownerimages', image);
+      });
+      webRequest.postMultipart(
+        ENDPOINTS.PHA_RETAILERS(),
+        formData,
+        headers
+      ).then((res) => res.json()).then((res) => {
+        if (res.success) {
+          console.log(res);
+          setModal({ type: estate.type, open: estate.open });
+          setTimeout(() => {
+            navigate('/home');
+          }, PAGE_REDIRECT_TIME);
+        }
+      });
     } else {
       setActiveTab(estate.value as FormTabType);
     }

@@ -7,7 +7,8 @@ import {
   setLocal, setProduceAvailStore, setProduceAvailSeasonally, setContactPatron, setContactOwner,
   setSnapAccepted, setWicAccepted, setContactEmail, setSelectCategoryCorner,
   setSelectCategoryDistribution, setSelectCategoryDollar,
-  setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket, setSelectCategory
+  setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry,
+  setSelectCategorySupermarket, setSelectCategory, setImagesFiles
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -16,6 +17,9 @@ export const useMarketplaceState = () => useSelector(
 export const useMarketplaceDispatch = () => {
   const dispatch = useDispatch();
   return {
+    setImagesFiles: (type: string, value: MultimediaInterface[]) => {
+      dispatch(setImagesFiles(type, value));
+    },
     setBusinessDetails: (type: string, value: string | number) => {
       dispatch(setBusinessDetails(type, value));
     },

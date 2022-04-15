@@ -49,7 +49,6 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                       className="button-goecoder"
                       type="button"
                       onClick={() => {
-                        console.log(opt);
                         setInputText({
                           text: opt.place_name,
                           shouldSearch: false,

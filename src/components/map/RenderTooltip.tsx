@@ -3,7 +3,13 @@ import { ToolTipMobile } from './ToolTipMobile';
 import { PropertiesLayer, RenderToolTipInterface } from '../../@types';
 import { MOBILE_WIDTH } from '../../constants';
 
-export default function renderTooltip({ info, badges, width }: RenderToolTipInterface) {
+export default function renderTooltip({
+  info,
+  badges,
+  width,
+  setVisibleFeedback,
+  setCurrentRetailerId
+}: RenderToolTipInterface) {
   let toolTip = null;
   if (info?.object) {
     const { x, y, object } = info;
@@ -13,7 +19,7 @@ export default function renderTooltip({ info, badges, width }: RenderToolTipInte
         x, y, objectTypified
       })
       : ToolTip({
-        x, y, objectTypified, badges
+        x, y, objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
       });
   }
   return toolTip;

@@ -256,7 +256,7 @@ export const LeftForm2 = () => {
         </div>
         <div className="ainput htxtarea">
           <textarea
-            name="yth"
+            name="yth2"
             id="yth2"
             cols={30}
             rows={10}
@@ -272,7 +272,7 @@ export const LeftForm2 = () => {
         </div>
         <div className="ainput htxtarea">
           <textarea
-            name="yth"
+            name="yth3"
             id="yth3"
             cols={30}
             rows={10}
@@ -291,6 +291,7 @@ export const LeftForm2 = () => {
         </div>
         <Attachment
           type={TYPE_BUSINESS.BUSINESS}
+          subType="images"
         />
       </div>
       <div className="item">
@@ -299,6 +300,7 @@ export const LeftForm2 = () => {
         </div>
         <Attachment
           type={TYPE_BUSINESS.OWNER}
+          subType="ownerimages"
         />
       </div>
     </>

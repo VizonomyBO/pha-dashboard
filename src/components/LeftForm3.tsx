@@ -75,6 +75,7 @@ export const LeftForm3 = () => {
             <input
               type="checkbox"
               value={contact_owner}
+              checked={contact_owner === formConstants.CONTACT_OWNER.YES}
               onChange={setContactOwnerFunction}
             />
             <span className="checkmark ckeckmark-form" />
@@ -83,6 +84,7 @@ export const LeftForm3 = () => {
             I am patron of this business.
             <input
               type="checkbox"
+              checked={contact_patron === formConstants.CONTACT_PATRON.YES}
               value={contact_patron}
               onChange={setContactPatronFunction}
             />

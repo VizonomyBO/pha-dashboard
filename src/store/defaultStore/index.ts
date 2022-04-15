@@ -37,7 +37,9 @@ export const INITIAL_MARKETPLACE: MarketplaceInterface = {
   files: {
     bussines: [],
     owner: [],
-    media: null
+    media: null,
+    images: [],
+    ownerimages: []
   },
   otherQuestions: {
     description: '',

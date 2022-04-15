@@ -75,7 +75,7 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          produceAvailStore: action.value,
+          produce_avail_store: action.value,
         }
       };
     case TYPES.SET_PRODUCE_AVAIL_SEASONALLY:
@@ -83,7 +83,7 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
         ...state,
         otherQuestions: {
           ...state.otherQuestions,
-          produceAvailSeasonally: action.value,
+          produce_avail_seasonally: action.value,
         }
       };
     case TYPES.SET_CONTACT_NAME:
@@ -157,6 +157,22 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
         selectCategory: {
           ...state.selectCategory,
           food_pantry: action.payload
+        }
+      };
+    case TYPES.IMAGES_FILES:
+      console.log(action);
+      console.log(JSON.stringify({
+        ...state,
+        files: {
+          ...state.files,
+          [action.payload]: action.value
+        }
+      }, null, 2));
+      return {
+        ...state,
+        files: {
+          ...state.files,
+          [action.payload]: action.value
         }
       };
     case TYPES.SET_SELECT_CATEGORY_DISTRIBUTION:

@@ -163,3 +163,11 @@ export const setBusinessFile = (type: string, value: MultimediaInterface[]) => (
     value
   });
 };
+
+export const setImagesFiles = (type: string, value: MultimediaInterface[]) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.IMAGES_FILES,
+    payload: type,
+    value
+  });
+};

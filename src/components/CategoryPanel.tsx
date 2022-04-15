@@ -146,7 +146,7 @@ export const CategoryPanel = () => {
                   <input
                     type="checkbox"
                     value={food_co_op}
-                    checked={distribution === formSelectCategory.FOOD_CO_OP.YES}
+                    checked={food_co_op === formSelectCategory.FOOD_CO_OP.YES}
                     onChange={setSelectFoodCoOpFunction}
                   />
                   <span className="checkmark ckeckmark-form" />

@@ -29,7 +29,6 @@ export const FormArea = ({
   const { activeTab } = useTabState();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
   const formAreaClass = classNames('formarea', { [formClass]: true });
-
   const formArea = (
     <div
       className={formAreaClass}
@@ -41,7 +40,7 @@ export const FormArea = ({
       <div className="group">
         <div className="left">
           {activeTab === BUSINESS_DETAILS && (
-            <LeftForm1 isEdit />
+            <LeftForm1 isEdit={isModal} />
           )}
           {activeTab === OTHER_QUESTIONS && (
             <LeftForm2 />
