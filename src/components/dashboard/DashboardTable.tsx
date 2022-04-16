@@ -6,7 +6,7 @@ import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
 import { ROW_STATUS } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
-import { showText } from '../../utils/textFormatter';
+import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
@@ -97,7 +97,7 @@ export const DashboardTable = ({
                 <div className="toptrim" />
               </th>
             </tr>
-            <tr>
+            <tr style={{ height: '60px' }}>
               <th className="wcol1 htit1">
                 <div className="option">
                   <label className="chkwrap">
@@ -128,7 +128,7 @@ export const DashboardTable = ({
             }}
           >
             {table.map((item: PhaRetailer) => (
-              <tr key={item.retailer_id}>
+              <tr style={{ height: '60px' }} key={item.retailer_id}>
                 <td className="wcol1 bbtm padleft">
                   <div className="option">
                     <label className="chkwrap">
@@ -146,7 +146,7 @@ export const DashboardTable = ({
                   </div>
                 </td>
                 <td className="wcol2 bbtm"><span className="txt1">{showText(item.zipcode)}</span></td>
-                <td className="wcol3 bbtm"><span className="txt1">{showText(item.submission_date)}</span></td>
+                <td className="wcol3 bbtm"><span className="txt1">{showDate(item.submission_date ?? '')}</span></td>
                 <td className="wcol4 bbtm">
                   <div
                     className={

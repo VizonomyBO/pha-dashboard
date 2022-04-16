@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
@@ -12,6 +13,7 @@ import { ROW_STATUS } from '../constants/dashboard';
 import { CompletelyIntentionalAny } from '../@types/database';
 
 export const Dashboard = () => {
+  const [shouldReload, setShouldReload] = useState(false);
   const navigate = useNavigate();
   const { open } = useModalState();
   const { setModal } = useModalDispatch();
@@ -29,7 +31,7 @@ export const Dashboard = () => {
     totalElements,
     selectedElements,
     setSelectedElements
-  } = useDashboard();
+  } = useDashboard(shouldReload, setShouldReload);
 
   if (!token) {
     navigate('/login');
@@ -80,7 +82,7 @@ export const Dashboard = () => {
               contact_patron: contactDetails.contact_patron,
 
               description: otherQuestions.description,
-              availability: otherQuestions.availabilityOptions.join(','),
+              availability: (otherQuestions.availabilityOptions || []).join(','),
               quality: otherQuestions.quality,
               visibility: otherQuestions.visibility,
               local: otherQuestions.local,
@@ -98,13 +100,12 @@ export const Dashboard = () => {
             };
             const newBody: CompletelyIntentionalAny = {};
             Object.keys(body).forEach((k) => {
-              newBody[k] = body[k].split("'").join("\\'");
+              newBody[k] = body[k]?.split("'").join("\\'");
             });
             webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), newBody, headers)
               .then((r) => r.json())
-              .then((r) => {
-                // TODO: reload after updating
-                console.log('r', r);
+              .then(() => {
+                setShouldReload(true);
               });
             setModal({ open: false, type: false });
           }}
@@ -114,13 +115,20 @@ export const Dashboard = () => {
               submission_status: ROW_STATUS.REJECTED,
             }, headers)
               .then((r) => r.json())
-              .then((r) => {
-                // TODO: reload after updating
-                console.log('r', r);
+              .then(() => {
+                setShouldReload(true);
               });
             setModal({ open: false, type: false });
           }}
           clickDelete={() => {
+            const headers = webRequest.generateJSONHeader();
+            webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), {
+              submission_status: ROW_STATUS.DELETED,
+            }, headers)
+              .then((r) => r.json())
+              .then(() => {
+                setShouldReload(true);
+              });
             setModal({ open: false, type: false });
           }}
         />

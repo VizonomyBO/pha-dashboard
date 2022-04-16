@@ -19,8 +19,10 @@ export enum ROW_STATUS {
   APPROVED = 'Approved',
   REJECTED = 'Rejected',
   PENDING = 'Pending',
+  DELETED = 'Deleted'
 }
 
 export const FILENAME_CSV_RETAILER = 'PHA-retailer';
 export const FILENAME_CSV_INDIVIDUAL = 'PHA-individual';
 export const EXTENSION_CSV = '.csv';
+export const DEBOUNCE_SEARCH_TABLE = 500;
