@@ -6,7 +6,7 @@ import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
 import { ROW_STATUS } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
-import { showText } from '../../utils/textFormatter';
+import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
@@ -146,7 +146,7 @@ export const DashboardTable = ({
                   </div>
                 </td>
                 <td className="wcol2 bbtm"><span className="txt1">{showText(item.zipcode)}</span></td>
-                <td className="wcol3 bbtm"><span className="txt1">{showText(item.submission_date)}</span></td>
+                <td className="wcol3 bbtm"><span className="txt1">{showDate(item.submission_date ?? '')}</span></td>
                 <td className="wcol4 bbtm">
                   <div
                     className={

@@ -7,6 +7,11 @@ export const showText = (text: StringWithNullables, format?: (t: string) => stri
   return '-';
 };
 
+export const showDate = (text: string) => {
+  const options: any = { day: '2-digit', month: 'long', year: 'numeric' };
+  return new Date(text).toLocaleString('en-us', options);
+};
+
 const PHONE_REGEX = /(\d{3})(\d{3})(\d{4})/;
 export const formatPhone = (text: string) => (text ? text.replace(PHONE_REGEX, '($1) $2-$3') : '-');
 
