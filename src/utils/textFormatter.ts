@@ -8,6 +8,7 @@ export const showText = (text: StringWithNullables, format?: (t: string) => stri
 };
 
 export const showDate = (text: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const options: any = { day: '2-digit', month: 'long', year: 'numeric' };
   return new Date(text).toLocaleString('en-us', options);
 };
