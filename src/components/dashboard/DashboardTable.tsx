@@ -97,7 +97,7 @@ export const DashboardTable = ({
                 <div className="toptrim" />
               </th>
             </tr>
-            <tr>
+            <tr style={{ height: '60px' }}>
               <th className="wcol1 htit1">
                 <div className="option">
                   <label className="chkwrap">
@@ -128,7 +128,7 @@ export const DashboardTable = ({
             }}
           >
             {table.map((item: PhaRetailer) => (
-              <tr key={item.retailer_id}>
+              <tr style={{ height: '60px' }} key={item.retailer_id}>
                 <td className="wcol1 bbtm padleft">
                   <div className="option">
                     <label className="chkwrap">
