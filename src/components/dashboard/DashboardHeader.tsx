@@ -56,7 +56,7 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
         <div className="actions">
           <button className="light btndown" type="button" onClick={() => downloadCSV()}>
             <span className="icdown" />
-            <span className="title">Download CSV</span>
+            <span className="title">Download</span>
           </button>
           <button className="light btnplus active" type="button">
             <span className="icplus" />
