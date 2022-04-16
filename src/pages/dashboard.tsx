@@ -80,7 +80,7 @@ export const Dashboard = () => {
               contact_patron: contactDetails.contact_patron,
 
               description: otherQuestions.description,
-              availability: otherQuestions.availabilityOptions.join(','),
+              availability: (otherQuestions.availabilityOptions || []).join(','),
               quality: otherQuestions.quality,
               visibility: otherQuestions.visibility,
               local: otherQuestions.local,
@@ -98,7 +98,7 @@ export const Dashboard = () => {
             };
             const newBody: CompletelyIntentionalAny = {};
             Object.keys(body).forEach((k) => {
-              newBody[k] = body[k].split("'").join("\\'");
+              newBody[k] = body[k]?.split("'").join("\\'");
             });
             webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), newBody, headers)
               .then((r) => r.json())
@@ -121,6 +121,15 @@ export const Dashboard = () => {
             setModal({ open: false, type: false });
           }}
           clickDelete={() => {
+            const headers = webRequest.generateJSONHeader();
+            webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), {
+              submission_status: ROW_STATUS.DELETED,
+            }, headers)
+              .then((r) => r.json())
+              .then((r) => {
+                // TODO: reload after updating
+                console.log('r', r);
+              });
             setModal({ open: false, type: false });
           }}
         />

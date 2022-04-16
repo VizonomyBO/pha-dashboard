@@ -25,6 +25,7 @@
     "connected-react-router": "^6.9.2",
     "deck.gl": "^8.7.4",
     "file-saver": "^2.0.5",
+    "lodash.debounce": "^4.0.8",
     "mapbox-gl": "^2.7.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -73,6 +74,7 @@
   },
   "devDependencies": {
     "@types/file-saver": "^2.0.5",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/redux-mock-store": "^1.0.3",
     "eslint": "^8.11.0",
     "eslint-config-airbnb": "^19.0.4",

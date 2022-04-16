@@ -3,11 +3,18 @@ import {
   Dispatch,
   SetStateAction,
   useEffect,
+  useMemo,
   useState
 } from 'react';
 import { saveAs } from 'file-saver';
+import debounce from 'lodash.debounce';
 import { ButtonDashboard, QueryParams } from '../../@types';
-import { DEFAULT_VALUES_BUTTON, EXTENSION_CSV, FILENAME_CSV_RETAILER } from '../../constants/dashboard';
+import {
+  DEFAULT_VALUES_BUTTON,
+  EXTENSION_CSV,
+  FILENAME_CSV_RETAILER,
+  DEBOUNCE_SEARCH_TABLE
+} from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
 
@@ -16,7 +23,17 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
   selectedElements: Array<string>,
 }) => {
   const [inputValue, setinputValue] = useState('');
+  const [inputValue2, setinputValue2] = useState('');
   const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
+
+  const changeHandler = (val: string) => {
+    setinputValue(val);
+  };
+
+  const debouncedChangeHandler = useMemo(
+    () => debounce(changeHandler, DEBOUNCE_SEARCH_TABLE),
+    []
+  );
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, search: inputValue }));
@@ -27,6 +44,14 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
       .map((item) => item.name).join(',');
     setParams((old: QueryParams) => ({ ...old, status: options }));
   }, [buttonValue, setParams, setButtonValue]);
+
+  useEffect(() => () => {
+    debouncedChangeHandler.cancel();
+  }, [debouncedChangeHandler]);
+
+  useEffect(() => {
+    debouncedChangeHandler(inputValue2);
+  }, [debouncedChangeHandler, inputValue2]);
 
   const onChangeValue = (index: number) => {
     setButtonValue((old) => {
@@ -93,13 +118,26 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
             <input
               className="generic"
               type="text"
+              value={inputValue2}
+              onChange={(e) => { setinputValue2(e.target.value); }}
               onKeyDown={(e) => (e.key === 'Enter' || !(e.target as HTMLInputElement).value)
                 && setinputValue((e.target as HTMLInputElement).value)}
             />
+            {
+              inputValue && (
+              <button
+                type="button"
+                onClick={() => setinputValue2('')}
+                style={{
+                  border: 'none',
+                  background: 'none'
+                }}
+              >
+                <span className="icclose" />
+              </button>
+              )
+            }
           </div>
-          {
-            inputValue && <button className="light" type="button" onClick={() => setinputValue('')}> X </button>
-          }
         </div>
         {/* <div className="datefilterarea">
         <div className="opfilter">
