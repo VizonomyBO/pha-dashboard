@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
@@ -12,6 +13,7 @@ import { ROW_STATUS } from '../constants/dashboard';
 import { CompletelyIntentionalAny } from '../@types/database';
 
 export const Dashboard = () => {
+  const [shouldReload, setShouldReload] = useState(false);
   const navigate = useNavigate();
   const { open } = useModalState();
   const { setModal } = useModalDispatch();
@@ -29,7 +31,7 @@ export const Dashboard = () => {
     totalElements,
     selectedElements,
     setSelectedElements
-  } = useDashboard();
+  } = useDashboard(shouldReload, setShouldReload);
 
   if (!token) {
     navigate('/login');
@@ -102,9 +104,8 @@ export const Dashboard = () => {
             });
             webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), newBody, headers)
               .then((r) => r.json())
-              .then((r) => {
-                // TODO: reload after updating
-                console.log('r', r);
+              .then(() => {
+                setShouldReload(true);
               });
             setModal({ open: false, type: false });
           }}
@@ -114,9 +115,8 @@ export const Dashboard = () => {
               submission_status: ROW_STATUS.REJECTED,
             }, headers)
               .then((r) => r.json())
-              .then((r) => {
-                // TODO: reload after updating
-                console.log('r', r);
+              .then(() => {
+                setShouldReload(true);
               });
             setModal({ open: false, type: false });
           }}
@@ -126,9 +126,8 @@ export const Dashboard = () => {
               submission_status: ROW_STATUS.DELETED,
             }, headers)
               .then((r) => r.json())
-              .then((r) => {
-                // TODO: reload after updating
-                console.log('r', r);
+              .then(() => {
+                setShouldReload(true);
               });
             setModal({ open: false, type: false });
           }}
