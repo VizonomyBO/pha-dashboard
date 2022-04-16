@@ -36,7 +36,7 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
   );
 
   useEffect(() => {
-    setParams((old: QueryParams) => ({ ...old, search: inputValue }));
+    setParams((old: QueryParams) => ({ ...old, search: inputValue, page: 1 }));
   }, [inputValue, setParams]);
 
   useEffect(() => {
