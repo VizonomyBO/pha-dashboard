@@ -51,23 +51,17 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
           </Link>
         </div>
       ) : (
-        <div
-          className="backlink"
-          style={{
-            justifyContent: 'flex-end'
-          }}
-        >
+        <div className="backlink">
           <button
             className="light"
             type="button"
-            style={{
-              fontSize: '20px'
-            }}
             onClick={() => {
               setModal({ type: false, open: false });
             }}
           >
-            X
+            <span className="icarrowleft" />
+            &nbsp;
+            <span className="txt">Back to Dashboard</span>
           </button>
         </div>
       )}
