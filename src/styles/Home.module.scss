@@ -1241,6 +1241,7 @@ sup {
 								position: absolute;
 								bottom: -24px;
 								button.light {
+									display: none;
 									border-radius: 16px;
 									font-size: 14px;
 									line-height: 14px;
@@ -1254,6 +1255,16 @@ sup {
 									}
 								}
 							}
+						}
+						.profile::after {
+							content: "";
+							position: absolute;
+							display: block;
+							width: 60px;
+							height: 4px;
+						}
+						.profile:hover div.logout button.light {
+							display: block;
 						}
 					}
 					.donate {
