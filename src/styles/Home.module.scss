@@ -1239,7 +1239,7 @@ sup {
 							position: relative;
 							.logout {
 								position: absolute;
-								bottom: -24px;
+								bottom: -32px;
 								button.light {
 									display: none;
 									border-radius: 16px;
@@ -1598,6 +1598,9 @@ sup {
 								font-family: "FuturaMedium", sans-serif;
 								font-size: 14px;
 								color: #7a7e84;
+								.checkmark {
+									border: 1px solid #E3E5E5;
+								}
 							}
 						}
 					}
@@ -3014,6 +3017,7 @@ sup {
 							}
 							.checkmark {
 								position: relative;
+								border: 1px solid #E3E5E5;
 							}
 						}
 					}
@@ -5077,6 +5081,7 @@ header.topmenu {
 										width: 36px;
 										height: 36px;
 										margin-left: -16px;
+										border: 2px solid #E3E5E5;
 									}
 								}
 								.chkwrap input:checked ~ .checkmark {
