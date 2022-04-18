@@ -11,7 +11,7 @@ export const useGeocoder = (name: string, type: string) => {
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { inputText, options } = useGeocoderState() || {};
-  const [position, setposition] = useState(0);
+  const [position, setPosition] = useState(0);
   const [inputTextHtml, setInputTextHtml] = useState('');
   const geocoder = useRef<GeocoderService>(
     new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement)
@@ -31,7 +31,7 @@ export const useGeocoder = (name: string, type: string) => {
     if (inputText && inputText.text) {
       geocoder.current.setGeocoderQuery(inputText.text);
     }
-    setposition(0);
+    setPosition(0);
     setGeocoderOptions([]);
   }, [geocoder, inputText, setGeocoderOptions]);
 
@@ -42,16 +42,14 @@ export const useGeocoder = (name: string, type: string) => {
   }, [inputText]);
 
   const keyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
-    setposition(position + 1);
     if (e.code === 'ArrowUp') {
-      setposition(position === 0 ? position : position - 1);
+      setPosition(position === 0 ? position : position - 1);
     }
     if (e.code === 'ArrowDown') {
-      setposition(options.length - 1 === position ? position : position + 1);
+      setPosition(options.length - 1 === position ? position : position + 1);
     }
     if (e.code === 'Enter') {
-      const { region } = findRegion(options[position]);
-      const { regionShortcode } = findRegion(options[position]);
+      const { region, regionShortcode } = findRegion(options[position]);
       const addressText = regionShortcode === ''
         ? options[position].text : `${options[position].text}, ${regionShortcode}`;
       setInputText({
