@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -52,7 +52,10 @@ export const Home = () => {
       type: e
     });
   };
-
+  // set Call Filters on init page in order to call queries, just run on init home
+  useEffect(() => {
+    setCallFilters(true);
+  }, [setCallFilters]);
   const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMapViewFilter(e.currentTarget.checked);
     if (!e.currentTarget.checked) {
