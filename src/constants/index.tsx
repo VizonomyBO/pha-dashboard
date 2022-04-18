@@ -103,7 +103,7 @@ export const DEFAULT_DROPDOWN_OPTION = {
 };
 
 export const SELECT_CATEGORY = {
-  SET_SELECT_CATEGORY_SUPERMARKET: 'supermarket',
+  CATEGORY_SUPERMARKET: 'supermarket',
   CATEGORY_CORNER: 'corner_store',
   CATEGORY_DOLLAR: 'dollar_stores',
   CATEGORY_FOOD_PANTRY: 'food_pantry',
