@@ -3,7 +3,8 @@ import {
   useMemo,
   useEffect,
   UIEvent,
-  useCallback
+  useCallback,
+  useRef
 } from 'react';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS } from '../../../constants/url';
@@ -24,10 +25,10 @@ export const useHome = () => {
   const [dataRequest, setDataRequest] = useState<DataPhaDasboardMap[]>([]);
   const [currentPage, setCurrentPage] = useState(INIT_PAGE);
   const [hasNext, setHasNext] = useState<boolean>(false);
-  const abort = useMemo(() => new AbortController(), []);
-  const signalArray: AbortController[] = useMemo(() => [abort], [abort]);
-  const getMarkers = useMemo(
-    () => (_currentPage: number) => {
+  const abort = useRef(new AbortController());
+  const signalArray: AbortController[] = useMemo(() => [abort.current], [abort]);
+  const getMarkers = useCallback(
+    (_currentPage: number) => {
       const auxAbort = new AbortController();
       signalArray[signalArray.length - 1].abort();
       signalArray.push(auxAbort);
@@ -64,9 +65,7 @@ export const useHome = () => {
           }
         })
         .catch((err) => {
-          if (err && err.name === 'AbortError') {
-            console.log(err);
-          } else {
+          if (err && err.name !== 'AbortError') {
             console.error(err);
           }
         });
