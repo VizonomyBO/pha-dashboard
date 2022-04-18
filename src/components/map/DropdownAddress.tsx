@@ -1,4 +1,5 @@
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import classNames from 'classnames';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { useMarketplaceDispatch } from '../../store/hooks';
 import {
@@ -20,10 +21,15 @@ export const DropdownAddress = ({ type }: { type: string }) => {
     inputTextHtml,
     options,
     setGeocoderOptions,
-    onChangeInput
-  } = useGeocoder(name);
+    onChangeInput,
+    position,
+    keyDown
+  } = useGeocoder(name, type);
 
   const { setBusinessDetails } = useMarketplaceDispatch();
+  const trClassNames = (index: number) => (
+    classNames({ 'tr-geocoder-active': position === index, 'tr-geocoder': position === index })
+  );
   return (
     <>
       <div className="ainput">
@@ -34,17 +40,21 @@ export const DropdownAddress = ({ type }: { type: string }) => {
           type="text"
           value={inputTextHtml}
           onChange={onChangeInput}
+          onKeyDown={keyDown}
         />
       </div>
       <div className="geocoder-block">
         {options && inputText && options.length > 0 && inputText.shouldSearch && (
           <ul className="ul-address">
             {inputText.shouldSearch
-              && options.map((opt: Result) => {
+              && options.map((opt: Result, index: number) => {
                 const { region, regionShortcode } = findRegion(opt);
                 const addressText = regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`;
                 return (
-                  <li key={`${opt.place_name}index${type}`} className="tr-geocoder">
+                  <li
+                    key={`${opt.place_name}index${type}`}
+                    className={trClassNames(index)}
+                  >
                     <button
                       className="button-goecoder"
                       type="button"
