@@ -38,15 +38,11 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
     e.preventDefault();
     e.stopPropagation();
     setDraggin(false);
-    const newFiles = e.dataTransfer.files;
-    if (newFiles && newFiles.length > 0) {
-      const newObjects: Blob[] = [];
-      for (let i = 0; newFiles && i < newFiles.length; i += 1) {
-        newObjects.push(newFiles[i]);
-      }
-      setMultimedia([...multimedia, ...newObjects]);
-      e.dataTransfer.clearData();
+    const transferedFiles = e.dataTransfer.files;
+    if (transferedFiles && transferedFiles.length > 0) {
+      setMultimedia([...multimedia, ...Array.from(e.dataTransfer.files)]);
     }
+    e.dataTransfer.clearData();
   };
 
   return (
