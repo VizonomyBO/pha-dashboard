@@ -14,9 +14,10 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
     inputTextHtml,
     options,
     setGeocoderOptions,
-    onChangeInput
-  } = useGeocoder(name);
-
+    onChangeInput,
+    position,
+    keyDown
+  } = useGeocoder(name, type);
   return (
     <>
       <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
@@ -26,7 +27,6 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
             <span className="txtd">Where</span>
           </>
         )}
-
         <input
           ref={geocoderDivRef}
           className="txtd"
@@ -34,6 +34,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           value={inputTextHtml}
           onChange={onChangeInput}
           placeholder="City or Zip Code"
+          onKeyDown={keyDown}
         />
         {type !== 'home' && <span className="iccrosshair" />}
       </div>
@@ -41,10 +42,13 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
         {options && options.length > 0 && inputText.shouldSearch && (
           <ul className={type !== 'home' ? 'table-geocoder' : 'table-geocoder-home'}>
             {inputText.shouldSearch
-              && options.map((opt: Result) => {
+              && options.map((opt: Result, index: number) => {
                 const { region } = findRegion(opt);
                 return (
-                  <li key={`${opt.place_name}index`} className="tr-geocoder">
+                  <li
+                    key={`${opt.place_name}index`}
+                    className={position === index ? 'tr-geocoder-active' : 'tr-geocoder'}
+                  >
                     <button
                       className="button-goecoder"
                       type="button"

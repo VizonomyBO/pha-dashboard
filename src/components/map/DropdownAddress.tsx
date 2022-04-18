@@ -20,8 +20,10 @@ export const DropdownAddress = ({ type }: { type: string }) => {
     inputTextHtml,
     options,
     setGeocoderOptions,
-    onChangeInput
-  } = useGeocoder(name);
+    onChangeInput,
+    position,
+    keyDown
+  } = useGeocoder(name, type);
 
   const { setBusinessDetails } = useMarketplaceDispatch();
   return (
@@ -34,17 +36,21 @@ export const DropdownAddress = ({ type }: { type: string }) => {
           type="text"
           value={inputTextHtml}
           onChange={onChangeInput}
+          onKeyDown={keyDown}
         />
       </div>
       <div className="geocoder-block">
         {options && inputText && options.length > 0 && inputText.shouldSearch && (
           <ul className="ul-address">
             {inputText.shouldSearch
-              && options.map((opt: Result) => {
+              && options.map((opt: Result, index: number) => {
                 const { region, regionShortcode } = findRegion(opt);
                 const addressText = regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`;
                 return (
-                  <li key={`${opt.place_name}index${type}`} className="tr-geocoder">
+                  <li
+                    key={`${opt.place_name}index${type}`}
+                    className={position === index ? 'tr-geocoder-active' : 'tr-geocoder'}
+                  >
                     <button
                       className="button-goecoder"
                       type="button"

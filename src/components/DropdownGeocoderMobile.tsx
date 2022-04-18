@@ -15,7 +15,7 @@ export const DropdownGeocoderMobile = () => {
     options,
     setGeocoderOptions,
     onChangeInput
-  } = useGeocoder(name);
+  } = useGeocoder(name, 'none');
   const { setShouldZoom } = useGeocoderDispatch();
 
   return (
