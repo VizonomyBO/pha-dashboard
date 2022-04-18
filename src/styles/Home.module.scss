@@ -1341,6 +1341,9 @@ sup {
 						color: #161A23;
 						width: 128px;
 						padding-right: 5px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
 					}
 				}
 				.space {
@@ -1509,8 +1512,11 @@ sup {
 							font-size: 16px;
 							border: none;
 							outline: none;
-							width: 228px;
+							width: 198px;
 							padding-left: 8px;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
 						}
 						button.light {
 							padding: 7px 42px;
@@ -5959,6 +5965,9 @@ header.topmenu {
 						outline: none;
 						width: 92px;
 						padding-left: 0;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
 					}
 					button.light {
 						border-radius: none;

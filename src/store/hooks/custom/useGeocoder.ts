@@ -30,7 +30,9 @@ export const useGeocoder = (name: string) => {
 
   useEffect(() => {
     if (inputText.text) {
-      setInputTextHtml(inputText.text);
+      const positionOfComma = inputText.text.lastIndexOf(',');
+      const valueToDisplay = positionOfComma !== -1 ? inputText.text.substr(0, positionOfComma) : inputText.text;
+      setInputTextHtml(valueToDisplay);
     }
   }, [inputText]);
 
