@@ -3,7 +3,8 @@ import {
   useMemo,
   useEffect,
   UIEvent,
-  useCallback
+  useCallback,
+  useRef
 } from 'react';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS } from '../../../constants/url';
@@ -24,8 +25,13 @@ export const useHome = () => {
   const [dataRequest, setDataRequest] = useState<DataPhaDasboardMap[]>([]);
   const [currentPage, setCurrentPage] = useState(INIT_PAGE);
   const [hasNext, setHasNext] = useState<boolean>(false);
-  const getMarkers = useMemo(
-    () => (_currentPage: number) => {
+  const abort = useRef(new AbortController());
+  const signalArray: AbortController[] = useMemo(() => [abort.current], [abort]);
+  const getMarkers = useCallback(
+    (_currentPage: number) => {
+      const auxAbort = new AbortController();
+      signalArray[signalArray.length - 1].abort();
+      signalArray.push(auxAbort);
       const headers = webRequest.generateJSONHeader();
       webRequest
         .post(
@@ -37,7 +43,8 @@ export const useHome = () => {
             badges: [],
             ...(mapViewFilter && { bbox })
           },
-          headers
+          headers,
+          auxAbort.signal
         )
         .then((res) => res.json())
         .then((res) => {
@@ -57,9 +64,13 @@ export const useHome = () => {
             setHasNext(res.data.hasNextPage);
           }
         })
-        .catch((err) => console.error(err));
+        .catch((err) => {
+          if (err && err.name !== 'AbortError') {
+            console.error(err);
+          }
+        });
     },
-    [categoriesSelected, accesibilities, dataSources, bbox, mapViewFilter]
+    [categoriesSelected, accesibilities, dataSources, bbox, mapViewFilter, signalArray]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);
