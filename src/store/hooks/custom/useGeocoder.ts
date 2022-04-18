@@ -63,7 +63,7 @@ export const useGeocoder = (name: string, type:string) => {
       setInputTextHtml(region === '' ? options[position].text : `${options[position].text}, ${region}`);
       setGeocoderOptions([]);
       setBusinessDetails(TYPE_BUSINESS.LONGITUDE, options[position].center[0]);
-      setBusinessDetails(TYPE_BUSINESS.LONGITUDE, options[position].center[1]);
+      setBusinessDetails(TYPE_BUSINESS.LATITUDE, options[position].center[1]);
       setBusinessDetails(type, addressText);
       if (options[position].place_type.includes(POINTS_OF_INTEREST)) {
         const { zipcode, city, state } = getAddressFields(options[position].place_name);
