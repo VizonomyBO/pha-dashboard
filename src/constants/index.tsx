@@ -193,7 +193,7 @@ export const TYPE_INDIVIDUAL_FORM = {
   contact_zipcode: 'contact_zipcode',
   submission_date: 'submission_date',
   submission_status: 'submission_status',
-  multimedia: 'multimedia'
+  multimedia: 'files'
 };
 
 export const ICON_MAPPING = {

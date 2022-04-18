@@ -78,6 +78,7 @@ export interface PhaIndividual {
   contact_zipcode?: string,
   submission_date?: Date,
   submission_status?: string,
+  files: Blob[]
 }
 
 export interface InputTextInterface {
