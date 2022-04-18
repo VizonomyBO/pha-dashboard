@@ -22,7 +22,7 @@ export const Home = () => {
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [currentRetailerId, setCurrentRetailerId] = useState('');
-  const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
+  const retailerClass = classNames(['retailerlist-show', 'retailerlist']);
   let xDown:number | null = null;
   let yDown:number | null = null;
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
