@@ -6,7 +6,7 @@ import { getAddressFields } from '../../../utils/getAddressFields';
 import { useGeocoderDispatch, useGeocoderState } from '../geocoderHook';
 import { useMarketplaceDispatch } from '../marketplaceHook';
 
-export const useGeocoder = (name: string, type:string) => {
+export const useGeocoder = (name: string, type: string) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { setBusinessDetails } = useMarketplaceDispatch();
