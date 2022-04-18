@@ -22,6 +22,8 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
   const trClassNames = (index: number) => (
     classNames({ 'tr-geocoder-active': position === index, 'tr-geocoder': position === index })
   );
+  const blockClassNames = classNames({ 'geocoder-block': type !== 'home', 'geocoder-block-home': type === 'home' });
+  const tableClassNames = classNames({ 'table-geocoder': type !== 'home', 'table-geocoder-home': type === 'home' });
   return (
     <>
       <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
@@ -42,9 +44,9 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
         />
         {type !== 'home' && <span className="iccrosshair" />}
       </div>
-      <div className={type !== 'home' ? 'geocoder-block' : 'geocoder-block-home'}>
+      <div className={blockClassNames}>
         {options && options.length > 0 && inputText.shouldSearch && (
-          <ul className={type !== 'home' ? 'table-geocoder' : 'table-geocoder-home'}>
+          <ul className={tableClassNames}>
             {inputText.shouldSearch
               && options.map((opt: Result, index: number) => {
                 const { region } = findRegion(opt);
