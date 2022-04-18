@@ -206,4 +206,4 @@ export const ICON_MAPPING = {
   }
 };
 
-export const MOBILE_WIDTH = 375;
+export const MOBILE_WIDTH = 600;
