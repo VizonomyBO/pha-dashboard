@@ -8,7 +8,7 @@ export const Header = ({ type, setOpenModal }: HeaderInterface) => {
   return (
     <div className="searchoptionsarea">
       <div className="accesspoint colored">
-        <h1>GOOD FOOD MAP</h1>
+        <h1>MISSISSIPPI DELTA GOOD FOOD MAP</h1>
         <p>
           Looking for a nearby grocery store, SNAP retailer, or food-coop? Search our access points using the map below.
         </p>

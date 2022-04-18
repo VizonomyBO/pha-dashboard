@@ -61,8 +61,10 @@ export const Landing = () => {
           </div>
         </div>
         <div className="ldgaccesspoint">
-          <h1>GOOD FOOD MAP</h1>
-          <p>Search over +200 curated restaurants, farms, markets and other fresh source of local, sustainable food.</p>
+          <h1>MISSISSIPPI DELTA GOOD FOOD MAP</h1>
+          <p>
+            Search over 100+ curated grocery stores, farmers markets, and other locations that have local, good food.
+          </p>
         </div>
         <div className="ldgsearchstore">
           <div className="alook">
