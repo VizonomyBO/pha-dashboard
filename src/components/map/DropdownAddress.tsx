@@ -58,7 +58,7 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                         setInputTextHtml(addressText);
                         setGeocoderOptions([]);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[0]);
-                        setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[1]);
+                        setBusinessDetails(TYPE_BUSINESS.LATITUDE, opt.center[1]);
                         setBusinessDetails(type, addressText);
                         if (opt.place_type.includes(POINTS_OF_INTEREST)) {
                           const { zipcode, city, state } = getAddressFields(opt.place_name);

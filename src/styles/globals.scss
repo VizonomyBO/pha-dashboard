@@ -57,7 +57,6 @@ input, button, textarea, select {
     color: #e40000;
     font-family: "FuturaBold", sans-serif;
 }
-
 .mapboxgl-ctrl-geocoder--icon-search {
     display: none !important;
 }
@@ -317,4 +316,9 @@ input, button, textarea, select {
     display: flex;
     flex-direction: row;
     padding: 16px;
+}
+.map-container {
+  .mapboxgl-map {
+    border-top-right-radius: 20px !important;
+  }
 }

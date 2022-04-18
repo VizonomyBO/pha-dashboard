@@ -37,10 +37,11 @@ export const webRequest = {
     headers: headers || new Headers(),
     body: data,
   }),
-  post: (url: string, body: unknown, headers?: Headers) => fetch(url, {
+  post: (url: string, body: unknown, headers?: Headers, signal?: AbortSignal) => fetch(url, {
     method: 'POST',
     headers: headers || new Headers(),
     body: JSON.stringify(body),
+    signal
   }),
   put: (url: string, body: unknown, headers?: Headers) => fetch(url, {
     method: 'PUT',
