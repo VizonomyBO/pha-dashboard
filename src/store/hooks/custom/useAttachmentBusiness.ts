@@ -35,6 +35,7 @@ export const useAttachmentBusiness = ({ type, subType }: {
   return {
     filesSelected,
     multimedia,
-    removeFile
+    removeFile,
+    setMultimedia
   };
 };

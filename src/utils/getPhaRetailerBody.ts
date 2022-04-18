@@ -61,6 +61,7 @@ export const getPhaRetailerBody = () => (businessDetails: BusinessDetailsInterfa
       };
       return (selectCategory: SelectCategoryInterface) => {
         const selectCategoryBody: CompletelyIntentionalAny = {
+          supermarket: selectCategory.supermarket,
           corner_store: selectCategory.corner_store,
           distribution: selectCategory.distribution,
           dollar_stores: selectCategory.dollar_stores,

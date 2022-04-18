@@ -89,6 +89,7 @@ export const Dashboard = () => {
               produce_avail_store: otherQuestions.produce_avail_store,
               produce_avail_seasonally: otherQuestions.produce_avail_seasonally,
 
+              supermarket: selectCategory.supermarket,
               corner_store: selectCategory.corner_store,
               distribution: selectCategory.distribution,
               dollar_stores: selectCategory.dollar_stores,
