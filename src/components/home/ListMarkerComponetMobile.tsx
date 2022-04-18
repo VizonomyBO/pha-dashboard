@@ -34,7 +34,7 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
               <div className="statemk">
                 <div className="cardmk">
                   <div className={`icmk${color} dimensions`} />
-                  <div className={`desc ${color}`}>CO-OP</div>
+                  <div className={`desc ${color}`}>Retailer</div>
                 </div>
               </div>
             </div>

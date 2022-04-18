@@ -1239,8 +1239,9 @@ sup {
 							position: relative;
 							.logout {
 								position: absolute;
-								bottom: -24px;
+								bottom: -32px;
 								button.light {
+									display: none;
 									border-radius: 16px;
 									font-size: 14px;
 									line-height: 14px;
@@ -1254,6 +1255,16 @@ sup {
 									}
 								}
 							}
+						}
+						.profile::after {
+							content: "";
+							position: absolute;
+							display: block;
+							width: 60px;
+							height: 4px;
+						}
+						.profile:hover div.logout button.light {
+							display: block;
 						}
 					}
 					.donate {
@@ -1593,6 +1604,9 @@ sup {
 								font-family: "FuturaMedium", sans-serif;
 								font-size: 14px;
 								color: #7a7e84;
+								.checkmark {
+									border: 1px solid #E3E5E5;
+								}
 							}
 						}
 					}
@@ -1651,6 +1665,7 @@ sup {
 								justify-content: center;
 								align-items: center;
 								.dimensions {
+									margin-bottom: 4px;
 									display: block;
 									width: 48px;
 									height: 32px;
@@ -3009,6 +3024,7 @@ sup {
 							}
 							.checkmark {
 								position: relative;
+								border: 1px solid #E3E5E5;
 							}
 						}
 					}
@@ -5072,6 +5088,7 @@ header.topmenu {
 										width: 36px;
 										height: 36px;
 										margin-left: -16px;
+										border: 2px solid #E3E5E5;
 									}
 								}
 								.chkwrap input:checked ~ .checkmark {
@@ -6283,6 +6300,7 @@ header.topmenu {
 											justify-content: center;
 											align-items: center;
 											.dimensions {
+												margin-bottom: 1px;
 												display: block;
 												width: 32px;
 												height: 32px;
