@@ -13,12 +13,19 @@ export const useWindowSize = () => {
       }
     };
 
+    let resizer: ResizeObserver;
     if (current) {
       if ('ResizeObserver' in window) {
-        new ResizeObserver(trigger).observe(current);
+        resizer = new ResizeObserver(trigger);
+        resizer.observe(current);
       }
       trigger();
     }
+    return () => {
+      if (resizer) {
+        resizer.disconnect();
+      }
+    };
   }, [ref]);
   return {
     width,
