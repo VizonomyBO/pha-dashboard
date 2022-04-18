@@ -1,4 +1,5 @@
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import classNames from 'classnames';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { GEOCODER } from '../constants';
 import { useGeocoder } from '../store/hooks/custom/useGeocoder';
@@ -14,9 +15,15 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
     inputTextHtml,
     options,
     setGeocoderOptions,
-    onChangeInput
-  } = useGeocoder(name);
-
+    onChangeInput,
+    position,
+    keyDown
+  } = useGeocoder(name, type);
+  const trClassNames = (index: number) => (
+    classNames({ 'tr-geocoder-active': position === index, 'tr-geocoder': position === index })
+  );
+  const blockClassNames = classNames({ 'geocoder-block': type !== 'home', 'geocoder-block-home': type === 'home' });
+  const tableClassNames = classNames({ 'table-geocoder': type !== 'home', 'table-geocoder-home': type === 'home' });
   return (
     <>
       <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
@@ -26,7 +33,6 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
             <span className="txtd">Where</span>
           </>
         )}
-
         <input
           ref={geocoderDivRef}
           className="txtd"
@@ -34,17 +40,21 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           value={inputTextHtml}
           onChange={onChangeInput}
           placeholder="City or Zip Code"
+          onKeyDown={keyDown}
         />
         {type !== 'home' && <span className="iccrosshair" />}
       </div>
-      <div className={type !== 'home' ? 'geocoder-block' : 'geocoder-block-home'}>
+      <div className={blockClassNames}>
         {options && options.length > 0 && inputText.shouldSearch && (
-          <ul className={type !== 'home' ? 'table-geocoder' : 'table-geocoder-home'}>
+          <ul className={tableClassNames}>
             {inputText.shouldSearch
-              && options.map((opt: Result) => {
+              && options.map((opt: Result, index: number) => {
                 const { region } = findRegion(opt);
                 return (
-                  <li key={`${opt.place_name}index`} className="tr-geocoder">
+                  <li
+                    key={`${opt.place_name}index`}
+                    className={trClassNames(index)}
+                  >
                     <button
                       className="button-goecoder"
                       type="button"
