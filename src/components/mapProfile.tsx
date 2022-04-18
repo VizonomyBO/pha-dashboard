@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { DeckGLComponent } from './map/DeckGlComponent';
 import { PhaRetailer } from '../@types/database';
 import { deckDefaults } from './map/deckDefaults';
 import { IconLayerData } from './map/IconLayerData';
 import { BASEMAP, BASEMAP_SATELLITE } from '../constants';
+import { ViewStateChangeFn, ViewStateInterface } from '../@types';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 export const MapProfile = (profile?: PhaRetailer | null) => {
@@ -12,16 +13,19 @@ export const MapProfile = (profile?: PhaRetailer | null) => {
   });
   const [currentBasemap, setCurrentBasemap] = useState(BASEMAP);
   const [currentStateView, setCurrentStateView] = useState(deckDefaults.initialStateView);
+  const onViewChange: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
+    setCurrentStateView(viewState);
+  }, [setCurrentStateView]);
   useEffect(() => {
     const { geom } = profile || {};
     setInitDeckDefault((oldDeck) => {
       const newDeck = {
         ...oldDeck,
-        currentBasemap,
-        onViewStateChange: ({ viewState }:any) => setCurrentStateView(viewState),
+        currentBasemap: BASEMAP,
+        onViewStateChange: onViewChange,
         layers: profile ? IconLayerData([profile]) : [],
         initialStateView: {
-          ...currentStateView,
+          ...oldDeck.initialStateView,
           latitude: geom ? geom.coordinates[1] : oldDeck.initialStateView.latitude,
           longitude: geom ? geom.coordinates[0] : oldDeck.initialStateView.longitude,
           zoom: 16
@@ -29,8 +33,31 @@ export const MapProfile = (profile?: PhaRetailer | null) => {
       };
       return newDeck;
     });
-  }, [profile, currentBasemap, setInitDeckDefault, currentStateView]);
+  }, [profile, setInitDeckDefault, onViewChange]);
 
+  const changeDeckState = useMemo(() => (viewState: ViewStateInterface) => {
+    setInitDeckDefault((oldDeckState) => {
+      const newDS = {
+        ...oldDeckState,
+        initialStateView: {
+          ...viewState,
+        }
+      };
+      return newDS;
+    });
+  }, [setInitDeckDefault]);
+  useEffect(() => {
+    changeDeckState(currentStateView);
+  }, [currentStateView, changeDeckState]);
+  useEffect(() => {
+    setInitDeckDefault((oldDeck) => {
+      const newDeck = {
+        ...oldDeck,
+        currentBasemap
+      };
+      return newDeck;
+    });
+  }, [currentBasemap]);
   const changeZoom = (type: string) => {
     const adder = type === 'in' ? 0.5 : -0.5;
     setInitDeckDefault((oldDeck) => {
