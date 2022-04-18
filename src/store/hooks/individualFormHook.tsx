@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { MultimediaInterface } from '../../@types';
 import { PhaIndividual } from '../../@types/database';
-import { setIndividualForm } from '../actions';
+import { resetIndividualForm, setIndividualForm } from '../actions';
 
 export const useIndividualFormState = () => useSelector(
   (rootState: { individualForm: PhaIndividual}) => rootState.individualForm
@@ -14,5 +14,6 @@ export const useIndividualFormDispatch = () => {
   }, [dispatch]);
   return {
     setIndividualForm: setIndivualFormMemoized,
+    resetIndividualForm: () => dispatch(resetIndividualForm())
   };
 };
