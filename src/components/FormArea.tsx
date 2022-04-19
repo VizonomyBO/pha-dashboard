@@ -131,7 +131,7 @@ export const FormArea = ({
         <div
           className="pagecontainer"
           style={{
-            top: '100px',
+            top: '25px',
             left: 0,
             right: 0,
             bottom: 0,
