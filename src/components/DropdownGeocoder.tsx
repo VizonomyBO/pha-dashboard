@@ -35,7 +35,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
         )}
         <input
           ref={geocoderDivRef}
-          className="txtd"
+          className="txtd text-input-home"
           type="text"
           value={inputTextHtml}
           onChange={onChangeInput}
