@@ -12,7 +12,10 @@ import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetM
 import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 import { useHome } from '../store/hooks/custom/useHome';
 import { FeedbackForm } from '../components/FeedbackForm';
+import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
 
+let yStart = 0;
+let yMove = 0;
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
@@ -23,26 +26,32 @@ export const Home = () => {
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [currentRetailerId, setCurrentRetailerId] = useState('');
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
-  let xDown:number | null = null;
-  let yDown:number | null = null;
+
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
-    xDown = evt.touches[0].clientX;
-    yDown = evt.touches[0].clientY;
+    yStart = evt.touches[0].clientY || 0;
   };
 
   const handleTouchMove = (evt: React.TouchEvent<HTMLDivElement>) => {
-    if (!xDown || !yDown) {
-      return;
+    yMove = evt.touches[0].clientY || 0;
+    const yDiff = yStart - yMove;
+    if (Math.abs(yDiff) > DRAG_MINIMUM_DISTANCE) {
+      if (yDiff > 0) {
+        setOpenAllRetailer(true);
+      } else {
+        setOpenAllRetailer(false);
+      }
     }
-    const yUp = evt.touches[0].clientY;
-    const yDiff = yDown - yUp;
-    if (yDiff > 0) {
-      setOpenAllRetailer(true);
-    } else {
-      setOpenAllRetailer(false);
+  };
+
+  const handleTouchEnd = () => {
+    const yDiff = yStart - yMove;
+    if (Math.abs(yDiff) > DRAG_MINIMUM_DISTANCE) {
+      if (yDiff > 0) {
+        setOpenAllRetailer(true);
+      } else {
+        setOpenAllRetailer(false);
+      }
     }
-    xDown = null;
-    yDown = null;
   };
 
   const onClickChange = (e: string) => {
@@ -159,6 +168,7 @@ export const Home = () => {
               className={retailerClass}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
             >
               <div className="tab">
                 <div className="space">
