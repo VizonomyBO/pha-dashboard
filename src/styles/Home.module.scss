@@ -2452,6 +2452,7 @@ sup {
 							img {
 								max-width: 100%;
 								height: auto;
+								object-fit: cover;
 								border-radius: 50%;
 							}
 						}
@@ -2706,8 +2707,9 @@ sup {
 									height: 192px;
 									overflow: hidden;
 									img {
+										height: 256px;
+										object-fit: cover;
 										max-width: 100%;
-										height: auto;
 										border-radius: 16px;
 									}
 								}

@@ -12,7 +12,6 @@ import { FeedbackForm } from '../components/FeedbackForm';
 export const Profile = () => {
   const { profile, badges } = useProfile();
   const [visibleFeedback, setVisibleFeedback] = useState(false);
-  let position = 0;
   const picture: string[] = profile?.imagelinks ? profile.imagelinks.split(',') : [];
   const pictureOwner:string[] = profile?.owner_photo ? profile.owner_photo.split(',') : [];
   return (
@@ -179,9 +178,9 @@ export const Profile = () => {
               <div className="txtbt">Photo Gallery</div>
               <div className="gallery">
                 {picture.length >= 2 && picture.map((element: string, index: number) => {
-                  if (position % 2 === 1) {
+                  if (index % 2 === 1) {
                     return (
-                      <div className="rowtwoc">
+                      <div className="rowtwoc" key={element}>
                         <div className="twoc">
                           <div className="card"><img src={picture[index - 1]} alt="" /></div>
                         </div>
@@ -191,7 +190,6 @@ export const Profile = () => {
                       </div>
                     );
                   }
-                  position += 1;
                   return '';
                 })}
                 {picture.length % 2 === 1 && (
