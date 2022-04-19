@@ -90,6 +90,7 @@ export const INITIAL_INDIVIDUAL_FORM = {
   contact_zipcode: '',
   submission_date: new Date(),
   submission_status: '',
+  files: []
 };
 
 export const INITIAL_CATEGORIES = {

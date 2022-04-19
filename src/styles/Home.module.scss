@@ -1352,9 +1352,9 @@ sup {
 						color: #161A23;
 						width: 128px;
 						padding-right: 5px;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
 					}
 				}
 				.space {
@@ -1512,7 +1512,7 @@ sup {
 					.citysearch {
 						display: flex;
 						justify-content: center;
-            align-items: center;
+						align-items: center;
 						background-color: #fff;
 						border-radius: 56px;
 						padding:8px ;
@@ -1523,11 +1523,11 @@ sup {
 							font-size: 16px;
 							border: none;
 							outline: none;
-							width: 198px;
+							width: 195px;
 							padding-left: 8px;
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
+							white-space: nowrap;
+							text-overflow: ellipsis;
+							overflow: hidden;
 						}
 						button.light {
 							padding: 7px 42px;
@@ -5756,7 +5756,7 @@ header.topmenu {
 		}
 	}
 }
-@media (max-width: 428px) {
+@media (max-width: 600px) {
 	.table-geocoder {
 		display: none;
 	}
@@ -6145,17 +6145,17 @@ header.topmenu {
 					.addlistening {
 						position: absolute;
 						z-index: 4;
-						top: 600px;
 						left: 16px;
 						display: block;
 						font-size: 16px;
-						width: 350px;
+						width: 93%;
 						height: 46px;
 						border-radius: 56px;
 						background-color: #ffffff9c;
 						font-family: "FuturaBold", sans-serif !important;
 						border: 2.5px solid #00bde3;
 						color: #00bde3;
+						top: 82%;
 					}
 					.retailerlist.close {
 						display: none;
