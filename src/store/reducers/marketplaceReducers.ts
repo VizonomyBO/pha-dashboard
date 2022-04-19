@@ -199,6 +199,22 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
           snap_accepted: action.payload
         }
       };
+    case TYPES.SET_IMAGELINKS:
+      return {
+        ...state,
+        retailerFiles: {
+          ...state.retailerFiles,
+          imagelinks: action.payload
+        }
+      };
+    case TYPES.SET_OWNER_PHOTOS:
+      return {
+        ...state,
+        retailerFiles: {
+          ...state.retailerFiles,
+          owner_photo: action.payload
+        }
+      };
     case TYPES.INIT:
       return INITIAL_MARKETPLACE;
     default:

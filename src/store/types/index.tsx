@@ -8,3 +8,4 @@ export * from './modalTypes';
 export * from './scrollTypes';
 export * from './markerTypes';
 export * from './tabTypes';
+export * from './retailerFilesTypes';

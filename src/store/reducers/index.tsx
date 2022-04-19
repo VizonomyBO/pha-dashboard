@@ -8,6 +8,7 @@ import modalReducer from './modalReducers';
 import markerReducer from './markerReducer';
 import scrollReducer from './scrollReducers';
 import tabReducer from './tabReducer';
+import retailerFileReducer from './retailerFilesReducer';
 
 export const reducers = {
   marketplace: marketplaceReducer,
@@ -18,7 +19,8 @@ export const reducers = {
   modal: modalReducer,
   markerCenter: markerReducer,
   scroll: scrollReducer,
-  tab: tabReducer
+  tab: tabReducer,
+  retailerFiles: retailerFileReducer
 };
 
 export default combineReducers(reducers);
