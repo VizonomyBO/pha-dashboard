@@ -1,6 +1,10 @@
 import { MarketplaceInterface } from '../../@types/redux';
 
 export const INITIAL_MARKETPLACE: MarketplaceInterface = {
+  retailerFiles: {
+    owner_photo: '',
+    imagelinks: ''
+  },
   socialMedia: {
     facebook: 'fb'
   },
@@ -90,6 +94,7 @@ export const INITIAL_INDIVIDUAL_FORM = {
   contact_zipcode: '',
   submission_date: new Date(),
   submission_status: '',
+  files: []
 };
 
 export const INITIAL_CATEGORIES = {
@@ -140,4 +145,9 @@ export const INITIAL_CENTER_MARKER = {
 export const INITIAL_SCROLL = {
   widthScroll: 0,
   heightScroll: 0
+};
+
+export const INITIAL_RETAILER_FILES_REDUCER = {
+  imagelinks: '',
+  owner_photo: '',
 };

@@ -10,7 +10,7 @@ export const FeedbackForm = (
   { setVisible, retailerId }
   : {setVisible: React.Dispatch<React.SetStateAction<boolean>>, retailerId: string }
 ) => {
-  const { setIndividualForm } = useIndividualFormDispatch();
+  const { setIndividualForm, resetIndividualForm } = useIndividualFormDispatch();
   useEffect(() => {
     setIndividualForm(TYPE_INDIVIDUAL_FORM.retailer_id, retailerId);
   }, [setIndividualForm, retailerId]);
@@ -23,7 +23,8 @@ export const FeedbackForm = (
     meets_need,
     contact_phone,
     contact_zipcode,
-    produce_avail_store
+    produce_avail_store,
+    files
   } = useIndividualFormState();
   const setAvailabilityOptionsCheck = (type: string, checked: boolean, value: string) => {
     if (checked) {
@@ -32,6 +33,36 @@ export const FeedbackForm = (
       const availabilityCopy = availability ? availability.replace(`${value},`, '') : availability;
       setIndividualForm(type, availabilityCopy ? availabilityCopy.replace(`, ${value}`, '') : '');
     }
+  };
+  const sendForm = () => {
+    const formData = new FormData();
+    const obj = {
+      availability,
+      quality,
+      visibility,
+      local,
+      meets_need,
+      contact_phone,
+      contact_zipcode,
+      produce_avail_store
+    };
+    formData.append('json', JSON.stringify(obj).replace("'", "\\'"));
+    console.log('files ', files);
+    files.forEach((file) => {
+      console.log(file);
+      formData.append('files', file);
+    });
+    const headers = webRequest.generateMultipartHeader();
+    webRequest.postMultipart(
+      ENDPOINTS.PHA_INDIVIDUAL(),
+      formData,
+      headers
+    ).then((res) => res.json()).then((res) => {
+      if (res.success) {
+        setVisible(false);
+        resetIndividualForm();
+      }
+    });
   };
   return (
     <div className="modaluserfeedbck">
@@ -409,23 +440,7 @@ export const FeedbackForm = (
             <button
               className="light"
               type="button"
-              onClick={() => {
-                webRequest.post(ENDPOINTS.PHA_INDIVIDUAL(), {
-                  availability,
-                  quality,
-                  visibility,
-                  local,
-                  meets_need,
-                  contact_phone,
-                  contact_zipcode,
-                  produce_avail_store
-                }).then((res) => res.json())
-                  .then((res) => {
-                    if (res.success) {
-                      setVisible(false);
-                    }
-                  });
-              }}
+              onClick={sendForm}
             >
               Submit
             </button>

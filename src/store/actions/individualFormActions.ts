@@ -9,3 +9,8 @@ export const setIndividualForm = (
   payload: type,
   value
 });
+
+export const resetIndividualForm = () => ({
+  type: TYPES.INIT,
+  payload: null
+});

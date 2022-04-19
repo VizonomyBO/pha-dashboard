@@ -29,8 +29,8 @@ export const DashboardTableFooter = ({ setParams, totalElements }: {
     const pagination = arrayFromZeroToDiv.map((x) => x + 1);
     return pagination;
   }, [totalElements]);
-  const isFirstPage = currentPage === pages.at(0);
-  const isLastPage = currentPage === pages.at(-1);
+  const isFirstPage = currentPage === pages[0];
+  const isLastPage = currentPage === pages[pages.length - 1];
 
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, page: currentPage }));

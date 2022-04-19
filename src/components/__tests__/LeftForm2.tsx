@@ -8,6 +8,10 @@ describe('renders without crashing', () => {
     marketplace: {
       otherQuestions: {
         availabilityOptions: []
+      },
+      retailerFiles: {
+        imagelinks: '',
+        owner_photo: ''
       }
     },
     widthScroll: 5,

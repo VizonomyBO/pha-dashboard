@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { TYPE_BUSINESS } from '../constants';
+import { ATTACHMENTS_SUB_TYPES, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
@@ -291,7 +291,7 @@ export const LeftForm2 = () => {
         </div>
         <Attachment
           type={TYPE_BUSINESS.BUSINESS}
-          subType="images"
+          subType={ATTACHMENTS_SUB_TYPES.IMAGES}
         />
       </div>
       <div className="item">
@@ -300,7 +300,7 @@ export const LeftForm2 = () => {
         </div>
         <Attachment
           type={TYPE_BUSINESS.OWNER}
-          subType="ownerimages"
+          subType={ATTACHMENTS_SUB_TYPES.OWNER_IMAGES}
         />
       </div>
     </>

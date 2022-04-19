@@ -86,6 +86,7 @@ export interface MarketplaceInterface {
   contactDetails: ContactDetailsInterface,
   selectCategory: SelectCategoryInterface,
   selectAccessibility: SelectAccessibilityInterface,
+  retailerFiles: RetailerFileInterface,
 }
 
 export interface SessionInterface {
@@ -147,4 +148,9 @@ export interface TabStateInterface {
 export interface ScrollInterface {
   widthScroll: number,
   heightScroll: number
+}
+
+export interface RetailerFileInterface {
+  imagelinks: string,
+  owner_photo: string,
 }
