@@ -7,10 +7,17 @@ import { PHA_RETAILERS, USDA_RETAILERS } from '../../constants/categories';
 export const ToolTip = (data: TooltipProps) => {
   const { layer } = data;
   const layerNotTyped: CompletelyIntentionalAny = layer;
-  return (
-    <>
-      { layerNotTyped?.id === PHA_RETAILERS ? <ToolTipPhaRetailer {...data} /> : '' }
-      { layerNotTyped?.id === USDA_RETAILERS ? <ToolTipUSDA {...data} /> : '' }
-    </>
-  );
+  let toolTipSelected = <ToolTipPhaRetailer {...data} />;
+  switch (layerNotTyped?.id) {
+    case USDA_RETAILERS:
+      toolTipSelected = <ToolTipUSDA {...data} />;
+      break;
+    case PHA_RETAILERS:
+      toolTipSelected = <ToolTipPhaRetailer {...data} />;
+      break;
+    default:
+      toolTipSelected = <ToolTipPhaRetailer {...data} />;
+      break;
+  }
+  return toolTipSelected;
 };
