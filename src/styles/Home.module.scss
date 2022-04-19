@@ -593,6 +593,20 @@ sup {
 		color: #161A23;
 		border: 1px solid #E3E5E5;
 	}
+	input[type=number].light {
+		font-family: "FuturaMedium", sans-serif;
+        font-size: 16px;
+		line-height: 16px;
+        border: none;
+        float: left;
+        width: 100%;
+		border-radius: 56px;
+		background-color: #F7F9FA;
+		padding: 15px 24px;
+		outline: none;
+		color: #161A23;
+		border: 1px solid #E3E5E5;
+	}
 	input[type=text].generic {
 		font-family: "FuturaMedium", sans-serif;
         font-size: 14px;
@@ -2538,6 +2552,7 @@ sup {
 							color: #7A7E80;
 							padding-left: 8px;
 							font-size: 14px;
+							padding-right: 8px
 						}
 						.txtst.blue {
 							color: #00BDE3;

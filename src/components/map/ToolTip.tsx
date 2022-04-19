@@ -23,6 +23,5 @@ export const ToolTip = (data: TooltipProps) => {
       toolTipSelected = <ToolTipPhaRetailer {...data} />;
       break;
   }
-  console.log('layerrr', layer);
   return toolTipSelected;
 };

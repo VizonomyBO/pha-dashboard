@@ -50,8 +50,8 @@ export const ToolTipOSM = (data: TooltipProps) => {
         <div className="store"><b>{objectTypified?.properties?.name?.toUpperCase()}</b></div>
         <div className="address">
           {
-          `${objectTypified?.properties?.address ?? ''}, 
-          ${objectTypified?.properties?.city ?? ''}, MS, 
+          `${objectTypified?.properties?.address ? (`${objectTypified?.properties?.address}, `) : ''}
+          ${objectTypified?.properties?.city ? (`${objectTypified?.properties?.city}, `) : ''} MS,
           ${objectTypified?.properties?.postcode ?? ''}`
           }
         </div>

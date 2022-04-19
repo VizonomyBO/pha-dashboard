@@ -11,7 +11,7 @@ const selectScheduleDropdownValue = (defaultOption: string) => (option: string) 
 const openSchedule = selectScheduleDropdownValue(DEFAULT_DROPDOWN_OPTION.OPEN);
 const closeSchedule = selectScheduleDropdownValue(DEFAULT_DROPDOWN_OPTION.CLOSE);
 
-export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
+export const LeftForm1 = () => {
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
   return (
@@ -44,26 +44,11 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
             <sup>*</sup>
           </label>
         </div>
-        {
-          isEdit || businessDetails.address_1 ? (
-            <div className="ainput">
-              <input
-                className="light"
-                type="text"
-                onChange={
-                (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, e.target.value)
-              }
-                value={businessDetails && businessDetails.address_1}
-              />
-            </div>
-          ) : (
-            <div className="dropdownAddress">
-              <DropdownAddress
-                type={TYPE_BUSINESS.ADDRESS_1}
-              />
-            </div>
-          )
-        }
+        <div className="dropdownAddress">
+          <DropdownAddress
+            type={TYPE_BUSINESS.ADDRESS_1}
+          />
+        </div>
       </div>
       <div className="item">
         <div className="title">
@@ -90,7 +75,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
         <div className="ainput">
           <input
             className="light"
-            type="text"
+            type="number"
             onChange={
               (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.PHONE, e.target.value)
             }

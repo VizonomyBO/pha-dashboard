@@ -7,9 +7,22 @@ describe('renders without crashing', () => {
   const initialStoreState = {
     inputText: {
       text: '',
-      shouldSearch: false
+      shouldSearch: false,
+      center: [],
+      bbox: []
     },
-    options: []
+    options: [],
+    shouldZoom: false,
+    controllerZoom: {
+      value: 0,
+      type: ''
+    },
+    marketplace: {
+      businessDetails: {
+        state: '',
+        address_1: '',
+      }
+    },
   };
   const mockStore = configureStore();
   let store;

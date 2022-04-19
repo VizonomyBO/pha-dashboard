@@ -12,7 +12,6 @@ export const LeftForm2 = () => {
     setProduceAvailSeasonally
   } = useMarketplaceDispatch();
   const { otherQuestions } = useMarketplaceState();
-
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     setOtherQuestions(e.currentTarget.value);
   };
