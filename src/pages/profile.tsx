@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Badge } from '../components/map/Badge';
@@ -6,9 +7,11 @@ import { BADGES } from '../constants';
 import { useProfile } from '../store/hooks/custom/useProfile';
 import { formatPhone, showSchedule, showText } from '../utils/textFormatter';
 import { MapProfile } from '../components/mapProfile';
+import { FeedbackForm } from '../components/FeedbackForm';
 
 export const Profile = () => {
   const { profile, badges } = useProfile();
+  const [visibleFeedback, setVisibleFeedback] = useState(false);
   return (
     <div className="container">
       <div className="bgwhite" />
@@ -41,7 +44,7 @@ export const Profile = () => {
                 </button>
               </Link>
             </div>
-            <button type="button" className="light">
+            <button type="button" className="light" onClick={() => setVisibleFeedback(true)}>
               Help Improve This Listing
             </button>
           </div>
@@ -189,6 +192,7 @@ export const Profile = () => {
         </div>
 
       </div>
+      { visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={profile?.retailer_id || ''} />}
     </div>
   );
 };

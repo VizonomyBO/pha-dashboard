@@ -1352,6 +1352,9 @@ sup {
 						color: #161A23;
 						width: 128px;
 						padding-right: 5px;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
 					}
 				}
 				.space {
@@ -1509,7 +1512,7 @@ sup {
 					.citysearch {
 						display: flex;
 						justify-content: center;
-            align-items: center;
+						align-items: center;
 						background-color: #fff;
 						border-radius: 56px;
 						padding:8px ;
@@ -2563,7 +2566,7 @@ sup {
 						background-color: #eee1cd;
 						border-radius: 16px;
 						margin-bottom: 40px;
-						overflow: scroll;
+						overflow: hidden;
 						.opkindmap {
               z-index: 2;
 							position: absolute;
@@ -5979,6 +5982,9 @@ header.topmenu {
 						outline: none;
 						width: 92px;
 						padding-left: 0;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+						overflow: hidden;
 					}
 					button.light {
 						border-radius: none;
