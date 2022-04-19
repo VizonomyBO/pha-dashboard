@@ -7,7 +7,8 @@ describe('renders without crashing', () => {
   const initialStoreState = {
     marketplace: {
       businessDetails: {
-        state: ''
+        state: '',
+        address_1: '',
       }
     },
     geocoder: {

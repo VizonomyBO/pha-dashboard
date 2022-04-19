@@ -48,8 +48,7 @@ export const DropdownAddress = ({ type }: { type: string }) => {
           <ul className="ul-address">
             {inputText.shouldSearch
               && options.map((opt: Result, index: number) => {
-                const { region, regionShortcode } = findRegion(opt);
-                const addressText = regionShortcode === '' ? opt.text : `${opt.text}, ${regionShortcode}`;
+                const { region } = findRegion(opt);
                 return (
                   <li
                     key={`${opt.place_name}index${type}`}
@@ -65,11 +64,11 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                           center: opt.center,
                           bbox: opt?.bbox || []
                         });
-                        setInputTextHtml(addressText);
+                        setInputTextHtml(opt.place_name);
                         setGeocoderOptions([]);
                         setBusinessDetails(TYPE_BUSINESS.LONGITUDE, opt.center[0]);
                         setBusinessDetails(TYPE_BUSINESS.LATITUDE, opt.center[1]);
-                        setBusinessDetails(type, addressText);
+                        setBusinessDetails(type, opt.place_name);
                         if (opt.place_type.includes(POINTS_OF_INTEREST)) {
                           const { zipcode, city, state } = getAddressFields(opt.place_name);
                           setBusinessDetails(TYPE_BUSINESS.CITY, city);
@@ -84,7 +83,7 @@ export const DropdownAddress = ({ type }: { type: string }) => {
                     >
                       <label>
                         <span className="span-geocoder">
-                          {addressText}
+                          {opt.place_name}
                         </span>
                       </label>
                     </button>
