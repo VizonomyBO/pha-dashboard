@@ -47,5 +47,10 @@ export const webRequest = {
     method: 'PUT',
     headers: headers || new Headers(),
     body: JSON.stringify(body),
-  })
+  }),
+  putMultipart: (url: string, data: CompletelyIntentionalAny, headers?: Headers) => fetch(url, {
+    method: 'PUT',
+    headers: headers || new Headers(),
+    body: data,
+  }),
 };

@@ -549,7 +549,7 @@ sup {
 		z-index: -1;
 	}
 	.barblue.profile {
-		height: 1100px;
+		height: 1300px;
 	}
 	.drawarea {
 		display: none;
@@ -664,7 +664,7 @@ sup {
 		display: block;
 		top:0;
 		left:0;
-		height:100vh;
+		height:100%;
 		width: 100%;
 		z-index: 100;
 		bottom: 0;
@@ -2445,7 +2445,7 @@ sup {
 						align-items: center;
 						padding-bottom: 16px;
 						.picture {
-							display: block;
+							display: flex;
 							width: 166px;
 							height: 166px;
 							overflow: hidden;
@@ -2453,6 +2453,7 @@ sup {
 							img {
 								max-width: 100%;
 								height: auto;
+								object-fit: cover;
 								border-radius: 50%;
 							}
 						}
@@ -2702,12 +2703,15 @@ sup {
 							padding-bottom: 32px;
 							.twoc {
 								.card {
+									border-radius: 16px;
 									width: 256px;
 									height: 192px;
 									overflow: hidden;
 									img {
+										width: 256px;
+										height: 256px;
+										object-fit: cover;
 										max-width: 100%;
-										height: auto;
 										border-radius: 16px;
 									}
 								}
@@ -6080,9 +6084,9 @@ header.topmenu {
 		}
 		.modalretailer {
 			.panel {
-				margin-top: 80px;
+				margin-top: 20px;
 				width: 95%;
-				height: calc(100% - 100px);
+				height: calc(90% - 80px);
 				overflow-y: scroll;
 				.head {
 					font-family: 'FuturaMedium',sans-serif;
@@ -6117,18 +6121,19 @@ header.topmenu {
 					display: none;
 				}
 				.amap {
-					margin-top: 78px;
-					height: calc(100vh - 78px);
+					height: 100%;
 					width: 100%;
 					border-radius: 0;
 					.locfound, .modal {
 						display: none;
 					}
 					.controlzoom {
+						margin-top: 78px;
 						top: 16px;
 						right: 16px;
 					}
 					.supermarketfilter {
+						margin-top: 78px;
 						position: absolute;
 						z-index: 4;
 						top: 16px;
@@ -6145,7 +6150,7 @@ header.topmenu {
 						padding-bottom: 5px;
 					}
 					.addlistening {
-						position: absolute;
+						position: fixed;
 						z-index: 4;
 						left: 16px;
 						display: block;
@@ -6157,7 +6162,7 @@ header.topmenu {
 						font-family: "FuturaBold", sans-serif !important;
 						border: 2.5px solid #00bde3;
 						color: #00bde3;
-						top: 82%;
+						top: calc(100% - 82px - 46px - 10px);
 					}
 					.retailerlist.close {
 						display: none;
@@ -6166,7 +6171,7 @@ header.topmenu {
 						display: block;
 						width: 100%;
 						right: 0;
-						top: calc(100vh - 82px);
+						top: calc(100% - 82px);
 						height: 82px;
 						z-index: 4;
 						transition: top .2s ease-in-out!important;
@@ -6238,7 +6243,7 @@ header.topmenu {
 							display: none;
 						}
 						.listpanel {
-							height: 600px;
+							height: 500px;
 							overflow: scroll;
 							background-color: #fff;
 							.item {
@@ -6335,6 +6340,7 @@ header.topmenu {
 	/* end home map */
 	/* landing */
 	.container {
+		height: 100%;
 		.pagecontainer {
 			.ldgaccesspoint {
 				padding-top: 0px;

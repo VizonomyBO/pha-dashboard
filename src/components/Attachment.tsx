@@ -11,7 +11,9 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
     filesSelected,
     multimedia,
     removeFile,
-    setMultimedia
+    setMultimedia,
+    googleArray,
+    removeFromGoogleArray
   } = useAttachmentBusiness({ type, subType });
   const [draggin, setDraggin] = useState(false);
   const { ref, width } = useWindowSize();
@@ -79,6 +81,27 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
         </div>
       </div>
       <div className="fileContent">
+        {
+          googleArray.map((element: string, index: number) => (
+            <span
+              key={element}
+              className="fileSpam"
+            >
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={element}
+                style={{ all: 'unset', cursor: 'pointer' }}
+              >
+                {element}
+              </a>
+              <CloseIcon
+                onClick={() => (removeFromGoogleArray(index))}
+                style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
+              />
+            </span>
+          ))
+        }
         {
           multimedia.map((element: CompletelyIntentionalAny, index: number) => (
             <span

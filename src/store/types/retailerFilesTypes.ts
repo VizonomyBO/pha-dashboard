@@ -1,0 +1,2 @@
+export const SET_IMAGELINKS = 'SET_IMAGELINKS';
+export const SET_OWNER_PHOTOS = 'SET_OWNER_PHOTOS';

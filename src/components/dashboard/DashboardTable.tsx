@@ -6,6 +6,7 @@ import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
 import { ROW_STATUS } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
+import { useRetailerFileReducer } from '../../store/hooks/retailerFilesHook';
 import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
 import { DashboardTableFooter } from './DashboardTableFooter';
@@ -26,6 +27,10 @@ export const DashboardTable = ({
     setVisibility, setLocal, setProduceAvailStore, setProduceAvailSeasonally,
     setContactName, setContactEmail, setContactOwner, setContactPatron
   } = useMarketplaceDispatch();
+  const {
+    setImageLinks,
+    setOwnerPhotos
+  } = useRetailerFileReducer();
   const handleSelected = (checked: boolean, item: PhaRetailer) => {
     let newSelectedElements: string[];
     if (checked) {
@@ -69,6 +74,9 @@ export const DashboardTable = ({
         });
         setWicAccepted(retailer.wic_accepted);
         setSnapAccepted(retailer.snap_accepted);
+
+        setImageLinks(retailer.imagelinks);
+        setOwnerPhotos(retailer.owner_photo);
 
         setOtherQuestions(retailer.description);
         setAvailabilityOptions(retailer.availability.split(','));
