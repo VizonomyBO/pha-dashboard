@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { ATTACHMENTS_SUB_TYPES, INDIVIDUAL_FORM, TYPE_INDIVIDUAL_FORM } from '../../../constants';
+import {
+  ATTACHMENTS_SUB_TYPES, INDIVIDUAL_FORM, TYPE_BUSINESS, TYPE_INDIVIDUAL_FORM
+} from '../../../constants';
 import { useIndividualFormDispatch } from '../individualFormHook';
 import { useMarketplaceDispatch, useMarketplaceState } from '../marketplaceHook';
 import { useRetailerFileReducer } from '../retailerFilesHook';
@@ -17,14 +19,23 @@ export const useAttachmentBusiness = ({ type, subType }: {
   const filesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = e.target.files;
     const newObjects: Blob[] = [];
-    for (let i = 0; newFiles && i < newFiles.length; i += 1) {
-      newObjects.push(newFiles[i]);
+    let maxElements = 5;
+    if (type === TYPE_BUSINESS.OWNER) {
+      maxElements = 1;
     }
-    setMultimedia([...multimedia, ...newObjects]);
-    if (type === INDIVIDUAL_FORM) {
-      setIndividualForm(TYPE_INDIVIDUAL_FORM.multimedia, [...multimedia, ...newObjects]);
+    if (newFiles && newFiles?.length <= maxElements
+      && (multimedia.length + (newFiles.length ? newFiles.length : 0)) <= maxElements) {
+      for (let i = 0; newFiles && i < newFiles.length; i += 1) {
+        newObjects.push(newFiles[i]);
+      }
+      setMultimedia([...multimedia, ...newObjects]);
+      if (type === INDIVIDUAL_FORM) {
+        setIndividualForm(TYPE_INDIVIDUAL_FORM.multimedia, [...multimedia, ...newObjects]);
+      } else {
+        setImagesFiles(subType as string, [...multimedia, ...newObjects]);
+      }
     } else {
-      setImagesFiles(subType as string, [...multimedia, ...newObjects]);
+      alert(`You can't have more than ${maxElements} picture${maxElements === 1 ? '' : 's'}`);
     }
   };
 
@@ -41,7 +52,6 @@ export const useAttachmentBusiness = ({ type, subType }: {
   const removeFromGoogleArray = (index: number) => {
     const newArray = [...googleArray];
     newArray.splice(index, 1);
-    console.log(newArray);
     if (type !== INDIVIDUAL_FORM) {
       if (subType === ATTACHMENTS_SUB_TYPES.IMAGES) {
         setImageLinks(newArray.join(','));
