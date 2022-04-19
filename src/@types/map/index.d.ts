@@ -5,6 +5,10 @@ export interface PropertiesLayer {
     phone?: string;
     retailer_id?: string;
     owner_photo?: string;
+    imagelinks?: string,
+    listing_name?: string,
+    location_address?: string,
+    snap_option?: string
   };
 }
 
@@ -31,7 +35,8 @@ interface TooltipProps {
   objectTypified: PropertiesLayer,
   badges: string[],
   setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
-  setCurrentRetailerId: React.Dispatch<React.SetStateAction<string>>
+  setCurrentRetailerId: React.Dispatch<React.SetStateAction<string>>,
+  layer?: Layer<unknown>[] | undefined
 }
 
 export type ZoomInterface = {value: number, type: string}

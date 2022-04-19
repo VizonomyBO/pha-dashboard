@@ -12,14 +12,19 @@ export default function renderTooltip({
 }: RenderToolTipInterface) {
   let toolTip = null;
   if (info?.object) {
-    const { x, y, object } = info;
+    const {
+      x,
+      y,
+      object,
+      layer
+    } = info;
     const objectTypified = object as PropertiesLayer;
     toolTip = width === MOBILE_WIDTH
       ? ToolTipMobile({
         x, y, objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
       })
       : ToolTip({
-        x, y, objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
+        x, y, objectTypified, badges, setVisibleFeedback, setCurrentRetailerId, layer
       });
   }
   return toolTip;

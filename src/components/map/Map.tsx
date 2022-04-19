@@ -4,7 +4,6 @@ import {
   useEffect,
   useMemo
 } from 'react';
-import * as carto from '@deck.gl/carto';
 import { Layer, PickInfo, WebMercatorViewport } from 'deck.gl';
 import { FlyToInterpolator } from '@deck.gl/core';
 import { useGeocoderDispatch, useGeocoderState, useMarkerState } from '../../store/hooks';
@@ -20,9 +19,8 @@ import { useMap } from '../../store/hooks/custom/useMap';
 import { getDeckInitState } from './defaultGenerator';
 import { useBadge } from '../../store/hooks/custom/useBadge';
 import { useWindowSize } from '../../store/hooks/custom/useWindowSize';
+import { CompletelyIntentionalAny } from '../../@types/database';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const Carto = carto as any;
 export const Map = (
   { setVisibleFeedback, setCurrentRetailerId }
   : { setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
@@ -70,12 +68,12 @@ export const Map = (
         },
         coordinate: elementProperties.properties.geom.coordinates,
         index: 0,
-        layer: new Carto.CartoLayer({})
+        layer: layers.find((lay: CompletelyIntentionalAny) => lay.id === elementProperties.properties.source)
       };
       setHoverInfo(newInfo);
       setCurrentHovered(elementProperties?.properties?.retailer_id);
     }
-  }, [click, center, elementProperties]);
+  }, [click, center, elementProperties, layers]);
   const onEndTransition = useMemo(() => () => {
     if (!shouldZoom && controllerZoom.type === '') {
       openPopup();
@@ -146,17 +144,16 @@ export const Map = (
   }, [controllerZoom, zoomEffect]);
   return (
     <div className="map-container" ref={ref}>
-      <DeckGLComponent {...deckState}>
-        {
-          RenderTooltip({
-            info: hoverInfo,
-            badges,
-            width,
-            setVisibleFeedback,
-            setCurrentRetailerId
-          })
-        }
-      </DeckGLComponent>
+      <DeckGLComponent {...deckState} />
+      {
+        RenderTooltip({
+          info: hoverInfo,
+          badges,
+          width,
+          setVisibleFeedback,
+          setCurrentRetailerId
+        })
+      }
     </div>
   );
 };
