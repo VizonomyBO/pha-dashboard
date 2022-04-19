@@ -161,6 +161,6 @@ export const Formvalidation = (
   return ({ type: typeModal, open: openModal, value: returnValue });
 };
 
-export const valitadionText = (value: string) => (
+export const deleteBreakLines = (value: string) => (
   value.replace(/(\r\n|\n|\r)/gm, ' ')
 );

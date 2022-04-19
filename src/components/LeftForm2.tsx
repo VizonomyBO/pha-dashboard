@@ -3,7 +3,7 @@ import { ATTACHMENTS_SUB_TYPES, MAX_TEXT, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
-import { valitadionText } from '../utils/validation';
+import { deleteBreakLines } from '../utils/validation';
 
 export const LeftForm2 = () => {
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
@@ -14,7 +14,7 @@ export const LeftForm2 = () => {
   } = useMarketplaceDispatch();
   const { otherQuestions } = useMarketplaceState();
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    const numbertext = valitadionText(e.currentTarget.value);
+    const numbertext = deleteBreakLines(e.currentTarget.value);
     if (numbertext.split(' ').length <= MAX_TEXT) {
       setOtherQuestions(numbertext);
     }
@@ -55,14 +55,14 @@ export const LeftForm2 = () => {
   };
 
   const setProduceAvailStoreFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    const numbertext = valitadionText(e.currentTarget.value);
+    const numbertext = deleteBreakLines(e.currentTarget.value);
     if (numbertext.split(' ').length <= MAX_TEXT) {
       setProduceAvailStore(numbertext);
     }
   };
 
   const setProduceAvailSeasonallyFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    const numbertext = valitadionText(e.currentTarget.value);
+    const numbertext = deleteBreakLines(e.currentTarget.value);
     if (numbertext.split(' ').length <= MAX_TEXT) {
       setProduceAvailSeasonally(numbertext);
     }
