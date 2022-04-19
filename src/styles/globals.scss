@@ -325,3 +325,10 @@ input, button, textarea, select {
     border-top-right-radius: 20px !important;
   }
 }
+
+.text-input-home {
+    width: 200px !important;
+    white-space: nowrap !important;
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+}

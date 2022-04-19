@@ -8,6 +8,7 @@ import { useProfile } from '../store/hooks/custom/useProfile';
 import { formatPhone, showSchedule, showText } from '../utils/textFormatter';
 import { MapProfile } from '../components/mapProfile';
 import { FeedbackForm } from '../components/FeedbackForm';
+import { ModalRequestForm } from '../components/ModalRequestForm';
 
 export const Profile = () => {
   const { profile, badges } = useProfile();
@@ -205,6 +206,7 @@ export const Profile = () => {
         </div>
       </div>
       { visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={profile?.retailer_id || ''} />}
+      <ModalRequestForm />
     </div>
   );
 };

@@ -12,6 +12,7 @@ import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetM
 import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 import { useHome } from '../store/hooks/custom/useHome';
 import { FeedbackForm } from '../components/FeedbackForm';
+import { ModalRequestForm } from '../components/ModalRequestForm';
 
 export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
@@ -177,6 +178,7 @@ export const Home = () => {
         {openModal && <ModalFilters setOpenModal={setOpenModal} />}
       </div>
       {visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={currentRetailerId} />}
+      <ModalRequestForm />
     </div>
   );
 };
