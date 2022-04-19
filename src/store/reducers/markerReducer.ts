@@ -8,7 +8,6 @@ const defaultState: MarkerCenterInterface = {
 };
 
 const markerReducer = (state: MarkerCenterInterface = defaultState, action: AnyAction = { type: 'foo' }) => {
-  console.log('action', action);
   switch (action.type) {
     case TYPES.SET_CENTER_MARKER:
       return {

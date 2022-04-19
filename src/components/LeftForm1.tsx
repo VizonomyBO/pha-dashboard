@@ -45,7 +45,7 @@ export const LeftForm1 = ({ isEdit = false }: { isEdit?: boolean; }) => {
           </label>
         </div>
         {
-          isEdit ? (
+          isEdit || businessDetails.address_1 ? (
             <div className="ainput">
               <input
                 className="light"

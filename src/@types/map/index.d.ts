@@ -13,7 +13,11 @@ export interface PropertiesLayer {
     city?: string,
     postcode?: string,
     address?: string
-  };
+  },
+  geometry?: {
+    type: string,
+    coordinates: number[]
+  }
 }
 
 export interface ModalFilterData {
