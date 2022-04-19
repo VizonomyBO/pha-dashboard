@@ -40,7 +40,7 @@ export const FormArea = ({
       <div className="group">
         <div className="left">
           {activeTab === BUSINESS_DETAILS && (
-            <LeftForm1 isEdit={isModal} />
+            <LeftForm1 />
           )}
           {activeTab === OTHER_QUESTIONS && (
             <LeftForm2 />

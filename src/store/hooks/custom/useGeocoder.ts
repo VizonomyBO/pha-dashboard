@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { useMarketplaceState } from '..';
 import { POINTS_OF_INTEREST, TYPE_BUSINESS } from '../../../constants';
 import { GeocoderService } from '../../../services/geocoderService';
 import { findRegion } from '../../../utils/findRegion';
@@ -9,6 +10,7 @@ import { useMarketplaceDispatch } from '../marketplaceHook';
 export const useGeocoder = (name: string, type: string) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
+  const { businessDetails } = useMarketplaceState();
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { inputText, options } = useGeocoderState() || {};
   const [position, setPosition] = useState(0);
@@ -26,6 +28,10 @@ export const useGeocoder = (name: string, type: string) => {
     setInputTextHtml(e.currentTarget.value);
   };
 
+  useEffect(() => {
+    setInputTextHtml(businessDetails.address_1);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   useEffect(() => {
     geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
     if (inputText && inputText.text) {

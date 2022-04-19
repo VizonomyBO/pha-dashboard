@@ -71,7 +71,7 @@ export const STATES = [
   'Massachusetts',
   'Míchigan',
   'Minnesota',
-  'Misisipi',
+  'Mississippi',
   'Misuri',
   'Montana',
   'Nebraska',
