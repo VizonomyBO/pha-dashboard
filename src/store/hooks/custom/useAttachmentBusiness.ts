@@ -35,6 +35,7 @@ export const useAttachmentBusiness = ({ type, subType }: {
         setImagesFiles(subType as string, [...multimedia, ...newObjects]);
       }
     } else {
+      // eslint-disable-next-line no-alert
       alert(`You can't have more than ${maxElements} picture${maxElements === 1 ? '' : 's'}`);
     }
   };
