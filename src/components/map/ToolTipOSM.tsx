@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import { TooltipProps } from '../../@types';
 import { useMarketplaceDispatch } from '../../store/hooks';
 import { TYPE_BUSINESS } from '../../constants';
@@ -8,7 +9,8 @@ export const ToolTipOSM = (data: TooltipProps) => {
   const {
     x,
     y,
-    objectTypified
+    objectTypified,
+    isMobile
   } = data;
   const popupRef = useRef<HTMLDivElement>(null);
   const [currentY, setCurrentY] = useState(y);
@@ -19,32 +21,32 @@ export const ToolTipOSM = (data: TooltipProps) => {
     }
   }, [popupRef, setCurrentY, y]);
   const setDataBusiness = () => {
-    console.log(objectTypified);
     if (objectTypified.properties?.name) {
       setBusinessDetails(TYPE_BUSINESS.NAME, objectTypified.properties.name);
     }
-    if (objectTypified.properties?.address) {
-      setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, objectTypified.properties.address ?? '');
-    }
-    if (objectTypified.properties?.city) {
-      setBusinessDetails(TYPE_BUSINESS.CITY, objectTypified.properties.city);
-    }
-    if (objectTypified.properties?.postcode) {
-      setBusinessDetails(TYPE_BUSINESS.ZIPCODE, objectTypified.properties.postcode);
-    }
+    // commented because supposably they will return
+    // if (objectTypified.properties?.address) {
+    //   setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, objectTypified.properties.address ?? '');
+    // }
+    // if (objectTypified.properties?.city) {
+    //   setBusinessDetails(TYPE_BUSINESS.CITY, objectTypified.properties.city);
+    // }
+    // if (objectTypified.properties?.postcode) {
+    //   setBusinessDetails(TYPE_BUSINESS.ZIPCODE, objectTypified.properties.postcode);
+    // }
+    // setBusinessDetails(TYPE_BUSINESS.STATE, 'MS');
     if (objectTypified?.geometry?.coordinates) {
       setBusinessDetails(TYPE_BUSINESS.LONGITUDE, objectTypified.geometry.coordinates[0]);
       setBusinessDetails(TYPE_BUSINESS.LATITUDE, objectTypified.geometry.coordinates[1]);
     }
-    setBusinessDetails(TYPE_BUSINESS.STATE, 'MS');
   };
   return (
     <div
-      className="modal"
-      style={{ left: x, top: currentY }}
+      className={isMobile ? 'bmodal' : 'modal'}
+      style={{ left: isMobile ? '' : x, top: isMobile ? '' : currentY }}
       ref={popupRef}
     >
-      <div className="detailcard">
+      <div className={classNames('detailcard', isMobile ? 'detailCardOther' : '')}>
         <div className="store"><b>{objectTypified?.properties?.name?.toUpperCase()}</b></div>
         <div className="address">
           {

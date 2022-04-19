@@ -1,11 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
 import { TooltipProps } from '../../@types';
 
 export const ToolTipUSDA = (data: TooltipProps) => {
   const {
     x,
     y,
-    objectTypified
+    objectTypified,
+    isMobile
   } = data;
   const popupRef = useRef<HTMLDivElement>(null);
   const [currentY, setCurrentY] = useState(y);
@@ -16,11 +18,11 @@ export const ToolTipUSDA = (data: TooltipProps) => {
   }, [popupRef, setCurrentY, y]);
   return (
     <div
-      className="modal"
-      style={{ left: x, top: currentY }}
+      className={isMobile ? 'bmodal' : 'modal'}
+      style={{ left: isMobile ? '' : x, top: isMobile ? '' : currentY }}
       ref={popupRef}
     >
-      <div className="detailcard">
+      <div className={classNames('detailcard', isMobile ? 'detailCardOther' : '')}>
         <div className="store"><b>{objectTypified?.properties?.listing_name?.toUpperCase()}</b></div>
         <div className="address">{objectTypified?.properties?.location_address}</div>
         <div className="store"> Payment Type</div>

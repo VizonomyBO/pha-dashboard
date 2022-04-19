@@ -87,6 +87,7 @@ export interface MarketplaceInterface {
   selectCategory: SelectCategoryInterface,
   selectAccessibility: SelectAccessibilityInterface,
   retailerFiles: RetailerFileInterface,
+  osm_id?: string
 }
 
 export interface SessionInterface {

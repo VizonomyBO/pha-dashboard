@@ -44,7 +44,8 @@ interface TooltipProps {
   badges: string[],
   setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
   setCurrentRetailerId: React.Dispatch<React.SetStateAction<string>>,
-  layer?: Layer<unknown>[] | undefined
+  layer?: Layer<unknown>[] | undefined,
+  isMobile?: boolean
 }
 
 export type ZoomInterface = {value: number, type: string}
