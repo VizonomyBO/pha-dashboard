@@ -206,11 +206,10 @@ export const ICON_MAPPING = {
   }
 };
 
-export const MOBILE_WIDTH = 375;
-
 export const ATTACHMENTS_SUB_TYPES = {
   OWNER_IMAGES: 'ownerimages',
   IMAGES: 'images',
 };
 
 export const JSON_FIELD = 'json';
+export const MOBILE_WIDTH = 600;
