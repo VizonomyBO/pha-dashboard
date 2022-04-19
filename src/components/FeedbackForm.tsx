@@ -4,6 +4,7 @@ import { formConstants } from '../constants/form';
 import { ENDPOINTS } from '../constants/url';
 import { useModalDispatch } from '../store/hooks';
 import { useIndividualFormDispatch, useIndividualFormState } from '../store/hooks/individualFormHook';
+import { valitadionText } from '../utils/validation';
 import { webRequest } from '../utils/webRequest';
 import { Attachment } from './Attachment';
 
@@ -355,10 +356,13 @@ export const FeedbackForm = (
                     placeholder="Your text here..."
                     onChange={
                       (e: React.FormEvent<HTMLTextAreaElement>) => {
-                        setIndividualForm(
-                          TYPE_INDIVIDUAL_FORM.produce_avail_store,
-                          e.currentTarget.value
-                        );
+                        const numbertext = valitadionText(e.currentTarget.value);
+                        if (numbertext.split(' ').length <= 450) {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.produce_avail_store,
+                            numbertext
+                          );
+                        }
                       }
                     }
                   />

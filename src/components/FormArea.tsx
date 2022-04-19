@@ -92,7 +92,7 @@ export const FormArea = ({
           : (
             <div className="aaction">
               <button className="light" type="button" onClick={clickProceed}>
-                Proceed
+                {activeTab === CONTACT_DETAILS ? 'Submit' : 'Proceed'}
               </button>
             </div>
           )

@@ -3,6 +3,7 @@ import { ATTACHMENTS_SUB_TYPES, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
+import { valitadionText } from '../utils/validation';
 
 export const LeftForm2 = () => {
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
@@ -13,7 +14,10 @@ export const LeftForm2 = () => {
   } = useMarketplaceDispatch();
   const { otherQuestions } = useMarketplaceState();
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setOtherQuestions(e.currentTarget.value);
+    const numbertext = valitadionText(e.currentTarget.value);
+    if (numbertext.split(' ').length <= 450) {
+      setOtherQuestions(numbertext);
+    }
   };
 
   const setAvailabilityOptionsCheck = (constant: string, checked: boolean) => {
@@ -51,11 +55,17 @@ export const LeftForm2 = () => {
   };
 
   const setProduceAvailStoreFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setProduceAvailStore(e.currentTarget.value);
+    const numbertext = valitadionText(e.currentTarget.value);
+    if (numbertext.split(' ').length <= 450) {
+      setProduceAvailStore(numbertext);
+    }
   };
 
   const setProduceAvailSeasonallyFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setProduceAvailSeasonally(e.currentTarget.value);
+    const numbertext = valitadionText(e.currentTarget.value);
+    if (numbertext.split(' ').length <= 450) {
+      setProduceAvailSeasonally(numbertext);
+    }
   };
 
   useEffect(() => {

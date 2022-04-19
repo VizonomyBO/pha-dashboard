@@ -160,3 +160,7 @@ export const Formvalidation = (
   console.log('activeTab', activeTab, 'returnValue', returnValue, 'value', value);
   return ({ type: typeModal, open: openModal, value: returnValue });
 };
+
+export const valitadionText = (value: string) => (
+  value.replace(/(\r\n|\n|\r)/gm, ' ')
+);
