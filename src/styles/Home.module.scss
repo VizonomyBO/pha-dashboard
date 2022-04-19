@@ -549,7 +549,7 @@ sup {
 		z-index: -1;
 	}
 	.barblue.profile {
-		height: 1100px;
+		height: 1300px;
 	}
 	.drawarea {
 		display: none;
@@ -2444,7 +2444,7 @@ sup {
 						align-items: center;
 						padding-bottom: 16px;
 						.picture {
-							display: block;
+							display: flex;
 							width: 166px;
 							height: 166px;
 							overflow: hidden;
@@ -2452,6 +2452,7 @@ sup {
 							img {
 								max-width: 100%;
 								height: auto;
+								object-fit: cover;
 								border-radius: 50%;
 							}
 						}
@@ -2701,12 +2702,15 @@ sup {
 							padding-bottom: 32px;
 							.twoc {
 								.card {
+									border-radius: 16px;
 									width: 256px;
 									height: 192px;
 									overflow: hidden;
 									img {
+										width: 256px;
+										height: 256px;
+										object-fit: cover;
 										max-width: 100%;
-										height: auto;
 										border-radius: 16px;
 									}
 								}
