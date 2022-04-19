@@ -21,7 +21,7 @@ export const ToolTipUSDA = (data: TooltipProps) => {
       ref={popupRef}
     >
       <div className="detailcard">
-        <div className="store">{objectTypified?.properties?.listing_name?.toUpperCase()}</div>
+        <div className="store"><b>{objectTypified?.properties?.listing_name?.toUpperCase()}</b></div>
         <div className="address">{objectTypified?.properties?.location_address}</div>
         <div className="store"> Payment Type</div>
         <div className="address">{objectTypified?.properties?.snap_option}</div>

@@ -121,6 +121,7 @@ export const useMap = () => {
   );
 
   const zoomToCenterMarker = useMemo(() => (point: number[]) => {
+    setResetMarker();
     setCurrentViewState((oldViewState) => {
       const newViewState = {
         ...oldViewState,
@@ -130,7 +131,7 @@ export const useMap = () => {
       };
       return newViewState;
     });
-    setResetMarker();
+    console.log('waaaaaaaaaaaaa');
   }, [setCurrentViewState, setResetMarker]);
 
   const finishRender = useMemo(() => () => {

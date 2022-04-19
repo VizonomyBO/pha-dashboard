@@ -15,6 +15,8 @@ export const useMarkerDispatch = () => {
   }, [dispatch]);
   return {
     setCenterMarker: setCenterMarkerMemoized,
-    setResetMarker
+    setResetMarker: () => {
+      dispatch(setResetMarker());
+    }
   };
 };

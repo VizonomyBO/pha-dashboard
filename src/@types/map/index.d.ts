@@ -8,7 +8,11 @@ export interface PropertiesLayer {
     imagelinks?: string,
     listing_name?: string,
     location_address?: string,
-    snap_option?: string
+    snap_option?: string,
+    adress?: string,
+    city?: string,
+    postcode?: string,
+    address?: string
   };
 }
 
