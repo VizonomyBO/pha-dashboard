@@ -127,7 +127,11 @@ export const Dashboard = () => {
           clickDecline={() => {
             const headers = webRequest.generateMultipartHeader();
             const formData = new FormData();
-            formData.append('json', JSON.stringify({ submission_status: ROW_STATUS.REJECTED }));
+            formData.append('json', JSON.stringify({
+              submission_status: ROW_STATUS.REJECTED,
+              imagelinks: retailerFiles.imagelinks,
+              owner_photo: retailerFiles.owner_photo
+            }));
             webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
               .then((r) => r.json())
               .then(() => {
@@ -138,7 +142,11 @@ export const Dashboard = () => {
           clickDelete={() => {
             const headers = webRequest.generateMultipartHeader();
             const formData = new FormData();
-            formData.append('json', JSON.stringify({ submission_status: ROW_STATUS.DELETED }));
+            formData.append('json', JSON.stringify({
+              submission_status: ROW_STATUS.DELETED,
+              imagelinks: retailerFiles.imagelinks,
+              owner_photo: retailerFiles.owner_photo
+            }));
             webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
               .then((r) => r.json())
               .then(() => {
