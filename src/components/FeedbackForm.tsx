@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { TYPE_INDIVIDUAL_FORM } from '../constants';
 import { formConstants } from '../constants/form';
 import { ENDPOINTS } from '../constants/url';
+import { useModalDispatch } from '../store/hooks';
 import { useIndividualFormDispatch, useIndividualFormState } from '../store/hooks/individualFormHook';
 import { webRequest } from '../utils/webRequest';
 import { Attachment } from './Attachment';
@@ -11,6 +12,7 @@ export const FeedbackForm = (
   : {setVisible: React.Dispatch<React.SetStateAction<boolean>>, retailerId: string }
 ) => {
   const { setIndividualForm, resetIndividualForm } = useIndividualFormDispatch();
+  const { setModal } = useModalDispatch();
   useEffect(() => {
     setIndividualForm(TYPE_INDIVIDUAL_FORM.retailer_id, retailerId);
   }, [setIndividualForm, retailerId]);
@@ -35,6 +37,7 @@ export const FeedbackForm = (
     }
   };
   const sendForm = () => {
+    setModal({ type: true, open: true });
     const formData = new FormData();
     const obj = {
       availability,
@@ -47,9 +50,7 @@ export const FeedbackForm = (
       produce_avail_store
     };
     formData.append('json', JSON.stringify(obj).replace("'", "\\'"));
-    console.log('files ', files);
     files.forEach((file) => {
-      console.log(file);
       formData.append('files', file);
     });
     const headers = webRequest.generateMultipartHeader();
@@ -59,8 +60,11 @@ export const FeedbackForm = (
       headers
     ).then((res) => res.json()).then((res) => {
       if (res.success) {
+        setModal({ type: true, open: true });
         setVisible(false);
         resetIndividualForm();
+      } else {
+        setModal({ type: false, open: true });
       }
     });
   };

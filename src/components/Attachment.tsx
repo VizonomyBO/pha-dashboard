@@ -81,41 +81,37 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
         </div>
       </div>
       <div className="fileContent">
-        {
-          googleArray.map((element: string, index: number) => (
-            <span
-              key={element}
-              className="fileSpam"
+        {googleArray[0] !== '' && googleArray.map((element: string, index: number) => (
+          <span
+            key={element}
+            className="fileSpam"
+          >
+            <a
+              target="_blank"
+              rel="noreferrer"
+              href={element}
+              style={{ all: 'unset', cursor: 'pointer' }}
             >
-              <a
-                target="_blank"
-                rel="noreferrer"
-                href={element}
-                style={{ all: 'unset', cursor: 'pointer' }}
-              >
-                {element}
-              </a>
-              <CloseIcon
-                onClick={() => (removeFromGoogleArray(index))}
-                style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
-              />
-            </span>
-          ))
-        }
-        {
-          multimedia.map((element: CompletelyIntentionalAny, index: number) => (
-            <span
-              key={generateKey(element, index)}
-              className="fileSpam"
-            >
-              { element.name ? element.name : ''}
-              <CloseIcon
-                onClick={() => (removeFile(index))}
-                style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
-              />
-            </span>
-          ))
-        }
+              {element}
+            </a>
+            <CloseIcon
+              onClick={() => (removeFromGoogleArray(index))}
+              style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
+            />
+          </span>
+        ))}
+        {multimedia.length > 0 && multimedia.map((element: CompletelyIntentionalAny, index: number) => (
+          <span
+            key={generateKey(element, index)}
+            className="fileSpam"
+          >
+            { element.name ? element.name : ''}
+            <CloseIcon
+              onClick={() => (removeFile(index))}
+              style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
+            />
+          </span>
+        ))}
       </div>
     </div>
   );

@@ -10,9 +10,9 @@ export const ModalRequestForm = () => {
     }
   }, VISIBLE_TIME);
   return (
-    <div>
+    <div style={{ zIndex: '156' }}>
       {open && (
-        <div className="modaluserfeedbck">
+        <div className="modaluserfeedbck" style={{ zIndex: '156' }}>
           {type ? (
             <div className="modalsubmission">
               <div className="icoarea">
