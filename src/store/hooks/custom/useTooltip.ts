@@ -1,4 +1,5 @@
 import { PropertiesLayer } from '../../../@types';
+import { DEFAULT_IMAGE } from '../../../constants';
 
 export const useTooltip = () => {
   const getImageToDisplay = (objectTypified: PropertiesLayer) => {
@@ -6,7 +7,7 @@ export const useTooltip = () => {
       const images = objectTypified.properties.imagelinks.split(',');
       return images[0];
     }
-    return '/images/img_landing.png';
+    return DEFAULT_IMAGE;
   };
   return {
     getImageToDisplay

@@ -18,6 +18,8 @@ const markerReducer = (state: MarkerCenterInterface = defaultState, action: AnyA
       };
     case TYPES.INIT:
       return INITIAL_CENTER_MARKER;
+    case TYPES.SET_RESET:
+      return INITIAL_CENTER_MARKER;
     default:
       return {
         ...state

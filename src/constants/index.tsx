@@ -207,3 +207,5 @@ export const ICON_MAPPING = {
 };
 
 export const MOBILE_WIDTH = 600;
+
+export const DEFAULT_IMAGE = '/images/img_landing.png';
