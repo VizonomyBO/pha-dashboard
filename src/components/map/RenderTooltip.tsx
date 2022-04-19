@@ -19,7 +19,7 @@ export default function renderTooltip({
       layer
     } = info;
     const objectTypified = object as PropertiesLayer;
-    toolTip = width === MOBILE_WIDTH
+    toolTip = width <= MOBILE_WIDTH
       ? ToolTipMobile({
         x, y, objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
       })
