@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { TYPE_INDIVIDUAL_FORM } from '../constants';
+import { MAX_TEXT, TYPE_INDIVIDUAL_FORM } from '../constants';
 import { formConstants } from '../constants/form';
 import { ENDPOINTS } from '../constants/url';
 import { useModalDispatch } from '../store/hooks';
@@ -357,7 +357,7 @@ export const FeedbackForm = (
                     onChange={
                       (e: React.FormEvent<HTMLTextAreaElement>) => {
                         const numbertext = valitadionText(e.currentTarget.value);
-                        if (numbertext.split(' ').length <= 450) {
+                        if (numbertext.split(' ').length <= MAX_TEXT) {
                           setIndividualForm(
                             TYPE_INDIVIDUAL_FORM.produce_avail_store,
                             numbertext

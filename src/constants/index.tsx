@@ -14,6 +14,7 @@ export const GEOCODER = 'geocoder';
 export const GEOCODER_MOBILE = 'geocoder-mobile';
 export const REGION_GEOCODER = 'US-';
 export const REGION = 'region';
+export const MAX_TEXT = 450;
 export const INDIVIDUAL_FORM = 'individualForm';
 export const MAPBOX_KEY = process.env.REACT_APP_MAPBOX_KEY || NO_DATA;
 export const BASEMAP = 'mapbox://styles/vizonomy/cl0zk8u1o002w15pvqr3t0e1b';

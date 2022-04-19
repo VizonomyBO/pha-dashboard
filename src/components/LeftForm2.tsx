@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ATTACHMENTS_SUB_TYPES, TYPE_BUSINESS } from '../constants';
+import { ATTACHMENTS_SUB_TYPES, MAX_TEXT, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
@@ -15,7 +15,7 @@ export const LeftForm2 = () => {
   const { otherQuestions } = useMarketplaceState();
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     const numbertext = valitadionText(e.currentTarget.value);
-    if (numbertext.split(' ').length <= 450) {
+    if (numbertext.split(' ').length <= MAX_TEXT) {
       setOtherQuestions(numbertext);
     }
   };
@@ -56,14 +56,14 @@ export const LeftForm2 = () => {
 
   const setProduceAvailStoreFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     const numbertext = valitadionText(e.currentTarget.value);
-    if (numbertext.split(' ').length <= 450) {
+    if (numbertext.split(' ').length <= MAX_TEXT) {
       setProduceAvailStore(numbertext);
     }
   };
 
   const setProduceAvailSeasonallyFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
     const numbertext = valitadionText(e.currentTarget.value);
-    if (numbertext.split(' ').length <= 450) {
+    if (numbertext.split(' ').length <= MAX_TEXT) {
       setProduceAvailSeasonally(numbertext);
     }
   };
