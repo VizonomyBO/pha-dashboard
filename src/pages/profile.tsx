@@ -12,6 +12,9 @@ import { FeedbackForm } from '../components/FeedbackForm';
 export const Profile = () => {
   const { profile, badges } = useProfile();
   const [visibleFeedback, setVisibleFeedback] = useState(false);
+  let position = 0;
+  const picture: string[] = profile?.imagelinks ? profile.imagelinks.split(',') : [];
+  const pictureOwner:string[] = profile?.owner_photo ? profile.owner_photo.split(',') : [];
   return (
     <div className="container">
       <div className="bgwhite" />
@@ -52,7 +55,7 @@ export const Profile = () => {
             <div className="left">
               <div className="userphoto">
                 <div className="picture">
-                  <img src={profile?.owner_photo || '/images/owner_photo.png'} alt="" height={166} width={166} />
+                  <img src={pictureOwner?.[0] || '/images/owner_photo.png'} alt="" height={166} width={166} />
                 </div>
               </div>
               <div className="bname">
@@ -175,22 +178,33 @@ export const Profile = () => {
               </div>
               <div className="txtbt">Photo Gallery</div>
               <div className="gallery">
-                <div className="rowtwoc">
-                  <div className="twoc">
-                    <div className="card"><img src="/images/img_gallery_1.png" alt="" /></div>
+                {picture.length >= 2 && picture.map((element: string, index: number) => {
+                  if (position % 2 === 1) {
+                    return (
+                      <div className="rowtwoc">
+                        <div className="twoc">
+                          <div className="card"><img src={picture[index - 1]} alt="" /></div>
+                        </div>
+                        <div className="twoc">
+                          <div className="card"><img src={element} alt="" /></div>
+                        </div>
+                      </div>
+                    );
+                  }
+                  position += 1;
+                  return '';
+                })}
+                {picture.length % 2 === 1 && (
+                  <div className="rowonec">
+                    <div className="onec">
+                      <img style={{ borderRadius: '16px' }} src={picture[picture.length - 1]} alt="" />
+                    </div>
                   </div>
-                  <div className="twoc">
-                    <div className="card"><img src="/images/img_gallery_2.png" alt="" /></div>
-                  </div>
-                </div>
-                <div className="rowonec">
-                  <div className="onec"><img src="/images/img_gallery_3.png" alt="" /></div>
-                </div>
+                )}
               </div>
             </div>
           </div>
         </div>
-
       </div>
       { visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={profile?.retailer_id || ''} />}
     </div>

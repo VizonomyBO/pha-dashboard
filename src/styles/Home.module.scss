@@ -549,7 +549,7 @@ sup {
 		z-index: -1;
 	}
 	.barblue.profile {
-		height: 1100px;
+		height: 1300px;
 	}
 	.drawarea {
 		display: none;
@@ -2444,7 +2444,7 @@ sup {
 						align-items: center;
 						padding-bottom: 16px;
 						.picture {
-							display: block;
+							display: flex;
 							width: 166px;
 							height: 166px;
 							overflow: hidden;
@@ -2701,6 +2701,7 @@ sup {
 							padding-bottom: 32px;
 							.twoc {
 								.card {
+									border-radius: 16px;
 									width: 256px;
 									height: 192px;
 									overflow: hidden;

@@ -57,6 +57,7 @@ export interface PhaRetailer {
   grocery_store?: string,
   submission_date?: string,
   submission_status?: string,
+  imagelinks?: string,
   geom?: {
     type: string,
     coordinates: number[],
