@@ -22,7 +22,9 @@ export const Dashboard = () => {
     otherQuestions,
     contactDetails,
     selectCategory,
-    selectAccessibility
+    selectAccessibility,
+    retailerFiles,
+    files
   } = useMarketplaceState();
   const token = authorizationManager.getToken();
   const {
@@ -45,7 +47,7 @@ export const Dashboard = () => {
         <FormArea
           isModal
           clickApprove={() => {
-            const headers = webRequest.generateJSONHeader();
+            const headers = webRequest.generateMultipartHeader();
             const body: CompletelyIntentionalAny = {
               name: businessDetails.name,
               address_1: businessDetails.address_1,
@@ -89,6 +91,9 @@ export const Dashboard = () => {
               produce_avail_store: otherQuestions.produce_avail_store,
               produce_avail_seasonally: otherQuestions.produce_avail_seasonally,
 
+              imagelinks: retailerFiles.imagelinks,
+              owner_photo: retailerFiles.owner_photo,
+
               supermarket: selectCategory.supermarket,
               corner_store: selectCategory.corner_store,
               distribution: selectCategory.distribution,
@@ -103,7 +108,16 @@ export const Dashboard = () => {
             Object.keys(body).forEach((k) => {
               newBody[k] = body[k]?.split("'").join("\\'");
             });
-            webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), newBody, headers)
+            const formData = new FormData();
+            formData.append('json', JSON.stringify(newBody));
+            files.images.forEach((file) => {
+              formData.append('images', file);
+            });
+            files.ownerimages.forEach((file) => {
+              formData.append('ownerimages', file);
+            });
+
+            webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
               .then((r) => r.json())
               .then(() => {
                 setShouldReload(true);
@@ -111,10 +125,10 @@ export const Dashboard = () => {
             setModal({ open: false, type: false });
           }}
           clickDecline={() => {
-            const headers = webRequest.generateJSONHeader();
-            webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), {
-              submission_status: ROW_STATUS.REJECTED,
-            }, headers)
+            const headers = webRequest.generateMultipartHeader();
+            const formData = new FormData();
+            formData.append('json', JSON.stringify({ submission_status: ROW_STATUS.REJECTED }));
+            webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
               .then((r) => r.json())
               .then(() => {
                 setShouldReload(true);
@@ -122,10 +136,10 @@ export const Dashboard = () => {
             setModal({ open: false, type: false });
           }}
           clickDelete={() => {
-            const headers = webRequest.generateJSONHeader();
-            webRequest.put(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), {
-              submission_status: ROW_STATUS.DELETED,
-            }, headers)
+            const headers = webRequest.generateMultipartHeader();
+            const formData = new FormData();
+            formData.append('json', JSON.stringify({ submission_status: ROW_STATUS.DELETED }));
+            webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
               .then((r) => r.json())
               .then(() => {
                 setShouldReload(true);
