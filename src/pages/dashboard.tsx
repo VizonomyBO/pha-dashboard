@@ -11,6 +11,7 @@ import { webRequest } from '../utils/webRequest';
 import { ENDPOINTS } from '../constants/url';
 import { ROW_STATUS } from '../constants/dashboard';
 import { CompletelyIntentionalAny } from '../@types/database';
+import { ATTACHMENTS_SUB_TYPES, JSON_FIELD } from '../constants';
 
 export const Dashboard = () => {
   const [shouldReload, setShouldReload] = useState(false);
@@ -109,12 +110,12 @@ export const Dashboard = () => {
               newBody[k] = body[k]?.split("'").join("\\'");
             });
             const formData = new FormData();
-            formData.append('json', JSON.stringify(newBody));
+            formData.append(JSON_FIELD, JSON.stringify(newBody));
             files.images.forEach((file) => {
-              formData.append('images', file);
+              formData.append(ATTACHMENTS_SUB_TYPES.IMAGES, file);
             });
             files.ownerimages.forEach((file) => {
-              formData.append('ownerimages', file);
+              formData.append(ATTACHMENTS_SUB_TYPES.OWNER_IMAGES, file);
             });
 
             webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
@@ -127,7 +128,7 @@ export const Dashboard = () => {
           clickDecline={() => {
             const headers = webRequest.generateMultipartHeader();
             const formData = new FormData();
-            formData.append('json', JSON.stringify({
+            formData.append(JSON_FIELD, JSON.stringify({
               submission_status: ROW_STATUS.REJECTED,
               imagelinks: retailerFiles.imagelinks,
               owner_photo: retailerFiles.owner_photo
@@ -142,7 +143,7 @@ export const Dashboard = () => {
           clickDelete={() => {
             const headers = webRequest.generateMultipartHeader();
             const formData = new FormData();
-            formData.append('json', JSON.stringify({
+            formData.append(JSON_FIELD, JSON.stringify({
               submission_status: ROW_STATUS.DELETED,
               imagelinks: retailerFiles.imagelinks,
               owner_photo: retailerFiles.owner_photo

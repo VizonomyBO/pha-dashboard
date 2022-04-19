@@ -212,3 +212,5 @@ export const ATTACHMENTS_SUB_TYPES = {
   OWNER_IMAGES: 'ownerimages',
   IMAGES: 'images',
 };
+
+export const JSON_FIELD = 'json';
