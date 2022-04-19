@@ -14,9 +14,9 @@ import { useHome } from '../store/hooks/custom/useHome';
 import { FeedbackForm } from '../components/FeedbackForm';
 import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
 
-let yStart = 0;
-let yMove = 0;
 export const Home = () => {
+  const [yStart, setYStart] = useState(0);
+  const [yMove, setYMove] = useState(0);
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
   const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
@@ -28,29 +28,22 @@ export const Home = () => {
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
 
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
-    yStart = evt.touches[0].clientY || 0;
+    setYStart(evt.touches[0].clientY || 0);
   };
 
   const handleTouchMove = (evt: React.TouchEvent<HTMLDivElement>) => {
-    yMove = evt.touches[0].clientY || 0;
-    const yDiff = yStart - yMove;
+    const yMoveLocal = evt.touches[0].clientY || 0;
+    setYMove(yMoveLocal);
+    const yDiff = yStart - yMoveLocal;
     if (Math.abs(yDiff) > DRAG_MINIMUM_DISTANCE) {
-      if (yDiff > 0) {
-        setOpenAllRetailer(true);
-      } else {
-        setOpenAllRetailer(false);
-      }
+      setOpenAllRetailer(yDiff > 0);
     }
   };
 
   const handleTouchEnd = () => {
     const yDiff = yStart - yMove;
     if (Math.abs(yDiff) > DRAG_MINIMUM_DISTANCE) {
-      if (yDiff > 0) {
-        setOpenAllRetailer(true);
-      } else {
-        setOpenAllRetailer(false);
-      }
+      setOpenAllRetailer(yDiff > 0);
     }
   };
 
