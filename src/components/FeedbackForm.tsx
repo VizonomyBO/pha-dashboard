@@ -48,7 +48,8 @@ export const FeedbackForm = (
       meets_need,
       contact_phone,
       contact_zipcode,
-      produce_avail_store
+      produce_avail_store,
+      retailer_id: retailerId
     };
     formData.append('json', JSON.stringify(obj).replace("'", "\\'"));
     files.forEach((file) => {

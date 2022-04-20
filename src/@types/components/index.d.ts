@@ -15,7 +15,8 @@ export interface QueryParams {
   limit: number,
   search: string,
   status: string,
-  dateRange: string
+  dateRange: string,
+  isRetailer?: boolean,
 }
 export interface BadgePercentages {
   fresh_percentage?: number,
