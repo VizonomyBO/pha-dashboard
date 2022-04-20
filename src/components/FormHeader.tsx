@@ -1,9 +1,10 @@
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { FormHeaderInterface, FormTabType } from '../@types';
 import { Formvalidation } from '../utils/validation';
 import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants';
 import {
+  useMarketplaceDispatch,
   useMarketplaceState,
   useModalDispatch,
   useTabDispatch,
@@ -17,6 +18,8 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
     selectAccessibility,
     otherQuestions
   } = useMarketplaceState();
+  const navigate = useNavigate();
+  const { resetBusiness } = useMarketplaceDispatch();
   const { setModal } = useModalDispatch();
   const { activeTab } = useTabState();
   const { setActiveTab } = useTabDispatch();
@@ -40,31 +43,27 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
   };
   return (
     <div className="header">
-      {showBackArrow ? (
-        <div className="backlink">
-          <Link to="/home">
-            <button className="light" type="button">
-              <span className="icarrowleft">
-                <span className="txt">Back to Locations</span>
-              </span>
-            </button>
-          </Link>
-        </div>
-      ) : (
-        <div className="backlink">
-          <button
-            className="light"
-            type="button"
-            onClick={() => {
+      <div className="backlink">
+        <button
+          className="light"
+          type="button"
+          onClick={() => {
+            if (showBackArrow) {
+              navigate('/home');
+            } else {
               setModal({ type: false, open: false });
-            }}
-          >
-            <span className="icarrowleft" />
-            &nbsp;
-            <span className="txt">Back to Dashboard</span>
-          </button>
-        </div>
-      )}
+            }
+            resetBusiness();
+          }}
+        >
+          <span className="icarrowleft" />
+          &nbsp;
+          <span className="txt">
+            Back to &nbsp;
+            { showBackArrow ? 'Locations' : 'Dashboard' }
+          </span>
+        </button>
+      </div>
       <h2 className="sectitle">Marketplace Request Form</h2>
       <p className="secdescription">Have a location listed by completing the form below</p>
       <div
