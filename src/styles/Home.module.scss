@@ -3204,12 +3204,10 @@ sup {
 					}
 					.colorstatus {
 						display: flex;
-						justify-content: inherit;
+						justify-content: center;
 						align-items: center;
 						border-radius: 16px;
-						padding-top: 6px;
-						padding-bottom: 6px;
-						padding-left: 26px;
+						padding: 6px 16px;
 						width: 142px;
 						.dot {
 							display: block;

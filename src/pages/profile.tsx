@@ -192,8 +192,6 @@ export const Profile = () => {
             <div className="right">
               <div className="txtst">Supermarket</div>
               <div className="txtxl">{showText(profile?.name)}</div>
-              <div className="txtst" />
-              <div className="txtbt" />
               <div className="quality">
                 {
                   badges.map((badge) => (<Badge key={badge} {...BADGES[badge]} />))
