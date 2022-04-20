@@ -205,9 +205,12 @@ export const Profile = () => {
               <div className="space">
                 <div className="line" />
               </div>
-              <div className="txtbt">Photo Gallery</div>
+              <div className="txtbt">
+                {picture.length > 1 && picture[0] !== '' ? 'Photo Gallery'
+                  : <div className="txtst">No images available at this time.</div>}
+              </div>
               <div className="gallery">
-                {picture.length >= 2 && picture.map((element: string, index: number) => {
+                {picture.length >= 1 && picture.map((element: string, index: number) => {
                   if (index % 2 === 1) {
                     return (
                       <div className="rowtwoc" key={element}>

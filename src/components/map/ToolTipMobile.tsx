@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
 import { BADGES } from '../../constants';
 import { useTooltip } from '../../store/hooks/custom/useTooltip';
+import { formatPhone } from '../../utils/textFormatter';
 
 export const ToolTipMobile = (data: TooltipProps) => {
   const {
@@ -41,7 +42,9 @@ export const ToolTipMobile = (data: TooltipProps) => {
             <div className="address">{objectTypified?.properties?.address_1}</div>
             <div className="phone">
               <span className="icphone" />
-              <span className="number">{objectTypified?.properties?.phone}</span>
+              <span className="number">
+                {formatPhone(objectTypified?.properties?.phone ? objectTypified?.properties?.phone : '')}
+              </span>
             </div>
           </div>
         </div>

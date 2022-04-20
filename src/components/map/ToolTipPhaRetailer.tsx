@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
 import { useTooltip } from '../../store/hooks/custom/useTooltip';
 import { BADGES } from '../../constants';
+import { formatPhone } from '../../utils/textFormatter';
 
 export const ToolTipPhaRetailer = (data: TooltipProps) => {
   const { getImageToDisplay } = useTooltip();
@@ -54,7 +55,9 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
         <div className="address">{objectTypified?.properties?.address_1}</div>
         <div className="phone">
           <span className="icphone" />
-          <span className="number">{objectTypified?.properties?.phone}</span>
+          <span className="number">
+            {formatPhone(objectTypified?.properties?.phone ? objectTypified?.properties?.phone : '')}
+          </span>
         </div>
         <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
           <button className="light" type="button">
