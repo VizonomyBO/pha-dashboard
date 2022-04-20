@@ -82,6 +82,7 @@ export interface ViewStateInterface {
   zoom: number,
   bearing: number,
   pitch: number,
+  transitionDuration?: number
 }
 export type ViewStateChangeFn = (args: {
   viewState: any,

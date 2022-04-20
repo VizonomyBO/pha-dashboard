@@ -26,6 +26,7 @@ export const useMap = () => {
     dataSources,
     mapViewFilter
   } = useCategoriesState() || {};
+  const TRANSITION_DURATION = 1800;
   const { inputText, shouldZoom } = useGeocoderState() || {};
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const [queries, setQueries] = useState<QueriesInterface>();
@@ -101,7 +102,8 @@ export const useMap = () => {
               ...oldViewState,
               latitude: newviewport.latitude,
               longitude: newviewport.longitude,
-              zoom: newviewport.zoom
+              zoom: newviewport.zoom,
+              transitionDuration: TRANSITION_DURATION
             };
             return newViewState;
           });
@@ -110,7 +112,8 @@ export const useMap = () => {
             const newViewState = {
               ...oldViewState,
               latitude: inputText.center[1],
-              longitude: inputText.center[0]
+              longitude: inputText.center[0],
+              transitionDuration: TRANSITION_DURATION
             };
             return newViewState;
           });
@@ -119,7 +122,6 @@ export const useMap = () => {
     },
     [inputText]
   );
-
   const zoomToCenterMarker = useMemo(() => (point: number[]) => {
     setResetMarker();
     setCurrentViewState((oldViewState) => {
@@ -127,11 +129,11 @@ export const useMap = () => {
         ...oldViewState,
         latitude: point[1],
         longitude: point[0],
-        zoom: 16
+        zoom: 16,
+        transitionDuration: TRANSITION_DURATION
       };
       return newViewState;
     });
-    console.log('waaaaaaaaaaaaa');
   }, [setCurrentViewState, setResetMarker]);
 
   const finishRender = useMemo(() => () => {
@@ -154,7 +156,7 @@ export const useMap = () => {
       const newViewState = {
         ...oldViewState,
         zoom: oldViewState.zoom + adder,
-        transitionDuration: 400
+        transitionDuration: 100
       };
       return newViewState;
     });
@@ -206,6 +208,7 @@ export const useMap = () => {
     shouldZoom,
     zoomToCenterMarker,
     finishRender,
-    zoomEffect
+    zoomEffect,
+    TRANSITION_DURATION
   };
 };

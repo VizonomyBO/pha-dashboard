@@ -32,7 +32,7 @@ export const DEFAULT_VIEW_STATE = {
   longitude: -96,
   zoom: 3.1,
   bearing: 0,
-  pitch: 0,
+  pitch: 0
 };
 
 export const DEFAULT_VIEW_STATE_PROFILE = {
