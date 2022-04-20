@@ -159,7 +159,6 @@ export const Formvalidation = (
     default:
       break;
   }
-  console.log('activeTab', activeTab, 'returnValue', returnValue, 'value', value);
   return ({ type: typeModal, open: openModal, value: returnValue });
 };
 

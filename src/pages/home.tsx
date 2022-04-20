@@ -11,6 +11,7 @@ import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
 import { DropdownGeocoderMobile } from '../components/DropdownGeocoderMobile';
 import { useHome } from '../store/hooks/custom/useHome';
+import { useMap } from '../store/hooks/custom/useMap';
 import { FeedbackForm } from '../components/FeedbackForm';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
@@ -26,6 +27,7 @@ export const Home = () => {
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [currentRetailerId, setCurrentRetailerId] = useState('');
+  const { resetValues } = useMap();
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
 
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
@@ -58,7 +60,9 @@ export const Home = () => {
   // set Call Filters on init page in order to call queries, just run on init home
   useEffect(() => {
     setCallFilters(true);
-  }, [setCallFilters]);
+    resetValues();
+  }, [setCallFilters, resetValues]);
+
   const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMapViewFilter(e.currentTarget.checked);
     if (!e.currentTarget.checked) {

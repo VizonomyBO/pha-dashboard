@@ -39,6 +39,9 @@ export const ToolTipOSM = (data: TooltipProps) => {
       setBusinessDetails(TYPE_BUSINESS.LONGITUDE, objectTypified.geometry.coordinates[0]);
       setBusinessDetails(TYPE_BUSINESS.LATITUDE, objectTypified.geometry.coordinates[1]);
     }
+    if (objectTypified?.properties?.master_id) {
+      setBusinessDetails(TYPE_BUSINESS.MASTER_ID, objectTypified.properties.master_id);
+    }
   };
   return (
     <div

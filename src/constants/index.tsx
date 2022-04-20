@@ -145,6 +145,7 @@ export const TYPE_BUSINESS = {
   OWNER: 'owner',
   LATITUDE: 'latitude',
   LONGITUDE: 'longitude',
+  MASTER_ID: 'master_id'
 };
 
 export const BADGES: {

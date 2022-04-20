@@ -20,3 +20,7 @@ export const setControllerZoom = (controllerZoom: ControllerZoomInterface) => ({
   type: TYPES.SET_CONTROLLER_ZOOM,
   controllerZoom
 });
+
+export const setResetGeocoder = () => ({
+  type: TYPES.SET_RESET_GEOCODER
+});

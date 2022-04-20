@@ -49,6 +49,8 @@ const categoriesReducer = (state: CategoriesInterface = defaultState, action: An
         ...state,
         bbox: action.bbox
       };
+    case TYPES.RESET_VALUES:
+      return INITIAL_CATEGORIES;
     case TYPES.INIT:
       return INITIAL_CATEGORIES;
     default:
