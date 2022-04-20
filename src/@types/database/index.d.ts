@@ -72,6 +72,7 @@ export interface PhaIndividual {
   visibility?: string,
   local?: string,
   meets_need?: string,
+  imagelinks?: string,
   produce_avail_store?: string,
   contact_name?: string,
   contact_email?: string,

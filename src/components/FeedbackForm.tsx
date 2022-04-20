@@ -7,10 +7,11 @@ import { useIndividualFormDispatch, useIndividualFormState } from '../store/hook
 import { deleteBreakLines } from '../utils/validation';
 import { webRequest } from '../utils/webRequest';
 import { Attachment } from './Attachment';
+import { EditButtons } from './Editbuttons';
 
 export const FeedbackForm = (
-  { setVisible, retailerId }
-  : {setVisible: React.Dispatch<React.SetStateAction<boolean>>, retailerId: string }
+  { setVisible, retailerId, isEdit = false }
+  : {setVisible: React.Dispatch<React.SetStateAction<boolean>>, retailerId: string, isEdit?: boolean}
 ) => {
   const { setIndividualForm, resetIndividualForm } = useIndividualFormDispatch();
   const { setModal } = useModalDispatch();
@@ -27,7 +28,8 @@ export const FeedbackForm = (
     contact_phone,
     contact_zipcode,
     produce_avail_store,
-    files
+    files,
+    imagelinks
   } = useIndividualFormState();
   const setAvailabilityOptionsCheck = (type: string, checked: boolean, value: string) => {
     if (checked) {
@@ -70,7 +72,7 @@ export const FeedbackForm = (
       }
     });
   };
-  const clouseModal = (type: boolean, e: any) => {
+  const closeModal = (type: boolean, e: React.MouseEvent) => {
     e.stopPropagation();
     setVisible(type);
     resetIndividualForm();
@@ -80,20 +82,20 @@ export const FeedbackForm = (
       role="button"
       tabIndex={0}
       className="modaluserfeedbck"
-      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(false, e))}
+      onClick={(e: React.MouseEvent) => (closeModal(false, e))}
     >
       <div
         role="button"
         tabIndex={0}
         className="formpage"
-        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(true, e))}
+        onClick={(e: React.MouseEvent) => (closeModal(true, e))}
       >
         <div className="header">
           <div className="backlink">
             <button
               className="light"
               type="button"
-              onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (clouseModal(false, e))}
+              onClick={(e: React.MouseEvent) => (closeModal(false, e))}
             >
               <span className="icclose" />
               <span className="txt">
@@ -123,6 +125,7 @@ export const FeedbackForm = (
                     Fresh (only continue if checks this)
                     <input
                       type="checkbox"
+                      checked={availability === formConstants.AVAILABILITY.FRESH}
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
                           setAvailabilityOptionsCheck(
@@ -138,6 +141,7 @@ export const FeedbackForm = (
                   <label className="chkwrap">
                     Frozen
                     <input
+                      checked={quality === formConstants.AVAILABILITY.FROZEN}
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
@@ -154,6 +158,7 @@ export const FeedbackForm = (
                   <label className="chkwrap">
                     Canned
                     <input
+                      checked={visibility === formConstants.AVAILABILITY.CANNED}
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
@@ -399,7 +404,7 @@ export const FeedbackForm = (
                 </div>
                 <Attachment
                   type="individualForm"
-                  loadedFiles=""
+                  loadedFiles={isEdit ? imagelinks ?? '' : ''}
                 />
               </div>
               <div className="sectiontitle">
@@ -467,15 +472,26 @@ export const FeedbackForm = (
               </div>
             </div>
           </div>
-          <div className="aaction">
-            <button
-              className="light"
-              type="button"
-              onClick={sendForm}
-            >
-              Submit
-            </button>
-          </div>
+          {
+            isEdit ? (
+              <EditButtons
+                clickApprove={() => console.info('must approve')}
+                clickDecline={() => console.info('must decline')}
+                clickDelete={() => console.info('must delete')}
+              />
+            ) : (
+              <div className="aaction">
+                <button
+                  className="light"
+                  type="button"
+                  onClick={sendForm}
+                >
+                  Submit
+                </button>
+              </div>
+            )
+          }
+
         </div>
       </div>
     </div>
