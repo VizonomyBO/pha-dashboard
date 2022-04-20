@@ -356,7 +356,7 @@ export const FeedbackForm = (
                     placeholder="Your text here..."
                     onChange={
                       (e: React.FormEvent<HTMLTextAreaElement>) => {
-                        const numbertext = deleteBreakLines(e.currentTarget.value);
+                        const numbertext = deleteBreakLines({ value: e.currentTarget.value });
                         if (numbertext.split(' ').length <= MAX_TEXT) {
                           setIndividualForm(
                             TYPE_INDIVIDUAL_FORM.produce_avail_store,

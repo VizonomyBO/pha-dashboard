@@ -1,3 +1,4 @@
+import { validationText } from '../@types';
 import {
   BusinessDetailsInterface,
   OtherQuestionsInterface,
@@ -10,6 +11,7 @@ import {
   HOME,
   MARKED_ELEMENT,
   MARKED_FRESH,
+  MAX_TEXT,
   OTHER_QUESTIONS
 } from '../constants';
 
@@ -161,6 +163,13 @@ export const Formvalidation = (
   return ({ type: typeModal, open: openModal, value: returnValue });
 };
 
-export const deleteBreakLines = (value: string) => (
+export const deleteBreakLines = ({ value }: validationText) => (
   value.replace(/(\r\n|\n|\r)/gm, ' ')
 );
+
+export const ValidationDeleteBreakLines = (text: string, setText: (value: string) => void) => {
+  const numbertext = deleteBreakLines({ value: text });
+  if (numbertext.split(' ').length <= MAX_TEXT) {
+    setText(numbertext);
+  }
+};
