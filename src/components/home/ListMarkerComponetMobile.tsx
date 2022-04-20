@@ -2,23 +2,21 @@ import { DataPhaDasboardMap } from '../../@types';
 import {
   PHA_RETAILERS,
   OSM_RETAILERS,
-  RED,
-  GREEN,
-  BLUE
+  COLORS
 } from '../../constants/categories';
 
 export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) => (
   listMarker.map((element: DataPhaDasboardMap) => {
-    let color = RED;
+    let color = COLORS.RED;
     switch (element.source) {
       case PHA_RETAILERS:
-        color = RED;
+        color = COLORS.RED;
         break;
       case OSM_RETAILERS:
-        color = GREEN;
+        color = COLORS.GREEN;
         break;
       default:
-        color = BLUE;
+        color = COLORS.BLUE;
         break;
     }
     const picture:string[] = element.imagelinks ? element.imagelinks.split(',') : [];

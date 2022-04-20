@@ -1812,6 +1812,13 @@ sup {
 							line-height: 16px;
 							color: #7A7E80;
 							padding-bottom: 12px; /* 8px */
+              margin-bottom: 4px;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              height: 32px;
 						}
 						.description {
 	
@@ -1965,6 +1972,13 @@ sup {
 							line-height: 14px;
 							color: #7A7E80;
 							padding-bottom: 8px;
+              margin-bottom: 8px;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              height: 27px;
 						}
 						.services {
 							.kind {
@@ -3515,6 +3529,13 @@ sup {
 							line-height: 16px;
 							color: #7A7E80;
 							padding-bottom: 8px;
+              margin-bottom: 4px;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              height: 32px;
 						}
 						.description {
 	
@@ -3653,6 +3674,13 @@ sup {
 							line-height: 14px;
 							color: #7A7E80;
 							padding-bottom: 4px;
+              margin-bottom: 4px;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              height: 32px;
 						}
 						.description {
 	
