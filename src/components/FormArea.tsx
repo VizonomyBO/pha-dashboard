@@ -37,7 +37,9 @@ export const FormArea = ({
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.stopPropagation();
-    setModal({ type, open: type });
+    if (!type) {
+      setModal({ type, open: type });
+    }
   };
   const formAreaClass = classNames('formarea', { [formClass]: true });
   const formArea = (
