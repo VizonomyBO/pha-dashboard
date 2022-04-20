@@ -48,7 +48,8 @@ export const FeedbackForm = (
       meets_need,
       contact_phone,
       contact_zipcode,
-      produce_avail_store
+      produce_avail_store,
+      retailer_id: retailerId
     };
     formData.append('json', JSON.stringify(obj).replace("'", "\\'"));
     files.forEach((file) => {
@@ -69,16 +70,31 @@ export const FeedbackForm = (
       }
     });
   };
-  const closeModal = () => {
-    setVisible(false);
+  const clouseModal = (type: boolean, e: any) => {
+    e.stopPropagation();
+    setVisible(type);
     resetIndividualForm();
   };
   return (
-    <div className="modaluserfeedbck">
-      <div className="formpage">
+    <div
+      role="button"
+      tabIndex={0}
+      className="modaluserfeedbck"
+      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(false, e))}
+    >
+      <div
+        role="button"
+        tabIndex={0}
+        className="formpage"
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(true, e))}
+      >
         <div className="header">
           <div className="backlink">
-            <button className="light" type="button" onClick={closeModal}>
+            <button
+              className="light"
+              type="button"
+              onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (clouseModal(false, e))}
+            >
               <span className="icclose" />
               <span className="txt">
                 Close

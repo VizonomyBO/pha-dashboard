@@ -6,12 +6,11 @@ import { BUSINESS_DETAILS, CONTACT_DETAILS, OTHER_QUESTIONS } from '../constants
 import {
   useMarketplaceDispatch,
   useMarketplaceState,
-  useModalDispatch,
   useTabDispatch,
   useTabState
 } from '../store/hooks';
 
-export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
+export const FormHeader = ({ showBackArrow, clouseModal }: FormHeaderInterface) => {
   const {
     businessDetails,
     selectCategory,
@@ -20,7 +19,6 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
   } = useMarketplaceState();
   const navigate = useNavigate();
   const { resetBusiness } = useMarketplaceDispatch();
-  const { setModal } = useModalDispatch();
   const { activeTab } = useTabState();
   const { setActiveTab } = useTabDispatch();
   const businessClass = classNames('option', { active: activeTab === BUSINESS_DETAILS });
@@ -47,11 +45,11 @@ export const FormHeader = ({ showBackArrow }: FormHeaderInterface) => {
         <button
           className="light"
           type="button"
-          onClick={() => {
+          onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             if (showBackArrow) {
               navigate('/home');
             } else {
-              setModal({ type: false, open: false });
+              clouseModal(false, e);
             }
             resetBusiness();
           }}

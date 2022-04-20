@@ -1,16 +1,29 @@
-import { useEffect, useRef, useState } from 'react';
+import classNames from 'classnames';
+import {
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState
+} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { QueryParams } from '../../@types';
 import { authorizationManager } from '../../utils/authorizationManager';
 
-export const DashboardNavbar = () => {
+export const DashboardNavbar = ({ setParams }: { setParams: Dispatch<SetStateAction<QueryParams>>}) => {
   const [showLogout, setShowLogout] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const [isRetailer, setIsRetailer] = useState(true);
   const profileRef = useRef<HTMLElement>(null);
   const navigate = useNavigate();
   const logout = () => {
     authorizationManager.logout();
     navigate('/home');
   };
+
+  useEffect(() => {
+    setParams((old) => ({ ...old, isRetailer }));
+  }, [isRetailer, setParams]);
 
   useEffect(() => {
     const mouseOverEvent = () => {
@@ -30,6 +43,9 @@ export const DashboardNavbar = () => {
     };
   }, []);
 
+  const individualActive = classNames({ active: !isRetailer });
+  const retailerActive = classNames({ active: isRetailer });
+
   return (
     <div className="navbararea">
       <div className="navbar">
@@ -40,9 +56,15 @@ export const DashboardNavbar = () => {
           <div className="navigationadmin">
             <nav className="menu">
               <ol>
-                <li><a href="#0">Individual Forms</a></li>
-                <li className="active">
-                  <a href="#0">Retailer Forms</a>
+                <li className={individualActive}>
+                  <span role="button" tabIndex={0} onClick={() => setIsRetailer(false)}>
+                    Individual Forms
+                  </span>
+                </li>
+                <li className={retailerActive}>
+                  <span role="button" tabIndex={0} onClick={() => setIsRetailer(true)}>
+                    Retailer Forms
+                  </span>
                 </li>
               </ol>
             </nav>

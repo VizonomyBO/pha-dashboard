@@ -82,56 +82,76 @@ export const Profile = () => {
                 <span className="icodesc icciphone" />
                 <span className="txtst">{showText(profile?.phone, formatPhone)}</span>
               </div>
-              <div className="item">
-                <span className="icodesc iccimail" />
-                <span className="txtst blue">
-                  <a
-                    href={`mailto:${profile?.email}`}
-                    style={{ all: 'unset', cursor: 'pointer' }}
-                  >
-                    Email
-                  </a>
-                </span>
-              </div>
-              <div className="item">
-                <span className="icodesc iccifb" />
-                <span className="txtst blue">
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href={profile?.facebook}
-                    style={{ all: 'unset', cursor: 'pointer' }}
-                  >
-                    Facebook
-                  </a>
-                </span>
-              </div>
-              <div className="item">
-                <span className="icodesc iccitw" />
-                <span className="txtst blue">
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href={profile?.twitter}
-                    style={{ all: 'unset', cursor: 'pointer' }}
-                  >
-                    Twitter
-                  </a>
-                </span>
-              </div>
-              <div className="item">
-                <span className="icodesc icciws" />
-                <span className="txtst blue">
-                  <a
-                    target="_blank"
-                    rel="noreferrer"
-                    href={profile?.website}
-                    style={{ all: 'unset', cursor: 'pointer' }}
-                  >
-                    Website
-                  </a>
-                </span>
-              </div>
+              {
+                profile?.email && profile.email.length > 0
+                && (
+                <div className="item">
+                  <span className="icodesc iccimail" />
+                  <span className="txtst blue">
+                    <a
+                      href={`mailto:${profile?.email}`}
+                      style={{ all: 'unset', cursor: 'pointer' }}
+                    >
+                      Email
+                    </a>
+                  </span>
+                </div>
+                )
+              }
+              {
+                profile?.facebook && profile?.facebook.length > 0
+                && (
+                <div className="item">
+                  <span className="icodesc iccifb" />
+                  <span className="txtst blue">
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={profile?.facebook}
+                      style={{ all: 'unset', cursor: 'pointer' }}
+                    >
+                      Facebook
+                    </a>
+                  </span>
+                </div>
+                )
+              }
+              {
+                profile?.twitter && profile?.twitter.length
+                && (
+                <div className="item">
+                  <span className="icodesc iccitw" />
+                  <span className="txtst blue">
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={profile?.twitter}
+                      style={{ all: 'unset', cursor: 'pointer' }}
+                    >
+                      Twitter
+                    </a>
+                  </span>
+                </div>
+                )
+              }
+              {
+                profile?.website && profile?.website.length
+                && (
+                <div className="item">
+                  <span className="icodesc icciws" />
+                  <span className="txtst blue">
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={profile?.website}
+                      style={{ all: 'unset', cursor: 'pointer' }}
+                    >
+                      Website
+                    </a>
+                  </span>
+                </div>
+                )
+              }
               <div className="txtbt spc">Hours</div>
               <div className="item">
                 <span className="txtst width1">Sun</span>

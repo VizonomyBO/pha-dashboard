@@ -162,7 +162,9 @@ export const Dashboard = () => {
         <figure className="bgnoise home" />
         <div className="barblue db withmodal" />
         <div className="pagecontainer">
-          <DashboardNavbar />
+          <DashboardNavbar
+            setParams={setParams}
+          />
           <div className="dashboard">
             <DashboardHeader setParams={setParams} selectedElements={selectedElements} />
             <DashboardTable

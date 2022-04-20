@@ -13,5 +13,8 @@ export const getQueryParms = (params: QueryParams) => {
   if (params.dateRange) {
     queryParams += `&dateRange=${params.dateRange}`;
   }
+  if (params.isRetailer) {
+    queryParams += `&isRetailer=${params.isRetailer}`;
+  }
   return queryParams;
 };
