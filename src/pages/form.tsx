@@ -13,7 +13,12 @@ import {
 } from '../constants';
 import { FormTabType } from '../@types';
 import { ModalRequestForm } from '../components/ModalRequestForm';
-import { useMarketplaceState, useModalDispatch } from '../store/hooks';
+import {
+  useMarketplaceDispatch,
+  useMarketplaceState,
+  useModalDispatch,
+  useGeocoderDispatch
+} from '../store/hooks';
 import { Formvalidation } from '../utils/validation';
 import { FormArea } from '../components/FormArea';
 import { useTabDispatch, useTabState } from '../store/hooks/tabHook';
@@ -36,6 +41,12 @@ export const Form = () => {
     contactDetails,
     files
   } = useMarketplaceState();
+  const {
+    setResetGeocoder
+  } = useGeocoderDispatch();
+  const {
+    resetBusiness
+  } = useMarketplaceDispatch();
   useEffect(() => {
     setFormClass(CLASSES_BY_FORM[activeTab]);
   }, [activeTab]);
@@ -86,6 +97,17 @@ export const Form = () => {
         if (res.success) {
           setModal({ type: estate.type, open: estate.open });
           setTimeout(() => {
+            setResetGeocoder();
+            if (businessDetails?.master_id) {
+              webRequest.delete(
+                ENDPOINTS.DELETE_OSM(businessDetails.master_id)
+              ).then((resDelete) => resDelete.json()).then((resDelete) => {
+                if (resDelete.success) {
+                  console.log('osm_point_deleted', resDelete, businessDetails.master_id);
+                }
+              });
+            }
+            resetBusiness();
             navigate('/home');
           }, PAGE_REDIRECT_TIME);
         }

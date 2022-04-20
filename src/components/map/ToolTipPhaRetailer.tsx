@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
 import { useTooltip } from '../../store/hooks/custom/useTooltip';
@@ -18,8 +19,19 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
     setVisibleFeedback(true);
     setCurrentRetailerId(objectTypified?.properties?.retailer_id ?? '');
   };
+  const popupRef = useRef<HTMLDivElement>(null);
+  const [currentY, setCurrentY] = useState(y);
+  useEffect(() => {
+    if (popupRef.current) {
+      setCurrentY(y - popupRef.current.getBoundingClientRect().height);
+    }
+  }, [y, popupRef, setCurrentY]);
   return (
-    <div className="modal" style={{ left: x, top: y - 460 }}>
+    <div
+      className="modal"
+      style={{ left: x, top: currentY }}
+      ref={popupRef}
+    >
       <figure className="picture">
         <img
           src={getImageToDisplay(objectTypified)}

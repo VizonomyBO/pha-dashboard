@@ -20,7 +20,7 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
       <div
         key={`itemMarker${element.retailer_id}`}
         className="item"
-        onMouseEnter={() => zoomToMarker(element, 'hover')}
+        // onMouseEnter={() => zoomToMarker(element, 'hover')}
         onClick={() => zoomToMarker(element, 'click')}
         aria-hidden="true"
       >
@@ -35,7 +35,8 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
           <div className="address">{element.address_1}</div>
           <div className="distance">
             <div className="kind">
-              {element.snap_accepted === 'Yes' ? 'SNAP Accepted ' : ''}
+              {element.snap_accepted === 'Yes' ? 'SNAP Accepted' : ''}
+              {element.snap_accepted === 'Yes' && element.wic_accepted === 'Yes' ? ', ' : ''}
               {element.wic_accepted === 'Yes' ? 'WIC Accepted' : ''}
             </div>
           </div>

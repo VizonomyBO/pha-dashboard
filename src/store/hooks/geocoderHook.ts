@@ -5,7 +5,8 @@ import {
   setInputText,
   setGeocoderOptions,
   setShouldZoom,
-  setControllerZoom
+  setControllerZoom,
+  setResetGeocoder
 } from '../actions';
 
 export const useGeocoderState = () => useSelector(
@@ -23,12 +24,16 @@ export const useGeocoderDispatch = () => {
   const setControllerZoomMemoized = useCallback((controllerZoom: ControllerZoomInterface) => {
     dispatch(setControllerZoom(controllerZoom));
   }, [dispatch]);
+  const setResetGeocoderMemoized = useCallback(() => {
+    dispatch(setResetGeocoder());
+  }, [dispatch]);
   return {
     setInputText: (chart: InputTextInterface) => {
       dispatch(setInputText(chart));
     },
     setGeocoderOptions: setGeocoderOptionsMemoized,
     setShouldZoom: setShouldZoomMemoized,
-    setControllerZoom: setControllerZoomMemoized
+    setControllerZoom: setControllerZoomMemoized,
+    setResetGeocoder: setResetGeocoderMemoized
   };
 };

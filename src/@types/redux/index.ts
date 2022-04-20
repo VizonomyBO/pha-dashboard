@@ -40,6 +40,7 @@ export interface BusinessDetailsInterface {
   instagram: string,
   latitude: number,
   longitude: number,
+  master_id?: number
 }
 export interface OtherQuestionsInterface {
   description: string,
@@ -86,8 +87,7 @@ export interface MarketplaceInterface {
   contactDetails: ContactDetailsInterface,
   selectCategory: SelectCategoryInterface,
   selectAccessibility: SelectAccessibilityInterface,
-  retailerFiles: RetailerFileInterface,
-  osm_id?: string
+  retailerFiles: RetailerFileInterface
 }
 
 export interface SessionInterface {

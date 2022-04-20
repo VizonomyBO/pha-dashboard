@@ -27,6 +27,9 @@ export const useCategoriesDispatch = () => {
   const setBboxMemoized = useMemo(() => (bbox: BBOXInterface) => {
     dispatch(setBbox(bbox));
   }, [dispatch]);
+  const setResetMemoized = useMemo(() => () => {
+    dispatch(resetValues());
+  }, [dispatch]);
   return {
     setCategoriesSelected: (categoriesSelected: string[]) => {
       dispatch(setCategoriesSelected(categoriesSelected));
@@ -46,8 +49,6 @@ export const useCategoriesDispatch = () => {
     setCallFilters: setCallFiltersMemoized,
     setMapViewFilter: setMapViewFilterMemoized,
     setBbox: setBboxMemoized,
-    resetValues: () => {
-      dispatch(resetValues());
-    }
+    resetValues: setResetMemoized
   };
 };
