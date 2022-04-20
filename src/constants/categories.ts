@@ -91,3 +91,5 @@ export const DATASOURCES: FilterType[] = [
 export const PHA_RETAILERS = 'retailers_pha';
 export const OSM_RETAILERS = 'retailers_osm';
 export const USDA_RETAILERS = 'retailers_usda';
+
+export const COLORS = { GREEN: 'green', BLUE: 'blue', RED: 'red' };

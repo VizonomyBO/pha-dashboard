@@ -1,5 +1,9 @@
 import { DataPhaDasboardMap, PropertiesLayer } from '../../@types';
-import { PHA_RETAILERS } from '../../constants/categories';
+import {
+  PHA_RETAILERS,
+  OSM_RETAILERS,
+  COLORS
+} from '../../constants/categories';
 import { useMarkerDispatch } from '../../store/hooks/markerHook';
 
 export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
@@ -15,7 +19,18 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
     }
   };
   return listMarker.map((element: DataPhaDasboardMap) => {
-    const color = element.source === PHA_RETAILERS ? 'red' : 'green';
+    let color = COLORS.RED;
+    switch (element.source) {
+      case PHA_RETAILERS:
+        color = COLORS.RED;
+        break;
+      case OSM_RETAILERS:
+        color = COLORS.GREEN;
+        break;
+      default:
+        color = COLORS.BLUE;
+        break;
+    }
     return (
       <div
         key={`itemMarker${element.retailer_id}`}
@@ -32,7 +47,7 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
         </div>
         <div className="descres">
           <div className="namemark">{element.name}</div>
-          <div className="address">{element.address_1}</div>
+          <div className="address">{element.address_1?.replace(', United States', '')}</div>
           <div className="distance">
             <div className="kind">
               {element.snap_accepted === 'Yes' ? 'SNAP Accepted' : ''}

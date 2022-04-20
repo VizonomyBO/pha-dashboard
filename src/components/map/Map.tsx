@@ -38,29 +38,30 @@ export const Map = (
     setCurrentViewState,
     zoomToCenterMarker,
     finishRender,
-    zoomEffect
+    zoomEffect,
+    TRANSITION_DURATION
   } = useMap();
   const {
-    center, click, elementProperties
+    center, elementProperties
   } = useMarkerState() || {};
+  const TRANSITION_OFFSET = 200;
   const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
-  const OFFSET_POPUP = 40;
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);
     setCurrentViewState(viewState);
   }, [setCurrentViewState]);
 
-  const openPopup = useMemo(() => () => {
-    if (click && center[0] && center[1]) {
+  const openPopup = useMemo(() => (centerPopup: number[]) => {
+    if (centerPopup[0] && centerPopup[1]) {
       const viewportWebMercator = new WebMercatorViewport({
         width: window.innerWidth,
         height: window.innerHeight
       });
-      const newCoord = viewportWebMercator.projectFlat([center[0], center[1]]);
+      const newCoord = viewportWebMercator.projectFlat([centerPopup[0], centerPopup[1]]);
       const newInfo: PickInfo<Layer<unknown>[]> = {
         x: newCoord[0],
-        y: newCoord[1] + OFFSET_POPUP,
+        y: newCoord[1],
         object: {
           ...elementProperties,
           geometry: elementProperties.geom,
@@ -73,14 +74,14 @@ export const Map = (
       setHoverInfo(newInfo);
       setCurrentHovered(elementProperties?.properties?.retailer_id);
     }
-  }, [click, center, elementProperties, layers]);
+  }, [elementProperties, layers]);
   const onEndTransition = useMemo(() => () => {
     if (!shouldZoom && controllerZoom.type === '') {
-      openPopup();
+      openPopup(center);
     }
     setShouldZoom(false);
     setControllerZoom({ value: 0, type: '' });
-  }, [setShouldZoom, openPopup, shouldZoom, setControllerZoom, controllerZoom]);
+  }, [center, setShouldZoom, openPopup, shouldZoom, setControllerZoom, controllerZoom]);
   const changeDeckState = useMemo(() => (viewState: ViewStateInterface) => {
     setDeckState((oldDeckState) => {
       const newDS = {
@@ -88,13 +89,13 @@ export const Map = (
         initialStateView: {
           ...viewState,
           transitionInterpolator: new FlyToInterpolator(),
-          transitionDuration: 400,
+          transitionDuration: viewState.transitionDuration ?? TRANSITION_DURATION,
           onTransitionEnd: onEndTransition
         }
       };
       return newDS;
     });
-  }, [setDeckState, onEndTransition]);
+  }, [setDeckState, onEndTransition, TRANSITION_DURATION]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -119,9 +120,11 @@ export const Map = (
   useEffect(() => {
     if (center[0] && center[1]) {
       zoomToCenterMarker(center);
-      openPopup();
+      setTimeout(() => {
+        openPopup(center);
+      }, TRANSITION_DURATION + TRANSITION_OFFSET);
     }
-  }, [click, center, zoomToCenterMarker, openPopup]);
+  }, [center, zoomToCenterMarker, openPopup, TRANSITION_DURATION, TRANSITION_OFFSET]);
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {
