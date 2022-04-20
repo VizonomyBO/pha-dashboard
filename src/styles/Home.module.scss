@@ -1796,7 +1796,7 @@ sup {
 						overflow: hidden;
 						img {
 							max-width: 100%;
-							height: inherit;
+							height: auto;
 							border-top-left-radius: 16px;
 							border-top-right-radius: 16px;
 						}
@@ -1830,7 +1830,7 @@ sup {
 						.address {
 							font-family: "FuturaMedium", sans-serif;
 							font-size: 14px;
-							line-height: 16px;
+							line-height: 20px;
 							color: #7A7E80;
 							padding-bottom: 12px; /* 8px */
               margin-bottom: 4px;
@@ -1839,7 +1839,7 @@ sup {
               overflow: hidden;
               text-overflow: ellipsis;
               display: -webkit-box;
-              height: 32px;
+              height: 38px;
 						}
 						.description {
 	
