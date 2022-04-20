@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classNames from 'classnames';
 import { useState } from 'react';
 import { LeftForm1 } from './LeftForm1';
@@ -11,7 +13,7 @@ import {
   CONTACT_DETAILS,
   OTHER_QUESTIONS
 } from '../constants';
-import { useMarketplaceDispatch, useTabState } from '../store/hooks';
+import { useMarketplaceDispatch, useModalDispatch, useTabState } from '../store/hooks';
 
 export const FormArea = ({
   isModal,
@@ -29,14 +31,26 @@ export const FormArea = ({
   const { activeTab } = useTabState();
   const { resetBusiness } = useMarketplaceDispatch();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
+  const { setModal } = useModalDispatch();
+  const clouseModal = (
+    type: boolean,
+    e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.stopPropagation();
+    if (!type) {
+      setModal({ type, open: type });
+    }
+  };
   const formAreaClass = classNames('formarea', { [formClass]: true });
   const formArea = (
     <div
       className={formAreaClass}
       style={isModal ? { overflow: 'auto' } : {}}
+      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(true, e))}
     >
       <FormHeader
         showBackArrow={!isModal}
+        clouseModal={clouseModal}
       />
       <div className="group">
         <div className="left">
@@ -157,6 +171,7 @@ export const FormArea = ({
             right: 0,
             bottom: 0,
           }}
+          onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(false, e))}
         >
           {formArea}
         </div>
