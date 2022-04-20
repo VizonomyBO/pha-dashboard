@@ -55,6 +55,16 @@
 		 font-family: "FuturaBold", sans-serif;
 		 padding-right: 32px;
 	}
+	.menu > ol > li span {
+		color: #161A23;
+		display: block;
+		padding: 0;
+		position: relative;
+		text-decoration: none;
+		z-index: 1;
+		font-family: "FuturaBold", sans-serif;
+		padding-right: 32px;
+ }
 	.menu > ol > li a:not(:last-child)::before {
 		 display: block;
 		 width: 16px;
@@ -1199,6 +1209,16 @@ sup {
 								padding-top: 0;
 								margin-right: 16px;
 								a {
+									display: block;
+									font-size: 14px;
+									line-height: 14px;
+									padding: 8px 16px;
+									border-radius: 4px;
+									&.active {
+										background-color: rgba(0, 189, 227, 0.12);
+									}
+								}
+								span {
 									display: block;
 									font-size: 14px;
 									line-height: 14px;
@@ -3182,10 +3202,12 @@ sup {
 					}
 					.colorstatus {
 						display: flex;
-						justify-content: center;
+						justify-content: inherit;
 						align-items: center;
 						border-radius: 16px;
-						padding: 4px 12px;
+						padding-top: 6px;
+						padding-bottom: 6px;
+						padding-left: 26px;
 						width: 142px;
 						.dot {
 							display: block;
