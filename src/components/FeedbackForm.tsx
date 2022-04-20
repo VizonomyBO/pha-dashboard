@@ -381,7 +381,10 @@ export const FeedbackForm = (
                     (Please upload a photo where produce is stocked at this retailer)
                   </label>
                 </div>
-                <Attachment type="individualForm" />
+                <Attachment
+                  type="individualForm"
+                  loadedFiles=""
+                />
               </div>
               <div className="sectiontitle">
                 Contact

@@ -1,12 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAttachmentBusiness } from '../store/hooks/custom/useAttachmentBusiness';
-import { MultimediFileInterface } from '../@types';
-import { MOBILE_WIDTH } from '../constants';
+import { MOBILE_WIDTH, GOOGLE_STORAGE } from '../constants';
 import { useWindowSize } from '../store/hooks/custom/useWindowSize';
 import { CompletelyIntentionalAny } from '../@types/database';
 
-export const Attachment = ({ type, subType }: {type: string, subType?: string }) => {
+export const Attachment = ({
+  type,
+  subType,
+  loadedFiles,
+  setLoadedFiles = (name: string) => {
+    console.log('name', name);
+  }
+}: {
+  type: string;
+  subType?: string;
+  loadedFiles: string;
+  setLoadedFiles?: (name: string) => void;
+}) => {
   const {
     filesSelected,
     multimedia,
@@ -15,9 +26,10 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
     googleArray,
     removeFromGoogleArray
   } = useAttachmentBusiness({ type, subType });
+  const [loadedFilesArray, setLoadedFilesArray] = useState<string[]>([]);
   const [draggin, setDraggin] = useState(false);
   const { ref, width } = useWindowSize();
-  const generateKey = (e: MultimediFileInterface, index: number) => `${e.file?.name || 'file'}-${index}-${type}`;
+  const generateKey = (name: string, index: number) => `${name || 'file'}-${index}-${type}`;
 
   const handleDragIn = (e: React.DragEvent) => {
     e.preventDefault();
@@ -47,6 +59,22 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
     e.dataTransfer.clearData();
   };
 
+  const removeLoadedFile = (index: number) => {
+    const newFilesArray = loadedFilesArray.filter((_: string, i: number) => i !== index);
+    setLoadedFiles(newFilesArray.join(','));
+  };
+
+  useEffect(() => {
+    let arr: string[] = [];
+    if (loadedFiles) {
+      arr = loadedFiles
+        .split(',')
+        .filter((r) => !!r)
+        .map((r) => r.split(GOOGLE_STORAGE).join(''));
+    }
+    setLoadedFilesArray(arr);
+  }, [loadedFiles]);
+
   return (
     <div ref={ref}>
       <div
@@ -75,7 +103,7 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
           />
           <div>
             <label htmlFor={`${type}uploader`}>
-              <p className="fileText">{width > MOBILE_WIDTH ? 'Browser Files' : 'Browse on your device' }</p>
+              <p className="fileText">{width > MOBILE_WIDTH ? 'Browser Files' : 'Browse on your device'}</p>
             </label>
           </div>
         </div>
@@ -100,12 +128,26 @@ export const Attachment = ({ type, subType }: {type: string, subType?: string })
             />
           </span>
         ))}
+        {
+          loadedFilesArray.map((fileString: string, index: number) => (
+            <span
+              key={generateKey(fileString, index)}
+              className="fileSpam"
+            >
+              { fileString }
+              <CloseIcon
+                onClick={() => (removeLoadedFile(index))}
+                style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
+              />
+            </span>
+          ))
+        }
         {multimedia.length > 0 && multimedia.map((element: CompletelyIntentionalAny, index: number) => (
           <span
-            key={generateKey(element, index)}
+            key={generateKey(element.file?.name, index)}
             className="fileSpam"
           >
-            { element.name ? element.name : ''}
+            {element.name ? element.name : ''}
             <CloseIcon
               onClick={() => (removeFile(index))}
               style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
