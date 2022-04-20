@@ -68,12 +68,16 @@ export const FeedbackForm = (
       }
     });
   };
+  const closeModal = () => {
+    setVisible(false);
+    resetIndividualForm();
+  };
   return (
     <div className="modaluserfeedbck">
       <div className="formpage">
         <div className="header">
           <div className="backlink">
-            <button className="light" type="button" onClick={() => setVisible(false)}>
+            <button className="light" type="button" onClick={closeModal}>
               <span className="icclose" />
               <span className="txt">
                 Close
