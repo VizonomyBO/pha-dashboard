@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect } from 'react';
 import { MAX_TEXT, TYPE_INDIVIDUAL_FORM } from '../constants';
 import { formConstants } from '../constants/form';
@@ -69,16 +71,27 @@ export const FeedbackForm = (
       }
     });
   };
-  const closeModal = () => {
-    setVisible(false);
+  const clouseModal = (type: boolean, e: any) => {
+    e.stopPropagation();
+    setVisible(type);
     resetIndividualForm();
   };
   return (
-    <div className="modaluserfeedbck">
-      <div className="formpage">
+    <div
+      className="modaluserfeedbck"
+      onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(false, e))}
+    >
+      <div
+        className="formpage"
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(true, e))}
+      >
         <div className="header">
           <div className="backlink">
-            <button className="light" type="button" onClick={closeModal}>
+            <button
+              className="light"
+              type="button"
+              onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => (clouseModal(false, e))}
+            >
               <span className="icclose" />
               <span className="txt">
                 Close
