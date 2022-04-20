@@ -12,4 +12,5 @@ export const defaultQueryParams = {
   search: '',
   status: '',
   dateRange: '',
+  isRetailer: true
 } as QueryParams;
