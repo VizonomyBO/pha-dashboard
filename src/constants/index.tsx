@@ -215,3 +215,5 @@ export const ATTACHMENTS_SUB_TYPES = {
 
 export const JSON_FIELD = 'json';
 export const MOBILE_WIDTH = 600;
+
+export const DEFAULT_IMAGE = '/images/img_landing.png';

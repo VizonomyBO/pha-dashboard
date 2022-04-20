@@ -7,3 +7,7 @@ export const setCenterMarker = (center: number[], click: boolean, elementPropert
   click,
   elementProperties
 });
+
+export const setResetMarker = () => ({
+  type: TYPES.SET_RESET
+});

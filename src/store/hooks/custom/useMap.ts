@@ -2,6 +2,7 @@ import { useState, useMemo, useEffect } from 'react';
 import * as carto from '@deck.gl/carto';
 import { WebMercatorViewport } from 'deck.gl';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
+import { useMarkerDispatch } from '../markerHook';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
@@ -17,6 +18,7 @@ const Carto = carto as any;
 
 export const useMap = () => {
   const { resetValues, setCallFilters, setBbox } = useCategoriesDispatch();
+  const { setResetMarker } = useMarkerDispatch();
   const {
     callFilters,
     categoriesSelected,
@@ -119,6 +121,7 @@ export const useMap = () => {
   );
 
   const zoomToCenterMarker = useMemo(() => (point: number[]) => {
+    setResetMarker();
     setCurrentViewState((oldViewState) => {
       const newViewState = {
         ...oldViewState,
@@ -128,7 +131,8 @@ export const useMap = () => {
       };
       return newViewState;
     });
-  }, [setCurrentViewState]);
+    console.log('waaaaaaaaaaaaa');
+  }, [setCurrentViewState, setResetMarker]);
 
   const finishRender = useMemo(() => () => {
     if (mapViewFilter) {

@@ -34,7 +34,10 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
           <div className="namemark">{element.name}</div>
           <div className="address">{element.address_1}</div>
           <div className="distance">
-            <div className="kind">{element.state}</div>
+            <div className="kind">
+              {element.snap_accepted === 'Yes' ? 'SNAP Accepted ' : ''}
+              {element.wic_accepted === 'Yes' ? 'WIC Accepted' : ''}
+            </div>
           </div>
         </div>
         <div className="arrow">

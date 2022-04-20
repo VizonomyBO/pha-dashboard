@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { PropertiesLayer } from '../../@types';
 import { MarkerCenterInterface } from '../../@types/database';
-import { setCenterMarker } from '../actions';
+import { setCenterMarker, setResetMarker } from '../actions';
 
 export const useMarkerState = () => useSelector(
   (rootState: { markerCenter: MarkerCenterInterface }) => rootState.markerCenter
@@ -14,6 +14,9 @@ export const useMarkerDispatch = () => {
     dispatch(setCenterMarker(center, click, elementHovered));
   }, [dispatch]);
   return {
-    setCenterMarker: setCenterMarkerMemoized
+    setCenterMarker: setCenterMarkerMemoized,
+    setResetMarker: () => {
+      dispatch(setResetMarker());
+    }
   };
 };

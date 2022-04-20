@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
 import { BADGES } from '../../constants';
+import { useTooltip } from '../../store/hooks/custom/useTooltip';
 
 export const ToolTipMobile = (data: TooltipProps) => {
   const {
     objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
   } = data;
+  const { getImageToDisplay } = useTooltip();
   const openIndividualForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     setVisibleFeedback(true);
@@ -13,10 +15,13 @@ export const ToolTipMobile = (data: TooltipProps) => {
   };
   return (
     <>
-      <Link to={`profile/${objectTypified?.properties?.retailer_id}`}>
+      <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
         <div className="bmodal">
           <figure className="picture">
-            <img src={objectTypified?.properties?.owner_photo} alt="" />
+            <img
+              src={getImageToDisplay(objectTypified)}
+              alt=""
+            />
           </figure>
           <div className="detailcard">
             <div className="store">{objectTypified?.properties?.name}</div>

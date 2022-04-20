@@ -13,8 +13,7 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
   onClickFunction,
   onLoadFunction,
   onFinishRenderFunction,
-  currentBasemap,
-  children
+  currentBasemap
 }) => {
   const mapref = useRef(null);
   return (
@@ -32,7 +31,6 @@ export const DeckGLComponent: React.FC<DeckInterface> = ({
           onAfterRender={onFinishRenderFunction}
         >
           <Map ref={mapref} reuseMaps mapStyle={currentBasemap} mapboxAccessToken={MAPBOX_KEY} />
-          { children }
         </DeckGL>
       )}
     </div>
