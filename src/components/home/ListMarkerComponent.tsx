@@ -1,5 +1,10 @@
 import { DataPhaDasboardMap, PropertiesLayer } from '../../@types';
-import { PHA_RETAILERS, OSM_RETAILERS } from '../../constants/categories';
+import {
+  PHA_RETAILERS,
+  OSM_RETAILERS,
+  RED, GREEN,
+  BLUE
+} from '../../constants/categories';
 import { useMarkerDispatch } from '../../store/hooks/markerHook';
 
 export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
@@ -15,16 +20,16 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
     }
   };
   return listMarker.map((element: DataPhaDasboardMap) => {
-    let color = 'red';
+    let color = RED;
     switch (element.source) {
       case PHA_RETAILERS:
-        color = 'red';
+        color = RED;
         break;
       case OSM_RETAILERS:
-        color = 'green';
+        color = GREEN;
         break;
       default:
-        color = 'blue';
+        color = BLUE;
         break;
     }
     return (

@@ -44,6 +44,7 @@ export const Map = (
   const {
     center, elementProperties
   } = useMarkerState() || {};
+  const TRANSITION_OFFSET = 200;
   const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText));
   const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
@@ -88,13 +89,13 @@ export const Map = (
         initialStateView: {
           ...viewState,
           transitionInterpolator: new FlyToInterpolator(),
-          transitionDuration: viewState.transitionDuration ?? 2000,
+          transitionDuration: viewState.transitionDuration ?? TRANSITION_DURATION,
           onTransitionEnd: onEndTransition
         }
       };
       return newDS;
     });
-  }, [setDeckState, onEndTransition]);
+  }, [setDeckState, onEndTransition, TRANSITION_DURATION]);
 
   useEffect(() => {
     if (isLoaded) {
@@ -121,9 +122,9 @@ export const Map = (
       zoomToCenterMarker(center);
       setTimeout(() => {
         openPopup(center);
-      }, TRANSITION_DURATION + 200);
+      }, TRANSITION_DURATION + TRANSITION_OFFSET);
     }
-  }, [center, zoomToCenterMarker, openPopup, TRANSITION_DURATION]);
+  }, [center, zoomToCenterMarker, openPopup, TRANSITION_DURATION, TRANSITION_OFFSET]);
   useEffect(() => {
     setDeckState((oldDeckState) => {
       const newDeckState = {
