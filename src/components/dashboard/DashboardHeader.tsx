@@ -17,6 +17,7 @@ import {
 } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
+import { useMarketplaceDispatch, useModalDispatch } from '../../store/hooks';
 
 export const DashboardHeader = ({ setParams, selectedElements }: {
   setParams: Dispatch<SetStateAction<QueryParams>>,
@@ -24,6 +25,8 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
 }) => {
   const [inputValue, setinputValue] = useState('');
   const [inputValue2, setinputValue2] = useState('');
+  const { setModal } = useModalDispatch();
+  const { resetBusiness } = useMarketplaceDispatch();
   const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
 
   const changeHandler = (val: string) => {
@@ -83,7 +86,14 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
             <span className="icdown" />
             <span className="title">Download</span>
           </button>
-          <button className="light btnplus active" type="button">
+          <button
+            className="light btnplus active"
+            type="button"
+            onClick={() => {
+              resetBusiness();
+              setModal({ type: true, open: true });
+            }}
+          >
             <span className="icplus" />
             <span className="title">Add Retailer</span>
           </button>
