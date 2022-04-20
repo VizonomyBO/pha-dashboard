@@ -8,7 +8,7 @@ import {
   setSnapAccepted, setWicAccepted, setContactEmail, setSelectCategoryCorner,
   setSelectCategoryDistribution, setSelectCategoryDollar,
   setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry,
-  setSelectCategorySupermarket, setSelectCategory, setImagesFiles
+  setSelectCategorySupermarket, setSelectCategory, setImagesFiles, resetBusiness
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -17,6 +17,9 @@ export const useMarketplaceState = () => useSelector(
 export const useMarketplaceDispatch = () => {
   const dispatch = useDispatch();
   return {
+    resetBusiness: () => {
+      dispatch(resetBusiness());
+    },
     setImagesFiles: (type: string, value: MultimediaInterface[]) => {
       dispatch(setImagesFiles(type, value));
     },

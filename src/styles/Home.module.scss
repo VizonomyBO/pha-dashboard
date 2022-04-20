@@ -2382,9 +2382,34 @@ sup {
 			}
 		}
 		.formarea.form1 {
+			border: 10px solid white;
 			/* height: 1960px; */
 			height: 100%;
 		}
+		.formarea.form1::-webkit-scrollbar {
+			-webkit-appearance: none;
+	}
+	
+	.formarea.form1::-webkit-scrollbar:vertical {
+			width:10px;
+	}
+		.formarea.form1::-webkit-scrollbar-button:increment,.contenedor::-webkit-scrollbar-button {
+			display: none;
+	} 
+	
+	.formarea.form1::-webkit-scrollbar:horizontal {
+			height: 10px;
+	}
+	
+	.formarea.form1::-webkit-scrollbar-thumb {
+			background-color: #00bce4;
+			border-radius: 20px;
+			border: 2px solid #f1f2f3;
+	}
+	
+	.formarea.form1::-webkit-scrollbar-track {
+			border-radius: 10px;  
+	}
 		.formarea.form2 {
 			/* height: 2675px; */
 			height: 100%;
@@ -3133,7 +3158,6 @@ sup {
 					}
 					.colorstatus.green {
 						background-color: #ECF6ED;
-						width: 113px;
 						.dot {
 							background-color: #529F5A;
 						}

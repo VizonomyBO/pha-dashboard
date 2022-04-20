@@ -20,3 +20,8 @@ export const showSchedule = (start: StringWithNullables, end: StringWithNullable
   const text = `${showText(start)} - ${showText(end)}`;
   return text;
 };
+
+export const cleanSplit = (commaSeparated: string) => {
+  const arr = commaSeparated ? commaSeparated.split(',') : [];
+  return arr.filter((r) => !!r);
+};

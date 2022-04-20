@@ -11,7 +11,7 @@ import {
   CONTACT_DETAILS,
   OTHER_QUESTIONS
 } from '../constants';
-import { useTabState } from '../store/hooks';
+import { useMarketplaceDispatch, useTabState } from '../store/hooks';
 
 export const FormArea = ({
   isModal,
@@ -27,6 +27,7 @@ export const FormArea = ({
   clickDelete?: () => void;
 }) => {
   const { activeTab } = useTabState();
+  const { resetBusiness } = useMarketplaceDispatch();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
   const formAreaClass = classNames('formarea', { [formClass]: true });
   const formArea = (
@@ -56,13 +57,28 @@ export const FormArea = ({
       {
         isModal ? (
           <div className="aaction">
-            <button className="light" type="button" onClick={clickApprove} style={{ padding: '16px 30px' }}>
+            <button
+              className="light"
+              type="button"
+              onClick={() => {
+                if (clickApprove) {
+                  clickApprove();
+                }
+                resetBusiness();
+              }}
+              style={{ padding: '16px 30px' }}
+            >
               Approve
             </button>
             <button
               className="light"
               type="button"
-              onClick={clickDecline}
+              onClick={() => {
+                if (clickDecline) {
+                  clickDecline();
+                }
+                resetBusiness();
+              }}
               style={{
                 backgroundColor: 'white',
                 padding: '16px 30px',
@@ -76,7 +92,12 @@ export const FormArea = ({
             <button
               className="light"
               type="button"
-              onClick={clickDelete}
+              onClick={() => {
+                if (clickDelete) {
+                  clickDelete();
+                }
+                resetBusiness();
+              }}
               style={{
                 backgroundColor: 'white',
                 padding: '16px 30px',
@@ -92,7 +113,7 @@ export const FormArea = ({
           : (
             <div className="aaction">
               <button className="light" type="button" onClick={clickProceed}>
-                Proceed
+                {activeTab === CONTACT_DETAILS ? 'Submit' : 'Proceed'}
               </button>
             </div>
           )
@@ -131,7 +152,7 @@ export const FormArea = ({
         <div
           className="pagecontainer"
           style={{
-            top: '100px',
+            top: '25px',
             left: 0,
             right: 0,
             bottom: 0,

@@ -3,6 +3,8 @@ import { ATTACHMENTS_SUB_TYPES, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
+import { ValidationDeleteBreakLines } from '../utils/validation';
+import { useRetailerFileReducer } from '../store/hooks/retailerFilesHook';
 
 export const LeftForm2 = () => {
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
@@ -11,9 +13,13 @@ export const LeftForm2 = () => {
     setVisibility, setLocal, setProduceAvailStore,
     setProduceAvailSeasonally
   } = useMarketplaceDispatch();
-  const { otherQuestions } = useMarketplaceState();
+  const {
+    setImageLinks,
+    setOwnerPhotos
+  } = useRetailerFileReducer();
+  const { otherQuestions, retailerFiles } = useMarketplaceState();
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setOtherQuestions(e.currentTarget.value);
+    ValidationDeleteBreakLines(e.currentTarget.value, setOtherQuestions);
   };
 
   const setAvailabilityOptionsCheck = (constant: string, checked: boolean) => {
@@ -51,11 +57,11 @@ export const LeftForm2 = () => {
   };
 
   const setProduceAvailStoreFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setProduceAvailStore(e.currentTarget.value);
+    ValidationDeleteBreakLines(e.currentTarget.value, setProduceAvailStore);
   };
 
   const setProduceAvailSeasonallyFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setProduceAvailSeasonally(e.currentTarget.value);
+    ValidationDeleteBreakLines(e.currentTarget.value, setProduceAvailSeasonally);
   };
 
   useEffect(() => {
@@ -291,6 +297,8 @@ export const LeftForm2 = () => {
         <Attachment
           type={TYPE_BUSINESS.BUSINESS}
           subType={ATTACHMENTS_SUB_TYPES.IMAGES}
+          loadedFiles={retailerFiles.imagelinks}
+          setLoadedFiles={setImageLinks}
         />
       </div>
       <div className="item">
@@ -300,6 +308,8 @@ export const LeftForm2 = () => {
         <Attachment
           type={TYPE_BUSINESS.OWNER}
           subType={ATTACHMENTS_SUB_TYPES.OWNER_IMAGES}
+          loadedFiles={retailerFiles.owner_photo}
+          setLoadedFiles={setOwnerPhotos}
         />
       </div>
     </>

@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Badge } from '../components/map/Badge';
 import { Navbar } from '../components/Navbar';
 import { BADGES } from '../constants';
 import { useProfile } from '../store/hooks/custom/useProfile';
-import { formatPhone, showSchedule, showText } from '../utils/textFormatter';
+import {
+  formatPhone,
+  showSchedule,
+  showText,
+  cleanSplit
+} from '../utils/textFormatter';
 import { MapProfile } from '../components/mapProfile';
 import { FeedbackForm } from '../components/FeedbackForm';
 import { ModalRequestForm } from '../components/ModalRequestForm';
@@ -13,8 +18,14 @@ import { ModalRequestForm } from '../components/ModalRequestForm';
 export const Profile = () => {
   const { profile, badges } = useProfile();
   const [visibleFeedback, setVisibleFeedback] = useState(false);
-  const picture: string[] = profile?.imagelinks ? profile.imagelinks.split(',') : [];
-  const pictureOwner:string[] = profile?.owner_photo ? profile.owner_photo.split(',') : [];
+  const picture: string[] = useMemo(
+    () => cleanSplit(profile?.imagelinks ?? ''),
+    [profile]
+  );
+  const pictureOwner: string[] = useMemo(
+    () => cleanSplit(profile?.owner_photo ?? ''),
+    [profile]
+  );
   return (
     <div className="container">
       <div className="bgwhite" />
