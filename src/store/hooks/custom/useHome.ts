@@ -33,6 +33,7 @@ export const useHome = () => {
       signalArray[signalArray.length - 1].abort();
       signalArray.push(auxAbort);
       const headers = webRequest.generateJSONHeader();
+      setHasNext(false);
       webRequest
         .post(
           `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}`,

@@ -129,7 +129,7 @@ export const useMap = () => {
         ...oldViewState,
         latitude: point[1],
         longitude: point[0],
-        zoom: 16,
+        zoom: 10.6,
         transitionDuration: TRANSITION_DURATION
       };
       return newViewState;
