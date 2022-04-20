@@ -311,11 +311,12 @@ input, button, textarea, select {
 .bmodal-ts {
     position: absolute;
     top: 300px;
-    margin-top: 100px;
+    margin-top: 104px;
     margin-left: 280px;
     width: 0%;
     height: 0%;
-    left: 8px;
+/*     left: 8px; */
+    left: -8px;
     background-color: transparent;
     display: flex;
     flex-direction: row;
@@ -332,4 +333,52 @@ input, button, textarea, select {
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
+}
+.dropdown-categories-select {
+    color: #161A23 !important;
+    padding: 1px 1px;
+    font-size: 14px !important;
+    font-family: "FuturaMedium", sans-serif;
+    font-weight: 500;
+    em {
+        font-family: "FuturaMedium", sans-serif;
+        font-style: normal;
+        font-size: 14px !important;
+        line-height: 14px;
+        color: #161A23;
+    }
+}
+@media (min-width: 1920px) {
+    .dropdown-categories-select {
+        color: #161A23 !important;
+        em {
+            font-family: "FuturaMedium", sans-serif;
+            font-style: normal;
+            font-size: 18px;
+            line-height: 18px;
+            color: #161A23;
+        }
+    }
+}
+@media (min-width: 2560px) {
+    div.dropdown-categories-select {
+        color: #161A23 !important;
+        em {
+            font-family: "FuturaMedium", sans-serif;
+            font-style: normal;
+            font-size: 24px !important;
+            line-height: 24px;
+            color: #161A23;
+        }
+    }
+    .MuiOutlinedInput-root .MuiInputBase-root .MuiInputBase-colorPrimary .dropdown-categories-select {
+        color: #7A7E80 !important;
+        em {
+            font-family: "FuturaMedium", sans-serif;
+            font-style: normal;
+            font-size: 24px !important;
+            line-height: 24px;
+            color: #161A23;
+        }
+    }
 }

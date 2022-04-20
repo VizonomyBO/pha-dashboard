@@ -1369,7 +1369,28 @@ sup {
 						text-overflow: ellipsis;
 						white-space: nowrap;
 						overflow: hidden;
+						&::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+							color:    #161A23;
+						}
+						&:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+							 color:    #161A23;
+							 opacity:  1;
+						}
+						&::-moz-placeholder { /* Mozilla Firefox 19+ */
+							 color:    #161A23;
+							 opacity:  1;
+						}
+						&:-ms-input-placeholder { /* Internet Explorer 10-11 */
+							 color:    #161A23;
+						}
+						&::-ms-input-placeholder { /* Microsoft Edge */
+							 color:    #161A23;
+						}
+						&::placeholder { /* Most modern browsers support this now. */
+							 color:    #161A23;
+						}
 					}
+
 				}
 				.space {
 					display: block;
@@ -1754,7 +1775,7 @@ sup {
 						overflow: hidden;
 						img {
 							max-width: 100%;
-							height: auto;
+							height: inherit;
 							border-top-left-radius: 16px;
 							border-top-right-radius: 16px;
 						}
@@ -1769,6 +1790,9 @@ sup {
 							font-size: 16px;
 							color: #161A23;
 							padding-bottom: 12px;
+						}
+						.services.close {
+							display: none;
 						}
 						.services {
 							display: flex;
@@ -1787,7 +1811,7 @@ sup {
 							font-size: 14px;
 							line-height: 16px;
 							color: #7A7E80;
-							padding-bottom: 8px;
+							padding-bottom: 12px; /* 8px */
 						}
 						.description {
 	
@@ -1880,16 +1904,17 @@ sup {
 					box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 					display: flex;
 					flex-direction: row;
-					padding: 16px;
+					
 					.picture {
 						display: block;
-						height: 90px;
+						height: 152px;
 						width: 120px;
 						overflow: hidden;
 						img {
 							max-width: 100%;
-							height: auto;
-							border-radius: 8px;
+							height: 100%;
+							border-top-left-radius: 16px;
+							border-bottom-left-radius: 16px;
 						}
 					}
           .detailCardOther {
@@ -1911,7 +1936,7 @@ sup {
 						position: relative;
 						height: 100%;
 						width: calc(100% - 120px);
-						padding: 0px 16px 16px 8px;
+						padding: 16px 16px 16px 8px;
 						.store {
 							font-family: "FuturaMedium", sans-serif;
 							font-size: 16px;
@@ -1939,7 +1964,7 @@ sup {
 							font-size: 14px;
 							line-height: 14px;
 							color: #7A7E80;
-							padding-bottom: 4px;
+							padding-bottom: 8px;
 						}
 						.services {
 							.kind {
