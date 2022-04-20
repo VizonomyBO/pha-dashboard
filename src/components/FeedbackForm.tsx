@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useEffect } from 'react';
 import { MAX_TEXT, TYPE_INDIVIDUAL_FORM } from '../constants';
 import { formConstants } from '../constants/form';
@@ -78,10 +76,14 @@ export const FeedbackForm = (
   };
   return (
     <div
+      role="button"
+      tabIndex={0}
       className="modaluserfeedbck"
       onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(false, e))}
     >
       <div
+        role="button"
+        tabIndex={0}
         className="formpage"
         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => (clouseModal(true, e))}
       >
