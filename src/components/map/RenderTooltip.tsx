@@ -20,6 +20,7 @@ export default function renderTooltip({
       layer
     } = info;
     const objectTypified = object as PropertiesLayer;
+    console.log('layer', layer, objectTypified);
     toolTip = width <= MOBILE_WIDTH && layer?.id === PHA_RETAILERS
       ? ToolTipMobile({
         x, y, objectTypified, badges, setVisibleFeedback, setCurrentRetailerId

@@ -59,6 +59,7 @@ export const Map = (
         height: window.innerHeight
       });
       const newCoord = viewportWebMercator.projectFlat([centerPopup[0], centerPopup[1]]);
+      console.log('console', elementProperties.properties.source, layers);
       const newInfo: PickInfo<Layer<unknown>[]> = {
         x: newCoord[0],
         y: newCoord[1],

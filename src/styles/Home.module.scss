@@ -1209,6 +1209,7 @@ sup {
 							li {
 								padding-top: 0;
 								margin-right: 16px;
+                cursor: pointer;
 								a {
 									display: block;
 									font-size: 14px;
@@ -3134,6 +3135,13 @@ sup {
 					.txt1 {
 						font-size: 14px;
 						line-height: 20px;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            max-height: 40px;
+            margin-bottom: 6px;
 					}
 					.txt2 {
 						font-size: 16px;
@@ -5737,6 +5745,13 @@ header.topmenu {
 					.txt1 {
 						font-size: 24px;
 						line-height: 140%;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            max-height: 40px;
+            margin-bottom: 6px
 					}
 					.txt2 {
 						font-size: 28px;

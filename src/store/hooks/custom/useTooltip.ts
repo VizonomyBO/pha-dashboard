@@ -9,7 +9,40 @@ export const useTooltip = () => {
     }
     return DEFAULT_IMAGE;
   };
+  const getAddress = (objectTypifiedAddress: PropertiesLayer) => {
+    if (objectTypifiedAddress.properties?.address) {
+      return `${objectTypifiedAddress.properties?.address}, `;
+    }
+    if (objectTypifiedAddress.properties?.address_1) {
+      return `${objectTypifiedAddress.properties?.address_1}, `;
+    }
+    if (objectTypifiedAddress.properties?.location_address) {
+      return `${objectTypifiedAddress.properties.location_address}`;
+    }
+    return '';
+  };
+  const getPostCode = (objectTypifiedPC: PropertiesLayer) => {
+    if (objectTypifiedPC.properties?.postcode) {
+      return `${objectTypifiedPC.properties?.postcode}`;
+    }
+    if (objectTypifiedPC.properties?.zipcode) {
+      return `${objectTypifiedPC.properties?.zipcode}`;
+    }
+    return '';
+  };
+  const getName = (objectTypified: PropertiesLayer) => {
+    if (objectTypified.properties?.listing_name) {
+      return `${objectTypified.properties?.listing_name}`;
+    }
+    if (objectTypified.properties?.name) {
+      return `${objectTypified.properties?.name}`;
+    }
+    return '';
+  };
   return {
-    getImageToDisplay
+    getImageToDisplay,
+    getAddress,
+    getPostCode,
+    getName
   };
 };

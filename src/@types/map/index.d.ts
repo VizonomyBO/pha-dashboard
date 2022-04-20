@@ -13,7 +13,9 @@ export interface PropertiesLayer {
     city?: string,
     postcode?: string,
     address?: string,
-    master_id?: number
+    master_id?: number,
+    zipcode?: string,
+    location_address?: string
   },
   geometry?: {
     type: string,

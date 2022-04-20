@@ -54,6 +54,7 @@ export const useHome = () => {
             res.data.rows.forEach((element: DataPhaDasboardMap) => {
               dataRows.push(element);
             });
+            console.log('this is data', _currentPage, dataRows);
             if (_currentPage > INIT_PAGE) {
               setDataRequest((oldDR) => {
                 const newDR = [...oldDR, ...dataRows];

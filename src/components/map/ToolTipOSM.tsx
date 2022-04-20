@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { TooltipProps } from '../../@types';
 import { useMarketplaceDispatch } from '../../store/hooks';
 import { TYPE_BUSINESS } from '../../constants';
+import { useTooltip } from '../../store/hooks/custom/useTooltip';
 
 export const ToolTipOSM = (data: TooltipProps) => {
   const {
@@ -15,6 +16,7 @@ export const ToolTipOSM = (data: TooltipProps) => {
   const popupRef = useRef<HTMLDivElement>(null);
   const [currentY, setCurrentY] = useState(y);
   const { setBusinessDetails } = useMarketplaceDispatch();
+  const { getAddress, getPostCode } = useTooltip();
   useEffect(() => {
     if (popupRef.current) {
       setCurrentY(y - popupRef.current.getBoundingClientRect().height);
@@ -53,9 +55,9 @@ export const ToolTipOSM = (data: TooltipProps) => {
         <div className="store"><b>{objectTypified?.properties?.name?.toUpperCase()}</b></div>
         <div className="address">
           {
-          `${objectTypified?.properties?.address ? (`${objectTypified?.properties?.address}, `) : ''}
+          `${getAddress(objectTypified)}
           ${objectTypified?.properties?.city ? (`${objectTypified?.properties?.city}, `) : ''} MS,
-          ${objectTypified?.properties?.postcode ?? ''}`
+          ${getPostCode(objectTypified)}`
           }
         </div>
         <Link to="/form">
