@@ -113,3 +113,5 @@ export interface ButtonDashboard {
   class: string,
   active: boolean
 }
+
+export type validationText = {value: string}

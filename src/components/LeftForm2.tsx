@@ -3,6 +3,7 @@ import { ATTACHMENTS_SUB_TYPES, TYPE_BUSINESS } from '../constants';
 import { Attachment } from './Attachment';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 import { formConstants } from '../constants/form';
+import { ValidationDeleteBreakLines } from '../utils/validation';
 
 export const LeftForm2 = () => {
   const [showIsFreshOption, setShowIsFreshOption] = useState(false);
@@ -13,7 +14,7 @@ export const LeftForm2 = () => {
   } = useMarketplaceDispatch();
   const { otherQuestions } = useMarketplaceState();
   const setDescriptionFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setOtherQuestions(e.currentTarget.value);
+    ValidationDeleteBreakLines(e.currentTarget.value, setOtherQuestions);
   };
 
   const setAvailabilityOptionsCheck = (constant: string, checked: boolean) => {
@@ -51,11 +52,11 @@ export const LeftForm2 = () => {
   };
 
   const setProduceAvailStoreFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setProduceAvailStore(e.currentTarget.value);
+    ValidationDeleteBreakLines(e.currentTarget.value, setProduceAvailStore);
   };
 
   const setProduceAvailSeasonallyFunction = (e: React.FormEvent<HTMLTextAreaElement>): void => {
-    setProduceAvailSeasonally(e.currentTarget.value);
+    ValidationDeleteBreakLines(e.currentTarget.value, setProduceAvailSeasonally);
   };
 
   useEffect(() => {
