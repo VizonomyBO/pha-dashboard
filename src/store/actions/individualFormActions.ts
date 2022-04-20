@@ -11,6 +11,6 @@ export const setIndividualForm = (
 });
 
 export const resetIndividualForm = () => ({
-  type: TYPES.INIT,
+  type: TYPES.RESET_INDIVIDUAL_FORM,
   payload: null
 });

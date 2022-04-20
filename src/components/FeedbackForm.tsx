@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { MAX_TEXT, TYPE_INDIVIDUAL_FORM } from '../constants';
+import { JSON_FIELD, MAX_TEXT, TYPE_INDIVIDUAL_FORM } from '../constants';
+import { ROW_STATUS } from '../constants/dashboard';
 import { formConstants } from '../constants/form';
 import { ENDPOINTS } from '../constants/url';
 import { useModalDispatch } from '../store/hooks';
@@ -39,30 +40,30 @@ export const FeedbackForm = (
       setIndividualForm(type, availabilityCopy ? availabilityCopy.replace(`, ${value}`, '') : '');
     }
   };
-  const sendForm = () => {
-    setModal({ type: true, open: true });
+
+  const getObject = () => ({
+    availability,
+    quality,
+    visibility,
+    local,
+    meets_need,
+    contact_phone,
+    contact_zipcode,
+    produce_avail_store,
+    retailer_id: retailerId
+  });
+
+  const getFormData = (jsonString: string) => {
     const formData = new FormData();
-    const obj = {
-      availability,
-      quality,
-      visibility,
-      local,
-      meets_need,
-      contact_phone,
-      contact_zipcode,
-      produce_avail_store,
-      retailer_id: retailerId
-    };
-    formData.append('json', JSON.stringify(obj).replace("'", "\\'"));
+    formData.append(JSON_FIELD, jsonString);
     files.forEach((file) => {
       formData.append('files', file);
     });
-    const headers = webRequest.generateMultipartHeader();
-    webRequest.postMultipart(
-      ENDPOINTS.PHA_INDIVIDUAL(),
-      formData,
-      headers
-    ).then((res) => res.json()).then((res) => {
+    return formData;
+  };
+
+  const proccessPromise = (promise: Promise<Response>) => {
+    promise.then((res) => res.json()).then((res) => {
       if (res.success) {
         setModal({ type: true, open: true });
         setVisible(false);
@@ -72,11 +73,45 @@ export const FeedbackForm = (
       }
     });
   };
+
+  const sendForm = () => {
+    const obj = getObject();
+    const formData = getFormData(JSON.stringify(obj).replace("'", "\\'"));
+    const headers = webRequest.generateMultipartHeader();
+    proccessPromise(webRequest.postMultipart(
+      ENDPOINTS.PHA_INDIVIDUAL(),
+      formData,
+      headers
+    ));
+  };
+
   const closeModal = (type: boolean, e: React.MouseEvent) => {
     e.stopPropagation();
     setVisible(type);
-    resetIndividualForm();
+    if (!type) {
+      resetIndividualForm();
+    }
   };
+
+  const putForm = (status: string) => {
+    const obj = getObject();
+    let finalObjet: unknown = { submission_status: status };
+    if (status === ROW_STATUS.APPROVED) {
+      finalObjet = { obj, submission_status: status };
+    }
+    const formData = getFormData(JSON.stringify(finalObjet).replace("'", "\\'"));
+    const headers = webRequest.generateMultipartHeader();
+    proccessPromise(webRequest.putMultipart(
+      ENDPOINTS.PHA_INDIVIDUAL(retailerId),
+      formData,
+      headers
+    ));
+  };
+
+  const approveForm = () => putForm(ROW_STATUS.APPROVED);
+  const rejectForm = () => putForm(ROW_STATUS.REJECTED);
+  const deleteForm = () => putForm(ROW_STATUS.DELETED);
+
   return (
     <div
       role="button"
@@ -125,9 +160,10 @@ export const FeedbackForm = (
                     Fresh (only continue if checks this)
                     <input
                       type="checkbox"
-                      checked={availability === formConstants.AVAILABILITY.FRESH}
+                      checked={availability?.includes(formConstants.AVAILABILITY.FRESH)}
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
+                          console.log('a');
                           setAvailabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
@@ -141,7 +177,7 @@ export const FeedbackForm = (
                   <label className="chkwrap">
                     Frozen
                     <input
-                      checked={quality === formConstants.AVAILABILITY.FROZEN}
+                      checked={availability?.includes(formConstants.AVAILABILITY.FROZEN)}
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
@@ -158,7 +194,7 @@ export const FeedbackForm = (
                   <label className="chkwrap">
                     Canned
                     <input
-                      checked={visibility === formConstants.AVAILABILITY.CANNED}
+                      checked={availability?.includes(formConstants.AVAILABILITY.CANNED)}
                       type="checkbox"
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
@@ -190,6 +226,7 @@ export const FeedbackForm = (
                     Acceptable (peak condition, top quality, good color, fresh, firm, and clean)
                     <input
                       type="radio"
+                      name="quality"
                       value={quality}
                       checked={quality === formConstants.QUALITY.ACCEPTABLE}
                       onChange={
@@ -208,6 +245,7 @@ export const FeedbackForm = (
                     hes or cracked or broken surfaces, signs of shriveling, mold or excessive softening)
                     <input
                       type="radio"
+                      name="quality"
                       value={quality}
                       checked={quality === formConstants.QUALITY.UNACCEPTABLE}
                       onChange={
@@ -239,6 +277,7 @@ export const FeedbackForm = (
                     Yes
                     <input
                       type="radio"
+                      name="visibility"
                       value={visibility}
                       checked={visibility === formConstants.VISIBILITY.YES}
                       onChange={
@@ -256,6 +295,7 @@ export const FeedbackForm = (
                     No
                     <input
                       type="radio"
+                      name="visibility"
                       value={visibility}
                       checked={visibility === formConstants.VISIBILITY.NO}
                       onChange={
@@ -287,6 +327,7 @@ export const FeedbackForm = (
                     Yes
                     <input
                       type="radio"
+                      name="local"
                       value={local}
                       checked={local === formConstants.LOCAL.YES}
                       onChange={
@@ -305,6 +346,7 @@ export const FeedbackForm = (
                     <input
                       type="radio"
                       value={local}
+                      name="local"
                       checked={local === formConstants.LOCAL.NO}
                       onChange={
                         () => {
@@ -335,6 +377,7 @@ export const FeedbackForm = (
                     Yes
                     <input
                       type="radio"
+                      name="meets-need"
                       value={meets_need}
                       checked={meets_need === formConstants.MEETS_NEED.YES}
                       onChange={
@@ -352,6 +395,7 @@ export const FeedbackForm = (
                     No
                     <input
                       type="radio"
+                      name="meets-need"
                       value={meets_need}
                       checked={meets_need === formConstants.MEETS_NEED.NO}
                       onChange={
@@ -475,9 +519,9 @@ export const FeedbackForm = (
           {
             isEdit ? (
               <EditButtons
-                clickApprove={() => console.info('must approve')}
-                clickDecline={() => console.info('must decline')}
-                clickDelete={() => console.info('must delete')}
+                clickApprove={approveForm}
+                clickDecline={rejectForm}
+                clickDelete={deleteForm}
               />
             ) : (
               <div className="aaction">
