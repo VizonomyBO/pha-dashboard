@@ -415,5 +415,8 @@ input, button, textarea, select {
   .marginbottom {
     margin-bottom: 6px !important;
     margin-top: 2px !important;
+    line-height: 17px !important;
+    max-height: 33px !important;
+    height: auto !important;
   }  
 }
