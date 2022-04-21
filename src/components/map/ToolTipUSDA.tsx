@@ -13,14 +13,13 @@ export const ToolTipUSDA = (data: TooltipProps) => {
   const popupRef = useRef<HTMLDivElement>(null);
   const [currentY, setCurrentY] = useState(y);
   const { getAddress, getName } = useTooltip();
+
   useEffect(() => {
     if (popupRef.current) {
       setCurrentY(y - popupRef.current.getBoundingClientRect().height);
     }
   }, [popupRef, setCurrentY, y]);
-  useEffect(() => {
-    console.log('object Tipified', objectTypified);
-  }, [objectTypified]);
+
   return (
     <div
       className={isMobile ? 'bmodal' : 'modal'}
