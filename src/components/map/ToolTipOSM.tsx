@@ -47,21 +47,21 @@ export const ToolTipOSM = (data: TooltipProps) => {
   };
   return (
     <div
-      className={isMobile ? 'bmodal' : 'modal'}
+      className={classNames({ bmodal: isMobile, 'usda-mobile': isMobile, modal: !isMobile })}
       style={{ left: isMobile ? '' : x, top: isMobile ? '' : currentY }}
       ref={popupRef}
     >
-      <div className={classNames('detailcard', isMobile ? 'detail-card-other' : '')}>
-        <div className="store"><b>{objectTypified?.properties?.name?.toUpperCase()}</b></div>
-        <div className="address">
-          {
-          `${getAddress(objectTypified)}
-          ${objectTypified?.properties?.city ? (`${objectTypified?.properties?.city}, `) : ''} MS,
-          ${getPostCode(objectTypified)}`
-          }
+      <div className={classNames('detailcard', { 'detail-card-other': isMobile })}>
+        <div className={classNames('store', { 'store-osm-bottom': isMobile })}>
+          <b>{objectTypified?.properties?.name?.toUpperCase()}</b>
+        </div>
+        <div className="address margin-bottom-osm">
+          {`${getAddress(objectTypified)}
+          ${objectTypified?.properties?.city ? `${objectTypified?.properties?.city}, ` : ''} MS,
+          ${getPostCode(objectTypified)}`}
         </div>
         <Link to="/form">
-          <button className="lightOSM" type="button" onClick={() => setDataBusiness()}>
+          <button className="light-osm" type="button" onClick={() => setDataBusiness()}>
             Submit Retailer Info
           </button>
         </Link>

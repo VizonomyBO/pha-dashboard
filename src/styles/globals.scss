@@ -406,6 +406,12 @@ input, button, textarea, select {
   padding-bottom: 3px !important;
 }
 
+.margin-bottom-osm {
+  margin-bottom: 5px !important;
+  height: auto !important;
+  max-height: 40px !important;
+  padding-bottom: 3px !important;
+}
 .margin-bottom-payment { 
   padding-bottom: 5px !important;
 }
@@ -429,4 +435,14 @@ input, button, textarea, select {
     max-height: 33px !important;
     height: auto !important;
   }  
+  .margin-bottom-osm {
+    margin-bottom: 11px !important;
+    margin-top: 2px !important;
+    line-height: 17px !important;
+    max-height: 33px !important;
+    height: auto !important;
+  }
+  .store-osm-bottom {
+    padding-bottom: 10px !important;
+  }
 }
