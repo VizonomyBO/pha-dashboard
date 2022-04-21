@@ -39,28 +39,30 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
           alt=""
         />
       </figure>
-      <div className="detailcard">
-        <div className="store">{objectTypified?.properties?.name}</div>
-        <div className="services">
-          {badges.map((badge) => (
-            <span
-              key={badge}
-              className="kind"
-              style={{
-                content: `url("${BADGES[badge].image}")`
-              }}
-            />
-          ))}
-        </div>
-        <div className="address">{objectTypified?.properties?.address_1}</div>
-        <div className="phone">
+      <div className="detailcard detail-pha">
+        <div className="store store-bottom">{objectTypified?.properties?.name}</div>
+        {badges.length !== 0 && (
+          <div className="services services-bottom">
+            {badges.map((badge) => (
+              <span
+                key={badge}
+                className="kind"
+                style={{
+                  content: `url("${BADGES[badge].image}")`
+                }}
+              />
+            ))}
+          </div>
+        )}
+        <div className="address address-bottom">{objectTypified?.properties?.address_1}</div>
+        <div className="phone phone-bottom">
           <span className="icphone" />
           <span className="number">
-            {formatPhone(objectTypified?.properties?.phone ? objectTypified?.properties?.phone : '')}
+            {formatPhone(objectTypified?.properties?.phone ?? '')}
           </span>
         </div>
         <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
-          <button className="light" type="button">
+          <button className="light button-margin" type="button">
             View Details
           </button>
         </Link>
