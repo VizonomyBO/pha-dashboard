@@ -154,7 +154,7 @@ export const DashboardTable = ({
               <th className="wcol2 htit2">ZIP Code</th>
               <th className="wcol3 htit3">Submitted</th>
               <th className="wcol4 htit4">Status</th>
-              <th className="wcol5 htit5">Control Information</th>
+              <th className="wcol5 htit5">Contact Information</th>
               <th className="wcol6 htit6"> </th>
             </tr>
           </thead>

@@ -108,7 +108,7 @@ export const Form = () => {
               });
             }
             resetBusiness();
-            navigate('/home');
+            navigate('/map');
           }, PAGE_REDIRECT_TIME);
         }
       });

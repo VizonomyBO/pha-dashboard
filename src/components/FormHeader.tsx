@@ -47,7 +47,7 @@ export const FormHeader = ({ showBackArrow, clouseModal }: FormHeaderInterface) 
           type="button"
           onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
             if (showBackArrow) {
-              navigate('/home');
+              navigate('/map');
             } else {
               clouseModal(false, e);
             }
