@@ -13,7 +13,9 @@ import {
   CONTACT_DETAILS,
   OTHER_QUESTIONS
 } from '../constants';
-import { useMarketplaceDispatch, useModalDispatch, useTabState } from '../store/hooks';
+import {
+  useMarketplaceDispatch, useModalDispatch, useModalState, useTabState
+} from '../store/hooks';
 
 export const FormArea = ({
   isModal,
@@ -32,13 +34,14 @@ export const FormArea = ({
   const { resetBusiness } = useMarketplaceDispatch();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
   const { setModal } = useModalDispatch();
+  const { type } = useModalState();
   const clouseModal = (
-    type: boolean,
+    typeModal: boolean,
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     e.stopPropagation();
-    if (!type) {
-      setModal({ type, open: type });
+    if (!typeModal) {
+      setModal({ type: typeModal, open: type });
     }
   };
   const formAreaClass = classNames('formarea', { [formClass]: true });
@@ -69,7 +72,7 @@ export const FormArea = ({
         </div>
       </div>
       {
-        isModal ? (
+        isModal && type ? (
           <div className="aaction">
             <button
               className="light"
