@@ -105,5 +105,11 @@ export interface MarkerCenterInterface {
   elementProperties: PropertiesLayer
 }
 
+export interface AvailabilityOptions {
+  FRESH: boolean;
+  FROZEN: boolean;
+  CANNED: boolean;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type CompletelyIntentionalAny = any;
