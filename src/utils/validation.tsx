@@ -179,9 +179,6 @@ export const validationIndividualForm = ({
   visibility,
   local,
   meets_need
-}: PhaIndividualValidation) => {
-  if (isEmpty(availability) || isEmpty(quality) || isEmpty(visibility) || isEmpty(local) || isEmpty(meets_need)) {
-    return true;
-  }
-  return false;
-};
+}: PhaIndividualValidation) => (
+  (isEmpty(availability) || isEmpty(quality) || isEmpty(visibility) || isEmpty(local) || isEmpty(meets_need))
+);
