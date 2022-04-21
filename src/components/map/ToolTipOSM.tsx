@@ -51,7 +51,7 @@ export const ToolTipOSM = (data: TooltipProps) => {
       style={{ left: isMobile ? '' : x, top: isMobile ? '' : currentY }}
       ref={popupRef}
     >
-      <div className={classNames('detailcard', isMobile ? 'detailCardOther' : '')}>
+      <div className={classNames('detailcard', isMobile ? 'detail-card-other' : '')}>
         <div className="store"><b>{objectTypified?.properties?.name?.toUpperCase()}</b></div>
         <div className="address">
           {
