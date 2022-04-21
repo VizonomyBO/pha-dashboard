@@ -27,6 +27,7 @@ export const FeedbackForm = (
     local,
     meets_need,
     contact_phone,
+    contact_email,
     contact_zipcode,
     produce_avail_store,
     files,
@@ -49,6 +50,7 @@ export const FeedbackForm = (
     meets_need,
     contact_phone,
     contact_zipcode,
+    contact_email,
     produce_avail_store,
     retailer_id: retailerId
   });
