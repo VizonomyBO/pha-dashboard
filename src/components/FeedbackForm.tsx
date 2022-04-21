@@ -85,7 +85,9 @@ export const FeedbackForm = (
   };
 
   const sendForm = () => {
-    if (validationIndividualForm(availability, quality, visibility, local, meets_need)) {
+    if (validationIndividualForm({
+      availability, quality, visibility, local, meets_need
+    })) {
       const obj = getObject();
       const formData = getFormData(JSON.stringify(obj).replace("'", "\\'"));
       const headers = webRequest.generateMultipartHeader();

@@ -1,4 +1,4 @@
-import { validationText } from '../@types';
+import { PhaIndividualValidation, validationText } from '../@types';
 import {
   BusinessDetailsInterface,
   OtherQuestionsInterface,
@@ -173,13 +173,13 @@ export const ValidationDeleteBreakLines = (text: string, setText: (value: string
   }
 };
 
-export const validationIndividualForm = (
-  availability: string | undefined,
-  quality: string | undefined,
-  visibility: string | undefined,
-  local: string | undefined,
-  meets_need: string | undefined
-) => {
+export const validationIndividualForm = ({
+  availability,
+  quality,
+  visibility,
+  local,
+  meets_need
+}: PhaIndividualValidation) => {
   if (isEmpty(availability) || isEmpty(quality) || isEmpty(visibility) || isEmpty(local) || isEmpty(meets_need)) {
     return true;
   }
