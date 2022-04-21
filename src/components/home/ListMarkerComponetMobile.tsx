@@ -13,10 +13,10 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
         color = COLORS.RED;
         break;
       case OSM_RETAILERS:
-        color = COLORS.GREEN;
+        color = COLORS.BLUE;
         break;
       default:
-        color = COLORS.BLUE;
+        color = COLORS.GREEN;
         break;
     }
     const picture:string[] = element.imagelinks ? element.imagelinks.split(',') : [];

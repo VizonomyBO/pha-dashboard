@@ -1716,11 +1716,13 @@ sup {
 						.statemk {
 							display: flex;
 							flex-direction: column;
+              min-width: 77px;
 							.cardmk {
 								display: flex;
 								flex-direction: column;
 								justify-content: center;
 								align-items: center;
+                text-align: center;
 								.dimensions {
 									margin-bottom: 4px;
 									display: block;
@@ -1842,6 +1844,17 @@ sup {
               display: -webkit-box;
               height: 38px;
 						}
+            .payment {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 20px;
+							color: #7A7E80;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+						}
 						.description {
 	
 						}
@@ -1948,7 +1961,7 @@ sup {
 					}
           .detailCardOther {
             width: 100% !important;
-            padding: 0px !important;
+            padding: 16px !important;
             button.lightOSM {
               font-family: "FuturaBold", sans-serif;
 							font-size: 16px;
@@ -1960,6 +1973,53 @@ sup {
 							margin-top: 36px;
               border: none;
             }
+            .store {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 16px;
+							color: #161A23;
+							padding-bottom: 4px;
+						}
+						.attribute {
+							display: flex;
+							flex-direction: row;
+							justify-content: flex-start;
+							padding-bottom: 4px;
+							.aitem {
+								display: block;
+								border-radius: 4px;
+								font-family: "FuturaMedium", sans-serif;
+								font-size: 10px;
+								color: #529F5A;
+								margin-right: 5px;
+								padding: 2px 8px;
+								background-color: #ECF6ED;
+							}
+						}
+						.address {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 14px;
+							color: #7A7E80;
+							padding-bottom: 8px;
+              margin-bottom: 8px;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              height: 27px;
+						}
+            .payment {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 16px;
+							color: #7A7E80;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+						}
           }
 					.detailcard {
 						position: relative;
@@ -2001,6 +2061,17 @@ sup {
               text-overflow: ellipsis;
               display: -webkit-box;
               height: 27px;
+						}
+            .payment {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 18px;
+							color: #7A7E80;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
 						}
 						.services {
 							.kind {
@@ -3445,6 +3516,7 @@ sup {
 						.statemk {
 							display: flex;
 							flex-direction: column;
+              min-width: 77px;
 							.cardmk {
 								display: flex;
 								flex-direction: column;
@@ -3568,6 +3640,17 @@ sup {
               display: -webkit-box;
               height: 32px;
 						}
+            .payment {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 16px;
+							color: #7A7E80;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+						}
 						.description {
 	
 						}
@@ -3659,7 +3742,7 @@ sup {
 					}
           .detailCardOther {
             width: 100% !important;
-            padding: 0px !important;
+            padding: 16px !important;
             button.lightOSM {
               font-family: "FuturaBold", sans-serif;
 							font-size: 16px;
@@ -3671,6 +3754,53 @@ sup {
 							margin-top: 36px;
               border: none;
             }
+            .store {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 16px;
+							color: #161A23;
+							padding-bottom: 4px;
+						}
+						.attribute {
+							display: flex;
+							flex-direction: row;
+							justify-content: flex-start;
+							padding-bottom: 4px;
+							.aitem {
+								display: block;
+								border-radius: 4px;
+								font-family: "FuturaMedium", sans-serif;
+								font-size: 10px;
+								color: #529F5A;
+								margin-right: 5px;
+								padding: 2px 8px;
+								background-color: #ECF6ED;
+							}
+						}
+						.address {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 14px;
+							color: #7A7E80;
+							padding-bottom: 4px;
+              margin-bottom: 4px;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              height: 32px;
+						}
+            .payment {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 14px;
+							color: #7A7E80;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+						}
           }
 					.detailcard {
 						position: relative;
@@ -3712,6 +3842,17 @@ sup {
               text-overflow: ellipsis;
               display: -webkit-box;
               height: 32px;
+						}
+            .payment {
+							font-family: "FuturaMedium", sans-serif;
+							font-size: 14px;
+							line-height: 16px;
+							color: #7A7E80;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
 						}
 						.description {
 	
@@ -4378,6 +4519,7 @@ header.topmenu {
 								.statemk {
 									display: flex;
 									flex-direction: column;
+                  min-width: 77px;
 									.cardmk {
 										display: flex;
 										flex-direction: column;
@@ -5292,6 +5434,7 @@ header.topmenu {
 								.statemk {
 									display: flex;
 									flex-direction: column;
+                  min-width: 77px;
 									.cardmk {
 										display: flex;
 										flex-direction: column;
@@ -6488,6 +6631,7 @@ header.topmenu {
 									.statemk {
 										display: flex;
 										flex-direction: column;
+                    min-width: 77px;
 										.cardmk {
 											display: flex;
 											flex-direction: column;

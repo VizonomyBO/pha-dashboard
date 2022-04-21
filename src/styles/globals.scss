@@ -177,6 +177,15 @@ input, button, textarea, select {
 .swhere-home {
   max-width: 200px;
   width: 200px;
+  position: relative;
+  .clear-button {
+    background-image: url('../../public/ic-close.png');
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    right: 5px;
+  }
 }
 
 .ul-address {
@@ -389,4 +398,25 @@ input, button, textarea, select {
             color: #161A23;
         }
     }
+}
+.marginbottom {
+  margin-bottom: 12px !important;
+}
+
+.marginbottompayment { 
+  padding-bottom: 5px !important;
+}
+
+.usdamobile {
+  height: auto !important;
+}
+
+@media (max-width: 600px) {
+  .marginbottom {
+    margin-bottom: 6px !important;
+    margin-top: 2px !important;
+    line-height: 17px !important;
+    max-height: 33px !important;
+    height: auto !important;
+  }  
 }

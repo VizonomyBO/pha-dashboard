@@ -93,3 +93,8 @@ export const OSM_RETAILERS = 'retailers_osm';
 export const USDA_RETAILERS = 'retailers_usda';
 
 export const COLORS = { GREEN: 'green', BLUE: 'blue', RED: 'red' };
+export const NAMESMARKERS = {
+  PHA_RETAILERS: 'Retailer',
+  OSM_RETAILERS: 'Open Street Map Retailer',
+  USDA_RETAILERS: 'USDA Farmers Markets'
+};

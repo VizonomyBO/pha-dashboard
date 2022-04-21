@@ -2,7 +2,8 @@ import { DataPhaDasboardMap, PropertiesLayer } from '../../@types';
 import {
   PHA_RETAILERS,
   OSM_RETAILERS,
-  COLORS
+  COLORS,
+  NAMESMARKERS
 } from '../../constants/categories';
 import { useMarkerDispatch } from '../../store/hooks/markerHook';
 
@@ -20,15 +21,19 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
   };
   return listMarker.map((element: DataPhaDasboardMap) => {
     let color = COLORS.RED;
+    let namemark = NAMESMARKERS.PHA_RETAILERS;
     switch (element.source) {
       case PHA_RETAILERS:
         color = COLORS.RED;
+        namemark = NAMESMARKERS.PHA_RETAILERS;
         break;
       case OSM_RETAILERS:
-        color = COLORS.GREEN;
+        color = COLORS.BLUE;
+        namemark = NAMESMARKERS.OSM_RETAILERS;
         break;
       default:
-        color = COLORS.BLUE;
+        color = COLORS.GREEN;
+        namemark = NAMESMARKERS.USDA_RETAILERS;
         break;
     }
     return (
@@ -42,7 +47,7 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
         <div className="statemk">
           <div className="cardmk">
             <div className={`icmk${color} dimensions`} />
-            <div className={`desc ${color}`}>Retailer</div>
+            <div className={`desc ${color}`}>{namemark}</div>
           </div>
         </div>
         <div className="descres">

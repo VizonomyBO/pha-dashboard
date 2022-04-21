@@ -20,7 +20,7 @@ export const useHome = () => {
     bbox,
     mapViewFilter
   } = useCategoriesState() || {};
-  const VALUES_PER_PAGE = 10;
+  const VALUES_PER_PAGE = 25;
   const INIT_PAGE = 1;
   const [dataRequest, setDataRequest] = useState<DataPhaDasboardMap[]>([]);
   const [currentPage, setCurrentPage] = useState(INIT_PAGE);
