@@ -154,18 +154,18 @@ export const DashboardTable = ({
               <th className="wcol2 htit2">ZIP Code</th>
               <th className="wcol3 htit3">Submitted</th>
               <th className="wcol4 htit4">Status</th>
-              <th className="wcol5 htit5">Control Information</th>
+              <th className="wcol5 htit5">Contact Information</th>
               <th className="wcol6 htit6"> </th>
             </tr>
           </thead>
           <tbody
             style={{
-              overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
+              overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden', display: 'contents'
             }}
           >
             {table.map((item: (PhaRetailer & PhaIndividual)) => (
-              <tr style={{ height: '60px' }} key={item.individual_id || item.retailer_id}>
-                <td className="wcol1 bbtm padleft">
+              <tr style={{ height: '71px' }} key={item.individual_id || item.retailer_id}>
+                <td className="wcol1 bbtm padleft" style={{ height: '71px' }}>
                   <div className="option">
                     <label className="chkwrap">
                       <span className="store">

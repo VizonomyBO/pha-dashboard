@@ -18,7 +18,7 @@ export const DashboardNavbar = ({ setParams }: { setParams: Dispatch<SetStateAct
   const navigate = useNavigate();
   const logout = () => {
     authorizationManager.logout();
-    navigate('/home');
+    navigate('/map');
   };
 
   useEffect(() => {

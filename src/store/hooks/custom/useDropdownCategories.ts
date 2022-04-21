@@ -13,7 +13,7 @@ export const useDropdownCategories = () => {
     setCategoriesSelected(typeof value === 'string' ? value.split(',') : value);
   };
   const goToMapView = () => {
-    const path = 'home';
+    const path = 'map';
     navigate(path);
   };
   return {

@@ -1,4 +1,4 @@
-import { validationText } from '../@types';
+import { PhaIndividualValidation, validationText } from '../@types';
 import {
   BusinessDetailsInterface,
   OtherQuestionsInterface,
@@ -15,7 +15,7 @@ import {
   OTHER_QUESTIONS
 } from '../constants';
 
-export const isEmpty = (field: string) => !!field;
+export const isEmpty = (field: string | undefined) => !!field;
 
 export const isLiteralYes = (field: string) => field === MARKED_ELEMENT;
 
@@ -172,3 +172,13 @@ export const ValidationDeleteBreakLines = (text: string, setText: (value: string
     setText(numbertext);
   }
 };
+
+export const validationIndividualForm = ({
+  availability,
+  quality,
+  visibility,
+  local,
+  meets_need
+}: PhaIndividualValidation) => (
+  (isEmpty(availability) || isEmpty(quality) || isEmpty(visibility) || isEmpty(local) || isEmpty(meets_need))
+);

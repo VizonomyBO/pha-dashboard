@@ -14,10 +14,12 @@ import {
 import { MapProfile } from '../components/mapProfile';
 import { FeedbackForm } from '../components/FeedbackForm';
 import { ModalRequestForm } from '../components/ModalRequestForm';
+import { useWindowSize } from '../store/hooks/custom/useWindowSize';
 
 export const Profile = () => {
   const { profile, badges } = useProfile();
   const [visibleFeedback, setVisibleFeedback] = useState(false);
+  const { ref, height } = useWindowSize();
   const picture: string[] = useMemo(
     () => cleanSplit(profile?.imagelinks ?? ''),
     [profile]
@@ -30,7 +32,7 @@ export const Profile = () => {
     <div className="container">
       <div className="bgwhite" />
       <figure className="bgnoise home" />
-      <div className="barblue profile" />
+      <div className="barblue profile" style={{ height: `${height - 350}px` }} />
       <header className="topmenu">
         <div className="spanel">
           <div className="logoarea">
@@ -48,10 +50,10 @@ export const Profile = () => {
       <div className="pagecontainer">
         <Navbar />
         <Header />
-        <div className="userprofile">
+        <div className="userprofile" ref={ref}>
           <div className="pheader">
             <div className="backlink">
-              <Link to="/home" style={{ textDecoration: 'none' }}>
+              <Link to="/map" style={{ textDecoration: 'none' }}>
                 <button type="button" className="light">
                   <span className="icarrowleft" />
                   <span className="txt">Back to Locations</span>
