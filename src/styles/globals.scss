@@ -423,8 +423,35 @@ input, button, textarea, select {
 .store-usda-bottom {
   padding-bottom: 8px !important;
 }
+
 .max-width-usda {
   max-width: 60px !important;
+}
+
+.detail-pha {
+  padding: 17px 16px 24px 16px !important;
+}
+
+.store-bottom{
+  padding-bottom: 14px !important;
+}
+
+.services-bottom {
+  padding-bottom: 18px !important;
+}
+
+.address-bottom {
+  margin-bottom: 17px !important;
+  height: auto !important;
+  padding-bottom: 0px !important;
+}
+
+.phone-bottom {
+  padding-bottom: 15px !important;
+}
+
+.button-margin { 
+  margin-top: 6px !important;
 }
 
 @media (max-width: 600px) {
