@@ -201,7 +201,7 @@ export const DashboardTable = ({
           </tbody>
           <DashboardTableFooter setParams={setParams} totalElements={totalElements} />
         </table>
-        {visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={idRetailer} />}
+        {visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={idRetailer} isEdit />}
       </div>
     </div>
   );
