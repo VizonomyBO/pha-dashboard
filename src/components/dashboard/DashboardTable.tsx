@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
 import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
@@ -9,6 +9,7 @@ import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
 import { useRetailerFileReducer } from '../../store/hooks/retailerFilesHook';
 import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
+import { FeedbackForm } from '../FeedbackForm';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
 export const DashboardTable = ({
@@ -25,12 +26,14 @@ export const DashboardTable = ({
     setBusinessDetails, setSelectCategory, setWicAccepted, setSnapAccepted,
     setOtherQuestions, setAvailabilityOptions, setQuality,
     setVisibility, setLocal, setProduceAvailStore, setProduceAvailSeasonally,
-    setContactName, setContactEmail, setContactOwner, setContactPatron
+    setContactName, setContactEmail, setContactOwner, setContactPatron,
   } = useMarketplaceDispatch();
   const {
     setImageLinks,
     setOwnerPhotos
   } = useRetailerFileReducer();
+  const [visibleFeedback, setVisibleFeedback] = useState(false);
+  const [idRetailer, setIdRetailer] = useState('');
   const handleSelected = (checked: boolean, item: PhaRetailer & PhaIndividual) => {
     let newSelectedElements: string[];
     if (checked) {
@@ -64,7 +67,8 @@ export const DashboardTable = ({
 
   const showModal = (item: PhaRetailer & PhaIndividual) => {
     if (item.individual_id) {
-      // TODO: @dottyjk or @egroj abran aca
+      setVisibleFeedback(true);
+      setIdRetailer(item.individual_id);
       console.info('Here you need to open the modal for individual');
     } else {
       webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
@@ -197,6 +201,7 @@ export const DashboardTable = ({
           </tbody>
           <DashboardTableFooter setParams={setParams} totalElements={totalElements} />
         </table>
+        {visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={idRetailer} />}
       </div>
     </div>
   );
