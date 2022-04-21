@@ -562,7 +562,7 @@ export const FeedbackForm = (
                 clickDelete={deleteForm}
               />
             ) : (
-              <div className="aaction">
+              <div className="aaction" style={{ paddingTop: '0px' }}>
                 <button
                   className="light"
                   type="button"
