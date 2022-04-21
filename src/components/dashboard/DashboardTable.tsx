@@ -160,12 +160,12 @@ export const DashboardTable = ({
           </thead>
           <tbody
             style={{
-              overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
+              overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden', display: 'contents'
             }}
           >
             {table.map((item: (PhaRetailer & PhaIndividual)) => (
-              <tr style={{ height: '60px' }} key={item.individual_id || item.retailer_id}>
-                <td className="wcol1 bbtm padleft">
+              <tr style={{ height: '71px' }} key={item.individual_id || item.retailer_id}>
+                <td className="wcol1 bbtm padleft" style={{ height: '71px' }}>
                   <div className="option">
                     <label className="chkwrap">
                       <span className="store">
