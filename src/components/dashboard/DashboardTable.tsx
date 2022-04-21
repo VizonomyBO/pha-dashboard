@@ -2,10 +2,11 @@ import classNames from 'classnames';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
-import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
+import { TYPE_BUSINESS, SELECT_CATEGORY, TYPE_INDIVIDUAL_FORM } from '../../constants';
 import { ROW_STATUS } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
+import { useIndividualFormDispatch } from '../../store/hooks/individualFormHook';
 import { useRetailerFileReducer } from '../../store/hooks/retailerFilesHook';
 import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
@@ -32,6 +33,8 @@ export const DashboardTable = ({
     setImageLinks,
     setOwnerPhotos
   } = useRetailerFileReducer();
+
+  const { setIndividualForm } = useIndividualFormDispatch();
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [idRetailer, setIdRetailer] = useState('');
   const handleSelected = (checked: boolean, item: PhaRetailer & PhaIndividual) => {
@@ -66,10 +69,23 @@ export const DashboardTable = ({
   };
 
   const showModal = (item: PhaRetailer & PhaIndividual) => {
+    console.log('my item ', item);
     if (item.individual_id) {
+      console.log('entro aca');
       setVisibleFeedback(true);
       setIdRetailer(item.individual_id);
-      console.info('Here you need to open the modal for individual');
+      webRequest.get(ENDPOINTS.INDIVIDUAL_FORM(item.individual_id))
+        .then((res) => res.json())
+        .then((res) => {
+          const individual = res.data as Record<string, string>;
+          console.info(individual);
+          Object.keys(TYPE_INDIVIDUAL_FORM).forEach((key) => {
+            const prop = (TYPE_INDIVIDUAL_FORM as Record<string, string>)[key];
+            console.log(prop);
+            setIndividualForm(prop, individual[prop]);
+          });
+        })
+        .catch((err) => console.error(err));
     } else {
       webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
         .then((res) => res.json())
@@ -148,7 +164,7 @@ export const DashboardTable = ({
             }}
           >
             {table.map((item: (PhaRetailer & PhaIndividual)) => (
-              <tr style={{ height: '60px' }} key={item.retailer_id}>
+              <tr style={{ height: '60px' }} key={item.individual_id || item.retailer_id}>
                 <td className="wcol1 bbtm padleft">
                   <div className="option">
                     <label className="chkwrap">

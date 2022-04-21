@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { JSON_FIELD, MAX_TEXT, TYPE_INDIVIDUAL_FORM } from '../constants';
 import { ROW_STATUS } from '../constants/dashboard';
 import { formConstants } from '../constants/form';
@@ -56,13 +56,16 @@ export const FeedbackForm = (
   const getFormData = (jsonString: string) => {
     const formData = new FormData();
     formData.append(JSON_FIELD, jsonString);
-    files.forEach((file) => {
-      formData.append('files', file);
-    });
+    if (files) {
+      files.forEach((file) => {
+        formData.append('files', file);
+      });
+    }
     return formData;
   };
 
   const proccessPromise = (promise: Promise<Response>) => {
+    console.log('neter to promise ');
     promise.then((res) => res.json()).then((res) => {
       if (res.success) {
         setModal({ type: true, open: true });
@@ -102,7 +105,7 @@ export const FeedbackForm = (
     const formData = getFormData(JSON.stringify(finalObjet).replace("'", "\\'"));
     const headers = webRequest.generateMultipartHeader();
     proccessPromise(webRequest.putMultipart(
-      ENDPOINTS.PHA_INDIVIDUAL(retailerId),
+      ENDPOINTS.INDIVIDUAL_FORM(retailerId),
       formData,
       headers
     ));
@@ -163,7 +166,6 @@ export const FeedbackForm = (
                       checked={availability?.includes(formConstants.AVAILABILITY.FRESH)}
                       onChange={
                         (e: React.FormEvent<HTMLInputElement>) => {
-                          console.log('a');
                           setAvailabilityOptionsCheck(
                             TYPE_INDIVIDUAL_FORM.availability,
                             e.currentTarget.checked,
