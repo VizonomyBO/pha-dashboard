@@ -15,7 +15,6 @@ import { Landing } from './pages/landing';
 import { Home } from './pages/home';
 import { Form } from './pages/form';
 import { Form4 } from './pages/form4';
-import { MainMap } from './pages/mainMap';
 import { Nsform1 } from './pages/nsform1';
 import { Nsform4 } from './pages/nsform4';
 import { Nshome } from './pages/nshome';
@@ -54,12 +53,8 @@ ReactDOM.render(
               element={<Form4 />}
             />
             <Route
-              path="/home"
-              element={<Home />}
-            />
-            <Route
               path="/map"
-              element={<MainMap />}
+              element={<Home />}
             />
             <Route
               path="/nsform1"

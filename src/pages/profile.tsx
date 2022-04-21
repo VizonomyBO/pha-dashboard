@@ -51,7 +51,7 @@ export const Profile = () => {
         <div className="userprofile">
           <div className="pheader">
             <div className="backlink">
-              <Link to="/home" style={{ textDecoration: 'none' }}>
+              <Link to="/map" style={{ textDecoration: 'none' }}>
                 <button type="button" className="light">
                   <span className="icarrowleft" />
                   <span className="txt">Back to Locations</span>
