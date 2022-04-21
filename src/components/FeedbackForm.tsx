@@ -1,6 +1,7 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { JSON_FIELD, MAX_TEXT, TYPE_INDIVIDUAL_FORM } from '../constants';
 import { ROW_STATUS } from '../constants/dashboard';
+import { AvailabilityOptions } from '../@types/database';
 import { formConstants } from '../constants/form';
 import { ENDPOINTS } from '../constants/url';
 import { useModalDispatch } from '../store/hooks';
@@ -11,14 +12,23 @@ import { Attachment } from './Attachment';
 import { EditButtons } from './Editbuttons';
 
 export const FeedbackForm = (
-  { setVisible, retailerId, isEdit = false }
-  : {setVisible: React.Dispatch<React.SetStateAction<boolean>>, retailerId: string, isEdit?: boolean}
+  {
+    setVisible,
+    retailerId,
+    isEdit = false
+  }: {
+    setVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    retailerId: string,
+    isEdit?: boolean
+  }
 ) => {
   const { setIndividualForm, resetIndividualForm } = useIndividualFormDispatch();
   const { setModal } = useModalDispatch();
-  useEffect(() => {
-    setIndividualForm(TYPE_INDIVIDUAL_FORM.retailer_id, retailerId);
-  }, [setIndividualForm, retailerId]);
+  const [availabilityOptions, setAvailabilityOptions] = useState<AvailabilityOptions>({
+    FRESH: false,
+    FROZEN: false,
+    CANNED: false
+  });
 
   const {
     availability,
@@ -33,15 +43,6 @@ export const FeedbackForm = (
     files,
     imagelinks
   } = useIndividualFormState();
-  const setAvailabilityOptionsCheck = (type: string, checked: boolean, value: string) => {
-    if (checked) {
-      setIndividualForm(type, availability === '' ? value : `${availability}, ${value}`);
-    } else {
-      const availabilityCopy = availability ? availability.replace(`${value},`, '') : availability;
-      setIndividualForm(type, availabilityCopy ? availabilityCopy.replace(`, ${value}`, '') : '');
-    }
-  };
-
   const getObject = () => ({
     availability,
     quality,
@@ -116,6 +117,31 @@ export const FeedbackForm = (
   const approveForm = () => putForm(ROW_STATUS.APPROVED);
   const rejectForm = () => putForm(ROW_STATUS.REJECTED);
   const deleteForm = () => putForm(ROW_STATUS.DELETED);
+  useEffect(() => {
+    setIndividualForm(TYPE_INDIVIDUAL_FORM.retailer_id, retailerId);
+  }, [setIndividualForm, retailerId]);
+
+  useEffect(() => {
+    setAvailabilityOptions({
+      FRESH: availability?.includes(formConstants.AVAILABILITY.FRESH) || false,
+      FROZEN: availability?.includes(formConstants.AVAILABILITY.FROZEN) || false,
+      CANNED: availability?.includes(formConstants.AVAILABILITY.CANNED) || false,
+    });
+  }, [availability, setAvailabilityOptions]);
+
+  useEffect(() => {
+    const opts: string[] = [];
+    if (availabilityOptions.FRESH) {
+      opts.push(formConstants.AVAILABILITY.FRESH);
+    }
+    if (availabilityOptions.FROZEN) {
+      opts.push(formConstants.AVAILABILITY.FROZEN);
+    }
+    if (availabilityOptions.CANNED) {
+      opts.push(formConstants.AVAILABILITY.CANNED);
+    }
+    setIndividualForm(TYPE_INDIVIDUAL_FORM.availability, opts.join(', '));
+  }, [availabilityOptions.FRESH, availabilityOptions.FROZEN, availabilityOptions.CANNED, setIndividualForm]);
 
   return (
     <div
@@ -165,14 +191,13 @@ export const FeedbackForm = (
                     Fresh (only continue if checks this)
                     <input
                       type="checkbox"
-                      checked={availability?.includes(formConstants.AVAILABILITY.FRESH)}
+                      checked={availabilityOptions.FRESH}
                       onChange={
-                        (e: React.FormEvent<HTMLInputElement>) => {
-                          setAvailabilityOptionsCheck(
-                            TYPE_INDIVIDUAL_FORM.availability,
-                            e.currentTarget.checked,
-                            formConstants.AVAILABILITY.FRESH
-                          );
+                        () => {
+                          setAvailabilityOptions({
+                            ...availabilityOptions,
+                            FRESH: !availabilityOptions.FRESH
+                          });
                         }
                       }
                     />
@@ -181,15 +206,14 @@ export const FeedbackForm = (
                   <label className="chkwrap">
                     Frozen
                     <input
-                      checked={availability?.includes(formConstants.AVAILABILITY.FROZEN)}
+                      checked={availabilityOptions.FROZEN}
                       type="checkbox"
                       onChange={
-                        (e: React.FormEvent<HTMLInputElement>) => {
-                          setAvailabilityOptionsCheck(
-                            TYPE_INDIVIDUAL_FORM.availability,
-                            e.currentTarget.checked,
-                            formConstants.AVAILABILITY.FROZEN
-                          );
+                        () => {
+                          setAvailabilityOptions({
+                            ...availabilityOptions,
+                            FROZEN: !availabilityOptions.FROZEN
+                          });
                         }
                       }
                     />
@@ -198,15 +222,14 @@ export const FeedbackForm = (
                   <label className="chkwrap">
                     Canned
                     <input
-                      checked={availability?.includes(formConstants.AVAILABILITY.CANNED)}
+                      checked={availabilityOptions.CANNED}
                       type="checkbox"
                       onChange={
-                        (e: React.FormEvent<HTMLInputElement>) => {
-                          setAvailabilityOptionsCheck(
-                            TYPE_INDIVIDUAL_FORM.availability,
-                            e.currentTarget.checked,
-                            formConstants.AVAILABILITY.CANNED
-                          );
+                        () => {
+                          setAvailabilityOptions({
+                            ...availabilityOptions,
+                            CANNED: !availabilityOptions.CANNED
+                          });
                         }
                       }
                     />
