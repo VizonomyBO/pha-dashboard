@@ -27,6 +27,7 @@ export const useMap = () => {
     mapViewFilter
   } = useCategoriesState() || {};
   const TRANSITION_DURATION = 1800;
+  const TRANSITION_DURATION_GEOCODER = 500;
   const { inputText, shouldZoom } = useGeocoderState() || {};
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const [queries, setQueries] = useState<QueriesInterface>();
@@ -58,11 +59,11 @@ export const useMap = () => {
   );
 
   const getPinColor = (originTable: string) => {
-    let defaultPin = PinBlue;
+    let defaultPin = PinGreen;
     if (originTable === 'retailers_pha') {
       defaultPin = PinRed;
     } else if (originTable === 'retailers_osm') {
-      defaultPin = PinGreen;
+      defaultPin = PinBlue;
     }
     return defaultPin;
   };
@@ -102,8 +103,8 @@ export const useMap = () => {
               ...oldViewState,
               latitude: newviewport.latitude,
               longitude: newviewport.longitude,
-              zoom: newviewport.zoom,
-              transitionDuration: TRANSITION_DURATION
+              zoom: newviewport.zoom + 1,
+              transitionDuration: TRANSITION_DURATION_GEOCODER
             };
             return newViewState;
           });
@@ -113,7 +114,7 @@ export const useMap = () => {
               ...oldViewState,
               latitude: inputText.center[1],
               longitude: inputText.center[0],
-              transitionDuration: TRANSITION_DURATION
+              transitionDuration: TRANSITION_DURATION_GEOCODER
             };
             return newViewState;
           });

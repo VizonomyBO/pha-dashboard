@@ -28,9 +28,17 @@ export const CLASSES_BY_FORM = {
   [key: string]: string;
 };
 export const DEFAULT_VIEW_STATE = {
-  latitude: 39.02,
-  longitude: -96,
-  zoom: 3.1,
+  latitude: 32.75657,
+  longitude: -90.073877,
+  zoom: 6.33,
+  bearing: 0,
+  pitch: 0
+};
+
+export const DEFAULT_VIEW_STATE_MOBILE = {
+  latitude: 33.047450,
+  longitude: -90.638029,
+  zoom: 6.3,
   bearing: 0,
   pitch: 0
 };
@@ -219,3 +227,10 @@ export const JSON_FIELD = 'json';
 export const MOBILE_WIDTH = 600;
 
 export const DEFAULT_IMAGE = '/images/img_landing.png';
+
+export const MISSISSIPPI_BBOX:[number, number, number, number] = [
+  -91.7561120665,
+  30.9533699671,
+  -89.7267421499,
+  35.043627319
+];
