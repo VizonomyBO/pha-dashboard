@@ -25,21 +25,23 @@ export const ToolTipMobile = (data: TooltipProps) => {
             />
           </figure>
           <div className="detailcard">
-            <div className="store">{objectTypified?.properties?.name}</div>
-            <div className="services">
-              {
-                badges.map((badge) => (
-                  <span
-                    key={badge}
-                    className="kind icmkdish"
-                    style={{
-                      content: `url("${BADGES[badge].image}")`
-                    }}
-                  />
-                ))
-              }
-            </div>
-            <div className="address">{objectTypified?.properties?.address_1}</div>
+            <div className="store store-bottom-mobile">{objectTypified?.properties?.name}</div>
+            {badges.length !== 0 && (
+              <div className="services services-mobile">
+                {
+                  badges.map((badge) => (
+                    <span
+                      key={badge}
+                      className="kind icmkdish"
+                      style={{
+                        content: `url("${BADGES[badge].image}")`
+                      }}
+                    />
+                  ))
+                }
+              </div>
+            )}
+            <div className="address address-bottom-mobile">{objectTypified?.properties?.address_1}</div>
             <div className="phone">
               <span className="icphone" />
               <span className="number">
