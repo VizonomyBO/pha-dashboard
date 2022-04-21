@@ -400,7 +400,10 @@ input, button, textarea, select {
     }
 }
 .marginbottom {
-  margin-bottom: 12px !important;
+  margin-bottom: 5px !important;
+  height: auto !important;
+  max-height: 40px !important;
+  padding-bottom: 3px !important;
 }
 
 .marginbottompayment { 
@@ -411,9 +414,13 @@ input, button, textarea, select {
   height: auto !important;
 }
 
+.storeUSDABottom {
+  padding-bottom: 8px !important;
+}
+
 @media (max-width: 600px) {
   .marginbottom {
-    margin-bottom: 6px !important;
+    margin-bottom: 10px !important;
     margin-top: 2px !important;
     line-height: 17px !important;
     max-height: 33px !important;
