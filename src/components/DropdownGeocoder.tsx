@@ -1,4 +1,5 @@
 import 'react-map-gl-geocoder/dist/mapbox-gl-geocoder.css';
+import ClearIcon from '@mui/icons-material/Clear';
 import classNames from 'classnames';
 import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { GEOCODER } from '../constants';
@@ -41,6 +42,18 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           onChange={onChangeInput}
           placeholder="City or Zip Code"
           onKeyDown={keyDown}
+        />
+        <ClearIcon
+          style={{ width: '16px', height: '16px', color: '#7a7e80' }}
+          onClick={() => {
+            setInputText({
+              text: '',
+              shouldSearch: false,
+              center: [],
+              bbox: []
+            });
+            setInputTextHtml('');
+          }}
         />
         {type !== 'home' && <span className="iccrosshair" />}
       </div>
