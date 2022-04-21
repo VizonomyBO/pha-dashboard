@@ -1,6 +1,6 @@
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { InputTextInterface } from '../@types/database';
-import { MAPBOX_KEY } from '../constants';
+import { MAPBOX_KEY, MISSISSIPPI_BBOX } from '../constants';
 
 export class GeocoderService {
   t;
@@ -19,6 +19,7 @@ export class GeocoderService {
     this.geocoder = new MapboxGeocoder({
       accessToken: MAPBOX_KEY,
       countries: 'US',
+      bbox: MISSISSIPPI_BBOX,
       marker: false
     });
     if (elem) {

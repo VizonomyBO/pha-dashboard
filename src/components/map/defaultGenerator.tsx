@@ -2,6 +2,7 @@ import { WebMercatorViewport } from 'deck.gl';
 import RenderTooltip from './RenderTooltip';
 import { InputTextInterface } from '../../@types/database';
 import { deckDefaults } from './deckDefaults';
+import { ViewStateInterface } from '../../@types';
 
 export const getLatLonViewport = (inputText: InputTextInterface) => {
   if (inputText?.bbox) {
@@ -24,9 +25,10 @@ export const getLatLonViewport = (inputText: InputTextInterface) => {
   return {};
 };
 
-export const getDeckInitState = (inputText: InputTextInterface) => {
+export const getDeckInitState = (inputText: InputTextInterface, initView: ViewStateInterface) => {
   const newDeckDefault = {
-    ...deckDefaults
+    ...deckDefaults,
+    initialStateView: initView
   };
   if (inputText?.bbox && inputText.bbox.length === 4) {
     const newviewport = getLatLonViewport(inputText);
@@ -41,7 +43,7 @@ export const getDeckInitState = (inputText: InputTextInterface) => {
       ...newDeckDefault.initialStateView,
       latitude: inputText.center[1],
       longitude: inputText.center[0],
-      zoom: 12
+      zoom: 2
     };
   }
   return { ...newDeckDefault, renderToolTip: RenderTooltip };

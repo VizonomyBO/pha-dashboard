@@ -20,6 +20,7 @@ import { getDeckInitState } from './defaultGenerator';
 import { useBadge } from '../../store/hooks/custom/useBadge';
 import { useWindowSize } from '../../store/hooks/custom/useWindowSize';
 import { CompletelyIntentionalAny } from '../../@types/database';
+import { MOBILE_WIDTH, DEFAULT_VIEW_STATE, DEFAULT_VIEW_STATE_MOBILE } from '../../constants';
 
 export const Map = (
   { setVisibleFeedback, setCurrentRetailerId }
@@ -44,8 +45,9 @@ export const Map = (
   const {
     center, elementProperties
   } = useMarkerState() || {};
+  const initView = width <= MOBILE_WIDTH ? DEFAULT_VIEW_STATE_MOBILE : DEFAULT_VIEW_STATE;
   const TRANSITION_OFFSET = 200;
-  const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText));
+  const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText, initView));
   const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);
