@@ -10,7 +10,7 @@ const individualFormReducer = (state: PhaIndividual = INITIAL_INDIVIDUAL_FORM, a
         ...state,
         [action.payload]: action.value
       };
-    case TYPES.INIT:
+    case TYPES.RESET_INDIVIDUAL_FORM:
       return { ...state, ...INITIAL_INDIVIDUAL_FORM };
     default:
       return {

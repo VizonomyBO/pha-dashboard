@@ -1,14 +1,16 @@
 import classNames from 'classnames';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
-import { TYPE_BUSINESS, SELECT_CATEGORY } from '../../constants';
+import { TYPE_BUSINESS, SELECT_CATEGORY, TYPE_INDIVIDUAL_FORM } from '../../constants';
 import { ROW_STATUS } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
+import { useIndividualFormDispatch } from '../../store/hooks/individualFormHook';
 import { useRetailerFileReducer } from '../../store/hooks/retailerFilesHook';
 import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
+import { FeedbackForm } from '../FeedbackForm';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
 export const DashboardTable = ({
@@ -25,13 +27,17 @@ export const DashboardTable = ({
     setBusinessDetails, setSelectCategory, setWicAccepted, setSnapAccepted,
     setOtherQuestions, setAvailabilityOptions, setQuality,
     setVisibility, setLocal, setProduceAvailStore, setProduceAvailSeasonally,
-    setContactName, setContactEmail, setContactOwner, setContactPatron
+    setContactName, setContactEmail, setContactOwner, setContactPatron,
   } = useMarketplaceDispatch();
   const {
     setImageLinks,
     setOwnerPhotos
   } = useRetailerFileReducer();
-  const handleSelected = (checked: boolean, item: PhaRetailer) => {
+
+  const { setIndividualForm } = useIndividualFormDispatch();
+  const [visibleFeedback, setVisibleFeedback] = useState(false);
+  const [idRetailer, setIdRetailer] = useState('');
+  const handleSelected = (checked: boolean, item: PhaRetailer & PhaIndividual) => {
     let newSelectedElements: string[];
     if (checked) {
       newSelectedElements = [...selectedElements, item.retailer_id || ''];
@@ -44,7 +50,10 @@ export const DashboardTable = ({
   const selectAll = (checked: boolean) => {
     let newSelectedElements: Set<string> = new Set(selectedElements);
     if (checked) {
-      const selectedElementsSet = [...selectedElements, ...table.map((item: PhaRetailer) => item.retailer_id || '')];
+      const selectedElementsSet = [
+        ...selectedElements,
+        ...table.map((item: (PhaRetailer & PhaIndividual)) => item.retailer_id || '')
+      ];
       newSelectedElements = new Set(selectedElementsSet);
     } else {
       table.forEach((item) => {
@@ -59,40 +68,59 @@ export const DashboardTable = ({
     return checked;
   };
 
-  const showModal = (item: PhaRetailer) => {
-    webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
-      .then((res) => res.json())
-      .then((res) => {
-        const retailer = res.data as Record<string, string>;
-        Object.keys(TYPE_BUSINESS).forEach((key: string) => {
-          const prop = (TYPE_BUSINESS as Record<string, string>)[key];
-          setBusinessDetails(prop, retailer[prop]);
-        });
-        Object.keys(SELECT_CATEGORY).forEach((key: string) => {
-          const prop = (SELECT_CATEGORY as Record<string, string>)[key];
-          setSelectCategory(prop, retailer[prop]);
-        });
-        setWicAccepted(retailer.wic_accepted);
-        setSnapAccepted(retailer.snap_accepted);
+  const showModal = (item: PhaRetailer & PhaIndividual) => {
+    console.log('my item ', item);
+    if (item.individual_id) {
+      console.log('entro aca');
+      setVisibleFeedback(true);
+      setIdRetailer(item.individual_id);
+      webRequest.get(ENDPOINTS.INDIVIDUAL_FORM(item.individual_id))
+        .then((res) => res.json())
+        .then((res) => {
+          const individual = res.data as Record<string, string>;
+          console.info(individual);
+          Object.keys(TYPE_INDIVIDUAL_FORM).forEach((key) => {
+            const prop = (TYPE_INDIVIDUAL_FORM as Record<string, string>)[key];
+            console.log(prop);
+            setIndividualForm(prop, individual[prop]);
+          });
+        })
+        .catch((err) => console.error(err));
+    } else {
+      webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
+        .then((res) => res.json())
+        .then((res) => {
+          const retailer = res.data as Record<string, string>;
+          Object.keys(TYPE_BUSINESS).forEach((key: string) => {
+            const prop = (TYPE_BUSINESS as Record<string, string>)[key];
+            setBusinessDetails(prop, retailer[prop]);
+          });
+          Object.keys(SELECT_CATEGORY).forEach((key: string) => {
+            const prop = (SELECT_CATEGORY as Record<string, string>)[key];
+            setSelectCategory(prop, retailer[prop]);
+          });
+          setWicAccepted(retailer.wic_accepted);
+          setSnapAccepted(retailer.snap_accepted);
 
-        setImageLinks(retailer.imagelinks);
-        setOwnerPhotos(retailer.owner_photo);
+          setImageLinks(retailer.imagelinks);
+          setOwnerPhotos(retailer.owner_photo);
 
-        setOtherQuestions(retailer.description);
-        setAvailabilityOptions(retailer.availability.split(','));
-        setQuality(retailer.quality);
-        setVisibility(retailer.visibility);
-        setLocal(retailer.local);
-        setProduceAvailStore(retailer.produce_avail_store);
-        setProduceAvailSeasonally(retailer.produce_avail_seasonally);
+          setOtherQuestions(retailer.description);
+          setAvailabilityOptions(retailer.availability.split(','));
+          setQuality(retailer.quality);
+          setVisibility(retailer.visibility);
+          setLocal(retailer.local);
+          setProduceAvailStore(retailer.produce_avail_store);
+          setProduceAvailSeasonally(retailer.produce_avail_seasonally);
 
-        setContactName(retailer.contact_name);
-        setContactEmail(retailer.contact_email);
-        setContactOwner(retailer.contact_owner);
-        setContactPatron(retailer.contact_patron);
-      })
-      .catch((err) => console.error(err));
-    setModal({ open: true, type: true });
+          setContactName(retailer.contact_name);
+          setContactEmail(retailer.contact_email);
+          setContactOwner(retailer.contact_owner);
+          setContactPatron(retailer.contact_patron);
+        })
+        .catch((err) => console.error(err));
+      setModal({ open: true, type: true });
+    }
   };
 
   return (
@@ -135,8 +163,8 @@ export const DashboardTable = ({
               overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden'
             }}
           >
-            {table.map((item: PhaRetailer) => (
-              <tr style={{ height: '60px' }} key={item.retailer_id}>
+            {table.map((item: (PhaRetailer & PhaIndividual)) => (
+              <tr style={{ height: '60px' }} key={item.individual_id || item.retailer_id}>
                 <td className="wcol1 bbtm padleft">
                   <div className="option">
                     <label className="chkwrap">
@@ -189,6 +217,7 @@ export const DashboardTable = ({
           </tbody>
           <DashboardTableFooter setParams={setParams} totalElements={totalElements} />
         </table>
+        {visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={idRetailer} isEdit />}
       </div>
     </div>
   );
