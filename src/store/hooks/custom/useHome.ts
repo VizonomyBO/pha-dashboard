@@ -33,6 +33,7 @@ export const useHome = () => {
       signalArray[signalArray.length - 1].abort();
       signalArray.push(auxAbort);
       const headers = webRequest.generateJSONHeader();
+      setHasNext(false);
       webRequest
         .post(
           `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}`,
@@ -53,6 +54,7 @@ export const useHome = () => {
             res.data.rows.forEach((element: DataPhaDasboardMap) => {
               dataRows.push(element);
             });
+            console.log('this is data', _currentPage, dataRows);
             if (_currentPage > INIT_PAGE) {
               setDataRequest((oldDR) => {
                 const newDR = [...oldDR, ...dataRows];

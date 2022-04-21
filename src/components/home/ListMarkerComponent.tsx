@@ -33,7 +33,7 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
     }
     return (
       <div
-        key={`itemMarker${element.retailer_id}`}
+        key={`itemMarker${element.retailer_id}${Math.random()}`}
         className="item"
         // onMouseEnter={() => zoomToMarker(element, 'hover')}
         onClick={() => zoomToMarker(element, 'click')}
