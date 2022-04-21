@@ -177,6 +177,15 @@ input, button, textarea, select {
 .swhere-home {
   max-width: 200px;
   width: 200px;
+  position: relative;
+  .clear-button {
+    background-image: url('../../public/ic-close.png');
+    background-repeat: no-repeat;
+    width: 10px;
+    height: 20px;
+    position: absolute;
+    right: 5px;
+  }
 }
 
 .ul-address {
