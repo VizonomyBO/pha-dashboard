@@ -6,7 +6,7 @@ import { formConstants } from '../constants/form';
 import { ENDPOINTS } from '../constants/url';
 import { useModalDispatch } from '../store/hooks';
 import { useIndividualFormDispatch, useIndividualFormState } from '../store/hooks/individualFormHook';
-import { deleteBreakLines } from '../utils/validation';
+import { deleteBreakLines, validationIndividualForm } from '../utils/validation';
 import { webRequest } from '../utils/webRequest';
 import { Attachment } from './Attachment';
 import { EditButtons } from './Editbuttons';
@@ -68,27 +68,38 @@ export const FeedbackForm = (
   };
 
   const proccessPromise = (promise: Promise<Response>) => {
-    console.log('neter to promise ');
     promise.then((res) => res.json()).then((res) => {
       if (res.success) {
-        setModal({ type: true, open: true });
+        if (!isEdit) {
+          setModal({ type: true, open: true });
+        }
         setVisible(false);
         resetIndividualForm();
       } else {
-        setModal({ type: false, open: true });
+        if (!isEdit) {
+          setModal({ type: false, open: true });
+        }
+        setVisible(false);
+        resetIndividualForm();
       }
     });
   };
 
   const sendForm = () => {
-    const obj = getObject();
-    const formData = getFormData(JSON.stringify(obj).replace("'", "\\'"));
-    const headers = webRequest.generateMultipartHeader();
-    proccessPromise(webRequest.postMultipart(
-      ENDPOINTS.PHA_INDIVIDUAL(),
-      formData,
-      headers
-    ));
+    if (validationIndividualForm({
+      availability, quality, visibility, local, meets_need
+    })) {
+      const obj = getObject();
+      const formData = getFormData(JSON.stringify(obj).replace("'", "\\'"));
+      const headers = webRequest.generateMultipartHeader();
+      proccessPromise(webRequest.postMultipart(
+        ENDPOINTS.PHA_INDIVIDUAL(),
+        formData,
+        headers
+      ));
+    } else if (!isEdit) {
+      setModal({ type: false, open: true });
+    }
   };
 
   const closeModal = (type: boolean, e: React.MouseEvent) => {
@@ -534,8 +545,8 @@ export const FeedbackForm = (
               <div className="item">
                 <div className="ainput chk">
                   <label className="chkwrap">
-                    Stay connected to your local retailers and your community! I agree to allow P
-                    HA and its affiliates to use my contact information for communication purposes.
+                    Stay connected to your local retailers and your community! I agree to allow PHA
+                    and its affiliates to use my contact information for communication purposes.
                     <input type="checkbox" />
                     <span className="checkmark ckeckmark-form" />
                   </label>

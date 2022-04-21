@@ -118,3 +118,11 @@ export interface ButtonDashboard {
 }
 
 export type validationText = {value: string}
+
+export interface PhaIndividualValidation {
+  availability: string | undefined,
+  quality: string | undefined,
+  visibility: string | undefined,
+  local: string | undefined,
+  meets_need: string | undefined
+}
