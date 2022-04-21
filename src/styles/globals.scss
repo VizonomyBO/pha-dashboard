@@ -399,27 +399,30 @@ input, button, textarea, select {
         }
     }
 }
-.marginbottom {
+.margin-bottom {
   margin-bottom: 5px !important;
   height: auto !important;
   max-height: 40px !important;
   padding-bottom: 3px !important;
 }
 
-.marginbottompayment { 
+.margin-bottom-payment { 
   padding-bottom: 5px !important;
 }
 
-.usdamobile {
+.usda-mobile {
   height: auto !important;
 }
 
-.storeUSDABottom {
+.store-USDA-bottom {
   padding-bottom: 8px !important;
+}
+.max-width-usda {
+  max-width: 60px !important;
 }
 
 @media (max-width: 600px) {
-  .marginbottom {
+  .margin-bottom {
     margin-bottom: 10px !important;
     margin-top: 2px !important;
     line-height: 17px !important;

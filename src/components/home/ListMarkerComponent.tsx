@@ -47,7 +47,7 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
         <div className="statemk">
           <div className="cardmk">
             <div className={`icmk${color} dimensions`} />
-            <div className={`desc ${color}`}>{namemark}</div>
+            <div className={`desc ${color} max-width-usda`}>{namemark}</div>
           </div>
         </div>
         <div className="descres">
