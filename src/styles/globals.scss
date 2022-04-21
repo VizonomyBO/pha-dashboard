@@ -351,18 +351,26 @@ input, button, textarea, select {
 @media (min-width: 1920px) {
     .dropdown-categories-select {
         color: #161A23 !important;
+        font-size: 18px !important;
+        padding-left: -16px !important;
+        margin-left: 0;
+        width: 224px !important;
         em {
             font-family: "FuturaMedium", sans-serif;
             font-style: normal;
-            font-size: 18px;
-            line-height: 18px;
+            font-size: 18px !important;
+            line-height: 18px !important;
             color: #161A23;
         }
     }
 }
 @media (min-width: 2560px) {
-    div.dropdown-categories-select {
+    .dropdown-categories-select {
         color: #161A23 !important;
+        font-size: 24px !important;
+        padding-left: -16px !important;
+        margin-left: 0;
+        width: 300px !important;
         em {
             font-family: "FuturaMedium", sans-serif;
             font-style: normal;

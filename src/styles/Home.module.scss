@@ -4588,14 +4588,13 @@ header.topmenu {
 						}
 						.ainput {
 							height: 72px;
-							input[type=text] {
+							input[type=text],input[type=number] {
 								padding: 24px 24px;
 								font-size: 21px;
 							}
 						}
 					}
 					.left {
-
 					}
 					.right {
 						.panel .body .card .group {
@@ -4629,7 +4628,7 @@ header.topmenu {
 				.aaction {
 					button.light {
 						font-size: 21px;
-						padding: 20px 78px;
+						padding: 24px 78px;
 					}
 				}
 			}
@@ -5509,14 +5508,14 @@ header.topmenu {
 						padding-bottom: 20px;
 					}
 					.item {
-						padding-bottom: 32px;
+						padding-bottom: 42px;
 						.title {
 							font-size: 28px;
 							padding-bottom: 18px;
 						}
 						.ainput {
 							height: 72px;
-							input[type=text] {
+							input[type=text], input[type=number]  {
 								padding: 24px 24px;
 								font-size: 28px;
 							}
@@ -5555,8 +5554,8 @@ header.topmenu {
 				}
 				.aaction {
 					button.light {
-						font-size: 21px;
-						padding: 20px 78px;
+						font-size: 28px;
+						padding: 32px 105px;
 					}
 				}
 			}
