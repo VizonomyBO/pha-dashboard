@@ -102,7 +102,7 @@ export const FeedbackForm = (
     const obj = getObject();
     let finalObjet: unknown = { submission_status: status };
     if (status === ROW_STATUS.APPROVED) {
-      finalObjet = { obj, submission_status: status };
+      finalObjet = { ...obj, submission_status: status };
     }
     const formData = getFormData(JSON.stringify(finalObjet).replace("'", "\\'"));
     const headers = webRequest.generateMultipartHeader();
