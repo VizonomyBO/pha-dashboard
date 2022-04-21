@@ -15,7 +15,7 @@ import {
   OTHER_QUESTIONS
 } from '../constants';
 
-export const isEmpty = (field: string) => !!field;
+export const isEmpty = (field: string | undefined) => !!field;
 
 export const isLiteralYes = (field: string) => field === MARKED_ELEMENT;
 
@@ -171,4 +171,17 @@ export const ValidationDeleteBreakLines = (text: string, setText: (value: string
   if (numbertext.split(' ').length <= MAX_TEXT) {
     setText(numbertext);
   }
+};
+
+export const validationIndividualForm = (
+  availability: string | undefined,
+  quality: string | undefined,
+  visibility: string | undefined,
+  local: string | undefined,
+  meets_need: string | undefined
+) => {
+  if (isEmpty(availability) || isEmpty(quality) || isEmpty(visibility) || isEmpty(local) || isEmpty(meets_need)) {
+    return true;
+  }
+  return false;
 };
