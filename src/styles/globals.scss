@@ -399,3 +399,21 @@ input, button, textarea, select {
         }
     }
 }
+.marginbottom {
+  margin-bottom: 12px !important;
+}
+
+.marginbottompayment { 
+  padding-bottom: 5px !important;
+}
+
+.usdamobile {
+  height: auto !important;
+}
+
+@media (max-width: 600px) {
+  .marginbottom {
+    margin-bottom: 6px !important;
+    margin-top: 2px !important;
+  }  
+}

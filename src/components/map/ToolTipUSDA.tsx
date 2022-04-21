@@ -22,15 +22,15 @@ export const ToolTipUSDA = (data: TooltipProps) => {
 
   return (
     <div
-      className={isMobile ? 'bmodal' : 'modal'}
+      className={isMobile ? 'bmodal usdamobile' : 'modal'}
       style={{ left: isMobile ? '' : x, top: isMobile ? '' : currentY }}
       ref={popupRef}
     >
       <div className={classNames('detailcard', isMobile ? 'detailCardOther' : '')}>
         <div className="store"><b>{getName(objectTypified).toUpperCase()}</b></div>
-        <div className="address">{getAddress(objectTypified)}</div>
-        <div className="store"> Payment Type</div>
-        <div className="address">{objectTypified?.properties?.snap_option ?? 'No payment type collected'}</div>
+        <div className="address marginbottom">{getAddress(objectTypified)}</div>
+        <div className="store marginbottompayment"> Payment Type</div>
+        <div className="payment">{objectTypified?.properties?.snap_option ?? 'No payment type collected'}</div>
       </div>
     </div>
   );
