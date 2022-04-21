@@ -30,7 +30,7 @@ export const ToolTipUSDA = (data: TooltipProps) => {
         <div className="store"><b>{getName(objectTypified).toUpperCase()}</b></div>
         <div className="address">{getAddress(objectTypified)}</div>
         <div className="store"> Payment Type</div>
-        <div className="address">{objectTypified?.properties?.snap_option ?? '-'}</div>
+        <div className="address">{objectTypified?.properties?.snap_option ?? 'No payment type collected'}</div>
       </div>
     </div>
   );
