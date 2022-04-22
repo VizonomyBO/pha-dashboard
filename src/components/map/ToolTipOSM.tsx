@@ -17,11 +17,18 @@ export const ToolTipOSM = (data: TooltipProps) => {
   const [currentY, setCurrentY] = useState(y);
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { getAddress, getPostCode } = useTooltip();
+  const [currentX, setCurrentX] = useState(x);
   useEffect(() => {
     if (popupRef.current) {
-      setCurrentY(y - popupRef.current.getBoundingClientRect().height);
+      setCurrentY(y - popupRef.current.getBoundingClientRect().height - 10);
     }
-  }, [popupRef, setCurrentY, y]);
+  }, [y, popupRef, setCurrentY]);
+
+  useEffect(() => {
+    if (popupRef.current) {
+      setCurrentX(x - popupRef.current.getBoundingClientRect().width / 2);
+    }
+  }, [x, popupRef, setCurrentX]);
   const setDataBusiness = () => {
     if (objectTypified.properties?.name) {
       setBusinessDetails(TYPE_BUSINESS.NAME, objectTypified.properties.name);
@@ -48,7 +55,7 @@ export const ToolTipOSM = (data: TooltipProps) => {
   return (
     <div
       className={classNames({ bmodal: isMobile, 'usda-mobile': isMobile, modal: !isMobile })}
-      style={{ left: isMobile ? '' : x, top: isMobile ? '' : currentY }}
+      style={{ left: isMobile ? '' : currentX, top: isMobile ? '' : currentY }}
       ref={popupRef}
     >
       <div className={classNames('detailcard', { 'detail-card-other': isMobile })}>
