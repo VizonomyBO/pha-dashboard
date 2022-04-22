@@ -17,7 +17,8 @@ import {
   useMarketplaceDispatch,
   useMarketplaceState,
   useModalDispatch,
-  useGeocoderDispatch
+  useGeocoderDispatch,
+  useLoaderDispatch
 } from '../store/hooks';
 import { Formvalidation } from '../utils/validation';
 import { FormArea } from '../components/FormArea';
@@ -41,6 +42,7 @@ export const Form = () => {
     contactDetails,
     files
   } = useMarketplaceState();
+  const { setLoaderState } = useLoaderDispatch();
   const {
     setResetGeocoder
   } = useGeocoderDispatch();
@@ -77,6 +79,7 @@ export const Form = () => {
       setModal({ type: estate.type, open: true });
     }
     if (value === HOME) {
+      setLoaderState(true);
       const headers = webRequest.generateMultipartHeader();
       const bodyGen = getPhaRetailerBody();
       // eslint-disable-next-line max-len
@@ -96,6 +99,7 @@ export const Form = () => {
       ).then((res) => res.json()).then((res) => {
         if (res.success) {
           setModal({ type: estate.type, open: estate.open });
+          setLoaderState(false);
           setTimeout(() => {
             setResetGeocoder();
             if (businessDetails?.master_id) {
