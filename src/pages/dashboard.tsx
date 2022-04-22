@@ -72,7 +72,7 @@ export const Dashboard = () => {
               default:
                 break;
             }
-            const estate = Formvalidation(
+            const state = Formvalidation(
               value,
               activeTab,
               businessDetails,
@@ -80,9 +80,6 @@ export const Dashboard = () => {
               selectAccessibility,
               otherQuestions
             );
-            if (!estate.type) {
-              // setModal({ type: estate.type, open: true });
-            }
             if (value === HOME) {
               const headers = webRequest.generateMultipartHeader();
               const bodyGen = getPhaRetailerBody();
@@ -91,10 +88,10 @@ export const Dashboard = () => {
               const formData = new FormData();
               formData.append('json', JSON.stringify(body.json));
               body.images.forEach((image: Blob) => {
-                formData.append('images', image);
+                formData.append(ATTACHMENTS_SUB_TYPES.IMAGES, image);
               });
               body.ownerimages.forEach((image: Blob) => {
-                formData.append('ownerimages', image);
+                formData.append(ATTACHMENTS_SUB_TYPES.OWNER_IMAGES, image);
               });
               webRequest.postMultipart(
                 ENDPOINTS.PHA_RETAILERS(),
@@ -102,7 +99,6 @@ export const Dashboard = () => {
                 headers
               ).then((res) => res.json()).then((res) => {
                 if (res.success) {
-                  // setModal({ type: estate.type, open: estate.open });
                   setTimeout(() => {
                     setResetGeocoder();
                     if (businessDetails?.master_id) {
@@ -110,7 +106,7 @@ export const Dashboard = () => {
                         ENDPOINTS.DELETE_OSM(businessDetails.master_id)
                       ).then((resDelete) => resDelete.json()).then((resDelete) => {
                         if (resDelete.success) {
-                          console.log('osm_point_deleted', resDelete, businessDetails.master_id);
+                          console.info('osm_point_deleted', resDelete, businessDetails.master_id);
                         }
                       });
                     }
@@ -122,7 +118,7 @@ export const Dashboard = () => {
                 }
               });
             } else {
-              setActiveTab(estate.value as FormTabType);
+              setActiveTab(state.value as FormTabType);
             }
           }}
           clickApprove={() => {
@@ -203,7 +199,7 @@ export const Dashboard = () => {
               });
             setModal({ open: false, type: false });
             resetBusiness();
-            setActiveTab('businessDetails');
+            setActiveTab(BUSINESS_DETAILS);
           }}
           clickDecline={() => {
             const headers = webRequest.generateMultipartHeader();

@@ -44,7 +44,7 @@ export const FormArea = ({
     if (!typeModal) {
       setModal({ type: typeModal, open: typeModal });
       resetBusiness();
-      setActiveTab('businessDetails');
+      setActiveTab(BUSINESS_DETAILS);
     }
   };
   const formAreaClass = classNames('formarea', { [formClass]: true });
