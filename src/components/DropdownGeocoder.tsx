@@ -27,7 +27,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
   const tableClassNames = classNames({ 'table-geocoder': type !== 'home', 'table-geocoder-home': type === 'home' });
   return (
     <>
-      <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
+      <div className={classNames({ swhere: type !== 'home', 'swhere-home': type === 'home' })}>
         {type !== 'home'
           && (
           <>
