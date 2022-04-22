@@ -6125,6 +6125,7 @@ header.topmenu {
 				display: block;
 				width: 100%;
 				z-index: 5;
+        background-color: white;
 				.tab {
 					height: 62px;
 					border-top-left-radius: 16px;
@@ -6671,7 +6672,7 @@ header.topmenu {
 	/* end home map */
 	/* landing */
 	.container {
-		height: 100%;
+		height: 100vh;
 		.pagecontainer {
 			.ldgaccesspoint {
 				padding-top: 0px;
