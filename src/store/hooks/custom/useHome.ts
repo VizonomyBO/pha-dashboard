@@ -9,6 +9,7 @@ import {
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS } from '../../../constants/url';
 import { useCategoriesState } from '../categoriesHook';
+import { useLoaderDispatch } from '../loaderHook';
 import { DataPhaDasboardMap } from '../../../@types';
 
 export const useHome = () => {
@@ -20,6 +21,7 @@ export const useHome = () => {
     bbox,
     mapViewFilter
   } = useCategoriesState() || {};
+  const { setLoaderState } = useLoaderDispatch();
   const VALUES_PER_PAGE = 25;
   const INIT_PAGE = 1;
   const [dataRequest, setDataRequest] = useState<DataPhaDasboardMap[]>([]);
@@ -29,6 +31,7 @@ export const useHome = () => {
   const signalArray: AbortController[] = useMemo(() => [abort.current], [abort]);
   const getMarkers = useCallback(
     (_currentPage: number) => {
+      setLoaderState(true);
       const auxAbort = new AbortController();
       signalArray[signalArray.length - 1].abort();
       signalArray.push(auxAbort);
@@ -62,6 +65,7 @@ export const useHome = () => {
             } else {
               setDataRequest(dataRows);
             }
+            setLoaderState(false);
             setHasNext(res.data.hasNextPage);
           }
         })
@@ -71,7 +75,7 @@ export const useHome = () => {
           }
         });
     },
-    [categoriesSelected, accesibilities, dataSources, bbox, mapViewFilter, signalArray]
+    [categoriesSelected, accesibilities, dataSources, bbox, mapViewFilter, signalArray, setLoaderState]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);

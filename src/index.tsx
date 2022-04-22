@@ -25,11 +25,13 @@ import { Nsprofile } from './pages/nsprofile';
 import { Nsdashboard } from './pages/nsdashboard';
 
 import { theme } from './theme';
+import { Loader } from './components/map/Loader';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <React.StrictMode>
+        <Loader />
         <BrowserRouter>
           <Routes>
             <Route
