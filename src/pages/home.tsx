@@ -169,7 +169,7 @@ export const Home = () => {
                 <div className="space">
                   <div className="line" />
                 </div>
-                <div className="title">All Retailer</div>
+                <div className="title">All Retailers</div>
               </div>
               {openAllRetailer && (
                 <div className="listpanel">
