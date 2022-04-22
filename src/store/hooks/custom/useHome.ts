@@ -65,9 +65,7 @@ export const useHome = () => {
             } else {
               setDataRequest(dataRows);
             }
-            setTimeout(() => {
-              setLoaderState(false);
-            }, 600);
+            setLoaderState(false);
             setHasNext(res.data.hasNextPage);
           }
         })
