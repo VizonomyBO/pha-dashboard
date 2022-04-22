@@ -46,19 +46,24 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
         />
         {inputTextHtml !== ''
           && (
-          <ClearIcon
-            className={classNames({ 'icon-home': type !== 'home' })}
-            style={{ width: '16px', height: '16px', color: '#7a7e80' }}
-            onClick={() => {
-              setInputText({
-                text: '',
-                shouldSearch: false,
-                center: [],
-                bbox: []
-              });
-              setInputTextHtml('');
-            }}
-          />
+            <div className="icon-home">
+              <ClearIcon
+                style={{
+                  width: '16px',
+                  height: '16px',
+                  color: '#7a7e80'
+                }}
+                onClick={() => {
+                  setInputText({
+                    text: '',
+                    shouldSearch: false,
+                    center: [],
+                    bbox: []
+                  });
+                  setInputTextHtml('');
+                }}
+              />
+            </div>
           )}
         {type !== 'home' && <span className="iccrosshair" />}
       </div>
