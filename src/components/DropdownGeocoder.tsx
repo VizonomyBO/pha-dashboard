@@ -44,7 +44,9 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           placeholder="City or Zip Code"
           onKeyDown={keyDown}
         />
-        {/* {inputTextHtml !== ''
+        
+        {/* this comment is intentional, it will be back in near future
+         {inputTextHtml !== ''
           && (
             <div className="icon-home">
               <ClearIcon
