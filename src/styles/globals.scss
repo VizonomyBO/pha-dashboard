@@ -172,11 +172,11 @@ input, button, textarea, select {
   display: 'block';
   position: absolute;
   max-width: 313;
-  top: 338px;
+  top: 400px;
 }
 .swhere-home {
-  max-width: 200px;
-  width: 200px;
+  // max-width: 200px;
+  // width: 200px;
   position: relative;
   .clear-button {
     background-image: url('../../public/ic-close.png');
@@ -338,7 +338,7 @@ input, button, textarea, select {
 }
 
 .text-input-home {
-    width: 75% !important;
+    width: 75%;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
@@ -356,6 +356,11 @@ input, button, textarea, select {
         line-height: 14px;
         color: #161A23;
     }
+}
+.icon-home {
+  top: 27%;
+  right: 4px;
+  position: absolute;
 }
 @media (min-width: 1920px) {
     .dropdown-categories-select {
@@ -492,5 +497,8 @@ input, button, textarea, select {
     align-content: flex-end;
     margin-left: auto;
     padding-right: 5px;
+  }
+  .text-input-home {
+    width: 75% !important;
   }
 }
