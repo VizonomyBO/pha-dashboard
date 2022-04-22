@@ -14,7 +14,7 @@ import {
   OTHER_QUESTIONS
 } from '../constants';
 import {
-  useMarketplaceDispatch, useModalDispatch, useModalState, useTabState
+  useMarketplaceDispatch, useModalDispatch, useModalState, useTabDispatch, useTabState
 } from '../store/hooks';
 
 export const FormArea = ({
@@ -31,6 +31,7 @@ export const FormArea = ({
   clickDelete?: () => void;
 }) => {
   const { activeTab } = useTabState();
+  const { setActiveTab } = useTabDispatch();
   const { resetBusiness } = useMarketplaceDispatch();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
   const { setModal } = useModalDispatch();
@@ -41,7 +42,9 @@ export const FormArea = ({
   ) => {
     e.stopPropagation();
     if (!typeModal) {
-      setModal({ type: typeModal, open: type });
+      setModal({ type: typeModal, open: typeModal });
+      resetBusiness();
+      setActiveTab(BUSINESS_DETAILS);
     }
   };
   const formAreaClass = classNames('formarea', { [formClass]: true });

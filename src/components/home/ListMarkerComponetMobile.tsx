@@ -34,7 +34,7 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
             </div>
           )}
           {picture.length === 1 && (
-            <div className="picture">
+            <div className="picture" style={{ paddingBottom: '8px' }}>
               <img className="img" src={picture[0]} alt="" />
             </div>
           )}

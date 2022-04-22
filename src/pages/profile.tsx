@@ -208,7 +208,7 @@ export const Profile = () => {
                 <div className="line" />
               </div>
               <div className="txtbt">
-                {picture.length > 1 && picture[0] !== '' ? 'Photo Gallery'
+                {picture.length >= 1 && picture[0] !== '' ? 'Photo Gallery'
                   : <div className="txtst">No images available at this time.</div>}
               </div>
               <div className="gallery">

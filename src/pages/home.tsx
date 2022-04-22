@@ -148,7 +148,7 @@ export const Home = () => {
               className="supermarketfilter"
               onClick={() => (setOpenModal(true))}
             >
-              Supermarket/super...
+              Filters & Layers
               <KeyboardArrowDownIcon style={{ marginLeft: '8px', marginBottom: '-5px' }} />
             </button>
             <Link to="/form">
