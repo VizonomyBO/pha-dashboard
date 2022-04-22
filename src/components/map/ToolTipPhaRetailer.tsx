@@ -22,15 +22,23 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
   };
   const popupRef = useRef<HTMLDivElement>(null);
   const [currentY, setCurrentY] = useState(y);
+  const [currentX, setCurrentX] = useState(x);
   useEffect(() => {
     if (popupRef.current) {
-      setCurrentY(y - popupRef.current.getBoundingClientRect().height);
+      setCurrentY(y - popupRef.current.getBoundingClientRect().height - 10);
     }
-  }, [y, popupRef, setCurrentY]);
+  }, [y, popupRef, setCurrentY, badges]);
+
+  useEffect(() => {
+    if (popupRef.current) {
+      setCurrentX(x - popupRef.current.getBoundingClientRect().width / 2);
+    }
+  }, [x, popupRef, setCurrentX, badges]);
+
   return (
     <div
       className="modal"
-      style={{ left: x, top: currentY }}
+      style={{ left: currentX, top: currentY }}
       ref={popupRef}
     >
       <figure className="picture">
