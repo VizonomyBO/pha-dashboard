@@ -28,12 +28,13 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
   return (
     <>
       <div className={type !== 'home' ? 'swhere' : 'swhere-home'}>
-        {type !== 'home' && (
+        {type !== 'home'
+          && (
           <>
             <span className="icmappin" />
             <span className="txtd">Where</span>
           </>
-        )}
+          )}
         <input
           ref={geocoderDivRef}
           className="txtd text-input-home"
@@ -43,18 +44,21 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           placeholder="City or Zip Code"
           onKeyDown={keyDown}
         />
-        <ClearIcon
-          style={{ width: '16px', height: '16px', color: '#7a7e80' }}
-          onClick={() => {
-            setInputText({
-              text: '',
-              shouldSearch: false,
-              center: [],
-              bbox: []
-            });
-            setInputTextHtml('');
-          }}
-        />
+        {inputTextHtml !== ''
+          && (
+          <ClearIcon
+            style={{ width: '16px', height: '16px', color: '#7a7e80' }}
+            onClick={() => {
+              setInputText({
+                text: '',
+                shouldSearch: false,
+                center: [],
+                bbox: []
+              });
+              setInputTextHtml('');
+            }}
+          />
+          )}
         {type !== 'home' && <span className="iccrosshair" />}
       </div>
       <div className={blockClassNames}>
@@ -64,10 +68,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
               && options.map((opt: Result, index: number) => {
                 const { region } = findRegion(opt);
                 return (
-                  <li
-                    key={`${opt.place_name}index`}
-                    className={trClassNames(index)}
-                  >
+                  <li key={`${opt.place_name}index`} className={trClassNames(index)}>
                     <button
                       className="button-goecoder"
                       type="button"

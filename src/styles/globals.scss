@@ -338,7 +338,7 @@ input, button, textarea, select {
 }
 
 .text-input-home {
-    width: 180px !important;
+    width: 75% !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
     overflow: hidden !important;
@@ -486,5 +486,11 @@ input, button, textarea, select {
   }
   .store-osm-bottom {
     padding-bottom: 10px !important;
+  }
+  .iccrosshair {
+    display: flex;
+    align-content: flex-end;
+    margin-left: auto;
+    padding-right: 5px;
   }
 }
