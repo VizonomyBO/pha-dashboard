@@ -3,7 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
 import { DashboardTable } from '../components/dashboard/DashboardTable';
-import { useMarketplaceState, useModalDispatch, useModalState } from '../store/hooks';
+import {
+  useMarketplaceState, useModalDispatch, useModalState, useTabDispatch, useTabState
+} from '../store/hooks';
 import { useDashboard } from '../store/hooks/custom/useDashboard';
 import { authorizationManager } from '../utils/authorizationManager';
 import { FormArea } from '../components/FormArea';
@@ -11,10 +13,18 @@ import { webRequest } from '../utils/webRequest';
 import { ENDPOINTS } from '../constants/url';
 import { ROW_STATUS } from '../constants/dashboard';
 import { CompletelyIntentionalAny } from '../@types/database';
-import { ATTACHMENTS_SUB_TYPES, JSON_FIELD } from '../constants';
+import {
+  ATTACHMENTS_SUB_TYPES, BUSINESS_DETAILS, CONTACT_DETAILS, HOME, JSON_FIELD, OTHER_QUESTIONS, PAGE_REDIRECT_TIME
+} from '../constants';
+import { Formvalidation } from '../utils/validation';
+import { getPhaRetailerBody } from '../utils/getPhaRetailerBody';
+import { resetBusiness, setResetGeocoder } from '../store/actions';
+import { FormTabType } from '../@types';
 
 export const Dashboard = () => {
   const [shouldReload, setShouldReload] = useState(false);
+  const { activeTab } = useTabState();
+  const { setActiveTab } = useTabDispatch();
   const navigate = useNavigate();
   const { open } = useModalState();
   const { setModal } = useModalDispatch();
@@ -47,6 +57,74 @@ export const Dashboard = () => {
         && (
         <FormArea
           isModal
+          clickProceed={() => {
+            let value = BUSINESS_DETAILS;
+            switch (activeTab) {
+              case BUSINESS_DETAILS:
+                value = OTHER_QUESTIONS;
+                break;
+              case OTHER_QUESTIONS:
+                value = CONTACT_DETAILS;
+                break;
+              case CONTACT_DETAILS:
+                value = HOME;
+                break;
+              default:
+                break;
+            }
+            const estate = Formvalidation(
+              value,
+              activeTab,
+              businessDetails,
+              selectCategory,
+              selectAccessibility,
+              otherQuestions
+            );
+            if (!estate.type) {
+              // setModal({ type: estate.type, open: true });
+            }
+            if (value === HOME) {
+              const headers = webRequest.generateMultipartHeader();
+              const bodyGen = getPhaRetailerBody();
+              // eslint-disable-next-line max-len
+              const body = bodyGen(businessDetails)(contactDetails)(otherQuestions)(selectCategory)(selectAccessibility)(files)()();
+              const formData = new FormData();
+              formData.append('json', JSON.stringify(body.json));
+              body.images.forEach((image: Blob) => {
+                formData.append('images', image);
+              });
+              body.ownerimages.forEach((image: Blob) => {
+                formData.append('ownerimages', image);
+              });
+              webRequest.postMultipart(
+                ENDPOINTS.PHA_RETAILERS(),
+                formData,
+                headers
+              ).then((res) => res.json()).then((res) => {
+                if (res.success) {
+                  // setModal({ type: estate.type, open: estate.open });
+                  setTimeout(() => {
+                    setResetGeocoder();
+                    if (businessDetails?.master_id) {
+                      webRequest.delete(
+                        ENDPOINTS.DELETE_OSM(businessDetails.master_id)
+                      ).then((resDelete) => resDelete.json()).then((resDelete) => {
+                        if (resDelete.success) {
+                          console.log('osm_point_deleted', resDelete, businessDetails.master_id);
+                        }
+                      });
+                    }
+                    resetBusiness();
+                    navigate('/dashboard');
+                    setShouldReload(true);
+                    setModal({ type: false, open: false });
+                  }, PAGE_REDIRECT_TIME);
+                }
+              });
+            } else {
+              setActiveTab(estate.value as FormTabType);
+            }
+          }}
           clickApprove={() => {
             const headers = webRequest.generateMultipartHeader();
             const body: CompletelyIntentionalAny = {
@@ -124,6 +202,8 @@ export const Dashboard = () => {
                 setShouldReload(true);
               });
             setModal({ open: false, type: false });
+            resetBusiness();
+            setActiveTab('businessDetails');
           }}
           clickDecline={() => {
             const headers = webRequest.generateMultipartHeader();
@@ -139,6 +219,8 @@ export const Dashboard = () => {
                 setShouldReload(true);
               });
             setModal({ open: false, type: false });
+            resetBusiness();
+            setActiveTab('businessDetails');
           }}
           clickDelete={() => {
             const headers = webRequest.generateMultipartHeader();
@@ -154,6 +236,8 @@ export const Dashboard = () => {
                 setShouldReload(true);
               });
             setModal({ open: false, type: false });
+            resetBusiness();
+            setActiveTab('businessDetails');
           }}
         />
         )

@@ -18,10 +18,7 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
         }
       };
     case TYPES.RESET_MARKETPLACE_BUSINESS:
-      return {
-        ...state,
-        businessDetails: INITIAL_MARKETPLACE.businessDetails,
-      };
+      return INITIAL_MARKETPLACE;
     case TYPES.BUSINESS_FILES:
       return {
         ...state,
