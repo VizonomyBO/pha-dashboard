@@ -9,3 +9,4 @@ export * from './scrollTypes';
 export * from './markerTypes';
 export * from './tabTypes';
 export * from './retailerFilesTypes';
+export * from './loaderTypes';

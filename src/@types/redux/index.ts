@@ -155,3 +155,7 @@ export interface RetailerFileInterface {
   imagelinks: string,
   owner_photo: string,
 }
+
+export interface loaderInterface {
+  isLoading: boolean
+}
