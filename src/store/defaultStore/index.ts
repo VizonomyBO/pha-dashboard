@@ -1,4 +1,5 @@
 import { MarketplaceInterface } from '../../@types/redux';
+import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../constants/categories';
 
 export const INITIAL_MARKETPLACE: MarketplaceInterface = {
   retailerFiles: {
@@ -102,7 +103,7 @@ export const INITIAL_CATEGORIES = {
   center: [],
   accesibilities: [],
   badges: [],
-  dataSources: ['retailers_pha'],
+  dataSources: [PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS],
   callFilters: true,
   zoomCenter: true,
   mapViewFilter: false
