@@ -66,6 +66,14 @@ export const Home = () => {
       setCallFilters(!e.currentTarget.checked);
     }
   };
+
+  const getTotalNumber = () => {
+    if (dataRequest.length > 0) {
+      return dataRequest[0].total;
+    }
+    return 0;
+  };
+
   return (
     <div className="container">
       <div className="bgwhite" />
@@ -85,7 +93,10 @@ export const Home = () => {
         <div className="location">
           <div className="locfound">
             <div className="description">
-              <div className="desc1">50 Locations Found</div>
+              <div className="desc1">
+                { getTotalNumber() }
+                &nbsp; Locations Found
+              </div>
               <div className="desc2">
                 Don’t see a food pantry or retailer? We can help! Submit a request form, and we’ll add the location.
               </div>
