@@ -6708,10 +6708,13 @@ header.topmenu {
 							font-size: 14px;
 						}
 						input[type=text] {
-							width: 75%;
+							width: 85% !important;
 							color: #161A23;
 							font-size: 14px;
 							font-weight: 600;
+						}
+						.iccrosshair {
+							display: none;
 						}
 					}
 					.space {
