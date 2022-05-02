@@ -61,7 +61,8 @@ export interface PhaRetailer {
   geom?: {
     type: string,
     coordinates: number[],
-  }
+  },
+  total?: number
 }
 
 export interface PhaIndividual {
