@@ -86,7 +86,10 @@ export const useMap = () => {
           width: 50,
           getCursor: () => 'pointer',
           zIndex: 2
-        })
+        }),
+        getFillColor: [0, 0, 0, 0],
+        getLineColor: [0, 0, 0, 0],
+        getLineWidth: 0
       });
       return cartoLayer;
     },
