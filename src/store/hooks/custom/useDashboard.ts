@@ -10,6 +10,7 @@ import { defaultQueryParams } from '../../../constants/defaultValues';
 import { ENDPOINTS } from '../../../constants/url';
 import { getQueryParms } from '../../../utils/getQueryParams';
 import { webRequest } from '../../../utils/webRequest';
+import { useLoaderDispatch } from '../loaderHook';
 
 type setterBoolean = Dispatch<SetStateAction<boolean>>;
 
@@ -18,17 +19,20 @@ export const useDashboard = (shouldReload: boolean, setShouldReload: setterBoole
   const [table, setTable] = useState<(PhaRetailer & PhaIndividual)[]>([]);
   const [totalElements, setTotalElements] = useState(0);
   const [selectedElements, setSelectedElements] = useState<Array<string>>([]);
+  const { setLoaderState } = useLoaderDispatch();
 
   const loadData = useCallback(() => {
+    setLoaderState(true);
     const queryParams = getQueryParms(params);
     webRequest.get(ENDPOINTS.DASHBOARD(queryParams)).then((response) => response.json())
       .then((response) => {
+        setLoaderState(false);
         setTable(response.data.rows);
       }).catch((error) => {
         console.error(error);
         setTable([]);
       });
-  }, [params]);
+  }, [params, setLoaderState]);
 
   const loadCount = useCallback(() => {
     const queryParams = getQueryParms(params);
