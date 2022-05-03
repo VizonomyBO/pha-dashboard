@@ -65,7 +65,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
               />
             </div>
           )} */}
-        {type !== 'home' && <span className="iccrosshair" />}
+        {/* {type !== 'home' && <span className="iccrosshair" />} */}
       </div>
       <div className={blockClassNames}>
         {options && options.length > 0 && inputText.shouldSearch && (
