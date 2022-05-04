@@ -28,25 +28,25 @@ export const CLASSES_BY_FORM = {
   [key: string]: string;
 };
 export const DEFAULT_VIEW_STATE = {
-  latitude: 32.75657,
-  longitude: -90.073877,
+  latitude: 32.745440,
+  longitude: -89.638029,
   zoom: 6.33,
   bearing: 0,
   pitch: 0
 };
 
 export const DEFAULT_VIEW_STATE_MOBILE = {
-  latitude: 33.047450,
-  longitude: -90.638029,
-  zoom: 6.3,
+  latitude: 32.847450,
+  longitude: -89.778029,
+  zoom: 6.2,
   bearing: 0,
   pitch: 0
 };
 
 export const DEFAULT_VIEW_STATE_PROFILE = {
-  latitude: 39.02,
-  longitude: -96,
-  zoom: 15,
+  latitude: 33.047450,
+  longitude: -89.638029,
+  zoom: 6.3,
   bearing: 0,
   pitch: 0,
 };
