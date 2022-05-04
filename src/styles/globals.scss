@@ -472,8 +472,11 @@ input, button, textarea, select {
   height: auto !important;
   padding-bottom: 0px !important;
   line-height: 16px !important;
+  text-decoration: none;
 }
-
+.address-bottom-mobile:hover {
+  color: #00BDE3;
+}
 @media (max-width: 600px) {
   .margin-bottom {
     margin-bottom: 10px !important;

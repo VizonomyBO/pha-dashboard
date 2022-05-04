@@ -20,6 +20,7 @@ export const Profile = () => {
   const { profile, badges } = useProfile();
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const { ref, height } = useWindowSize();
+  const address = profile?.address_1?.split(',');
   const picture: string[] = useMemo(
     () => cleanSplit(profile?.imagelinks ?? ''),
     [profile]
@@ -78,11 +79,30 @@ export const Profile = () => {
               <div className="contactinf txtbt">Contact Information</div>
               <div className="item">
                 <span className="icodesc iccipin" />
-                <span className="txtst">{showText(profile?.address_1)}</span>
+                <a
+                  href={
+                    `https://www.google.com/maps/dir/${profile?.geom?.coordinates[1]},${profile?.geom?.coordinates[0]}`
+                  }
+                  rel="noreferrer"
+                  target="_blank"
+                  className="txtst"
+                >
+                  {showText(address ? `${address[0]},  ${address[1]}` : '')}
+                  <br />
+                  {showText(address ? `${address[2]}` : '')}
+                </a>
               </div>
               <div className="item">
                 <span className="icodesc icciphone" />
-                <span className="txtst">{showText(profile?.phone, formatPhone)}</span>
+                <a
+                  href={
+                    `tel:${profile?.phone}`
+                  }
+                  rel="noreferrer"
+                  className="txtst"
+                >
+                  {showText(profile?.phone, formatPhone)}
+                </a>
               </div>
               {
                 profile?.email && profile.email.length > 0
