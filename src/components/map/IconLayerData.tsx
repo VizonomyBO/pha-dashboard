@@ -1,20 +1,19 @@
 import { Position } from 'deck.gl';
 import { IconLayer } from '@deck.gl/layers';
-import PinRed from './ic-pin-red.svg';
 import PinBlue from './ic-pin-blue.svg';
-import PinGreen from './ic-pin-green.svg';
+import PinGrey from './ic-pin-grey.svg';
 import { PhaRetailer } from '../../@types/database';
 
 const COLORS = { GREEN: 'green', BLUE: 'blue' };
 
 export const IconLayerData = (data: PhaRetailer[]) => (
   data.map((item: PhaRetailer) => {
-    let icon = PinRed;
+    let icon = PinBlue;
     if (item?.geom?.type === COLORS.BLUE) {
-      icon = PinBlue;
+      icon = PinGrey;
     }
     if (item?.geom?.type === COLORS.GREEN) {
-      icon = PinGreen;
+      icon = PinGrey;
     }
     return new IconLayer({
       id: `IconLayer%${item.retailer_id}`,
