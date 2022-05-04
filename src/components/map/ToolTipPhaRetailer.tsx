@@ -19,7 +19,7 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
     setCurrentRetailerId(objectTypified?.properties?.retailer_id ?? '');
   };
   const popupRef = useRef<HTMLDivElement>(null);
-
+  const address = objectTypified?.properties?.address_1?.split(',');
   return (
     <div
       className="modal"
@@ -46,12 +46,30 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
             ))}
           </div>
         )}
-        <div className="address address-bottom">{objectTypified?.properties?.address_1}</div>
+        <a
+          href={
+            `https://www.google.com/maps/dir/${
+              objectTypified?.geometry?.coordinates[1]},${objectTypified?.geometry?.coordinates[0]}`
+          }
+          rel="noreferrer"
+          target="_blank"
+          className="address address-bottom"
+        >
+          {address ? `${address[0]},  ${address[1]}` : ''}
+          <br />
+          {address ? `${address[2]}` : ''}
+        </a>
         <div className="phone phone-bottom">
           <span className="icphone" />
-          <span className="number">
+          <a
+            href={
+              `tel:${objectTypified?.properties?.phone}`
+            }
+            rel="noreferrer"
+            className="number"
+          >
             {formatPhone(objectTypified?.properties?.phone ?? '')}
-          </span>
+          </a>
         </div>
         <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
           <button className="light button-margin" type="button">

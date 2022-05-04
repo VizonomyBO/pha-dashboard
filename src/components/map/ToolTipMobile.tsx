@@ -14,6 +14,7 @@ export const ToolTipMobile = (data: TooltipProps) => {
     setVisibleFeedback(true);
     setCurrentRetailerId(objectTypified?.properties?.retailer_id ?? '');
   };
+  const address = objectTypified?.properties?.address_1?.split(',');
   return (
     <>
       <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
@@ -41,12 +42,30 @@ export const ToolTipMobile = (data: TooltipProps) => {
                 }
               </div>
             )}
-            <div className="address address-bottom-mobile">{objectTypified?.properties?.address_1}</div>
+            <a
+              href={
+                `https://www.google.com/maps/dir/${
+                  objectTypified?.geometry?.coordinates[1]},${objectTypified?.geometry?.coordinates[0]}`
+              }
+              rel="noreferrer"
+              target="_blank"
+              className="address address-bottom-mobile"
+            >
+              {address ? `${address[0]},  ${address[1]}` : ''}
+              <br />
+              {address ? `${address[2]}` : ''}
+            </a>
             <div className="phone">
               <span className="icphone" />
-              <span className="number">
-                {formatPhone(objectTypified?.properties?.phone ? objectTypified?.properties?.phone : '')}
-              </span>
+              <a
+                href={
+                  `tel:${objectTypified?.properties?.phone}`
+                }
+                rel="noreferrer"
+                className="number"
+              >
+                {formatPhone(objectTypified?.properties?.phone ?? '')}
+              </a>
             </div>
           </div>
         </div>
