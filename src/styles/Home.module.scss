@@ -1850,6 +1850,10 @@ sup {
               text-overflow: ellipsis;
               display: -webkit-box;
               height: 38px;
+							text-decoration: none;
+						}
+						.address:hover {
+							color: #00BDE3;
 						}
             .payment {
 							font-family: "FuturaMedium", sans-serif;
@@ -1879,6 +1883,10 @@ sup {
 								line-height: 16px;
 								color: #7A7E80;
 								padding-left: 8px;
+								text-decoration: none;
+							}
+							.number:hover {
+								color: #00BDE3;
 							}
 						}
 						button.light {
@@ -1964,6 +1972,7 @@ sup {
 							height: 100%;
 							border-top-left-radius: 16px;
 							border-bottom-left-radius: 16px;
+							object-fit: cover;
 						}
 					}
           .detail-card-other {
@@ -2718,10 +2727,15 @@ sup {
 							color: #7A7E80;
 							padding-left: 8px;
 							font-size: 14px;
-							padding-right: 8px
+							padding-right: 8px;
+							text-decoration: none;
+						}
+						a:hover {
+							color: #00BDE3;
 						}
 						.txtst.blue {
 							color: #00BDE3;
+							text-decoration: none;
 						}
 						.width1 {
 							width: 40px;
