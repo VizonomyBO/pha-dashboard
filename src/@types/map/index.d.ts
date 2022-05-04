@@ -41,8 +41,8 @@ export interface RenderToolTipInterface {
 }
 
 interface TooltipProps {
-  x: number,
-  y: number,
+  x?: number,
+  y?: number,
   objectTypified: PropertiesLayer,
   badges: string[],
   setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
