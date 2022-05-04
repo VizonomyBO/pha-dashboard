@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { DEFAULT_DROPDOWN_OPTION, TYPE_BUSINESS } from '../constants';
 import { DropdownBusiness } from './DropdownBusiness';
 import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks/marketplaceHook';
 import { DropdownAddress } from './map/DropdownAddress';
+import { isEmpty } from '../utils/validation';
 
 const selectScheduleDropdownValue = (defaultOption: string) => (option: string) => {
   const response = option && option.length ? option : defaultOption;
@@ -157,6 +159,15 @@ export const LeftForm1 = () => {
               type={TYPE_BUSINESS.SUN_CLOSE}
             />
           </div>
+          {(isEmpty(businessDetails.sun_open) || isEmpty(businessDetails.sun_close)) && (
+            <span
+              className="ic-circle-clear"
+              onClick={() => {
+                setBusinessDetails(TYPE_BUSINESS.SUN_OPEN, '');
+                setBusinessDetails(TYPE_BUSINESS.SUN_CLOSE, '');
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="threec">
@@ -180,6 +191,15 @@ export const LeftForm1 = () => {
               type={TYPE_BUSINESS.MON_CLOSE}
             />
           </div>
+          {(isEmpty(businessDetails.mon_open) || isEmpty(businessDetails.mon_close)) && (
+            <span
+              className="ic-circle-clear"
+              onClick={() => {
+                setBusinessDetails(TYPE_BUSINESS.MON_OPEN, '');
+                setBusinessDetails(TYPE_BUSINESS.MON_CLOSE, '');
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="threec">
@@ -203,6 +223,15 @@ export const LeftForm1 = () => {
               type={TYPE_BUSINESS.TUES_CLOSE}
             />
           </div>
+          {(isEmpty(businessDetails.tues_open) || isEmpty(businessDetails.tues_close)) && (
+            <span
+              className="ic-circle-clear"
+              onClick={() => {
+                setBusinessDetails(TYPE_BUSINESS.TUES_OPEN, '');
+                setBusinessDetails(TYPE_BUSINESS.TUES_CLOSE, '');
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="threec">
@@ -226,6 +255,15 @@ export const LeftForm1 = () => {
               type={TYPE_BUSINESS.WED_CLOSE}
             />
           </div>
+          {(isEmpty(businessDetails.wed_open) || isEmpty(businessDetails.wed_close)) && (
+            <span
+              className="ic-circle-clear"
+              onClick={() => {
+                setBusinessDetails(TYPE_BUSINESS.WED_OPEN, '');
+                setBusinessDetails(TYPE_BUSINESS.WED_CLOSE, '');
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="threec">
@@ -249,6 +287,15 @@ export const LeftForm1 = () => {
               type={TYPE_BUSINESS.THURS_CLOSE}
             />
           </div>
+          {(isEmpty(businessDetails.thurs_open) || isEmpty(businessDetails.thurs_close)) && (
+            <span
+              className="ic-circle-clear"
+              onClick={() => {
+                setBusinessDetails(TYPE_BUSINESS.THURS_OPEN, '');
+                setBusinessDetails(TYPE_BUSINESS.THURS_CLOSE, '');
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="threec">
@@ -272,6 +319,15 @@ export const LeftForm1 = () => {
               type={TYPE_BUSINESS.FRI_CLOSE}
             />
           </div>
+          {(isEmpty(businessDetails.fri_open) || isEmpty(businessDetails.fri_close)) && (
+            <span
+              className="ic-circle-clear"
+              onClick={() => {
+                setBusinessDetails(TYPE_BUSINESS.FRI_OPEN, '');
+                setBusinessDetails(TYPE_BUSINESS.FRI_CLOSE, '');
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="threec">
@@ -295,6 +351,15 @@ export const LeftForm1 = () => {
               type={TYPE_BUSINESS.SAT_CLOSE}
             />
           </div>
+          {(isEmpty(businessDetails.sat_open) || isEmpty(businessDetails.sat_close)) && (
+            <span
+              className="ic-circle-clear"
+              onClick={() => {
+                setBusinessDetails(TYPE_BUSINESS.SAT_OPEN, '');
+                setBusinessDetails(TYPE_BUSINESS.SAT_CLOSE, '');
+              }}
+            />
+          )}
         </div>
       </div>
       <div className="sectiontitle second">
