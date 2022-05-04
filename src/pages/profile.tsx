@@ -85,7 +85,7 @@ export const Profile = () => {
                   }
                   rel="noreferrer"
                   target="_blank"
-                  className="txtst"
+                  className="txtst blue"
                 >
                   {showText(address ? `${address[0]},  ${address[1]}` : '')}
                   <br />
@@ -99,7 +99,7 @@ export const Profile = () => {
                     `tel:${profile?.phone}`
                   }
                   rel="noreferrer"
-                  className="txtst"
+                  className="txtst blue"
                 >
                   {showText(profile?.phone, formatPhone)}
                 </a>
