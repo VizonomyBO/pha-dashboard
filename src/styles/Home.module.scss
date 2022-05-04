@@ -420,7 +420,7 @@ button.light {
 .controlzoom {
 	position: absolute;
 	top: 32px;
-	right: 32px;
+	left: 32px;
 	background-color: #fff;
 	border-radius: 16px;
 	border: 1px solid #E3E5E5;
@@ -1793,7 +1793,7 @@ sup {
 				.modal {
 					position: absolute;
 					top: 1em;
-					left: 81px;
+					right: 1em;
 					width: 280px;
 					background-color: #fff;
 					border-radius: 16px;
@@ -2144,7 +2144,7 @@ sup {
 				.controlzoom {
 					position: absolute;
 					top: 32px;
-					right: 32px;
+					left: 32px;
 					background-color: #fff;
 					border-radius: 16px;
 					border: 1px solid #E3E5E5;
@@ -3609,7 +3609,7 @@ sup {
 				.modal {
 					position: absolute;
 					top: 1em;
-					left: 81px;
+					right: 1em;
 					width: 280px;
 					background-color: #fff;
 					border-radius: 16px;
@@ -6490,7 +6490,7 @@ header.topmenu {
 					.controlzoom {
 						margin-top: 78px;
 						top: 16px;
-						right: 16px;
+						left: 85%;
 					}
 					.supermarketfilter {
 						margin-top: 78px;

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { TooltipProps } from '../../@types';
@@ -8,27 +8,13 @@ import { useTooltip } from '../../store/hooks/custom/useTooltip';
 
 export const ToolTipOSM = (data: TooltipProps) => {
   const {
-    x,
-    y,
     objectTypified,
     isMobile
   } = data;
   const popupRef = useRef<HTMLDivElement>(null);
-  const [currentY, setCurrentY] = useState(y);
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { getAddress, getPostCode } = useTooltip();
-  const [currentX, setCurrentX] = useState(x);
-  useEffect(() => {
-    if (popupRef.current) {
-      setCurrentY(y - popupRef.current.getBoundingClientRect().height - 10);
-    }
-  }, [y, popupRef, setCurrentY]);
 
-  useEffect(() => {
-    if (popupRef.current) {
-      setCurrentX(x - popupRef.current.getBoundingClientRect().width / 2);
-    }
-  }, [x, popupRef, setCurrentX]);
   const setDataBusiness = () => {
     if (objectTypified.properties?.name) {
       setBusinessDetails(TYPE_BUSINESS.NAME, objectTypified.properties.name);
@@ -55,7 +41,6 @@ export const ToolTipOSM = (data: TooltipProps) => {
   return (
     <div
       className={classNames({ bmodal: isMobile, 'usda-mobile': isMobile, modal: !isMobile })}
-      style={{ left: isMobile ? '' : currentX, top: isMobile ? '' : currentY }}
       ref={popupRef}
     >
       <div className={classNames('detailcard', { 'detail-card-other': isMobile })}>

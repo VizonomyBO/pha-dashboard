@@ -104,9 +104,7 @@ export const Map = (
   }, [setDeckState, onEndTransition, TRANSITION_DURATION]);
 
   useEffect(() => {
-    if (isLoaded) {
-      changeDeckState(currentViewstate);
-    }
+    changeDeckState(currentViewstate);
   }, [currentViewstate, isLoaded, changeDeckState]);
 
   const expandTooltip = useMemo(() => (info: PickInfo<Layer<unknown>[]>) => {

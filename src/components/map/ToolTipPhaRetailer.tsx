@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
 import { useTooltip } from '../../store/hooks/custom/useTooltip';
@@ -8,8 +8,6 @@ import { formatPhone } from '../../utils/textFormatter';
 export const ToolTipPhaRetailer = (data: TooltipProps) => {
   const { getImageToDisplay } = useTooltip();
   const {
-    x,
-    y,
     objectTypified,
     badges,
     setVisibleFeedback,
@@ -21,25 +19,10 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
     setCurrentRetailerId(objectTypified?.properties?.retailer_id ?? '');
   };
   const popupRef = useRef<HTMLDivElement>(null);
-  const [currentY, setCurrentY] = useState(y);
-  const [currentX, setCurrentX] = useState(x);
   const address = objectTypified?.properties?.address_1?.split(',');
-  useEffect(() => {
-    if (popupRef.current) {
-      setCurrentY(y - popupRef.current.getBoundingClientRect().height - 10);
-    }
-  }, [y, popupRef, setCurrentY, badges]);
-
-  useEffect(() => {
-    if (popupRef.current) {
-      setCurrentX(x - popupRef.current.getBoundingClientRect().width / 2);
-    }
-  }, [x, popupRef, setCurrentX, badges]);
-
   return (
     <div
       className="modal"
-      style={{ left: currentX, top: currentY }}
       ref={popupRef}
     >
       <figure className="picture">
