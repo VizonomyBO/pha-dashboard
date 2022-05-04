@@ -321,6 +321,9 @@ button.light {
 .icmkgreen {
 	content: url("../../public/images/ic_mk_green.svg");
 }
+.icmkgrey {
+	content: url("../../public/images/ic_mk_grey.svg");
+}
 .icaddcoment {
 	content: url("../../public/images/ic_addcomment.svg");
 }
@@ -1741,6 +1744,9 @@ sup {
 								}
 								.desc.green {
 									color: #77BD43;
+								}
+								.desc.grey {
+									color: #7A7E80;
 								}
 							}
 						}
@@ -3540,6 +3546,9 @@ sup {
 								.desc.green {
 									color: #77BD43;
 								}
+								.desc.grey {
+									color: #7A7E80;
+								}
 							}
 						}
 						.descres {
@@ -4544,6 +4553,9 @@ header.topmenu {
 										.desc.green {
 											color: #77BD43;
 										}
+										.desc.grey {
+											color: #7A7E80;
+										}
 									}
 								}
 								.descres {
@@ -5458,6 +5470,9 @@ header.topmenu {
 										}
 										.desc.green {
 											color: #77BD43;
+										}
+										.desc.grey {
+											color: #7A7E80;
 										}
 									}
 								}
@@ -6649,6 +6664,8 @@ header.topmenu {
 												font-family: "FuturaMedium", sans-serif;
 												font-size: 8px;
 												padding-top: 2px;
+												width: 60px;
+												text-align: center;
 											}
 											.desc.red {
 												color: #E40000;
@@ -6658,6 +6675,9 @@ header.topmenu {
 											}
 											.desc.green {
 												color: #77BD43;
+											}
+											.desc.grey {
+												color: #7A7E80;
 											}
 										}
 									}

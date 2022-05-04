@@ -24,15 +24,15 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
     let namemark = NAMESMARKERS.PHA_RETAILERS;
     switch (element.source) {
       case PHA_RETAILERS:
-        color = COLORS.RED;
+        color = COLORS.BLUE;
         namemark = NAMESMARKERS.PHA_RETAILERS;
         break;
       case OSM_RETAILERS:
-        color = COLORS.BLUE;
+        color = COLORS.GREY;
         namemark = NAMESMARKERS.OSM_RETAILERS;
         break;
       default:
-        color = COLORS.GREEN;
+        color = COLORS.GREY;
         namemark = NAMESMARKERS.USDA_RETAILERS;
         break;
     }

@@ -48,6 +48,10 @@ export const Map = (
   const initView = width <= MOBILE_WIDTH ? DEFAULT_VIEW_STATE_MOBILE : DEFAULT_VIEW_STATE;
   const TRANSITION_OFFSET = 200;
   const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText, initView));
+  useEffect(() => {
+    const initViewState = width <= MOBILE_WIDTH ? DEFAULT_VIEW_STATE_MOBILE : DEFAULT_VIEW_STATE;
+    setDeckState(getDeckInitState(inputText, initViewState));
+  }, [width, inputText]);
   const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);
