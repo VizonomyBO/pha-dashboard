@@ -8,9 +8,8 @@ import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
 import { QueriesInterface } from '../../../@types/redux';
 import { useGeocoderState } from '../geocoderHook';
-import PinRed from '../../../components/map/ic-pin-red.svg';
 import PinBlue from '../../../components/map/ic-pin-blue.svg';
-import PinGreen from '../../../components/map/ic-pin-green.svg';
+import PinGrey from '../../../components/map/ic-pin-grey.svg';
 import { deckDefaults } from '../../../components/map/deckDefaults';
 import { getLatLonViewport } from '../../../components/map/defaultGenerator';
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -59,11 +58,11 @@ export const useMap = () => {
   );
 
   const getPinColor = (originTable: string) => {
-    let defaultPin = PinGreen;
+    let defaultPin = PinGrey;
     if (originTable === 'retailers_pha') {
-      defaultPin = PinRed;
-    } else if (originTable === 'retailers_osm') {
       defaultPin = PinBlue;
+    } else if (originTable === 'retailers_osm') {
+      defaultPin = PinGrey;
     }
     return defaultPin;
   };
