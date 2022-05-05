@@ -48,7 +48,7 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
             <div className="address">
               <div className="reference">
                 <div className="ref1">
-                  {element.address_1}
+                  {element.address_1 ? element.address_1.replace(', United States', '') : 'No address registered'}
                 </div>
               </div>
               <div className="statemk">

@@ -52,7 +52,9 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
         </div>
         <div className="descres">
           <div className="namemark">{element.name}</div>
-          <div className="address">{element.address_1?.replace(', United States', '')}</div>
+          <div className="address">
+            {element.address_1 ? element.address_1.replace(', United States', '') : 'No address registered'}
+          </div>
           <div className="distance">
             <div className="kind">
               {element.snap_accepted === 'Yes' ? 'SNAP Accepted' : ''}
