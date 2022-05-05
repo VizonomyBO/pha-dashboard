@@ -42,32 +42,6 @@ export const LeftForm3 = () => {
   return (
     <>
       <div className="item">
-        <div className="title">
-          <label>Your Name</label>
-        </div>
-        <div className="ainput">
-          <input
-            className="light"
-            type="text"
-            value={contact_name}
-            onChange={setName}
-          />
-        </div>
-      </div>
-      <div className="item">
-        <div className="title">
-          <label>Your Email</label>
-        </div>
-        <div className="ainput">
-          <input
-            className="light"
-            type="text"
-            value={contact_email}
-            onChange={setEmail}
-          />
-        </div>
-      </div>
-      <div className="item">
         <div className="title grouped" />
         <div className="ainput chk">
           <label className="chkwrap">
@@ -90,6 +64,34 @@ export const LeftForm3 = () => {
             />
             <span className="checkmark ckeckmark-form" />
           </label>
+        </div>
+      </div>
+      {contact_owner === formConstants.CONTACT_OWNER.YES && (
+        <div className="item">
+          <div className="title">
+            <label>Your Name</label>
+          </div>
+          <div className="ainput">
+            <input
+              className="light"
+              type="text"
+              value={contact_name}
+              onChange={setName}
+            />
+          </div>
+        </div>
+      )}
+      <div className="item">
+        <div className="title">
+          <label>Your Email</label>
+        </div>
+        <div className="ainput">
+          <input
+            className="light"
+            type="text"
+            value={contact_email}
+            onChange={setEmail}
+          />
         </div>
       </div>
     </>

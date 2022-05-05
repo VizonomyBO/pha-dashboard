@@ -417,6 +417,16 @@ button.light {
 .icxcircle {
 	content: url("../../public/images/ic_x_circle.svg");
 }
+.ic-circle-clear {
+	padding-left: 4%;
+	height: 40%;
+	content: url("../../public/images/ic-close-circle.svg");
+}
+.ic-circle-clear:hover {
+	padding-left: 4%;
+	height: 40%;
+	content: url("../../public/images/ic-close-circle-hover.svg");
+}
 .controlzoom {
 	position: absolute;
 	top: 32px;
