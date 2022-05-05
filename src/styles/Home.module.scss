@@ -330,8 +330,14 @@ button.light {
 .iczplus {
 	content: url("../../public/images/ic_zplus.svg");
 }
+.iczplus-blue {
+	content: url("../../public/images/ic_zplus-blue.svg");
+}
 .iczminus {
 	content: url("../../public/images/ic_zminus.svg");
+}
+.iczminus {
+	content: url("../../public/images/ic_zminus-blue.svg");
 }
 .icarrowleft {
 	content: url("../../public/images/ic_arrow_left.svg");
@@ -458,6 +464,13 @@ button.light {
 				display: block;
 				width: 24px;
 				height: 24px;
+				content: url("../../public/images/ic_zplus.svg");
+			}
+			.iczplus:hover {
+				display: block;
+				width: 24px;
+				height: 24px;
+				content: url("../../public/images/ic_zplus-blue.svg");
 			}
 		}
 	}
@@ -496,6 +509,13 @@ button.light {
 				display: block;
 				width: 24px;
 				height: 24px;
+				content: url("../../public/images/ic_zminus.svg");
+			}
+			.iczminus:hover {
+				display: block;
+				width: 24px;
+				height: 24px;
+				content: url("../../public/images/ic_zminus-blue.svg");
 			}
 		}
 	}
@@ -2847,7 +2867,8 @@ sup {
               z-index: 2;
 							position: absolute;
 							top: 20px;
-							right: 16px;
+							left: 480px;
+							// right: 16px;
 							background-color: #fff;
 							border-radius: 16px;
 							border: 1px solid #E3E5E5;
