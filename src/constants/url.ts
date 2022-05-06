@@ -21,7 +21,9 @@ export const ENDPOINTS = {
   PHA_INDIVIDUAL_CSV: () => `${URL}/${CARTODB}/pha-individual/download`,
   GET_LAYERS: `${URL}/${CARTODB}/layers`,
   GET_MARKERS: `${URL}/${CARTODB}/map-table`,
-  DELETE_OSM: (id: number | undefined) => `${URL}/${CARTODB}/osm-point/${id}`
+  DELETE_OSM: (id: number | undefined) => `${URL}/${CARTODB}/osm-point/${id}`,
+  DELETE_RETAILER: () => `${URL}/${CARTODB}/pha`,
+  DELETE_INDIVIDUAL: () => `${URL}/${CARTODB}/pha-individual-delete`,
 };
 
 export const CARTO_API = 'https://gcp-us-east1.api.carto.com';

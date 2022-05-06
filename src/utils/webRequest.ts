@@ -53,8 +53,9 @@ export const webRequest = {
     headers: headers || new Headers(),
     body: data,
   }),
-  delete: (url: string, headers?: Headers) => fetch(url, {
+  delete: (url: string, body?: unknown, headers?: Headers) => fetch(url, {
     method: 'DELETE',
-    headers: headers || new Headers()
+    headers: headers || new Headers(),
+    body: JSON.stringify(body)
   })
 };

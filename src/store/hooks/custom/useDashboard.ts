@@ -63,6 +63,7 @@ export const useDashboard = (shouldReload: boolean, setShouldReload: setterBoole
 
   return {
     setParams,
+    params,
     table,
     totalElements,
     selectedElements,

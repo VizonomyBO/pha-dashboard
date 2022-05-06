@@ -19,25 +19,26 @@ import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
 import { useMarketplaceDispatch, useModalDispatch } from '../../store/hooks';
 
-export const DashboardHeader = ({ setParams, selectedElements }: {
+export const DashboardHeader = ({
+  setParams, selectedElements, params, setShouldReload
+}: {
   setParams: Dispatch<SetStateAction<QueryParams>>,
   selectedElements: Array<string>,
+  params: QueryParams,
+  setShouldReload: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const [inputValue, setinputValue] = useState('');
   const [inputValue2, setinputValue2] = useState('');
   const { setModal } = useModalDispatch();
   const { resetBusiness } = useMarketplaceDispatch();
   const [buttonValue, setButtonValue] = useState<Array<ButtonDashboard>>(DEFAULT_VALUES_BUTTON);
-
   const changeHandler = (val: string) => {
     setinputValue(val);
   };
-
   const debouncedChangeHandler = useMemo(
     () => debounce(changeHandler, DEBOUNCE_SEARCH_TABLE),
     []
   );
-
   useEffect(() => {
     setParams((old: QueryParams) => ({ ...old, search: inputValue, page: 1 }));
   }, [inputValue, setParams]);
@@ -72,6 +73,28 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
       const now = new Date();
       const filename = `${FILENAME_CSV_RETAILER}-${now.toISOString()}${EXTENSION_CSV}`;
       res.blob().then((blob) => saveAs(blob, filename));
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+
+  const deleteRetailer = () => {
+    const headers = webRequest.generateJSONHeader();
+    webRequest.delete(ENDPOINTS.DELETE_RETAILER(), {
+      ids: selectedElements
+    }, headers).then(() => {
+      setShouldReload(true);
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+
+  const deleteIndividual = () => {
+    const headers = webRequest.generateJSONHeader();
+    webRequest.delete(ENDPOINTS.DELETE_INDIVIDUAL(), {
+      ids: selectedElements
+    }, headers).then(() => {
+      setShouldReload(true);
     }).catch((error) => {
       console.error(error);
     });
@@ -148,6 +171,21 @@ export const DashboardHeader = ({ setParams, selectedElements }: {
               )
             }
           </div>
+          {selectedElements.length > 0 && (
+            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+            <span
+              className="text-delete"
+              onClick={() => {
+                if (params.isRetailer) {
+                  deleteRetailer();
+                } else {
+                  deleteIndividual();
+                }
+              }}
+            >
+              Delete
+            </span>
+          )}
         </div>
         {/* <div className="datefilterarea">
         <div className="opfilter">

@@ -41,6 +41,7 @@ export const Dashboard = () => {
   const {
     table,
     setParams,
+    params,
     totalElements,
     selectedElements,
     setSelectedElements
@@ -246,7 +247,12 @@ export const Dashboard = () => {
             setParams={setParams}
           />
           <div className="dashboard">
-            <DashboardHeader setParams={setParams} selectedElements={selectedElements} />
+            <DashboardHeader
+              setParams={setParams}
+              params={params}
+              selectedElements={selectedElements}
+              setShouldReload={setShouldReload}
+            />
             <DashboardTable
               table={table}
               setParams={setParams}
