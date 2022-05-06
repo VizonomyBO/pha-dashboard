@@ -40,9 +40,11 @@ export const DashboardTable = ({
   const handleSelected = (checked: boolean, item: PhaRetailer & PhaIndividual) => {
     let newSelectedElements: string[];
     if (checked) {
-      newSelectedElements = [...selectedElements, item.retailer_id || ''];
+      newSelectedElements = [...selectedElements, item.individual_id ? item.individual_id : (item.retailer_id || '')];
     } else {
-      newSelectedElements = selectedElements.filter((a) => a !== item.retailer_id);
+      newSelectedElements = selectedElements.filter(
+        (a) => (a !== (item.individual_id ? item.individual_id : item.retailer_id))
+      );
     }
     setSelectedElements(newSelectedElements);
   };
@@ -52,12 +54,14 @@ export const DashboardTable = ({
     if (checked) {
       const selectedElementsSet = [
         ...selectedElements,
-        ...table.map((item: (PhaRetailer & PhaIndividual)) => item.retailer_id || '')
+        ...table.map((item: (PhaRetailer & PhaIndividual)) => (item.individual_id
+          ? item.individual_id : (item.retailer_id || '')))
       ];
       newSelectedElements = new Set(selectedElementsSet);
     } else {
       table.forEach((item) => {
-        newSelectedElements.delete(item.retailer_id || '');
+        newSelectedElements.delete((item.individual_id
+          ? item.individual_id : (item.retailer_id || '')));
       });
     }
     setSelectedElements(Array.from(newSelectedElements));
@@ -175,7 +179,9 @@ export const DashboardTable = ({
                       <input
                         type="checkbox"
                         onChange={(e) => handleSelected(e.target.checked, item)}
-                        checked={selectedElements.includes(item.retailer_id || '')}
+                        checked={
+                          selectedElements.includes(item.individual_id ? item.individual_id : (item.retailer_id || ''))
+                        }
                       />
                       <span className="checkmark  ckeckmark-form" />
                     </label>

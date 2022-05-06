@@ -6153,6 +6153,22 @@ header.topmenu {
 	}
 }
 @media (max-width: 600px) {
+	.controlzoom {
+		.zplus {
+			button.light {
+				.iczplus:hover {
+					content: url("../../public/images/ic_zplus.svg");
+				}
+			}
+		}
+		.zminus {
+			button.light {
+				.iczminus:hover {
+					content: url("../../public/images/ic_zminus.svg");
+				}
+			}
+		}
+	}
 	.table-geocoder {
 		display: none;
 	}
