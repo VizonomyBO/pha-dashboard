@@ -22,8 +22,7 @@ export const ENDPOINTS = {
   GET_LAYERS: `${URL}/${CARTODB}/layers`,
   GET_MARKERS: `${URL}/${CARTODB}/map-table`,
   DELETE_OSM: (id: number | undefined) => `${URL}/${CARTODB}/osm-point/${id}`,
-  DELETE_RETAILER: () => `${URL}/${CARTODB}/pha`,
-  DELETE_INDIVIDUAL: () => `${URL}/${CARTODB}/pha-individual-delete`,
+  DELETE_RETAILER: (table:string) => `${URL}/${CARTODB}/pha?table=${table}`,
 };
 
 export const CARTO_API = 'https://gcp-us-east1.api.carto.com';

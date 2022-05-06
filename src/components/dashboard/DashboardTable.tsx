@@ -43,7 +43,7 @@ export const DashboardTable = ({
       newSelectedElements = [...selectedElements, item.individual_id ? item.individual_id : (item.retailer_id || '')];
     } else {
       newSelectedElements = selectedElements.filter(
-        (a) => (a !== item.individual_id ? item.individual_id : item.retailer_id)
+        (a) => (a !== (item.individual_id ? item.individual_id : item.retailer_id))
       );
     }
     setSelectedElements(newSelectedElements);
@@ -60,8 +60,8 @@ export const DashboardTable = ({
       newSelectedElements = new Set(selectedElementsSet);
     } else {
       table.forEach((item) => {
-        newSelectedElements.delete(item.individual_id
-          ? item.individual_id : (item.retailer_id || ''));
+        newSelectedElements.delete((item.individual_id
+          ? item.individual_id : (item.retailer_id || '')));
       });
     }
     setSelectedElements(Array.from(newSelectedElements));

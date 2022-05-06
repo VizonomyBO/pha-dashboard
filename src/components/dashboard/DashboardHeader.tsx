@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import classNames from 'classnames';
 import {
   Dispatch,
@@ -80,18 +81,8 @@ export const DashboardHeader = ({
 
   const deleteRetailer = () => {
     const headers = webRequest.generateJSONHeader();
-    webRequest.delete(ENDPOINTS.DELETE_RETAILER(), {
-      ids: selectedElements
-    }, headers).then(() => {
-      setShouldReload(true);
-    }).catch((error) => {
-      console.error(error);
-    });
-  };
-
-  const deleteIndividual = () => {
-    const headers = webRequest.generateJSONHeader();
-    webRequest.delete(ENDPOINTS.DELETE_INDIVIDUAL(), {
+    const table = params.isRetailer ? 'retailers_pha' : 'pha_individual';
+    webRequest.delete(ENDPOINTS.DELETE_RETAILER(table), {
       ids: selectedElements
     }, headers).then(() => {
       setShouldReload(true);
@@ -172,15 +163,11 @@ export const DashboardHeader = ({
             }
           </div>
           {selectedElements.length > 0 && (
-            // eslint-disable-next-line jsx-a11y/no-static-element-interactions
             <span
               className="text-delete"
+              aria-hidden="true"
               onClick={() => {
-                if (params.isRetailer) {
-                  deleteRetailer();
-                } else {
-                  deleteIndividual();
-                }
+                deleteRetailer();
               }}
             >
               Delete
