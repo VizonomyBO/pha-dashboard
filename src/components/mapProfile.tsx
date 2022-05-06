@@ -28,7 +28,7 @@ export const MapProfile = (profile?: PhaRetailer | null) => {
           ...oldDeck.initialStateView,
           latitude: geom ? geom.coordinates[1] : oldDeck.initialStateView.latitude,
           longitude: geom ? geom.coordinates[0] : oldDeck.initialStateView.longitude,
-          zoom: 16.0
+          zoom: 16.3
         }
       };
       return newDeck;
