@@ -1,1 +1,1 @@
-export const DRAG_MINIMUM_DISTANCE = 150;
+export const DRAG_MINIMUM_DISTANCE = 50;
