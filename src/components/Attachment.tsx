@@ -109,7 +109,7 @@ export const Attachment = ({
         </div>
       </div>
       <div className="fileContent">
-        {googleArray[0] !== '' && googleArray.map((element: string, index: number) => (
+        {googleArray[0] !== '' ? googleArray.map((element: string, index: number) => (
           <span
             key={element}
             className="fileSpam"
@@ -120,28 +120,25 @@ export const Attachment = ({
               href={element}
               style={{ all: 'unset', cursor: 'pointer' }}
             >
-              {element}
+              {element.replace('https://storage.googleapis.com/pha-storage/', '')}
             </a>
             <CloseIcon
               onClick={() => (removeFromGoogleArray(index))}
               style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
             />
           </span>
+        )) : loadedFilesArray.map((fileString: string, index: number) => (
+          <span
+            key={generateKey(fileString, index)}
+            className="fileSpam"
+          >
+            { fileString }
+            <CloseIcon
+              onClick={() => (removeLoadedFile(index))}
+              style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
+            />
+          </span>
         ))}
-        {
-          loadedFilesArray.map((fileString: string, index: number) => (
-            <span
-              key={generateKey(fileString, index)}
-              className="fileSpam"
-            >
-              { fileString }
-              <CloseIcon
-                onClick={() => (removeLoadedFile(index))}
-                style={{ marginLeft: '10px', fontSize: '16px', color: '#7A7E80' }}
-              />
-            </span>
-          ))
-        }
         {multimedia.length > 0 && multimedia.map((element: CompletelyIntentionalAny, index: number) => (
           <span
             key={generateKey(element.file?.name, index)}
