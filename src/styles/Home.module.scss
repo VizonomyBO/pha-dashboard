@@ -520,6 +520,40 @@ button.light {
 		}
 	}
 }
+.legendmap {
+  position:absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 170px;
+  background-color: #fff;
+  border-radius: 16px;
+  border: 1px solid #e3e5e5;
+  font-size: 14px;
+  font-family: "FuturaLight", sans-serif;
+  font-weight: bold;
+  align-items: center;
+  text-align: left;
+  padding-left: 16px;
+    padding-top: 13px;
+  .iconverified {
+    width: 22px;
+    height: 22px;
+    content: url("../../public/images/icon-legend-desktop-verified.svg");
+    margin-right: 6px;
+  }
+  .iconunverified {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    content: url("../../public/images/icon-legend-desktop-unverified.svg");
+  }
+  .legend {
+    display: inline-flex;
+		height: 32px;
+		border-top-right-radius: 16px;
+		border-top-left-radius: 16px;
+  }
+}
 sup {
 	font-size: 'FuturaMedium', sans-serif;
 	font-size: 20px;
@@ -1074,7 +1108,7 @@ sup {
 			flex-direction: column;
 			align-items: center;
 			height: 72px;
-			z-index: 1 !important;
+			z-index: 6 !important;
 		}
 		.navbar {
 			position: relative;

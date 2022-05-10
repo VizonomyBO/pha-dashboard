@@ -154,6 +154,16 @@ export const Home = () => {
                 </button>
               </div>
             </div>
+            <div className="legendmap">
+              <div className="legend">
+                <div className="iconverified" />
+                Verified Retailer
+              </div>
+              <div className="legend">
+                <div className="iconunverified" />
+                Unverified Retailer
+              </div>
+            </div>
             <button
               type="button"
               className="supermarketfilter"
