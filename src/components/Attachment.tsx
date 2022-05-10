@@ -22,9 +22,9 @@ export const Attachment = ({
     filesSelected,
     multimedia,
     removeFile,
-    setMultimedia,
     googleArray,
-    removeFromGoogleArray
+    removeFromGoogleArray,
+    saveFilesSelected
   } = useAttachmentBusiness({ type, subType });
   const [loadedFilesArray, setLoadedFilesArray] = useState<string[]>([]);
   const [draggin, setDraggin] = useState(false);
@@ -53,9 +53,7 @@ export const Attachment = ({
     e.stopPropagation();
     setDraggin(false);
     const transferedFiles = e.dataTransfer.files;
-    if (transferedFiles && transferedFiles.length > 0) {
-      setMultimedia([...multimedia, ...Array.from(e.dataTransfer.files)]);
-    }
+    saveFilesSelected(transferedFiles);
     e.dataTransfer.clearData();
   };
 
