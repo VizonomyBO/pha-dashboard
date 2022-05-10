@@ -78,7 +78,6 @@ export const Dashboard = () => {
               activeTab,
               businessDetails,
               selectCategory,
-              selectAccessibility,
               otherQuestions
             );
             if (value === HOME) {

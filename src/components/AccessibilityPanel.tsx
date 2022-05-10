@@ -29,7 +29,6 @@ export const AccessibilityPanel = () => {
     <>
       <div className="sectiontitle second">
         Select Accessibility
-        <sup>*</sup>
       </div>
       <div className="panel">
         <div className="body">

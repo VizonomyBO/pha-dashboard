@@ -14,7 +14,6 @@ export const FormHeader = ({ showBackArrow, clouseModal }: FormHeaderInterface) 
   const {
     businessDetails,
     selectCategory,
-    selectAccessibility,
     otherQuestions
   } = useMarketplaceState();
   const navigate = useNavigate();
@@ -31,7 +30,6 @@ export const FormHeader = ({ showBackArrow, clouseModal }: FormHeaderInterface) 
         activeTab,
         businessDetails,
         selectCategory,
-        selectAccessibility,
         otherQuestions
       );
       setActiveTab(estate.value as FormTabType);
