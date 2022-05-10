@@ -16,8 +16,7 @@ export const useAttachmentBusiness = ({ type, subType }: {
   const [multimedia, setMultimedia] = useState<Blob[]>([]);
   const [googleArray, setGoogleArray] = useState<string[]>([]);
   const { setImageLinks, setOwnerPhotos } = useRetailerFileReducer();
-  const filesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newFiles = e.target.files;
+  const saveFilesSelected = (newFiles: FileList | null) => {
     const newObjects: Blob[] = [];
     let maxElements = 5;
     if (type === TYPE_BUSINESS.OWNER) {
@@ -38,6 +37,10 @@ export const useAttachmentBusiness = ({ type, subType }: {
       // eslint-disable-next-line no-alert
       alert(`You can't have more than ${maxElements} picture${maxElements === 1 ? '' : 's'}`);
     }
+  };
+  const filesSelected = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newFiles = e.target.files;
+    saveFilesSelected(newFiles);
   };
 
   useEffect(() => {
@@ -79,6 +82,7 @@ export const useAttachmentBusiness = ({ type, subType }: {
     removeFile,
     setMultimedia,
     googleArray,
-    removeFromGoogleArray
+    removeFromGoogleArray,
+    saveFilesSelected
   };
 };
