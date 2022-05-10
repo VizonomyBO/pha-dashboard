@@ -12,13 +12,13 @@ import debounce from 'lodash.debounce';
 import { ButtonDashboard, QueryParams } from '../../@types';
 import {
   DEFAULT_VALUES_BUTTON,
-  EXTENSION_CSV,
+  EXTENSION_ZIP,
   FILENAME_CSV_RETAILER,
   DEBOUNCE_SEARCH_TABLE
 } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
-import { useMarketplaceDispatch, useModalDispatch } from '../../store/hooks';
+import { useLoaderDispatch, useMarketplaceDispatch, useModalDispatch } from '../../store/hooks';
 
 export const DashboardHeader = ({
   setParams, selectedElements, params, setShouldReload
@@ -28,6 +28,7 @@ export const DashboardHeader = ({
   params: QueryParams,
   setShouldReload: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
+  const { setLoaderState } = useLoaderDispatch();
   const [inputValue, setinputValue] = useState('');
   const [inputValue2, setinputValue2] = useState('');
   const { setModal } = useModalDispatch();
@@ -68,14 +69,19 @@ export const DashboardHeader = ({
 
   const downloadCSV = () => {
     const headers = webRequest.generateJSONHeader();
+    setLoaderState(true);
     webRequest.post(ENDPOINTS.PHA_RETAILER_CSV(), {
       retailerIds: selectedElements,
     }, headers).then((res) => {
       const now = new Date();
-      const filename = `${FILENAME_CSV_RETAILER}-${now.toISOString()}${EXTENSION_CSV}`;
-      res.blob().then((blob) => saveAs(blob, filename));
+      const filename = `${FILENAME_CSV_RETAILER}-${now.toISOString()}${EXTENSION_ZIP}`;
+      res.blob().then((blob) => {
+        saveAs(blob, filename);
+        setLoaderState(false);
+      });
     }).catch((error) => {
       console.error(error);
+      setLoaderState(false);
     });
   };
 
