@@ -70,7 +70,7 @@ export const Map = (
         y: newCoord[1],
         object: {
           ...elementProperties,
-          geometry: elementProperties.geom,
+          geometry: elementProperties.properties.geom,
           type: 'Feature'
         },
         coordinate: elementProperties.properties.geom.coordinates,
