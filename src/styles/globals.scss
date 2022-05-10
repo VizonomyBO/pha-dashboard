@@ -511,6 +511,9 @@ input, button, textarea, select {
   font-family: "FuturaMedium", sans-serif;
   padding-left: 20px;
   cursor: pointer;
+  &:hover {
+    color:  #e40000;
+  }
 }
 .mapboxgl-map {
   border-radius: 16px !important;
