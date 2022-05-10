@@ -6187,6 +6187,43 @@ header.topmenu {
 	}
 }
 @media (max-width: 600px) {
+  .legendmap {
+    bottom: 12rem;
+    left: 0.8rem;
+  }
+  .invisiblelegend {
+    display: none;
+  }
+  .legendmapmobile {
+    position:absolute;
+    bottom: 9rem;
+    height: 70px;
+    left: 0.1rem;
+    border-radius: 16px;
+    font-size: 14px;
+    font-family: "FuturaLight", sans-serif;
+    font-weight: bold;
+    align-items: center;
+    text-align: left;
+    .unselected {
+      width: 100%;
+      height: 100%;
+      content: url("../../public/images/icon-mobile-legend-unselected.svg");
+      -o-background-size: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+    }
+    .selected {
+      width: 100%;
+      height: 100%;
+      content: url("../../public/images/icon-mobile-legend-selected.svg");
+      -o-background-size: cover;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      background-size: cover;
+    }
+  }
 	.controlzoom {
 		.zplus {
 			button.light {

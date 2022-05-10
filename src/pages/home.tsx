@@ -18,6 +18,7 @@ import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
 export const Home = () => {
   const [yStart, setYStart] = useState(0);
   const [yMove, setYMove] = useState(0);
+  const [openLegend, setOpenLegend] = useState(false);
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
   const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
@@ -154,7 +155,7 @@ export const Home = () => {
                 </button>
               </div>
             </div>
-            <div className="legendmap">
+            <div className={classNames('legendmap', { invisiblelegend: !openLegend })}>
               <div className="legend">
                 <div className="iconverified" />
                 Verified Retailer
@@ -163,6 +164,13 @@ export const Home = () => {
                 <div className="iconunverified" />
                 Unverified Retailer
               </div>
+            </div>
+            <div className="legendmapmobile">
+              <div
+                className={classNames({ unselected: !openLegend, selected: openLegend })}
+                onClick={() => setOpenLegend(!openLegend)}
+                aria-hidden="true"
+              />
             </div>
             <button
               type="button"
