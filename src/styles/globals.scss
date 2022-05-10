@@ -511,7 +511,14 @@ input, button, textarea, select {
   font-family: "FuturaMedium", sans-serif;
   padding-left: 20px;
   cursor: pointer;
+  &:hover {
+    color:  #e40000;
+  }
 }
 .mapboxgl-map {
   border-radius: 16px !important;
+}
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

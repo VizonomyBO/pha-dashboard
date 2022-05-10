@@ -16,6 +16,11 @@ const closeSchedule = selectScheduleDropdownValue(DEFAULT_DROPDOWN_OPTION.CLOSE)
 export const LeftForm1 = () => {
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { businessDetails } = useMarketplaceState();
+  const handlePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.validity.valid) {
+      setBusinessDetails(TYPE_BUSINESS.PHONE, e.target.value);
+    }
+  };
   return (
     <>
       <div className="sectiontitle">
@@ -77,9 +82,11 @@ export const LeftForm1 = () => {
         <div className="ainput">
           <input
             className="light"
-            type="number"
+            type="text"
+            pattern="[0-9]*"
+            maxLength={10}
             onChange={
-              (e: React.ChangeEvent<HTMLInputElement>) => setBusinessDetails(TYPE_BUSINESS.PHONE, e.target.value)
+              (e: React.ChangeEvent<HTMLInputElement>) => handlePhoneNumber(e)
             }
             value={businessDetails && businessDetails.phone}
           />
