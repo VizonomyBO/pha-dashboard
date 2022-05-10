@@ -74,7 +74,7 @@ export const DashboardHeader = ({
       retailerIds: selectedElements,
     }, headers).then((res) => {
       const now = new Date();
-      const filename = `${FILENAME_CSV_RETAILER}-${now.toISOString()}${EXTENSION_ZIP}`;
+      const filename = `${FILENAME_CSV_RETAILER}-${now.toISOString().split('T')[0]}${EXTENSION_ZIP}`;
       res.blob().then((blob) => {
         saveAs(blob, filename);
         setLoaderState(false);
