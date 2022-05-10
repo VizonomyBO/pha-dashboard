@@ -94,7 +94,6 @@ export const Formvalidation = (
   activeTab: string,
   businessDetails: BusinessDetailsInterface,
   selectCategory: SelectCategoryInterface,
-  selectAccessibility: SelectAccessibilityInterface,
   otherQuestions: OtherQuestionsInterface
 ) => {
   let returnValue = activeTab;
@@ -103,8 +102,7 @@ export const Formvalidation = (
   switch (activeTab) {
     case BUSINESS_DETAILS:
       if (businessDetailsValidation(businessDetails)
-      && selectCategoryValidation(selectCategory)
-      && selectAccessibilityValidation(selectAccessibility)) {
+      && selectCategoryValidation(selectCategory)) {
         typeModal = true;
         openModal = true;
         returnValue = value;
@@ -115,24 +113,21 @@ export const Formvalidation = (
       break;
     case OTHER_QUESTIONS:
       if (otherQuestionsValidationFresh(otherQuestions)
-      && selectCategoryValidation(selectCategory)
-      && selectAccessibilityValidation(selectAccessibility)) {
+      && selectCategoryValidation(selectCategory)) {
         typeModal = true;
         openModal = true;
         returnValue = value;
         break;
       }
       if (otherQuestionsValidation(otherQuestions)
-        && selectCategoryValidation(selectCategory)
-        && selectAccessibilityValidation(selectAccessibility)) {
+        && selectCategoryValidation(selectCategory)) {
         typeModal = true;
         openModal = true;
         returnValue = value;
         break;
       }
       if (otherQuestionsEmty(otherQuestions)
-        || selectCategoryEmty(selectCategory)
-        || selectAccessibilityEmty(selectAccessibility)) {
+        || selectCategoryEmty(selectCategory)) {
         typeModal = false;
         openModal = true;
       }
@@ -141,8 +136,7 @@ export const Formvalidation = (
       }
       break;
     case CONTACT_DETAILS:
-      if (selectCategoryValidation(selectCategory)
-        && selectAccessibilityValidation(selectAccessibility)) {
+      if (selectCategoryValidation(selectCategory)) {
         typeModal = true;
         openModal = true;
         if (value !== HOME) {

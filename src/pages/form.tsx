@@ -72,7 +72,6 @@ export const Form = () => {
       activeTab,
       businessDetails,
       selectCategory,
-      selectAccessibility,
       otherQuestions
     );
     if (!estate.type) {
