@@ -17,15 +17,17 @@ export const ToolTipMobile = (data: TooltipProps) => {
   const address = objectTypified?.properties?.address_1?.split(',');
   return (
     <>
-      <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
-        <div className="bmodal">
+      <div className="bmodal">
+        <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
           <figure className="picture">
             <img
               src={getImageToDisplay(objectTypified)}
               alt=""
             />
           </figure>
-          <div className="detailcard">
+        </Link>
+        <div className="detailcard">
+          <Link to={`/profile/${objectTypified?.properties?.retailer_id}`} style={{ textDecoration: 'none' }}>
             <div className="store store-bottom-mobile">{objectTypified?.properties?.name}</div>
             {badges.length !== 0 && (
               <div className="services services-mobile">
@@ -42,34 +44,34 @@ export const ToolTipMobile = (data: TooltipProps) => {
                 }
               </div>
             )}
+          </Link>
+          <a
+            href={
+              `https://www.google.com/maps/dir/${
+                objectTypified?.geometry?.coordinates[1]},${objectTypified?.geometry?.coordinates[0]}`
+            }
+            rel="noreferrer"
+            target="_blank"
+            className="address address-bottom-mobile"
+          >
+            {address ? `${address[0]},  ${address[1]}` : ''}
+            <br />
+            {address ? `${address[2]}` : ''}
+          </a>
+          <div className="phone">
+            <span className="icphone" />
             <a
               href={
-                `https://www.google.com/maps/dir/${
-                  objectTypified?.geometry?.coordinates[1]},${objectTypified?.geometry?.coordinates[0]}`
+                `tel:${objectTypified?.properties?.phone}`
               }
               rel="noreferrer"
-              target="_blank"
-              className="address address-bottom-mobile"
+              className="number"
             >
-              {address ? `${address[0]},  ${address[1]}` : ''}
-              <br />
-              {address ? `${address[2]}` : ''}
+              {formatPhone(objectTypified?.properties?.phone ?? '')}
             </a>
-            <div className="phone">
-              <span className="icphone" />
-              <a
-                href={
-                  `tel:${objectTypified?.properties?.phone}`
-                }
-                rel="noreferrer"
-                className="number"
-              >
-                {formatPhone(objectTypified?.properties?.phone ?? '')}
-              </a>
-            </div>
           </div>
         </div>
-      </Link>
+      </div>
       <div className="bmodal-ts">
         <div className="pinaddcomment">
           <button className="light" type="button" onClick={openIndividualForm}>
