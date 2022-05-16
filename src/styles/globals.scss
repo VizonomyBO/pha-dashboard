@@ -31,6 +31,7 @@ input, button, textarea, select {
 
 .fileText {
 	text-decoration: underline;
+  font-weight:normal;
 }
 
 .fileText:hover {
@@ -478,13 +479,16 @@ input, button, textarea, select {
   color: #00BDE3;
 }
 @media (max-width: 600px) {
+  .clouseClearIcon {
+    margin-left: 0px !important;
+  }
   .margin-bottom {
     margin-bottom: 10px !important;
     margin-top: 2px !important;
     line-height: 17px !important;
     max-height: 33px !important;
     height: auto !important;
-  }  
+  }
   .margin-bottom-osm {
     margin-bottom: 15px !important;
     margin-top: 2px !important;
@@ -517,6 +521,7 @@ input, button, textarea, select {
 }
 .mapboxgl-map {
   border-radius: 16px !important;
+  overflow-y: hidden !important;
 }
 input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   -webkit-appearance: none;

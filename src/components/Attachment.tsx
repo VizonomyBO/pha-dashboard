@@ -88,20 +88,36 @@ export const Attachment = ({
         <div
           className="uploadarea"
         >
-          <div>Drag and drop files here</div>
+          {width > MOBILE_WIDTH
+            ? <div>Drag and drop files here</div>
+            : (
+              <>
+                <input
+                  id={`${type}uploader`}
+                  type="file"
+                  style={{ display: 'none' }}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => (filesSelected(e))}
+                  multiple
+                  accept="image/png, image/jpeg, image/jpg"
+                  capture
+                />
+                <label htmlFor={`${type}uploader`}>
+                  <p className="fileText">Take Photo</p>
+                </label>
+              </>
+            )}
           <div>or</div>
           <input
             id={`${type}uploader`}
             type="file"
+            name={`${type}uploader`}
             style={{ display: 'none' }}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => (filesSelected(e))}
-            multiple
-            accept="image/png, image/jpeg"
-            capture
+            accept="image/png, image/jpeg, image/jpg"
           />
           <div>
             <label htmlFor={`${type}uploader`}>
-              <p className="fileText">{width > MOBILE_WIDTH ? 'Browser Files' : 'Browse on your device'}</p>
+              <p className="fileText">{width > MOBILE_WIDTH ? 'Browser Files' : 'Access Photos on your Device'}</p>
             </label>
           </div>
         </div>

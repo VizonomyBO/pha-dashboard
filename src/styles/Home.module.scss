@@ -767,7 +767,7 @@ sup {
 		z-index: 5;
 		.panel {
 			width: 939px;
-			height: 628px;
+			height: 380px;
 			background-color: #fff;
 			border-radius: 16px;
 			box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -4243,6 +4243,9 @@ sup {
 /* deshabilitados para desktop */
 header.topmenu {
 	display: none;
+}
+.clouseClearIcon {
+	margin-left: 180px;
 }
 .mobile-nav {
 	display: none;

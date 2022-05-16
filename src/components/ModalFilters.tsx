@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import ClearIcon from '@mui/icons-material/Clear';
 import { ModalFilterData, FilterType } from '../@types';
 import { CATEGORIES, ACCESIBILITIES, DATASOURCES } from '../constants/categories';
 import { useFilter } from '../store/hooks/custom/useFilters';
@@ -18,6 +19,10 @@ export const ModalFilters = ({ setOpenModal }: ModalFilterData) => {
       <div className="panel">
         <div className="head">
           <label>Choose the categories that most accurately describes the retailer.</label>
+          <ClearIcon
+            className="clouseClearIcon"
+            onClick={() => setOpenModal(false)}
+          />
         </div>
         <div className="body">
           <div className="card">

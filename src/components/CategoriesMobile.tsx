@@ -23,7 +23,7 @@ export const CategoriesMobile = (
           />
         </div>
       </div>
-      <div className="searchresult" style={{ height: '357px' }}>
+      <div className="searchresult" style={{ height: '190px' }}>
         <ul className="ul-geocoder-mobile">
           {CATEGORIES.map((category: FilterType) => (
             <li key={`${category.name}index`} className="tr-categories">
