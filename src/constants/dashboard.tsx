@@ -27,3 +27,4 @@ export const FILENAME_CSV_INDIVIDUAL = 'PHA-individual';
 export const EXTENSION_CSV = '.csv';
 export const EXTENSION_ZIP = '.zip';
 export const DEBOUNCE_SEARCH_TABLE = 500;
+export const RETAILERS_PHA = 'retailers_pha';
