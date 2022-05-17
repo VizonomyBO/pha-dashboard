@@ -15,7 +15,8 @@ import {
   EXTENSION_ZIP,
   FILENAME_CSV_RETAILER,
   DEBOUNCE_SEARCH_TABLE,
-  RETAILERS_PHA
+  RETAILERS_PHA,
+  INDIVIDUAL_PHA
 } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
@@ -88,7 +89,7 @@ export const DashboardHeader = ({
 
   const deleteRetailer = () => {
     const headers = webRequest.generateJSONHeader();
-    const table = params.isRetailer ? RETAILERS_PHA : 'pha_individual';
+    const table = params.isRetailer ? RETAILERS_PHA : INDIVIDUAL_PHA;
     webRequest.delete(ENDPOINTS.DELETE_RETAILER(table), {
       ids: selectedElements
     }, headers).then(() => {
@@ -100,7 +101,7 @@ export const DashboardHeader = ({
 
   const approveRetailer = () => {
     const headers = webRequest.generateJSONHeader();
-    const table = params.isRetailer ? RETAILERS_PHA : 'pha_individual';
+    const table = params.isRetailer ? RETAILERS_PHA : INDIVIDUAL_PHA;
     webRequest.post(ENDPOINTS.DELETE_RETAILER(table), {
       ids: selectedElements
     }, headers).then(() => {
