@@ -14,7 +14,8 @@ import {
   DEFAULT_VALUES_BUTTON,
   EXTENSION_ZIP,
   FILENAME_CSV_RETAILER,
-  DEBOUNCE_SEARCH_TABLE
+  DEBOUNCE_SEARCH_TABLE,
+  RETAILERS_PHA
 } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
@@ -87,8 +88,20 @@ export const DashboardHeader = ({
 
   const deleteRetailer = () => {
     const headers = webRequest.generateJSONHeader();
-    const table = params.isRetailer ? 'retailers_pha' : 'pha_individual';
+    const table = params.isRetailer ? RETAILERS_PHA : 'pha_individual';
     webRequest.delete(ENDPOINTS.DELETE_RETAILER(table), {
+      ids: selectedElements
+    }, headers).then(() => {
+      setShouldReload(true);
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+
+  const approveRetailer = () => {
+    const headers = webRequest.generateJSONHeader();
+    const table = params.isRetailer ? RETAILERS_PHA : 'pha_individual';
+    webRequest.post(ENDPOINTS.DELETE_RETAILER(table), {
       ids: selectedElements
     }, headers).then(() => {
       setShouldReload(true);
@@ -177,6 +190,17 @@ export const DashboardHeader = ({
               }}
             >
               Delete
+            </span>
+          )}
+          {selectedElements.length > 0 && (
+            <span
+              className="text-delete"
+              aria-hidden="true"
+              onClick={() => {
+                approveRetailer();
+              }}
+            >
+              Approve
             </span>
           )}
         </div>
