@@ -97,6 +97,18 @@ export const DashboardHeader = ({
     });
   };
 
+  const approveRetailer = () => {
+    const headers = webRequest.generateJSONHeader();
+    const table = params.isRetailer ? 'retailers_pha' : 'pha_individual';
+    webRequest.post(ENDPOINTS.DELETE_RETAILER(table), {
+      ids: selectedElements
+    }, headers).then(() => {
+      setShouldReload(true);
+    }).catch((error) => {
+      console.error(error);
+    });
+  };
+
   return (
     <div className="header">
       <div className="sec1">
@@ -177,6 +189,17 @@ export const DashboardHeader = ({
               }}
             >
               Delete
+            </span>
+          )}
+          {selectedElements.length > 0 && (
+            <span
+              className="text-delete"
+              aria-hidden="true"
+              onClick={() => {
+                approveRetailer();
+              }}
+            >
+              Approve
             </span>
           )}
         </div>
