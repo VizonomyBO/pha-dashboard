@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAttachmentBusiness } from '../store/hooks/custom/useAttachmentBusiness';
-import { MOBILE_WIDTH, GOOGLE_STORAGE } from '../constants';
+import { GOOGLE_STORAGE, MOBILE_WIDTH_ATTACHMENT } from '../constants';
 import { useWindowSize } from '../store/hooks/custom/useWindowSize';
 import { CompletelyIntentionalAny } from '../@types/database';
 
@@ -88,7 +88,7 @@ export const Attachment = ({
         <div
           className="uploadarea"
         >
-          {width > MOBILE_WIDTH
+          {width > MOBILE_WIDTH_ATTACHMENT
             ? <div>Drag and drop files here</div>
             : (
               <>
@@ -107,18 +107,18 @@ export const Attachment = ({
               </>
             )}
           <div>or</div>
-          <input
-            id={`${type}uploader`}
-            type="file"
-            name={`${type}uploader`}
-            style={{ display: 'none' }}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => (filesSelected(e))}
-            accept="image/png, image/jpeg, image/jpg"
-          />
-          <div>
-            <label htmlFor={`${type}uploader`}>
-              <p className="fileText">{width > MOBILE_WIDTH ? 'Browser Files' : 'Access Photos on your Device'}</p>
-            </label>
+          <div className="fileUpload">
+            <p className="fileText">
+              {width > MOBILE_WIDTH_ATTACHMENT ? 'Browser Files' : 'Access Photos on your Device'}
+            </p>
+            <input
+              id={`${type}uploader`}
+              type="file"
+              name={`${type}uploader`}
+              className="upload"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => (filesSelected(e))}
+              accept="image/png, image/jpeg, image/jpg"
+            />
           </div>
         </div>
       </div>
