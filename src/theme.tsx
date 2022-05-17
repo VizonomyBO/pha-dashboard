@@ -54,7 +54,7 @@ export const theme = createTheme({
           backgroundColor: 'white !important',
           borderRadius: '25px !important',
           width: '264px !important',
-          height: '220px',
+          height: '170px',
           paddingBottom: '10px',
           border: '15px solid white',
           paddingRight: '0px !important',
