@@ -3,17 +3,13 @@ import { useMarketplaceDispatch, useMarketplaceState } from '../store/hooks';
 
 export const CategoryPanel = () => {
   const {
-    setSelectCategoryCorner, setSelectCategoryDistribution, setSelectCategoryDollar,
-    setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry, setSelectCategorySupermarket
+    setSelectCategoryCorner, setSelectCategoryFoodPantry, setSelectCategorySupermarket
   } = useMarketplaceDispatch();
   const {
     selectCategory: {
       supermarket,
       corner_store,
-      dollar_stores,
       food_pantry,
-      distribution,
-      food_co_op
     }
   } = useMarketplaceState();
 
@@ -33,35 +29,11 @@ export const CategoryPanel = () => {
     }
   };
 
-  const setSelectDollarFunction = (e: React.FormEvent<HTMLInputElement>): void => {
-    if (e.currentTarget.checked) {
-      setSelectCategoryDollar(formSelectCategory.DOLLAR_STORES.YES);
-    } else {
-      setSelectCategoryDollar(formSelectCategory.DOLLAR_STORES.NO);
-    }
-  };
-
   const setSelectFoodPantryFunction = (e: React.FormEvent<HTMLInputElement>): void => {
     if (e.currentTarget.checked) {
       setSelectCategoryFoodPantry(formSelectCategory.FOOD_PANTRY.YES);
     } else {
       setSelectCategoryFoodPantry(formSelectCategory.FOOD_PANTRY.NO);
-    }
-  };
-
-  const setSelectDistributionFunction = (e: React.FormEvent<HTMLInputElement>): void => {
-    if (e.currentTarget.checked) {
-      setSelectCategoryDistribution(formSelectCategory.DISTRIBUTION.YES);
-    } else {
-      setSelectCategoryDistribution(formSelectCategory.DISTRIBUTION.NO);
-    }
-  };
-
-  const setSelectFoodCoOpFunction = (e: React.FormEvent<HTMLInputElement>): void => {
-    if (e.currentTarget.checked) {
-      setSelectCategoryFoodCoOp(formSelectCategory.FOOD_CO_OP.YES);
-    } else {
-      setSelectCategoryFoodCoOp(formSelectCategory.FOOD_CO_OP.NO);
     }
   };
 
@@ -82,7 +54,7 @@ export const CategoryPanel = () => {
               </div>
               <div className="option">
                 <label className="chkwrap">
-                  Supermarket/big box retailer
+                  Food Retailer
                   <input
                     type="checkbox"
                     value={supermarket}
@@ -94,24 +66,12 @@ export const CategoryPanel = () => {
               </div>
               <div className="option">
                 <label className="chkwrap">
-                  Corner/convenience store
+                  Farmers Market
                   <input
                     type="checkbox"
                     value={corner_store}
                     checked={corner_store === formSelectCategory.CORNER_STORE.YES}
                     onChange={setSelectCornerFunction}
-                  />
-                  <span className="checkmark ckeckmark-form" />
-                </label>
-              </div>
-              <div className="option">
-                <label className="chkwrap">
-                  Dollar stores
-                  <input
-                    type="checkbox"
-                    value={dollar_stores}
-                    checked={dollar_stores === formSelectCategory.DOLLAR_STORES.YES}
-                    onChange={setSelectDollarFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
                 </label>
@@ -124,30 +84,6 @@ export const CategoryPanel = () => {
                     value={food_pantry}
                     checked={food_pantry === formSelectCategory.FOOD_PANTRY.YES}
                     onChange={setSelectFoodPantryFunction}
-                  />
-                  <span className="checkmark ckeckmark-form" />
-                </label>
-              </div>
-              <div className="option">
-                <label className="chkwrap">
-                  Distribution location
-                  <input
-                    type="checkbox"
-                    value={distribution}
-                    checked={distribution === formSelectCategory.DISTRIBUTION.YES}
-                    onChange={setSelectDistributionFunction}
-                  />
-                  <span className="checkmark ckeckmark-form" />
-                </label>
-              </div>
-              <div className="option">
-                <label className="chkwrap">
-                  Food co-op
-                  <input
-                    type="checkbox"
-                    value={food_co_op}
-                    checked={food_co_op === formSelectCategory.FOOD_CO_OP.YES}
-                    onChange={setSelectFoodCoOpFunction}
                   />
                   <span className="checkmark ckeckmark-form" />
                 </label>

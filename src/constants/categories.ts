@@ -2,16 +2,16 @@ import { FilterType } from '../@types';
 
 export const CATEGORIES: FilterType[] = [
   {
-    name: 'Food pantry',
-    attrib: 'food_pantry'
-  },
-  {
     name: 'Food Retailer',
     attrib: 'supermarket'
   },
   {
     name: 'Farmers Market',
-    attrib: 'farmers_market'
+    attrib: 'corner_store'
+  },
+  {
+    name: 'Food pantry',
+    attrib: 'food_pantry'
   }
 ];
 
