@@ -16,7 +16,8 @@ import {
   FILENAME_CSV_RETAILER,
   DEBOUNCE_SEARCH_TABLE,
   RETAILERS_PHA,
-  INDIVIDUAL_PHA
+  INDIVIDUAL_PHA,
+  DEFAULT_VALUES_BUTTON_INDIVIDUAL
 } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
@@ -58,13 +59,29 @@ export const DashboardHeader = ({
   }, [debouncedChangeHandler]);
 
   useEffect(() => {
+    if (params.isRetailer) {
+      setButtonValue(DEFAULT_VALUES_BUTTON);
+    } else {
+      setButtonValue(DEFAULT_VALUES_BUTTON_INDIVIDUAL);
+    }
+  }, [params.isRetailer]);
+
+  useEffect(() => {
     debouncedChangeHandler(inputValue2);
   }, [debouncedChangeHandler, inputValue2]);
 
   const onChangeValue = (index: number) => {
     setButtonValue((old) => {
       const copy = [...old];
-      copy[index].active = !copy[index].active;
+      if (index === 3) {
+        copy[0].active = false;
+        copy[1].active = false;
+        copy[2].active = false;
+        copy[3].active = !copy[index].active;
+      } else {
+        copy[index].active = !copy[index].active;
+        copy[3].active = false;
+      }
       return copy;
     });
   };

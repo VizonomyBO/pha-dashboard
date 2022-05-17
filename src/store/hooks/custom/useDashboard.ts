@@ -8,7 +8,7 @@ import {
 import { PhaIndividual, PhaRetailer } from '../../../@types/database';
 import { defaultQueryParams } from '../../../constants/defaultValues';
 import { ENDPOINTS } from '../../../constants/url';
-import { getQueryParms } from '../../../utils/getQueryParams';
+import { getQueryParms, getQueryParmsUnvalidated } from '../../../utils/getQueryParams';
 import { webRequest } from '../../../utils/webRequest';
 import { useLoaderDispatch } from '../loaderHook';
 
@@ -32,6 +32,17 @@ export const useDashboard = (shouldReload: boolean, setShouldReload: setterBoole
         console.error(error);
         setTable([]);
       });
+    if (params.status.includes('Unvalidated')) {
+      const queryParamsUnvalidated = getQueryParmsUnvalidated(params);
+      webRequest.get(ENDPOINTS.DASHBOARD(queryParamsUnvalidated)).then((response) => response.json())
+        .then((response) => {
+          setLoaderState(false);
+          setTable(response.data.rows);
+        }).catch((error) => {
+          console.error(error);
+          setTable([]);
+        });
+    }
   }, [params, setLoaderState]);
 
   const loadCount = useCallback(() => {
@@ -43,6 +54,16 @@ export const useDashboard = (shouldReload: boolean, setShouldReload: setterBoole
         console.error(error);
         setTotalElements(0);
       });
+    if (params.status.includes('Unvalidated')) {
+      const queryParamsUnvalidated = getQueryParmsUnvalidated(params);
+      webRequest.get(ENDPOINTS.DASHBOARD_COUNT(queryParamsUnvalidated)).then((resp) => resp.json())
+        .then((resp) => {
+          setTotalElements(resp.data.count);
+        }).catch((error) => {
+          console.error(error);
+          setTotalElements(0);
+        });
+    }
   }, [params]);
 
   useEffect(() => {
