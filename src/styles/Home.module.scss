@@ -6192,8 +6192,10 @@ header.topmenu {
 @media (max-width: 600px) {
   .legendmap {
 		width: 190px !important;
-		top: 52%;
+    height: 80px;
+    bottom: 38%;
     left: 0.8rem;
+    top: auto;
   }
   .invisiblelegend {
     display: none;
