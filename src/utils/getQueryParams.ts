@@ -1,4 +1,5 @@
 import { QueryParams } from '../@types';
+import { IS_UNVALIDATED } from '../constants/dashboard';
 
 export const getQueryParms = (params: QueryParams) => {
   let queryParams = '';
@@ -30,7 +31,7 @@ export const getQueryParmsUnvalidated = (params: QueryParams) => {
     queryParams += `&dateRange=${params.dateRange}`;
   }
   if (params.isRetailer) {
-    queryParams += '&isUnvalidated=true';
+    queryParams += `&${IS_UNVALIDATED}`;
   }
   return queryParams;
 };
