@@ -479,6 +479,10 @@ input, button, textarea, select {
   color: #00BDE3;
 }
 @media (max-width: 600px) {
+  .constainer-mobile {
+    height: 85vh !important;
+    overflow: hidden !important;
+  }
   .clouseClearIcon {
     margin-left: 0px !important;
   }
