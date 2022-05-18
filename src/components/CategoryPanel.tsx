@@ -78,7 +78,7 @@ export const CategoryPanel = () => {
               </div>
               <div className="option">
                 <label className="chkwrap">
-                  Food pantry
+                  Food Pantry
                   <input
                     type="checkbox"
                     value={food_pantry}

@@ -547,6 +547,12 @@ button.light {
     margin-right: 6px;
     content: url("../../public/images/icon-legend-desktop-unverified.svg");
   }
+	.icouperstart {
+    width: 22px;
+    height: 22px;
+    margin-right: 6px;
+    content: url("../../public/images/icon-legend-desktop-superstart.svg");
+  }
   .legend {
     display: inline-flex;
 		height: 32px;
@@ -6192,7 +6198,7 @@ header.topmenu {
 @media (max-width: 600px) {
   .legendmap {
 		width: 190px !important;
-    height: 80px;
+    height: 115px;
     bottom: 38%;
     left: 0.8rem;
     top: auto;

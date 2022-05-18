@@ -10,7 +10,7 @@ export const CATEGORIES: FilterType[] = [
     attrib: 'corner_store'
   },
   {
-    name: 'Food pantry',
+    name: 'Food Pantry',
     attrib: 'food_pantry'
   }
 ];
