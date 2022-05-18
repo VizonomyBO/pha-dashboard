@@ -6,6 +6,7 @@ import {
   useState
 } from 'react';
 import { PhaIndividual, PhaRetailer } from '../../../@types/database';
+import { UNVALIDATED } from '../../../constants/dashboard';
 import { defaultQueryParams } from '../../../constants/defaultValues';
 import { ENDPOINTS } from '../../../constants/url';
 import { getQueryParms, getQueryParmsUnvalidated } from '../../../utils/getQueryParams';
@@ -23,16 +24,17 @@ export const useDashboard = (shouldReload: boolean, setShouldReload: setterBoole
 
   const loadData = useCallback(() => {
     setLoaderState(true);
-    const queryParams = getQueryParms(params);
-    webRequest.get(ENDPOINTS.DASHBOARD(queryParams)).then((response) => response.json())
-      .then((response) => {
-        setLoaderState(false);
-        setTable(response.data.rows);
-      }).catch((error) => {
-        console.error(error);
-        setTable([]);
-      });
-    if (params.status.includes('Unvalidated')) {
+    if (!params.status.includes(UNVALIDATED)) {
+      const queryParams = getQueryParms(params);
+      webRequest.get(ENDPOINTS.DASHBOARD(queryParams)).then((response) => response.json())
+        .then((response) => {
+          setLoaderState(false);
+          setTable(response.data.rows);
+        }).catch((error) => {
+          console.error(error);
+          setTable([]);
+        });
+    } else {
       const queryParamsUnvalidated = getQueryParmsUnvalidated(params);
       webRequest.get(ENDPOINTS.DASHBOARD(queryParamsUnvalidated)).then((response) => response.json())
         .then((response) => {
@@ -46,15 +48,16 @@ export const useDashboard = (shouldReload: boolean, setShouldReload: setterBoole
   }, [params, setLoaderState]);
 
   const loadCount = useCallback(() => {
-    const queryParams = getQueryParms(params);
-    webRequest.get(ENDPOINTS.DASHBOARD_COUNT(queryParams)).then((resp) => resp.json())
-      .then((resp) => {
-        setTotalElements(resp.data.count);
-      }).catch((error) => {
-        console.error(error);
-        setTotalElements(0);
-      });
-    if (params.status.includes('Unvalidated')) {
+    if (!params.status.includes(UNVALIDATED)) {
+      const queryParams = getQueryParms(params);
+      webRequest.get(ENDPOINTS.DASHBOARD_COUNT(queryParams)).then((resp) => resp.json())
+        .then((resp) => {
+          setTotalElements(resp.data.count);
+        }).catch((error) => {
+          console.error(error);
+          setTotalElements(0);
+        });
+    } else {
       const queryParamsUnvalidated = getQueryParmsUnvalidated(params);
       webRequest.get(ENDPOINTS.DASHBOARD_COUNT(queryParamsUnvalidated)).then((resp) => resp.json())
         .then((resp) => {

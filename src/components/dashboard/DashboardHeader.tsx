@@ -74,10 +74,10 @@ export const DashboardHeader = ({
     setButtonValue((old) => {
       const copy = [...old];
       if (index === 3) {
-        copy[0].active = false;
-        copy[1].active = false;
-        copy[2].active = false;
-        copy[3].active = !copy[index].active;
+        for (let indexCopy = 0; indexCopy < 3; indexCopy += 1) {
+          copy[indexCopy].active = false;
+        }
+        copy[index].active = !copy[index].active;
       } else {
         copy[index].active = !copy[index].active;
         copy[3].active = false;
