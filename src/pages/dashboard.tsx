@@ -11,7 +11,7 @@ import { authorizationManager } from '../utils/authorizationManager';
 import { FormArea } from '../components/FormArea';
 import { webRequest } from '../utils/webRequest';
 import { ENDPOINTS } from '../constants/url';
-import { ROW_STATUS, UNVALIDATED } from '../constants/dashboard';
+import { IS_UNVALIDATED, ROW_STATUS, UNVALIDATED } from '../constants/dashboard';
 import { CompletelyIntentionalAny } from '../@types/database';
 import {
   ATTACHMENTS_SUB_TYPES, BUSINESS_DETAILS, CONTACT_DETAILS, HOME, JSON_FIELD, OTHER_QUESTIONS, PAGE_REDIRECT_TIME
@@ -192,7 +192,7 @@ export const Dashboard = () => {
               formData.append(ATTACHMENTS_SUB_TYPES.OWNER_IMAGES, file);
             });
             if (params.status.includes(UNVALIDATED)) {
-              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS('isUnvalidated=true'), formData, headers)
+              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS(IS_UNVALIDATED), formData, headers)
                 .then((r) => r.json())
                 .then(() => {
                   setShouldReload(true);
@@ -217,7 +217,7 @@ export const Dashboard = () => {
               owner_photo: retailerFiles.owner_photo
             }));
             if (params.status.includes(UNVALIDATED)) {
-              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS('isUnvalidated=true'), formData, headers)
+              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS(IS_UNVALIDATED), formData, headers)
                 .then((r) => r.json())
                 .then(() => {
                   setShouldReload(true);
@@ -242,7 +242,11 @@ export const Dashboard = () => {
               owner_photo: retailerFiles.owner_photo
             }));
             if (params.status.includes(UNVALIDATED)) {
-              // TODO: DELETE
+              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS(IS_UNVALIDATED), formData, headers)
+                .then((r) => r.json())
+                .then(() => {
+                  setShouldReload(true);
+                });
             } else {
               webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
                 .then((r) => r.json())
