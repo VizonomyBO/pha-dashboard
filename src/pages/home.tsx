@@ -164,6 +164,10 @@ export const Home = () => {
                 <div className="iconunverified" />
                 Unverified Retailer
               </div>
+              <div className="legend">
+                <div className="icouperstart" />
+                Superstart Retailer
+              </div>
             </div>
             <div className="legendmapmobile">
               <div
