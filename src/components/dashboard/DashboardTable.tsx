@@ -76,17 +76,14 @@ export const DashboardTable = ({
   const showModal = (item: PhaRetailer & PhaIndividual) => {
     console.log('my item ', item);
     if (item.individual_id) {
-      console.log('entro aca');
       setVisibleFeedback(true);
       setIdRetailer(item.individual_id);
       webRequest.get(ENDPOINTS.INDIVIDUAL_FORM(item.individual_id))
         .then((res) => res.json())
         .then((res) => {
           const individual = res.data as Record<string, string>;
-          console.info(individual);
           Object.keys(TYPE_INDIVIDUAL_FORM).forEach((key) => {
             const prop = (TYPE_INDIVIDUAL_FORM as Record<string, string>)[key];
-            console.log(prop, 'Dotty..3', individual[prop]);
             setIndividualForm(prop, individual[prop]);
           });
         })
