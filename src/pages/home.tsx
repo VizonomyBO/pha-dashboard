@@ -76,7 +76,7 @@ export const Home = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container constainer-mobile">
       <div className="bgwhite" />
       <figure className="bgnoise home" />
       <div className="barblue home" id="barblue" />
