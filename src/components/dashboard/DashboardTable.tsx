@@ -3,7 +3,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { QueryParams } from '../../@types';
 import { PhaIndividual, PhaRetailer } from '../../@types/database';
 import { TYPE_BUSINESS, SELECT_CATEGORY, TYPE_INDIVIDUAL_FORM } from '../../constants';
-import { ROW_STATUS } from '../../constants/dashboard';
+import { ROW_STATUS, UNVALIDATED } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
 import { useIndividualFormDispatch } from '../../store/hooks/individualFormHook';
@@ -14,13 +14,14 @@ import { FeedbackForm } from '../FeedbackForm';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
 export const DashboardTable = ({
-  table, setParams, totalElements, selectedElements, setSelectedElements
+  table, setParams, totalElements, selectedElements, setSelectedElements, params
 }: {
   table: (PhaRetailer & PhaIndividual)[],
   setParams: Dispatch<SetStateAction<QueryParams>>,
   totalElements: number,
   selectedElements: Array<string>,
   setSelectedElements: Dispatch<SetStateAction<Array<string>>>,
+  params: QueryParams
 }) => {
   const { setModal } = useModalDispatch();
   const {
@@ -85,11 +86,18 @@ export const DashboardTable = ({
           console.info(individual);
           Object.keys(TYPE_INDIVIDUAL_FORM).forEach((key) => {
             const prop = (TYPE_INDIVIDUAL_FORM as Record<string, string>)[key];
-            console.log(prop);
+            console.log(prop, 'Dotty..3', individual[prop]);
             setIndividualForm(prop, individual[prop]);
           });
         })
         .catch((err) => console.error(err));
+    } else if (params.status.includes(UNVALIDATED)) {
+      setBusinessDetails(TYPE_BUSINESS.NAME, (item.name || ''));
+      setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, (item.address_1 || ''));
+      setBusinessDetails(TYPE_BUSINESS.LONGITUDE, (item.geom?.coordinates[0] || ''));
+      setBusinessDetails(TYPE_BUSINESS.LATITUDE, (item.geom?.coordinates[1] || ''));
+      setBusinessDetails(TYPE_BUSINESS.STATE, ('Mississippi'));
+      setModal({ open: true, type: true });
     } else {
       webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
         .then((res) => res.json())
@@ -116,7 +124,6 @@ export const DashboardTable = ({
           setLocal(retailer.local);
           setProduceAvailStore(retailer.produce_avail_store);
           setProduceAvailSeasonally(retailer.produce_avail_seasonally);
-
           setContactName(retailer.contact_name);
           setContactEmail(retailer.contact_email);
           setContactOwner(retailer.contact_owner);

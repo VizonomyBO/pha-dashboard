@@ -11,7 +11,7 @@ import { authorizationManager } from '../utils/authorizationManager';
 import { FormArea } from '../components/FormArea';
 import { webRequest } from '../utils/webRequest';
 import { ENDPOINTS } from '../constants/url';
-import { ROW_STATUS } from '../constants/dashboard';
+import { ROW_STATUS, UNVALIDATED } from '../constants/dashboard';
 import { CompletelyIntentionalAny } from '../@types/database';
 import {
   ATTACHMENTS_SUB_TYPES, BUSINESS_DETAILS, CONTACT_DETAILS, HOME, JSON_FIELD, OTHER_QUESTIONS, PAGE_REDIRECT_TIME
@@ -191,12 +191,19 @@ export const Dashboard = () => {
             files.ownerimages.forEach((file) => {
               formData.append(ATTACHMENTS_SUB_TYPES.OWNER_IMAGES, file);
             });
-
-            webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
-              .then((r) => r.json())
-              .then(() => {
-                setShouldReload(true);
-              });
+            if (params.status.includes(UNVALIDATED)) {
+              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS('isUnvalidated=true'), formData, headers)
+                .then((r) => r.json())
+                .then(() => {
+                  setShouldReload(true);
+                });
+            } else {
+              webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
+                .then((r) => r.json())
+                .then(() => {
+                  setShouldReload(true);
+                });
+            }
             setModal({ open: false, type: false });
             resetBusiness();
             setActiveTab(BUSINESS_DETAILS);
@@ -209,11 +216,19 @@ export const Dashboard = () => {
               imagelinks: retailerFiles.imagelinks,
               owner_photo: retailerFiles.owner_photo
             }));
-            webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
-              .then((r) => r.json())
-              .then(() => {
-                setShouldReload(true);
-              });
+            if (params.status.includes(UNVALIDATED)) {
+              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS('isUnvalidated=true'), formData, headers)
+                .then((r) => r.json())
+                .then(() => {
+                  setShouldReload(true);
+                });
+            } else {
+              webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
+                .then((r) => r.json())
+                .then(() => {
+                  setShouldReload(true);
+                });
+            }
             setModal({ open: false, type: false });
             resetBusiness();
             setActiveTab('businessDetails');
@@ -226,11 +241,15 @@ export const Dashboard = () => {
               imagelinks: retailerFiles.imagelinks,
               owner_photo: retailerFiles.owner_photo
             }));
-            webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
-              .then((r) => r.json())
-              .then(() => {
-                setShouldReload(true);
-              });
+            if (params.status.includes(UNVALIDATED)) {
+              // TODO: DELETE
+            } else {
+              webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
+                .then((r) => r.json())
+                .then(() => {
+                  setShouldReload(true);
+                });
+            }
             setModal({ open: false, type: false });
             resetBusiness();
             setActiveTab('businessDetails');
@@ -258,6 +277,7 @@ export const Dashboard = () => {
               totalElements={totalElements}
               selectedElements={selectedElements}
               setSelectedElements={setSelectedElements}
+              params={params}
             />
           </div>
         </div>
