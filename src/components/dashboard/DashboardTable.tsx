@@ -1,3 +1,4 @@
+import { Switch } from '@mui/material';
 import classNames from 'classnames';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { QueryParams } from '../../@types';
@@ -159,12 +160,39 @@ export const DashboardTable = ({
                   </label>
                 </div>
               </th>
-              <th className="wcol2 htit2">ZIP Code</th>
-              <th className="wcol3 htit3">Submitted</th>
-              <th className="wcol4 htit4">Status</th>
-              <th className="wcol5 htit5">
-                {params.status.includes(UNVALIDATED) ? 'Google Map' : 'Contact Information'}
+              <th
+                className="wcol2 htit2"
+                style={params.status.includes(UNVALIDATED) ? { width: '10%' } : {}}
+              >
+                ZIP Code
               </th>
+              <th
+                className="wcol3 htit3"
+                style={params.status.includes(UNVALIDATED) ? { width: '12%' } : {}}
+              >
+                Submitted
+              </th>
+              <th className="wcol4 htit4">Status</th>
+              {params.status.includes(UNVALIDATED) && (
+                <th className="wcol5 htit5">
+                  Google Map
+                </th>
+              )}
+              {!params.status.includes(UNVALIDATED) && params.isRetailer && (
+                <>
+                  <th className="wcol7 htit7">
+                    Permanently Closed
+                  </th>
+                  <th className="wcol7 htit7">
+                    Superstar Retailer
+                  </th>
+                </>
+              )}
+              {!params.isRetailer && (
+                <th className="wcol5 htit5">
+                  Contact Information
+                </th>
+              )}
               <th className="wcol6 htit6"> </th>
             </tr>
           </thead>
@@ -193,8 +221,18 @@ export const DashboardTable = ({
                     </label>
                   </div>
                 </td>
-                <td className="wcol2 bbtm"><span className="txt1">{showText(item.zipcode)}</span></td>
-                <td className="wcol3 bbtm"><span className="txt1">{showDate(item.submission_date ?? '')}</span></td>
+                <td
+                  className="wcol2 bbtm"
+                  style={params.status.includes(UNVALIDATED) ? { width: '10%' } : {}}
+                >
+                  <span className="txt1">{showText(item.zipcode)}</span>
+                </td>
+                <td
+                  className="wcol3 bbtm"
+                  style={params.status.includes(UNVALIDATED) ? { width: '12%' } : {}}
+                >
+                  <span className="txt1">{showDate(item.submission_date ?? '')}</span>
+                </td>
                 <td className="wcol4 bbtm">
                   <div
                     className={
@@ -212,29 +250,46 @@ export const DashboardTable = ({
                     </span>
                   </div>
                 </td>
-                <td className="wcol5 bbtm">
-                  <div className="coninf">
-                    {params.status.includes(UNVALIDATED)
-                      ? (
-                        <a
-                          className="cname txt2 google-map"
-                          href={item.geom?.coordinates
-                            ? `https://www.google.com/maps/dir/${item.geom.coordinates[1]},${item.geom.coordinates[0]}`
-                            : ''}
-                          rel="noreferrer"
-                          target="_blank"
-                        >
-                          {item.geom?.coordinates ? 'Open Map' : '-'}
-                        </a>
-                      )
-                      : (
-                        <>
-                          <span className="cname txt2">{showText(item.contact_name)}</span>
-                          <span className="email txt2">{showText(item.contact_email)}</span>
-                        </>
-                      )}
-                  </div>
-                </td>
+                {params.status.includes(UNVALIDATED) && (
+                  <td className="wcol5 bbtm">
+                    <div className="coninf">
+                      <a
+                        className="cname txt2 google-map"
+                        href={item.geom?.coordinates
+                          ? `https://www.google.com/maps/dir/${item.geom.coordinates[1]},${item.geom.coordinates[0]}`
+                          : ''}
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        {item.geom?.coordinates ? 'Open Map' : '-'}
+                      </a>
+                    </div>
+                  </td>
+                )}
+                {!params.status.includes(UNVALIDATED) && params.isRetailer && (
+                  <>
+                    <td className="wcol7 bbtm">
+                      <div className="coninf" style={{ textAlign: 'center' }}>
+                        Yes
+                      </div>
+                    </td>
+                    <td className="wcol7 bbtm">
+                      <div className="coninf">
+                        <label className="switch">
+                          <Switch />
+                        </label>
+                      </div>
+                    </td>
+                  </>
+                )}
+                {!params.isRetailer && (
+                  <td className="wcol5 bbtm">
+                    <div className="coninf">
+                      <span className="cname txt2">{showText(item.contact_name)}</span>
+                      <span className="email txt2">{showText(item.contact_email)}</span>
+                    </div>
+                  </td>
+                )}
                 <td className="wcol6 bbtm padright">
                   <button
                     type="button"

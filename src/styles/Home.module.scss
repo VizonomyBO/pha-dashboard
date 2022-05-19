@@ -3337,6 +3337,7 @@ sup {
 						}
 					}
 					.coninf {
+						font-family:  "FuturaMedium", sans-serif;
 						display: flex;
 						flex-direction: column;
 						justify-content: flex-start;
@@ -3358,7 +3359,7 @@ sup {
 					.wcol4 { width: 16%; }
 					.wcol5 { width: 23%; }
 					.wcol6 { width: 5%;  }
-					
+					.wcol7 { width: 13.5%;  }
 					.wcol1.htit1 {
 						padding-left: 24px;
 					}
@@ -3532,7 +3533,7 @@ sup {
 							}
 						}
 					}
-					.htit1, .htit2, .htit3, .htit4, .htit5, .htit6 {
+					.htit1, .htit2, .htit3, .htit4, .htit5, .htit6, .htit7 {
 						text-align: left;
 						border-bottom: 1px solid #E3E5E5;
 						padding-bottom: 10px !important;

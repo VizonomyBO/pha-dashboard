@@ -21,6 +21,39 @@ export const theme = createTheme({
         }
       }
     },
+    MuiSwitch: {
+      styleOverrides: {
+        switchBase: {
+          color: '#7B7A80',
+          '&.Mui-checked': {
+            color: '#00BDE3',
+            left: '-6px',
+          },
+          '&.Mui-checked + .MuiSwitch-track': {
+            backgroundColor: '#fff',
+            border: '2px solid #00BDE3',
+            opacity: '1',
+          },
+        },
+        thumb: {
+          width: '10px',
+          height: '10px',
+          marginTop: '8px',
+          marginLeft: '9px',
+          '&.Mui-checked + .MuiSwitch-track': {
+            marginRight: '100px',
+          },
+        },
+        track: {
+          backgroundColor: '#fff',
+          border: '2px solid #7B7A80',
+          width: '100%',
+          height: '20px',
+          borderRadius: '20px',
+          opacity: '1',
+        }
+      }
+    },
     MuiMenuItem: {
       styleOverrides: {
         root: {

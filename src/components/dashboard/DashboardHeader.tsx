@@ -18,7 +18,8 @@ import {
   RETAILERS_PHA,
   INDIVIDUAL_PHA,
   DEFAULT_VALUES_BUTTON_INDIVIDUAL,
-  UNVALIDATED
+  UNVALIDATED,
+  UNVALIDATE_PHA
 } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
@@ -108,7 +109,7 @@ export const DashboardHeader = ({
   const deleteRetailer = () => {
     const headers = webRequest.generateJSONHeader();
     const table = params.isRetailer ? RETAILERS_PHA : INDIVIDUAL_PHA;
-    webRequest.delete(ENDPOINTS.DELETE_RETAILER(table), {
+    webRequest.delete(ENDPOINTS.DELETE_RETAILER(!params.status.includes(UNVALIDATED) ? table : UNVALIDATE_PHA), {
       ids: selectedElements
     }, headers).then(() => {
       setShouldReload(true);
