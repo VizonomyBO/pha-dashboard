@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import {
@@ -9,7 +9,8 @@ import {
   CONTACT_DETAILS,
   HOME,
   OTHER_QUESTIONS,
-  PAGE_REDIRECT_TIME
+  PAGE_REDIRECT_TIME,
+  TYPE_BUSINESS
 } from '../constants';
 import { FormTabType } from '../@types';
 import { ModalRequestForm } from '../components/ModalRequestForm';
@@ -29,11 +30,16 @@ import { getPhaRetailerBody } from '../utils/getPhaRetailerBody';
 
 export const Form = () => {
   const { activeTab } = useTabState();
+  const { setBusinessDetails } = useMarketplaceDispatch();
   const { setActiveTab } = useTabDispatch();
   const [, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const { setModal } = useModalDispatch();
   const navigate = useNavigate();
+  const { name } = useParams();
+  useEffect(() => {
+    setBusinessDetails(TYPE_BUSINESS.NAME, name || '');
+  }, [name, setBusinessDetails]);
   const {
     businessDetails,
     selectCategory,

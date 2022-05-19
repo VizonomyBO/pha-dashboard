@@ -47,6 +47,10 @@ ReactDOM.render(
               element={<Dashboard />}
             />
             <Route
+              path="/form/:name"
+              element={<Form />}
+            />
+            <Route
               path="/form"
               element={<Form />}
             />

@@ -52,7 +52,7 @@ export const ToolTipOSM = (data: TooltipProps) => {
           ${objectTypified?.properties?.city ? `${objectTypified?.properties?.city}, ` : ''} MS,
           ${getPostCode(objectTypified)}`}
         </div>
-        <Link to="/form">
+        <Link to={`/form/${objectTypified.properties?.name}`}>
           <button className="light-osm" type="button" onClick={() => setDataBusiness()}>
             Submit Retailer Info
           </button>

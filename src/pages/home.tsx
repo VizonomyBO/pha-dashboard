@@ -166,7 +166,7 @@ export const Home = () => {
               </div>
               <div className="legend">
                 <div className="icouperstart" />
-                Superstart Retailer
+                Superstar Retailer
               </div>
             </div>
             <div className="legendmapmobile">
