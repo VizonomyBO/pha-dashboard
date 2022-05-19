@@ -17,7 +17,8 @@ import {
   DEBOUNCE_SEARCH_TABLE,
   RETAILERS_PHA,
   INDIVIDUAL_PHA,
-  DEFAULT_VALUES_BUTTON_INDIVIDUAL
+  DEFAULT_VALUES_BUTTON_INDIVIDUAL,
+  UNVALIDATED
 } from '../../constants/dashboard';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
@@ -210,7 +211,7 @@ export const DashboardHeader = ({
               Delete
             </span>
           )}
-          {selectedElements.length > 0 && (
+          {selectedElements.length > 0 && !params.status.includes(UNVALIDATED) && (
             <span
               className="text-delete"
               aria-hidden="true"
