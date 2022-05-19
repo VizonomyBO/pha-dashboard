@@ -123,7 +123,7 @@ export const Dashboard = () => {
           }}
           clickApprove={() => {
             const headers = webRequest.generateMultipartHeader();
-            const body: CompletelyIntentionalAny = {
+            let body: CompletelyIntentionalAny = {
               name: businessDetails.name,
               address_1: businessDetails.address_1,
               address_2: businessDetails.address_2,
@@ -180,8 +180,19 @@ export const Dashboard = () => {
               wic_accepted: selectAccessibility.wic_accepted,
             };
             const newBody: CompletelyIntentionalAny = {};
+            if (params.status.includes(UNVALIDATED)) {
+              body = {
+                ...body,
+                latitude: businessDetails.latitude,
+                longitude: businessDetails.longitude
+              };
+            }
             Object.keys(body).forEach((k) => {
-              newBody[k] = body[k]?.split("'").join("\\'");
+              if (k !== 'latitude' && k !== 'longitude') {
+                newBody[k] = body[k]?.split("'").join("\\'");
+              } else {
+                newBody[k] = body[k];
+              }
             });
             const formData = new FormData();
             formData.append(JSON_FIELD, JSON.stringify(newBody));
