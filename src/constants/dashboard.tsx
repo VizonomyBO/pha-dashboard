@@ -41,7 +41,8 @@ export enum ROW_STATUS {
   APPROVED = 'Approved',
   REJECTED = 'Rejected',
   PENDING = 'Pending',
-  DELETED = 'Deleted'
+  DELETED = 'Deleted',
+  UNVALIDATED = 'Unvalidated'
 }
 
 export const FILENAME_CSV_RETAILER = 'PHA-retailer';

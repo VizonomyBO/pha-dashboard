@@ -548,3 +548,11 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   opacity: 0;
   filter: alpha(opacity=0);
 }
+.google-map {
+  text-decoration: none;
+  color:#00BDE3 !important;
+}
+.google-map:hover {
+  text-decoration: none;
+  color:#161A23 !important;
+}
