@@ -39,7 +39,8 @@ export const Form = () => {
   const { name } = useParams();
   useEffect(() => {
     setBusinessDetails(TYPE_BUSINESS.NAME, name || '');
-  }, [name, setBusinessDetails]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   const {
     businessDetails,
     selectCategory,
