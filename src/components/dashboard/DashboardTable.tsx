@@ -200,7 +200,7 @@ export const DashboardTable = ({
                     className={
                       classNames('colorstatus', {
                         blue: item.submission_status === ROW_STATUS.PENDING
-                        || params.status.includes(UNVALIDATED) === true,
+                        || params.status.includes(UNVALIDATED),
                         green: item.submission_status === ROW_STATUS.APPROVED,
                         red: item.submission_status === ROW_STATUS.REJECTED,
                       })
