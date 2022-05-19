@@ -195,6 +195,7 @@ export const TYPE_INDIVIDUAL_FORM = {
   availability: 'availability',
   quality: 'quality',
   visibility: 'visibility',
+  closed: 'closed',
   imagelinks: 'imagelinks',
   local: 'local',
   meets_need: 'meets_need',

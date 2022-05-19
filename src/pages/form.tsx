@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import {
@@ -9,8 +9,7 @@ import {
   CONTACT_DETAILS,
   HOME,
   OTHER_QUESTIONS,
-  PAGE_REDIRECT_TIME,
-  TYPE_BUSINESS
+  PAGE_REDIRECT_TIME
 } from '../constants';
 import { FormTabType } from '../@types';
 import { ModalRequestForm } from '../components/ModalRequestForm';
@@ -27,19 +26,16 @@ import { useTabDispatch, useTabState } from '../store/hooks/tabHook';
 import { webRequest } from '../utils/webRequest';
 import { ENDPOINTS } from '../constants/url';
 import { getPhaRetailerBody } from '../utils/getPhaRetailerBody';
+import { useFormName } from '../store/hooks/custom/useFormName';
 
 export const Form = () => {
   const { activeTab } = useTabState();
-  const { setBusinessDetails } = useMarketplaceDispatch();
+  const { addName } = useFormName();
   const { setActiveTab } = useTabDispatch();
   const [, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const { setModal } = useModalDispatch();
   const navigate = useNavigate();
-  const { name } = useParams();
-  useEffect(() => {
-    setBusinessDetails(TYPE_BUSINESS.NAME, name || '');
-  }, [name, setBusinessDetails]);
   const {
     businessDetails,
     selectCategory,
@@ -84,6 +80,7 @@ export const Form = () => {
       setModal({ type: estate.type, open: true });
     }
     if (value === HOME) {
+      addName();
       setLoaderState(true);
       const headers = webRequest.generateMultipartHeader();
       const bodyGen = getPhaRetailerBody();

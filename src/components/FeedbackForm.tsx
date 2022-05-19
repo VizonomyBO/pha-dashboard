@@ -31,6 +31,7 @@ export const FeedbackForm = (
   });
 
   const {
+    closed,
     availability,
     quality,
     visibility,
@@ -44,6 +45,7 @@ export const FeedbackForm = (
     imagelinks
   } = useIndividualFormState();
   const getObject = () => ({
+    closed,
     availability,
     quality,
     visibility,
@@ -186,6 +188,43 @@ export const FeedbackForm = (
         <div className="body">
           <div className="group">
             <div className="aleft">
+              <div className="sectiontitle">
+                Current Operations
+              </div>
+              <div className="item">
+                <div className="title grouped">
+                  <span className="description">
+                    Select the checkbox if the retail location is permanently closed.
+                  </span>
+                </div>
+                <div className="ainput chk">
+                  <label className="chkwrap">
+                    Closed
+                    <input
+                      type="checkbox"
+                      name="closed"
+                      value={closed}
+                      checked={closed === formConstants.CLOSED.YES}
+                      onChange={
+                        () => {
+                          if (closed === formConstants.CLOSED.YES) {
+                            setIndividualForm(
+                              TYPE_INDIVIDUAL_FORM.closed,
+                              formConstants.CLOSED.NO
+                            );
+                          } else {
+                            setIndividualForm(
+                              TYPE_INDIVIDUAL_FORM.closed,
+                              formConstants.CLOSED.YES
+                            );
+                          }
+                        }
+                      }
+                    />
+                    <span className="checkmark ckeckmark-form" />
+                  </label>
+                </div>
+              </div>
               <div className="sectiontitle">
                 Availability
               </div>

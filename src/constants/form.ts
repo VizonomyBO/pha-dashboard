@@ -3,6 +3,10 @@ export const formConstants = {
     ACCEPTABLE: 'Acceptable',
     UNACCEPTABLE: 'Unacceptable'
   },
+  CLOSED: {
+    YES: 'Yes',
+    NO: 'No'
+  },
   AVAILABILITY: {
     FRESH: 'Fresh',
     FROZEN: 'Frozen',
