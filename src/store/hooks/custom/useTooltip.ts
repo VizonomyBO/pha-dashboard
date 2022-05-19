@@ -1,11 +1,14 @@
 import { PropertiesLayer } from '../../../@types';
-import { DEFAULT_IMAGE } from '../../../constants';
+import { DEFAULT_IMAGE, GOOGLE_STORAGE } from '../../../constants';
 
 export const useTooltip = () => {
   const getImageToDisplay = (objectTypified: PropertiesLayer) => {
     if (objectTypified.properties?.imagelinks) {
       const images = objectTypified.properties.imagelinks.split(',');
-      return images[0];
+      if (images[0].includes(GOOGLE_STORAGE)) {
+        return images[0];
+      }
+      return images[1];
     }
     return DEFAULT_IMAGE;
   };
