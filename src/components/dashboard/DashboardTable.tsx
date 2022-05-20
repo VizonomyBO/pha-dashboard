@@ -96,7 +96,7 @@ export const DashboardTable = ({
       setBusinessDetails(TYPE_BUSINESS.LONGITUDE, (item.geom?.coordinates[0] || ''));
       setBusinessDetails(TYPE_BUSINESS.LATITUDE, (item.geom?.coordinates[1] || ''));
       setBusinessDetails(TYPE_BUSINESS.STATE, ('Mississippi'));
-      setModal({ open: true, type: true });
+      setModal({ open: true, type: false });
     } else {
       webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
         .then((res) => res.json())

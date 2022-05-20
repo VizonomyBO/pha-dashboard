@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DashboardHeader } from '../components/dashboard/DashboardHeader';
 import { DashboardNavbar } from '../components/dashboard/DashboardNavbar';
@@ -50,6 +50,10 @@ export const Dashboard = () => {
   if (!token) {
     navigate('/login');
   }
+
+  useEffect(() => {
+    setSelectedElements([]);
+  }, [params, setSelectedElements]);
 
   return (
     <>
