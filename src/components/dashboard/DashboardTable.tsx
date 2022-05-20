@@ -271,12 +271,14 @@ export const DashboardTable = ({
                   <>
                     <td className="wcol7 bbtm">
                       <div className="coninf" style={{ textAlign: 'center' }}>
-                        Yes
+                        <label className="switch" style={{ textAlign: 'center' }}>
+                          <Switch />
+                        </label>
                       </div>
                     </td>
                     <td className="wcol7 bbtm">
                       <div className="coninf">
-                        <label className="switch">
+                        <label className="switch" style={{ textAlign: 'center' }}>
                           <Switch />
                         </label>
                       </div>

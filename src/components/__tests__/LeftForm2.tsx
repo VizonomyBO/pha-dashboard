@@ -14,6 +14,9 @@ describe('renders without crashing', () => {
         owner_photo: ''
       }
     },
+    individualForm: {
+      imagelinks: '',
+    },
     widthScroll: 5,
     heightScroll: 0
   };
