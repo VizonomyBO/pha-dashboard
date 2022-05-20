@@ -80,9 +80,11 @@ export const DashboardHeader = ({
           copy[indexCopy].active = false;
         }
         copy[index].active = !copy[index].active;
-      } else {
+      } else if (params.isRetailer) {
         copy[index].active = !copy[index].active;
         copy[3].active = false;
+      } else {
+        copy[index].active = !copy[index].active;
       }
       return copy;
     });
