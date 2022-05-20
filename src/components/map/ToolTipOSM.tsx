@@ -45,7 +45,9 @@ export const ToolTipOSM = (data: TooltipProps) => {
     >
       <div className={classNames('detailcard', { 'detail-card-other': isMobile })}>
         <div className={classNames('store', { 'store-osm-bottom': isMobile })}>
-          <b>{objectTypified?.properties?.name?.toUpperCase()}</b>
+          <b>
+            {objectTypified?.properties?.name?.toUpperCase() || objectTypified?.properties?.listing_name?.toUpperCase()}
+          </b>
         </div>
         <div className="address margin-bottom-osm">
           {`${getAddress(objectTypified)}
