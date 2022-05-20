@@ -14,7 +14,7 @@ export const ToolTipOSM = (data: TooltipProps) => {
   const popupRef = useRef<HTMLDivElement>(null);
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { getAddress, getPostCode } = useTooltip();
-
+  const name = objectTypified?.properties?.name || objectTypified?.properties?.listing_name;
   const setDataBusiness = () => {
     if (objectTypified.properties?.name) {
       setBusinessDetails(TYPE_BUSINESS.NAME, objectTypified.properties.name);
@@ -46,7 +46,7 @@ export const ToolTipOSM = (data: TooltipProps) => {
       <div className={classNames('detailcard', { 'detail-card-other': isMobile })}>
         <div className={classNames('store', { 'store-osm-bottom': isMobile })}>
           <b>
-            {objectTypified?.properties?.name?.toUpperCase() || objectTypified?.properties?.listing_name?.toUpperCase()}
+            {name?.toUpperCase()}
           </b>
         </div>
         <div className="address margin-bottom-osm">
@@ -54,7 +54,7 @@ export const ToolTipOSM = (data: TooltipProps) => {
           ${objectTypified?.properties?.city ? `${objectTypified?.properties?.city}, ` : ''} MS,
           ${getPostCode(objectTypified)}`}
         </div>
-        <Link to={`/form/${objectTypified.properties?.name}`}>
+        <Link to={`/form/${name}`}>
           <button className="light-osm" type="button" onClick={() => setDataBusiness()}>
             Submit Retailer Info
           </button>

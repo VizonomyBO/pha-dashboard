@@ -32,10 +32,17 @@ export const Form = () => {
   const { activeTab } = useTabState();
   const { addName } = useFormName();
   const { setActiveTab } = useTabDispatch();
+  const [firstLoad, setFirstLoad] = useState(true);
   const [, setFormClass] = useState(CLASSES_BY_FORM[activeTab]);
   const barBlueClass = classNames('barblue', { [CLASSES_BY_FORM[activeTab]]: true });
   const { setModal } = useModalDispatch();
   const navigate = useNavigate();
+  useEffect(() => {
+    if (firstLoad) {
+      addName();
+      setFirstLoad(false);
+    }
+  }, [addName, firstLoad]);
   const {
     businessDetails,
     selectCategory,
@@ -80,7 +87,6 @@ export const Form = () => {
       setModal({ type: estate.type, open: true });
     }
     if (value === HOME) {
-      addName();
       setLoaderState(true);
       const headers = webRequest.generateMultipartHeader();
       const bodyGen = getPhaRetailerBody();
