@@ -31,7 +31,7 @@ export const FeedbackForm = (
   });
 
   const {
-    closed,
+    permanently_closed,
     availability,
     quality,
     visibility,
@@ -45,7 +45,7 @@ export const FeedbackForm = (
     imagelinks
   } = useIndividualFormState();
   const getObject = () => ({
-    closed,
+    permanently_closed,
     availability,
     quality,
     visibility,
@@ -88,9 +88,7 @@ export const FeedbackForm = (
   };
 
   const sendForm = () => {
-    if (validationIndividualForm({
-      availability, quality, visibility, local, meets_need
-    })) {
+    if (validationIndividualForm({ availability }) || permanently_closed === formConstants.CLOSED.YES) {
       const obj = getObject();
       const formData = getFormData(JSON.stringify(obj).replace("'", "\\'"));
       const headers = webRequest.generateMultipartHeader();
@@ -185,7 +183,7 @@ export const FeedbackForm = (
           <h2 className="sectitle">User Feedback Form</h2>
           <p className="secdescription">Have a location listed by completing the form below</p>
         </div>
-        <div className="body">
+        <div className="body" style={permanently_closed === formConstants.CLOSED.YES ? {} : {}}>
           <div className="group">
             <div className="aleft">
               <div className="sectiontitle">
@@ -198,26 +196,47 @@ export const FeedbackForm = (
                   </span>
                 </div>
                 <div className="ainput chk">
-                  <label className="chkwrap">
-                    Closed
+                  <a
+                    className="chkwrap"
+                    href="#contact-id"
+                    style={{ textDecoration: 'none' }}
+                    onClick={() => {
+                      setIndividualForm(
+                        TYPE_INDIVIDUAL_FORM.permanently_closed,
+                        formConstants.CLOSED.YES
+                      );
+                    }}
+                  >
+                    Yes
                     <input
-                      type="checkbox"
+                      type="radio"
                       name="closed"
-                      value={closed}
-                      checked={closed === formConstants.CLOSED.YES}
+                      value={permanently_closed}
+                      checked={permanently_closed === formConstants.CLOSED.YES}
                       onChange={
                         () => {
-                          if (closed === formConstants.CLOSED.YES) {
-                            setIndividualForm(
-                              TYPE_INDIVIDUAL_FORM.closed,
-                              formConstants.CLOSED.NO
-                            );
-                          } else {
-                            setIndividualForm(
-                              TYPE_INDIVIDUAL_FORM.closed,
-                              formConstants.CLOSED.YES
-                            );
-                          }
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.permanently_closed,
+                            formConstants.CLOSED.YES
+                          );
+                        }
+                      }
+                    />
+                    <span className="checkmark ckeckmark-form" />
+                  </a>
+                  <label className="chkwrap">
+                    No
+                    <input
+                      type="radio"
+                      name="closed"
+                      value={permanently_closed}
+                      checked={permanently_closed === formConstants.CLOSED.NO}
+                      onChange={
+                        () => {
+                          setIndividualForm(
+                            TYPE_INDIVIDUAL_FORM.permanently_closed,
+                            formConstants.CLOSED.NO
+                          );
                         }
                       }
                     />
@@ -547,7 +566,7 @@ export const FeedbackForm = (
                   />
                 </div>
               </div>
-              <div className="item">
+              <div className="item" id="contact-id">
                 <div className="title">
                   <label>Phone Number</label>
                 </div>

@@ -81,7 +81,7 @@ export const INITIAL_SESSION = {
 };
 
 export const INITIAL_INDIVIDUAL_FORM = {
-  closed: 'No',
+  permanently_closed: '',
   individual_id: '',
   retailer_id: '',
   availability: '',

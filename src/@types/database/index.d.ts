@@ -66,7 +66,7 @@ export interface PhaRetailer {
 }
 
 export interface PhaIndividual {
-  closed?: string,
+  permanently_closed?: string,
   individual_id?: string,
   retailer_id: string,
   availability?: string,
