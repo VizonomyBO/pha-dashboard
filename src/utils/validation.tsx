@@ -168,11 +168,7 @@ export const ValidationDeleteBreakLines = (text: string, setText: (value: string
 };
 
 export const validationIndividualForm = ({
-  availability,
-  quality,
-  visibility,
-  local,
-  meets_need
+  availability
 }: PhaIndividualValidation) => (
-  (isEmpty(availability) || isEmpty(quality) || isEmpty(visibility) || isEmpty(local) || isEmpty(meets_need))
+  (isEmpty(availability))
 );
