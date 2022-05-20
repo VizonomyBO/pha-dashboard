@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import {
   ATTACHMENTS_SUB_TYPES, INDIVIDUAL_FORM, TYPE_BUSINESS, TYPE_INDIVIDUAL_FORM
 } from '../../../constants';
-import { useIndividualFormDispatch } from '../individualFormHook';
+import { useIndividualFormDispatch, useIndividualFormState } from '../individualFormHook';
 import { useMarketplaceDispatch, useMarketplaceState } from '../marketplaceHook';
 import { useRetailerFileReducer } from '../retailerFilesHook';
 
@@ -16,6 +16,7 @@ export const useAttachmentBusiness = ({ type, subType }: {
   const [multimedia, setMultimedia] = useState<Blob[]>([]);
   const [googleArray, setGoogleArray] = useState<string[]>([]);
   const { setImageLinks, setOwnerPhotos } = useRetailerFileReducer();
+  const { imagelinks } = useIndividualFormState();
   const saveFilesSelected = (newFiles: FileList | null) => {
     const newObjects: Blob[] = [];
     let maxElements = 5;
@@ -51,7 +52,10 @@ export const useAttachmentBusiness = ({ type, subType }: {
         setGoogleArray((retailerFiles.owner_photo || '').split(','));
       }
     }
-  }, [retailerFiles.imagelinks, retailerFiles.owner_photo, subType, type]);
+    if (type === INDIVIDUAL_FORM) {
+      setGoogleArray((imagelinks || '').split(','));
+    }
+  }, [imagelinks, retailerFiles.imagelinks, retailerFiles.owner_photo, subType, type]);
 
   const removeFromGoogleArray = (index: number) => {
     const newArray = [...googleArray];
@@ -63,6 +67,9 @@ export const useAttachmentBusiness = ({ type, subType }: {
       if (subType === ATTACHMENTS_SUB_TYPES.OWNER_IMAGES) {
         setOwnerPhotos(newArray.join(','));
       }
+    }
+    if (type === INDIVIDUAL_FORM) {
+      setIndividualForm(TYPE_INDIVIDUAL_FORM.imagelinks, newArray.join(','));
     }
   };
 
