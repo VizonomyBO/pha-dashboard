@@ -90,6 +90,7 @@ export const DashboardTable = ({
         })
         .catch((err) => console.error(err));
     } else if (params.status.includes(UNVALIDATED)) {
+      setBusinessDetails(TYPE_BUSINESS.RETAILER_ID, (item.retailer_id || ''));
       setBusinessDetails(TYPE_BUSINESS.NAME, (item.name || ''));
       setBusinessDetails(TYPE_BUSINESS.ADDRESS_1, (item.address_1 || ''));
       setBusinessDetails(TYPE_BUSINESS.LONGITUDE, (item.geom?.coordinates[0] || ''));

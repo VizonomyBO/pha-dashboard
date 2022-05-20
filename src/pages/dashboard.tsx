@@ -253,7 +253,7 @@ export const Dashboard = () => {
               owner_photo: retailerFiles.owner_photo
             }));
             if (params.status.includes(UNVALIDATED)) {
-              webRequest.postMultipart(ENDPOINTS.PHA_RETAILERS(IS_UNVALIDATED), formData, headers)
+              webRequest.delete(ENDPOINTS.DELETE_UNVALIDATE(businessDetails.retailer_id), formData, headers)
                 .then((r) => r.json())
                 .then(() => {
                   setShouldReload(true);

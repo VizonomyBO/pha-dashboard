@@ -22,6 +22,7 @@ export const ENDPOINTS = {
   GET_LAYERS: `${URL}/${CARTODB}/layers`,
   GET_MARKERS: `${URL}/${CARTODB}/map-table`,
   DELETE_OSM: (id: number | undefined) => `${URL}/${CARTODB}/osm-point/${id}`,
+  DELETE_UNVALIDATE: (id: number | string | undefined) => `${URL}/${CARTODB}/unvalidated/${id}`,
   DELETE_RETAILER: (table:string) => `${URL}/${CARTODB}/pha?table=${table}`,
 };
 
