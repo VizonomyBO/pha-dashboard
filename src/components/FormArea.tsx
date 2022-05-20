@@ -75,7 +75,7 @@ export const FormArea = ({
         </div>
       </div>
       {
-        isModal && type ? (
+        isModal && type && (
           <div className="aaction">
             <button
               className="light"
@@ -130,14 +130,52 @@ export const FormArea = ({
             </button>
           </div>
         )
-          : (
-            <div className="aaction">
-              <button className="light" type="button" onClick={clickProceed}>
-                {activeTab === CONTACT_DETAILS ? 'Submit' : 'Proceed'}
-              </button>
-            </div>
-          )
-        }
+      }
+      {!type && !isModal && (
+        <div className="aaction">
+          <button className="light" type="button" onClick={clickProceed}>
+            {activeTab === CONTACT_DETAILS ? 'Submit' : 'Proceed'}
+          </button>
+        </div>
+      )}
+      {
+        !type && (
+          <div className="aaction">
+            <button
+              className="light"
+              type="button"
+              onClick={() => {
+                if (clickApprove) {
+                  clickApprove();
+                }
+                resetBusiness();
+              }}
+              style={{ padding: '16px 30px' }}
+            >
+              Approve
+            </button>
+            <button
+              className="light"
+              type="button"
+              onClick={() => {
+                if (clickDelete) {
+                  clickDelete();
+                }
+                resetBusiness();
+              }}
+              style={{
+                backgroundColor: 'white',
+                padding: '16px 30px',
+                color: '#E40000',
+                border: '2px solid #E40000',
+                margin: '4px'
+              }}
+            >
+              Delete
+            </button>
+          </div>
+        )
+    }
     </div>
   );
 
