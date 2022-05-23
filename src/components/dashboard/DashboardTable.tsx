@@ -144,7 +144,7 @@ export const DashboardTable = ({
               </th>
             </tr>
             <tr style={{ height: '60px' }}>
-              <th className="wcol1 htit1">
+              <th className="wcol1 htit1" style={params.status.includes(UNVALIDATED) ? { width: '34%' } : {}}>
                 <div className="option">
                   <label className="chkwrap">
                     <span className="store">
@@ -163,17 +163,17 @@ export const DashboardTable = ({
               </th>
               <th
                 className="wcol2 htit2"
-                style={params.status.includes(UNVALIDATED) ? { width: '10%' } : {}}
+                style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
               >
                 ZIP Code
               </th>
               <th
                 className="wcol3 htit3"
-                style={params.status.includes(UNVALIDATED) ? { width: '12%' } : {}}
+                style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
               >
                 Submitted
               </th>
-              <th className="wcol4 htit4">Status</th>
+              <th className="wcol4 htit4" style={!params.isRetailer ? { width: '10%' } : {}}>Status</th>
               {params.status.includes(UNVALIDATED) && (
                 <th className="wcol5 htit5">
                   Google Map
@@ -190,9 +190,14 @@ export const DashboardTable = ({
                 </>
               )}
               {!params.isRetailer && (
-                <th className="wcol5 htit5">
-                  Contact Information
-                </th>
+                <>
+                  <th className="wcol7 htit7">
+                    Permanently Closed
+                  </th>
+                  <th className="wcol7 htit7">
+                    Contact Information
+                  </th>
+                </>
               )}
               <th className="wcol6 htit6"> </th>
             </tr>
@@ -204,7 +209,10 @@ export const DashboardTable = ({
           >
             {table.map((item: (PhaRetailer & PhaIndividual)) => (
               <tr style={{ height: '71px' }} key={item.individual_id || item.retailer_id}>
-                <td className="wcol1 bbtm padleft" style={{ height: '71px' }}>
+                <td
+                  className="wcol1 bbtm padleft"
+                  style={params.status.includes(UNVALIDATED) ? { width: '34%', height: '71px' } : { height: '71px' }}
+                >
                   <div className="option">
                     <label className="chkwrap">
                       <span className="store">
@@ -224,17 +232,17 @@ export const DashboardTable = ({
                 </td>
                 <td
                   className="wcol2 bbtm"
-                  style={params.status.includes(UNVALIDATED) ? { width: '10%' } : {}}
+                  style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
                 >
                   <span className="txt1">{showText(item.zipcode)}</span>
                 </td>
                 <td
                   className="wcol3 bbtm"
-                  style={params.status.includes(UNVALIDATED) ? { width: '12%' } : {}}
+                  style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
                 >
                   <span className="txt1">{showDate(item.submission_date ?? '')}</span>
                 </td>
-                <td className="wcol4 bbtm">
+                <td className="wcol4 bbtm" style={!params.isRetailer ? { width: '10%' } : {}}>
                   <div
                     className={
                       classNames('colorstatus', {
@@ -286,12 +294,23 @@ export const DashboardTable = ({
                   </>
                 )}
                 {!params.isRetailer && (
-                  <td className="wcol5 bbtm">
-                    <div className="coninf">
-                      <span className="cname txt2">{showText(item.contact_name)}</span>
-                      <span className="email txt2">{showText(item.contact_email)}</span>
-                    </div>
-                  </td>
+                  <>
+                    <td className="wcol7 bbtm">
+                      <div className="coninf" style={{ textAlign: 'center' }}>
+                        <label className="switch" style={{ textAlign: 'center' }}>
+                          Yes
+                        </label>
+                      </div>
+                    </td>
+                    <td className="wcol7 bbtm">
+                      <div className="coninf">
+                        <label className="switch" style={{ textAlign: 'center' }}>
+                          <span className="cname txt2">{showText(item.contact_name)}</span>
+                          <span className="email txt2">{showText(item.contact_email)}</span>
+                        </label>
+                      </div>
+                    </td>
+                  </>
                 )}
                 <td className="wcol6 bbtm padright">
                   <button
