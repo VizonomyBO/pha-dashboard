@@ -298,7 +298,7 @@ export const DashboardTable = ({
                     <td className="wcol7 bbtm">
                       <div className="coninf" style={{ textAlign: 'center' }}>
                         <label className="switch" style={{ textAlign: 'center' }}>
-                          Yes
+                          {showText(item.permanently_closed)}
                         </label>
                       </div>
                     </td>
