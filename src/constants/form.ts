@@ -43,6 +43,12 @@ export const formAccessibility = {
     NO: 'No'
   }
 };
+export const formOperation = {
+  OPEN: {
+    YES: 'Yes',
+    NO: 'No'
+  }
+};
 export const formSelectCategory = {
   SUPERMARKET: {
     YES: 'Yes',

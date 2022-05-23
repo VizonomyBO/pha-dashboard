@@ -17,7 +17,10 @@ describe('renders without crashing', () => {
       selectAccessibility: {
         wic_accepted: true,
         snap_accepted: true
-      }
+      },
+      currentOperation: {
+        open: '',
+      },
     },
   };
   const mockStore = configureStore();

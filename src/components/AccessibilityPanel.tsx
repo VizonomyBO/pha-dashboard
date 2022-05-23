@@ -61,10 +61,6 @@ export const AccessibilityPanel = () => {
             </div>
           </div>
         </div>
-        <div className="sectiontitle second">
-          <sup>*</sup>
-          <span className="colorred">Required</span>
-        </div>
       </div>
     </>
   );

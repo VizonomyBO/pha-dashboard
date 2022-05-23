@@ -172,6 +172,13 @@ const marketplaceReducer = (state: MarketplaceInterface = defaultState, action: 
           distribution: action.payload
         }
       };
+    case TYPES.SET_SELECT_OPERATION:
+      return {
+        ...state,
+        currentOperation: {
+          open: action.payload
+        }
+      };
     case TYPES.SET_SELECT_CATEGORY_FOOD_CO_OP:
       return {
         ...state,

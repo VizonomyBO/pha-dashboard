@@ -73,6 +73,9 @@ export const INITIAL_MARKETPLACE: MarketplaceInterface = {
     wic_accepted: 'No',
     snap_accepted: 'No',
   },
+  currentOperation: {
+    open: '',
+  },
 };
 
 export const INITIAL_SESSION = {
