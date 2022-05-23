@@ -462,7 +462,7 @@ export const DashboardTable = ({
                     </td>
                     <td className="wcol8 bbtm">
                       <div className="coninf">
-                        <label className="switch" style={{ textAlign: 'center' }}>
+                        <label className="switch">
                           <span className="cname txt2">{showText(item.contact_name)}</span>
                           <span className="email txt2">{showText(item.contact_email)}</span>
                         </label>

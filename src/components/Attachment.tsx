@@ -98,7 +98,7 @@ export const Attachment = ({
                   style={{ display: 'none' }}
                   onChange={(e: React.ChangeEvent<HTMLInputElement>) => (filesSelected(e))}
                   multiple
-                  accept="image/png, image/jpeg, image/jpg"
+                  accept="image/png, image/jpeg, image/jpg, image/heic"
                   capture
                 />
                 <label htmlFor={`${type}uploader`}>
@@ -117,7 +117,7 @@ export const Attachment = ({
               name={`${type}uploader`}
               className="upload"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => (filesSelected(e))}
-              accept="image/png, image/jpeg, image/jpg"
+              accept="image/png, image/jpeg, image/jpg, image/heic"
             />
           </div>
         </div>
