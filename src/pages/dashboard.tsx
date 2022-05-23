@@ -297,6 +297,7 @@ export const Dashboard = () => {
               selectedElements={selectedElements}
               setSelectedElements={setSelectedElements}
               params={params}
+              setShouldReload={setShouldReload}
             />
           </div>
         </div>

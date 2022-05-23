@@ -58,6 +58,8 @@ export interface PhaRetailer {
   submission_date?: string,
   submission_status?: string,
   imagelinks?: string,
+  superstar_badge?: string | undefined,
+  permanently_closed?: string | undefined,
   geom?: {
     type: string,
     coordinates: number[],

@@ -133,6 +133,17 @@ export const theme = createTheme({
           paddingTop: '0px'
         },
       }
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          color: '#7A7E80',
+          backgroundColor: '#FFFFFF',
+          boxShadow: '5px 5px 10px #888888',
+          fontFamily: 'FuturaMedium,sans-serif',
+          fontSize: '14px'
+        },
+      }
     }
   }
 });
