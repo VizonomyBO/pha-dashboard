@@ -139,7 +139,7 @@ export const FormArea = ({
         </div>
       )}
       {
-        !type && (
+        !type && isModal && (
           <div className="aaction">
             <button
               className="light"

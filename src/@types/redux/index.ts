@@ -79,6 +79,10 @@ export interface SelectAccessibilityInterface {
   wic_accepted: string,
   snap_accepted: string,
 }
+
+export interface SelectCurrentOperation {
+  open: string
+}
 export interface MarketplaceInterface {
   businessDetails: BusinessDetailsInterface,
   socialMedia: SocialMediaInterface,
@@ -87,7 +91,8 @@ export interface MarketplaceInterface {
   contactDetails: ContactDetailsInterface,
   selectCategory: SelectCategoryInterface,
   selectAccessibility: SelectAccessibilityInterface,
-  retailerFiles: RetailerFileInterface
+  retailerFiles: RetailerFileInterface,
+  currentOperation: SelectCurrentOperation
 }
 
 export interface SessionInterface {

@@ -171,3 +171,10 @@ export const setImagesFiles = (type: string, value: MultimediaInterface[]) => (d
     value
   });
 };
+
+export const setSelectOperation = (value: string) => (dispatch: Dispatch) => {
+  dispatch({
+    type: TYPES.SET_SELECT_OPERATION,
+    payload: value
+  });
+};

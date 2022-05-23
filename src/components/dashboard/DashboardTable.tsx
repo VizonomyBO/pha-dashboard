@@ -49,7 +49,7 @@ export const DashboardTable = ({
     setBusinessDetails, setSelectCategory, setWicAccepted, setSnapAccepted,
     setOtherQuestions, setAvailabilityOptions, setQuality,
     setVisibility, setLocal, setProduceAvailStore, setProduceAvailSeasonally,
-    setContactName, setContactEmail, setContactOwner, setContactPatron,
+    setContactName, setContactEmail, setContactOwner, setContactPatron, setSelectOperation
   } = useMarketplaceDispatch();
   const {
     setImageLinks,
@@ -125,6 +125,7 @@ export const DashboardTable = ({
         setContactEmail(retailer.contact_email);
         setContactOwner(retailer.contact_owner);
         setContactPatron(retailer.contact_patron);
+        setSelectOperation(item.permanently_closed || '');
         if (type === 'save') {
           setSwitchEdit(true);
         }
@@ -219,7 +220,7 @@ export const DashboardTable = ({
           snap_accepted: selectAccessibility.snap_accepted,
           wic_accepted: selectAccessibility.wic_accepted,
           permanently_closed: closedSwitch,
-          superstar_badge: superstartSwitch
+          superstar_badge: superstartSwitch,
         };
         const newBody: CompletelyIntentionalAny = {};
         Object.keys(body).forEach((k) => {

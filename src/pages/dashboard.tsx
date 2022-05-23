@@ -35,7 +35,8 @@ export const Dashboard = () => {
     selectCategory,
     selectAccessibility,
     retailerFiles,
-    files
+    files,
+    currentOperation
   } = useMarketplaceState();
   const token = authorizationManager.getToken();
   const {
@@ -44,7 +45,7 @@ export const Dashboard = () => {
     params,
     totalElements,
     selectedElements,
-    setSelectedElements
+    setSelectedElements,
   } = useDashboard(shouldReload, setShouldReload);
 
   if (!token) {
@@ -182,6 +183,7 @@ export const Dashboard = () => {
               submission_status: ROW_STATUS.APPROVED,
               snap_accepted: selectAccessibility.snap_accepted,
               wic_accepted: selectAccessibility.wic_accepted,
+              permanently_closed: currentOperation.open
             };
             const newBody: CompletelyIntentionalAny = {};
             if (params.status.includes(UNVALIDATED)) {

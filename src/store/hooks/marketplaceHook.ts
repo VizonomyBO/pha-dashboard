@@ -8,7 +8,7 @@ import {
   setSnapAccepted, setWicAccepted, setContactEmail, setSelectCategoryCorner,
   setSelectCategoryDistribution, setSelectCategoryDollar,
   setSelectCategoryFoodCoOp, setSelectCategoryFoodPantry,
-  setSelectCategorySupermarket, setSelectCategory, setImagesFiles, resetBusiness
+  setSelectCategorySupermarket, setSelectCategory, setImagesFiles, resetBusiness, setSelectOperation
 } from '../actions';
 
 export const useMarketplaceState = () => useSelector(
@@ -88,6 +88,9 @@ export const useMarketplaceDispatch = () => {
     },
     setSnapAccepted: (wicAccepted: string) => {
       dispatch(setSnapAccepted(wicAccepted));
+    },
+    setSelectOperation: (closed: string) => {
+      dispatch(setSelectOperation(closed));
     },
   };
 };
