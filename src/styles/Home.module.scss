@@ -423,6 +423,9 @@ button.light {
 .icxcircle {
 	content: url("../../public/images/ic_x_circle.svg");
 }
+.icinfo {
+	content: url("../../public/images/ic_info.svg");
+}
 .ic-circle-clear {
 	padding-left: 4%;
 	height: 40%;
@@ -432,6 +435,12 @@ button.light {
 	padding-left: 4%;
 	height: 40%;
 	content: url("../../public/images/ic-close-circle-hover.svg");
+}
+.icinfo {
+	display: block;
+	margin-left: 5px;
+	width: 16px;
+	height: 16px;
 }
 .controlzoom {
 	position: absolute;
@@ -3359,7 +3368,8 @@ sup {
 					.wcol4 { width: 16%; }
 					.wcol5 { width: 23%; }
 					.wcol6 { width: 5%;  }
-					.wcol7 { width: 16%;  }
+					.wcol7 { width: 14%; }
+					.wxol8 { width: 16%; }
 					.wcol1.htit1 {
 						padding-left: 24px;
 					}
