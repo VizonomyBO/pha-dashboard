@@ -7,7 +7,7 @@ import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
 import { QueriesInterface } from '../../../@types/redux';
-import { useGeocoderState } from '../geocoderHook';
+import { useGeocoderState, useGeocoderDispatch } from '../geocoderHook';
 import PinBlue from '../../../components/map/ic-pin-blue.svg';
 import PinGrey from '../../../components/map/ic-pin-grey.svg';
 import { deckDefaults } from '../../../components/map/deckDefaults';
@@ -17,6 +17,7 @@ const Carto = carto as any;
 
 export const useMap = () => {
   const { resetValues, setCallFilters, setBbox } = useCategoriesDispatch();
+  const { setShouldZoom } = useGeocoderDispatch();
   const { setResetMarker } = useMarkerDispatch();
   const {
     callFilters,
@@ -151,7 +152,11 @@ export const useMap = () => {
         ymax: se[1]
       });
     }
-  }, [mapViewFilter, currentViewstate, setBbox]);
+    if (shouldZoom) {
+      zoomToCenterGeocoder();
+      setShouldZoom(false);
+    }
+  }, [mapViewFilter, currentViewstate, setBbox, shouldZoom, zoomToCenterGeocoder, setShouldZoom]);
 
   const zoomEffect = useMemo(() => (type: string) => {
     const adder = type === 'in' ? 0.5 : -0.5;
@@ -180,7 +185,7 @@ export const useMap = () => {
     if (shouldZoom) {
       zoomToCenterGeocoder();
     }
-  }, [shouldZoom, zoomToCenterGeocoder]);
+  }, [shouldZoom, zoomToCenterGeocoder, inputText]);
   useEffect(() => {
     if (queries) {
       Carto.setDefaultCredentials({

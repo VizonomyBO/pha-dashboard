@@ -3,11 +3,13 @@ import Checkbox from '@mui/material/Checkbox';
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
+import { useGeocoderDispatch } from '../store/hooks';
 import { CATEGORIES } from '../constants/categories';
 import { FilterType } from '../@types';
 
 export const DropdownCategories = () => {
   const { categoriesSelected, handleChange, goToMapView } = useDropdownCategories();
+  const { setShouldZoom } = useGeocoderDispatch();
   return (
     <div className="citysearch">
       <i className="icsearch" />
@@ -43,7 +45,7 @@ export const DropdownCategories = () => {
           </MenuItem>
         ))}
       </Select>
-      <button className="light" type="button" onClick={() => goToMapView()}>
+      <button className="light" type="button" onClick={() => { goToMapView(); setShouldZoom(true); }}>
         Search
       </button>
     </div>
