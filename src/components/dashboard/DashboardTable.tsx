@@ -148,12 +148,12 @@ export const DashboardTable = ({
     }
   };
   const updateSwitch = (item: PhaRetailer & PhaIndividual, type: string, value: string) => {
-    const headers = webRequest.generateMultipartHeader();
+    const headers = webRequest.generateJSONHeader();
     const body: CompletelyIntentionalAny = {
       value,
       field: type
     };
-    webRequest.put(ENDPOINTS.UPDATE_SWITCH(item.retailer_id), JSON.stringify(body), headers)
+    webRequest.put(ENDPOINTS.UPDATE_SWITCH(item.retailer_id), body, headers)
       .then((r) => r.json())
       .then(() => {
         setShouldReload(true);
