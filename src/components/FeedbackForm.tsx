@@ -15,11 +15,15 @@ export const FeedbackForm = (
   {
     setVisible,
     retailerId,
-    isEdit = false
+    individualId,
+    isEdit = false,
+    setShouldReload
   }: {
     setVisible: React.Dispatch<React.SetStateAction<boolean>>,
     retailerId: string,
-    isEdit?: boolean
+    individualId?: string,
+    isEdit?: boolean,
+    setShouldReload?: React.Dispatch<React.SetStateAction<boolean>>
   }
 ) => {
   const { setIndividualForm, resetIndividualForm } = useIndividualFormDispatch();
@@ -71,6 +75,9 @@ export const FeedbackForm = (
 
   const proccessPromise = (promise: Promise<Response>) => {
     promise.then((res) => res.json()).then((res) => {
+      if (setShouldReload) {
+        setShouldReload(true);
+      }
       if (res.success) {
         if (!isEdit) {
           setModal({ type: true, open: true });
@@ -119,7 +126,7 @@ export const FeedbackForm = (
     const formData = getFormData(JSON.stringify(finalObjet).replace("'", "\\'"));
     const headers = webRequest.generateMultipartHeader();
     proccessPromise(webRequest.putMultipart(
-      ENDPOINTS.INDIVIDUAL_FORM(retailerId),
+      ENDPOINTS.INDIVIDUAL_FORM(individualId),
       formData,
       headers
     ));
