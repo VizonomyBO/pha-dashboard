@@ -16,12 +16,14 @@ export const FeedbackForm = (
     setVisible,
     retailerId,
     individualId,
-    isEdit = false
+    isEdit = false,
+    setShouldReload
   }: {
     setVisible: React.Dispatch<React.SetStateAction<boolean>>,
     retailerId: string,
     individualId?: string,
-    isEdit?: boolean
+    isEdit?: boolean,
+    setShouldReload?: React.Dispatch<React.SetStateAction<boolean>>
   }
 ) => {
   const { setIndividualForm, resetIndividualForm } = useIndividualFormDispatch();
@@ -73,6 +75,9 @@ export const FeedbackForm = (
 
   const proccessPromise = (promise: Promise<Response>) => {
     promise.then((res) => res.json()).then((res) => {
+      if (setShouldReload) {
+        setShouldReload(true);
+      }
       if (res.success) {
         if (!isEdit) {
           setModal({ type: true, open: true });

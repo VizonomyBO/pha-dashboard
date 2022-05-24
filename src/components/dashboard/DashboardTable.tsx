@@ -495,6 +495,7 @@ export const DashboardTable = ({
             retailerId={idRetailer}
             individualId={individualId}
             isEdit
+            setShouldReload={setShouldReload}
           />
           )}
       </div>
