@@ -28,7 +28,7 @@ export const Map = (
   setCurrentRetailerId: React.Dispatch<React.SetStateAction<string>>}
 ) => {
   const { setShouldZoom, setControllerZoom } = useGeocoderDispatch();
-  const { shouldZoom, controllerZoom, inputText } = useGeocoderState() || {};
+  const { shouldZoom, controllerZoom } = useGeocoderState() || {};
   const [hoverInfo, setHoverInfo] = useState<PickInfo<Layer<unknown>[]>>();
   const [currentHovered, setCurrentHovered] = useState<string | undefined>(undefined);
   const { badges } = useBadge(currentHovered);
@@ -47,11 +47,11 @@ export const Map = (
   } = useMarkerState() || {};
   const initView = width <= MOBILE_WIDTH ? DEFAULT_VIEW_STATE_MOBILE : DEFAULT_VIEW_STATE;
   const TRANSITION_OFFSET = 200;
-  const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(inputText, initView));
+  const [deckState, setDeckState] = useState<DeckInterface>(getDeckInitState(initView));
   useEffect(() => {
     const initViewState = width <= MOBILE_WIDTH ? DEFAULT_VIEW_STATE_MOBILE : DEFAULT_VIEW_STATE;
-    setDeckState(getDeckInitState(inputText, initViewState));
-  }, [width, inputText]);
+    setDeckState(getDeckInitState(initViewState));
+  }, [width]);
   const [isLoaded, setIsLoaded] = useState(false);
   const hideTooltip: ViewStateChangeFn = useMemo(() => ({ viewState }) => {
     setHoverInfo(undefined);

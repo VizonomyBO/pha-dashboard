@@ -231,8 +231,11 @@ export const MOBILE_WIDTH_ATTACHMENT = 400;
 export const DEFAULT_IMAGE = '/images/img_landing.png';
 
 export const MISSISSIPPI_BBOX:[number, number, number, number] = [
-  -91.7561120665,
-  30.9533699671,
-  -89.7267421499,
-  35.043627319
+  -91.669922, 30.173625, -88.077393, 35.029996
 ];
+
+export const MISSISSIPPI_CENTER:[number, number] = [
+  -89.741821, 32.342841
+];
+
+export const MISSISSIPPI_NAME = 'Mississippi';
