@@ -3,19 +3,18 @@ import classNames from 'classnames';
 import {
   Dispatch,
   SetStateAction,
-  useEffect,
   useState
 } from 'react';
 import { QueryParams } from '../../@types';
 import { CompletelyIntentionalAny, PhaIndividual, PhaRetailer } from '../../@types/database';
 import {
-  TYPE_BUSINESS, SELECT_CATEGORY, TYPE_INDIVIDUAL_FORM, JSON_FIELD, ATTACHMENTS_SUB_TYPES
+  TYPE_BUSINESS, SELECT_CATEGORY, TYPE_INDIVIDUAL_FORM, SUPERSTART_BADGE
 } from '../../constants';
 import { ROW_STATUS, UNVALIDATED } from '../../constants/dashboard';
 import { formConstants } from '../../constants/form';
 import { ENDPOINTS } from '../../constants/url';
 import { resetBusiness } from '../../store/actions';
-import { useModalDispatch, useMarketplaceDispatch, useMarketplaceState } from '../../store/hooks';
+import { useModalDispatch, useMarketplaceDispatch } from '../../store/hooks';
 import { useIndividualFormDispatch } from '../../store/hooks/individualFormHook';
 import { useRetailerFileReducer } from '../../store/hooks/retailerFilesHook';
 import { showDate, showText } from '../../utils/textFormatter';
@@ -35,16 +34,6 @@ export const DashboardTable = ({
   setShouldReload: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const { setModal } = useModalDispatch();
-  const [switchEdit, setSwitchEdit] = useState(false);
-  const {
-    businessDetails,
-    otherQuestions,
-    contactDetails,
-    selectCategory,
-    selectAccessibility,
-    retailerFiles,
-    files
-  } = useMarketplaceState();
   const {
     setBusinessDetails, setSelectCategory, setWicAccepted, setSnapAccepted,
     setOtherQuestions, setAvailabilityOptions, setQuality,
@@ -57,8 +46,6 @@ export const DashboardTable = ({
   } = useRetailerFileReducer();
 
   const { setIndividualForm } = useIndividualFormDispatch();
-  const [closedSwitch, setClosedSwitch] = useState<string|undefined>('');
-  const [superstartSwitch, setSuperstartSwitch] = useState<string|undefined>('');
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [idRetailer, setIdRetailer] = useState('');
   const [individualId, setIndividualId] = useState('');
@@ -97,7 +84,7 @@ export const DashboardTable = ({
     const checked = table.every((element) => selectedElements.includes(element.retailer_id || ''));
     return checked;
   };
-  const elementRetailer = (item: PhaRetailer & PhaIndividual, type: string) => {
+  const elementRetailer = (item: PhaRetailer & PhaIndividual) => {
     webRequest.get(ENDPOINTS.PROFILE(item.retailer_id))
       .then((res) => res.json())
       .then((res) => {
@@ -128,9 +115,6 @@ export const DashboardTable = ({
         setContactOwner(retailer.contact_owner);
         setContactPatron(retailer.contact_patron);
         setSelectOperation(item.permanently_closed || '');
-        if (type === 'save') {
-          setSwitchEdit(true);
-        }
       })
       .catch((err) => console.error(err));
   };
@@ -159,114 +143,24 @@ export const DashboardTable = ({
       setBusinessDetails(TYPE_BUSINESS.STATE, ('Mississippi'));
       setModal({ open: true, type: false });
     } else {
-      elementRetailer(item, 'edit');
+      elementRetailer(item);
       setModal({ open: true, type: true });
     }
   };
-  useEffect(
-    () => {
-      if (switchEdit) {
-        const headers = webRequest.generateMultipartHeader();
-        const body: CompletelyIntentionalAny = {
-          name: businessDetails.name,
-          address_1: businessDetails.address_1,
-          address_2: businessDetails.address_2,
-          phone: businessDetails.phone,
-          city: businessDetails.city,
-          state: businessDetails.state,
-          zipcode: businessDetails.zipcode,
-
-          sun_close: businessDetails.sun_close,
-          sun_open: businessDetails.sun_open,
-          mon_close: businessDetails.mon_close,
-          mon_open: businessDetails.mon_open,
-          tues_close: businessDetails.tues_close,
-          tues_open: businessDetails.tues_open,
-          wed_close: businessDetails.wed_close,
-          wed_open: businessDetails.wed_open,
-          thurs_close: businessDetails.thurs_close,
-          thurs_open: businessDetails.thurs_open,
-          fri_close: businessDetails.fri_close,
-          fri_open: businessDetails.fri_open,
-          sat_close: businessDetails.sat_close,
-          sat_open: businessDetails.sat_open,
-
-          website: businessDetails.website,
-          facebook: businessDetails.facebook,
-          twitter: businessDetails.twitter,
-          email: businessDetails.email,
-          instagram: businessDetails.instagram,
-
-          contact_email: contactDetails.contact_email,
-          contact_name: contactDetails.contact_name,
-          contact_owner: contactDetails.contact_owner,
-          contact_patron: contactDetails.contact_patron,
-
-          description: otherQuestions.description,
-          availability: (otherQuestions.availabilityOptions || []).join(','),
-          quality: otherQuestions.quality,
-          visibility: otherQuestions.visibility,
-          local: otherQuestions.local,
-          produce_avail_store: otherQuestions.produce_avail_store,
-          produce_avail_seasonally: otherQuestions.produce_avail_seasonally,
-
-          imagelinks: retailerFiles.imagelinks,
-          owner_photo: retailerFiles.owner_photo,
-
-          supermarket: selectCategory.supermarket,
-          corner_store: selectCategory.corner_store,
-          distribution: selectCategory.distribution,
-          dollar_stores: selectCategory.dollar_stores,
-          food_co_op: selectCategory.food_co_op,
-          food_pantry: selectCategory.food_pantry,
-          submission_status: ROW_STATUS.APPROVED,
-          snap_accepted: selectAccessibility.snap_accepted,
-          wic_accepted: selectAccessibility.wic_accepted,
-          permanently_closed: closedSwitch,
-          superstar_badge: superstartSwitch,
-        };
-        const newBody: CompletelyIntentionalAny = {};
-        Object.keys(body).forEach((k) => {
-          if (k !== 'latitude' && k !== 'longitude') {
-            newBody[k] = body[k]?.split("'").join("\\'");
-          } else {
-            newBody[k] = body[k];
-          }
-        });
-        const formData = new FormData();
-        formData.append(JSON_FIELD, JSON.stringify(newBody));
-        files.images.forEach((file) => {
-          formData.append(ATTACHMENTS_SUB_TYPES.IMAGES, file);
-        });
-        files.ownerimages.forEach((file) => {
-          formData.append(ATTACHMENTS_SUB_TYPES.OWNER_IMAGES, file);
-        });
-        webRequest.putMultipart(ENDPOINTS.PHA_RETAILERS_ID(businessDetails.retailer_id), formData, headers)
-          .then((r) => r.json())
-          .then(() => {
-            setShouldReload(true);
-          });
-        setModal({ open: false, type: false });
-        resetBusiness();
-        setSwitchEdit(false);
-      }
-    },
-    [
-      businessDetails,
-      closedSwitch,
-      contactDetails,
-      files.images,
-      files.ownerimages,
-      otherQuestions,
-      retailerFiles,
-      selectAccessibility,
-      selectCategory,
-      setModal,
-      setShouldReload,
-      switchEdit,
-      superstartSwitch
-    ]
-  );
+  const updateSwitch = (item: PhaRetailer & PhaIndividual, type: string, value: string) => {
+    const headers = webRequest.generateMultipartHeader();
+    const body: CompletelyIntentionalAny = {
+      value,
+      field: type
+    };
+    webRequest.put(ENDPOINTS.UPDATE_SWITCH(item.retailer_id), JSON.stringify(body), headers)
+      .then((r) => r.json())
+      .then(() => {
+        setShouldReload(true);
+      });
+    setModal({ open: false, type: false });
+    resetBusiness();
+  };
 
   return (
     <div className="listarea">
@@ -428,10 +322,12 @@ export const DashboardTable = ({
                             checked={item.permanently_closed === formConstants.CLOSED.YES}
                             onChange={(event) => {
                               event.stopPropagation();
-                              setClosedSwitch(item.permanently_closed === formConstants.CLOSED.YES
-                                ? formConstants.CLOSED.NO : formConstants.CLOSED.YES);
-                              setSuperstartSwitch(item.superstar_badge);
-                              elementRetailer(item, 'save');
+                              updateSwitch(
+                                item,
+                                TYPE_INDIVIDUAL_FORM.permanently_closed,
+                                item.permanently_closed === formConstants.CLOSED.YES
+                                  ? formConstants.CLOSED.NO : formConstants.CLOSED.YES
+                              );
                             }}
                           />
                         </label>
@@ -444,10 +340,12 @@ export const DashboardTable = ({
                             checked={item.superstar_badge === formConstants.CLOSED.YES}
                             onChange={(event) => {
                               event.stopPropagation();
-                              setClosedSwitch(item.permanently_closed);
-                              setSuperstartSwitch(item.superstar_badge === formConstants.CLOSED.YES
-                                ? formConstants.CLOSED.NO : formConstants.CLOSED.YES);
-                              elementRetailer(item, 'save');
+                              updateSwitch(
+                                item,
+                                SUPERSTART_BADGE,
+                                item.superstar_badge === formConstants.CLOSED.YES
+                                  ? formConstants.CLOSED.NO : formConstants.CLOSED.YES
+                              );
                             }}
                           />
                         </label>

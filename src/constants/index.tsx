@@ -4,6 +4,7 @@ export const NO_DATA = 'no-data';
 export const BUSINESS_DETAILS = 'businessDetails';
 export const OTHER_QUESTIONS = 'otherQuestions';
 export const CONTACT_DETAILS = 'contactDetails';
+export const SUPERSTART_BADGE = 'superstar_badge';
 export const HOME = 'home';
 export const VISIBLE_TIME = 2000;
 export const PAGE_REDIRECT_TIME = 1000;
