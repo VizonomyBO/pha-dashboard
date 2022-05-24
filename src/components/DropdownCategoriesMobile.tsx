@@ -1,12 +1,14 @@
 import { FilterType } from '../@types';
 import { CATEGORIES } from '../constants/categories';
 import { useDropdownCategories } from '../store/hooks/custom/useDropdownCategories';
+import { useGeocoderDispatch } from '../store/hooks';
 
 export const DropdownCategoriesMobile = (
   { setOpenCategories }
   : {setOpenCategories:React.Dispatch<React.SetStateAction<boolean>>}
 ) => {
   const { categoriesSelected, goToMapView, setCategoriesSelected } = useDropdownCategories();
+  const { setShouldZoom } = useGeocoderDispatch();
   const selected = () => {
     if (categoriesSelected) {
       if (categoriesSelected.length === 0) {
@@ -36,7 +38,7 @@ export const DropdownCategoriesMobile = (
       <button
         type="button"
         className="light"
-        onClick={() => goToMapView()}
+        onClick={() => { goToMapView(); setShouldZoom(true); }}
       >
         Search
       </button>

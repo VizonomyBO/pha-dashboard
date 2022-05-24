@@ -30,21 +30,5 @@ export const getDeckInitState = (initView: ViewStateInterface) => {
     ...deckDefaults,
     initialStateView: initView
   };
-  // if (inputText?.bbox && inputText.bbox.length === 4) {
-  //   const newviewport = getLatLonViewport(inputText);
-  //   newDeckDefault.initialStateView = {
-  //     ...newDeckDefault.initialStateView,
-  //     latitude: newviewport.latitude,
-  //     longitude: newviewport.longitude,
-  //     zoom: newviewport.zoom
-  //   };
-  // } else if (inputText?.text !== '' && inputText?.center) {
-  //   newDeckDefault.initialStateView = {
-  //     ...newDeckDefault.initialStateView,
-  //     latitude: inputText.center[1],
-  //     longitude: inputText.center[0],
-  //     zoom: 2
-  //   };
-  // }
   return { ...newDeckDefault, renderToolTip: RenderTooltip };
 };

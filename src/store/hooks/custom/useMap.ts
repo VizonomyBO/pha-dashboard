@@ -141,6 +141,7 @@ export const useMap = () => {
   }, [setCurrentViewState, setResetMarker]);
 
   const finishRender = useMemo(() => () => {
+    console.log('finish render');
     if (mapViewFilter) {
       const viewport = new WebMercatorViewport(currentViewstate);
       const nw = viewport.unproject([0, 0]);
