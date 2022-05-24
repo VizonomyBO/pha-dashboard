@@ -24,6 +24,7 @@ export const ENDPOINTS = {
   DELETE_OSM: (id: number | undefined) => `${URL}/${CARTODB}/osm-point/${id}`,
   DELETE_UNVALIDATE: (id: number | string | undefined) => `${URL}/${CARTODB}/unvalidated/${id}`,
   DELETE_RETAILER: (table:string) => `${URL}/${CARTODB}/pha?table=${table}`,
+  UPDATE_SWITCH: (id: number | string | undefined) => `${URL}/${CARTODB}/update-switch/${id}`,
 };
 
 export const CARTO_API = 'https://gcp-us-east1.api.carto.com';
