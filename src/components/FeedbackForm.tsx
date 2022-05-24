@@ -15,10 +15,12 @@ export const FeedbackForm = (
   {
     setVisible,
     retailerId,
+    individualId,
     isEdit = false
   }: {
     setVisible: React.Dispatch<React.SetStateAction<boolean>>,
     retailerId: string,
+    individualId?: string,
     isEdit?: boolean
   }
 ) => {
@@ -119,7 +121,7 @@ export const FeedbackForm = (
     const formData = getFormData(JSON.stringify(finalObjet).replace("'", "\\'"));
     const headers = webRequest.generateMultipartHeader();
     proccessPromise(webRequest.putMultipart(
-      ENDPOINTS.INDIVIDUAL_FORM(retailerId),
+      ENDPOINTS.INDIVIDUAL_FORM(individualId),
       formData,
       headers
     ));

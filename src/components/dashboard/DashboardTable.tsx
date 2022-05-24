@@ -61,6 +61,8 @@ export const DashboardTable = ({
   const [superstartSwitch, setSuperstartSwitch] = useState<string|undefined>('');
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [idRetailer, setIdRetailer] = useState('');
+  const [individualId, setIndividualId] = useState('');
+
   const handleSelected = (checked: boolean, item: PhaRetailer & PhaIndividual) => {
     let newSelectedElements: string[];
     if (checked) {
@@ -136,11 +138,12 @@ export const DashboardTable = ({
   const showModal = (item: PhaRetailer & PhaIndividual) => {
     if (item.individual_id) {
       setVisibleFeedback(true);
-      setIdRetailer(item.individual_id);
+      setIndividualId(item.individual_id);
       webRequest.get(ENDPOINTS.INDIVIDUAL_FORM(item.individual_id))
         .then((res) => res.json())
         .then((res) => {
           const individual = res.data as Record<string, string>;
+          setIdRetailer(individual.retailer_id);
           Object.keys(TYPE_INDIVIDUAL_FORM).forEach((key) => {
             const prop = (TYPE_INDIVIDUAL_FORM as Record<string, string>)[key];
             setIndividualForm(prop, individual[prop]);
@@ -485,7 +488,15 @@ export const DashboardTable = ({
           </tbody>
           <DashboardTableFooter setParams={setParams} totalElements={totalElements} />
         </table>
-        {visibleFeedback && <FeedbackForm setVisible={setVisibleFeedback} retailerId={idRetailer} isEdit />}
+        {visibleFeedback
+          && (
+          <FeedbackForm
+            setVisible={setVisibleFeedback}
+            retailerId={idRetailer}
+            individualId={individualId}
+            isEdit
+          />
+          )}
       </div>
     </div>
   );
