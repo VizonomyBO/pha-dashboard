@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Badge } from '../components/map/Badge';
@@ -15,9 +15,15 @@ import { MapProfile } from '../components/mapProfile';
 import { FeedbackForm } from '../components/FeedbackForm';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { useWindowSize } from '../store/hooks/custom/useWindowSize';
+import { isEmpty } from '../utils/validation';
 
 export const Profile = () => {
-  const { profile, badges } = useProfile();
+  const {
+    profile,
+    badges,
+    pictureIndividual,
+    setPictureIndividual
+  } = useProfile();
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const { ref, height } = useWindowSize();
   const address = profile?.address_1?.split(',');
@@ -25,6 +31,17 @@ export const Profile = () => {
     () => cleanSplit(profile?.imagelinks ?? ''),
     [profile]
   );
+  useEffect(() => {
+    if (pictureIndividual.length > 0) {
+      pictureIndividual.map((value: string) => {
+        if (isEmpty(value)) {
+          picture.push(value);
+        }
+        return value;
+      });
+      setPictureIndividual([]);
+    }
+  }, [picture, pictureIndividual, setPictureIndividual]);
   const pictureOwner: string[] = useMemo(
     () => cleanSplit(profile?.owner_photo ?? ''),
     [profile]
