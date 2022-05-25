@@ -59,7 +59,8 @@ export const FeedbackForm = (
     contact_zipcode,
     contact_email,
     produce_avail_store,
-    retailer_id: retailerId
+    retailer_id: retailerId,
+    imagelinks
   });
 
   const getFormData = (jsonString: string) => {
