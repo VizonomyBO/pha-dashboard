@@ -20,10 +20,14 @@ import { Formvalidation } from '../utils/validation';
 import { getPhaRetailerBody } from '../utils/getPhaRetailerBody';
 import { resetBusiness, setResetGeocoder } from '../store/actions';
 import { FormTabType } from '../@types';
+import { FeedbackForm } from '../components/FeedbackForm';
 
 export const Dashboard = () => {
   const [shouldReload, setShouldReload] = useState(false);
   const { activeTab } = useTabState();
+  const [visibleFeedback, setVisibleFeedback] = useState(false);
+  const [idRetailer, setIdRetailer] = useState('');
+  const [individualId, setIndividualId] = useState('');
   const { setActiveTab } = useTabDispatch();
   const navigate = useNavigate();
   const { open } = useModalState();
@@ -279,6 +283,16 @@ export const Dashboard = () => {
         )
       }
       <div className="container">
+        {visibleFeedback
+          && (
+          <FeedbackForm
+            setVisible={setVisibleFeedback}
+            retailerId={idRetailer}
+            individualId={individualId}
+            isEdit
+            setShouldReload={setShouldReload}
+          />
+          )}
         <figure className="bgnoise home" />
         <div className="barblue db withmodal" />
         <div className="pagecontainer">
@@ -300,6 +314,9 @@ export const Dashboard = () => {
               setSelectedElements={setSelectedElements}
               params={params}
               setShouldReload={setShouldReload}
+              setVisibleFeedback={setVisibleFeedback}
+              setIndividualId={setIndividualId}
+              setIdRetailer={setIdRetailer}
             />
           </div>
         </div>

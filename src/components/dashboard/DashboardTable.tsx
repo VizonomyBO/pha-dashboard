@@ -2,8 +2,7 @@ import { Switch, Tooltip } from '@mui/material';
 import classNames from 'classnames';
 import {
   Dispatch,
-  SetStateAction,
-  useState
+  SetStateAction
 } from 'react';
 import { QueryParams } from '../../@types';
 import { CompletelyIntentionalAny, PhaIndividual, PhaRetailer } from '../../@types/database';
@@ -19,11 +18,19 @@ import { useIndividualFormDispatch } from '../../store/hooks/individualFormHook'
 import { useRetailerFileReducer } from '../../store/hooks/retailerFilesHook';
 import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
-import { FeedbackForm } from '../FeedbackForm';
 import { DashboardTableFooter } from './DashboardTableFooter';
 
 export const DashboardTable = ({
-  table, setParams, totalElements, selectedElements, setSelectedElements, params, setShouldReload
+  table,
+  setParams,
+  totalElements,
+  selectedElements,
+  setSelectedElements,
+  params,
+  setShouldReload,
+  setVisibleFeedback,
+  setIndividualId,
+  setIdRetailer
 }: {
   table: (PhaRetailer & PhaIndividual)[],
   setParams: Dispatch<SetStateAction<QueryParams>>,
@@ -31,7 +38,10 @@ export const DashboardTable = ({
   selectedElements: Array<string>,
   setSelectedElements: Dispatch<SetStateAction<Array<string>>>,
   params: QueryParams,
-  setShouldReload: React.Dispatch<React.SetStateAction<boolean>>
+  setShouldReload: React.Dispatch<React.SetStateAction<boolean>>,
+  setIndividualId: React.Dispatch<React.SetStateAction<string>>,
+  setVisibleFeedback: React.Dispatch<React.SetStateAction<boolean>>,
+  setIdRetailer: React.Dispatch<React.SetStateAction<string>>
 }) => {
   const { setModal } = useModalDispatch();
   const {
@@ -46,9 +56,6 @@ export const DashboardTable = ({
   } = useRetailerFileReducer();
 
   const { setIndividualForm } = useIndividualFormDispatch();
-  const [visibleFeedback, setVisibleFeedback] = useState(false);
-  const [idRetailer, setIdRetailer] = useState('');
-  const [individualId, setIndividualId] = useState('');
 
   const handleSelected = (checked: boolean, item: PhaRetailer & PhaIndividual) => {
     let newSelectedElements: string[];
@@ -386,16 +393,6 @@ export const DashboardTable = ({
           </tbody>
           <DashboardTableFooter setParams={setParams} totalElements={totalElements} />
         </table>
-        {visibleFeedback
-          && (
-          <FeedbackForm
-            setVisible={setVisibleFeedback}
-            retailerId={idRetailer}
-            individualId={individualId}
-            isEdit
-            setShouldReload={setShouldReload}
-          />
-          )}
       </div>
     </div>
   );
