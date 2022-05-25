@@ -32,12 +32,11 @@ export const Profile = () => {
     [profile]
   );
   useEffect(() => {
-    if (pictureIndividual.length > 0) {
-      pictureIndividual.map((value: string) => {
+    if (pictureIndividual.length > 0 && picture) {
+      pictureIndividual.forEach((value: string) => {
         if (isEmpty(value)) {
           picture.push(value);
         }
-        return value;
       });
       setPictureIndividual([]);
     }
