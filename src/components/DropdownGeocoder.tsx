@@ -69,7 +69,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                       type="button"
                       onClick={() => {
                         setInputText({
-                          text: isPostCode ? getLabel(region, isPostCode, opt) : opt.place_name,
+                          text: isPostCode ? opt.text : opt.place_name,
                           shouldSearch: false,
                           center: opt.center,
                           bbox: opt?.bbox || [],

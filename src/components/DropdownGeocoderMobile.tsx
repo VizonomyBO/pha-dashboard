@@ -6,6 +6,7 @@ import { useGeocoderDispatch } from '../store/hooks';
 
 const name = GEOCODER_MOBILE;
 export const DropdownGeocoderMobile = () => {
+  const POSTCODE = 'postcode';
   const {
     setInputText,
     setInputTextHtml,
@@ -17,7 +18,15 @@ export const DropdownGeocoderMobile = () => {
     onChangeInput
   } = useGeocoder(name, 'none');
   const { setShouldZoom } = useGeocoderDispatch();
-
+  const getLabel = (region: string, isPostCode: boolean, opt: Result) => {
+    if (isPostCode) {
+      return `Zipcode: ${opt.text}`;
+    }
+    if (region !== '') {
+      return `${opt.text}, ${region}`;
+    }
+    return opt.text;
+  };
   return (
     <>
       <div className="alook">
@@ -46,7 +55,8 @@ export const DropdownGeocoderMobile = () => {
             {inputText.shouldSearch
               && options.map((opt: Result) => {
                 let { region } = findRegion(opt);
-                region = region === '' ? opt.text : `${opt.text}, ${region}`;
+                const isPostCode = opt?.place_type.includes(POSTCODE);
+                region = getLabel(region, isPostCode, opt);
                 return (
                   <li key={`${opt.place_name}index`} className="tr-geocoder">
                     <button
@@ -54,7 +64,7 @@ export const DropdownGeocoderMobile = () => {
                       type="button"
                       onClick={() => {
                         setInputText({
-                          text: opt.place_name,
+                          text: isPostCode ? opt.text : opt.place_name,
                           shouldSearch: false,
                           center: opt.center,
                           bbox: opt?.bbox || [],
