@@ -9,7 +9,7 @@ import { useMarketplaceDispatch } from '../marketplaceHook';
 
 export const useGeocoder = (name: string, type: string) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
-  const { setInputText, setGeocoderOptions, setShouldZoom } = useGeocoderDispatch();
+  const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { businessDetails } = useMarketplaceState();
   const { setBusinessDetails } = useMarketplaceDispatch();
   const { inputText, options } = useGeocoderState() || {};
@@ -81,9 +81,6 @@ export const useGeocoder = (name: string, type: string) => {
         setBusinessDetails(TYPE_BUSINESS.CITY, '');
         setBusinessDetails(TYPE_BUSINESS.ZIPCODE, '');
         setBusinessDetails(TYPE_BUSINESS.STATE, region);
-      }
-      if (inputText.center[0] !== 0 && inputText.center[1] !== 0) {
-        setShouldZoom(true);
       }
     }
   };
