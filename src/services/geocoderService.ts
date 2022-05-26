@@ -7,6 +7,8 @@ export class GeocoderService {
 
   geocoder;
 
+  geocoderReverse;
+
   setGeocoderOptions;
 
   constructor(
@@ -22,6 +24,11 @@ export class GeocoderService {
       bbox: MISSISSIPPI_BBOX,
       marker: false
     });
+    this.geocoderReverse = new MapboxGeocoder({
+      accessToken: MAPBOX_KEY,
+      reverseGeocode: true,
+      marker: false
+    });
     if (elem) {
       this.geocoder.addTo(elem);
     }
@@ -29,6 +36,12 @@ export class GeocoderService {
       setGeocoderOptions(response.features);
     });
     this.geocoder.on('error', (error) => {
+      console.log('error', error);
+    });
+    this.geocoderReverse.on('results', (response) => {
+      console.log('reverse geocoder', response);
+    });
+    this.geocoderReverse.on('error', (error) => {
       console.log('error', error);
     });
   }
@@ -42,6 +55,12 @@ export class GeocoderService {
   setGeocoderQuery(query: string) {
     if (this.geocoder != null) {
       this.geocoder.query(query);
+    }
+  }
+
+  setGeocoderReverseQuery(query: string) {
+    if (this.geocoderReverse != null) {
+      this.geocoderReverse.query(query);
     }
   }
 }

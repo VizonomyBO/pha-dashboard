@@ -18,7 +18,7 @@ export const useGeocoder = (name: string, type: string) => {
   const geocoder = useRef<GeocoderService>(
     new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement)
   );
-
+  const [userCoordinates, setUserCoordinates] = useState({ latitude: 0, longitud: 0 });
   const onChangeInput = (e: React.FormEvent<HTMLInputElement>): void => {
     setInputText({
       text: e.currentTarget.value,
@@ -28,9 +28,15 @@ export const useGeocoder = (name: string, type: string) => {
     setInputTextHtml(e.currentTarget.value);
   };
 
+  const getCurrentUserPosition = () => {
+    navigator.geolocation.getCurrentPosition((positionNav) => {
+      setUserCoordinates({ latitude: positionNav.coords.latitude, longitud: positionNav.coords.longitude });
+    });
+  };
+
   useEffect(() => {
     setInputTextHtml(businessDetails.address_1);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
     geocoder.current.geocoder.addTo(geocoderDivRef.current as HTMLElement);
@@ -98,6 +104,8 @@ export const useGeocoder = (name: string, type: string) => {
     setGeocoderOptions,
     onChangeInput,
     position,
-    keyDown
+    keyDown,
+    getCurrentUserPosition,
+    userCoordinates
   };
 };
