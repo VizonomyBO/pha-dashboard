@@ -8,6 +8,7 @@ import { findRegion } from '../utils/findRegion';
 
 const name = GEOCODER;
 export const DropdownGeocoder = ({ type }: { type: string }) => {
+  const POSTCODE = 'postcode';
   const {
     setInputText,
     setInputTextHtml,
@@ -25,6 +26,15 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
   );
   const blockClassNames = classNames({ 'geocoder-block': type !== 'home', 'geocoder-block-home': type === 'home' });
   const tableClassNames = classNames({ 'table-geocoder': type !== 'home', 'table-geocoder-home': type === 'home' });
+  const getLabel = (region: string, isPostCode: boolean, opt: Result) => {
+    if (isPostCode) {
+      return `Zipcode: ${opt.text}`;
+    }
+    if (region !== '') {
+      return `${opt.text}, ${region}`;
+    }
+    return opt.text;
+  };
   return (
     <>
       <div className={classNames({ swhere: type !== 'home', 'swhere-home': type === 'home' })}>
@@ -44,28 +54,6 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           placeholder="City or Zip Code"
           onKeyDown={keyDown}
         />
-        {/* this comment is intentional, it will be back in near future
-         {inputTextHtml !== '' && (
-            <div className="icon-home">
-              <ClearIcon
-                style={{
-                  width: '16px',
-                  height: '16px',
-                  color: '#7a7e80'
-                }}
-                onClick={() => {
-                  setInputText({
-                    text: '',
-                    shouldSearch: false,
-                    center: [],
-                    bbox: []
-                  });
-                  setInputTextHtml('');
-                }}
-              />
-            </div>
-          )} */}
-        {/* {type !== 'home' && <span className="iccrosshair" />} */}
       </div>
       <div className={blockClassNames}>
         {options && options.length > 0 && inputText.shouldSearch && (
@@ -73,6 +61,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
             {inputText.shouldSearch
               && options.map((opt: Result, index: number) => {
                 const { region } = findRegion(opt);
+                const isPostCode = opt?.place_type.includes(POSTCODE);
                 return (
                   <li key={`${opt.place_name}index`} className={trClassNames(index)}>
                     <button
@@ -80,7 +69,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                       type="button"
                       onClick={() => {
                         setInputText({
-                          text: opt.place_name,
+                          text: isPostCode ? getLabel(region, isPostCode, opt) : opt.place_name,
                           shouldSearch: false,
                           center: opt.center,
                           bbox: opt?.bbox || [],
@@ -91,7 +80,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                       }}
                     >
                       <label>
-                        <span className="span-geocoder">{region === '' ? opt.text : `${opt.text}, ${region}`}</span>
+                        <span className="span-geocoder">{getLabel(region, isPostCode, opt)}</span>
                       </label>
                     </button>
                   </li>
