@@ -23,7 +23,7 @@ export const useGeocoder = (name: string, type: string) => {
     setInputText({
       text: e.currentTarget.value,
       shouldSearch: true,
-      center: [0, 0]
+      center: [0, 0],
     });
     setInputTextHtml(e.currentTarget.value);
   };
@@ -64,7 +64,8 @@ export const useGeocoder = (name: string, type: string) => {
         text: options[position].place_name,
         shouldSearch: false,
         center: options[position].center,
-        bbox: options[position].bbox || []
+        bbox: options[position].bbox || [],
+        placetype: options[position]?.place_type || []
       });
       setInputTextHtml(region === '' ? options[position].text : `${options[position].text}, ${region}`);
       setGeocoderOptions([]);
