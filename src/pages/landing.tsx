@@ -106,7 +106,8 @@ export const Landing = () => {
                             text: opt.place_name,
                             shouldSearch: false,
                             center: opt.center,
-                            bbox: opt?.bbox || []
+                            bbox: opt?.bbox || [],
+                            placetype: opt?.place_type || []
                           });
                           setGeocoderOptions([]);
                         }}

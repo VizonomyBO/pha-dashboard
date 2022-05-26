@@ -91,14 +91,15 @@ export interface InputTextInterface {
   text: string,
   shouldSearch: boolean,
   center: number[],
-  bbox?: number[]
+  bbox?: number[],
+  placetype?: string[]
 }
 export interface ControllerZoomInterface {
   value: number,
   type: string
 }
 export interface GeocoderInterface {
-  inputText: inputTextInterface,
+  inputText: InputTextInterface,
   options: Result[],
   shouldZoom: boolean,
   controllerZoom: ControllerZoomInterface

@@ -28,6 +28,9 @@ export const useMap = () => {
   } = useCategoriesState() || {};
   const TRANSITION_DURATION = 1800;
   const TRANSITION_DURATION_GEOCODER = 500;
+  const POSTCODE = 'postcode';
+  const ZOOM_POSTCODE = 15;
+  const ZOOM_NORMAL = 13.4;
   const { inputText, shouldZoom } = useGeocoderState() || {};
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
   const [queries, setQueries] = useState<QueriesInterface>();
@@ -98,8 +101,25 @@ export const useMap = () => {
 
   const zoomToCenterGeocoder = useMemo(
     () => () => {
+      const getZoom = (placetypes?: string[]) => {
+        if (placetypes && placetypes.includes(POSTCODE)) {
+          return ZOOM_POSTCODE;
+        }
+        return ZOOM_NORMAL;
+      };
       if (inputText?.text !== '') {
-        if (inputText?.bbox && inputText.bbox.length === 4) {
+        if (inputText?.center && inputText.center[0] !== 0 && inputText.center[1] !== 0) {
+          setCurrentViewState((oldViewState) => {
+            const newViewState = {
+              ...oldViewState,
+              latitude: inputText.center[1],
+              longitude: inputText.center[0],
+              zoom: getZoom(inputText?.placetype),
+              transitionDuration: TRANSITION_DURATION_GEOCODER
+            };
+            return newViewState;
+          });
+        } else if (inputText?.bbox && inputText.bbox.length === 4) {
           const newviewport = getLatLonViewport(inputText);
           setCurrentViewState((oldViewState) => {
             const newViewState = {
@@ -107,16 +127,6 @@ export const useMap = () => {
               latitude: newviewport.latitude,
               longitude: newviewport.longitude,
               zoom: newviewport.zoom + 1,
-              transitionDuration: TRANSITION_DURATION_GEOCODER
-            };
-            return newViewState;
-          });
-        } else if (inputText?.center && inputText.center[0] !== 0 && inputText.center[1] !== 0) {
-          setCurrentViewState((oldViewState) => {
-            const newViewState = {
-              ...oldViewState,
-              latitude: inputText.center[1],
-              longitude: inputText.center[0],
               transitionDuration: TRANSITION_DURATION_GEOCODER
             };
             return newViewState;
@@ -141,7 +151,6 @@ export const useMap = () => {
   }, [setCurrentViewState, setResetMarker]);
 
   const finishRender = useMemo(() => () => {
-    console.log('finish render');
     if (mapViewFilter) {
       const viewport = new WebMercatorViewport(currentViewstate);
       const nw = viewport.unproject([0, 0]);
