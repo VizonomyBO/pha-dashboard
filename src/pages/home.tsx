@@ -14,6 +14,7 @@ import { useHome } from '../store/hooks/custom/useHome';
 import { FeedbackForm } from '../components/FeedbackForm';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
+import { Timeline } from '../components/timeline/Timeline';
 
 export const Home = () => {
   const [yStart, setYStart] = useState(0);
@@ -210,6 +211,7 @@ export const Home = () => {
                 </div>
               )}
             </div>
+            <Timeline />
           </div>
         </div>
         {openModal && <ModalFilters setOpenModal={setOpenModal} />}
