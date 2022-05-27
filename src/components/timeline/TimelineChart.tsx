@@ -13,7 +13,7 @@ const margin = {
 };
 const width = 750 - margin.left - margin.right;
 const height = 200 - margin.top - margin.bottom;
-const barWidth = width / 31;
+const barWidth = width / 20;
 
 const getDateByX = (newPosition:any, minusOne = false) => {
   const r = newPosition / barWidth;
@@ -40,7 +40,7 @@ export const TimelineChart = ({ data, play, setPlay }: {
   // const { startDate, endDate, filter, selected, play } = useTimelineState();
   // eslint-disable-next-line max-len
   // const { setTimelineDataStories, setTimelineTimeframe, setTimelineSelected, setTimelinePlay } = useTimelineDispatch();
-  const [endPlay, setEndPlay] = useState(new Date());
+  const [endPlay, setEndPlay] = useState(new Date('22 May 2022 00:00 UTC'));
   useEffect(() => {
     if (play) {
       setTimeout(() => {
@@ -49,19 +49,22 @@ export const TimelineChart = ({ data, play, setPlay }: {
         setXLeft(newXLeft);
         setXRight(newXRight);
         const x = Math.round(newXLeft / barWidth);
-        const y = Math.round((newXRight) / barWidth) - 1;
-        const x1 = new Date((new Date().setDate(new Date().getDate() - 30 + x)));
-        const y1 = new Date((new Date().setDate(new Date().getDate() - 30 + y)));
+        const y = (Math.round(newXRight / barWidth)) - 1;
+        const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
+        const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y)));
+        // TODO: Addis aqui estan los datos en x1 y y1
+        console.log(newXLeft, newXRight, x, y, x1, y1);
         setTimelineTimeframe({
           startDate: x1,
           endDate: y1,
         });
-        if (y1.toDateString() === endPlay.toDateString()) {
+        if (y1.toDateString() > new Date('23 December 2023 00:00 UTC').toDateString()) {
+          console.log('Fin');
           setPlay(false);
         }
       }, 3000);
     } else {
-      setEndPlay(new Date());
+      setEndPlay(new Date('22 May 2022 00:00 UTC'));
     }
   }, [endPlay, play, setPlay, xLeft]);
   useEffect(() => {
