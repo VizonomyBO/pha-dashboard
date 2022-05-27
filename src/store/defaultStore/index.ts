@@ -110,7 +110,9 @@ export const INITIAL_CATEGORIES = {
   dataSources: [PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS],
   callFilters: true,
   zoomCenter: true,
-  mapViewFilter: false
+  mapViewFilter: false,
+  superstarDateRange: [],
+  verifiedDateRange: []
 };
 
 export const INITIAL_GEOCODER_STATE = {

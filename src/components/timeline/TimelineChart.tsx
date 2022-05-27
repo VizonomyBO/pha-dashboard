@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import { END_DATE, MONTH, START_DATE } from '../../constants/timeline';
 import { DataTimelineType, DatesTimelineType, TimelinesFrameType } from '../../@types/timeline.ts';
+import { useCategoriesDispatch, useCategoriesState } from '../../store/hooks';
 
 const paddleWidth = 6;
 const dotsLength = 3;
@@ -41,6 +42,16 @@ export const TimelineChart = ({ data, play, setPlay }: {
   // eslint-disable-next-line max-len
   // const { setTimelineDataStories, setTimelineTimeframe, setTimelineSelected, setTimelinePlay } = useTimelineDispatch();
   const [endPlay, setEndPlay] = useState(new Date('22 May 2022 00:00 UTC'));
+  const { verifiedDateRange } = useCategoriesState();
+  const {
+    setVerifiedDateRange,
+    setCallFilters
+  } = useCategoriesDispatch();
+
+  useEffect(() => {
+    setCallFilters(true);
+  }, [verifiedDateRange, setCallFilters]);
+
   useEffect(() => {
     if (play) {
       setTimeout(() => {
@@ -52,8 +63,7 @@ export const TimelineChart = ({ data, play, setPlay }: {
         const y = (Math.round(newXRight / barWidth)) - 1;
         const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
         const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y)));
-        // TODO: Addis aqui estan los datos en x1 y y1
-        console.log(newXLeft, newXRight, x, y, x1, y1);
+        setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
         setTimelineTimeframe({
           startDate: x1,
           endDate: y1,
@@ -66,7 +76,7 @@ export const TimelineChart = ({ data, play, setPlay }: {
     } else {
       setEndPlay(new Date('22 May 2022 00:00 UTC'));
     }
-  }, [endPlay, play, setPlay, xLeft]);
+  }, [endPlay, play, setPlay, xLeft, setVerifiedDateRange]);
   useEffect(() => {
     console.log('Dotty..13');
     let maxElements = 0;

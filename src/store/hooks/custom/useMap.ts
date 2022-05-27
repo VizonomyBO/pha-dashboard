@@ -12,6 +12,7 @@ import PinBlue from '../../../components/map/ic-pin-golden.svg';
 import PinGrey from '../../../components/map/ic-pin-grey.svg';
 import { deckDefaults } from '../../../components/map/deckDefaults';
 import { getLatLonViewport } from '../../../components/map/defaultGenerator';
+import { CompletelyIntentionalAny } from '../../../@types/database';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const Carto = carto as any;
 
@@ -24,6 +25,8 @@ export const useMap = () => {
     categoriesSelected,
     accesibilities,
     dataSources,
+    superstarDateRange,
+    verifiedDateRange,
     mapViewFilter
   } = useCategoriesState() || {};
   const TRANSITION_DURATION = 1800;
@@ -38,15 +41,23 @@ export const useMap = () => {
   const getLayers = useMemo(
     () => () => {
       const headers = webRequest.generateJSONHeader();
+      const obj: CompletelyIntentionalAny = {
+        categories: categoriesSelected,
+        accesibility: accesibilities,
+        dataSources,
+        badges: []
+      };
+      if (superstarDateRange.length === 2) {
+        obj.superstarDateRange = superstarDateRange;
+      }
+      if (verifiedDateRange.length === 2) {
+        obj.verifiedDateRange = verifiedDateRange;
+      }
+      console.log('my object is ', obj);
       webRequest
         .post(
           ENDPOINTS.GET_LAYERS,
-          {
-            categories: categoriesSelected,
-            accesibility: accesibilities,
-            dataSources,
-            badges: []
-          },
+          obj,
           headers
         )
         .then((res) => res.json())
@@ -58,7 +69,7 @@ export const useMap = () => {
         })
         .catch((err) => console.error(err));
     },
-    [categoriesSelected, accesibilities, dataSources, setCallFilters]
+    [categoriesSelected, accesibilities, dataSources, setCallFilters, superstarDateRange, verifiedDateRange]
   );
 
   const getPinColor = (originTable: string) => {
