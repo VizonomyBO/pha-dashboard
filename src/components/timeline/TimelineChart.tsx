@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { END_DATE, START_DATE } from '../../constants/timeline';
+import { END_DATE, MONTH, START_DATE } from '../../constants/timeline';
 import { DataTimelineType, DatesTimelineType, TimelinesFrameType } from '../../@types/timeline.ts';
 
 const paddleWidth = 6;
@@ -70,13 +70,23 @@ export const TimelineChart = ({ data, play, setPlay }: {
     const dataStories = [];
     // eslint-disable-next-line max-len
     const dates: DatesTimelineType[] | any = [];
-    const dataByDate = d3.group(data, (d) => new Date(d.month).toDateString());
-    for (let i = 0; i <= 8; i += 1) {
-      const date = new Date((new Date().setDate(new Date().getDate() - 130 + i))).toDateString();
+    const dataByDate = d3.group(data, (d) => {
+      const datesDivition = d.month.split('-');
+      return new Date(`${datesDivition[0]}-22-${datesDivition[1]}`).toDateString();
+    });
+    // const dataByDate = d3.group(data, (d) => (d.count.toString()));
+    console.log(dataByDate, 'Dotty..13', '22-', data, MONTH);
+    const dateForDates = new Date('22 May 2022 00:00 UTC');
+    for (let i = 0; i <= 19; i += 1) {
+      // const date = new Date((new Date().setDate(new Date().getDate() - 130 + i))).toDateString();
       dates.push([
-        date,
-        dataByDate.get(date) || []
+        dateForDates.toDateString(),
+        dataByDate.get(dateForDates.toDateString()) || []
       ]);
+      if (dateForDates >= END_DATE) {
+        break;
+      }
+      dateForDates.setMonth(dateForDates.getMonth() + 1);
     }
     // eslint-disable-next-line max-len
     const startDateIndex = dates.findIndex((a:any) => new Date(START_DATE).toDateString() === new Date(a[0]).toDateString());
@@ -127,13 +137,14 @@ export const TimelineChart = ({ data, play, setPlay }: {
         d3.axisBottom(x)
           .tickSize(0)
           .tickFormat((d) => {
-            const date = new Date(d).getDate();
-            return (date < 10 ? '0' : '') + d3.format('d')(date);
+            const date = new Date(d);
+            return MONTH[date.getMonth()] + d3.format('d')(date.getUTCFullYear());
           })
       )
       .selectAll('text')
       .attr('transform', 'translate(3,4)')
       .style('text-anchor', 'end')
+      .style('font-size', '6px')
       .style('fill', '#B4B6B8');
     svg.select('.domain').remove();
     const y = d3.scaleLinear()
