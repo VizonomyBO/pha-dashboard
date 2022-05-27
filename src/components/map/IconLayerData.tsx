@@ -2,6 +2,7 @@ import { Position } from 'deck.gl';
 import { IconLayer } from '@deck.gl/layers';
 import PinBlue from './ic-pin-blue.svg';
 import PinGrey from './ic-pin-grey.svg';
+import PinGolden from './ic-pin-golden.svg';
 import { PhaRetailer } from '../../@types/database';
 
 const COLORS = { GREEN: 'green', BLUE: 'blue' };
@@ -14,6 +15,11 @@ export const IconLayerData = (data: PhaRetailer[]) => (
     }
     if (item?.geom?.type === COLORS.GREEN) {
       icon = PinGrey;
+    }
+    console.log(item, 'Dotty..1');
+    if (item?.superstar_badge === 'Yes') {
+      console.log(item, 'Dotty..2');
+      icon = PinGolden;
     }
     return new IconLayer({
       id: `IconLayer%${item.retailer_id}`,

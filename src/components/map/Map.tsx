@@ -130,6 +130,7 @@ export const Map = (
     }
   }, [center, zoomToCenterMarker, openPopup, TRANSITION_DURATION, TRANSITION_OFFSET]);
   useEffect(() => {
+    console.log(layers, hideTooltip, expandTooltip, onLoad, finishRender, 'Dotty..7');
     setDeckState((oldDeckState) => {
       const newDeckState = {
         ...oldDeckState,
