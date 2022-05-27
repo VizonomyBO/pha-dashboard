@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import classNames from 'classnames';
 import { DataTimelineType } from '../../@types/timeline.ts';
 import { END_DATE, START_DATE } from '../../constants/timeline';
 import { ENDPOINTS } from '../../constants/url';
@@ -7,15 +8,22 @@ import { TimelineChart } from './TimelineChart';
 
 export const Timeline = () => {
   const [data, setData] = useState<DataTimelineType[]>([]);
+  const [dataSuperStar, setDataSuperStar] = useState<DataTimelineType[]>([]);
   const [play, setPlay] = useState(false);
   const [retailerByMonth, setRetailerByMonth] = useState(true);
-  console.log(retailerByMonth);
+  const byMonthClassNames = classNames({ headertext: true, active: retailerByMonth });
+  const blockClassNames = classNames({ headertext: true, active: !retailerByMonth });
   useEffect(() => {
     webRequest.get(ENDPOINTS.TIME_LINE_RETAILER(START_DATE.toISOString(), END_DATE.toISOString()))
       .then((res) => res.json())
       .then((res) => {
         setData(res.data.rows);
-        console.log(res.data.rows, 'Dotty..3');
+      })
+      .catch((err) => console.error(err));
+    webRequest.get(ENDPOINTS.TIME_LINE_RETAILER_SUPERSTAR(START_DATE.toISOString(), END_DATE.toISOString()))
+      .then((res) => res.json())
+      .then((res) => {
+        setDataSuperStar(res.data.rows);
       })
       .catch((err) => console.error(err));
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -38,7 +46,7 @@ export const Timeline = () => {
       <div className="header" id="retailerByMonth">
         <div className="headerspan">
           <span
-            className="headertext"
+            className={byMonthClassNames}
             onClick={() => (setRetailerByMonth(true))}
             aria-hidden="true"
           >
@@ -47,7 +55,7 @@ export const Timeline = () => {
         </div>
         <div className="headerspan" id="retailerCumulative">
           <span
-            className="headertext"
+            className={blockClassNames}
             onClick={() => (setRetailerByMonth(false))}
             aria-hidden="true"
           >
@@ -59,6 +67,8 @@ export const Timeline = () => {
         data={data}
         play={play}
         setPlay={setPlay}
+        dataSuperStar={dataSuperStar}
+        retailerByMonth={retailerByMonth}
       />
     </div>
   );

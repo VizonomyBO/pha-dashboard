@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 export const URL = process.env.REACT_APP_URL || 'http://localhost:9000';
 export const URL_API = `${URL}/api`;
 
@@ -26,8 +27,8 @@ export const ENDPOINTS = {
   DELETE_RETAILER: (table:string) => `${URL}/${CARTODB}/pha?table=${table}`,
   UPDATE_SWITCH: (id: number | string | undefined) => `${URL}/${CARTODB}/update-switch/${id}`,
   IMAGE_INDIVIDUAL: (id: number | string | undefined) => `${URL}/${CARTODB}/individual-images/${id}`,
-  // eslint-disable-next-line max-len
   TIME_LINE_RETAILER: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-retailers-by-month?dateRange=${dateStart}%20-%20${dateEnd}`,
+  TIME_LINE_RETAILER_SUPERSTAR: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-superstar-by-month?dateRange=${dateStart}%20-%20${dateEnd}`,
 };
 
 export const CARTO_API = 'https://gcp-us-east1.api.carto.com';

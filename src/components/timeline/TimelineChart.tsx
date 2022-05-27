@@ -1,6 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { END_DATE, MONTH, START_DATE } from '../../constants/timeline';
+import {
+  END_DATE,
+  MONTH,
+  MONTH_NAME
+} from '../../constants/timeline';
 import { DataTimelineType, DatesTimelineType, TimelinesFrameType } from '../../@types/timeline.ts';
 import { useCategoriesDispatch, useCategoriesState } from '../../store/hooks';
 
@@ -29,11 +33,62 @@ const dataReturn = (dates:DatesTimelineType[]) => {
   });
   return dateReturn;
 };
-export const TimelineChart = ({ data, play, setPlay }: {
+export const TimelineChart = ({
+  data,
+  play,
+  setPlay,
+  dataSuperStar,
+  retailerByMonth
+}: {
   data: DataTimelineType[],
   play: boolean,
-  setPlay: React.Dispatch<React.SetStateAction<boolean>>
+  setPlay: React.Dispatch<React.SetStateAction<boolean>>,
+  dataSuperStar: DataTimelineType[],
+  retailerByMonth: boolean
 }) => {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const DataByCounRetailer = (i: number) => {
+    let countAcum = 0;
+    let count = 0;
+    let never = true;
+    data.map((element) => {
+      if (!retailerByMonth) {
+        countAcum += element.count;
+        if (element.month === MONTH_NAME[i]) {
+          count = countAcum;
+          never = false;
+        }
+      } else if (element.month === MONTH_NAME[i]) {
+        count = element.count;
+      }
+      if (!retailerByMonth && never) {
+        count = countAcum;
+      }
+      return count;
+    });
+    return count / 50;
+  };
+  const DataByCounSuperStar = (i: number) => {
+    let countAcum = 0;
+    let count = 0;
+    let never = true;
+    dataSuperStar.map((element) => {
+      if (!retailerByMonth) {
+        countAcum += element.count;
+        if (element.month === MONTH_NAME[i]) {
+          count = countAcum;
+          never = false;
+        }
+      } else if (element.month === MONTH_NAME[i]) {
+        count = element.count;
+      }
+      if (!retailerByMonth && never) {
+        count = countAcum;
+      }
+      return count;
+    });
+    return count / 100;
+  };
   const [xLeft, setXLeft] = useState(0);
   const [xRight, setXRight] = useState(width);
   const wrapperRef = useRef<any>();
@@ -64,12 +119,7 @@ export const TimelineChart = ({ data, play, setPlay }: {
         const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
         const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y)));
         setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
-        setTimelineTimeframe({
-          startDate: x1,
-          endDate: y1,
-        });
-        if (y1.toDateString() > new Date('23 December 2023 00:00 UTC').toDateString()) {
-          console.log('Fin');
+        if (y1.toDateString() >= new Date('23 December 2023 00:00 UTC').toDateString()) {
           setPlay(false);
         }
       }, 3000);
@@ -78,23 +128,22 @@ export const TimelineChart = ({ data, play, setPlay }: {
     }
   }, [endPlay, play, setPlay, xLeft, setVerifiedDateRange]);
   useEffect(() => {
-    console.log('Dotty..13');
-    let maxElements = 0;
-    const dataStories = [];
+    const maxElements = 0;
+    // const dataStories = [];
     // eslint-disable-next-line max-len
     const dates: DatesTimelineType[] | any = [];
-    const dataByDate = d3.group(data, (d) => {
-      const datesDivition = d.month.split('-');
-      return new Date(`${datesDivition[0]}-22-${datesDivition[1]}`).toDateString();
-    });
-    // const dataByDate = d3.group(data, (d) => (d.count.toString()));
-    console.log(dataByDate, 'Dotty..13', '22-', data, MONTH);
+    // const dataByDate = d3.group(data, (d) => {
+    //   const datesDivition = d.month.split('-');
+    //   return new Date(`${datesDivition[0]}-22-${datesDivition[1]}`).toDateString();
+    // });
     const dateForDates = new Date('22 May 2022 00:00 UTC');
+    // const dataByCoun =
     for (let i = 0; i <= 19; i += 1) {
       // const date = new Date((new Date().setDate(new Date().getDate() - 130 + i))).toDateString();
       dates.push([
         dateForDates.toDateString(),
-        dataByDate.get(dateForDates.toDateString()) || []
+        DataByCounRetailer(i),
+        DataByCounSuperStar(i)
       ]);
       if (dateForDates >= END_DATE) {
         break;
@@ -102,15 +151,15 @@ export const TimelineChart = ({ data, play, setPlay }: {
       dateForDates.setMonth(dateForDates.getMonth() + 1);
     }
     // eslint-disable-next-line max-len
-    const startDateIndex = dates.findIndex((a:any) => new Date(START_DATE).toDateString() === new Date(a[0]).toDateString());
-    const endDateIndex = dates.findIndex((a:any) => new Date(END_DATE).toDateString()
-    === new Date(a[0]).toDateString());
-    dates.forEach((d: any, i: number) => {
-      maxElements = Math.max(d[1].length, maxElements);
-      if (i >= startDateIndex && i <= endDateIndex) {
-        dataStories.push(...d[1]);
-      }
-    });
+    // const startDateIndex = dates.findIndex((a:any) => new Date(START_DATE).toDateString() === new Date(a[0]).toDateString());
+    // const endDateIndex = dates.findIndex((a:any) => new Date(END_DATE).toDateString()
+    // === new Date(a[0]).toDateString());
+    // dates.forEach((d: any, i: number) => {
+    //   maxElements = Math.max(d[1].length, maxElements);
+    //   if (i >= startDateIndex && i <= endDateIndex) {
+    //     dataStories.push(...d[1]);
+    //   }
+    // });
     // eslint-disable-next-line @typescript-eslint/no-shadow
     let svg:any = d3.select(wrapperRef.current);
     svg.selectAll('*').remove();
@@ -133,7 +182,7 @@ export const TimelineChart = ({ data, play, setPlay }: {
         .style('stroke', 'black')
         .style('opacity', 0.4)
     ));
-    [0, 20, 40, 60, 80, 100].forEach((p) => {
+    [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].forEach((p) => {
       svg.append('line')
         .attr('x1', 0)
         .attr('x2', width)
@@ -163,8 +212,26 @@ export const TimelineChart = ({ data, play, setPlay }: {
     const y = d3.scaleLinear()
       .domain([0, ((maxElements === 0 ? 1 : maxElements) + Math.floor(maxElements / 4))])
       .range([height, 0]);
-    console.log(y);
     svg.selectAll('mybar')
+      .data(dates)
+      .enter()
+      .append('rect')
+      .attr('x', (d:any) => {
+        if (d[0]) {
+          const datex = x(new Date(d[0]).toDateString());
+          if (datex) {
+            return datex + 2;
+          }
+          return 2;
+        }
+        return 2;
+      })
+      .attr('y', (d:any) => y((d[1] + d[2])))
+      .attr('width', barWidth - 2)
+      .attr('height', (d:any) => height - y(d[2]))
+      .attr('fill', '#f0933a')
+      .attr('index', (d:any, i:number) => i);
+    svg.selectAll('mybar1')
       .data(dates)
       .enter()
       .append('rect')
@@ -178,10 +245,10 @@ export const TimelineChart = ({ data, play, setPlay }: {
         }
         return 1;
       })
-      .attr('y', (d:any) => y(d[1].length))
+      .attr('y', (d:any) => y(d[1]))
       .attr('width', barWidth - 2)
-      .attr('height', (d:any) => height - y(d[1].length))
-      .attr('fill', '#CDCFD0')
+      .attr('height', (d:any) => height - y(d[1]))
+      .attr('fill', '#00bde3')
       .attr('index', (d:any, i:number) => i);
 
     svg.selectAll('rect')
@@ -190,7 +257,7 @@ export const TimelineChart = ({ data, play, setPlay }: {
         const xRightRect = xLeftRect ? xLeftRect + barWidth / 2 : 0;
         const fill = (xLeft - 2) <= (xLeftRect ?? 0) && xRightRect <= (xRight + 2);
         d3.select('react')
-          .style('fill', fill ? '#408B50' : '#CDCFD0');
+          .style('fill', fill ? '#408B50' : '#00bde3');
       });
 
     const rect = svg.append('rect')
@@ -436,16 +503,15 @@ export const TimelineChart = ({ data, play, setPlay }: {
     };
     svg.selectAll('.paddle').call(
       d3.drag().on('start', (e:any) => {
-        console.log('Dotty..1');
         paddlesDrag(e);
       })
     );
     betweenPaddlesRect.call(
       d3.drag().on('start', (e:any) => {
-        console.log('Dotty..1');
         middleRectDrag(e);
       })
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, xLeft, xRight]);
   return (
     <div ref={wrapperRef} />

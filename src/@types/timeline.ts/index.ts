@@ -10,5 +10,6 @@ export interface DataTimelineType {
 
 export interface DatesTimelineType {
   date: string,
-  month: d3.InternMap<string, DataTimelineType[]> | any
+  month: d3.InternMap<string, DataTimelineType[]> | any,
+  superStart: d3.InternMap<string, DataTimelineType[]> | any
 }
