@@ -8,7 +8,7 @@ import { ENDPOINTS, CARTO_API } from '../../../constants/url';
 import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
 import { QueriesInterface } from '../../../@types/redux';
 import { useGeocoderState, useGeocoderDispatch } from '../geocoderHook';
-import PinBlue from '../../../components/map/ic-pin-golden.svg';
+import PinBlue from '../../../components/map/ic-pin-blue.svg';
 import PinGrey from '../../../components/map/ic-pin-grey.svg';
 import { deckDefaults } from '../../../components/map/deckDefaults';
 import { getLatLonViewport } from '../../../components/map/defaultGenerator';
