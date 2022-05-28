@@ -125,6 +125,8 @@ export interface CategoriesInterface {
   center: number[],
   accesibilities: string[],
   dataSources: string[],
+  verifiedDateRange: string[],
+  superstarDateRange: string[],
   badges: string[],
   bbox?: BBOXInterface,
   callFilters: boolean,

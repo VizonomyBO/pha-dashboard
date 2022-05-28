@@ -51,6 +51,16 @@ const categoriesReducer = (state: CategoriesInterface = defaultState, action: An
       };
     case TYPES.RESET_VALUES:
       return INITIAL_CATEGORIES;
+    case TYPES.SET_SUPERBADGE_DATE_RANGE:
+      return {
+        ...state,
+        superBadgeDateRange: action.superBadgeDateRange
+      };
+    case TYPES.SET_VERIFIED_DATE_RANGE:
+      return {
+        ...state,
+        verifiedDateRange: action.verifiedDateRange
+      };
     case TYPES.INIT:
       return INITIAL_CATEGORIES;
     default:

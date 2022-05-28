@@ -10,7 +10,9 @@ import {
   resetValues,
   setCallFilters,
   setMapViewFilter,
-  setBbox
+  setBbox,
+  setSuperStarDateRange,
+  setVerifiedDateRange
 } from '../actions';
 
 export const useCategoriesState = () => useSelector(
@@ -26,6 +28,12 @@ export const useCategoriesDispatch = () => {
   }, [dispatch]);
   const setBboxMemoized = useMemo(() => (bbox: BBOXInterface) => {
     dispatch(setBbox(bbox));
+  }, [dispatch]);
+  const setSuperStarDateRangeMemoized = useMemo(() => (superstarDateRange: string[]) => {
+    dispatch(setSuperStarDateRange(superstarDateRange));
+  }, [dispatch]);
+  const setVerifiedDateRangeMemoized = useMemo(() => (verifiedDateRange: string[]) => {
+    dispatch(setVerifiedDateRange(verifiedDateRange));
   }, [dispatch]);
   const setResetMemoized = useMemo(() => () => {
     dispatch(resetValues());
@@ -46,6 +54,8 @@ export const useCategoriesDispatch = () => {
     setBadgesSelected: (badges: string[]) => {
       dispatch(setBadgesSelected(badges));
     },
+    setSuperStarDateRange: setSuperStarDateRangeMemoized,
+    setVerifiedDateRange: setVerifiedDateRangeMemoized,
     setCallFilters: setCallFiltersMemoized,
     setMapViewFilter: setMapViewFilterMemoized,
     setBbox: setBboxMemoized,
