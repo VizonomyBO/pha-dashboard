@@ -47,7 +47,6 @@ export const TimelineChart = ({
   dataSuperStar: DataTimelineType[],
   retailerByMonth: boolean
 }) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const DataByCounRetailer = (i: number) => {
     let countAcum = 0;
     let count = 0;
@@ -120,7 +119,7 @@ export const TimelineChart = ({
         const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
         const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y)));
         setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
-        if (y1.toDateString() >= new Date('23 December 2023 00:00 UTC').toDateString()) {
+        if (y1.toDateString() > new Date('23 December 2023 00:00 UTC').toDateString()) {
           setPlay(false);
         }
       }, 3000);

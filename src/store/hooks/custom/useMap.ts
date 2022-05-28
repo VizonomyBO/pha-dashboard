@@ -53,7 +53,6 @@ export const useMap = () => {
       if (verifiedDateRange.length === 2) {
         obj.verifiedDateRange = verifiedDateRange;
       }
-      console.log('my object is ', obj);
       webRequest
         .post(
           ENDPOINTS.GET_LAYERS,

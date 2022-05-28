@@ -16,9 +16,7 @@ export const IconLayerData = (data: PhaRetailer[]) => (
     if (item?.geom?.type === COLORS.GREEN) {
       icon = PinGrey;
     }
-    console.log(item, 'Dotty..1');
     if (item?.superstar_badge === 'Yes') {
-      console.log(item, 'Dotty..2');
       icon = PinGolden;
     }
     return new IconLayer({
