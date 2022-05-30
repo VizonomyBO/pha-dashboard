@@ -6,6 +6,9 @@ import { findRegion } from '../../../utils/findRegion';
 import { getAddressFields } from '../../../utils/getAddressFields';
 import { useGeocoderDispatch, useGeocoderState } from '../geocoderHook';
 import { useMarketplaceDispatch } from '../marketplaceHook';
+import { webRequest } from '../../../utils/webRequest';
+import { ENDPOINTS } from '../../../constants/url';
+import { CompletelyIntentionalAny } from '../../../@types/database';
 
 export const useGeocoder = (name: string, type: string) => {
   const geocoderDivRef = useRef<HTMLInputElement>(null);
@@ -18,7 +21,7 @@ export const useGeocoder = (name: string, type: string) => {
   const geocoder = useRef<GeocoderService>(
     new GeocoderService(name, setGeocoderOptions, geocoderDivRef.current as HTMLElement)
   );
-
+  const [userPosition, setUserPosition] = useState({ latitude: 0, longitude: 0 });
   const onChangeInput = (e: React.FormEvent<HTMLInputElement>): void => {
     setInputText({
       text: e.currentTarget.value,
@@ -28,6 +31,27 @@ export const useGeocoder = (name: string, type: string) => {
     setInputTextHtml(e.currentTarget.value);
   };
 
+  const getCurrentUserPosition = () => {
+    navigator.geolocation.getCurrentPosition((positionNav) => {
+      setUserPosition({ latitude: positionNav.coords.latitude, longitude: positionNav.coords.longitude });
+    });
+  };
+  useEffect(() => {
+    if (userPosition.latitude !== 0 && userPosition.longitude !== 0) {
+      webRequest.get(ENDPOINTS.REVERSE_GEOCODING(userPosition.latitude, userPosition.longitude))
+        .then((res) => res.json())
+        .then((res: CompletelyIntentionalAny) => {
+          if (res.features.length) {
+            setInputText({
+              text: res.features[0].place_name,
+              shouldSearch: false,
+              center: res.query
+            });
+          }
+        })
+        .catch((err) => console.error(err));
+    }
+  }, [userPosition, setInputText]);
   useEffect(() => {
     setInputTextHtml(businessDetails.address_1);
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -98,6 +122,8 @@ export const useGeocoder = (name: string, type: string) => {
     setGeocoderOptions,
     onChangeInput,
     position,
-    keyDown
+    keyDown,
+    getCurrentUserPosition,
+    userCoordinates: userPosition
   };
 };

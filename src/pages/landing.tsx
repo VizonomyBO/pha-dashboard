@@ -13,6 +13,16 @@ export const Landing = () => {
   const { setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { inputText, options } = useGeocoderState() || {};
   const [openCategories, setOpenCategories] = useState(false);
+  const POSTCODE = 'postcode';
+  const getLabel = (region: string, isPostCode: boolean, opt: Result) => {
+    if (isPostCode) {
+      return `Zipcode: ${opt.text}`;
+    }
+    if (region !== '') {
+      return `${opt.text}, ${region}`;
+    }
+    return opt.text;
+  };
   return (
     <div className="container">
       <div className="bg" />
@@ -96,6 +106,7 @@ export const Landing = () => {
               {inputText.shouldSearch
                 && options.map((opt: Result) => {
                   const { region } = findRegion(opt);
+                  const isPostCode = opt?.place_type.includes(POSTCODE);
                   return (
                     <li key={`${opt.place_name}index`} className="tr-geocoder">
                       <button
@@ -103,7 +114,7 @@ export const Landing = () => {
                         type="button"
                         onClick={() => {
                           setInputText({
-                            text: opt.place_name,
+                            text: isPostCode ? opt.text : opt.place_name,
                             shouldSearch: false,
                             center: opt.center,
                             bbox: opt?.bbox || [],
@@ -113,7 +124,7 @@ export const Landing = () => {
                         }}
                       >
                         <label>
-                          <span className="span-geocoder">{region === '' ? opt.text : `${opt.text}, ${region}`}</span>
+                          <span className="span-geocoder">{getLabel(region, isPostCode, opt)}</span>
                         </label>
                       </button>
                     </li>
