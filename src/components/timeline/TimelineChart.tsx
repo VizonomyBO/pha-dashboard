@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
@@ -95,9 +96,6 @@ export const TimelineChart = ({
   const [xRight, setXRight] = useState(width);
   const wrapperRef = useRef<any>();
   const [, setTimelineTimeframe] = useState<TimelinesFrameType | unknown>();
-  // const { startDate, endDate, filter, selected, play } = useTimelineState();
-  // eslint-disable-next-line max-len
-  // const { setTimelineDataStories, setTimelineTimeframe, setTimelineSelected, setTimelinePlay } = useTimelineDispatch();
   const { verifiedDateRange } = useCategoriesState();
   const {
     setVerifiedDateRange,
@@ -117,8 +115,8 @@ export const TimelineChart = ({
       setXRight(newXRight);
       const x = Math.round(newXLeft / barWidth);
       const y = (Math.round(newXRight / barWidth)) - 1;
-      const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
-      const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y)));
+      const x1 = new Date((start_date.setMonth(5 + x)));
+      const y1 = new Date((start_date.setMonth(5 + y)));
       setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
       if (y1.toDateString() > new Date('23 December 2023 00:00 UTC').toDateString()) {
         setPlay(false);
@@ -128,17 +126,9 @@ export const TimelineChart = ({
   }, [play]);
   useEffect(() => {
     const maxElements = 0;
-    // const dataStories = [];
-    // eslint-disable-next-line max-len
     const dates: DatesTimelineType[] | any = [];
-    // const dataByDate = d3.group(data, (d) => {
-    //   const datesDivition = d.month.split('-');
-    //   return new Date(`${datesDivition[0]}-22-${datesDivition[1]}`).toDateString();
-    // });
-    const dateForDates = new Date('22 May 2022 00:00 UTC');
-    // const dataByCoun =
+    const dateForDates = start_date;
     for (let i = 0; i <= 19; i += 1) {
-      // const date = new Date((new Date().setDate(new Date().getDate() - 130 + i))).toDateString();
       dates.push([
         dateForDates.toDateString(),
         DataByCounRetailer(i),
@@ -149,17 +139,6 @@ export const TimelineChart = ({
       }
       dateForDates.setMonth(dateForDates.getMonth() + 1);
     }
-    // eslint-disable-next-line max-len
-    // const startDateIndex = dates.findIndex((a:any) => new Date(START_DATE).toDateString() === new Date(a[0]).toDateString());
-    // const endDateIndex = dates.findIndex((a:any) => new Date(END_DATE).toDateString()
-    // === new Date(a[0]).toDateString());
-    // dates.forEach((d: any, i: number) => {
-    //   maxElements = Math.max(d[1].length, maxElements);
-    //   if (i >= startDateIndex && i <= endDateIndex) {
-    //     dataStories.push(...d[1]);
-    //   }
-    // });
-    // eslint-disable-next-line @typescript-eslint/no-shadow
     let svg:any = d3.select(wrapperRef.current);
     svg.selectAll('*').remove();
     svg = d3.select(wrapperRef.current)
@@ -212,6 +191,7 @@ export const TimelineChart = ({
       .domain([0, ((maxElements === 0 ? 1 : maxElements) + Math.floor(maxElements / 4))])
       .range([height, 0]);
     svg.selectAll('mybar')
+      .attr('id', 'mybar')
       .data(dates)
       .enter()
       .append('rect')
@@ -394,7 +374,6 @@ export const TimelineChart = ({
       rightPopup.raise().transition('2000').attr('opacity', 1);
       rightPopupLabel.raise().transition('2000').attr('opacity', 1);
       const rect1 = d3.select('#betweenPaddlesRect').classed('dragging', true);
-
       const diff = event.x - parseInt(rect1.attr('x'), 10);
       const w = xRight - xLeft;
 
@@ -431,7 +410,6 @@ export const TimelineChart = ({
           startDate: new Date(dates[Math.ceil(newPosition / barWidth)][0]),
           endDate: new Date(dates[Math.floor((newPosition + w - barWidth) / barWidth)][0])
         });
-        // setTimelineSelected('timeframe');
         leftPopup.transition('2000').attr('opacity', 0);
         leftPopupLabel.transition('2000').attr('opacity', 0);
         rightPopup.transition('2000').attr('opacity', 0);
@@ -468,7 +446,6 @@ export const TimelineChart = ({
             } else if (endedX > xRight) {
               finalX += barWidth;
             } else {
-              // TODO: review
               finalX += barWidth;
             }
           }
@@ -480,7 +457,6 @@ export const TimelineChart = ({
             } else if (endedX > xLeft) {
               finalX += barWidth;
             } else {
-              // TODO: review
               finalX += barWidth;
             }
           }
@@ -492,7 +468,6 @@ export const TimelineChart = ({
           startDate: new Date(dates[Math.ceil(mini / barWidth)][0]),
           endDate: new Date(dates[Math.floor((maxi - barWidth) / barWidth)][0])
         });
-        // setTimelineSelected('timeframe');
         setXLeft(mini);
         setXRight(maxi);
         paddle.classed('dragging', false);
@@ -501,7 +476,6 @@ export const TimelineChart = ({
         rightPaddle.transition(200).attr('x', maxi);
         dotsright.transition(200).attr('x1', maxi + offsetX1).attr('x2', maxi + offsetX2);
       }
-      // event.on('drag', dragged).on('end', ended);
       if (paddleId === 'left') {
         dragged();
       } else {
@@ -514,9 +488,6 @@ export const TimelineChart = ({
     svg.select('#right').call(
       d3.drag().on('end', (event) => paddlesDrag(event, 'right'))
     );
-    // svg.selectAll('.paddle').call(
-    //   d3.drag().on('end', paddlesDrag)
-    // );
     betweenPaddlesRect.call(
       d3.drag().on('start', middleRectDrag)
     );
