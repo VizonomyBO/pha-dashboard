@@ -218,11 +218,11 @@ export const TimelineChart = ({
         if (d[0]) {
           const datex = x(new Date(d[0]).toDateString());
           if (datex) {
-            return datex + 2;
+            return datex + 1;
           }
-          return 2;
+          return 1;
         }
-        return 2;
+        return 1;
       })
       .attr('y', (d:any) => y((d[1] + d[2])))
       .attr('width', barWidth - 2)
