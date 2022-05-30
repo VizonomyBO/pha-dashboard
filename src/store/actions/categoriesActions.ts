@@ -13,6 +13,18 @@ export const setAccesibilitiesSelected = (accesibilities: string[]) => (
     accesibilities
   }
 );
+export const setSuperStarDateRange = (superStarDateRange: string[]) => (
+  {
+    type: TYPES.SET_SUPERBADGE_DATE_RANGE,
+    superStarDateRange
+  }
+);
+export const setVerifiedDateRange = (verifiedDateRange: string[]) => (
+  {
+    type: TYPES.SET_VERIFIED_DATE_RANGE,
+    verifiedDateRange
+  }
+);
 export const setCenterGeocoder = (center: string[]) => (
   {
     type: TYPES.SET_CENTER,

@@ -1,5 +1,6 @@
 import { MAPBOX_KEY } from '.';
 
+/* eslint-disable max-len */
 export const URL = process.env.REACT_APP_URL || 'http://localhost:9000';
 export const URL_API = `${URL}/api`;
 
@@ -31,7 +32,9 @@ export const ENDPOINTS = {
   REVERSE_GEOCODING: (
     latitud: number,
     longitud: number
-  ) => `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitud},${latitud}.json?access_token=${MAPBOX_KEY}`
+  ) => `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitud},${latitud}.json?access_token=${MAPBOX_KEY}`,
+  TIME_LINE_RETAILER: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-retailers-by-month?dateRange=${dateStart}%20-%20${dateEnd}`,
+  TIME_LINE_RETAILER_SUPERSTAR: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-superstar-by-month?dateRange=${dateStart}%20-%20${dateEnd}`,
 };
 
 export const CARTO_API = 'https://gcp-us-east1.api.carto.com';
