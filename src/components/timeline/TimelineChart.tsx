@@ -1,5 +1,4 @@
 /* eslint-disable func-names */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import {
@@ -9,6 +8,7 @@ import {
 } from '../../constants/timeline';
 import { DataTimelineType, DatesTimelineType, TimelinesFrameType } from '../../@types/timeline.ts';
 import { useCategoriesDispatch, useCategoriesState } from '../../store/hooks';
+import { CompletelyIntentionalAny } from '../../@types/database';
 
 const paddleWidth = 6;
 const dotsLength = 3;
@@ -24,14 +24,14 @@ const barWidth = width / 19;
 const barWidthExtent = width / 20;
 const start_date = new Date('23 December 2023 00:00 UTC');
 
-const getDateByX = (newPosition:any) => {
+const getDateByX = (newPosition: CompletelyIntentionalAny) => {
   const r = newPosition / barWidth;
   const date = new Date((start_date.setMonth(new Date().getMonth() + r)));
   return d3.timeFormat('%b %d')(date);
 };
 const dataReturn = (dates:DatesTimelineType[]) => {
-  const dateReturn: any[] = [];
-  dates.forEach((d:any) => {
+  const dateReturn: CompletelyIntentionalAny[] = [];
+  dates.forEach((d:CompletelyIntentionalAny) => {
     const date = new Date(d[0]);
     dateReturn.push(date.toDateString());
   });
@@ -94,7 +94,7 @@ export const TimelineChart = ({
   };
   const [xLeft, setXLeft] = useState(0);
   const [xRight, setXRight] = useState(width);
-  const wrapperRef = useRef<any>();
+  const wrapperRef = useRef<CompletelyIntentionalAny>();
   const [, setTimelineTimeframe] = useState<TimelinesFrameType | unknown>();
   const { verifiedDateRange } = useCategoriesState();
   const {
@@ -126,7 +126,7 @@ export const TimelineChart = ({
   }, [play]);
   useEffect(() => {
     const maxElements = 0;
-    const dates: DatesTimelineType[] | any = [];
+    const dates: DatesTimelineType[] | CompletelyIntentionalAny = [];
     const dateForDates = start_date;
     for (let i = 0; i <= 19; i += 1) {
       dates.push([
@@ -139,7 +139,7 @@ export const TimelineChart = ({
       }
       dateForDates.setMonth(dateForDates.getMonth() + 1);
     }
-    let svg:any = d3.select(wrapperRef.current);
+    let svg: CompletelyIntentionalAny = d3.select(wrapperRef.current);
     svg.selectAll('*').remove();
     svg = d3.select(wrapperRef.current)
       .append('svg')
@@ -150,7 +150,7 @@ export const TimelineChart = ({
     const x = d3.scaleBand()
       .range([0, width])
       .domain(dataReturn(dates));
-    [...dates.map((d:any) => x(new Date(d[0]).toDateString())), width].forEach((d) => (
+    [...dates.map((d: CompletelyIntentionalAny) => x(new Date(d[0]).toDateString())), width].forEach((d) => (
       svg.append('line')
         .attr('x1', d)
         .attr('x2', d)
@@ -195,7 +195,7 @@ export const TimelineChart = ({
       .data(dates)
       .enter()
       .append('rect')
-      .attr('x', (d:any) => {
+      .attr('x', (d: CompletelyIntentionalAny) => {
         if (d[0]) {
           const datex = x(new Date(d[0]).toDateString());
           if (datex) {
@@ -205,16 +205,16 @@ export const TimelineChart = ({
         }
         return 1;
       })
-      .attr('y', (d:any) => y((d[1] + d[2])))
+      .attr('y', (d: CompletelyIntentionalAny) => y((d[1] + d[2])))
       .attr('width', barWidth - 2)
-      .attr('height', (d:any) => height - y(d[2]))
+      .attr('height', (d: CompletelyIntentionalAny) => height - y(d[2]))
       .attr('fill', '#f0933a')
-      .attr('index', (d:any, i:number) => i);
+      .attr('index', (d: CompletelyIntentionalAny, i:number) => i);
     svg.selectAll('mybar1')
       .data(dates)
       .enter()
       .append('rect')
-      .attr('x', (d:any) => {
+      .attr('x', (d: CompletelyIntentionalAny) => {
         if (d[0]) {
           const datex = x(new Date(d[0]).toDateString());
           if (datex) {
@@ -224,14 +224,14 @@ export const TimelineChart = ({
         }
         return 1;
       })
-      .attr('y', (d:any) => y(d[1]))
+      .attr('y', (d: CompletelyIntentionalAny) => y(d[1]))
       .attr('width', barWidth - 2)
-      .attr('height', (d:any) => height - y(d[1]))
+      .attr('height', (d: CompletelyIntentionalAny) => height - y(d[1]))
       .attr('fill', '#00bde3')
-      .attr('index', (d:any, i:number) => i);
+      .attr('index', (d: CompletelyIntentionalAny, i:number) => i);
 
     svg.selectAll('rect')
-      .each((d:any) => {
+      .each((d: CompletelyIntentionalAny) => {
         const xLeftRect = x(new Date(d[0]).toDateString());
         const xRightRect = xLeftRect ? xLeftRect + barWidth / 2 : 0;
         const fill = (xLeft - 2) <= (xLeftRect ?? 0) && xRightRect <= (xRight + 2);
@@ -357,7 +357,7 @@ export const TimelineChart = ({
       betweenPaddlesRect.style('cursor', 'default');
     });
 
-    rect.on('click', function (event:any) {
+    rect.on('click', function (event: CompletelyIntentionalAny) {
       const [xCoord] = d3.pointer(event, rect);
       setXLeft((xCoord / barWidth) * barWidth);
       setXRight(((xCoord / barWidth) + 1) * barWidth);
@@ -367,7 +367,7 @@ export const TimelineChart = ({
       });
     });
 
-    function middleRectDrag(event:any) {
+    function middleRectDrag(event: CompletelyIntentionalAny) {
       d3.select('#headertimeline').style('z-index', '-1');
       leftPopup.raise().transition('2000').attr('opacity', 1);
       leftPopupLabel.raise().transition('2000').attr('opacity', 1);
@@ -418,7 +418,7 @@ export const TimelineChart = ({
       event.on('drag', dragged).on('end', ended);
     }
 
-    function paddlesDrag(event:any, paddleId: string) {
+    function paddlesDrag(event: CompletelyIntentionalAny, paddleId: string) {
       const paddle = d3.select(event.sourceEvent.target).classed('dragging', true);
       const isLeftPaddle = d3.select('.paddle').attr('id') === 'left';
       function dragged() {
