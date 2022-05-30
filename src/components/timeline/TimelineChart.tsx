@@ -19,11 +19,12 @@ const margin = {
 };
 const width = 750 - margin.left - margin.right;
 const height = 200 - margin.top - margin.bottom;
-const barWidth = width / 20;
+const barWidth = width / 19;
+const start_date = new Date('23 December 2023 00:00 UTC');
 
-const getDateByX = (newPosition:any, minusOne = false) => {
+const getDateByX = (newPosition:any) => {
   const r = newPosition / barWidth;
-  const date = new Date((new Date().setDate(new Date().getDate() - 30 + r - (minusOne ? 1 : 0))));
+  const date = new Date((start_date.setMonth(new Date().getMonth() + r)));
   return d3.timeFormat('%b %d')(date);
 };
 const dataReturn = (dates:DatesTimelineType[]) => {
@@ -345,7 +346,7 @@ export const TimelineChart = ({
       .attr('y', height + 19)
       .style('font-size', 12)
       .style('text-anchor', 'middle')
-      .text(getDateByX(xRight, true));
+      .text(getDateByX(xRight));
 
     [0, 1, 2].forEach((r) => {
       const h = height / 2 - (1 - r) * 5;
@@ -409,7 +410,7 @@ export const TimelineChart = ({
         leftPopup.attr('x', newPosition - 25);
         leftPopupLabel.text(getDateByX(newPosition)).raise().attr('x', newPosition);
         rightPopup.attr('x', newPosition + w - 25);
-        rightPopupLabel.text(getDateByX(newPosition + w, true)).raise().attr('x', newPosition + w);
+        rightPopupLabel.text(getDateByX(newPosition + w)).raise().attr('x', newPosition + w);
       }
 
       function ended() {
