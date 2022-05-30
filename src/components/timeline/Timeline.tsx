@@ -11,8 +11,8 @@ export const Timeline = () => {
   const [dataSuperStar, setDataSuperStar] = useState<DataTimelineType[]>([]);
   const [play, setPlay] = useState(false);
   const [retailerByMonth, setRetailerByMonth] = useState(true);
-  const byMonthClassNames = classNames({ headertext: true, active: retailerByMonth });
-  const blockClassNames = classNames({ headertext: true, active: !retailerByMonth });
+  const byMonthClassNames = classNames({ headertext: true, active: retailerByMonth, line: retailerByMonth });
+  const blockClassNames = classNames({ headertext: true, active: !retailerByMonth, line: !retailerByMonth });
   useEffect(() => {
     console.log('useEffect retailerByMonth', retailerByMonth);
     webRequest.get(ENDPOINTS.TIME_LINE_RETAILER(START_DATE.toISOString(), END_DATE.toISOString()))
