@@ -89,7 +89,7 @@ export const TimelineChart = ({
       }
       return count;
     });
-    return count / 100;
+    return count / 50;
   };
   const [xLeft, setXLeft] = useState(0);
   const [xRight, setXRight] = useState(width);
@@ -127,7 +127,6 @@ export const TimelineChart = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [play]);
   useEffect(() => {
-    console.log('rerendering chart');
     const maxElements = 0;
     // const dataStories = [];
     // eslint-disable-next-line max-len
@@ -400,7 +399,6 @@ export const TimelineChart = ({
       const w = xRight - xLeft;
 
       function dragged() {
-        console.log('dragged middle rect');
         let newPosition = event.x - diff;
         if (newPosition < 0) newPosition = 0;
         if (newPosition + w >= width) newPosition = width - w;
@@ -445,16 +443,11 @@ export const TimelineChart = ({
     function paddlesDrag(event:any, paddleId: string) {
       const paddle = d3.select(event.sourceEvent.target).classed('dragging', true);
       const isLeftPaddle = d3.select('.paddle').attr('id') === 'left';
-      console.log('paddle', paddle, event);
       function dragged() {
-        console.log('paddlesDrag', 'dragged');
         let newPosition = event.x;
-        // console.log('newPosition');
-        // console.log('bef newPosition', newPosition);
         newPosition = Math.floor(newPosition / barWidthExtent) * barWidthExtent;
         if (newPosition < 0) newPosition = 0;
         if (newPosition > width) newPosition = width;
-        console.log('newPosition', newPosition);
         leftPaddle.attr('x', newPosition);
         paddle.attr('x', newPosition);
         setXLeft(newPosition);
@@ -463,10 +456,8 @@ export const TimelineChart = ({
       }
 
       function ended() {
-        console.log('paddlesDrag', 'ended');
         let positions;
         let endedX = event.x;
-        console.log(endedX);
         if (endedX < 0) endedX = 0;
         if (endedX > width) endedX = width;
         let finalX = Math.ceil(endedX / barWidthExtent) * barWidthExtent;
@@ -502,7 +493,6 @@ export const TimelineChart = ({
           endDate: new Date(dates[Math.floor((maxi - barWidth) / barWidth)][0])
         });
         // setTimelineSelected('timeframe');
-        console.log('positions', positions);
         setXLeft(mini);
         setXRight(maxi);
         paddle.classed('dragging', false);
@@ -513,10 +503,8 @@ export const TimelineChart = ({
       }
       // event.on('drag', dragged).on('end', ended);
       if (paddleId === 'left') {
-        console.log('left');
         dragged();
       } else {
-        console.log('right');
         ended();
       }
     }
