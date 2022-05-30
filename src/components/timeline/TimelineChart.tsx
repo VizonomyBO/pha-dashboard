@@ -96,7 +96,6 @@ export const TimelineChart = ({
   // const { startDate, endDate, filter, selected, play } = useTimelineState();
   // eslint-disable-next-line max-len
   // const { setTimelineDataStories, setTimelineTimeframe, setTimelineSelected, setTimelinePlay } = useTimelineDispatch();
-  const [endPlay, setEndPlay] = useState(new Date('22 May 2022 00:00 UTC'));
   const { verifiedDateRange } = useCategoriesState();
   const {
     setVerifiedDateRange,
@@ -108,26 +107,25 @@ export const TimelineChart = ({
   }, [verifiedDateRange, setCallFilters]);
 
   useEffect(() => {
-    if (play) {
-      setTimeout(() => {
-        const newXLeft = (xLeft + barWidth) % width;
-        const newXRight = (newXLeft + barWidth) % width;
-        setXLeft(newXLeft);
-        setXRight(newXRight);
-        const x = Math.round(newXLeft / barWidth);
-        const y = (Math.round(newXRight / barWidth)) - 1;
-        const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
-        const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y)));
-        setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
-        if (y1.toDateString() > new Date('23 December 2023 00:00 UTC').toDateString()) {
-          setPlay(false);
-        }
-      }, 3000);
-    } else {
-      setEndPlay(new Date('22 May 2022 00:00 UTC'));
-    }
-  }, [endPlay, play, setPlay, xLeft, setVerifiedDateRange]);
+    if (!play) return;
+    setTimeout(() => {
+      const newXLeft = (xLeft + barWidth) % width;
+      const newXRight = (newXLeft + barWidth) % width;
+      setXLeft(newXLeft);
+      setXRight(newXRight);
+      const x = Math.round(newXLeft / barWidth);
+      const y = (Math.round(newXRight / barWidth)) - 1;
+      const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
+      const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y)));
+      setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
+      if (y1.toDateString() > new Date('23 December 2023 00:00 UTC').toDateString()) {
+        setPlay(false);
+      }
+    }, 3000);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [play]);
   useEffect(() => {
+    console.log('rerendering chart');
     const maxElements = 0;
     // const dataStories = [];
     // eslint-disable-next-line max-len
@@ -270,6 +268,7 @@ export const TimelineChart = ({
     svg.selectAll('.paddle').remove();
 
     const betweenPaddlesRect = svg.append('rect')
+      .attr('id', 'betweenPaddlesRect')
       .attr('fill', 'blue')
       .attr('x', xLeft)
       .attr('y', 0)
@@ -364,21 +363,21 @@ export const TimelineChart = ({
     const dotsright = svg.selectAll('.dotsright');
 
     const paddles = svg.selectAll('.paddle');
-    paddles.on('mouseover', () => {
-      d3.select('mouseover').style('cursor', 'ew-resize');
+    paddles.on('mouseover', function () {
+      d3.select(paddles).style('cursor', 'ew-resize');
     });
-    paddles.on('mouseout', () => {
-      d3.select('mouseout').style('cursor', 'default');
+    paddles.on('mouseout', function () {
+      d3.select(paddles).style('cursor', 'default');
     });
-    betweenPaddlesRect.on('mouseover', () => {
-      d3.select('mouseover').style('cursor', 'move');
+    betweenPaddlesRect.on('mouseover', function () {
+      d3.select(betweenPaddlesRect).style('cursor', 'move');
     });
-    betweenPaddlesRect.on('mouseout', () => {
-      d3.select('mouseout').style('cursor', 'default');
+    betweenPaddlesRect.on('mouseout', function () {
+      d3.select(betweenPaddlesRect).style('cursor', 'default');
     });
 
-    rect.on('click', (event:any) => {
-      const [xCoord] = d3.pointer(event, this);
+    rect.on('click', function (event:any) {
+      const [xCoord] = d3.pointer(event, rect);
       setXLeft((xCoord / barWidth) * barWidth);
       setXRight(((xCoord / barWidth) + 1) * barWidth);
       setTimelineTimeframe({
@@ -387,18 +386,18 @@ export const TimelineChart = ({
       });
     });
 
-    const middleRectDrag = (event:any) => {
+    function middleRectDrag(event:any) {
       d3.select('#headertimeline').style('z-index', '-1');
       leftPopup.raise().transition('2000').attr('opacity', 1);
       leftPopupLabel.raise().transition('2000').attr('opacity', 1);
       rightPopup.raise().transition('2000').attr('opacity', 1);
       rightPopupLabel.raise().transition('2000').attr('opacity', 1);
-      const rect1 = d3.select(event).classed('dragging', true);
+      const rect1 = d3.select('#betweenPaddlesRect').classed('dragging', true);
 
       const diff = event.x - parseInt(rect1.attr('x'), 10);
       const w = xRight - xLeft;
 
-      const dragged = () => {
+      function dragged() {
         let newPosition = event.x - diff;
         if (newPosition < 0) newPosition = 0;
         if (newPosition + w >= width) newPosition = width - w;
@@ -411,9 +410,9 @@ export const TimelineChart = ({
         leftPopupLabel.text(getDateByX(newPosition)).raise().attr('x', newPosition);
         rightPopup.attr('x', newPosition + w - 25);
         rightPopupLabel.text(getDateByX(newPosition + w, true)).raise().attr('x', newPosition + w);
-      };
+      }
 
-      const ended = () => {
+      function ended() {
         d3.select('#headertimeline').style('z-index', '0');
         let newPosition = event.x - diff;
         if (newPosition < 0) newPosition = 0;
@@ -436,80 +435,83 @@ export const TimelineChart = ({
         leftPopupLabel.transition('2000').attr('opacity', 0);
         rightPopup.transition('2000').attr('opacity', 0);
         rightPopupLabel.transition('2000').attr('opacity', 0);
-      };
+      }
       event.on('drag', dragged).on('end', ended);
-    };
+    }
 
-    const paddlesDrag = (event:any) => {
-      const paddle = d3.select(event).classed('dragging', true);
-      const isLeftPaddle = d3.select(event).attr('id') === 'left';
+    function paddlesDrag(event:any) {
+      const paddle = d3.select(event.sourceEvent.target).classed('dragging', true);
 
-      const dragged = () => {
-        let newPosition = event.x;
-        if (newPosition < 0) newPosition = 0;
-        if (newPosition > width) newPosition = width;
+      const isLeftPaddle = d3.select('.paddle').attr('id') === 'left';
+      console.log('paddle', paddle);
+      function dragged() {
+        console.log('paddlesDrag', 'dragged');
+        const newPosition = event.x;
+        console.log('newPosition');
+        console.log('bef newPosition', newPosition);
+        // if (newPosition < 0) newPosition = 0;
+        // if (newPosition > width) newPosition = width;
+        console.log('newPosition', newPosition);
         paddle.attr('x', newPosition);
         const dots = isLeftPaddle ? dotsleft : dotsright;
         dots.attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
-      };
+      }
 
-      const ended = () => {
-        let positions;
-        let endedX = event.x;
-        if (endedX < 0) endedX = 0;
-        if (endedX > width) endedX = width;
-        let finalX = (endedX / barWidth) * barWidth;
-        if (isLeftPaddle) {
-          if (finalX === xRight) {
-            if (endedX < xRight) {
-              finalX -= barWidth;
-            } else if (endedX > xRight) {
-              finalX += barWidth;
-            } else {
-              // TODO: review
-              finalX += barWidth;
-            }
-          }
-          positions = [finalX, xRight];
-        } else {
-          if (finalX === xLeft) {
-            if (endedX < xLeft) {
-              finalX -= barWidth;
-            } else if (endedX > xLeft) {
-              finalX += barWidth;
-            } else {
-              // TODO: review
-              finalX += barWidth;
-            }
-          }
-          positions = [finalX, xLeft];
-        }
-        const mini = Math.min(positions[0], positions[1]);
-        const maxi = Math.max(positions[0], positions[1]);
-        setTimelineTimeframe({
-          startDate: new Date(dates[Math.ceil(mini / barWidth)][0]),
-          endDate: new Date(dates[Math.floor((maxi - barWidth) / barWidth)][0])
-        });
-        // setTimelineSelected('timeframe');
-        setXLeft(mini);
-        setXRight(maxi);
+      function ended() {
+        console.log('paddlesDrag', 'ended');
+        // let positions;
+        const endedX = event.x;
+        console.log(endedX);
+        // if (endedX < 0) endedX = 0;
+        // if (endedX > width) endedX = width;
+        // let finalX = (endedX / barWidth) * barWidth;
+        // if (isLeftPaddle) {
+        //   if (finalX === xRight) {
+        //     if (endedX < xRight) {
+        //       finalX -= barWidth;
+        //     } else if (endedX > xRight) {
+        //       finalX += barWidth;
+        //     } else {
+        //       // TODO: review
+        //       finalX += barWidth;
+        //     }
+        //   }
+        //   positions = [finalX, xRight];
+        // } else {
+        //   if (finalX === xLeft) {
+        //     if (endedX < xLeft) {
+        //       finalX -= barWidth;
+        //     } else if (endedX > xLeft) {
+        //       finalX += barWidth;
+        //     } else {
+        //       // TODO: review
+        //       finalX += barWidth;
+        //     }
+        //   }
+        //   positions = [finalX, xLeft];
+        // }
+        // const mini = Math.min(positions[0], positions[1]);
+        // const maxi = Math.max(positions[0], positions[1]);
+        // setTimelineTimeframe({
+        //   startDate: new Date(dates[Math.ceil(mini / barWidth)][0]),
+        //   endDate: new Date(dates[Math.floor((maxi - barWidth) / barWidth)][0])
+        // });
+        // // setTimelineSelected('timeframe');
+        // setXLeft(mini);
+        // setXRight(maxi);
         paddle.classed('dragging', false);
-        leftPaddle.transition('200').attr('x', mini);
-        dotsleft.transition('200').attr('x1', mini + offsetX1).attr('x2', mini + offsetX2);
-        rightPaddle.transition('200').attr('x', maxi);
-        dotsright.transition('200').attr('x1', maxi + offsetX1).attr('x2', maxi + offsetX2);
-      };
+        // leftPaddle.transition(200).attr('x', mini);
+        // dotsleft.transition(200).attr('x1', mini + offsetX1).attr('x2', mini + offsetX2);
+        // rightPaddle.transition(200).attr('x', maxi);
+        // dotsright.transition(200).attr('x1', maxi + offsetX1).attr('x2', maxi + offsetX2);
+      }
       event.on('drag', dragged).on('end', ended);
-    };
+    }
     svg.selectAll('.paddle').call(
-      d3.drag().on('start', (e:any) => {
-        paddlesDrag(e);
-      })
+      d3.drag().on('start', paddlesDrag)
     );
     betweenPaddlesRect.call(
-      d3.drag().on('start', (e:any) => {
-        middleRectDrag(e);
-      })
+      d3.drag().on('start', middleRectDrag)
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, xLeft, xRight]);

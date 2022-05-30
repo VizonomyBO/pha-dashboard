@@ -14,6 +14,7 @@ export const Timeline = () => {
   const byMonthClassNames = classNames({ headertext: true, active: retailerByMonth });
   const blockClassNames = classNames({ headertext: true, active: !retailerByMonth });
   useEffect(() => {
+    console.log('useEffect retailerByMonth', retailerByMonth);
     webRequest.get(ENDPOINTS.TIME_LINE_RETAILER(START_DATE.toISOString(), END_DATE.toISOString()))
       .then((res) => res.json())
       .then((res) => {
@@ -27,7 +28,7 @@ export const Timeline = () => {
       })
       .catch((err) => console.error(err));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [retailerByMonth]);
+  }, [retailerByMonth, setData, setDataSuperStar]);
   return (
     <div className="timeline">
       <span className="title">
@@ -47,7 +48,9 @@ export const Timeline = () => {
         <div className="headerspan">
           <span
             className={byMonthClassNames}
-            onClick={() => (setRetailerByMonth(true))}
+            onClick={() => {
+              setRetailerByMonth(true);
+            }}
             aria-hidden="true"
           >
             View New Retailers by Month
@@ -56,7 +59,9 @@ export const Timeline = () => {
         <div className="headerspan" id="retailerCumulative">
           <span
             className={blockClassNames}
-            onClick={() => (setRetailerByMonth(false))}
+            onClick={() => {
+              setRetailerByMonth(false);
+            }}
             aria-hidden="true"
           >
             View Total Cumulative Retailers
