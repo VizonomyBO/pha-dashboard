@@ -65,6 +65,8 @@ export const DATASOURCES: FilterType[] = [
 ];
 
 export const PHA_RETAILERS = 'retailers_pha';
+export const PHA_RETAILERS_YES = 'retailers_pha_yes';
+export const PHA_RETAILERS_NO = 'retailers_pha_no';
 export const OSM_RETAILERS = 'retailers_osm';
 export const USDA_RETAILERS = 'retailers_usda';
 
