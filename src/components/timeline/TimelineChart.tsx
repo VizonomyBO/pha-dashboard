@@ -360,13 +360,18 @@ export const TimelineChart = ({
     });
 
     rect.on('click', function (event: CompletelyIntentionalAny) {
-      const [xCoord] = d3.pointer(event, rect);
-      setXLeft((xCoord / barWidth) * barWidth);
-      setXRight(((xCoord / barWidth) + 1) * barWidth);
-      setTimelineTimeframe({
-        startDate: new Date(dates[Math.ceil((xCoord / barWidth))][0]),
-        endDate: new Date(dates[Math.floor(((xCoord / barWidth) + 1))][0])
+      setModalView({
+        view: true,
+        x: event.x - 815,
+        number: (event.x - 815) / barWidthExtent
       });
+      setTimeout(() => {
+        setModalView({
+          view: false,
+          x: event.x,
+          number: event.x / barWidthExtent
+        });
+      }, 2000);
     });
     function middleRectDrag(event: CompletelyIntentionalAny) {
       d3.select('#headertimeline').style('z-index', '-1');
