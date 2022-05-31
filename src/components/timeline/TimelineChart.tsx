@@ -114,23 +114,21 @@ export const TimelineChart = ({
   useEffect(() => {
     if (!play) return;
     setTimeout(() => {
-      const newXLeft = (xLeft + barWidthExtent) % width;
-      const newXRight = (newXLeft + barWidthExtent) % width;
+      const newXLeft = (xLeft + barWidthExtent) % (width + barWidthExtent);
+      const newXRight = (newXLeft + barWidthExtent) % (width + barWidthExtent);
       setXLeft(newXLeft);
       setXRight(newXRight);
-      const x = Math.round(newXLeft / barWidthExtent) - 1;
-      const y = (Math.round(newXRight / barWidthExtent)) - 2;
-      const x1 = new Date((start_date.setMonth(5 + x)));
+      const x = Math.round(newXLeft / barWidthExtent);
+      const y = Math.round(newXRight / barWidthExtent);
+      const x1 = new Date((start_date.setMonth(4 + x)));
       start_date = new Date('22 May 2022 00:00 UTC');
       // eslint-disable-next-line no-nested-ternary
-      const y1 = new Date((start_date.setMonth(5 + y === -2 ? 18 : (y === -1 ? 1 : y))));
+      const y1 = new Date((start_date.setMonth(4 + y)));
+      console.log(x, y, x1, y1, xLeft, barWidthExtent, width, newXLeft);
       if (retailerByMonth) {
         setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
       } else {
         setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), y1.toISOString()]);
-      }
-      if (y === -2) {
-        setPlay(false);
       }
     }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
