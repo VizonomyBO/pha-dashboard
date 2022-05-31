@@ -5,11 +5,19 @@ import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 import { useMarkerDispatch } from '../markerHook';
 import { webRequest } from '../../../utils/webRequest';
 import { ENDPOINTS, CARTO_API } from '../../../constants/url';
-import { PHA_RETAILERS, OSM_RETAILERS, USDA_RETAILERS } from '../../../constants/categories';
+import {
+  OSM_RETAILERS,
+  USDA_RETAILERS,
+  PHA_RETAILERS_YES,
+  PHA_RETAILERS_NO,
+  PHA_RETAILERS_SUPERSTAR_NO,
+  PHA_RETAILERS_SUPERSTAR_YES
+} from '../../../constants/categories';
 import { QueriesInterface } from '../../../@types/redux';
 import { useGeocoderState, useGeocoderDispatch } from '../geocoderHook';
 import PinBlue from '../../../components/map/ic-pin-blue.svg';
 import PinGrey from '../../../components/map/ic-pin-grey.svg';
+import PinGolden from '../../../components/map/ic-pin-golden.svg';
 import { deckDefaults } from '../../../components/map/deckDefaults';
 import { getLatLonViewport } from '../../../components/map/defaultGenerator';
 import { CompletelyIntentionalAny } from '../../../@types/database';
@@ -73,7 +81,9 @@ export const useMap = () => {
 
   const getPinColor = (originTable: string) => {
     let defaultPin = PinGrey;
-    if (originTable === 'retailers_pha') {
+    if (originTable === PHA_RETAILERS_YES) {
+      defaultPin = PinGolden;
+    } else if (originTable === PHA_RETAILERS_NO) {
       defaultPin = PinBlue;
     } else if (originTable === 'retailers_osm') {
       defaultPin = PinGrey;
@@ -82,7 +92,7 @@ export const useMap = () => {
   };
   const getCartoLayer = useMemo(
     () => (connectionName: string, query: string, originTable: string) => {
-      console.log(connectionName, query, originTable, 'Dotty..6');
+      const pinColor = getPinColor(originTable);
       const cartoLayer = new Carto.CartoLayer({
         id: originTable,
         connection: connectionName,
@@ -94,7 +104,7 @@ export const useMap = () => {
         getIconSize: () => 30,
         getIcon: () => ({
           id: 'marker',
-          url: getPinColor(originTable),
+          url: pinColor,
           anchorY: 60,
           height: 70,
           width: 50,
@@ -214,8 +224,17 @@ export const useMap = () => {
         accessToken: queries.token
       });
       const newLayers = [];
-      if (queries.queries?.retailers_pha) {
-        newLayers.push(getCartoLayer(queries.connection_name, queries.queries.retailers_pha, PHA_RETAILERS));
+      if (queries.queries[PHA_RETAILERS_SUPERSTAR_NO as keyof typeof queries.queries]) {
+        const query = queries.queries[PHA_RETAILERS_SUPERSTAR_NO as keyof typeof queries.queries];
+        newLayers.push(
+          getCartoLayer(queries.connection_name, query ?? '', PHA_RETAILERS_NO)
+        );
+      }
+      if (queries.queries[PHA_RETAILERS_SUPERSTAR_YES as keyof typeof queries.queries]) {
+        const query = queries.queries[PHA_RETAILERS_SUPERSTAR_YES as keyof typeof queries.queries];
+        newLayers.push(
+          getCartoLayer(queries.connection_name, query ?? '', PHA_RETAILERS_YES)
+        );
       }
       if (queries.queries?.retailers_osm) {
         newLayers.push(getCartoLayer(queries.connection_name, queries.queries.retailers_osm, OSM_RETAILERS));

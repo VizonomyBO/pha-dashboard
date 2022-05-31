@@ -141,6 +141,8 @@ export interface QueriesInterface {
     retailers_pha?: string,
     retailers_osm?: string,
     retailers_usda?: string,
+    'retailers_pha-superstar_no'?: string,
+    'retailers_pha-superstar_yes'?: string
   },
 }
 
