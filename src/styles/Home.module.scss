@@ -751,7 +751,12 @@ sup {
 			}
 			.active {
 				color: #00bce4;
-    		text-decoration-line: underline;
+			}
+			.line {
+				padding-bottom: 6px;
+				border-bottom-style: solid;
+				border-bottom-width: 3px;
+				width: fit-content;
 			}
 		}
 	}
