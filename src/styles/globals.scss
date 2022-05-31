@@ -95,8 +95,8 @@ input, button, textarea, select {
     z-index: 2;
 }
 .table-geocoder-home {
-  margin-left: -135px;
-  width: 216px;
+  margin-left: 21px;
+  width: 294px;
   background-color: white;
   border-radius: 20px;
   list-style: none;
@@ -391,6 +391,17 @@ input, button, textarea, select {
       padding: 12px;
       z-index: 2;
     }
+    .table-geocoder-home {
+      margin-top: 64px;
+      margin-left: 30px;
+      width: 329px;
+      background-color: white;
+      border-radius: 20px;
+      list-style: none;
+      padding: 10px;
+      z-index: 2;
+      position: relative;
+    }
 }
 @media (min-width: 2560px) {
     .table-geocoder {
@@ -404,6 +415,17 @@ input, button, textarea, select {
       list-style: none;
       padding: 12px;
       z-index: 2;
+    }
+    .table-geocoder-home {
+      margin-top: 227px;
+      margin-left: 40px;
+      width: 410px;
+      background-color: white;
+      border-radius: 20px;
+      list-style: none;
+      padding: 10px;
+      z-index: 2;
+      position: relative;
     }
     .span-geocoder {
       font-size: 20px;
