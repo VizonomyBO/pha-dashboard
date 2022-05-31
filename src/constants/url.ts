@@ -1,3 +1,5 @@
+import { MAPBOX_KEY } from '.';
+
 /* eslint-disable max-len */
 export const URL = process.env.REACT_APP_URL || 'http://localhost:9000';
 export const URL_API = `${URL}/api`;
@@ -24,11 +26,15 @@ export const ENDPOINTS = {
   GET_MARKERS: `${URL}/${CARTODB}/map-table`,
   DELETE_OSM: (id: number | undefined) => `${URL}/${CARTODB}/osm-point/${id}`,
   DELETE_UNVALIDATE: (id: number | string | undefined) => `${URL}/${CARTODB}/unvalidated/${id}`,
-  DELETE_RETAILER: (table:string) => `${URL}/${CARTODB}/pha?table=${table}`,
+  DELETE_RETAILER: (table: string) => `${URL}/${CARTODB}/pha?table=${table}`,
   UPDATE_SWITCH: (id: number | string | undefined) => `${URL}/${CARTODB}/update-switch/${id}`,
   IMAGE_INDIVIDUAL: (id: number | string | undefined) => `${URL}/${CARTODB}/individual-images/${id}`,
+  REVERSE_GEOCODING: (
+    latitude: number,
+    longitude: number
+  ) => `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${MAPBOX_KEY}`,
   TIME_LINE_RETAILER: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-retailers-by-month?dateRange=${dateStart}%20-%20${dateEnd}`,
-  TIME_LINE_RETAILER_SUPERSTAR: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-superstar-by-month?dateRange=${dateStart}%20-%20${dateEnd}`,
+  TIME_LINE_RETAILER_SUPERSTAR: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-superstar-by-month?dateRange=${dateStart}%20-%20${dateEnd}`
 };
 
 export const CARTO_API = 'https://gcp-us-east1.api.carto.com';

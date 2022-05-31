@@ -27,10 +27,11 @@ export const useGeocoderDispatch = () => {
   const setResetGeocoderMemoized = useCallback(() => {
     dispatch(setResetGeocoder());
   }, [dispatch]);
+  const setInputTextMemoized = useCallback((chart: InputTextInterface) => {
+    dispatch(setInputText(chart));
+  }, [dispatch]);
   return {
-    setInputText: (chart: InputTextInterface) => {
-      dispatch(setInputText(chart));
-    },
+    setInputText: setInputTextMemoized,
     setGeocoderOptions: setGeocoderOptionsMemoized,
     setShouldZoom: setShouldZoomMemoized,
     setControllerZoom: setControllerZoomMemoized,

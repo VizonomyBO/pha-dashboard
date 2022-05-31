@@ -19,7 +19,8 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
     setGeocoderOptions,
     onChangeInput,
     position,
-    keyDown
+    keyDown,
+    getCurrentUserPosition
   } = useGeocoder(name, type);
   const trClassNames = (index: number) => (
     classNames({ 'tr-geocoder-active': position === index, 'tr-geocoder': position === index })
@@ -54,6 +55,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           placeholder="City or Zip Code"
           onKeyDown={keyDown}
         />
+        <span className="iccrosshair" onClick={() => getCurrentUserPosition()} aria-hidden="true" />
       </div>
       <div className={blockClassNames}>
         {options && options.length > 0 && inputText.shouldSearch && (
@@ -69,7 +71,7 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                       type="button"
                       onClick={() => {
                         setInputText({
-                          text: isPostCode ? getLabel(region, isPostCode, opt) : opt.place_name,
+                          text: isPostCode ? opt.text : opt.place_name,
                           shouldSearch: false,
                           center: opt.center,
                           bbox: opt?.bbox || [],

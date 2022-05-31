@@ -1649,7 +1649,7 @@ sup {
 						outline: none;
 						padding-left: 8px;
 						color: #161A23;
-						width: 180px;
+						width: 275px;
 						padding-right: 5px;
 						text-overflow: ellipsis;
 						white-space: nowrap;
@@ -1831,20 +1831,19 @@ sup {
 					}
 					.citysearch {
 						display: flex;
-						justify-content: center;
+						justify-content: space-between;
 						align-items: center;
 						background-color: #fff;
 						border-radius: 56px;
 						padding:8px ;
-						width: 384px;
+						width: 500px;
 						input[type=text] {
 							-webkit-appearance: none;
 							font-family: "FuturaMedium", sans-serif;
 							font-size: 16px;
 							border: none;
 							outline: none;
-							width: 195px;
-							padding-left: 8px;
+							width: 280px;
 							white-space: nowrap;
 							text-overflow: ellipsis;
 							overflow: hidden;
@@ -4626,10 +4625,10 @@ header.topmenu {
 				}
 			}
 			.ldgsearchstore {
-				width: 848px;
+				width: 925px;
 				.alook {
 					.swhere {
-						width: 328px;
+						width: 403px;
 						padding-left: 32px;
 						padding-right: 16px;
 						justify-content: space-between;
@@ -4644,7 +4643,7 @@ header.topmenu {
 						}
 						input[type=text] {
 							font-size: 18px;
-							width: 152px;
+							width: 242px;
 						}
 						.iccrosshair {
 							display: block;
@@ -4738,15 +4737,15 @@ header.topmenu {
 							font-size: 21px;
 						}
 						.citysearch {
-							width: 512px;
+							width: 593px;
 							.icsearch {
 								width: 21px;
 								height: 21px;
 							}
 							input[type=text] {
-								font-size: 21px;
-								padding-left: 16px;
-								width: 272px;
+								font-size: 21px;						
+                padding-left: 3px;
+                width: 313px;
 							}
 							button.light {
 								font-size: 21px;
@@ -5536,10 +5535,10 @@ header.topmenu {
 				}
 			}
 			.ldgsearchstore {
-				width: 1128px;
+				width: 1262px;
 				.alook {
 					.swhere {
-						width: 440px;
+						width: 567px;
 						padding-left: 42px;
 						padding-right: 16px;
 						justify-content: space-between;
@@ -5554,7 +5553,7 @@ header.topmenu {
 						}
 						input[type=text] {
 							font-size: 24px;
-							width: 218px;
+							width: 352px;
 						}
 						.iccrosshair {
 							display: block;
@@ -5650,17 +5649,20 @@ header.topmenu {
 							height: 100px;
 						}
 						.citysearch {
-							width: 683px;
+							width: 766px;
 							padding: 16px 16px 16px 32px;
 							justify-content: space-between;
 							.icsearch {
 								width: 28px;
 								height: 28px;
 							}
+              .iccrosshair {
+                width: 21px;
+              }
 							input[type=text] {
 								font-size: 28px;
-								padding-left: 16px;
-								width: 360px;
+								padding-left: 4px;
+								width: 391px;
 							}
 							button.light {
 								font-size: 28px;
