@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import classNames from 'classnames';
-import { DataTimelineType } from '../../@types/timeline.ts';
-import { END_DATE, START_DATE } from '../../constants/timeline';
+import { DataTimelineType, ModalTimeline } from '../../@types/timeline.ts';
+import {
+  END_DATE, MONTH_NAME, MONTH_TEXT, START_DATE
+} from '../../constants/timeline';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
 import { TimelineChart } from './TimelineChart';
@@ -13,8 +15,56 @@ export const Timeline = () => {
   const [retailerByMonth, setRetailerByMonth] = useState(true);
   const byMonthClassNames = classNames({ headertext: true, active: retailerByMonth, line: retailerByMonth });
   const blockClassNames = classNames({ headertext: true, active: !retailerByMonth, line: !retailerByMonth });
+  const [modalView, setModalView] = useState<ModalTimeline>({ view: false, x: 0, number: 0 });
+  const dateFormat = () => {
+    const date = new Date(new Date('22 May 2022 00:00 UTC').setMonth(
+      new Date('22 May 2022 00:00 UTC').getMonth() + modalView.number
+    ));
+    return (
+      <div className="modal-timeline-title">
+        {`${MONTH_TEXT[date.getMonth()]} ${date.getFullYear()}`}
+      </div>
+    );
+  };
+  const returnNumberRetailer = () => {
+    if (retailerByMonth) {
+      const count: DataTimelineType | undefined = data.find(
+        (element) => element.month === MONTH_NAME[Math.trunc(modalView.number)]
+      );
+      return (
+        <span className="modal-timeline-text">{count ? count.count : 0}</span>
+      );
+    }
+    let count = 0;
+    data.forEach((element, index) => {
+      if (index <= Math.trunc(modalView.number)) {
+        count += element.count;
+      }
+    });
+    return (
+      <span className="modal-timeline-text">{count}</span>
+    );
+  };
+  const returnNumberSuperstar = () => {
+    if (retailerByMonth) {
+      const count: DataTimelineType | undefined = dataSuperStar.find(
+        (element) => element.month === MONTH_NAME[Math.trunc(modalView.number)]
+      );
+      return (
+        <span className="modal-timeline-text">{count ? count.count : 0}</span>
+      );
+    }
+    let count = 0;
+    dataSuperStar.forEach((element, index) => {
+      if (index <= Math.trunc(modalView.number)) {
+        count += element.count;
+      }
+    });
+    return (
+      <span className="modal-timeline-text">{count}</span>
+    );
+  };
   useEffect(() => {
-    console.log('useEffect retailerByMonth', retailerByMonth);
     webRequest.get(ENDPOINTS.TIME_LINE_RETAILER(START_DATE.toISOString(), END_DATE.toISOString()))
       .then((res) => res.json())
       .then((res) => {
@@ -68,7 +118,23 @@ export const Timeline = () => {
           </span>
         </div>
       </div>
+      {modalView.view && (
+        <div className="modal-timeline" style={{ left: `${modalView.x + 715}px` }}>
+          {dateFormat()}
+          <div>
+            <span className="modal-timeline-circulo" />
+            <span className="modal-timeline-text">Validated Retailer</span>
+            {returnNumberRetailer()}
+          </div>
+          <div>
+            <span className="modal-timeline-circulo" style={{ backgroundColor: '#F5B375' }} />
+            <span className="modal-timeline-text">Superstar Retailer</span>
+            {returnNumberSuperstar()}
+          </div>
+        </div>
+      )}
       <TimelineChart
+        setModalView={setModalView}
         data={data}
         play={play}
         setPlay={setPlay}

@@ -20,6 +20,22 @@ export const MONTH = [
   'Nov-',
   'Dec-'
 ];
+
+export const MONTH_TEXT = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
+];
+
 export const YEAR = [
   '22',
   '23'
