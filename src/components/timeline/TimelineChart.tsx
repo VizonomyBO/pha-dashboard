@@ -22,7 +22,7 @@ const width = 750 - margin.left - margin.right;
 const height = 200 - margin.top - margin.bottom;
 const barWidth = width / 19;
 const barWidthExtent = width / 20;
-const start_date = new Date('23 December 2023 00:00 UTC');
+const start_date = new Date('22 May 2022 00:00 UTC');
 
 const getDateByX = (newPosition: CompletelyIntentionalAny) => {
   const r = newPosition / barWidth;
@@ -127,7 +127,7 @@ export const TimelineChart = ({
   useEffect(() => {
     const maxElements = 0;
     const dates: DatesTimelineType[] | CompletelyIntentionalAny = [];
-    const dateForDates = start_date;
+    const dateForDates = new Date('22 May 2022 00:00 UTC');
     for (let i = 0; i <= 19; i += 1) {
       dates.push([
         dateForDates.toDateString(),
