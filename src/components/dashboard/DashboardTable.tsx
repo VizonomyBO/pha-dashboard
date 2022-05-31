@@ -9,6 +9,7 @@ import { CompletelyIntentionalAny, PhaIndividual, PhaRetailer } from '../../@typ
 import {
   TYPE_BUSINESS, SELECT_CATEGORY, TYPE_INDIVIDUAL_FORM, SUPERSTART_BADGE
 } from '../../constants';
+import { PHA_RETAILERS } from '../../constants/categories';
 import { ROW_STATUS, UNVALIDATED } from '../../constants/dashboard';
 import { formConstants } from '../../constants/form';
 import { ENDPOINTS } from '../../constants/url';
@@ -126,8 +127,8 @@ export const DashboardTable = ({
       .catch((err) => console.error(err));
   };
 
-  const showModal = (item: PhaRetailer & PhaIndividual) => {
-    if (item.individual_id) {
+  const showModal = (item: PhaRetailer & PhaIndividual, type?: string) => {
+    if (item.individual_id && type !== PHA_RETAILERS) {
       setVisibleFeedback(true);
       setIndividualId(item.individual_id);
       webRequest.get(ENDPOINTS.INDIVIDUAL_FORM(item.individual_id))
@@ -236,7 +237,7 @@ export const DashboardTable = ({
               )}
               {!params.isRetailer && (
                 <>
-                  <th className="wcol8 htit7">
+                  <th className="wcol8 htit7" style={{ textAlign: 'center' }}>
                     Permanently Closed
                   </th>
                   <th className="wcol8 htit7">
@@ -364,9 +365,14 @@ export const DashboardTable = ({
                   <>
                     <td className="wcol8 bbtm">
                       <div className="coninf" style={{ textAlign: 'center' }}>
-                        <label className="switch" style={{ textAlign: 'center' }}>
-                          {showText(item.permanently_closed)}
-                        </label>
+                        <span
+                          className="switch"
+                          style={{ textAlign: 'center', color: '#00BDE3' }}
+                          onClick={() => showModal(item, PHA_RETAILERS)}
+                          aria-hidden="true"
+                        >
+                          {showText(item.permanently_closed === formConstants.CLOSED.YES ? 'Closed' : 'Open')}
+                        </span>
                       </div>
                     </td>
                     <td className="wcol8 bbtm">

@@ -2,8 +2,10 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import {
+  MAX_POSITION,
   MONTH,
-  MONTH_NAME
+  MONTH_NAME,
+  START_DATE
 } from '../../constants/timeline';
 import {
   DataTimelineType, DatesTimelineType, ModalTimeline
@@ -118,9 +120,10 @@ export const TimelineChart = ({
       setXRight(newXRight);
       const x = Math.round(newXLeft / barWidthExtent) - 1;
       const y = (Math.round(newXRight / barWidthExtent)) - 2;
-      const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
+      const x1 = new Date((start_date.setMonth(5 + x)));
+      start_date = new Date('22 May 2022 00:00 UTC');
       // eslint-disable-next-line no-nested-ternary
-      const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y === -2 ? 18 : (y === -1 ? 1 : y))));
+      const y1 = new Date((start_date.setMonth(5 + y === -2 ? 18 : (y === -1 ? 1 : y))));
       if (retailerByMonth) {
         setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
       } else {
@@ -136,7 +139,8 @@ export const TimelineChart = ({
     const maxElements = 0;
     const dates: DatesTimelineType[] | CompletelyIntentionalAny = [];
     let moveBetweenPaddles = 0;
-    const dateForDates = new Date('22 May 2022 00:00 UTC');
+    start_date = new Date('22 May 2022 00:00 UTC');
+    const dateForDates = start_date;
     for (let i = 0; i <= 19; i += 1) {
       dates.push([
         dateForDates.toDateString(),
@@ -434,15 +438,16 @@ export const TimelineChart = ({
         let r = ((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft) / barWidthExtent;
         start_date = new Date('22 May 2022 00:00 UTC');
         const dateLeft = new Date((start_date.setMonth(start_date.getMonth() + r - 2)));
-        r = ((newPosition + xRight) > 690 ? 690 : newPosition + xRight) / barWidthExtent;
-        const dateRight = new Date((new Date('22 May 2022 00:00 UTC').setMonth(start_date.getMonth() + r)));
+        r = ((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : newPosition + xRight) / barWidthExtent;
+        start_date = new Date('22 May 2022 00:00 UTC');
+        const dateRight = new Date(start_date.setMonth(start_date.getMonth() + r));
         if (retailerByMonth) {
           setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
         } else {
           setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), dateRight.toISOString()]);
         }
         setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft);
-        setXRight((newPosition + xRight) > 690 ? 690 : (newPosition + xRight));
+        setXRight((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : (newPosition + xRight));
         leftPopup.transition('2000').attr('opacity', 0);
         leftPopupLabel.transition('2000').attr('opacity', 0);
         rightPopup.transition('2000').attr('opacity', 0);
@@ -474,11 +479,12 @@ export const TimelineChart = ({
         if (retailerByMonth) {
           setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
         } else {
-          setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), dateRight.toISOString()]);
         }
       }
 
       function ended() {
+        start_date = new Date('22 May 2022 00:00 UTC');
         let positions;
         let endedX = event.x;
         if (endedX < 0) endedX = 0;
@@ -520,11 +526,12 @@ export const TimelineChart = ({
         start_date = new Date('22 May 2022 00:00 UTC');
         const dateLeft = new Date((start_date.setMonth(new Date().getMonth() + r)));
         r = endedX / barWidthExtent;
+        start_date = new Date('22 May 2022 00:00 UTC');
         const dateRight = new Date((start_date.setMonth(new Date().getMonth() + r)));
         if (retailerByMonth) {
           setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
         } else {
-          setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), dateRight.toISOString()]);
         }
       }
       if (paddleId === 'left') {
