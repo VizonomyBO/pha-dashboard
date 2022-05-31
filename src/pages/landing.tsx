@@ -96,7 +96,7 @@ export const Landing = () => {
             <div className="title">
               Where
               <ClearIcon
-                style={{ marginLeft: '250px' }}
+                style={{ marginLeft: '76%', marginBottom: '-5px', opacity: '0.5' }}
                 onClick={() => setGeocoderOptions([])}
               />
             </div>
