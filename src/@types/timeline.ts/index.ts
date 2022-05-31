@@ -14,3 +14,9 @@ export interface DatesTimelineType {
   month: d3.InternMap<string, DataTimelineType[]> | any,
   superStart: d3.InternMap<string, DataTimelineType[]> | any
 }
+
+export interface ModalTimeline {
+  view: boolean;
+  x: number;
+  number: number;
+}

@@ -606,3 +606,32 @@ input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
   text-decoration: none;
   color:#161A23 !important;
 }
+.modal-timeline {
+  position: fixed;
+  bottom: 100px;
+  background-color: #EAEBEB;
+  width: 159px;
+  height: 79px;
+  border-radius: 5px;
+  font-size: 12px;
+  padding: 10px;
+}
+.modal-timeline-title {
+  font-family: "FuturaBold", sans-serif;
+  color: #161A23;
+  padding-bottom: 5px;
+}
+.modal-timeline-circulo {
+  position: absolute;
+  background-color: #00bde3;
+  width: 8px;
+  margin-top: 4px;
+  height: 8px;
+  border-radius: 50%;
+}
+.modal-timeline-text {
+  font-family: "FuturaMedium", sans-serif;
+  color: #161A23;
+  padding-left: 13px;
+
+}

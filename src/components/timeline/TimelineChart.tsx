@@ -2,11 +2,12 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import {
-  END_DATE,
   MONTH,
   MONTH_NAME
 } from '../../constants/timeline';
-import { DataTimelineType, DatesTimelineType, TimelinesFrameType } from '../../@types/timeline.ts';
+import {
+  DataTimelineType, DatesTimelineType, ModalTimeline, TimelinesFrameType
+} from '../../@types/timeline.ts';
 import { useCategoriesDispatch, useCategoriesState } from '../../store/hooks';
 import { CompletelyIntentionalAny } from '../../@types/database';
 
@@ -23,6 +24,7 @@ const height = 200 - margin.top - margin.bottom;
 const barWidth = width / 19;
 const barWidthExtent = width / 20;
 const start_date = new Date('22 May 2022 00:00 UTC');
+export const end_date = new Date('23 December 2023 00:00 UTC');
 
 const getDateByX = (newPosition: CompletelyIntentionalAny) => {
   const r = newPosition / barWidth;
@@ -42,13 +44,15 @@ export const TimelineChart = ({
   play,
   setPlay,
   dataSuperStar,
-  retailerByMonth
+  retailerByMonth,
+  setModalView
 }: {
   data: DataTimelineType[],
   play: boolean,
   setPlay: React.Dispatch<React.SetStateAction<boolean>>,
   dataSuperStar: DataTimelineType[],
-  retailerByMonth: boolean
+  retailerByMonth: boolean,
+  setModalView: React.Dispatch<React.SetStateAction<ModalTimeline>>
 }) => {
   const DataByCounRetailer = (i: number) => {
     let countAcum = 0;
@@ -109,21 +113,19 @@ export const TimelineChart = ({
   useEffect(() => {
     if (!play) return;
     setTimeout(() => {
-      const newXLeft = (xLeft + barWidth) % width;
-      const newXRight = (newXLeft + barWidth) % width;
+      const newXLeft = (xLeft + barWidthExtent) % width;
+      const newXRight = (newXLeft + barWidthExtent) % width;
       setXLeft(newXLeft);
       setXRight(newXRight);
-      const x = Math.round(newXLeft / barWidth);
-      const y = (Math.round(newXRight / barWidth)) - 1;
-      const x1 = new Date((start_date.setMonth(5 + x)));
-      const y1 = new Date((start_date.setMonth(5 + y)));
+      const x = Math.round(newXLeft / barWidthExtent) - 1;
+      const y = (Math.round(newXRight / barWidthExtent)) - 2;
+      const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
+      const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y === -2 ? 19 : 2)));
       setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
-      if (y1.toDateString() > new Date('23 December 2023 00:00 UTC').toDateString()) {
-        setPlay(false);
-      }
-    }, 3000);
+      if (y === -2) setPlay(false);
+    }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [play]);
+  }, [play, xLeft]);
   useEffect(() => {
     const maxElements = 0;
     const dates: DatesTimelineType[] | CompletelyIntentionalAny = [];
@@ -134,7 +136,7 @@ export const TimelineChart = ({
         DataByCounRetailer(i),
         DataByCounSuperStar(i)
       ]);
-      if (dateForDates >= END_DATE) {
+      if (dateForDates >= end_date) {
         break;
       }
       dateForDates.setMonth(dateForDates.getMonth() + 1);
@@ -366,13 +368,29 @@ export const TimelineChart = ({
         endDate: new Date(dates[Math.floor(((xCoord / barWidth) + 1))][0])
       });
     });
-
     function middleRectDrag(event: CompletelyIntentionalAny) {
       d3.select('#headertimeline').style('z-index', '-1');
       leftPopup.raise().transition('2000').attr('opacity', 1);
       leftPopupLabel.raise().transition('2000').attr('opacity', 1);
       rightPopup.raise().transition('2000').attr('opacity', 1);
       rightPopupLabel.raise().transition('2000').attr('opacity', 1);
+      function modalView(event1: CompletelyIntentionalAny) {
+        setModalView({
+          view: true,
+          x: event1.x,
+          number: event1.x / barWidthExtent
+        });
+        setTimeout(() => {
+          setModalView({
+            view: false,
+            x: event1.x,
+            number: event1.x / barWidthExtent
+          });
+        }, 2000);
+      }
+      svg.select('#betweenPaddlesRect').call(
+        d3.drag().on('end', (event1) => modalView(event1))
+      );
       const rect1 = d3.select('#betweenPaddlesRect').classed('dragging', true);
       const diff = event.x - parseInt(rect1.attr('x'), 10);
       const w = xRight - xLeft;
