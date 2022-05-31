@@ -113,21 +113,19 @@ export const TimelineChart = ({
   useEffect(() => {
     if (!play) return;
     setTimeout(() => {
-      const newXLeft = (xLeft + barWidth) % width;
-      const newXRight = (newXLeft + barWidth) % width;
+      const newXLeft = (xLeft + barWidthExtent) % width;
+      const newXRight = (newXLeft + barWidthExtent) % width;
       setXLeft(newXLeft);
       setXRight(newXRight);
-      const x = Math.round(newXLeft / barWidth);
-      const y = (Math.round(newXRight / barWidth)) - 1;
-      const x1 = new Date((start_date.setMonth(5 + x)));
-      const y1 = new Date((start_date.setMonth(5 + y)));
+      const x = Math.round(newXLeft / barWidthExtent) - 1;
+      const y = (Math.round(newXRight / barWidthExtent)) - 2;
+      const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
+      const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y === -2 ? 19 : 2)));
       setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
-      if (y1 > new Date('22 December 2023 00:00 UTC')) {
-        setPlay(false);
-      }
-    }, 3000);
+      if (y === -2) setPlay(false);
+    }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [play]);
+  }, [play, xLeft]);
   useEffect(() => {
     const maxElements = 0;
     const dates: DatesTimelineType[] | CompletelyIntentionalAny = [];
