@@ -6393,6 +6393,9 @@ header.topmenu {
 	}
 }
 @media (max-width: 600px) {
+	.timeline {
+		display: none;
+	}
   .legendmap {
 		width: 190px !important;
     height: 115px;
@@ -6481,6 +6484,7 @@ header.topmenu {
 				display: block;
 				width: 100%;
 				z-index: 5;
+				border-radius: 15px;
         background-color: white;
 				.tab {
 					height: 62px;

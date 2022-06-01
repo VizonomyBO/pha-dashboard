@@ -2,11 +2,13 @@
 import { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
 import {
+  MAX_POSITION,
   MONTH,
-  MONTH_NAME
+  MONTH_NAME,
+  START_DATE
 } from '../../constants/timeline';
 import {
-  DataTimelineType, DatesTimelineType, ModalTimeline, TimelinesFrameType
+  DataTimelineType, DatesTimelineType, ModalTimeline
 } from '../../@types/timeline.ts';
 import { useCategoriesDispatch, useCategoriesState } from '../../store/hooks';
 import { CompletelyIntentionalAny } from '../../@types/database';
@@ -23,7 +25,7 @@ const width = 750 - margin.left - margin.right;
 const height = 200 - margin.top - margin.bottom;
 const barWidth = width / 19;
 const barWidthExtent = width / 20;
-const start_date = new Date('22 May 2022 00:00 UTC');
+let start_date = new Date('22 May 2022 00:00 UTC');
 export const end_date = new Date('23 December 2023 00:00 UTC');
 
 const getDateByX = (newPosition: CompletelyIntentionalAny) => {
@@ -99,7 +101,6 @@ export const TimelineChart = ({
   const [xLeft, setXLeft] = useState(0);
   const [xRight, setXRight] = useState(width);
   const wrapperRef = useRef<CompletelyIntentionalAny>();
-  const [, setTimelineTimeframe] = useState<TimelinesFrameType | unknown>();
   const { verifiedDateRange } = useCategoriesState();
   const {
     setVerifiedDateRange,
@@ -113,23 +114,31 @@ export const TimelineChart = ({
   useEffect(() => {
     if (!play) return;
     setTimeout(() => {
-      const newXLeft = (xLeft + barWidthExtent) % width;
-      const newXRight = (newXLeft + barWidthExtent) % width;
+      const newXLeft = (xLeft + barWidthExtent) % (width + barWidthExtent);
+      const newXRight = (newXLeft + barWidthExtent) % (width + barWidthExtent);
       setXLeft(newXLeft);
       setXRight(newXRight);
-      const x = Math.round(newXLeft / barWidthExtent) - 1;
-      const y = (Math.round(newXRight / barWidthExtent)) - 2;
-      const x1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + x)));
-      const y1 = new Date((new Date('22 May 2022 00:00 UTC').setMonth(5 + y === -2 ? 19 : 2)));
-      setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
-      if (y === -2) setPlay(false);
+      const x = Math.round(newXLeft / barWidthExtent);
+      const y = Math.round(newXRight / barWidthExtent);
+      const x1 = new Date((start_date.setMonth(4 + x)));
+      start_date = new Date('22 May 2022 00:00 UTC');
+      // eslint-disable-next-line no-nested-ternary
+      const y1 = new Date((start_date.setMonth(4 + y)));
+      console.log(x, y, x1, y1, xLeft, barWidthExtent, width, newXLeft);
+      if (retailerByMonth) {
+        setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
+      } else {
+        setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), y1.toISOString()]);
+      }
     }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [play, xLeft]);
   useEffect(() => {
     const maxElements = 0;
     const dates: DatesTimelineType[] | CompletelyIntentionalAny = [];
-    const dateForDates = new Date('22 May 2022 00:00 UTC');
+    let moveBetweenPaddles = 0;
+    start_date = new Date('22 May 2022 00:00 UTC');
+    const dateForDates = start_date;
     for (let i = 0; i <= 19; i += 1) {
       dates.push([
         dateForDates.toDateString(),
@@ -374,6 +383,7 @@ export const TimelineChart = ({
       }, 2000);
     });
     function middleRectDrag(event: CompletelyIntentionalAny) {
+      setPlay(false);
       d3.select('#headertimeline').style('z-index', '-1');
       leftPopup.raise().transition('2000').attr('opacity', 1);
       leftPopupLabel.raise().transition('2000').attr('opacity', 1);
@@ -397,11 +407,10 @@ export const TimelineChart = ({
         d3.drag().on('end', (event1) => modalView(event1))
       );
       const rect1 = d3.select('#betweenPaddlesRect').classed('dragging', true);
-      const diff = event.x - parseInt(rect1.attr('x'), 10);
+      const diff = (moveBetweenPaddles - event.x) * -1;
       const w = xRight - xLeft;
-
       function dragged() {
-        let newPosition = event.x - diff;
+        let newPosition = diff;
         if (newPosition < 0) newPosition = 0;
         if (newPosition + w >= width) newPosition = width - w;
         rect1.attr('x', newPosition);
@@ -417,31 +426,37 @@ export const TimelineChart = ({
 
       function ended() {
         d3.select('#headertimeline').style('z-index', '0');
-        let newPosition = event.x - diff;
-        if (newPosition < 0) newPosition = 0;
-        if (newPosition + w >= width) newPosition = width - w;
-        newPosition = (newPosition / barWidth) * barWidth;
+        const newPosition = diff;
         leftPaddle.transition('200').attr('x', newPosition);
         dotsleft.transition('200').attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
         rect.transition('200').attr('x', newPosition);
         rightPaddle.transition('200').attr('x', newPosition + w);
         dotsright.transition('200').attr('x1', newPosition + w + offsetX1).attr('x2', newPosition + w + offsetX2);
         rect.classed('dragging', false);
-        setXLeft(newPosition);
-        setXRight(newPosition + w);
-        setTimelineTimeframe({
-          startDate: new Date(dates[Math.ceil(newPosition / barWidth)][0]),
-          endDate: new Date(dates[Math.floor((newPosition + w - barWidth) / barWidth)][0])
-        });
+        let r = ((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft) / barWidthExtent;
+        start_date = new Date('22 May 2022 00:00 UTC');
+        const dateLeft = new Date((start_date.setMonth(start_date.getMonth() + r - 2)));
+        r = ((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : newPosition + xRight) / barWidthExtent;
+        start_date = new Date('22 May 2022 00:00 UTC');
+        const dateRight = new Date(start_date.setMonth(start_date.getMonth() + r));
+        if (retailerByMonth) {
+          setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
+        } else {
+          setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), dateRight.toISOString()]);
+        }
+        setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft);
+        setXRight((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : (newPosition + xRight));
         leftPopup.transition('2000').attr('opacity', 0);
         leftPopupLabel.transition('2000').attr('opacity', 0);
         rightPopup.transition('2000').attr('opacity', 0);
         rightPopupLabel.transition('2000').attr('opacity', 0);
       }
-      event.on('drag', dragged).on('end', ended);
+      dragged();
+      ended();
     }
 
     function paddlesDrag(event: CompletelyIntentionalAny, paddleId: string) {
+      setPlay(false);
       const paddle = d3.select(event.sourceEvent.target).classed('dragging', true);
       const isLeftPaddle = d3.select('.paddle').attr('id') === 'left';
       function dragged() {
@@ -454,9 +469,20 @@ export const TimelineChart = ({
         setXLeft(newPosition);
         const dots = isLeftPaddle ? dotsleft : dotsright;
         dots.attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
+        let r = newPosition / barWidthExtent;
+        start_date = new Date('22 May 2022 00:00 UTC');
+        const dateLeft = new Date((start_date.setMonth(new Date().getMonth() + r)));
+        r = xRight / barWidthExtent;
+        const dateRight = new Date((start_date.setMonth(new Date().getMonth() + r - 1)));
+        if (retailerByMonth) {
+          setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
+        } else {
+          setVerifiedDateRange([START_DATE.toISOString(), dateRight.toISOString()]);
+        }
       }
 
       function ended() {
+        start_date = new Date('22 May 2022 00:00 UTC');
         let positions;
         let endedX = event.x;
         if (endedX < 0) endedX = 0;
@@ -487,10 +513,6 @@ export const TimelineChart = ({
         }
         const mini = Math.min(positions[0], positions[1]);
         const maxi = Math.max(positions[0], positions[1]);
-        setTimelineTimeframe({
-          startDate: new Date(dates[Math.ceil(mini / barWidth)][0]),
-          endDate: new Date(dates[Math.floor((maxi - barWidth) / barWidth)][0])
-        });
         setXLeft(mini);
         setXRight(maxi);
         paddle.classed('dragging', false);
@@ -498,6 +520,17 @@ export const TimelineChart = ({
         dotsleft.transition(200).attr('x1', mini + offsetX1).attr('x2', mini + offsetX2);
         rightPaddle.transition(200).attr('x', maxi);
         dotsright.transition(200).attr('x1', maxi + offsetX1).attr('x2', maxi + offsetX2);
+        let r = xLeft / barWidthExtent;
+        start_date = new Date('22 May 2022 00:00 UTC');
+        const dateLeft = new Date((start_date.setMonth(new Date().getMonth() + r)));
+        r = endedX / barWidthExtent;
+        start_date = new Date('22 May 2022 00:00 UTC');
+        const dateRight = new Date((start_date.setMonth(new Date().getMonth() + r)));
+        if (retailerByMonth) {
+          setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
+        } else {
+          setVerifiedDateRange([START_DATE.toISOString(), dateRight.toISOString()]);
+        }
       }
       if (paddleId === 'left') {
         dragged();
@@ -512,10 +545,12 @@ export const TimelineChart = ({
       d3.drag().on('end', (event) => paddlesDrag(event, 'right'))
     );
     betweenPaddlesRect.call(
-      d3.drag().on('start', middleRectDrag)
+      d3.drag().on('start', (event) => {
+        moveBetweenPaddles = event.x;
+      }).on('end', middleRectDrag)
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, xLeft, xRight]);
+  }, [data, xLeft, xRight, dataSuperStar]);
   return (
     <div ref={wrapperRef} />
   );
