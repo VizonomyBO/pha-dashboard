@@ -18,6 +18,7 @@ export const Timeline = () => {
   const byMonthClassNames = classNames({ headertext: true, active: retailerByMonth, line: retailerByMonth });
   const blockClassNames = classNames({ headertext: true, active: !retailerByMonth, line: !retailerByMonth });
   const [modalView, setModalView] = useState<ModalTimeline>({ view: false, x: 0, number: 0 });
+  const dateCurrent = new Date();
   const dateFormat = () => {
     const date = new Date(new Date('1 May 2022 00:00 UTC').setMonth(
       new Date('1 May 2022 00:00 UTC').getMonth() + modalView.number + 1
@@ -38,11 +39,10 @@ export const Timeline = () => {
       );
     }
     let count = 0;
-    data.forEach((element, index) => {
-      if (index <= Math.trunc(modalView.number)) {
-        count += element.count;
-      }
-    });
+    for (let index1 = 0; index1 <= modalView.number && modalView.number < dateCurrent.getMonth() - 3; index1 += 1) {
+      const information = data.filter((element) => element.month === MONTH_NAME[index1]);
+      count += information[0] ? information[0].count : 0;
+    }
     return (
       <span className="modal-timeline-text">{count}</span>
     );
@@ -57,11 +57,12 @@ export const Timeline = () => {
       );
     }
     let count = 0;
-    dataSuperStar.forEach((element, index) => {
-      if (index <= Math.trunc(modalView.number)) {
-        count += element.superstar_badge_count ?? 0;
+    for (let index1 = 0; index1 <= modalView.number && modalView.number < dateCurrent.getMonth() - 3; index1 += 1) {
+      const information = dataSuperStar.filter((element) => element.month === MONTH_NAME[index1]);
+      if (information[0]) {
+        count += information[0].superstar_badge_count ? information[0].superstar_badge_count : 0;
       }
-    });
+    }
     return (
       <span className="modal-timeline-text">{count}</span>
     );

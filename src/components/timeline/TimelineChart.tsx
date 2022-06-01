@@ -25,6 +25,7 @@ const width = 750 - margin.left - margin.right;
 const height = 200 - margin.top - margin.bottom;
 const barWidth = width / 19;
 const barWidthExtent = width / 20;
+const dateCurrent = new Date();
 let start_date = new Date('3 May 2022 00:00 UTC');
 export const end_date = new Date('30 December 2023 00:00 UTC');
 
@@ -58,45 +59,33 @@ export const TimelineChart = ({
   setModalView: React.Dispatch<React.SetStateAction<ModalTimeline>>
 }) => {
   const DataByCounRetailer = (i: number) => {
-    let countAcum = 0;
     let count = 0;
-    let never = true;
-    data.map((element) => {
-      if (!retailerByMonth) {
-        countAcum += element.count;
-        if (element.month === MONTH_NAME[i]) {
-          count = countAcum;
-          never = false;
-        }
-      } else if (element.month === MONTH_NAME[i]) {
-        count = element.count;
+    if (!retailerByMonth) {
+      for (let index1 = 0; index1 <= i && i < dateCurrent.getMonth() - 3; index1 += 1) {
+        const information = data.filter((element) => element.month === MONTH_NAME[index1]);
+        count += information[0] ? information[0].count : 0;
       }
-      if (!retailerByMonth && never) {
-        count = countAcum;
-      }
-      return count;
-    });
+    } else {
+      const information = data.filter((element) => element.month === MONTH_NAME[i]);
+      count += information[0] ? information[0].count : 0;
+    }
     return count / 100;
   };
   const DataByCounSuperStar = (i: number) => {
-    let countAcum = 0;
     let count = 0;
-    let never = true;
-    dataSuperStar.map((element) => {
-      if (!retailerByMonth) {
-        countAcum += element.superstar_badge_count ?? 0;
-        if (element.month === MONTH_NAME[i]) {
-          count = countAcum;
-          never = false;
+    if (!retailerByMonth) {
+      for (let index1 = 0; index1 <= i && i < dateCurrent.getMonth() - 3; index1 += 1) {
+        const information = dataSuperStar.filter((element) => element.month === MONTH_NAME[index1]);
+        if (information[0]) {
+          count += information[0].superstar_badge_count ? information[0].superstar_badge_count : 0;
         }
-      } else if (element.month === MONTH_NAME[i]) {
-        count = element.superstar_badge_count ?? 0;
       }
-      if (!retailerByMonth && never) {
-        count = countAcum;
+    } else {
+      const information = dataSuperStar.filter((element) => element.month === MONTH_NAME[i]);
+      if (information[0]) {
+        count += information[0].superstar_badge_count ? information[0].superstar_badge_count : 0;
       }
-      return count;
-    });
+    }
     return count / 100;
   };
   const [xLeft, setXLeft] = useState(0);
@@ -126,8 +115,12 @@ export const TimelineChart = ({
       const y1 = new Date((start_date.setMonth(4 + y)));
       if (retailerByMonth) {
         setVerifiedDateRange([new Date(x1.setDate(0)).toISOString(), new Date(y1.setDate(29)).toISOString()]);
+      } else if (x1.getMonth() > y1.getMonth()) {
+        setVerifiedDateRange(
+          [new Date(x1.setDate(1)).toISOString(), new Date(y1.setDate(30)).toISOString()]
+        );
       } else {
-        setVerifiedDateRange([new Date('1 May 2022 00:00 UTC').toISOString(), new Date(y1.setDate(29)).toISOString()]);
+        setVerifiedDateRange([START_DATE.toISOString(), new Date(y1.setDate(30)).toISOString()]);
       }
     }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -372,14 +365,14 @@ export const TimelineChart = ({
     rect.on('click', function (event: CompletelyIntentionalAny) {
       setModalView({
         view: true,
-        x: event.x - 815,
-        number: (event.x - 815) / barWidthExtent
+        x: event.layerX - barWidthExtent,
+        number: (event.layerX - barWidthExtent) / barWidthExtent
       });
       setTimeout(() => {
         setModalView({
           view: false,
-          x: event.x,
-          number: event.x / barWidthExtent
+          x: event.x + barWidthExtent,
+          number: (event.x + barWidthExtent) / barWidthExtent
         });
       }, 2000);
     });
@@ -444,10 +437,12 @@ export const TimelineChart = ({
           setVerifiedDateRange(
             [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
           );
-        } else {
+        } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
           setVerifiedDateRange(
-            [new Date('1 May 2022 00:00 UTC').toISOString(), new Date(dateRight.setDate(29)).toISOString()]
+            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
           );
+        } else {
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(30)).toISOString()]);
         }
         setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft);
         setXRight((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : (newPosition + xRight));
@@ -483,8 +478,12 @@ export const TimelineChart = ({
           setVerifiedDateRange(
             [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
           );
+        } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
+          setVerifiedDateRange(
+            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+          );
         } else {
-          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(29)).toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(30)).toISOString()]);
         }
       }
 
@@ -534,6 +533,10 @@ export const TimelineChart = ({
         start_date = new Date('1 May 2022 00:00 UTC');
         const dateRight = new Date((start_date.setMonth(new Date().getMonth() + r - 1)));
         if (retailerByMonth) {
+          setVerifiedDateRange(
+            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+          );
+        } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
           setVerifiedDateRange(
             [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
           );
