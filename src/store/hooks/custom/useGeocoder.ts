@@ -31,6 +31,17 @@ export const useGeocoder = (name: string, type: string) => {
     setInputTextHtml(e.currentTarget.value);
   };
 
+  const onChangeInputRemove = (): void => {
+    setTimeout(() => {
+      setInputText({
+        text: '',
+        shouldSearch: true,
+        center: [0, 0],
+      });
+      setInputTextHtml('');
+    }, 500);
+  };
+
   const getCurrentUserPosition = () => {
     navigator.geolocation.getCurrentPosition((positionNav) => {
       setUserPosition({ latitude: positionNav.coords.latitude, longitude: positionNav.coords.longitude });
@@ -124,6 +135,7 @@ export const useGeocoder = (name: string, type: string) => {
     position,
     keyDown,
     getCurrentUserPosition,
-    userCoordinates: userPosition
+    userCoordinates: userPosition,
+    onChangeInputRemove
   };
 };
