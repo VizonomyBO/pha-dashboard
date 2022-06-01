@@ -15,7 +15,8 @@ export const DropdownGeocoderMobile = () => {
     inputTextHtml,
     options,
     setGeocoderOptions,
-    onChangeInput
+    onChangeInput,
+    onChangeInputRemove
   } = useGeocoder(name, 'none');
   const { setShouldZoom } = useGeocoderDispatch();
   const getLabel = (region: string, isPostCode: boolean, opt: Result) => {
@@ -43,7 +44,10 @@ export const DropdownGeocoderMobile = () => {
           <button
             type="button"
             className="light"
-            onClick={() => setShouldZoom(true)}
+            onClick={() => {
+              setShouldZoom(true);
+              onChangeInputRemove();
+            }}
           >
             Search
           </button>
