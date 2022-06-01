@@ -15,9 +15,11 @@ import { FeedbackForm } from '../components/FeedbackForm';
 import { ModalRequestForm } from '../components/ModalRequestForm';
 import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
 import { Timeline } from '../components/timeline/Timeline';
+import { useWindowSize } from '../store/hooks/custom/useWindowSize';
 
 export const Home = () => {
   const [yStart, setYStart] = useState(0);
+  const { ref } = useWindowSize();
   const [yMove, setYMove] = useState(0);
   const [openLegend, setOpenLegend] = useState(false);
   const { dataRequest, scrolledToEnd } = useHome();
@@ -89,7 +91,7 @@ export const Home = () => {
           <DropdownGeocoderMobile />
         </div>
       </header>
-      <div className="pagecontainer">
+      <div className="pagecontainer" ref={ref}>
         <Navbar />
         <Header type="home" setOpenModal={setOpenModal} />
         <div className="location">

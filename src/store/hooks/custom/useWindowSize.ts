@@ -1,15 +1,20 @@
 import { useEffect, useState, useRef } from 'react';
+import { useScrollDispatch, useScrollState } from '../scrollHook';
 
 export const useWindowSize = () => {
+  const { widthScroll, heightScroll } = useScrollState();
   const ref = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-  const [height, setHeight] = useState(0);
+  const [width, setWidth] = useState(widthScroll);
+  const [height, setHeight] = useState(heightScroll);
+  const { setScrollWidth, setScrollHeight } = useScrollDispatch();
   useEffect(() => {
     const { current } = ref;
     const trigger = () => {
       if (current) {
         setWidth(current.clientWidth);
         setHeight(current.clientHeight);
+        setScrollWidth(current.clientWidth);
+        setScrollHeight(current.clientHeight);
       }
     };
 
@@ -26,7 +31,7 @@ export const useWindowSize = () => {
         resizer.disconnect();
       }
     };
-  }, [ref]);
+  }, [ref, setScrollWidth, setScrollHeight]);
   return {
     width,
     height,
