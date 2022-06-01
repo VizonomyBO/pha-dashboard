@@ -363,18 +363,26 @@ export const TimelineChart = ({
     });
 
     rect.on('click', function (event: CompletelyIntentionalAny) {
-      setModalView({
-        view: true,
-        x: event.layerX - barWidthExtent,
-        number: (event.layerX - barWidthExtent) / barWidthExtent
-      });
-      setTimeout(() => {
+      const information = data.filter(
+        (element) => element.month === MONTH_NAME[Math.trunc((event.layerX - barWidthExtent) / barWidthExtent)]
+      );
+      const informationSperStar = dataSuperStar.filter(
+        (element) => element.month === MONTH_NAME[Math.trunc((event.layerX - barWidthExtent) / barWidthExtent)]
+      );
+      if (information.length > 0 || informationSperStar.length > 0) {
         setModalView({
-          view: false,
-          x: event.x + barWidthExtent,
-          number: (event.x + barWidthExtent) / barWidthExtent
+          view: true,
+          x: event.layerX - barWidthExtent,
+          number: (event.layerX - barWidthExtent) / barWidthExtent
         });
-      }, 2000);
+        setTimeout(() => {
+          setModalView({
+            view: false,
+            x: event.x + barWidthExtent,
+            number: (event.x + barWidthExtent) / barWidthExtent
+          });
+        }, 2000);
+      }
     });
     function middleRectDrag(event: CompletelyIntentionalAny) {
       setPlay(false);
@@ -384,18 +392,26 @@ export const TimelineChart = ({
       rightPopup.raise().transition('2000').attr('opacity', 1);
       rightPopupLabel.raise().transition('2000').attr('opacity', 1);
       function modalView(event1: CompletelyIntentionalAny) {
-        setModalView({
-          view: true,
-          x: event1.x,
-          number: event1.x / barWidthExtent
-        });
-        setTimeout(() => {
+        const information = data.filter(
+          (element) => element.month === MONTH_NAME[Math.trunc(event1.x / barWidthExtent)]
+        );
+        const informationSperStar = dataSuperStar.filter(
+          (element) => element.month === MONTH_NAME[Math.trunc(event1.x / barWidthExtent)]
+        );
+        if (information.length > 0 || informationSperStar.length > 0) {
           setModalView({
-            view: false,
+            view: true,
             x: event1.x,
             number: event1.x / barWidthExtent
           });
-        }, 2000);
+          setTimeout(() => {
+            setModalView({
+              view: false,
+              x: event1.x,
+              number: event1.x / barWidthExtent
+            });
+          }, 2000);
+        }
       }
       svg.select('#betweenPaddlesRect').call(
         d3.drag().on('end', (event1) => modalView(event1))
