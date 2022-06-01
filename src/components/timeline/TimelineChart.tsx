@@ -110,6 +110,7 @@ export const TimelineChart = ({
       setXRight(newXRight);
       const x = Math.round(newXLeft / barWidthExtent);
       const y = Math.round(newXRight / barWidthExtent);
+      start_date = new Date('3 May 2022 00:00 UTC');
       const x1 = new Date((start_date.setMonth(4 + x)));
       start_date = new Date('3 May 2022 00:00 UTC');
       const y1 = new Date((start_date.setMonth(4 + y)));
