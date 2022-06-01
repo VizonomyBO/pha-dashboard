@@ -25,11 +25,12 @@ const width = 750 - margin.left - margin.right;
 const height = 200 - margin.top - margin.bottom;
 const barWidth = width / 19;
 const barWidthExtent = width / 20;
-let start_date = new Date('22 May 2022 00:00 UTC');
-export const end_date = new Date('23 December 2023 00:00 UTC');
+let start_date = new Date('3 May 2022 00:00 UTC');
+export const end_date = new Date('30 December 2023 00:00 UTC');
 
 const getDateByX = (newPosition: CompletelyIntentionalAny) => {
   const r = newPosition / barWidth;
+  start_date = new Date('3 May 2022 00:00 UTC');
   const date = new Date((start_date.setMonth(new Date().getMonth() + r)));
   return d3.timeFormat('%b %d')(date);
 };
@@ -75,7 +76,7 @@ export const TimelineChart = ({
       }
       return count;
     });
-    return count / 50;
+    return count / 100;
   };
   const DataByCounSuperStar = (i: number) => {
     let countAcum = 0;
@@ -96,7 +97,7 @@ export const TimelineChart = ({
       }
       return count;
     });
-    return count / 50;
+    return count / 100;
   };
   const [xLeft, setXLeft] = useState(0);
   const [xRight, setXRight] = useState(width);
@@ -121,14 +122,13 @@ export const TimelineChart = ({
       const x = Math.round(newXLeft / barWidthExtent);
       const y = Math.round(newXRight / barWidthExtent);
       const x1 = new Date((start_date.setMonth(4 + x)));
-      start_date = new Date('22 May 2022 00:00 UTC');
-      // eslint-disable-next-line no-nested-ternary
+      start_date = new Date('3 May 2022 00:00 UTC');
       const y1 = new Date((start_date.setMonth(4 + y)));
       console.log(x, y, x1, y1, xLeft, barWidthExtent, width, newXLeft);
       if (retailerByMonth) {
-        setVerifiedDateRange([x1.toISOString(), y1.toISOString()]);
+        setVerifiedDateRange([new Date(x1.setDate(1)).toISOString(), new Date(y1.setDate(30)).toISOString()]);
       } else {
-        setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), y1.toISOString()]);
+        setVerifiedDateRange([new Date('1 May 2022 00:00 UTC').toISOString(), new Date(y1.setDate(30)).toISOString()]);
       }
     }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -137,7 +137,7 @@ export const TimelineChart = ({
     const maxElements = 0;
     const dates: DatesTimelineType[] | CompletelyIntentionalAny = [];
     let moveBetweenPaddles = 0;
-    start_date = new Date('22 May 2022 00:00 UTC');
+    start_date = new Date('3 May 2022 00:00 UTC');
     const dateForDates = start_date;
     for (let i = 0; i <= 19; i += 1) {
       dates.push([
@@ -171,7 +171,7 @@ export const TimelineChart = ({
         .style('stroke', 'black')
         .style('opacity', 0.4)
     ));
-    [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100].forEach((p) => {
+    [0, 33, 66, 100].forEach((p) => {
       svg.append('line')
         .attr('x1', 0)
         .attr('x2', width)
@@ -189,13 +189,16 @@ export const TimelineChart = ({
           .tickSize(0)
           .tickFormat((d) => {
             const date = new Date(d);
-            return MONTH[date.getMonth()] + d3.format('d')(date.getUTCFullYear());
+            console.log(date, 'Date', d, x);
+            const year = date.getUTCFullYear().toString().replace('20', '');
+            return MONTH[date.getMonth()] + d3.format('d')(Number(year));
           })
       )
       .selectAll('text')
-      .attr('transform', 'translate(3,4)')
+      .attr('transform', 'translate(15,5)')
       .style('text-anchor', 'end')
-      .style('font-size', '6px')
+      .style('font-size', '9px')
+      .style('font-family', 'FuturaMedium, sans-serif')
       .style('fill', '#B4B6B8');
     svg.select('.domain').remove();
     const y = d3.scaleLinear()
@@ -434,15 +437,19 @@ export const TimelineChart = ({
         dotsright.transition('200').attr('x1', newPosition + w + offsetX1).attr('x2', newPosition + w + offsetX2);
         rect.classed('dragging', false);
         let r = ((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft) / barWidthExtent;
-        start_date = new Date('22 May 2022 00:00 UTC');
+        start_date = new Date('3 May 2022 00:00 UTC');
         const dateLeft = new Date((start_date.setMonth(start_date.getMonth() + r - 2)));
         r = ((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : newPosition + xRight) / barWidthExtent;
-        start_date = new Date('22 May 2022 00:00 UTC');
+        start_date = new Date('3 May 2022 00:00 UTC');
         const dateRight = new Date(start_date.setMonth(start_date.getMonth() + r));
         if (retailerByMonth) {
-          setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange(
+            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+          );
         } else {
-          setVerifiedDateRange([new Date('22 May 2022 00:00 UTC').toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange(
+            [new Date('1 May 2022 00:00 UTC').toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+          );
         }
         setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft);
         setXRight((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : (newPosition + xRight));
@@ -470,19 +477,21 @@ export const TimelineChart = ({
         const dots = isLeftPaddle ? dotsleft : dotsright;
         dots.attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
         let r = newPosition / barWidthExtent;
-        start_date = new Date('22 May 2022 00:00 UTC');
+        start_date = new Date('3 May 2022 00:00 UTC');
         const dateLeft = new Date((start_date.setMonth(new Date().getMonth() + r)));
         r = xRight / barWidthExtent;
         const dateRight = new Date((start_date.setMonth(new Date().getMonth() + r - 1)));
         if (retailerByMonth) {
-          setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange(
+            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+          );
         } else {
-          setVerifiedDateRange([START_DATE.toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(30)).toISOString()]);
         }
       }
 
       function ended() {
-        start_date = new Date('22 May 2022 00:00 UTC');
+        start_date = new Date('1 May 2022 00:00 UTC');
         let positions;
         let endedX = event.x;
         if (endedX < 0) endedX = 0;
@@ -521,15 +530,17 @@ export const TimelineChart = ({
         rightPaddle.transition(200).attr('x', maxi);
         dotsright.transition(200).attr('x1', maxi + offsetX1).attr('x2', maxi + offsetX2);
         let r = xLeft / barWidthExtent;
-        start_date = new Date('22 May 2022 00:00 UTC');
+        start_date = new Date('1 May 2022 00:00 UTC');
         const dateLeft = new Date((start_date.setMonth(new Date().getMonth() + r)));
         r = endedX / barWidthExtent;
-        start_date = new Date('22 May 2022 00:00 UTC');
+        start_date = new Date('1 May 2022 00:00 UTC');
         const dateRight = new Date((start_date.setMonth(new Date().getMonth() + r)));
         if (retailerByMonth) {
-          setVerifiedDateRange([dateLeft.toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange(
+            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+          );
         } else {
-          setVerifiedDateRange([START_DATE.toISOString(), dateRight.toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(30)).toISOString()]);
         }
       }
       if (paddleId === 'left') {

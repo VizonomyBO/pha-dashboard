@@ -1,4 +1,5 @@
 import { DataPhaDasboardMap } from '../../@types';
+import { MARKED_ELEMENT } from '../../constants';
 import {
   PHA_RETAILERS,
   OSM_RETAILERS,
@@ -23,6 +24,10 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
         color = COLORS.GREY;
         namemark = NAMESMARKERS.USDA_RETAILERS;
         break;
+    }
+    if (element.superstar_badge === MARKED_ELEMENT) {
+      color = COLORS.GOLDEN;
+      namemark = NAMESMARKERS.SUPERSTAR;
     }
     const picture:string[] = element.imagelinks ? element.imagelinks.split(',') : [];
     return (

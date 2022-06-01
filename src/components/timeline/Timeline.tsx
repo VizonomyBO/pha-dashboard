@@ -17,8 +17,8 @@ export const Timeline = () => {
   const blockClassNames = classNames({ headertext: true, active: !retailerByMonth, line: !retailerByMonth });
   const [modalView, setModalView] = useState<ModalTimeline>({ view: false, x: 0, number: 0 });
   const dateFormat = () => {
-    const date = new Date(new Date('22 May 2022 00:00 UTC').setMonth(
-      new Date('22 May 2022 00:00 UTC').getMonth() + modalView.number
+    const date = new Date(new Date('1 May 2022 00:00 UTC').setMonth(
+      new Date('1 May 2022 00:00 UTC').getMonth() + modalView.number
     ));
     return (
       <div className="modal-timeline-title">
@@ -95,7 +95,7 @@ export const Timeline = () => {
         </span>
       </button>
       <div className="header" id="retailerByMonth">
-        <div className="headerspan">
+        <div className="headerspan" style={{ paddingLeft: '30px' }}>
           <span
             className={byMonthClassNames}
             onClick={() => {
