@@ -118,10 +118,10 @@ export const TimelineChart = ({
         setVerifiedDateRange([new Date(x1.setDate(0)).toISOString(), new Date(y1.setDate(29)).toISOString()]);
       } else if (x1.getMonth() > y1.getMonth()) {
         setVerifiedDateRange(
-          [new Date(x1.setDate(1)).toISOString(), new Date(y1.setDate(30)).toISOString()]
+          [new Date(x1.setDate(0)).toISOString(), new Date(y1.setDate(29)).toISOString()]
         );
       } else {
-        setVerifiedDateRange([START_DATE.toISOString(), new Date(y1.setDate(30)).toISOString()]);
+        setVerifiedDateRange([START_DATE.toISOString(), new Date(y1.setDate(29)).toISOString()]);
       }
     }, 4000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -456,10 +456,10 @@ export const TimelineChart = ({
           );
         } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
           setVerifiedDateRange(
-            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+            [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
           );
         } else {
-          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(30)).toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(29)).toISOString()]);
         }
         setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft);
         setXRight((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : (newPosition + xRight));
@@ -497,10 +497,10 @@ export const TimelineChart = ({
           );
         } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
           setVerifiedDateRange(
-            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+            [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
           );
         } else {
-          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(30)).toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(29)).toISOString()]);
         }
       }
 
@@ -551,14 +551,14 @@ export const TimelineChart = ({
         const dateRight = new Date((start_date.setMonth(new Date().getMonth() + r - 1)));
         if (retailerByMonth) {
           setVerifiedDateRange(
-            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+            [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
           );
         } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
           setVerifiedDateRange(
-            [new Date(dateLeft.setDate(1)).toISOString(), new Date(dateRight.setDate(30)).toISOString()]
+            [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
           );
         } else {
-          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(30)).toISOString()]);
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(29)).toISOString()]);
         }
       }
       if (paddleId === 'left') {
