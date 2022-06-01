@@ -6,7 +6,8 @@ export interface TimelinesFrameType {
 
 export interface DataTimelineType {
   count: number,
-  month: string
+  month: string,
+  superstar_badge_count?: number,
 }
 
 export interface DatesTimelineType {

@@ -7,18 +7,20 @@ import {
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
 import { TimelineChart } from './TimelineChart';
+import { useScrollState } from '../../store/hooks/scrollHook';
 
 export const Timeline = () => {
   const [data, setData] = useState<DataTimelineType[]>([]);
   const [dataSuperStar, setDataSuperStar] = useState<DataTimelineType[]>([]);
   const [play, setPlay] = useState(false);
+  const { widthScroll } = useScrollState();
   const [retailerByMonth, setRetailerByMonth] = useState(true);
   const byMonthClassNames = classNames({ headertext: true, active: retailerByMonth, line: retailerByMonth });
   const blockClassNames = classNames({ headertext: true, active: !retailerByMonth, line: !retailerByMonth });
   const [modalView, setModalView] = useState<ModalTimeline>({ view: false, x: 0, number: 0 });
   const dateFormat = () => {
     const date = new Date(new Date('1 May 2022 00:00 UTC').setMonth(
-      new Date('1 May 2022 00:00 UTC').getMonth() + modalView.number
+      new Date('1 May 2022 00:00 UTC').getMonth() + modalView.number + 1
     ));
     return (
       <div className="modal-timeline-title">
@@ -51,13 +53,13 @@ export const Timeline = () => {
         (element) => element.month === MONTH_NAME[Math.trunc(modalView.number)]
       );
       return (
-        <span className="modal-timeline-text">{count ? count.count : 0}</span>
+        <span className="modal-timeline-text">{count ? count.superstar_badge_count : 0}</span>
       );
     }
     let count = 0;
     dataSuperStar.forEach((element, index) => {
       if (index <= Math.trunc(modalView.number)) {
-        count += element.count;
+        count += element.superstar_badge_count ?? 0;
       }
     });
     return (
@@ -119,7 +121,7 @@ export const Timeline = () => {
         </div>
       </div>
       {modalView.view && (
-        <div className="modal-timeline" style={{ left: `${modalView.x + 715}px` }}>
+        <div className="modal-timeline" style={{ left: `${modalView.x + (widthScroll / 3) + 50}px` }}>
           {dateFormat()}
           <div>
             <span className="modal-timeline-circulo" />
@@ -127,7 +129,7 @@ export const Timeline = () => {
             {returnNumberRetailer()}
           </div>
           <div>
-            <span className="modal-timeline-circulo" style={{ backgroundColor: '#F5B375' }} />
+            <span className="modal-timeline-circulo" style={{ backgroundColor: '#F0933A' }} />
             <span className="modal-timeline-text">Superstar Retailer</span>
             {returnNumberSuperstar()}
           </div>
