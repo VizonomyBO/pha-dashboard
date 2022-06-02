@@ -7,7 +7,7 @@ export const DEFAULT_VALUES_BUTTON = [{
   id: 'btn-02',
   name: 'Approved',
   class: 'light op2',
-  active: false
+  active: true
 }, {
   id: 'btn-03',
   name: 'Rejected',
@@ -29,7 +29,7 @@ export const DEFAULT_VALUES_BUTTON_INDIVIDUAL = [{
   id: 'btn-02',
   name: 'Approved',
   class: 'light op2',
-  active: false
+  active: true
 }, {
   id: 'btn-03',
   name: 'Rejected',

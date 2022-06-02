@@ -20,6 +20,7 @@ import { useRetailerFileReducer } from '../../store/hooks/retailerFilesHook';
 import { showDate, showText } from '../../utils/textFormatter';
 import { webRequest } from '../../utils/webRequest';
 import { DashboardTableFooter } from './DashboardTableFooter';
+import { GeomDashboard } from './GeomDashboard';
 
 export const DashboardTable = ({
   table,
@@ -240,8 +241,8 @@ export const DashboardTable = ({
                   <th className="wcol8 htit7" style={{ textAlign: 'center' }}>
                     Permanently Closed
                   </th>
-                  <th className="wcol8 htit7">
-                    Contact Information
+                  <th className="wcol9 htit7" style={{ textAlign: 'center' }}>
+                    View Links
                   </th>
                 </>
               )}
@@ -367,25 +368,42 @@ export const DashboardTable = ({
                       <div className="coninf" style={{ textAlign: 'center' }}>
                         <span
                           className="switch"
-                          style={{ textAlign: 'center', color: '#00BDE3' }}
-                          onClick={() => showModal(item, PHA_RETAILERS)}
-                          aria-hidden="true"
+                          style={{ textAlign: 'center' }}
                         >
                           {showText(item.permanently_closed === formConstants.CLOSED.YES ? 'Closed' : 'Open')}
                         </span>
                       </div>
                     </td>
-                    <td className="wcol8 bbtm">
-                      <div className="coninf">
-                        <label className="switch">
-                          <span className="cname txt2">{showText(item.contact_name)}</span>
-                          <span className="email txt2">{showText(item.contact_email)}</span>
-                        </label>
+                    <td className="wcol9 bbtm">
+                      <div className="coninf" style={{ textAlign: 'center' }}>
+                        <p>
+                          <span
+                            className="cname txt2 google-map"
+                            style={{ textAlign: 'center', color: '#00BDE3' }}
+                            onClick={() => showModal(item)}
+                            aria-hidden="true"
+                          >
+                            Individual Form&nbsp;
+                          </span>
+                          <span className="switch" style={{ textAlign: 'center' }}>|&nbsp;</span>
+                          <span
+                            className="cname txt2 google-map"
+                            style={{ textAlign: 'center', color: '#00BDE3' }}
+                            onClick={() => showModal(item, PHA_RETAILERS)}
+                            aria-hidden="true"
+                          >
+                            Retailer&nbsp;
+                          </span>
+                          <span className="switch" style={{ textAlign: 'center' }}>|&nbsp;</span>
+                          <GeomDashboard
+                            item={item}
+                          />
+                        </p>
                       </div>
                     </td>
                   </>
                 )}
-                <td className="wcol6 bbtm padright">
+                {/* <td className="wcol6 bbtm padright">
                   <button
                     type="button"
                     className="light view txt2"
@@ -393,7 +411,7 @@ export const DashboardTable = ({
                   >
                     View
                   </button>
-                </td>
+                </td> */}
               </tr>
             ))}
           </tbody>
