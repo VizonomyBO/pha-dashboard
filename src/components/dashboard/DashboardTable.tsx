@@ -375,26 +375,26 @@ export const DashboardTable = ({
                       </div>
                     </td>
                     <td className="wcol9 bbtm">
-                      <div className="coninf" style={{ textAlign: 'center' }}>
+                      <div className="coninf" style={{ textAlign: 'center', cursor: 'pointer' }}>
                         <p>
                           <span
                             className="cname txt2 google-map"
-                            style={{ textAlign: 'center', color: '#00BDE3' }}
+                            style={{ textAlign: 'center', cursor: 'pointer' }}
                             onClick={() => showModal(item)}
                             aria-hidden="true"
                           >
                             Individual Form&nbsp;
                           </span>
-                          <span className="switch" style={{ textAlign: 'center' }}>|&nbsp;</span>
+                          <span className="switch" style={{ textAlign: 'center', cursor: 'pointer' }}>|&nbsp;</span>
                           <span
                             className="cname txt2 google-map"
-                            style={{ textAlign: 'center', color: '#00BDE3' }}
+                            style={{ textAlign: 'center' }}
                             onClick={() => showModal(item, PHA_RETAILERS)}
                             aria-hidden="true"
                           >
                             Retailer&nbsp;
                           </span>
-                          <span className="switch" style={{ textAlign: 'center' }}>|&nbsp;</span>
+                          <span className="switch" style={{ textAlign: 'center', cursor: 'pointer' }}>|&nbsp;</span>
                           <GeomDashboard
                             item={item}
                           />
@@ -403,15 +403,6 @@ export const DashboardTable = ({
                     </td>
                   </>
                 )}
-                {/* <td className="wcol6 bbtm padright">
-                  <button
-                    type="button"
-                    className="light view txt2"
-                    onClick={() => showModal(item)}
-                  >
-                    View
-                  </button>
-                </td> */}
               </tr>
             ))}
           </tbody>
