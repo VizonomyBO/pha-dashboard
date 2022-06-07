@@ -256,56 +256,136 @@ export const DashboardTable = ({
           >
             {table.map((item: (PhaRetailer & PhaIndividual)) => (
               <tr style={{ height: '71px' }} key={item.individual_id || item.retailer_id}>
-                <td
-                  className="wcol1 bbtm padleft"
-                  style={params.status.includes(UNVALIDATED) ? { width: '34%', height: '71px' } : { height: '71px' }}
-                >
-                  <div className="option">
-                    <label className="chkwrap">
-                      <span className="store">
-                        <span className="market txt2">{showText(item.name)}</span>
-                        <span className="address txt1">{showText(item.address_1)}</span>
-                      </span>
-                      <input
-                        type="checkbox"
-                        onChange={(e) => handleSelected(e.target.checked, item)}
-                        checked={
-                          selectedElements.includes(item.individual_id ? item.individual_id : (item.retailer_id || ''))
+                {item.individual_id ? (
+                  <>
+                    <td
+                      className="wcol1 bbtm padleft"
+                      style={params.status.includes(UNVALIDATED) ? { width: '34%', height: '71px' }
+                        : { height: '71px' }}
+                    >
+                      <div className="option">
+                        <label className="chkwrap">
+                          <span className="store">
+                            <span className="market txt2">{showText(item.name)}</span>
+                            <span className="address txt1">{showText(item.address_1)}</span>
+                          </span>
+                          <input
+                            type="checkbox"
+                            onChange={(e) => handleSelected(e.target.checked, item)}
+                            checked={
+                              selectedElements.includes(item.individual_id ? item.individual_id
+                                : (item.retailer_id || ''))
+                            }
+                          />
+                          <span className="checkmark  ckeckmark-form" />
+                        </label>
+                      </div>
+                    </td>
+                    <td
+                      className="wcol2 bbtm"
+                    >
+                      <span className="txt1">{showText(item.zipcode)}</span>
+                    </td>
+                    <td
+                      className="wcol3 bbtm"
+                    >
+                      <span className="txt1">{showDate(item.submission_date ?? '')}</span>
+                    </td>
+                    <td className="wcol4 bbtm" style={!params.isRetailer ? { width: '10%' } : {}}>
+                      <div
+                        className={
+                          classNames('colorstatus', {
+                            blue: item.submission_status === ROW_STATUS.PENDING
+                            || params.status.includes(UNVALIDATED),
+                            green: item.submission_status === ROW_STATUS.APPROVED,
+                            red: item.submission_status === ROW_STATUS.REJECTED,
+                          })
                         }
-                      />
-                      <span className="checkmark  ckeckmark-form" />
-                    </label>
-                  </div>
-                </td>
-                <td
-                  className="wcol2 bbtm"
-                  style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
-                >
-                  <span className="txt1">{showText(item.zipcode)}</span>
-                </td>
-                <td
-                  className="wcol3 bbtm"
-                  style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
-                >
-                  <span className="txt1">{showDate(item.submission_date ?? '')}</span>
-                </td>
-                <td className="wcol4 bbtm" style={!params.isRetailer ? { width: '10%' } : {}}>
-                  <div
-                    className={
-                      classNames('colorstatus', {
-                        blue: item.submission_status === ROW_STATUS.PENDING
-                        || params.status.includes(UNVALIDATED),
-                        green: item.submission_status === ROW_STATUS.APPROVED,
-                        red: item.submission_status === ROW_STATUS.REJECTED,
-                      })
-                    }
-                  >
-                    <span className="dot" />
-                    <span className="txt2">
-                      {showText(params.status.includes(UNVALIDATED) ? ROW_STATUS.UNVALIDATED : item.submission_status)}
-                    </span>
-                  </div>
-                </td>
+                      >
+                        <span className="dot" />
+                        <span className="txt2">
+                          {item.submission_status}
+                        </span>
+                      </div>
+                    </td>
+                  </>
+                ) : (
+                  <>
+                    <td
+                      className="wcol1 bbtm padleft"
+                      style={params.status.includes(UNVALIDATED) ? { width: '34%', height: '71px' }
+                        : { height: '71px' }}
+                    >
+                      <div className="option">
+                        <label className="chkwrap">
+                          <span className="store">
+                            <span
+                              className="market txt2"
+                              aria-hidden="true"
+                              onClick={() => showModal(item)}
+                            >
+                              {showText(item.name)}
+                            </span>
+                            <span
+                              className="address txt1"
+                              aria-hidden="true"
+                              onClick={() => showModal(item)}
+                            >
+                              {showText(item.address_1)}
+                            </span>
+                          </span>
+                          <input
+                            type="checkbox"
+                            onChange={(e) => handleSelected(e.target.checked, item)}
+                            checked={
+                              selectedElements.includes(item.individual_id ? item.individual_id
+                                : (item.retailer_id || ''))
+                            }
+                          />
+                          <span className="checkmark  ckeckmark-form" />
+                        </label>
+                      </div>
+                    </td>
+                    <td
+                      className="wcol2 bbtm"
+                      aria-hidden="true"
+                      onClick={() => showModal(item)}
+                      style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
+                    >
+                      <span className="txt1">{showText(item.zipcode)}</span>
+                    </td>
+                    <td
+                      className="wcol3 bbtm"
+                      aria-hidden="true"
+                      onClick={() => showModal(item)}
+                      style={params.status.includes(UNVALIDATED) || !params.isRetailer ? { width: '10%' } : {}}
+                    >
+                      <span className="txt1">{showDate(item.submission_date ?? '')}</span>
+                    </td>
+                    <td
+                      className="wcol4 bbtm"
+                      aria-hidden="true"
+                      onClick={() => showModal(item)}
+                    >
+                      <div
+                        className={
+                          classNames('colorstatus', {
+                            blue: item.submission_status === ROW_STATUS.PENDING
+                            || params.status.includes(UNVALIDATED),
+                            green: item.submission_status === ROW_STATUS.APPROVED,
+                            red: item.submission_status === ROW_STATUS.REJECTED,
+                          })
+                        }
+                      >
+                        <span className="dot" />
+                        <span className="txt2">
+                          {showText(params.status.includes(UNVALIDATED) ? ROW_STATUS.UNVALIDATED
+                            : item.submission_status)}
+                        </span>
+                      </div>
+                    </td>
+                  </>
+                )}
                 {params.status.includes(UNVALIDATED) && (
                   <td className="wcol5 bbtm">
                     <div className="coninf">
@@ -324,7 +404,11 @@ export const DashboardTable = ({
                 )}
                 {!params.status.includes(UNVALIDATED) && params.isRetailer && (
                   <>
-                    <td className="wcol7 bbtm">
+                    <td
+                      className="wcol7 bbtm"
+                      aria-hidden="true"
+                      onClick={() => showModal(item)}
+                    >
                       <div className="coninf" style={{ textAlign: 'center' }}>
                         <label className="switch" style={{ textAlign: 'center' }}>
                           <Switch
@@ -342,7 +426,11 @@ export const DashboardTable = ({
                         </label>
                       </div>
                     </td>
-                    <td className="wcol7 bbtm">
+                    <td
+                      className="wcol7 bbtm"
+                      aria-hidden="true"
+                      onClick={() => showModal(item)}
+                    >
                       <div className="coninf">
                         <label className="switch" style={{ textAlign: 'center' }}>
                           <Switch
