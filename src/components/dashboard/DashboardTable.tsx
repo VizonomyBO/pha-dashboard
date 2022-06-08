@@ -223,8 +223,9 @@ export const DashboardTable = ({
                   <th className="wcol7 htit7" style={{ textAlign: 'center' }}>
                     Superstar
                     <Tooltip
-                      title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, s
-                      ed do eiusmod tempor incididunt ut labore."
+                      title="Where 51% or more of approved individual forms for a respective retailer have the
+                        following responses: &quot;fresh&quot; , &quot;acceptable&quot;, &quot;yes&quot;, and
+                        &quot;yes&quot;."
                       TransitionProps={{ timeout: 0 }}
                     >
                       <button type="button" className="light">
