@@ -444,6 +444,16 @@ button.light {
 	height: 40%;
 	content: url("../../public/images/ic-play.svg");
 }
+.icdown {
+	padding-left: 4%;
+	height: 40%;
+	content: url("../../public/images/ic-down.svg");
+}
+.icopen {
+	padding-left: 4%;
+	height: 40%;
+	content: url("../../public/images/ic-open.svg");
+}
 .icinfo {
 	display: block;
 	margin-left: 5px;
@@ -588,6 +598,41 @@ sup {
 	/* vertical-align: bottom; */
 	padding-left: 2px;
 }
+.timeline-close {
+	font-family: 'Inter-SemiBold', sans-serif;
+	position: absolute;
+	width: 752px;
+	height: 56px;
+	left: calc(50% - 752px/2);
+	bottom: 32px;
+
+	background: #FFFFFF;
+	box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.08);
+	border-radius: 20px;
+	z-index: 3;
+	.title {
+		position: absolute;
+		width: 700px;
+		height: 16px;
+		left: 20px;
+		top: 20px;
+		font-style: normal;
+		font-weight: 550;
+		font-size: 16px;
+		line-height: 16px;
+		color: #0E0F0F;
+		font-family: "FuturaMedium", sans-serif;
+	}
+}
+.open {
+	font-family: 'Inter-SemiBold', sans-serif;
+	position: absolute;
+	left: calc(50% - 140px/2 + 380px);
+	top: 15px;
+	border-radius: 20px;
+	border-width: 0px;
+	background-color: transparent;
+}
 .timeline {
 	font-family: 'Inter-SemiBold', sans-serif;
 	position: absolute;
@@ -680,12 +725,21 @@ sup {
 		}
 		
 	}
+	.close {
+		font-family: 'Inter-SemiBold', sans-serif;
+		position: absolute;
+		left: calc(50% - 140px/2 + 380px);
+		top: 20px;
+		border-radius: 20px;
+		border-width: 0px;
+		background-color: transparent;
+	}
 	.play {
 		font-family: 'Inter-SemiBold', sans-serif;
 		position: absolute;
 		width: 140px;
 		height: 30px;
-		left: calc(50% - 140px/2 + 270px);
+		left: calc(50% - 140px/2 + 230px);
 		top: 20px;
 		background: #00BCE4;
 		border-radius: 20px;

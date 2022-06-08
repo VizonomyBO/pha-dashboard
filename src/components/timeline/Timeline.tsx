@@ -19,6 +19,8 @@ export const Timeline = () => {
   const blockClassNames = classNames({ headertext: true, active: !retailerByMonth, line: !retailerByMonth });
   const [modalView, setModalView] = useState<ModalTimeline>({ view: false, x: 0, number: 0 });
   const dateCurrent = new Date();
+  const [open, setOpen] = useState(false);
+  const timelineOpen = classNames({ timeline: open, 'timeline-close': !open });
   const dateFormat = () => {
     const date = new Date(new Date('1 May 2022 00:00 UTC').setMonth(
       new Date('1 May 2022 00:00 UTC').getMonth() + modalView.number + 1
@@ -83,67 +85,91 @@ export const Timeline = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [retailerByMonth, setData, setDataSuperStar]);
   return (
-    <div className="timeline">
-      <span className="title">
-        Change in Validated and Superstar Retailers Over Time
-      </span>
-      <button
-        className="play"
-        type="button"
-        onClick={() => (setPlay(true))}
-      >
-        <span className="icplay" />
-        <span className="text">
-          Play timeline
-        </span>
-      </button>
-      <div className="header" id="retailerByMonth">
-        <div className="headerspan" style={{ paddingLeft: '30px' }}>
-          <span
-            className={byMonthClassNames}
-            onClick={() => {
-              setRetailerByMonth(true);
-            }}
-            aria-hidden="true"
-          >
-            View New Retailers by Month
+    <div className={timelineOpen}>
+      {open ? (
+        <>
+          <span className="title">
+            Change in Validated and Superstar Retailers Over Time
           </span>
-        </div>
-        <div className="headerspan" id="retailerCumulative">
-          <span
-            className={blockClassNames}
-            onClick={() => {
-              setRetailerByMonth(false);
-            }}
-            aria-hidden="true"
+          <button
+            className="play"
+            type="button"
+            onClick={() => (setPlay(true))}
           >
-            View Total Cumulative Retailers
+            <span className="icplay" />
+            <span className="text">
+              Play timeline
+            </span>
+          </button>
+          <button
+            className="close"
+            type="button"
+            onClick={() => (setOpen(false))}
+          >
+            <span className="icdown" />
+          </button>
+          <div className="header" id="retailerByMonth">
+            <div className="headerspan" style={{ paddingLeft: '30px' }}>
+              <span
+                className={byMonthClassNames}
+                onClick={() => {
+                  setRetailerByMonth(true);
+                }}
+                aria-hidden="true"
+              >
+                View New Retailers by Month
+              </span>
+            </div>
+            <div className="headerspan" id="retailerCumulative">
+              <span
+                className={blockClassNames}
+                onClick={() => {
+                  setRetailerByMonth(false);
+                }}
+                aria-hidden="true"
+              >
+                View Total Cumulative Retailers
+              </span>
+            </div>
+          </div>
+          {modalView.view && (
+            <div className="modal-timeline" style={{ left: `${modalView.x + (widthScroll / 3) + 50}px` }}>
+              {dateFormat()}
+              <div>
+                <span className="modal-timeline-circulo" />
+                <span className="modal-timeline-text">Validated Retailer</span>
+                {returnNumberRetailer()}
+              </div>
+              <div>
+                <span className="modal-timeline-circulo" style={{ backgroundColor: '#F0933A' }} />
+                <span className="modal-timeline-text">Superstar Retailer</span>
+                {returnNumberSuperstar()}
+              </div>
+            </div>
+          )}
+          <TimelineChart
+            setModalView={setModalView}
+            data={data}
+            play={play}
+            setPlay={setPlay}
+            dataSuperStar={dataSuperStar}
+            retailerByMonth={retailerByMonth}
+          />
+        </>
+      ) : (
+        <>
+          <span className="title">
+            Change in Validated and Superstar Retailers Over Time
           </span>
-        </div>
-      </div>
-      {modalView.view && (
-        <div className="modal-timeline" style={{ left: `${modalView.x + (widthScroll / 3) + 50}px` }}>
-          {dateFormat()}
-          <div>
-            <span className="modal-timeline-circulo" />
-            <span className="modal-timeline-text">Validated Retailer</span>
-            {returnNumberRetailer()}
-          </div>
-          <div>
-            <span className="modal-timeline-circulo" style={{ backgroundColor: '#F0933A' }} />
-            <span className="modal-timeline-text">Superstar Retailer</span>
-            {returnNumberSuperstar()}
-          </div>
-        </div>
+          <button
+            className="open"
+            type="button"
+            onClick={() => (setOpen(true))}
+          >
+            <span className="icopen" />
+          </button>
+        </>
       )}
-      <TimelineChart
-        setModalView={setModalView}
-        data={data}
-        play={play}
-        setPlay={setPlay}
-        dataSuperStar={dataSuperStar}
-        retailerByMonth={retailerByMonth}
-      />
     </div>
   );
 };
