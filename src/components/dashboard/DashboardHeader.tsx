@@ -183,6 +183,7 @@ export const DashboardHeader = ({
             <input
               className="generic"
               type="text"
+              placeholder="Search retailers"
               value={inputValue2}
               onChange={(e) => { setinputValue2(e.target.value); }}
               onKeyDown={(e) => (e.key === 'Enter' || !(e.target as HTMLInputElement).value)
