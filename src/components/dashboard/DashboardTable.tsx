@@ -108,10 +108,8 @@ export const DashboardTable = ({
         });
         setWicAccepted(retailer.wic_accepted);
         setSnapAccepted(retailer.snap_accepted);
-
         setImageLinks(retailer.imagelinks);
         setOwnerPhotos(retailer.owner_photo);
-
         setOtherQuestions(retailer.description);
         setAvailabilityOptions(retailer.availability.split(','));
         setQuality(retailer.quality);
@@ -222,8 +220,8 @@ export const DashboardTable = ({
                   <th className="wcol7 htit7">
                     Permanently Closed
                   </th>
-                  <th className="wcol7 htit7">
-                    Superstar Retailer
+                  <th className="wcol7 htit7" style={{ textAlign: 'center' }}>
+                    Superstar
                     <Tooltip
                       title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, s
                       ed do eiusmod tempor incididunt ut labore."
