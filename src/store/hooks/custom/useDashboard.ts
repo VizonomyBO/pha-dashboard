@@ -5,7 +5,7 @@ import {
   useEffect,
   useState
 } from 'react';
-import { PhaIndividual, PhaRetailer } from '../../../@types/database';
+import { Manual, PhaIndividual, PhaRetailer } from '../../../@types/database';
 import { UNVALIDATED } from '../../../constants/dashboard';
 import { defaultQueryParams } from '../../../constants/defaultValues';
 import { ENDPOINTS } from '../../../constants/url';
@@ -17,7 +17,7 @@ type setterBoolean = Dispatch<SetStateAction<boolean>>;
 
 export const useDashboard = (shouldReload: boolean, setShouldReload: setterBoolean) => {
   const [params, setParams] = useState(defaultQueryParams);
-  const [table, setTable] = useState<(PhaRetailer & PhaIndividual)[]>([]);
+  const [table, setTable] = useState<(PhaRetailer & PhaIndividual & Manual)[]>([]);
   const [totalElements, setTotalElements] = useState(0);
   const [selectedElements, setSelectedElements] = useState<Array<string>>([]);
   const { setLoaderState } = useLoaderDispatch();

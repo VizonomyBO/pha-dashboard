@@ -5,7 +5,12 @@ import {
   SetStateAction
 } from 'react';
 import { QueryParams } from '../../@types';
-import { CompletelyIntentionalAny, PhaIndividual, PhaRetailer } from '../../@types/database';
+import {
+  CompletelyIntentionalAny,
+  Manual,
+  PhaIndividual,
+  PhaRetailer
+} from '../../@types/database';
 import {
   TYPE_BUSINESS, SELECT_CATEGORY, TYPE_INDIVIDUAL_FORM, SUPERSTART_BADGE
 } from '../../constants';
@@ -217,10 +222,10 @@ export const DashboardTable = ({
               )}
               {!params.status.includes(UNVALIDATED) && params.isRetailer && (
                 <>
-                  <th className="wcol7 htit7">
+                  <th className="wcol8 htit7">
                     Permanently Closed
                   </th>
-                  <th className="wcol7 htit7" style={{ textAlign: 'center' }}>
+                  <th className="wcol10 htit7" style={{ textAlign: 'center' }}>
                     Superstar
                     <Tooltip
                       title="Lorem ipsum dolor sit amet, consectetur adipiscing elit, s
@@ -231,6 +236,9 @@ export const DashboardTable = ({
                         <span className="icinfo" />
                       </button>
                     </Tooltip>
+                  </th>
+                  <th className="wcol10 htit7" style={{ textAlign: 'center', paddingRight: '10px' }}>
+                    Manual
                   </th>
                 </>
               )}
@@ -252,7 +260,7 @@ export const DashboardTable = ({
               overflow: 'auto', height: '480px', overflowY: 'scroll', overflowX: 'hidden', display: 'contents'
             }}
           >
-            {table.map((item: (PhaRetailer & PhaIndividual)) => (
+            {table.map((item: (PhaRetailer & PhaIndividual & Manual)) => (
               <tr style={{ height: '71px' }} key={item.individual_id || item.retailer_id}>
                 {item.individual_id ? (
                   <>
@@ -445,6 +453,11 @@ export const DashboardTable = ({
                           />
                         </label>
                       </div>
+                    </td>
+                    <td
+                      className="wcol7 bbtm"
+                    >
+                      <span className="txt2">{ item.manual ? item.manual.toString() : 'false' }</span>
                     </td>
                   </>
                 )}
