@@ -132,7 +132,8 @@ export const INITIAL_GEOCODER_STATE = {
 
 export const INITIAL_MODAL_STATE = {
   open: false,
-  type: false
+  type: false,
+  save: false
 };
 
 export const INITIAL_CENTER_MARKER = {
