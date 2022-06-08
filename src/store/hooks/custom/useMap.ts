@@ -40,7 +40,9 @@ export const useMap = () => {
   const TRANSITION_DURATION = 1800;
   const TRANSITION_DURATION_GEOCODER = 500;
   const POSTCODE = 'postcode';
-  const ZOOM_POSTCODE = 15;
+  const PLACE = 'place';
+  const ZOOM_POSTCODE = 12;
+  const ZOOM_PLACE = 12;
   const ZOOM_NORMAL = 13.4;
   const { inputText, shouldZoom } = useGeocoderState() || {};
   const [currentViewstate, setCurrentViewState] = useState(deckDefaults.initialStateView);
@@ -125,6 +127,9 @@ export const useMap = () => {
       const getZoom = (placetypes?: string[]) => {
         if (placetypes && placetypes.includes(POSTCODE)) {
           return ZOOM_POSTCODE;
+        }
+        if (placetypes && placetypes.includes(PLACE)) {
+          return ZOOM_PLACE;
         }
         return ZOOM_NORMAL;
       };
