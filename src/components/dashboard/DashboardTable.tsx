@@ -411,7 +411,7 @@ export const DashboardTable = ({
                 {!params.status.includes(UNVALIDATED) && params.isRetailer && (
                   <>
                     <td
-                      className="wcol7 bbtm"
+                      className="wcol8 bbtm"
                       aria-hidden="true"
                       onClick={() => showModal(item)}
                     >
@@ -455,7 +455,7 @@ export const DashboardTable = ({
                       </div>
                     </td>
                     <td
-                      className="wcol7 bbtm"
+                      className="wcol7 bbtm colcentered"
                     >
                       <span className="txt2">{ item.manual ? 'Yes' : 'No' }</span>
                     </td>
@@ -463,7 +463,7 @@ export const DashboardTable = ({
                 )}
                 {!params.isRetailer && (
                   <>
-                    <td className="wcol8 bbtm">
+                    <td className="wcol8 bbtm colcentered">
                       <div className="coninf" style={{ textAlign: 'center' }}>
                         <span
                           className="switch"
