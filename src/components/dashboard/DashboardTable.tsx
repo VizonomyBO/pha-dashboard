@@ -457,7 +457,7 @@ export const DashboardTable = ({
                     <td
                       className="wcol7 bbtm"
                     >
-                      <span className="txt2">{ item.manual ? item.manual.toString() : 'false' }</span>
+                      <span className="txt2">{ item.manual ? 'Yes' : 'No' }</span>
                     </td>
                   </>
                 )}
