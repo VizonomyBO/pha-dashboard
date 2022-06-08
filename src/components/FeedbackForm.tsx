@@ -215,7 +215,12 @@ export const FeedbackForm = (
                       );
                     }}
                   >
-                    Yes
+                    <span>
+                      The retail location is&nbsp;
+                    </span>
+                    <span style={{ fontFamily: 'FuturaBold, sans-serif' }}>
+                      permanently closed
+                    </span>
                     <input
                       type="radio"
                       name="closed"
@@ -233,7 +238,12 @@ export const FeedbackForm = (
                     <span className="checkmark ckeckmark-form" />
                   </a>
                   <label className="chkwrap">
-                    No
+                    <span>
+                      The retail location is&nbsp;
+                    </span>
+                    <span style={{ fontFamily: 'FuturaBold, sans-serif' }}>
+                      open
+                    </span>
                     <input
                       type="radio"
                       name="closed"

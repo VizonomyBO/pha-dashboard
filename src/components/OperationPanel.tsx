@@ -22,7 +22,12 @@ export const OperationPanel = () => {
             <div className="group">
               <div className="option">
                 <label className="chkwrap">
-                  Yes - the retail location is permanently closed
+                  <span>
+                    The retail location is&nbsp;
+                  </span>
+                  <span style={{ fontFamily: 'FuturaBold, sans-serif' }}>
+                    permanently closed
+                  </span>
                   <input
                     type="checkbox"
                     value={currentOperation.open}
@@ -34,7 +39,12 @@ export const OperationPanel = () => {
               </div>
               <div className="option">
                 <label className="chkwrap">
-                  No - the retail location is open
+                  <span>
+                    The retail location is&nbsp;
+                  </span>
+                  <span style={{ fontFamily: 'FuturaBold, sans-serif' }}>
+                    open
+                  </span>
                   <input
                     type="checkbox"
                     value={currentOperation.open}
