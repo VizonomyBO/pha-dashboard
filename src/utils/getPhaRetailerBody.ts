@@ -40,6 +40,7 @@ export const getPhaRetailerBody = () => (businessDetails: BusinessDetailsInterfa
     twitter: businessDetails.twitter,
     email: businessDetails.email,
     instagram: businessDetails.instagram,
+    superstar_badge: 'No',
 
   };
   return (contactDetails: ContactDetailsInterface) => {

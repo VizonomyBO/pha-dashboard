@@ -146,7 +146,7 @@ export const DashboardHeader = ({
             type="button"
             onClick={() => {
               resetBusiness();
-              setModal({ type: false, open: true });
+              setModal({ type: false, open: true, save: true });
             }}
           >
             <span className="icplus" />

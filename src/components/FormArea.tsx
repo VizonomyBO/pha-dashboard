@@ -35,7 +35,7 @@ export const FormArea = ({
   const { resetBusiness } = useMarketplaceDispatch();
   const [formClass] = useState(CLASSES_BY_FORM[activeTab]);
   const { setModal } = useModalDispatch();
-  const { type } = useModalState();
+  const { type, save } = useModalState();
   const clouseModal = (
     typeModal: boolean,
     e: React.MouseEvent<HTMLDivElement, MouseEvent> | React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -138,8 +138,15 @@ export const FormArea = ({
           </button>
         </div>
       )}
+      {save && (
+        <div className="aaction">
+          <button className="light" type="button" onClick={clickProceed}>
+            {activeTab === CONTACT_DETAILS ? 'Submit' : 'Proceed'}
+          </button>
+        </div>
+      )}
       {
-        !type && isModal && (
+        !type && isModal && save === false && (
           <div className="aaction">
             <button
               className="light"

@@ -148,7 +148,8 @@ export interface QueriesInterface {
 
 export interface ModalInderface {
   open: boolean,
-  type: boolean
+  type: boolean,
+  save?: boolean,
 }
 
 export interface TabStateInterface {

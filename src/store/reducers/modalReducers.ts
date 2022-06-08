@@ -13,7 +13,8 @@ const modalReducer = (state: ModalInderface = defaultState, action: AnyAction = 
       return {
         ...state,
         open: action.payload.open,
-        type: action.payload.type
+        type: action.payload.type,
+        save: action.payload.save,
       };
     case TYPES.INIT:
       return INITIAL_MODAL_STATE;
