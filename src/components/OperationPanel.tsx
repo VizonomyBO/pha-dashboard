@@ -25,9 +25,9 @@ export const OperationPanel = () => {
                   <span>
                     The retail location is&nbsp;
                   </span>
-                  <span style={{ fontFamily: 'FuturaBold, sans-serif' }}>
+                  <b>
                     permanently closed
-                  </span>
+                  </b>
                   <input
                     type="checkbox"
                     value={currentOperation.open}
@@ -42,9 +42,9 @@ export const OperationPanel = () => {
                   <span>
                     The retail location is&nbsp;
                   </span>
-                  <span style={{ fontFamily: 'FuturaBold, sans-serif' }}>
+                  <b>
                     open
-                  </span>
+                  </b>
                   <input
                     type="checkbox"
                     value={currentOperation.open}
