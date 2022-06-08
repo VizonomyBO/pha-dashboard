@@ -87,6 +87,9 @@ export interface PhaIndividual {
   files: Blob[]
 }
 
+export interface Manual {
+  manual?: string
+}
 export interface InputTextInterface {
   text: string,
   shouldSearch: boolean,
