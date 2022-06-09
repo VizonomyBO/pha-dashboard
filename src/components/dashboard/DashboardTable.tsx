@@ -458,7 +458,12 @@ export const DashboardTable = ({
                     <td
                       className="wcol7 bbtm"
                     >
-                      <span className="txt2">{ item.manual ? item.manual.toString() : 'false' }</span>
+                      <span
+                        className="txt2"
+                        style={{ textTransform: 'capitalize' }}
+                      >
+                        { item.manual ? item.manual.toString() : 'false' }
+                      </span>
                     </td>
                   </>
                 )}
