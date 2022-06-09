@@ -23,12 +23,16 @@ export const useGeocoder = (name: string, type: string) => {
   );
   const [userPosition, setUserPosition] = useState({ latitude: 0, longitude: 0 });
   const onChangeInput = (e: React.FormEvent<HTMLInputElement>): void => {
-    setInputText({
-      text: e.currentTarget.value,
-      shouldSearch: true,
-      center: [0, 0],
-    });
-    setInputTextHtml(e.currentTarget.value);
+    const userAgent = navigator.userAgent || navigator.vendor;
+    const M = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if (M[1] !== 'Safari' && !userAgent.match(/iPhone|iPad|iPod/i)) {
+      setInputText({
+        text: e.currentTarget.value,
+        shouldSearch: true,
+        center: [0, 0],
+      });
+      setInputTextHtml(e.currentTarget.value);
+    }
   };
 
   const onChangeInputRemove = (): void => {
@@ -85,6 +89,71 @@ export const useGeocoder = (name: string, type: string) => {
   }, [inputText]);
 
   const keyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
+    const userAgent = navigator.userAgent || navigator.vendor;
+    const M = userAgent.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
+    if (M[1] === 'Safari' || userAgent.match(/iPhone|iPad|iPod/i)) {
+      e.stopPropagation();
+      if (e.code === 'Space') {
+        setInputText({
+          text: `${inputText.text} `,
+          shouldSearch: true,
+          center: [0, 0],
+        });
+        setInputTextHtml(`${inputText.text} `);
+      }
+      if (e.code === 'Backspace') {
+        setInputText({
+          text: inputText.text.length === 1 ? '' : inputText.text.substr(0, inputText.text.length - 1),
+          shouldSearch: true,
+          center: [0, 0],
+        });
+        setInputTextHtml(inputText.text.length === 1 ? '' : inputText.text.substr(0, inputText.text.length - 1));
+      }
+      if (e.key.length === 1) {
+        setInputText({
+          text: inputText.text + e.key,
+          shouldSearch: true,
+          center: [0, 0],
+        });
+        setInputTextHtml(inputText.text + e.key);
+      }
+      if (e.code === 'ArrowUp') {
+        setPosition(position === 0 ? position : position - 1);
+      }
+      if (e.code === 'ArrowDown') {
+        setPosition(options.length - 1 === position ? position : position + 1);
+      }
+      if (e.code === 'Enter') {
+        const { region, regionShortcode } = findRegion(options[position]);
+        const addressText = regionShortcode === ''
+          ? options[position].text : `${options[position].text}, ${regionShortcode}`;
+        setInputText({
+          text: options[position].place_name,
+          shouldSearch: false,
+          center: options[position].center,
+          bbox: options[position].bbox || [],
+          placetype: options[position]?.place_type || []
+        });
+        setInputTextHtml(region === '' ? options[position].text : `${options[position].text}, ${region}`);
+        setGeocoderOptions([]);
+        setBusinessDetails(TYPE_BUSINESS.LONGITUDE, options[position].center[0]);
+        setBusinessDetails(TYPE_BUSINESS.LATITUDE, options[position].center[1]);
+        setBusinessDetails(type, addressText);
+        if (options[position].place_type.includes(POINTS_OF_INTEREST)) {
+          const { zipcode, city, state } = getAddressFields(options[position].place_name);
+          setBusinessDetails(TYPE_BUSINESS.CITY, city);
+          setBusinessDetails(TYPE_BUSINESS.STATE, state);
+          setBusinessDetails(TYPE_BUSINESS.ZIPCODE, zipcode);
+        } else {
+          setBusinessDetails(TYPE_BUSINESS.CITY, '');
+          setBusinessDetails(TYPE_BUSINESS.ZIPCODE, '');
+          setBusinessDetails(TYPE_BUSINESS.STATE, region);
+        }
+        if (inputText.center[0] !== 0 && inputText.center[1] !== 0) {
+          setShouldZoom(true);
+        }
+      }
+    }
     if (e.code === 'ArrowUp') {
       setPosition(position === 0 ? position : position - 1);
     }
