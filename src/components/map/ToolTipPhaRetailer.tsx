@@ -38,6 +38,12 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
               bottom: '40px',
             }
           }}
+          indicatorIconButtonProps={{
+            style: {
+              zIndex: '2',
+              bottom: '40px',
+            }
+          }}
         >
           {
             getImageToDisplayList(objectTypified).map((item, i) => (

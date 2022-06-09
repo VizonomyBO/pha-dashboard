@@ -148,7 +148,6 @@ export const theme = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          backgroundColor: '#00bde387!important',
           width: '1em',
           height: '1em',
         }
