@@ -12,6 +12,21 @@ export const useTooltip = () => {
     }
     return DEFAULT_IMAGE;
   };
+  const getImageToDisplayList = (objectTypified: PropertiesLayer) => {
+    if (objectTypified.properties?.imagelinks) {
+      const images = objectTypified.properties.imagelinks.split(',');
+      const returnImages = [];
+      for (let i = 0; i < images.length; i += 1) {
+        if (images[i].includes(GOOGLE_STORAGE)) {
+          returnImages.push(images[i]);
+        }
+      }
+      console.log(returnImages, 'returnImages');
+      return returnImages;
+    }
+    console.log(DEFAULT_IMAGE, 'DEFAULT_IMAGE');
+    return [DEFAULT_IMAGE];
+  };
   const getAddress = (objectTypifiedAddress: PropertiesLayer) => {
     if (objectTypifiedAddress.properties?.address) {
       return `${objectTypifiedAddress.properties?.address}`;
@@ -46,6 +61,7 @@ export const useTooltip = () => {
     getImageToDisplay,
     getAddress,
     getPostCode,
-    getName
+    getName,
+    getImageToDisplayList
   };
 };

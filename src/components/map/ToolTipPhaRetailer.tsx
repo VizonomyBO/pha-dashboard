@@ -1,4 +1,6 @@
+import { Paper } from '@mui/material';
 import { useRef } from 'react';
+import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
 import { useTooltip } from '../../store/hooks/custom/useTooltip';
@@ -6,7 +8,7 @@ import { BADGES } from '../../constants';
 import { formatPhone } from '../../utils/textFormatter';
 
 export const ToolTipPhaRetailer = (data: TooltipProps) => {
-  const { getImageToDisplay } = useTooltip();
+  const { getImageToDisplayList } = useTooltip();
   const {
     objectTypified,
     badges,
@@ -26,10 +28,30 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
       ref={popupRef}
     >
       <figure className="picture">
-        <img
-          src={getImageToDisplay(objectTypified)}
-          alt=""
-        />
+        <Carousel
+          animation="fade"
+          navButtonsAlwaysVisible
+          autoPlay={false}
+          activeIndicatorIconButtonProps={{
+            style: {
+              zIndex: '2',
+              bottom: '40px',
+            }
+          }}
+        >
+          {
+            getImageToDisplayList(objectTypified).map((item, i) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <Paper key={`picture${i}`} className="HeightItem">
+                <img
+                  src={item}
+                  alt=""
+                  className="img"
+                />
+              </Paper>
+            ))
+          }
+        </Carousel>
       </figure>
       <div className="detailcard detail-pha">
         <div className="store store-bottom">{objectTypified?.properties?.name}</div>
