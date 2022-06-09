@@ -84,13 +84,13 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           marginTop: '17px',
-          backgroundColor: 'white !important',
-          borderRadius: '25px !important',
-          width: '264px !important',
+          backgroundColor: 'white',
+          borderRadius: '25px',
+          width: '264px',
           height: '170px',
           paddingBottom: '10px',
           border: '15px solid white',
-          paddingRight: '0px !important',
+          paddingRight: '0px',
           '::-webkit-scrollbar': {
             '-webkit-appearance': 'none',
             width: '6px',
@@ -144,6 +144,21 @@ export const theme = createTheme({
           fontSize: '14px'
         },
       }
-    }
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          zIndex: '2',
+          bottom: '40px',
+        }
+      }
+    },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          backgroundColor: '#ffffffbf !important',
+        }
+      }
+    },
   }
 });
