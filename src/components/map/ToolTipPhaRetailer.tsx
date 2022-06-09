@@ -28,7 +28,17 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
       ref={popupRef}
     >
       <figure className="picture">
-        <Carousel animation="fade" navButtonsAlwaysVisible autoPlay={false}>
+        <Carousel
+          animation="fade"
+          navButtonsAlwaysVisible
+          autoPlay={false}
+          activeIndicatorIconButtonProps={{
+            style: {
+              zIndex: '2',
+              bottom: '40px',
+            }
+          }}
+        >
           {
             getImageToDisplayList(objectTypified).map((item, i) => (
               // eslint-disable-next-line react/no-array-index-key

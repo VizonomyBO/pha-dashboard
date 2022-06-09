@@ -145,18 +145,10 @@ export const theme = createTheme({
         },
       }
     },
-    MuiButtonBase: {
-      styleOverrides: {
-        root: {
-          zIndex: '2',
-          bottom: '40px',
-        }
-      }
-    },
     MuiIconButton: {
       styleOverrides: {
         root: {
-          backgroundColor: '#bfc4c5ab !important',
+          backgroundColor: '#00bde387!important',
           width: '1em',
           height: '1em',
         }
