@@ -21,10 +21,8 @@ export const useTooltip = () => {
           returnImages.push(images[i]);
         }
       }
-      console.log(returnImages, 'returnImages');
       return returnImages;
     }
-    console.log(DEFAULT_IMAGE, 'DEFAULT_IMAGE');
     return [DEFAULT_IMAGE];
   };
   const getAddress = (objectTypifiedAddress: PropertiesLayer) => {
