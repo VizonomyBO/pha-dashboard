@@ -289,12 +289,12 @@ export const DashboardTable = ({
                       </div>
                     </td>
                     <td
-                      className="wcol2 bbtm"
+                      className="wcol10 bbtm"
                     >
                       <span className="txt1">{showText(item.zipcode)}</span>
                     </td>
                     <td
-                      className="wcol3 bbtm"
+                      className="wcol10 bbtm"
                     >
                       <span className="txt1">{showDate(item.submission_date ?? '')}</span>
                     </td>
