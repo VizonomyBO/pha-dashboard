@@ -1,5 +1,8 @@
 import { PropertiesLayer } from '../../../@types';
 import { DEFAULT_IMAGE, GOOGLE_STORAGE } from '../../../constants';
+import { ENDPOINTS } from '../../../constants/url';
+import { isEmpty } from '../../../utils/validation';
+import { webRequest } from '../../../utils/webRequest';
 
 export const useTooltip = () => {
   const getImageToDisplay = (objectTypified: PropertiesLayer) => {
@@ -13,16 +16,38 @@ export const useTooltip = () => {
     return DEFAULT_IMAGE;
   };
   const getImageToDisplayList = (objectTypified: PropertiesLayer) => {
+    const returnImages: any[] | PromiseLike<any[]> = [];
     if (objectTypified.properties?.imagelinks) {
       const images = objectTypified.properties.imagelinks.split(',');
-      const returnImages = [];
       for (let i = 0; i < images.length; i += 1) {
         if (images[i].includes(GOOGLE_STORAGE)) {
           returnImages.push(images[i]);
         }
       }
+      webRequest.get(ENDPOINTS.IMAGE_INDIVIDUAL(objectTypified.properties?.retailer_id)).then((res) => res.json())
+        .then((res) => {
+          if (res.data > 0) {
+            res.data.forEach((value: string) => {
+              if (isEmpty(value)) {
+                returnImages.push(value);
+              }
+            });
+          }
+        });
       return returnImages;
     }
+    webRequest.get(ENDPOINTS.IMAGE_INDIVIDUAL(objectTypified.properties?.retailer_id)).then((res) => res.json())
+      .then((res) => {
+        if (res.data > 0) {
+          res.data.forEach((value: string) => {
+            if (isEmpty(value)) {
+              returnImages.push(value);
+            }
+          });
+          return returnImages;
+        }
+        return [DEFAULT_IMAGE];
+      });
     return [DEFAULT_IMAGE];
   };
   const getAddress = (objectTypifiedAddress: PropertiesLayer) => {
