@@ -1,4 +1,5 @@
 import { PropertiesLayer } from '../../../@types';
+import { CompletelyIntentionalAny } from '../../../@types/database';
 import { DEFAULT_IMAGE, GOOGLE_STORAGE } from '../../../constants';
 import { ENDPOINTS } from '../../../constants/url';
 import { isEmpty } from '../../../utils/validation';
@@ -16,7 +17,7 @@ export const useTooltip = () => {
     return DEFAULT_IMAGE;
   };
   const getImageToDisplayList = (objectTypified: PropertiesLayer) => {
-    const returnImages: any[] | PromiseLike<any[]> = [];
+    const returnImages: CompletelyIntentionalAny[] | PromiseLike<CompletelyIntentionalAny[]> = [];
     if (objectTypified.properties?.imagelinks) {
       const images = objectTypified.properties.imagelinks.split(',');
       for (let i = 0; i < images.length; i += 1) {
