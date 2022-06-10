@@ -72,6 +72,15 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
                 }}
               />
             ))}
+            {objectTypified?.properties?.superstar_badge && objectTypified.properties?.superstar_badge === 'Yes' && (
+              <span
+                key="meets_need"
+                className="kind"
+                style={{
+                  content: `url("${BADGES.meets_need.image}")`
+                }}
+              />
+            )}
           </div>
         )}
         <a
