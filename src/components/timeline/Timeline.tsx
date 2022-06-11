@@ -55,14 +55,18 @@ export const Timeline = () => {
         (element) => element.month === MONTH_NAME[Math.trunc(modalView.number)]
       );
       return (
-        <span className="modal-timeline-text">{count ? count.superstar_badge_count : 0}</span>
+        <span className="modal-timeline-text">
+          {count?.superstar_badge_count && count.no_superstar_badge_count
+            ? count.superstar_badge_count - count.no_superstar_badge_count : 0}
+        </span>
       );
     }
     let count = 0;
     for (let index1 = 0; index1 <= modalView.number && modalView.number < dateCurrent.getMonth() - 3; index1 += 1) {
       const information = dataSuperStar.filter((element) => element.month === MONTH_NAME[index1]);
       if (information[0]) {
-        count += information[0].superstar_badge_count ? information[0].superstar_badge_count : 0;
+        count += information[0].superstar_badge_count && information[0].no_superstar_badge_count
+          ? (information[0].superstar_badge_count - information[0].no_superstar_badge_count) : 0;
       }
     }
     return (

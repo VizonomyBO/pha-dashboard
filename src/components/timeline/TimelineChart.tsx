@@ -77,13 +77,15 @@ export const TimelineChart = ({
       for (let index1 = 0; index1 <= i && i < dateCurrent.getMonth() - 3; index1 += 1) {
         const information = dataSuperStar.filter((element) => element.month === MONTH_NAME[index1]);
         if (information[0]) {
-          count += information[0].superstar_badge_count ? information[0].superstar_badge_count : 0;
+          count += information[0].superstar_badge_count && information[0].no_superstar_badge_count
+            ? (information[0].superstar_badge_count - information[0].no_superstar_badge_count) : 0;
         }
       }
     } else {
       const information = dataSuperStar.filter((element) => element.month === MONTH_NAME[i]);
       if (information[0]) {
-        count += information[0].superstar_badge_count ? information[0].superstar_badge_count : 0;
+        count += information[0].superstar_badge_count && information[0].no_superstar_badge_count
+          ? (information[0].superstar_badge_count - information[0].no_superstar_badge_count) : 0;
       }
     }
     return count / 100;
