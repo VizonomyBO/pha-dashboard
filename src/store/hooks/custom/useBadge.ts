@@ -32,9 +32,6 @@ export const useBadge = (id: string | undefined) => {
     if (hasBadge(percentages.local_percentage)) {
       temporalBadges.push(PERCENTAGE_KEYS.LOCAL);
     }
-    if (hasBadge(percentages.meets_need_percentage)) {
-      temporalBadges.push(PERCENTAGE_KEYS.MEETS_NEED);
-    }
     setBadges(temporalBadges);
   }, [percentages]);
 

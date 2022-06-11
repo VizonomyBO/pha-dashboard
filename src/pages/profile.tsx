@@ -234,6 +234,9 @@ export const Profile = () => {
                 {
                   badges.map((badge) => (<Badge key={badge} {...BADGES[badge]} />))
                 }
+                {profile?.superstar_badge && profile.superstar_badge === 'Yes' && (
+                  <Badge key="meets_need" {...BADGES.meets_need} />
+                )}
               </div>
               <MapProfile {...profile} />
               <div className="txtbt">About our location</div>
