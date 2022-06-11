@@ -1,20 +1,22 @@
+/* eslint-disable array-callback-return */
 import { Paper } from '@mui/material';
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Carousel from 'react-material-ui-carousel';
 import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
 import { useTooltip } from '../../store/hooks/custom/useTooltip';
-import { BADGES } from '../../constants';
+import { BADGES, DEFAULT_IMAGE, MAX_ELEMENTS } from '../../constants';
 import { formatPhone } from '../../utils/textFormatter';
 
 export const ToolTipPhaRetailer = (data: TooltipProps) => {
-  const { getImageToDisplayList } = useTooltip();
+  const [returnImg, setReurnImg] = useState<string[]>();
   const {
     objectTypified,
     badges,
     setVisibleFeedback,
     setCurrentRetailerId
   } = data;
+  const { getImageToDisplayList, imageIndividual } = useTooltip(objectTypified);
   const openIndividualForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     setVisibleFeedback(true);
@@ -22,6 +24,19 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
   };
   const popupRef = useRef<HTMLDivElement>(null);
   const address = objectTypified?.properties?.address_1?.split(',');
+  useEffect(() => {
+    if (objectTypified) {
+      const imgReturn = getImageToDisplayList(objectTypified).concat(imageIndividual);
+      if (imgReturn.length === 0) {
+        imgReturn.push(DEFAULT_IMAGE);
+      }
+      if (imgReturn.length > MAX_ELEMENTS) {
+        imgReturn.length = MAX_ELEMENTS;
+      }
+      setReurnImg(imgReturn);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [imageIndividual]);
   return (
     <div
       className="modal"
@@ -46,7 +61,7 @@ export const ToolTipPhaRetailer = (data: TooltipProps) => {
           }}
         >
           {
-            getImageToDisplayList(objectTypified).map((item, i) => (
+            returnImg?.map((item, i) => (
               // eslint-disable-next-line react/no-array-index-key
               <Paper key={`picture${i}`} className="HeightItem">
                 <img

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { PropertiesLayer } from '../../../@types';
 import { CompletelyIntentionalAny } from '../../../@types/database';
 import { DEFAULT_IMAGE, GOOGLE_STORAGE } from '../../../constants';
@@ -5,7 +6,24 @@ import { ENDPOINTS } from '../../../constants/url';
 import { isEmpty } from '../../../utils/validation';
 import { webRequest } from '../../../utils/webRequest';
 
-export const useTooltip = () => {
+export const useTooltip = (objectTypifiedd?: PropertiesLayer) => {
+  const [imageIndividual, setImageIndividual] = useState<string[]>();
+  useEffect(() => {
+    if (objectTypifiedd) {
+      const returnimg: string[] = [];
+      webRequest.get(ENDPOINTS.IMAGE_INDIVIDUAL(objectTypifiedd.properties?.retailer_id)).then((res) => res.json())
+        .then((res) => {
+          if (res.data.length > 0) {
+            res.data.forEach((value: string) => {
+              if (isEmpty(value)) {
+                returnimg.push(value);
+              }
+            });
+          }
+          setImageIndividual(returnimg);
+        });
+    }
+  }, [objectTypifiedd]);
   const getImageToDisplay = (objectTypified: PropertiesLayer) => {
     if (objectTypified.properties?.imagelinks) {
       const images = objectTypified.properties.imagelinks.split(',');
@@ -17,39 +35,16 @@ export const useTooltip = () => {
     return DEFAULT_IMAGE;
   };
   const getImageToDisplayList = (objectTypified: PropertiesLayer) => {
-    const returnImages: CompletelyIntentionalAny[] | PromiseLike<CompletelyIntentionalAny[]> = [];
+    const returnImg: CompletelyIntentionalAny[] | PromiseLike<CompletelyIntentionalAny[]> = [];
     if (objectTypified.properties?.imagelinks) {
       const images = objectTypified.properties.imagelinks.split(',');
       for (let i = 0; i < images.length; i += 1) {
         if (images[i].includes(GOOGLE_STORAGE)) {
-          returnImages.push(images[i]);
+          returnImg.push(images[i]);
         }
       }
-      webRequest.get(ENDPOINTS.IMAGE_INDIVIDUAL(objectTypified.properties?.retailer_id)).then((res) => res.json())
-        .then((res) => {
-          if (res.data > 0) {
-            res.data.forEach((value: string) => {
-              if (isEmpty(value)) {
-                returnImages.push(value);
-              }
-            });
-          }
-        });
-      return returnImages;
     }
-    webRequest.get(ENDPOINTS.IMAGE_INDIVIDUAL(objectTypified.properties?.retailer_id)).then((res) => res.json())
-      .then((res) => {
-        if (res.data > 0) {
-          res.data.forEach((value: string) => {
-            if (isEmpty(value)) {
-              returnImages.push(value);
-            }
-          });
-          return returnImages;
-        }
-        return [DEFAULT_IMAGE];
-      });
-    return [DEFAULT_IMAGE];
+    return returnImg;
   };
   const getAddress = (objectTypifiedAddress: PropertiesLayer) => {
     if (objectTypifiedAddress.properties?.address) {
@@ -86,6 +81,7 @@ export const useTooltip = () => {
     getAddress,
     getPostCode,
     getName,
-    getImageToDisplayList
+    getImageToDisplayList,
+    imageIndividual
   };
 };
