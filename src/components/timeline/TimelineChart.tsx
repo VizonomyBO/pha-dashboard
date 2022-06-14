@@ -125,7 +125,7 @@ export const TimelineChart = ({
       } else {
         setVerifiedDateRange([START_DATE.toISOString(), new Date(y1.setDate(29)).toISOString()]);
       }
-    }, 4000);
+    }, 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [play, xLeft]);
   useEffect(() => {

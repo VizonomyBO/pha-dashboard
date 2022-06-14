@@ -112,7 +112,7 @@ export const INITIAL_CATEGORIES = {
   zoomCenter: true,
   mapViewFilter: false,
   superstarDateRange: [],
-  verifiedDateRange: []
+  verifiedDateRange: ['2022-05-01T00:00:00.000Z', '2023-12-23T00:00:00.000Z']
 };
 
 export const INITIAL_GEOCODER_STATE = {
