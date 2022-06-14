@@ -33,8 +33,8 @@ export const ENDPOINTS = {
     latitude: number,
     longitude: number
   ) => `https://api.mapbox.com/geocoding/v5/mapbox.places/${longitude},${latitude}.json?access_token=${MAPBOX_KEY}`,
-  TIME_LINE_RETAILER: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-retailers-by-month?dateRange=${dateStart}%20-%20${dateEnd}`,
-  TIME_LINE_RETAILER_SUPERSTAR: (dateStart: string, dateEnd: string) => `${URL}/${CARTODB}/count-superstar-by-month?dateRange=${dateStart}%20-%20${dateEnd}`
+  TIME_LINE_RETAILER: `${URL}/${CARTODB}/count-retailers-by-month`,
+  TIME_LINE_RETAILER_SUPERSTAR: `${URL}/${CARTODB}/count-superstar-by-month`
 };
 
 export const CARTO_API = 'https://gcp-us-east1.api.carto.com';
