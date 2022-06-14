@@ -122,7 +122,7 @@ export const Timeline = () => {
       })
       .catch((err) => console.error(err));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [retailerByMonth, setData, setDataSuperStar, categoriesSelected, accesibilities, dataSources]);
+  }, [retailerByMonth, setData, setDataSuperStar, categoriesSelected, accesibilities, dataSources, verifiedDateRange]);
   return (
     <div className={timelineOpen}>
       {open ? (
