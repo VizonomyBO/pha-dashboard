@@ -2,15 +2,24 @@ import { useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { DataTimelineType, ModalTimeline } from '../../@types/timeline.ts';
 import {
-  END_DATE, MONTH_NAME, MONTH_TEXT, START_DATE
+  MONTH_NAME, MONTH_TEXT
 } from '../../constants/timeline';
 import { ENDPOINTS } from '../../constants/url';
 import { webRequest } from '../../utils/webRequest';
 import { TimelineChart } from './TimelineChart';
 import { useScrollState } from '../../store/hooks/scrollHook';
+import { useCategoriesState } from '../../store/hooks';
 
 export const Timeline = () => {
   const [data, setData] = useState<DataTimelineType[]>([]);
+  const {
+    categoriesSelected,
+    accesibilities,
+    dataSources,
+    bbox,
+    mapViewFilter,
+    verifiedDateRange
+  } = useCategoriesState() || {};
   const [dataSuperStar, setDataSuperStar] = useState<DataTimelineType[]>([]);
   const [play, setPlay] = useState(false);
   const { widthScroll } = useScrollState();
@@ -74,20 +83,46 @@ export const Timeline = () => {
     );
   };
   useEffect(() => {
-    webRequest.get(ENDPOINTS.TIME_LINE_RETAILER(START_DATE.toISOString(), END_DATE.toISOString()))
+    const auxAbort = new AbortController();
+    const headers = webRequest.generateJSONHeader();
+    webRequest.post(
+      ENDPOINTS.TIME_LINE_RETAILER,
+      {
+        categories: categoriesSelected,
+        accesibility: accesibilities,
+        dataSources,
+        badges: [],
+        verifiedDateRange,
+        ...(mapViewFilter && { bbox })
+      },
+      headers,
+      auxAbort.signal
+    )
       .then((res) => res.json())
       .then((res) => {
         setData(res.data.rows);
       })
       .catch((err) => console.error(err));
-    webRequest.get(ENDPOINTS.TIME_LINE_RETAILER_SUPERSTAR(START_DATE.toISOString(), END_DATE.toISOString()))
+    webRequest.post(
+      ENDPOINTS.TIME_LINE_RETAILER_SUPERSTAR,
+      {
+        categories: categoriesSelected,
+        accesibility: accesibilities,
+        dataSources,
+        badges: [],
+        verifiedDateRange,
+        ...(mapViewFilter && { bbox })
+      },
+      headers,
+      auxAbort.signal
+    )
       .then((res) => res.json())
       .then((res) => {
         setDataSuperStar(res.data.rows);
       })
       .catch((err) => console.error(err));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [retailerByMonth, setData, setDataSuperStar]);
+  }, [retailerByMonth, setData, setDataSuperStar, categoriesSelected, accesibilities, dataSources]);
   return (
     <div className={timelineOpen}>
       {open ? (
