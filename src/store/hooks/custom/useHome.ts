@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import {
   useState,
   useMemo,
@@ -19,7 +20,8 @@ export const useHome = () => {
     accesibilities,
     dataSources,
     bbox,
-    mapViewFilter
+    mapViewFilter,
+    verifiedDateRange
   } = useCategoriesState() || {};
   const { setLoaderState } = useLoaderDispatch();
   const VALUES_PER_PAGE = 25;
@@ -39,7 +41,7 @@ export const useHome = () => {
       setHasNext(false);
       webRequest
         .post(
-          `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}`,
+          `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}&dateRange=${verifiedDateRange[0]}%20-%20${verifiedDateRange[1]}`,
           {
             categories: categoriesSelected,
             accesibility: accesibilities,
@@ -75,7 +77,7 @@ export const useHome = () => {
           }
         });
     },
-    [categoriesSelected, accesibilities, dataSources, bbox, mapViewFilter, signalArray, setLoaderState]
+    [setLoaderState, signalArray, verifiedDateRange, categoriesSelected, accesibilities, dataSources, mapViewFilter, bbox]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);
