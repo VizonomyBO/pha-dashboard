@@ -106,24 +106,26 @@ export const TimelineChart = ({
   useEffect(() => {
     if (!play) return;
     setTimeout(() => {
-      const newXLeft = (xLeft + barWidthExtent) % (width + barWidthExtent);
-      const newXRight = (newXLeft + barWidthExtent) % (width + barWidthExtent);
-      setXLeft(newXLeft);
-      setXRight(newXRight);
-      const x = Math.round(newXLeft / barWidthExtent);
-      const y = Math.round(newXRight / barWidthExtent);
-      start_date = new Date('3 May 2022 00:00 UTC');
-      const x1 = new Date((start_date.setMonth(4 + x)));
-      start_date = new Date('3 May 2022 00:00 UTC');
-      const y1 = new Date((start_date.setMonth(4 + y - 1)));
-      if (retailerByMonth) {
-        setVerifiedDateRange([new Date(x1.setDate(0)).toISOString(), new Date(y1.setDate(29)).toISOString()]);
-      } else if (x1.getMonth() > y1.getMonth()) {
-        setVerifiedDateRange(
-          [new Date(x1.setDate(0)).toISOString(), new Date(y1.setDate(29)).toISOString()]
-        );
-      } else {
-        setVerifiedDateRange([START_DATE.toISOString(), new Date(y1.setDate(29)).toISOString()]);
+      if (play) {
+        const newXLeft = (xLeft + barWidthExtent) % (width + barWidthExtent);
+        const newXRight = (newXLeft + barWidthExtent) % (width + barWidthExtent);
+        setXLeft(newXLeft);
+        setXRight(newXRight);
+        const x = Math.round(newXLeft / barWidthExtent);
+        const y = Math.round(newXRight / barWidthExtent);
+        start_date = new Date('3 May 2022 00:00 UTC');
+        const x1 = new Date((start_date.setMonth(4 + x)));
+        start_date = new Date('3 May 2022 00:00 UTC');
+        const y1 = new Date((start_date.setMonth(4 + y - 1)));
+        if (retailerByMonth) {
+          setVerifiedDateRange([new Date(x1.setDate(0)).toISOString(), new Date(y1.setDate(29)).toISOString()]);
+        } else if (x1.getMonth() > y1.getMonth()) {
+          setVerifiedDateRange(
+            [new Date(x1.setDate(0)).toISOString(), new Date(y1.setDate(29)).toISOString()]
+          );
+        } else {
+          setVerifiedDateRange([START_DATE.toISOString(), new Date(y1.setDate(29)).toISOString()]);
+        }
       }
     }, 5000);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -394,7 +396,12 @@ export const TimelineChart = ({
       leftPopupLabel.raise().transition('2000').attr('opacity', 1);
       rightPopup.raise().transition('2000').attr('opacity', 1);
       rightPopupLabel.raise().transition('2000').attr('opacity', 1);
+      const rect1 = d3.select('#betweenPaddlesRect').classed('dragging', true);
+      const diff = (moveBetweenPaddles - event.x) * -1;
+      const w = xRight - xLeft;
+      let modal = false;
       function modalView(event1: CompletelyIntentionalAny) {
+        modal = true;
         const information = data.filter(
           (element) => element.month === MONTH_NAME[Math.trunc(event1.x / barWidthExtent)]
         );
@@ -414,61 +421,82 @@ export const TimelineChart = ({
               number: event1.x / barWidthExtent
             });
           }, 2000);
+          let newPosition = event1.x;
+          newPosition = Math.floor(newPosition / barWidthExtent) * barWidthExtent;
+          if (newPosition < 0) newPosition = 0;
+          if (newPosition + w >= width) newPosition = width - w;
+          rect1.attr('x', newPosition);
+          leftPaddle.attr('x', newPosition);
+          dotsleft.attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
+          dotsright.attr('x1', newPosition + w + offsetX1).attr('x2', newPosition + w + offsetX2);
+          rightPaddle.attr('x', newPosition + w);
+          leftPopup.attr('x', newPosition - 25);
+          setTimeout(() => {
+            if (newPosition === 0) {
+              setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + barWidthExtent);
+              setXRight((newPosition + xRight) > MAX_POSITION
+                ? MAX_POSITION : ((barWidthExtent * 2) + newPosition));
+            } else {
+              setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition);
+              setXRight((newPosition + xRight) > MAX_POSITION
+                ? MAX_POSITION : (barWidthExtent + newPosition));
+            }
+          }, 100);
         }
       }
       svg.select('#betweenPaddlesRect').call(
         d3.drag().on('end', (event1) => modalView(event1))
       );
-      const rect1 = d3.select('#betweenPaddlesRect').classed('dragging', true);
-      const diff = (moveBetweenPaddles - event.x) * -1;
-      const w = xRight - xLeft;
       function dragged() {
-        let newPosition = diff;
-        if (newPosition < 0) newPosition = 0;
-        if (newPosition + w >= width) newPosition = width - w;
-        rect1.attr('x', newPosition);
-        leftPaddle.attr('x', newPosition);
-        dotsleft.attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
-        dotsright.attr('x1', newPosition + w + offsetX1).attr('x2', newPosition + w + offsetX2);
-        rightPaddle.attr('x', newPosition + w);
-        leftPopup.attr('x', newPosition - 25);
-        leftPopupLabel.text(getDateByX(newPosition)).raise().attr('x', newPosition);
-        rightPopup.attr('x', newPosition + w - 25);
-        rightPopupLabel.text(getDateByX(newPosition + w)).raise().attr('x', newPosition + w);
-      }
-
-      function ended() {
-        d3.select('#headertimeline').style('z-index', '0');
-        const newPosition = diff;
-        leftPaddle.transition('200').attr('x', newPosition);
-        dotsleft.transition('200').attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
-        rect.transition('200').attr('x', newPosition);
-        rightPaddle.transition('200').attr('x', newPosition + w);
-        dotsright.transition('200').attr('x1', newPosition + w + offsetX1).attr('x2', newPosition + w + offsetX2);
-        rect.classed('dragging', false);
-        let r = ((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft) / barWidthExtent;
-        start_date = new Date('1 May 2022 00:00 UTC');
-        const dateLeft = new Date((start_date.setMonth(start_date.getMonth() + r + 1)));
-        r = ((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : newPosition + xRight) / barWidthExtent;
-        start_date = new Date('1 May 2022 00:00 UTC');
-        const dateRight = new Date(start_date.setMonth(start_date.getMonth() + r));
-        if (retailerByMonth) {
-          setVerifiedDateRange(
-            [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
-          );
-        } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
-          setVerifiedDateRange(
-            [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
-          );
-        } else {
-          setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(29)).toISOString()]);
+        if (!modal) {
+          let newPosition = diff;
+          if (newPosition < 0) newPosition = 0;
+          if (newPosition + w >= width) newPosition = width - w;
+          rect1.attr('x', newPosition);
+          leftPaddle.attr('x', newPosition);
+          dotsleft.attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
+          dotsright.attr('x1', newPosition + w + offsetX1).attr('x2', newPosition + w + offsetX2);
+          rightPaddle.attr('x', newPosition + 25);
+          leftPopup.attr('x', newPosition - 25);
+          leftPopupLabel.text(getDateByX(newPosition)).raise().attr('x', newPosition);
+          rightPopup.attr('x', newPosition + w - 25);
+          rightPopupLabel.text(getDateByX(newPosition + w)).raise().attr('x', newPosition + w);
         }
-        setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft);
-        setXRight((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : (newPosition + xRight));
-        leftPopup.transition('2000').attr('opacity', 0);
-        leftPopupLabel.transition('2000').attr('opacity', 0);
-        rightPopup.transition('2000').attr('opacity', 0);
-        rightPopupLabel.transition('2000').attr('opacity', 0);
+      }
+      function ended() {
+        if (!modal) {
+          d3.select('#headertimeline').style('z-index', '0');
+          const newPosition = diff;
+          leftPaddle.transition('200').attr('x', newPosition);
+          dotsleft.transition('200').attr('x1', newPosition + offsetX1).attr('x2', newPosition + offsetX2);
+          rect.transition('200').attr('x', newPosition);
+          rightPaddle.transition('200').attr('x', newPosition + w);
+          dotsright.transition('200').attr('x1', newPosition + w + offsetX1).attr('x2', newPosition + w + offsetX2);
+          rect.classed('dragging', false);
+          let r = ((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft) / barWidthExtent;
+          start_date = new Date('1 May 2022 00:00 UTC');
+          const dateLeft = new Date((start_date.setMonth(start_date.getMonth() + r + 1)));
+          r = ((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : newPosition + xRight) / barWidthExtent;
+          start_date = new Date('1 May 2022 00:00 UTC');
+          const dateRight = new Date(start_date.setMonth(start_date.getMonth() + r));
+          if (retailerByMonth) {
+            setVerifiedDateRange(
+              [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
+            );
+          } else if (dateLeft.getMonth() > dateCurrent.getMonth()) {
+            setVerifiedDateRange(
+              [new Date(dateLeft.setDate(0)).toISOString(), new Date(dateRight.setDate(29)).toISOString()]
+            );
+          } else {
+            setVerifiedDateRange([START_DATE.toISOString(), new Date(dateRight.setDate(29)).toISOString()]);
+          }
+          setXLeft((newPosition + xLeft) < 0 ? 0 : newPosition + xLeft);
+          setXRight((newPosition + xRight) > MAX_POSITION ? MAX_POSITION : (newPosition + xRight));
+          leftPopup.transition('2000').attr('opacity', 0);
+          leftPopupLabel.transition('2000').attr('opacity', 0);
+          rightPopup.transition('2000').attr('opacity', 0);
+          rightPopupLabel.transition('2000').attr('opacity', 0);
+        }
       }
       dragged();
       ended();
@@ -581,7 +609,7 @@ export const TimelineChart = ({
       }).on('end', middleRectDrag)
     );
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, xLeft, xRight, dataSuperStar]);
+  }, [data, dataSuperStar]);
   return (
     <div ref={wrapperRef} />
   );
