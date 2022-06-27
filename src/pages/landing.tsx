@@ -24,7 +24,7 @@ export const Landing = () => {
     return opt.text;
   };
   return (
-    <div className="container">
+    <div className="container constainer-mobile">
       <div className="bg" />
       <div className="pagecontainer">
         <div className="navbar landing">
