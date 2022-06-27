@@ -30,22 +30,28 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
       namemark = NAMESMARKERS.SUPERSTAR;
     }
     const picture:string[] = element.imagelinks ? element.imagelinks.split(',') : [];
+    const pictureValid:string[] = [];
+    for (let i = 0; i < picture.length; i += 1) {
+      if (picture[i] !== '') {
+        pictureValid.push(picture[i]);
+      }
+    }
     return (
       <div key={`itemMarker${element.retailer_id}`} className="item">
         <div className="item">
-          {picture.length > 1 && (
+          {pictureValid.length > 1 && (
             <div className="picturerow">
               <div className="picture">
-                <img className="img" src={picture[0]} alt="" />
+                <img className="img" src={pictureValid[0]} alt="" />
               </div>
               <div className="picture">
-                <img className="img" src={picture[1]} alt="" />
+                <img className="img" src={pictureValid[1]} alt="" />
               </div>
             </div>
           )}
-          {picture.length === 1 && (
+          {pictureValid.length === 1 && (
             <div className="picture" style={{ paddingBottom: '8px' }}>
-              <img className="img" src={picture[0]} alt="" />
+              <img className="img" src={pictureValid[0]} alt="" />
             </div>
           )}
           <div className="detail">
