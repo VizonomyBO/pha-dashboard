@@ -1,14 +1,26 @@
 import { Link } from 'react-router-dom';
 import { TooltipProps } from '../../@types';
-import { BADGES } from '../../constants';
-import { useTooltip } from '../../store/hooks/custom/useTooltip';
+import { BADGES, DEFAULT_IMAGE } from '../../constants';
 import { formatPhone } from '../../utils/textFormatter';
 
 export const ToolTipMobile = (data: TooltipProps) => {
   const {
     objectTypified, badges, setVisibleFeedback, setCurrentRetailerId
   } = data;
-  const { getImageToDisplay } = useTooltip();
+  const getImageToDisplay = () => {
+    if (objectTypified.properties?.imagelinks && objectTypified.properties.imagelinks !== '') {
+      console.log('YES', objectTypified?.properties?.imagelinks);
+      const images = objectTypified.properties.imagelinks.split(',');
+      if (images[0] !== '') {
+        return images[0];
+      }
+      if (images.length > 1) {
+        return images[1];
+      }
+      return DEFAULT_IMAGE;
+    }
+    return DEFAULT_IMAGE;
+  };
   const openIndividualForm = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     setVisibleFeedback(true);
@@ -21,7 +33,7 @@ export const ToolTipMobile = (data: TooltipProps) => {
         <Link to={`/profile/${objectTypified?.properties?.retailer_id}`}>
           <figure className="picture">
             <img
-              src={getImageToDisplay(objectTypified)}
+              src={getImageToDisplay()}
               alt=""
             />
           </figure>
