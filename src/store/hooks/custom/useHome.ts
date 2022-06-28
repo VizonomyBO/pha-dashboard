@@ -12,6 +12,7 @@ import { ENDPOINTS } from '../../../constants/url';
 import { useCategoriesState } from '../categoriesHook';
 import { useLoaderDispatch } from '../loaderHook';
 import { DataPhaDasboardMap } from '../../../@types';
+import { useGeocoderState } from '../geocoderHook';
 
 export const useHome = () => {
   const {
@@ -23,6 +24,7 @@ export const useHome = () => {
     mapViewFilter,
     verifiedDateRange
   } = useCategoriesState() || {};
+  const { inputText } = useGeocoderState() || {};
   const { setLoaderState } = useLoaderDispatch();
   const VALUES_PER_PAGE = 25;
   const INIT_PAGE = 1;
@@ -41,7 +43,7 @@ export const useHome = () => {
       setHasNext(false);
       webRequest
         .post(
-          `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}&dateRange=${verifiedDateRange[0]}%20-%20${verifiedDateRange[1]}`,
+          `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}&dateRange=${verifiedDateRange[0]}%20-%20${verifiedDateRange[1]}&search=${inputText.text}`,
           {
             categories: categoriesSelected,
             accesibility: accesibilities,
@@ -77,7 +79,7 @@ export const useHome = () => {
           }
         });
     },
-    [setLoaderState, signalArray, verifiedDateRange, categoriesSelected, accesibilities, dataSources, mapViewFilter, bbox]
+    [setLoaderState, signalArray, verifiedDateRange, inputText.text, categoriesSelected, accesibilities, dataSources, mapViewFilter, bbox]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);
