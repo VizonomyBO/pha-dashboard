@@ -1,10 +1,13 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HeaderInterface } from '../@types';
 import { DropdownGeocoder } from './DropdownGeocoder';
-import { useGeocoderDispatch } from '../store/hooks';
+import { useCategoriesDispatch, useGeocoderDispatch } from '../store/hooks';
 
 export const Header = ({ type, setOpenModal }: HeaderInterface) => {
   const { setShouldZoom } = useGeocoderDispatch();
+  const {
+    setCallFilters
+  } = useCategoriesDispatch();
   return (
     <div className="searchoptionsarea">
       <div className="accesspoint colored">
@@ -23,7 +26,7 @@ export const Header = ({ type, setOpenModal }: HeaderInterface) => {
             <div className="citysearch">
               <i className="icsearch" />
               <DropdownGeocoder type="home" />
-              <button className="light" type="button" onClick={() => setShouldZoom(true)}>
+              <button className="light" type="button" onClick={() => { setShouldZoom(true); setCallFilters(true); }}>
                 Search
               </button>
             </div>
