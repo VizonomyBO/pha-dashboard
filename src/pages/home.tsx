@@ -5,7 +5,9 @@ import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
-import { useCategoriesDispatch, useGeocoderDispatch, useGeocoderState } from '../store/hooks';
+import {
+  useCategoriesDispatch, useGeocoderDispatch, useGeocoderState
+} from '../store/hooks';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
 import { ModalFilters } from '../components/ModalFilters';
 import { ListMarkerComponentMobil } from '../components/home/ListMarkerComponetMobile';
@@ -25,10 +27,11 @@ export const Home = () => {
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
   const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
-  const { setControllerZoom } = useGeocoderDispatch();
+  const { setControllerZoom, setInputText, setGeocoderOptions } = useGeocoderDispatch();
   const { controllerZoom } = useGeocoderState();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const [visibleFeedback, setVisibleFeedback] = useState(false);
+  const [valueCheckbox, setValueCheckbox] = useState(false);
   const [currentRetailerId, setCurrentRetailerId] = useState('');
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
 
@@ -66,7 +69,14 @@ export const Home = () => {
 
   const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMapViewFilter(e.currentTarget.checked);
+    setValueCheckbox(e.currentTarget.checked);
     if (!e.currentTarget.checked) {
+      setInputText({
+        text: '',
+        shouldSearch: true,
+        center: [0, 0],
+      });
+      setGeocoderOptions([]);
       setCallFilters(!e.currentTarget.checked);
     }
   };
@@ -93,7 +103,7 @@ export const Home = () => {
       </header>
       <div className="pagecontainer" ref={ref}>
         <Navbar />
-        <Header type="home" setOpenModal={setOpenModal} />
+        <Header type="home" setOpenModal={setOpenModal} setValueCheckbox={setValueCheckbox} />
         <div className="location">
           <div className="locfound">
             <div className="description">
@@ -114,6 +124,7 @@ export const Home = () => {
                     <input
                       type="checkbox"
                       onChange={changeFilterMapView}
+                      checked={valueCheckbox}
                     />
                     <span className="checkmark ckeckmark-form" />
                   </label>

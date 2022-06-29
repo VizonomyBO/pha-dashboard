@@ -28,6 +28,7 @@ export interface BadgePercentages {
 export interface HeaderInterface {
   type?: string,
   setOpenModal?: SetStateAction<S>,
+  setValueCheckbox?: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
 export type FormTabType = typeof BUSINESS_DETAILS | typeof OTHER_QUESTIONS | typeof CONTACT_DETAILS;

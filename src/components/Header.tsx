@@ -3,7 +3,7 @@ import { HeaderInterface } from '../@types';
 import { DropdownGeocoder } from './DropdownGeocoder';
 import { useCategoriesDispatch, useGeocoderDispatch } from '../store/hooks';
 
-export const Header = ({ type, setOpenModal }: HeaderInterface) => {
+export const Header = ({ type, setOpenModal, setValueCheckbox }: HeaderInterface) => {
   const { setShouldZoom } = useGeocoderDispatch();
   const {
     setCallFilters
@@ -26,7 +26,17 @@ export const Header = ({ type, setOpenModal }: HeaderInterface) => {
             <div className="citysearch">
               <i className="icsearch" />
               <DropdownGeocoder type="home" />
-              <button className="light" type="button" onClick={() => { setShouldZoom(true); setCallFilters(true); }}>
+              <button
+                className="light"
+                type="button"
+                onClick={() => {
+                  setShouldZoom(true);
+                  setCallFilters(true);
+                  if (setValueCheckbox) {
+                    setValueCheckbox(true);
+                  }
+                }}
+              >
                 Search
               </button>
             </div>
