@@ -24,7 +24,7 @@ export const useHome = () => {
     mapViewFilter,
     verifiedDateRange
   } = useCategoriesState() || {};
-  const { inputText } = useGeocoderState() || {};
+  const { options } = useGeocoderState() || {};
   const { setLoaderState } = useLoaderDispatch();
   const VALUES_PER_PAGE = 25;
   const INIT_PAGE = 1;
@@ -41,9 +41,13 @@ export const useHome = () => {
       signalArray.push(auxAbort);
       const headers = webRequest.generateJSONHeader();
       setHasNext(false);
+      let valueSearch = '';
+      if (options.length > 0) {
+        valueSearch = options[0].text;
+      }
       webRequest
         .post(
-          `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}&dateRange=${verifiedDateRange[0]}%20-%20${verifiedDateRange[1]}&search=${inputText.text}`,
+          `${ENDPOINTS.GET_MARKERS}?page=${_currentPage}&limit=${VALUES_PER_PAGE}&dateRange=${verifiedDateRange[0]}%20-%20${verifiedDateRange[1]}&search=${valueSearch}`,
           {
             categories: categoriesSelected,
             accesibility: accesibilities,
@@ -79,7 +83,7 @@ export const useHome = () => {
           }
         });
     },
-    [setLoaderState, signalArray, verifiedDateRange, inputText.text, categoriesSelected, accesibilities, dataSources, mapViewFilter, bbox]
+    [accesibilities, bbox, categoriesSelected, dataSources, mapViewFilter, options, setLoaderState, signalArray, verifiedDateRange]
   );
   const updateCurrentPage = useMemo(() => () => {
     getMarkers(currentPage + 1);

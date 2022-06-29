@@ -5,7 +5,6 @@ import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { GEOCODER } from '../constants';
 import { useGeocoder } from '../store/hooks/custom/useGeocoder';
 import { findRegion } from '../utils/findRegion';
-import { useCategoriesDispatch } from '../store/hooks';
 
 const name = GEOCODER;
 export const DropdownGeocoder = ({ type }: { type: string }) => {
@@ -23,7 +22,6 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
     keyDown,
     getCurrentUserPosition
   } = useGeocoder(name, type);
-  const { setCallFilters } = useCategoriesDispatch();
   const trClassNames = (index: number) => (
     classNames({ 'tr-geocoder-active': position === index, 'tr-geocoder': position === index })
   );
@@ -81,7 +79,6 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                         });
                         setInputTextHtml(region === '' ? opt.text : `${opt.text}, ${region}`);
                         setGeocoderOptions([]);
-                        setCallFilters(true);
                       }}
                     >
                       <label>
