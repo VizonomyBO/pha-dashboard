@@ -195,7 +195,7 @@ export const Home = () => {
               className="supermarketfilter"
               onClick={() => (setOpenModal(true))}
             >
-              Filters & Layers
+              <span style={{ paddingLeft: '6px' }}>Filters & Layers</span>
               <KeyboardArrowDownIcon style={{ marginLeft: '8px', marginBottom: '-5px' }} />
             </button>
             <Link to="/form">
