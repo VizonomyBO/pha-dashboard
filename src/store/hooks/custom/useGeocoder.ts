@@ -86,6 +86,9 @@ export const useGeocoder = (name: string, type: string) => {
       const valueToDisplay = positionOfComma !== -1 ? inputText.text.substr(0, positionOfComma) : inputText.text;
       setInputTextHtml(valueToDisplay);
     }
+    if (inputText.text === '') {
+      setInputTextHtml('');
+    }
   }, [inputText]);
 
   const keyDown = (e:React.KeyboardEvent<HTMLInputElement>) => {
