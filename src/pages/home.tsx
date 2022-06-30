@@ -18,6 +18,7 @@ import { ModalRequestForm } from '../components/ModalRequestForm';
 import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
 import { Timeline } from '../components/timeline/Timeline';
 import { useWindowSize } from '../store/hooks/custom/useWindowSize';
+import { setBbox } from '../store/actions';
 
 export const Home = () => {
   const [yStart, setYStart] = useState(0);
@@ -76,6 +77,12 @@ export const Home = () => {
   const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMapViewFilter(e.currentTarget.checked);
     setValueCheckbox(e.currentTarget.checked);
+    setBbox({
+      xmax: -91.95740800182172,
+      xmin: -85.82565979639735,
+      ymax: 30.312545450183634,
+      ymin: 34.80664213665584
+    });
     if (!e.currentTarget.checked) {
       setInputText({
         text: '',
