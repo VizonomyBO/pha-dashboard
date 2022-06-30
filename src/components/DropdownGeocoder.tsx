@@ -16,7 +16,6 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
     inputText,
     inputTextHtml,
     options,
-    setGeocoderOptions,
     onChangeInput,
     position,
     keyDown,
@@ -78,7 +77,6 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
                           placetype: opt?.place_type || []
                         });
                         setInputTextHtml(region === '' ? opt.text : `${opt.text}, ${region}`);
-                        setGeocoderOptions([]);
                       }}
                     >
                       <label>

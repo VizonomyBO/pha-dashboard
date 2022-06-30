@@ -1,10 +1,12 @@
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { HeaderInterface } from '../@types';
 import { DropdownGeocoder } from './DropdownGeocoder';
-import { useCategoriesDispatch, useGeocoderDispatch } from '../store/hooks';
+import { useCategoriesDispatch, useGeocoderDispatch, useGeocoderState } from '../store/hooks';
 
 export const Header = ({ type, setOpenModal, setValueCheckbox }: HeaderInterface) => {
   const { setShouldZoom } = useGeocoderDispatch();
+  const { setBbox, setMapViewFilter } = useCategoriesDispatch() || {};
+  const { inputText } = useGeocoderState() || {};
   const {
     setCallFilters
   } = useCategoriesDispatch();
@@ -30,6 +32,15 @@ export const Header = ({ type, setOpenModal, setValueCheckbox }: HeaderInterface
                 className="light"
                 type="button"
                 onClick={() => {
+                  if (inputText && inputText.bbox) {
+                    setBbox({
+                      xmin: inputText.bbox[1],
+                      xmax: inputText.bbox[0],
+                      ymin: inputText.bbox[3],
+                      ymax: inputText.bbox[2]
+                    });
+                  }
+                  setMapViewFilter(true);
                   setShouldZoom(true);
                   setCallFilters(true);
                   if (setValueCheckbox) {
