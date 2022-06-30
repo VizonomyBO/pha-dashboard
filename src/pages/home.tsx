@@ -28,12 +28,21 @@ export const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
   const { setControllerZoom, setInputText, setGeocoderOptions } = useGeocoderDispatch();
-  const { controllerZoom } = useGeocoderState();
+  const { controllerZoom, options } = useGeocoderState();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [valueCheckbox, setValueCheckbox] = useState(false);
+  const [first, setFirst] = useState(true);
   const [currentRetailerId, setCurrentRetailerId] = useState('');
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
+
+  useEffect(() => {
+    if (options.length > 0 && first) {
+      setValueCheckbox(true);
+      setCallFilters(true);
+    }
+    setFirst(false);
+  }, [options.length, first, setCallFilters]);
 
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
     setYStart(evt.touches[0].clientY || 0);
@@ -63,9 +72,6 @@ export const Home = () => {
     });
   };
   // set Call Filters on init page in order to call queries, just run on init home
-  useEffect(() => {
-    setCallFilters(true);
-  }, [setCallFilters]);
 
   const changeFilterMapView = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMapViewFilter(e.currentTarget.checked);
@@ -75,6 +81,7 @@ export const Home = () => {
         text: '',
         shouldSearch: true,
         center: [0, 0],
+        bbox: [],
       });
       setGeocoderOptions([]);
       setCallFilters(!e.currentTarget.checked);
