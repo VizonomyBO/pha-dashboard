@@ -40,7 +40,6 @@ export const useMap = () => {
   const TRANSITION_DURATION = 1800;
   const TRANSITION_DURATION_GEOCODER = 500;
   const POSTCODE = 'postcode';
-  const { options } = useGeocoderState() || {};
   const PLACE = 'place';
   const ZOOM_POSTCODE = 12;
   const ZOOM_PLACE = 12;
@@ -51,17 +50,12 @@ export const useMap = () => {
   const [layers, setLayers] = useState<any>([]);
   const getLayers = useMemo(
     () => () => {
-      let valueSearch = '';
-      if (options.length > 0) {
-        valueSearch = options[0].text;
-      }
       const headers = webRequest.generateJSONHeader();
       const obj: CompletelyIntentionalAny = {
         categories: categoriesSelected,
         accesibility: accesibilities,
         dataSources,
         badges: [],
-        search: valueSearch,
       };
       if (superstarDateRange.length === 2) {
         obj.superstarDateRange = superstarDateRange;
@@ -84,7 +78,7 @@ export const useMap = () => {
         })
         .catch((err) => console.error(err));
     },
-    [options, categoriesSelected, accesibilities, dataSources, superstarDateRange, verifiedDateRange, setCallFilters]
+    [categoriesSelected, accesibilities, dataSources, superstarDateRange, verifiedDateRange, setCallFilters]
   );
 
   const getPinColor = (originTable: string) => {
