@@ -46,9 +46,8 @@ export const useHome = () => {
             categories: categoriesSelected,
             accesibility: accesibilities,
             dataSources,
-            bbox: mapViewFilter ? bbox : undefined,
             badges: [],
-            ...(mapViewFilter && bbox)
+            ...(mapViewFilter && { bbox })
           },
           headers,
           auxAbort.signal
