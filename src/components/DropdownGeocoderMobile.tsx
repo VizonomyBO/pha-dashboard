@@ -2,7 +2,7 @@ import { Result } from '@mapbox/mapbox-gl-geocoder';
 import { GEOCODER_MOBILE } from '../constants';
 import { useGeocoder } from '../store/hooks/custom/useGeocoder';
 import { findRegion } from '../utils/findRegion';
-import { useGeocoderDispatch } from '../store/hooks';
+import { useCategoriesDispatch, useGeocoderDispatch } from '../store/hooks';
 
 const name = GEOCODER_MOBILE;
 export const DropdownGeocoderMobile = () => {
@@ -20,6 +20,10 @@ export const DropdownGeocoderMobile = () => {
     keyDown
   } = useGeocoder(name, 'none');
   const { setShouldZoom } = useGeocoderDispatch();
+  const { setBbox, setMapViewFilter } = useCategoriesDispatch() || {};
+  const {
+    setCallFilters
+  } = useCategoriesDispatch();
   const getLabel = (region: string, isPostCode: boolean, opt: Result) => {
     if (isPostCode) {
       return `Zipcode: ${opt.text}`;
@@ -47,7 +51,17 @@ export const DropdownGeocoderMobile = () => {
             type="button"
             className="light"
             onClick={() => {
+              if (inputText && inputText.bbox) {
+                setBbox({
+                  xmin: inputText.bbox[1],
+                  xmax: inputText.bbox[0],
+                  ymin: inputText.bbox[3],
+                  ymax: inputText.bbox[2]
+                });
+              }
+              setMapViewFilter(true);
               setShouldZoom(true);
+              setCallFilters(true);
               onChangeInputRemove();
             }}
           >
