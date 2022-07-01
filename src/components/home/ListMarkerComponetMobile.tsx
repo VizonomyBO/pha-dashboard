@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { DataPhaDasboardMap } from '../../@types';
 import { MARKED_ELEMENT } from '../../constants';
 import {
@@ -39,37 +40,39 @@ export const ListMarkerComponentMobil = (listMarker: Array<DataPhaDasboardMap>) 
     return (
       <div key={`itemMarker${element.retailer_id}`} className="item">
         <div className="item">
-          {pictureValid.length > 1 && (
-            <div className="picturerow">
-              <div className="picture">
+          <Link to={`/profile/${element.retailer_id}`} style={{ textDecoration: 'none' }}>
+            {pictureValid.length > 1 && (
+              <div className="picturerow">
+                <div className="picture">
+                  <img className="img" src={pictureValid[0]} alt="" />
+                </div>
+                <div className="picture">
+                  <img className="img" src={pictureValid[1]} alt="" />
+                </div>
+              </div>
+            )}
+            {pictureValid.length === 1 && (
+              <div className="picture" style={{ paddingBottom: '8px' }}>
                 <img className="img" src={pictureValid[0]} alt="" />
               </div>
-              <div className="picture">
-                <img className="img" src={pictureValid[1]} alt="" />
-              </div>
-            </div>
-          )}
-          {pictureValid.length === 1 && (
-            <div className="picture" style={{ paddingBottom: '8px' }}>
-              <img className="img" src={pictureValid[0]} alt="" />
-            </div>
-          )}
-          <div className="detail">
-            <div className="namemarket">{element.name}</div>
-            <div className="address">
-              <div className="reference">
-                <div className="ref1">
-                  {element.address_1 ? element.address_1.replace(', United States', '') : 'No address registered'}
+            )}
+            <div className="detail">
+              <div className="namemarket">{element.name}</div>
+              <div className="address">
+                <div className="reference">
+                  <div className="ref1">
+                    {element.address_1 ? element.address_1.replace(', United States', '') : 'No address registered'}
+                  </div>
                 </div>
-              </div>
-              <div className="statemk">
-                <div className="cardmk">
-                  <div className={`icmk${color} dimensions`} />
-                  <div className={`desc ${color}`}>{namemark}</div>
+                <div className="statemk">
+                  <div className="cardmk">
+                    <div className={`icmk${color} dimensions`} />
+                    <div className={`desc ${color}`}>{namemark}</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       </div>
     );
