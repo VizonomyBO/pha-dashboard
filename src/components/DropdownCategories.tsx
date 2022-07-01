@@ -52,7 +52,6 @@ export const DropdownCategories = () => {
         type="button"
         onClick={() => {
           goToMapView();
-          setShouldZoom(true);
           if (inputText && inputText.bbox) {
             setBbox({
               xmin: inputText.bbox[1],
@@ -60,8 +59,10 @@ export const DropdownCategories = () => {
               ymin: inputText.bbox[3],
               ymax: inputText.bbox[2]
             });
+            setTimeout(() => {
+              setShouldZoom(true);
+            }, 200);
           }
-          setShouldZoom(true);
         }}
       >
         Search

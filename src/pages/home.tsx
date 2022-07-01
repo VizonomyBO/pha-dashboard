@@ -38,14 +38,11 @@ export const Home = () => {
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
 
   useEffect(() => {
-    setTimeout(() => {
-      if (options.length > 0 && first) {
-        setValueCheckbox(true);
-        setCallFilters(true);
-        setMapViewFilter(true);
-      }
-      setFirst(false);
-    }, 500);
+    if (options.length > 0 && first) {
+      setValueCheckbox(true);
+      setCallFilters(true);
+      setMapViewFilter(true);
+    }
     setFirst(false);
   }, [options.length, first, setCallFilters, setMapViewFilter]);
 
