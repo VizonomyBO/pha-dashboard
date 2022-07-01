@@ -41,9 +41,10 @@ export const Home = () => {
     if (options.length > 0 && first) {
       setValueCheckbox(true);
       setCallFilters(true);
+      setMapViewFilter(true);
     }
     setFirst(false);
-  }, [options.length, first, setCallFilters]);
+  }, [options.length, first, setCallFilters, setMapViewFilter]);
 
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
     setYStart(evt.touches[0].clientY || 0);
