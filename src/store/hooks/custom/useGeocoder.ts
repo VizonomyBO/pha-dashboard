@@ -37,11 +37,6 @@ export const useGeocoder = (name: string, type: string) => {
 
   const onChangeInputRemove = (): void => {
     setTimeout(() => {
-      setInputText({
-        text: '',
-        shouldSearch: true,
-        center: [0, 0],
-      });
       setInputTextHtml('');
     }, 500);
   };

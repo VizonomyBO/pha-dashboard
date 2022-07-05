@@ -6,7 +6,7 @@ import { Header } from '../components/Header';
 import { Navbar } from '../components/Navbar';
 import { Map } from '../components/map/Map';
 import {
-  useCategoriesDispatch, useGeocoderDispatch, useGeocoderState
+  useCategoriesDispatch, useCategoriesState, useGeocoderDispatch, useGeocoderState
 } from '../store/hooks';
 import { ListMarkerComponent } from '../components/home/ListMarkerComponent';
 import { ModalFilters } from '../components/ModalFilters';
@@ -18,33 +18,47 @@ import { ModalRequestForm } from '../components/ModalRequestForm';
 import { DRAG_MINIMUM_DISTANCE } from '../constants/home';
 import { Timeline } from '../components/timeline/Timeline';
 import { useWindowSize } from '../store/hooks/custom/useWindowSize';
-import { setBbox } from '../store/actions';
+import { useScrollState } from '../store/hooks/scrollHook';
 
 export const Home = () => {
   const [yStart, setYStart] = useState(0);
   const { ref } = useWindowSize();
+  const { widthScroll } = useScrollState();
   const [yMove, setYMove] = useState(0);
   const [openLegend, setOpenLegend] = useState(false);
   const { dataRequest, scrolledToEnd } = useHome();
   const [openModal, setOpenModal] = useState(false);
-  const { setMapViewFilter, setCallFilters } = useCategoriesDispatch();
-  const { setControllerZoom, setInputText, setGeocoderOptions } = useGeocoderDispatch();
-  const { controllerZoom, options } = useGeocoderState();
+  const { setMapViewFilter, setCallFilters, setBbox } = useCategoriesDispatch();
+  const {
+    setControllerZoom, setInputText, setGeocoderOptions, setShouldZoom
+  } = useGeocoderDispatch();
+  const { controllerZoom, inputText } = useGeocoderState();
   const [openAllRetailer, setOpenAllRetailer] = useState(false);
   const [visibleFeedback, setVisibleFeedback] = useState(false);
   const [valueCheckbox, setValueCheckbox] = useState(false);
+  const { bbox } = useCategoriesState();
   const [first, setFirst] = useState(true);
   const [currentRetailerId, setCurrentRetailerId] = useState('');
   const retailerClass = classNames({ 'retailerlist-show': openAllRetailer, retailerlist: !openAllRetailer });
-
   useEffect(() => {
-    if (options.length > 0 && first) {
-      setValueCheckbox(true);
-      setCallFilters(true);
-      setMapViewFilter(true);
-    }
+    setTimeout(() => {
+      if (bbox?.xmin && first) {
+        setShouldZoom(true);
+        setValueCheckbox(true);
+        setCallFilters(true);
+        setMapViewFilter(true);
+      } else {
+        setBbox({
+          xmax: -91.95740800182172,
+          xmin: -85.82565979639735,
+          ymax: 30.312545450183634,
+          ymin: 34.80664213665584
+        });
+      }
+      setFirst(false);
+    }, 500);
     setFirst(false);
-  }, [options.length, first, setCallFilters, setMapViewFilter]);
+  }, [bbox?.xmin, first, inputText, setBbox, setCallFilters, setMapViewFilter, setShouldZoom, widthScroll]);
 
   const handleTouchStart = (evt: React.TouchEvent<HTMLDivElement>) => {
     setYStart(evt.touches[0].clientY || 0);
