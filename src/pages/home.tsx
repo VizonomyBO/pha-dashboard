@@ -48,12 +48,12 @@ export const Home = () => {
         setCallFilters(true);
         setMapViewFilter(true);
       } else {
-        setBbox({
-          xmax: -91.95740800182172,
-          xmin: -85.82565979639735,
-          ymax: 30.312545450183634,
-          ymin: 34.80664213665584
-        });
+        // setBbox({
+        //   xmax: -91.95740800182172,
+        //   xmin: -85.82565979639735,
+        //   ymax: 30.312545450183634,
+        //   ymin: 34.80664213665584
+        // });
       }
       setFirst(false);
     }, 500);
