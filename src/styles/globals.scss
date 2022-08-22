@@ -133,6 +133,12 @@ input, button, textarea, select {
 
 .tr-geocoder {
     list-style: none;
+    .span-geocoder {
+      color: #00BDE3;
+    }
+    .span-geocoder:hover {
+      color: #00BDE3;
+    }
 }
 
 .tr-categories {
@@ -147,10 +153,20 @@ input, button, textarea, select {
 }
 
 .tr-geocoder:hover {
-    background-color: #EBFBFF;
+    .span-geocoder {
+      color: #00BDE3;
+    }
+    .span-geocoder:hover {
+      color: #00BDE3;
+    }
 }
 .tr-geocoder-active {
-    background-color: #EBFBFF;
+    .span-geocoder {
+      color: #00BDE3;
+    }
+    .span-geocoder:hover {
+      color: #00BDE3;
+    }
 }
 
 .input-address {
