@@ -101,7 +101,8 @@ export const useHome = () => {
       getMarkers(INIT_PAGE);
       setCurrentPage(INIT_PAGE);
     }
-  }, [callFilters, mapViewFilter, getMarkers, bbox]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [callFilters, mapViewFilter, bbox]);
 
   return {
     getMarkers,
