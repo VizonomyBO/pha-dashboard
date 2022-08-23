@@ -20,6 +20,20 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
       setCenterMarker(elementHovered.geom.coordinates, type !== 'hover', elementProperties);
     }
   };
+  const getAddresSplitted = (address: string) => {
+    const result = address.split(',');
+    const firstRow = result.slice(0, 1);
+    const secondRow = result.slice(2);
+    const spanfirst = <span>{firstRow.join()}</span>;
+    const spansecond = <span>{secondRow.join()}</span>;
+    return (
+      <>
+        {spanfirst}
+        <br />
+        {spansecond}
+      </>
+    );
+  };
   return listMarker.map((element: DataPhaDasboardMap) => {
     let color = COLORS.RED;
     let namemark = NAMESMARKERS.PHA_RETAILERS;
@@ -58,7 +72,9 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
         <div className="descres">
           <div className="namemark">{element.name}</div>
           <div className="address">
-            {element.address_1 ? element.address_1.replace(', United States', '') : 'No address registered'}
+            {element.address_1
+              ? getAddresSplitted(element.address_1.replace(', United States', ''))
+              : 'No address registered'}
           </div>
           <div className="distance">
             <div className="kind">
