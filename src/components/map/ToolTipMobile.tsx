@@ -9,7 +9,6 @@ export const ToolTipMobile = (data: TooltipProps) => {
   } = data;
   const getImageToDisplay = () => {
     if (objectTypified.properties?.imagelinks && objectTypified.properties.imagelinks !== '') {
-      console.log('YES', objectTypified?.properties?.imagelinks);
       const images = objectTypified.properties.imagelinks.split(',');
       if (images[0] !== '') {
         return images[0];
