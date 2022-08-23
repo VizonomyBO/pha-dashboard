@@ -54,7 +54,12 @@ export const DropdownGeocoder = ({ type }: { type: string }) => {
           placeholder="City or Zip Code"
           onKeyDown={keyDown}
         />
-        <span className="iccrosshair" onClick={() => getCurrentUserPosition()} aria-hidden="true" />
+        <span
+          className="iccrosshair"
+          onClick={() => getCurrentUserPosition()}
+          aria-hidden="true"
+          style={type === 'home' ? { paddingTop: '7px' } : {}}
+        />
       </div>
       <div className={blockClassNames}>
         {options && options.length > 0 && inputText.shouldSearch && (
