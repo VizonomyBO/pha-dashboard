@@ -104,6 +104,15 @@ export const useHome = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [callFilters, mapViewFilter, bbox]);
 
+  // useEffect(() => {
+  //   console.log('callFilters', callFilters);
+  // }, [callFilters]);
+  // useEffect(() => {
+  //   console.log('mapViewFilter', mapViewFilter);
+  // }, [mapViewFilter]);
+  // useEffect(() => {
+  //   console.log('bbox', bbox);
+  // }, [bbox]);
   return {
     getMarkers,
     dataRequest,

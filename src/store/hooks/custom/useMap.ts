@@ -181,12 +181,26 @@ export const useMap = () => {
       const viewport = new WebMercatorViewport(currentViewstate);
       const nw = viewport.unproject([0, 0]);
       const se = viewport.unproject([viewport.width, viewport.height]);
-      setBbox({
-        xmin: se[0],
-        xmax: nw[0],
-        ymin: nw[1],
-        ymax: se[1]
-      });
+      if (
+        se[0] === -89.63365898757733
+        && nw[0] === -89.64239901242328
+        && nw[1] === 32.749115463252025
+        && se[1] === 32.74176438511083
+      ) {
+        setBbox({
+          xmax: -93.21556097009609,
+          xmin: -86.07681977641309,
+          ymax: 30.083164708268743,
+          ymin: 35.306538148000286
+        });
+      } else {
+        setBbox({
+          xmin: se[0],
+          xmax: nw[0],
+          ymin: nw[1],
+          ymax: se[1]
+        });
+      }
     }
     if (shouldZoom) {
       zoomToCenterGeocoder();
