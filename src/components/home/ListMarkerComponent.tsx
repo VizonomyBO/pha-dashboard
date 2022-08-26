@@ -20,9 +20,9 @@ export const ListMarkerComponent = (listMarker: Array<DataPhaDasboardMap>) => {
       setCenterMarker(elementHovered.geom.coordinates, type !== 'hover', elementProperties);
     }
   };
-  const addCommaSplitted = (value: any) => {
+  const addCommaSplitted = (value: string) => {
     const result = value.replace(',', '').split(' ');
-    return result.filter((element:any) => element !== '').join(', ');
+    return result.filter((element:string) => element !== '').join(', ');
   };
   const getAddresSplitted = (address: string) => {
     const result = address.replace(', Estados Unidos', '').split(',');
