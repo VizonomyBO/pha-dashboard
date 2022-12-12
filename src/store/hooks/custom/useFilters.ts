@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect } from 'react';
 import { FilterType, ModalFilterData } from '../../../@types';
+import { DATASOURCES } from '../../../constants/categories';
 import { useCategoriesDispatch, useCategoriesState } from '../categoriesHook';
 
 export const useFilter = ({ setOpenModal }: ModalFilterData) => {
@@ -40,6 +41,16 @@ export const useFilter = ({ setOpenModal }: ModalFilterData) => {
     if (categoriesSelected.length || accesibilities.length) {
       if (dataSources.indexOf('retailers_pha') === -1) {
         setDataSourcesSelected([...dataSources, 'retailers_pha']);
+      }
+      const indexOfOSM = dataSources.indexOf(DATASOURCES[1].attrib);
+      const indexOfUSDA = dataSources.indexOf(DATASOURCES[2].attrib);
+      if (indexOfOSM > -1) {
+        dataSources.splice(indexOfOSM, 1);
+        setDataSourcesSelected([...dataSources]);
+      }
+      if (indexOfUSDA > -1) {
+        dataSources.splice(indexOfUSDA, 1);
+        setDataSourcesSelected([...dataSources]);
       }
     }
   }, [categoriesSelected, accesibilities, dataSources, setDataSourcesSelected]);
